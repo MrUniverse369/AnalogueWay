@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
-using VSCodeEditor;
 
 namespace AnalogueWay
 {
@@ -31,6 +30,11 @@ namespace AnalogueWay
         {
             get { return speed;}
             set { speed = value; }
+        }
+        public float GetJSpeed
+        {
+            get { return jSpeed;}
+            set { jSpeed = value; }
         }
 
         // Start is called before the first frame update

@@ -15,6 +15,7 @@ namespace AnalogueWay
         [SerializeField] private Image cardImage; 
         [SerializeField] private Sprite activeCard;
         [SerializeField] private Sprite inActiveCard;
+       
         // Start is called before the first frame update
         void Start()
         {
