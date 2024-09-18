@@ -7,7 +7,7 @@ public class MovingTiles : MonoBehaviour
     [SerializeField] private Transform pointB;
     [SerializeField] private GameObject objToMove;
     [SerializeField] private float speed;
-
+    public bool enemyTurn;
     private Vector3 CurTargetPos;
     // Start is called before the first frame update
     void Start()
@@ -26,8 +26,17 @@ public class MovingTiles : MonoBehaviour
     private void MoveTile()
     {
         objToMove.transform.position = Vector3.MoveTowards(objToMove.transform.position, CurTargetPos, Time.deltaTime * speed);
-        if (objToMove.transform.position == pointB.position) CurTargetPos = pointA.transform.position;
-        if (objToMove.transform.position == pointA.position) CurTargetPos = pointB.transform.position;
+        if (objToMove.transform.position == pointB.position)
+        {     enemyTurn = true;
+            CurTargetPos = pointA.transform.position;
+       
+        }
+
+        if (objToMove.transform.position == pointA.position)
+        {  enemyTurn = false;
+            CurTargetPos = pointB.transform.position;
+          
+        }
         
     }
 }

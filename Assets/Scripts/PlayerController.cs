@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace AnalogueWay
@@ -17,15 +18,21 @@ namespace AnalogueWay
         private Rigidbody2D rb2D;
         private Vector2 turnLeft;
         private Vector2 turnRight;
-        private LevelManager lmanagerScriptRef;
         [SerializeField] private float speed;
         [SerializeField] private Animator animatorRef;
         [SerializeField] private float jSpeed;
         [SerializeField] private Transform pFeet;
+        [SerializeField] private LevelManager lManager;
         [SerializeField] private float pFeetRadius;
         [SerializeField] private LayerMask isPFeetOnGround;
         [SerializeField] private float coyoteTimeCounter;
         [SerializeField] private float coyoteTime;
+        private AudioManager audioManager;
+        private void Awake()
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        }
+
         public float GetSpeed
         {
             get { return speed;}
@@ -45,9 +52,6 @@ namespace AnalogueWay
             turnRight = new Vector2(0.5f, 0.5f);
             transform.localScale = turnRight;
             coyoteTimeCounter = coyoteTime;
-          
-
-
         }
 
         // Update is called once per frame
@@ -80,7 +84,7 @@ namespace AnalogueWay
            if (coyoteTimeCounter > 0 && Input.GetButtonDown("Jump"))
            {
                rb2D.velocity = jVel;
-             
+               audioManager.PlaySfx(audioManager.jumpSound);
            }
 
            if (Input.GetButton("Jump") && !isGrounded)
@@ -105,5 +109,13 @@ namespace AnalogueWay
             throw new System.NotImplementedException();
         }
 
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.CompareTag("CheckPoint"))
+            {
+                lManager.ReSpawnPos.transform.position = other.transform.position;
+            }
+        }
     }
 }

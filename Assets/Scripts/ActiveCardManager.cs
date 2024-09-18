@@ -28,7 +28,12 @@ public class ActiveCardManager : MonoBehaviour
     private bool buttonThreeIsActive;
     private bool activateCardOne;
     private int activeCardNumber;
-    
+    private AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     
     // Start is called before the first frame update
     void Start()
@@ -53,16 +58,19 @@ public class ActiveCardManager : MonoBehaviour
         {
             activeCardNumber = 1;
             cardCoolDown = 8;
+            audioManager.PlaySfx(audioManager.powerUpSound);
         }
         if (Input.GetKey(KeyCode.X)&& cardCoolDown < 1)
         {
             activeCardNumber = 2;
             cardCoolDown = 3;
+            audioManager.PlaySfx(audioManager.powerUpSound);
         }
         if (Input.GetKey(KeyCode.C)&& cardCoolDown < 1) 
         {
             activeCardNumber = 3;
-            cardCoolDown = 5;
+            cardCoolDown = 2;
+            audioManager.PlaySfx(audioManager.powerUpSound);
         }
         return activeCardNumber;
     }

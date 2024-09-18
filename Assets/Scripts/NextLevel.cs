@@ -10,7 +10,13 @@ public class NextLevel : MonoBehaviour
     [SerializeField] private GameObject levelComplete;
     [SerializeField] private Timer timerScriptRef;
     private bool pIsTouchingTreasure;
-
+    private AudioManager audioManager;
+    
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +39,7 @@ public class NextLevel : MonoBehaviour
     public IEnumerator NextLevelCo()
     {
         if (Input.GetKeyDown(KeyCode.E))
-        {
+        {    audioManager.PlaySfx(audioManager.winSound);
             levelComplete.gameObject.SetActive(true);
             levelComplete.GetComponent<LevelComplete>().GetSetFinalTimerText.text = timerScriptRef.timerText.text;
             levelComplete.GetComponent<LevelComplete>().GetCoinsCountText.text =

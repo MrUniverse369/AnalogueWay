@@ -18,7 +18,8 @@ public class ResetOnRespawn : MonoBehaviour
         startPos = transform.position;
         startRot = transform.rotation;
         startScale = transform.localScale;
-//        activeCardManScriptRef = GameObject.FindGameObjectWithTag("activeCardManager");
+        gameObject.SetActive(true);
+//   activeCardManScriptRef = GameObject.FindGameObjectWithTag("activeCardManager");
 
         if (GetComponent<Rigidbody2D>()!= null)
         {
@@ -45,6 +46,5 @@ public class ResetOnRespawn : MonoBehaviour
         transform.localScale = startScale;
         if (GetComponent<Rigidbody2D>() != null) startRb.velocity = Vector2.zero;
         if (GetComponent<MovingObstacles>() != null) fallingObj.pDetected = false;
-        
     }
 }

@@ -7,6 +7,10 @@ TagManager:
   - HurtPlayer
   - FallingObjGround
   - WalkOnAir
+  - Audio
+  - Enemy
+  - Water
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
@@ -44,18 +48,51 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: BackGround
+  - name: PBackGroundSix
     uniqueID: 2922648393
     locked: 0
-  - name: Traps
-    uniqueID: 1060950645
+  - name: PBackGroundFive
+    uniqueID: 3913380863
     locked: 0
-  - name: Ground
-    uniqueID: 2959731675
+  - name: PBacGroundFour
+    uniqueID: 203622269
+    locked: 0
+  - name: PBackGroundThree
+    uniqueID: 2174202989
+    locked: 0
+  - name: PBackGroundTwo
+    uniqueID: 2957991051
+    locked: 0
+  - name: PBackGroundOne
+    uniqueID: 2088332231
+    locked: 0
+  - name: GrassCover
+    uniqueID: 2549815777
     locked: 0
   - name: Tree
     uniqueID: 3762972185
     locked: 0
+  - name: Bush
+    uniqueID: 2774189553
+    locked: 0
+  - name: Traps
+    uniqueID: 1060950645
+    locked: 0
+  - name: JumpBox
+    uniqueID: 551678607
+    locked: 0
+  - name: Enemy
+    uniqueID: 2622867611
+    locked: 0
   - name: Player
     uniqueID: 2336263085
+    locked: 0
+  - name: water
+    uniqueID: 1486708773
+    locked: 0
+  - name: Ground
+    uniqueID: 2959731675
+    locked: 0
+  - name: waterTwo
+    uniqueID: 3094673611
     locked: 0

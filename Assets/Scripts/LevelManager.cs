@@ -15,29 +15,31 @@ namespace AnalogueWay
         [SerializeField] private Image cardImage; 
         [SerializeField] private Sprite activeCard;
         [SerializeField] private Sprite inActiveCard;
-       
+        private AudioManager audioManager;
+        
+        public Transform ReSpawnPos
+        {
+            get { return respawnPos;}
+            set { respawnPos = value; }
+        }
+
+        private void Awake()
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        }
+
         // Start is called before the first frame update
         void Start()
         {
             pScriptRef = FindObjectOfType<PlayerController>();
             resetObjsArr = FindObjectsOfType<ResetOnRespawn>();
+            ReSpawnPos.transform.position = respawnPos.transform.position;
 
         }
-
+    
         void Update()
         {
-           /* if (Input.GetKey(KeyCode.Z))
-            {
-                wOnAirCardScriptRef.gameObject.SetActive(true);
-                wOnAirCardScriptRef.GetAirTime = 5;
-                cardImage.sprite = activeCard;
-            }
-    
-            if (wOnAirCardScriptRef.GetAirTime < 0)
-            {
-                wOnAirCardScriptRef.gameObject.SetActive(false);  
-                cardImage.sprite = inActiveCard;
-            }*/
+          
         }
 
         public void Respawn()
@@ -47,10 +49,11 @@ namespace AnalogueWay
         }
 
         public IEnumerator RespawnCo()
-        {
+        { 
+            audioManager.PlaySfx(audioManager.gameOverSound);
             pScriptRef.gameObject.SetActive(false);
             yield return new WaitForSeconds(respawnDelay);
-            pScriptRef.transform.position = respawnPos.transform.position;
+            pScriptRef.transform.position = ReSpawnPos.transform.position;
             pScriptRef.gameObject.SetActive(true);
             for (int i = 0; i < resetObjsArr.Length; i++)
             {
