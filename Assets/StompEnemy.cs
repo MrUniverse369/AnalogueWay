@@ -16,4 +16,5 @@ public class StompEnemy : MonoBehaviour
         CollectableCollisiondetector.coinCollected = CollectableCollisiondetector.coinCollected + 10;
         }
     }
+    
 }
