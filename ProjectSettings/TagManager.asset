@@ -84,6 +84,9 @@ TagManager:
   - name: Enemy
     uniqueID: 2622867611
     locked: 0
+  - name: Goal
+    uniqueID: 658860049
+    locked: 0
   - name: Player
     uniqueID: 2336263085
     locked: 0
