@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,21 +10,23 @@ namespace AnalogueWay
     {
         [SerializeField] private GameObject playerRef;
 
-      [SerializeField]   private GameObject pRespawnPos;
-      private LevelManager lmanagerScriptRef;
+        [SerializeField] private GameObject pRespawnPos;
+        private LevelManager lmanagerScriptRef;
         // Start is called before the first frame update
         void Start()
-        { 
+        {
             playerRef = GameObject.Find("Player");
             lmanagerScriptRef = FindObjectOfType<LevelManager>();
-            
+
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (collision.CompareTag("Player"))
+
+            if (other.CompareTag("Player"))
             {
-               lmanagerScriptRef.Respawn();
+                Debug.Log("Player killed");
+                lmanagerScriptRef.Respawn();
             }
         }
     }

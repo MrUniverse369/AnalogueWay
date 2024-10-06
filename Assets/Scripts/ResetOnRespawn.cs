@@ -11,7 +11,7 @@ public class ResetOnRespawn : MonoBehaviour
     [SerializeField] private Rigidbody2D startRb;
     [SerializeField] private MovingObstacles fallingObj;
     [SerializeField] private GameObject activeCardManScriptRef;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,14 +19,14 @@ public class ResetOnRespawn : MonoBehaviour
         startRot = transform.rotation;
         startScale = transform.localScale;
         gameObject.SetActive(true);
-//   activeCardManScriptRef = GameObject.FindGameObjectWithTag("activeCardManager");
+        //   activeCardManScriptRef = GameObject.FindGameObjectWithTag("activeCardManager");
 
-        if (GetComponent<Rigidbody2D>()!= null)
+        if (GetComponent<Rigidbody2D>() != null)
         {
             startRb = GetComponent<Rigidbody2D>();
         }
 
-        if (GetComponent<MovingObstacles>()!= null)
+        if (GetComponent<MovingObstacles>() != null)
         {
             fallingObj = GetComponent<MovingObstacles>();
         }
@@ -36,7 +36,7 @@ public class ResetOnRespawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ResetObjs()
@@ -45,6 +45,6 @@ public class ResetOnRespawn : MonoBehaviour
         transform.rotation = startRot;
         transform.localScale = startScale;
         if (GetComponent<Rigidbody2D>() != null) startRb.velocity = Vector2.zero;
-        if (GetComponent<MovingObstacles>() != null) fallingObj.pDetected = false;
+        if (GetComponent<MovingObstacles>() != null) fallingObj.GetComponent<MovingObstacles>().GetPDetected = false;
     }
 }

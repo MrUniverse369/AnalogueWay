@@ -5,15 +5,22 @@ using UnityEngine;
 
 namespace AnalogueWay
 {
-    public class MovingObstacles :MonoBehaviour
+    public class MovingObstacles : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D rb2D;
         [SerializeField] private GameObject pRef;
         [SerializeField] private float dropSpeed;
         [SerializeField] private Vector2 p1;
         [SerializeField] private Vector2 p2;
+        [SerializeField] private GameObject detectionArea;
         private float dist;
-        public bool pDetected;
+        private bool pDetected;
+
+        public bool GetPDetected
+        {
+            get { return pDetected; }
+            set { pDetected = value; }
+        }
         private void Awake()
         {
 
@@ -23,29 +30,38 @@ namespace AnalogueWay
         }
         private void FixedUpdate()
         {
-            IsPlayerBelowObject();
+            //IsPlayerBelowObject();
             if (pDetected)
             {
-                Drop(); 
+                Drop();
             }
         }
 
         private void Drop()
         {
-            rb2D.velocity = new Vector2(rb2D.velocity.x,   -dropSpeed); 
+
+            rb2D.velocity = new Vector2(rb2D.velocity.x, -dropSpeed);
         }
-        public void IsPlayerBelowObject()
-        {
-            //calculate the displacment between the two objects
-            dist = transform.position.x - pRef.transform.position.x;
-            
-            if (pRef.transform.position.x > transform.position.x) dist = dist * -1;
-            if (dist < 1 && pRef.transform.position.y < transform.position.y) pDetected = true;
-        }
+
+        /*  public void IsPlayerBelowObject()
+          {
+              //calculate the displacment between the falling object and player in the horizontal axis two objects
+              dist = transform.position.x - pRef.transform.position.x;
+              if (pRef.transform.position.x > transform.position.x) dist = dist * -1;
+              if (dist < 1 && pRef.transform.position.y < transform.position.y) pDetected = true;
+          }*/
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag("FallingObjGround"))
+
+
+            if (other.gameObject.layer == LayerMask.NameToLayer("ICC"))
+            {
+                Debug.Log("ICC DETECTED Moving Obstacles Script");
+                return;
+            }
+
+            if (other.CompareTag("FallingObjGround"))
             {
                 transform.gameObject.SetActive(false);
             }
