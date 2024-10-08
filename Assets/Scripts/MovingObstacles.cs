@@ -30,7 +30,7 @@ namespace AnalogueWay
         }
         private void FixedUpdate()
         {
-            //IsPlayerBelowObject();
+            //   IsPlayerBelowObject();
             if (pDetected)
             {
                 Drop();
@@ -43,13 +43,13 @@ namespace AnalogueWay
             rb2D.velocity = new Vector2(rb2D.velocity.x, -dropSpeed);
         }
 
-        /*  public void IsPlayerBelowObject()
-          {
-              //calculate the displacment between the falling object and player in the horizontal axis two objects
-              dist = transform.position.x - pRef.transform.position.x;
-              if (pRef.transform.position.x > transform.position.x) dist = dist * -1;
-              if (dist < 1 && pRef.transform.position.y < transform.position.y) pDetected = true;
-          }*/
+        /* public void IsPlayerBelowObject()
+         {
+             //calculate the displacment between the falling object and player in the horizontal axis two objects
+             dist = transform.position.x - pRef.transform.position.x;
+             if (pRef.transform.position.x > transform.position.x) dist = dist * -1;
+             if (dist < 1 && pRef.transform.position.y < transform.position.y) pDetected = true;
+         }*/
 
         private void OnTriggerEnter2D(Collider2D other)
         {
