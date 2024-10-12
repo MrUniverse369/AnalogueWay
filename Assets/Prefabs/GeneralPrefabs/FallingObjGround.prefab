@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6020158208557231920}
   - component: {fileID: 6020158208557231923}
   m_Layer: 0
-  m_Name: EndPos
+  m_Name: FallingObjGround
   m_TagString: FallingObjGround
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
