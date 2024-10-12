@@ -99,3 +99,9 @@ TagManager:
   - name: waterTwo
     uniqueID: 3094673611
     locked: 0
+  - name: TreeFront
+    uniqueID: 2360038199
+    locked: 0
+  - name: EnemyFront
+    uniqueID: 397872497
+    locked: 0
