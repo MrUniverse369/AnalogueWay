@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AnalogueWay;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,18 +10,23 @@ public class NextLevel : MonoBehaviour
 {
     [SerializeField] private GameObject levelComplete;
     [SerializeField] private Timer timerScriptRef;
+    [SerializeField] private GameObject pScriptObjRef;
+    private PlayerController pScriptRef;
     private bool pIsTouchingTreasure;
     private AudioManager audioManager;
-    
+
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        pScriptRef = pScriptObjRef.GetComponent<PlayerController>();
+
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
         pIsTouchingTreasure = false;
+
     }
 
     // Update is called once per frame
@@ -28,7 +34,14 @@ public class NextLevel : MonoBehaviour
     {
         if (pIsTouchingTreasure)
         {
-           NextLevelPause();
+            if (pIsTouchingTreasure && Input.GetKey(KeyCode.E))
+            {
+
+
+                Debug.Log("Player is touching treasure and speed is 0");
+            }
+            NextLevelPause();
+
         }
     }
 
@@ -39,7 +52,9 @@ public class NextLevel : MonoBehaviour
     public IEnumerator NextLevelCo()
     {
         if (Input.GetKeyDown(KeyCode.E))
-        {    audioManager.PlaySfx(audioManager.winSound);
+        {
+            Time.timeScale = 0;
+            audioManager.PlaySfx(audioManager.winSound);
             levelComplete.gameObject.SetActive(true);
             levelComplete.GetComponent<LevelComplete>().GetSetFinalTimerText.text = timerScriptRef.timerText.text;
             levelComplete.GetComponent<LevelComplete>().GetCoinsCountText.text =
@@ -49,6 +64,9 @@ public class NextLevel : MonoBehaviour
             yield return new WaitForSeconds(5);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             levelComplete.gameObject.SetActive(false);
+            Time.timeScale = 1;
+            Debug.Log("Time should be resuming ");
+
         }
     }
 
@@ -60,16 +78,16 @@ public class NextLevel : MonoBehaviour
             pIsTouchingTreasure = true;
         }
     }
-    
+
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             pIsTouchingTreasure = true;
         }
-      
+
     }
-  
+
     private void OnTriggerExit2D(Collider2D other)
     {
         pIsTouchingTreasure = false;
