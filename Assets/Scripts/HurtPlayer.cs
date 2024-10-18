@@ -9,7 +9,7 @@ namespace AnalogueWay
     public class HurtPlayer : MonoBehaviour
     {
         [SerializeField] private GameObject playerRef;
-
+        public static int oopsCount = 0;
         [SerializeField] private GameObject pRespawnPos;
         private LevelManager lmanagerScriptRef;
         // Start is called before the first frame update
@@ -25,6 +25,7 @@ namespace AnalogueWay
 
             if (other.CompareTag("Player"))
             {
+
                 Debug.Log("Player killed");
                 lmanagerScriptRef.Respawn();
             }
