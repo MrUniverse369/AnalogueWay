@@ -23353,6 +23353,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1544211978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7080670360961270008, guid: e471a4107139d4161a9bc4ff977cf3e8, type: 3}
+  m_PrefabInstance: {fileID: 1909791919}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1547154751
 GameObject:
   m_ObjectHideFlags: 0
@@ -23452,6 +23457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelComplete: {fileID: 1002546576}
   timerScriptRef: {fileID: 0}
+  pScriptObjRef: {fileID: 1544211978}
 --- !u!114 &1670975550 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2700721103092162173, guid: 5e86e2039f4a7452bbde15142a2e03c1, type: 3}
@@ -23874,6 +23880,10 @@ PrefabInstance:
       propertyPath: levelComplete
       value: 
       objectReference: {fileID: 1002546576}
+    - target: {fileID: 7080670360961270014, guid: e471a4107139d4161a9bc4ff977cf3e8, type: 3}
+      propertyPath: pScriptObjRef
+      value: 
+      objectReference: {fileID: 2128667067}
     - target: {fileID: 7080670360961270014, guid: e471a4107139d4161a9bc4ff977cf3e8, type: 3}
       propertyPath: timerScriptRef
       value: 

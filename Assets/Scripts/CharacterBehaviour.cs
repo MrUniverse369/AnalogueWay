@@ -17,9 +17,8 @@ namespace AnalogueWay
         }
 
         abstract public void CharMovement();
-        abstract public void charAttack();
-        abstract public void charJump();
-   
+        abstract public void CharJump();
+
 
     }
 }

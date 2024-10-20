@@ -9,12 +9,15 @@ namespace AnalogueWay
     public class HurtPlayer : MonoBehaviour
     {
         [SerializeField] private GameObject playerRef;
+        [SerializeField] private int pLives;
         public static int oopsCount = 0;
+        public static int pLivesCount = 5;
         [SerializeField] private GameObject pRespawnPos;
         private LevelManager lmanagerScriptRef;
         // Start is called before the first frame update
         void Start()
         {
+            pLivesCount = pLives;
             playerRef = GameObject.Find("Player");
             lmanagerScriptRef = FindObjectOfType<LevelManager>();
 
@@ -25,9 +28,10 @@ namespace AnalogueWay
 
             if (other.CompareTag("Player"))
             {
-
-                Debug.Log("Player killed");
-                lmanagerScriptRef.Respawn();
+                // playerRef.GetComponent<PlayerController>().PushBackPlayer();
+                if (PlayerController.playerInviInvincible == false) pLivesCount -= 1;
+                Debug.Log("PlayerLivesCount" + pLivesCount);
+                if (pLivesCount <= 0) lmanagerScriptRef.Respawn();
             }
         }
     }

@@ -1,15 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace AnalogueWay
 {
     public class PlayerController : CharecterBehaviour
     {
-
         private Vector2 jVel;
         private float jDir;
         private bool isGrounded;
@@ -18,6 +13,8 @@ namespace AnalogueWay
         private Rigidbody2D rb2D;
         private Vector2 turnLeft;
         private Vector2 turnRight;
+        public static bool playerInviInvincible;
+        Vector2 enemyScale;
         [SerializeField] private float speed;
         [SerializeField] private Animator animatorRef;
         [SerializeField] private float jSpeed;
@@ -27,20 +24,28 @@ namespace AnalogueWay
         [SerializeField] private LayerMask isPFeetOnGround;
         [SerializeField] private float coyoteTimeCounter;
         [SerializeField] private float coyoteTime;
+        [SerializeField] private float pushBackCounter;  // Knockback force
+        [SerializeField] private float pushBackLenght;
+        [SerializeField] private float pushBackForceX;
+        [SerializeField] private float pushBackForceY;
         private AudioManager audioManager;
+
         private void Awake()
         {
             audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+            pushBackCounter = 0;
+            playerInviInvincible = false;
         }
 
         public float GetSpeed
         {
-            get { return speed;}
+            get { return speed; }
             set { speed = value; }
         }
+
         public float GetJSpeed
         {
-            get { return jSpeed;}
+            get { return jSpeed; }
             set { jSpeed = value; }
         }
 
@@ -57,10 +62,26 @@ namespace AnalogueWay
         // Update is called once per frame
         void Update()
         {
-            CharMovement();
-            charJump();
-        }
+            if (pushBackCounter <= 0)
+            {
+                CharMovement();
+                CharJump();
+                playerInviInvincible = false;
+            }
 
+            if (pushBackCounter > 0)
+            {
+                pushBackCounter -= Time.deltaTime;
+                playerInviInvincible = true;
+                PushBackPlayer();
+            }
+
+        }
+        public void PushBackPlayer()
+        {
+            if (transform.localScale.x > enemyScale.x) rb2D.velocity = new Vector2(-pushBackForceX, pushBackForceY);
+            if (transform.localScale.x < enemyScale.x) rb2D.velocity = new Vector2(pushBackForceX, pushBackForceY);
+        }
         public override void CharMovement()
         {
             dir = Input.GetAxisRaw("Horizontal");
@@ -71,50 +92,51 @@ namespace AnalogueWay
             coyoteTime = 0.25f;
             animatorRef.SetFloat("Speed", Mathf.Abs(dir));
         }
-        public override void charJump()
+
+        public override void CharJump()
         {
             jDir = Input.GetAxisRaw("Jump");
             jVel = new Vector2(rb2D.velocity.x, jDir * jSpeed);
             isGrounded = Physics2D.OverlapCircle(pFeet.position, pFeetRadius, isPFeetOnGround);
-            if (isGrounded) 
+            if (isGrounded)
             {
-                coyoteTimeCounter = coyoteTime ;
-                
+                coyoteTimeCounter = coyoteTime;
             }
-           if (coyoteTimeCounter > 0 && Input.GetButtonDown("Jump"))
-           {
-               rb2D.velocity = jVel;
-               audioManager.PlaySfx(audioManager.jumpSound);
-           }
 
-           if (Input.GetButton("Jump") && !isGrounded)
-           {
-               animatorRef.SetBool("Jump",true);
-           }
-           else
-           {
-               animatorRef.SetBool("Jump",false);
-           }
-           
-           if (!isGrounded)
-           {
-               coyoteTimeCounter -= Time.deltaTime;
-               coyoteTime = 0;
-           }
-       
+            if (coyoteTimeCounter > 0 && Input.GetButtonDown("Jump"))
+            {
+                rb2D.velocity = jVel;
+                audioManager.PlaySfx(audioManager.jumpSound);
+            }
+
+            if (Input.GetButton("Jump") && !isGrounded)
+            {
+                animatorRef.SetBool("Jump", true);
+            }
+            else
+            {
+                animatorRef.SetBool("Jump", false);
+            }
+
+            if (!isGrounded)
+            {
+                coyoteTimeCounter -= Time.deltaTime;
+                coyoteTime = 0;
+            }
         }
 
-        public override void charAttack()
-        {
-            throw new System.NotImplementedException();
-        }
-
-
+        // Handle player pushback when hitting the enemy trigger
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.CompareTag("CheckPoint"))
             {
                 lManager.ReSpawnPos.transform.position = other.transform.position;
+            }
+
+            if (other.CompareTag("Enemy"))
+            {
+                pushBackCounter = pushBackLenght;
+                enemyScale = other.gameObject.transform.localScale;
             }
         }
     }

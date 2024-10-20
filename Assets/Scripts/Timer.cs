@@ -24,7 +24,7 @@ public class Timer : MonoBehaviour
         int mins = Mathf.FloorToInt(elapsedTime / 60);
         int secs = Mathf.FloorToInt(elapsedTime % 60);
         timerText.text = string.Format("Time:" + "{0:00}:{1:00}", mins, secs);
-        oppsText.text = string.Format("Oops:" + "{0}", HurtPlayer.oopsCount);
+        oppsText.text = string.Format("Lives:" + "{0}", HurtPlayer.pLivesCount);
         if (Input.GetKey(KeyCode.E))
         {
             //Debug.Log(timerText.text);

@@ -34,41 +34,48 @@ public class NextLevel : MonoBehaviour
     {
         if (pIsTouchingTreasure)
         {
-            if (pIsTouchingTreasure && Input.GetKey(KeyCode.E))
+            if (pIsTouchingTreasure && Input.GetKeyDown(KeyCode.E))
             {
 
-
+                StartCoroutine(nameof(NextLevelPauseCo));
                 Debug.Log("Player is touching treasure and speed is 0");
             }
-            NextLevelPause();
+
 
         }
     }
 
-    public void NextLevelPause()
-    {
-        StartCoroutine(nameof(NextLevelCo));
-    }
-    public IEnumerator NextLevelCo()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Time.timeScale = 0;
-            audioManager.PlaySfx(audioManager.winSound);
-            levelComplete.gameObject.SetActive(true);
-            levelComplete.GetComponent<LevelComplete>().GetSetFinalTimerText.text = timerScriptRef.timerText.text;
-            levelComplete.GetComponent<LevelComplete>().GetCoinsCountText.text =
-                "Coins:" + CollectableCollisiondetector.coinCollected.ToString();
-            levelComplete.GetComponent<LevelComplete>().GetCompleteScoreText.text =
-                "Score" + CollectableCollisiondetector.coinCollected * 1.5f;
-            yield return new WaitForSeconds(5);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            levelComplete.gameObject.SetActive(false);
-            Time.timeScale = 1;
-            Debug.Log("Time should be resuming ");
 
-        }
+    public IEnumerator NextLevelPauseCo()
+    {
+        // Freeze game
+        Time.timeScale = 0;
+
+        // Play audio and activate the level complete UI
+        audioManager.PlaySfx(audioManager.winSound);
+        levelComplete.gameObject.SetActive(true);
+        levelComplete.GetComponent<LevelComplete>().GetSetFinalTimerText.text = timerScriptRef.timerText.text;
+        levelComplete.GetComponent<LevelComplete>().GetCoinsCountText.text =
+            "Coins: " + CollectableCollisiondetector.coinCollected.ToString();
+        levelComplete.GetComponent<LevelComplete>().GetCompleteScoreText.text =
+            "Score: " + (CollectableCollisiondetector.coinCollected * 1.5f);
+
+        // Wait for 5 real-time seconds while the game is frozen
+        yield return new WaitForSecondsRealtime(5);
+
+        // Load the next level
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        // Unfreeze the game (this happens after the scene is loaded)
+        Time.timeScale = 1;
+
+        // Optionally deactivate the levelComplete UI after scene transition
+        levelComplete.gameObject.SetActive(false);
+
+        Debug.Log("Time should be resuming and next level loaded");
     }
+
+
 
     //loads the next scene 
     private void OnTriggerEnter2D(Collider2D other)
