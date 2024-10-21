@@ -62,6 +62,7 @@ namespace AnalogueWay
         // Update is called once per frame
         void Update()
         {
+
             if (pushBackCounter <= 0)
             {
                 CharMovement();
@@ -79,8 +80,8 @@ namespace AnalogueWay
         }
         public void PushBackPlayer()
         {
-            if (transform.localScale.x > enemyScale.x) rb2D.velocity = new Vector2(-pushBackForceX, pushBackForceY);
-            if (transform.localScale.x < enemyScale.x) rb2D.velocity = new Vector2(pushBackForceX, pushBackForceY);
+            if (transform.localScale.x > 0) rb2D.velocity = new Vector2(-pushBackForceX, pushBackForceY);
+            if (transform.localScale.x < 0) rb2D.velocity = new Vector2(pushBackForceX, pushBackForceY);
         }
         public override void CharMovement()
         {
@@ -132,8 +133,9 @@ namespace AnalogueWay
             {
                 lManager.ReSpawnPos.transform.position = other.transform.position;
             }
-
-            if (other.CompareTag("Enemy"))
+            //if the player is touching the ground when the enemy has
+            // made contact we push the player in the direction opposite of the enemy 
+            if (other.CompareTag("Enemy") && isGrounded != false)
             {
                 pushBackCounter = pushBackLenght;
                 enemyScale = other.gameObject.transform.localScale;
