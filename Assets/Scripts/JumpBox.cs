@@ -17,22 +17,22 @@ public class JumpBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("PlayerDetectionArea"))
         {
-            
-          audioManager.PlaySfx(audioManager.bounceSound);
-           pref.GetComponent<Rigidbody2D>().velocity = new Vector2(pref.GetComponent<Rigidbody2D>().velocity.x, jForce);
+
+            audioManager.PlaySfx(audioManager.bounceSound);
+            pref.GetComponent<Rigidbody2D>().velocity = new Vector2(pref.GetComponent<Rigidbody2D>().velocity.x, jForce);
         }
     }
 }

@@ -51,6 +51,7 @@ MonoBehaviour:
   pointB: {fileID: 1389330942835575564}
   objToMove: {fileID: 1389330943332735466}
   speed: 4
+  enemyTurn: 0
 --- !u!1 &1389330942835575565
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,6 +97,7 @@ GameObject:
   - component: {fileID: 1389330943332735470}
   - component: {fileID: 2452537784085096640}
   - component: {fileID: 2452537784085096641}
+  - component: {fileID: 2569142970207433918}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -157,10 +159,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1672099685
-  m_SortingLayer: 13
+  m_SortingLayer: 12
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bb1e0cdb3d0d94ab48ed5247273dd5ad, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -467916700, guid: 39182ebd9792f4ca2b7b27dc6e06595b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -187,7 +189,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.4375, y: 1.3125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -209,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRef: {fileID: 0}
+  pLives: 0
   pRespawnPos: {fileID: 0}
 --- !u!114 &2452537784085096640
 MonoBehaviour:
@@ -241,6 +244,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceSpeed: 5
+  mTRef: {fileID: 0}
+--- !u!95 &2569142970207433918
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389330943332735466}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7212e051da82d4359a0ab7fd58349dff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1389330943483270083
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 394160351929318912}
   m_Layer: 0
   m_Name: Spikes
-  m_TagString: Untagged
+  m_TagString: KillPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1060950645
-  m_SortingLayer: 2
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bc76bc27d17ff43a3b4628985e783536, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -125,4 +125,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRef: {fileID: 6993799946190920027, guid: deb9879d2dbbc4fb7a2b7fb51169218b, type: 3}
+  pLives: 0
   pRespawnPos: {fileID: 880617821472645373, guid: 501edededfbad4e24825f7336f018fa8, type: 3}

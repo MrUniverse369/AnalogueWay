@@ -11,6 +11,11 @@ TagManager:
   - Enemy
   - Water
   - CheckPoint
+  - Coin
+  - CoinDetector
+  - LevelManager
+  - PlayerDetectionArea
+  - KillPlane
   layers:
   - Default
   - TransparentFX

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 731904648312775907}
   m_Layer: 0
   m_Name: KillPlane
-  m_TagString: Untagged
+  m_TagString: KillPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRef: {fileID: 0}
+  pLives: 0
   pRespawnPos: {fileID: 0}
 --- !u!61 &731904648312775907
 BoxCollider2D:

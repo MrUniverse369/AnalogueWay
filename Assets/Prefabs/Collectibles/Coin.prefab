@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1948382544926291790}
   - component: {fileID: 1948382544926291785}
   - component: {fileID: 1948382544926291789}
+  - component: {fileID: 6953063234541547964}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1958704211
-  m_SortingLayer: 13
+  m_SortingLayer: 14
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 50d84cfd93d0a48b1af71f1a276f0c54, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -143,3 +144,23 @@ MonoBehaviour:
   startRb: {fileID: 0}
   fallingObj: {fileID: 0}
   activeCardManScriptRef: {fileID: 0}
+--- !u!95 &6953063234541547964
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948382544926291784}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f6c047257b5044021a4d8db666fe2ed0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

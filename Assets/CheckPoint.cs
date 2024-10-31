@@ -18,12 +18,12 @@ public class CheckPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("PlayerDetectionArea"))
         {
             sRender.sprite = checkPointOpen;
         }

@@ -24,17 +24,17 @@ namespace AnalogueWay
         [SerializeField] private LayerMask isPFeetOnGround;
         [SerializeField] private float coyoteTimeCounter;
         [SerializeField] private float coyoteTime;
-        [SerializeField] private float pushBackCounter;  // Knockback force
         [SerializeField] private float pushBackLenght;
         [SerializeField] private float pushBackForceX;
         [SerializeField] private float pushBackForceY;
+        [SerializeField] private playerBodyDetectionArea pBDARef;
         private AudioManager audioManager;
 
         private void Awake()
         {
             audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-            pushBackCounter = 0;
             playerInviInvincible = false;
+            pBDARef = GameObject.FindGameObjectWithTag("PlayerDetectionArea").GetComponent<playerBodyDetectionArea>();
         }
 
         public float GetSpeed
@@ -53,8 +53,8 @@ namespace AnalogueWay
         void Start()
         {
             rb2D = GetComponent<Rigidbody2D>();
-            turnLeft = new Vector2(-0.5f, 0.5f);
-            turnRight = new Vector2(0.5f, 0.5f);
+            turnLeft = new Vector2(-0.32f, 0.32f);
+            turnRight = new Vector2(0.32f, 0.32f);
             transform.localScale = turnRight;
             coyoteTimeCounter = coyoteTime;
         }
@@ -63,16 +63,16 @@ namespace AnalogueWay
         void Update()
         {
 
-            if (pushBackCounter <= 0)
+            if (pBDARef.pushBackCounter <= 0)
             {
                 CharMovement();
                 CharJump();
                 playerInviInvincible = false;
             }
 
-            if (pushBackCounter > 0)
+            if (pBDARef.pushBackCounter > 0)
             {
-                pushBackCounter -= Time.deltaTime;
+                pBDARef.pushBackCounter -= Time.deltaTime;
                 playerInviInvincible = true;
                 PushBackPlayer();
             }
@@ -126,20 +126,5 @@ namespace AnalogueWay
             }
         }
 
-        // Handle player pushback when hitting the enemy trigger
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.gameObject.CompareTag("CheckPoint"))
-            {
-                lManager.ReSpawnPos.transform.position = other.transform.position;
-            }
-            //if the player is touching the ground when the enemy has
-            // made contact we push the player in the direction opposite of the enemy 
-            if (other.CompareTag("Enemy") && isGrounded != false)
-            {
-                pushBackCounter = pushBackLenght;
-                enemyScale = other.gameObject.transform.localScale;
-            }
-        }
     }
 }

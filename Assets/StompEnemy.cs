@@ -12,8 +12,6 @@ public class StompEnemy : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-
-
             pref.GetComponent<Rigidbody2D>().velocity = new Vector2(pref.GetComponent<Rigidbody2D>().velocity.x, other.GetComponent<EnemyController>().BounceSpeed);
             other.gameObject.SetActive(false);
             CollectableCollisiondetector.coinCollected = CollectableCollisiondetector.coinCollected + 10;

@@ -23,7 +23,7 @@ public class DetectPlayer : MonoBehaviour
     {
 
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("PlayerDetectionArea"))
         {
             fallingTileRef.GetComponent<MovingObstacles>().GetPDetected = true;
         }

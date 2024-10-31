@@ -26,10 +26,18 @@ namespace AnalogueWay
         private void OnTriggerEnter2D(Collider2D other)
         {
 
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("PlayerDetectionArea"))
             {
                 // playerRef.GetComponent<PlayerController>().PushBackPlayer();
                 if (PlayerController.playerInviInvincible == false) pLivesCount -= 1;
+                Debug.Log("PlayerLivesCount" + pLivesCount);
+                if (pLivesCount <= 0) lmanagerScriptRef.Respawn();
+            }
+
+            if (other.CompareTag("PlayerDetectionArea") && gameObject.CompareTag("KillPlane"))
+            {
+                // playerRef.GetComponent<PlayerController>().PushBackPlayer();
+                if (PlayerController.playerInviInvincible == false) pLivesCount = 0;
                 Debug.Log("PlayerLivesCount" + pLivesCount);
                 if (pLivesCount <= 0) lmanagerScriptRef.Respawn();
             }

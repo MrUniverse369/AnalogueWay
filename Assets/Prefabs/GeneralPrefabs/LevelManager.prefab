@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 921369736810464723}
   m_Layer: 0
   m_Name: LevelManager
-  m_TagString: Untagged
+  m_TagString: LevelManager
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,5 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawnDelay: 1
   pScriptRef: {fileID: 0}
+  wOnAirCardScriptRef: {fileID: 0}
   resetObjsArr: []
   respawnPos: {fileID: 0}
+  cardImage: {fileID: 0}
+  activeCard: {fileID: 0}
+  inActiveCard: {fileID: 0}
