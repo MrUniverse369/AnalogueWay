@@ -156,6 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.12
   isPlayerInBackGroundView: 0
@@ -627,6 +629,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.1
   isPlayerInBackGroundView: 0
@@ -19891,6 +19895,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.08
   isPlayerInBackGroundView: 0
@@ -20544,6 +20550,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.1
   isPlayerInBackGroundView: 0
@@ -21191,6 +21199,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.12
   isPlayerInBackGroundView: 0
@@ -21438,6 +21448,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.06
   isPlayerInBackGroundView: 0
@@ -22812,6 +22824,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.1
   isPlayerInBackGroundView: 0
@@ -24467,6 +24481,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.18
   isPlayerInBackGroundView: 0
@@ -24940,6 +24956,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.18
   isPlayerInBackGroundView: 0
@@ -25543,6 +25561,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.06
   isPlayerInBackGroundView: 0
@@ -27008,7 +27028,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1335235621
-  m_SortingLayer: 11
+  m_SortingLayer: 16
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bb1e0cdb3d0d94ab48ed5247273dd5ad, type: 3}
   m_Color: {r: 0.84535056, g: 0.8679245, b: 0.11053756, a: 1}
@@ -27752,6 +27772,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.12
   isPlayerInBackGroundView: 0
@@ -28037,7 +28059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6993799946190920028, guid: deb9879d2dbbc4fb7a2b7fb51169218b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.44
+      value: -0.81
       objectReference: {fileID: 0}
     - target: {fileID: 6993799946190920028, guid: deb9879d2dbbc4fb7a2b7fb51169218b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -28900,7 +28922,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1335235621
-  m_SortingLayer: 11
+  m_SortingLayer: 16
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -41935,6 +41957,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.18
   isPlayerInBackGroundView: 0
@@ -42254,6 +42278,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: 0
   lenght: 0
+  smallBackGround: 0
+  movement: 0
   cam: {fileID: 828719480}
   parallaxEffect: 0.06
   isPlayerInBackGroundView: 0

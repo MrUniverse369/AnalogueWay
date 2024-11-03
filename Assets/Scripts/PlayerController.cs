@@ -60,8 +60,10 @@ namespace AnalogueWay
         }
 
         // Update is called once per frame
+
         void Update()
         {
+
 
             if (pBDARef.pushBackCounter <= 0)
             {
@@ -92,6 +94,7 @@ namespace AnalogueWay
             rb2D.velocity = vel;
             coyoteTime = 0.25f;
             animatorRef.SetFloat("Speed", Mathf.Abs(dir));
+            animatorRef.SetFloat("JSpeed", rb2D.velocity.y);
         }
 
         public override void CharJump()
@@ -110,13 +113,13 @@ namespace AnalogueWay
                 audioManager.PlaySfx(audioManager.jumpSound);
             }
 
-            if (Input.GetButton("Jump") && !isGrounded)
+            if (Input.GetButtonDown("Jump") && !isGrounded)
             {
-                animatorRef.SetBool("Jump", true);
+                animatorRef.SetBool("Jump", isGrounded);
             }
             else
             {
-                animatorRef.SetBool("Jump", false);
+                animatorRef.SetBool("Jump", !isGrounded);
             }
 
             if (!isGrounded)
