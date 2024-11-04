@@ -19,17 +19,12 @@ public class CoinDetectionArea : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Coin")) { Debug.Log("Coin deteteted in Player Circle"); }
-    }
-
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Coin"))
         {
             other.gameObject.transform.position = Vector2.MoveTowards(other.gameObject.transform.position, transform.position, coinSpeed * Time.deltaTime);
-            
+
         }
     }
 }

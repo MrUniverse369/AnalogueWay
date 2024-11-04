@@ -398,7 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   animatorRef: {fileID: 776477715488756905}
-  jSpeed: 5
+  jSpeed: 6
   pFeet: {fileID: 6993799946060020112}
   lManager: {fileID: 0}
   pFeetRadius: 0.2

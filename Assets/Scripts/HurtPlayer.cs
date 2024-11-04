@@ -30,7 +30,6 @@ namespace AnalogueWay
             {
                 // playerRef.GetComponent<PlayerController>().PushBackPlayer();
                 if (PlayerController.playerInviInvincible == false) pLivesCount -= 1;
-                Debug.Log("PlayerLivesCount" + pLivesCount);
                 if (pLivesCount <= 0) lmanagerScriptRef.Respawn();
             }
 
@@ -38,7 +37,6 @@ namespace AnalogueWay
             {
                 // playerRef.GetComponent<PlayerController>().PushBackPlayer();
                 if (PlayerController.playerInviInvincible == false) pLivesCount = 0;
-                Debug.Log("PlayerLivesCount" + pLivesCount);
                 if (pLivesCount <= 0) lmanagerScriptRef.Respawn();
             }
         }

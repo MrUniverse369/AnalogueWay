@@ -24,46 +24,57 @@ public class ParallaxBackGround : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    {  
+    {
         float dist = cam.transform.position.x * parallaxEffect;
-        movement = cam.transform.position.x * (1- parallaxEffect);
-        
-        if (isPlayerInBackGroundView && smallBackGround)
+        movement = cam.transform.position.x * (1 - parallaxEffect);
+
+        if (isPlayerInBackGroundView)
         {
-        transform.position = new Vector3(startPos+dist,transform.position.y,transform.position.z);
-        Debug.Log("Activeted script for abckGround");
+            transform.position = new Vector3(startPos, transform.position.y, transform.position.z);
+            Debug.Log("Activeted script for BabckGround");
         }
         else
         {
-            transform.position = new Vector3(startPos+dist,transform.position.y,transform.position.z);
-            
+            transform.position = new Vector3(startPos + dist, transform.position.y, transform.position.z);
+
             if (movement > startPos + lenght)
             {
                 startPos += lenght;
             }
-            else if(movement < startPos - lenght)
+            else if (movement < startPos - lenght)
             {
                 startPos -= lenght;
             }
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("PlayerDetectionArea"))
+        {
+            Debug.Log("Player is touching background");
         }
-    
-    
+    }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        
+
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("colliding with player");
             isPlayerInBackGroundView = true;
         }
-    
+
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         isPlayerInBackGroundView = false;
+
+        if (other.CompareTag("PlayerDetectionArea"))
+        {
+            Debug.Log("Player is not touching background");
+        }
     }
 }
 

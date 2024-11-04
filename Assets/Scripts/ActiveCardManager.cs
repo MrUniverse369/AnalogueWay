@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class ActiveCardManager : MonoBehaviour
 {
-    [SerializeField] private Image cardImage; 
+    [SerializeField] private Image cardImage;
     [SerializeField] private Image cardImage2;
     [SerializeField] private Image cardImage3;
     [SerializeField] private Sprite activeCard;
@@ -22,8 +22,8 @@ public class ActiveCardManager : MonoBehaviour
     [SerializeField] private float speedBoost;
     [SerializeField] public float cardCoolDown;
     private float airTime;
-    private static bool  buttonOneIsActive;
-    private static float sCard; 
+    private static bool buttonOneIsActive;
+    private static float sCard;
     private bool buttonTwoIsActive;
     private bool buttonThreeIsActive;
     private bool activateCardOne;
@@ -34,7 +34,7 @@ public class ActiveCardManager : MonoBehaviour
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,13 +60,13 @@ public class ActiveCardManager : MonoBehaviour
             cardCoolDown = 8;
             audioManager.PlaySfx(audioManager.powerUpSound);
         }
-        if (Input.GetKey(KeyCode.X)&& cardCoolDown < 1)
+        if (Input.GetKey(KeyCode.X) && cardCoolDown < 1)
         {
             activeCardNumber = 2;
             cardCoolDown = 3;
             audioManager.PlaySfx(audioManager.powerUpSound);
         }
-        if (Input.GetKey(KeyCode.C)&& cardCoolDown < 1) 
+        if (Input.GetKey(KeyCode.C) && cardCoolDown < 1)
         {
             activeCardNumber = 3;
             cardCoolDown = 2;
@@ -84,22 +84,22 @@ public class ActiveCardManager : MonoBehaviour
         if (selectCard == 2) SwitchCardSprite(selectCard);
         if (selectCard == 3) SwitchCardSprite(selectCard);
     }
-    
+
     private void ActivateWalkOnAir()
-    { 
+    {
         if (activateCardOne)
         {
             wOnAirCardScriptRef.gameObject.SetActive(true);
             cardImage.sprite = activeCard;
-            
+
         }
         if (!activateCardOne)
-        {   
-            wOnAirCardScriptRef.gameObject.SetActive(false);  
+        {
+            wOnAirCardScriptRef.gameObject.SetActive(false);
             cardImage.sprite = inActiveCard;
-            
+
         }
-      
+
     }
 
     private void SwitchCardSprite(int activeCardNumber)
@@ -132,14 +132,14 @@ public class ActiveCardManager : MonoBehaviour
         {
             cardImage3.sprite = activeCardThree;
             cardImage.color = Color.white;
-            pScriptRef.GetJSpeed = speedBoost*1.4f;
+            pScriptRef.GetJSpeed = speedBoost * 1.4f;
         }
         else
         {
             cardImage3.sprite = inActiveCardThree;
             pScriptRef.GetJSpeed = 5.0f;
         }
-        
+
         cardCoolDown += -1 * Time.deltaTime;
 
     }
