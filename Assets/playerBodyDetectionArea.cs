@@ -7,6 +7,7 @@ public class playerBodyDetectionArea : MonoBehaviour
 {
     [SerializeField] private float pFeetRadius;
     [SerializeField] private LayerMask isPFeetOnGround;
+    [SerializeField] private Animator animatorRef;
     [SerializeField] private Transform pFeet;
     [SerializeField] private LevelManager lManager;
     public float pushBackCounter;  // Knockback force
@@ -23,7 +24,10 @@ public class playerBodyDetectionArea : MonoBehaviour
     // Handle player pushback when hitting the enemy trigger
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy")) Debug.Log("EnemyDetected In playbdArea");
+        if (other.CompareTag("Enemy") || other.CompareTag("HurtPlayer"))
+        {
+            animatorRef.SetTrigger("isHurt");
+        }
 
         isGrounded = Physics2D.OverlapCircle(pFeet.position, pFeetRadius, isPFeetOnGround);
         if (other.gameObject.CompareTag("CheckPoint"))
