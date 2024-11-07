@@ -113,13 +113,29 @@ namespace AnalogueWay
                 audioManager.PlaySfx(audioManager.jumpSound);
             }
 
-            if (Input.GetButtonDown("Jump") && !isGrounded)
+            if (jSpeed > 6)
             {
-                animatorRef.SetBool("Jump", isGrounded);
+                Debug.Log("Jspeed greater than six");
+
+                if (Input.GetButtonDown("Jump") && isGrounded)
+                {
+                    Debug.Log("Play super Jump");
+                    animatorRef.SetTrigger("JumpPowerUp");
+
+                }
             }
             else
             {
-                animatorRef.SetBool("Jump", !isGrounded);
+                if (Input.GetButtonDown("Jump") && !isGrounded)
+                {
+                    Debug.Log("regularJump Playing");
+                    animatorRef.SetBool("Jump", isGrounded);
+                }
+                else
+                {
+                    animatorRef.SetBool("Jump", !isGrounded);
+
+                }
             }
 
             if (!isGrounded)

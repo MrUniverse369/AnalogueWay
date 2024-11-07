@@ -21,6 +21,7 @@ public class ActiveCardManager : MonoBehaviour
     [SerializeField] private PlayerController pScriptRef;
     [SerializeField] private float speedBoost;
     [SerializeField] public float cardCoolDown;
+    public static bool jumpPowerUp = false;
     private float airTime;
     private static bool buttonOneIsActive;
     private static float sCard;
@@ -71,6 +72,7 @@ public class ActiveCardManager : MonoBehaviour
             activeCardNumber = 3;
             cardCoolDown = 2;
             audioManager.PlaySfx(audioManager.powerUpSound);
+
         }
         return activeCardNumber;
     }
