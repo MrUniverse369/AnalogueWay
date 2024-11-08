@@ -121,7 +121,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 30
+        width: 39
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d3931867059648fb8dea7ebe1080f99
-      internalID: -1886435429
+      spriteID: 788af4ced2b3e425ebb8d77e8b250209
+      internalID: 987410680
       vertices: []
       indices: 
       edges: []
@@ -140,9 +140,9 @@ TextureImporter:
       name: JumpPowerUp_1
       rect:
         serializedVersion: 2
-        x: 30
+        x: 39
         y: 0
-        width: 30
+        width: 39
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c331ba5a60084424b2220af1b6c4202
-      internalID: 261228475
+      spriteID: 1ada4a564b57d49ffaf15d8cdaf38992
+      internalID: 1585907151
       vertices: []
       indices: 
       edges: []
@@ -161,9 +161,9 @@ TextureImporter:
       name: JumpPowerUp_2
       rect:
         serializedVersion: 2
-        x: 60
+        x: 78
         y: 0
-        width: 30
+        width: 39
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f371d3b40efd34d78b5212a8d1d9d3df
-      internalID: 222501982
+      spriteID: d75ff5f62bc844b93aa354e83d723a63
+      internalID: -1262807793
       vertices: []
       indices: 
       edges: []
@@ -182,9 +182,9 @@ TextureImporter:
       name: JumpPowerUp_3
       rect:
         serializedVersion: 2
-        x: 90
+        x: 117
         y: 0
-        width: 30
+        width: 39
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -193,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 308056cdbfe8841298b944c470962351
-      internalID: 887773542
+      spriteID: b7a7ffcb2139d448e993491c13eaf620
+      internalID: -2010365606
       vertices: []
       indices: 
       edges: []
@@ -203,9 +203,9 @@ TextureImporter:
       name: JumpPowerUp_4
       rect:
         serializedVersion: 2
-        x: 120
+        x: 156
         y: 0
-        width: 30
+        width: 39
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -214,8 +214,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 131674e0669d64430b5dec15372ec29c
-      internalID: -411256624
+      spriteID: a3f715a0d14a24c9fb7ead18992035d9
+      internalID: -740366603
       vertices: []
       indices: 
       edges: []
@@ -224,9 +224,9 @@ TextureImporter:
       name: JumpPowerUp_5
       rect:
         serializedVersion: 2
-        x: 150
+        x: 195
         y: 0
-        width: 30
+        width: 39
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -235,8 +235,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70499ad0ba39d48e6b94a6291baa7041
-      internalID: -1545926913
+      spriteID: 0c5570f6800a04e09a10a150c84be679
+      internalID: -1223177855
       vertices: []
       indices: 
       edges: []
@@ -245,9 +245,9 @@ TextureImporter:
       name: JumpPowerUp_6
       rect:
         serializedVersion: 2
-        x: 180
+        x: 234
         y: 0
-        width: 30
+        width: 39
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -256,8 +256,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6fe9648dac0dd4662ad8f68e00318461
-      internalID: -1020942898
+      spriteID: 0cbd7a54472254d1683589dd7f3ba509
+      internalID: 1461923533
       vertices: []
       indices: 
       edges: []
@@ -266,9 +266,9 @@ TextureImporter:
       name: JumpPowerUp_7
       rect:
         serializedVersion: 2
-        x: 210
+        x: 273
         y: 0
-        width: 30
+        width: 39
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -277,8 +277,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dc792378e1d841b38287fbe4af09fb3
-      internalID: 460697107
+      spriteID: eea56c1f9d3a2402d9046c0fd27ca54b
+      internalID: -824777429
       vertices: []
       indices: 
       edges: []
@@ -287,9 +287,9 @@ TextureImporter:
       name: JumpPowerUp_8
       rect:
         serializedVersion: 2
-        x: 240
+        x: 312
         y: 0
-        width: 30
+        width: 39
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -298,8 +298,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 994f4d1501a16450db4b854b39620a5e
-      internalID: 449573871
+      spriteID: d3a5e1175d7844bf1b8cd6218fffd0b3
+      internalID: -1149489423
       vertices: []
       indices: 
       edges: []
@@ -308,9 +308,9 @@ TextureImporter:
       name: JumpPowerUp_9
       rect:
         serializedVersion: 2
-        x: 270
+        x: 351
         y: 0
-        width: 30
+        width: 39
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -319,8 +319,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a26bf7103be994dce8be107c1228be72
-      internalID: 706800790
+      spriteID: 9b5a05039f55a4d34afd82f5fa25b726
+      internalID: -1679723897
       vertices: []
       indices: 
       edges: []
@@ -329,9 +329,9 @@ TextureImporter:
       name: JumpPowerUp_10
       rect:
         serializedVersion: 2
-        x: 300
+        x: 390
         y: 0
-        width: 30
+        width: 39
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -340,8 +340,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7ea2368933934a868c03f0c20bb8264
-      internalID: -494832009
+      spriteID: 41d3010a7e202459a944dc3ca3c7edee
+      internalID: -1725436605
       vertices: []
       indices: 
       edges: []
@@ -350,9 +350,9 @@ TextureImporter:
       name: JumpPowerUp_11
       rect:
         serializedVersion: 2
-        x: 330
+        x: 429
         y: 0
-        width: 30
+        width: 39
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -361,8 +361,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80d0e1b7837ff4c61a01078036085521
-      internalID: 880156702
+      spriteID: e8f8760f4905f47878caa24a60b9274b
+      internalID: -1966877665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JumpPowerUp_12
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 0
+        width: 39
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45edc004f14744dd782dde53698bcfe4
+      internalID: 312214062
       vertices: []
       indices: 
       edges: []
@@ -378,18 +399,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      JumpPowerUp_4: -411256624
-      JumpPowerUp_5: -1545926913
-      JumpPowerUp_3: 887773542
-      JumpPowerUp_7: 460697107
-      JumpPowerUp_8: 449573871
-      JumpPowerUp_2: 222501982
-      JumpPowerUp_11: 880156702
-      JumpPowerUp_0: -1886435429
-      JumpPowerUp_1: 261228475
-      JumpPowerUp_6: -1020942898
-      JumpPowerUp_10: -494832009
-      JumpPowerUp_9: 706800790
+      JumpPowerUp_12: 312214062
+      JumpPowerUp_4: -740366603
+      JumpPowerUp_5: -1223177855
+      JumpPowerUp_3: -2010365606
+      JumpPowerUp_7: -824777429
+      JumpPowerUp_8: -1149489423
+      JumpPowerUp_2: -1262807793
+      JumpPowerUp_11: -1966877665
+      JumpPowerUp_0: 987410680
+      JumpPowerUp_1: 1585907151
+      JumpPowerUp_6: 1461923533
+      JumpPowerUp_10: -1725436605
+      JumpPowerUp_9: -1679723897
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

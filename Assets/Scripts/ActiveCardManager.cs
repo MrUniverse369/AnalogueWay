@@ -23,7 +23,7 @@ public class ActiveCardManager : MonoBehaviour
     [SerializeField] public float cardCoolDown;
     public static bool jumpPowerUp = false;
     private float airTime;
-    private static bool buttonOneIsActive;
+    public static bool walkOnAirIsActive;
     private static float sCard;
     private bool buttonTwoIsActive;
     private bool buttonThreeIsActive;
@@ -41,7 +41,7 @@ public class ActiveCardManager : MonoBehaviour
     {
         activeCardNumber = 0;
         airTime = 0;
-        buttonOneIsActive = false;
+        walkOnAirIsActive = false;
         activateCardOne = false;
     }
 
@@ -93,12 +93,14 @@ public class ActiveCardManager : MonoBehaviour
         {
             wOnAirCardScriptRef.gameObject.SetActive(true);
             cardImage.sprite = activeCard;
+            walkOnAirIsActive = true;
 
         }
         if (!activateCardOne)
         {
             wOnAirCardScriptRef.gameObject.SetActive(false);
             cardImage.sprite = inActiveCard;
+            walkOnAirIsActive = false;
 
         }
 

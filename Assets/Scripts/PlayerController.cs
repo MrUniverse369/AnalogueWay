@@ -63,6 +63,7 @@ namespace AnalogueWay
 
         void Update()
         {
+            Debug.Log(rb2D.velocity.x);
 
 
             if (pBDARef.pushBackCounter <= 0)
@@ -95,6 +96,17 @@ namespace AnalogueWay
             coyoteTime = 0.25f;
             animatorRef.SetFloat("Speed", Mathf.Abs(dir));
             animatorRef.SetFloat("JSpeed", rb2D.velocity.y);
+
+            if (ActiveCardManager.walkOnAirIsActive && rb2D.velocity.x != 0)
+            {
+                animatorRef.SetBool("WalkingOnAir", true);
+
+            }
+            else
+            {
+                animatorRef.SetBool("WalkingOnAir", false);
+            }
+
         }
 
         public override void CharJump()

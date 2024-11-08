@@ -12,19 +12,19 @@ public class WalkOnAirCard : MonoBehaviour
     private float airTime;
     private bool cardIsInPlay;
     [SerializeField] private ActiveCardManager activeCardManScriptRef;
-public float GetAirTime
-{
-    get { return airTime; }
-    set { airTime = value; }
-}
+    public float GetAirTime
+    {
+        get { return airTime; }
+        set { airTime = value; }
+    }
     // Start is called before the first frame update
     void Start()
     {
-      
+
     }
 
     // Update is called once per frame
     void Update()
-    { 
+    {
     }
 }
