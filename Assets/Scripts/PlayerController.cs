@@ -65,6 +65,14 @@ namespace AnalogueWay
         {
             Debug.Log(rb2D.velocity.x);
 
+            if (ActiveCardManager.speedBoostPowerUp == true)
+            {
+                animatorRef.SetBool("SpeedBoost", true);
+            }
+            else
+            {
+                animatorRef.SetBool("SpeedBoost", false);
+            }
 
             if (pBDARef.pushBackCounter <= 0)
             {

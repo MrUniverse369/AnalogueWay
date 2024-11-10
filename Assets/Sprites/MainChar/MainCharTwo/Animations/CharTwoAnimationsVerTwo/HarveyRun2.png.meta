@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cd63f6326238c4506b4c9cef6252b43f
+guid: a20809091eb144ad09d406e94d8bc8ef
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HarveyRun_0
+      name: HarveyRun2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
-        height: 32
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63294c7c5ec48422686f81192e136261
-      internalID: -1205974873
+      spriteID: c87fe533552234e07b97a1a7fdef6840
+      internalID: -1058019003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HarveyRun_1
+      name: HarveyRun2_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 32
-        height: 32
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a674416218fd4706b9cf5aebd216f9b
-      internalID: 406999677
+      spriteID: 58f4e14021303414790ede02c83ea018
+      internalID: -803467220
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HarveyRun_2
+      name: HarveyRun2_2
       rect:
         serializedVersion: 2
         x: 64
         y: 0
         width: 32
-        height: 32
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eccff264cc8464c94ba66476327f049a
-      internalID: -993080531
+      spriteID: da98b588e10be4d23ac654516aef6176
+      internalID: 1218767886
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HarveyRun_3
+      name: HarveyRun2_3
       rect:
         serializedVersion: 2
         x: 96
         y: 0
         width: 32
-        height: 32
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cba7c96fef32040edb8bf1bef6f583c3
-      internalID: -473396764
+      spriteID: 2bae156ed9d6640f7ab23c5345c013a1
+      internalID: 157146952
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HarveyRun_4
+      name: HarveyRun2_4
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 32
-        height: 32
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,20 +214,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49a5ed1f1276247c795879417c1a9b56
-      internalID: 1726011705
+      spriteID: 9bcb3799454a44ef38a857ca44dd231f
+      internalID: 1002520226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HarveyRun_5
+      name: HarveyRun2_5
       rect:
         serializedVersion: 2
         x: 160
         y: 0
         width: 32
-        height: 32
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,20 +235,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c971250db6d6f4148ac08f8baecf28b4
-      internalID: 411627069
+      spriteID: 7fd5015f7c29845eba323d2fc76fa5e4
+      internalID: -1733448073
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HarveyRun_6
+      name: HarveyRun2_6
       rect:
         serializedVersion: 2
         x: 192
         y: 0
         width: 32
-        height: 32
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,20 +256,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f46189d8df2c64968859baf767fb2c96
-      internalID: -2053075360
+      spriteID: c8786226b0dde4df9babb86d1797e80e
+      internalID: -1212248933
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HarveyRun_7
+      name: HarveyRun2_7
       rect:
         serializedVersion: 2
         x: 224
         y: 0
         width: 32
-        height: 32
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -277,8 +277,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 127e70a842e2a4b99a1ede6e2b8446da
-      internalID: 1190789662
+      spriteID: ee7ad001f120f4662b670607e78d65d4
+      internalID: 2036885349
       vertices: []
       indices: 
       edges: []
@@ -294,14 +294,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HarveyRun_7: 1190789662
-      HarveyRun_4: 1726011705
-      HarveyRun_1: 406999677
-      HarveyRun_2: -993080531
-      HarveyRun_0: -1205974873
-      HarveyRun_6: -2053075360
-      HarveyRun_3: -473396764
-      HarveyRun_5: 411627069
+      HarveyRun2_2: 1218767886
+      HarveyRun2_6: -1212248933
+      HarveyRun2_1: -803467220
+      HarveyRun2_0: -1058019003
+      HarveyRun2_4: 1002520226
+      HarveyRun2_7: 2036885349
+      HarveyRun2_3: 157146952
+      HarveyRun2_5: -1733448073
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

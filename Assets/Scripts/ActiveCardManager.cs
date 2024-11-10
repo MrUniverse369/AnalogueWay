@@ -22,6 +22,7 @@ public class ActiveCardManager : MonoBehaviour
     [SerializeField] private float speedBoost;
     [SerializeField] public float cardCoolDown;
     public static bool jumpPowerUp = false;
+    public static bool speedBoostPowerUp = false;
     private float airTime;
     public static bool walkOnAirIsActive;
     private static float sCard;
@@ -67,6 +68,7 @@ public class ActiveCardManager : MonoBehaviour
             cardCoolDown = 3;
             audioManager.PlaySfx(audioManager.powerUpSound);
         }
+
         if (Input.GetKey(KeyCode.C) && cardCoolDown < 1)
         {
             activeCardNumber = 3;
@@ -124,11 +126,13 @@ public class ActiveCardManager : MonoBehaviour
         {
             cardImage2.sprite = activeCardTwo;
             pScriptRef.GetSpeed = speedBoost;
+            speedBoostPowerUp = true;
             cardImage.color = Color.white;
         }
         else
         {
             cardImage2.sprite = inActiveCardTwo;
+            speedBoostPowerUp = false;
             pScriptRef.GetSpeed = 4.0f;
         }
 
@@ -142,6 +146,7 @@ public class ActiveCardManager : MonoBehaviour
         {
             cardImage3.sprite = inActiveCardThree;
             pScriptRef.GetJSpeed = 5.0f;
+
         }
 
         cardCoolDown += -1 * Time.deltaTime;
