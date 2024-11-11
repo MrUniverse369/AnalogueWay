@@ -24,9 +24,9 @@ public class playerBodyDetectionArea : MonoBehaviour
     // Handle player pushback when hitting the enemy trigger
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy") || other.CompareTag("HurtPlayer"))
+        if (other.CompareTag("HurtPlayer"))
         {
-            animatorRef.SetTrigger("isHurt");
+            animatorRef.SetTrigger("IsHurtStanding");
         }
 
         isGrounded = Physics2D.OverlapCircle(pFeet.position, pFeetRadius, isPFeetOnGround);
@@ -38,6 +38,7 @@ public class playerBodyDetectionArea : MonoBehaviour
         // made contact we push the player in the direction opposite of the enemy 
         if (other.gameObject.CompareTag("Enemy") && isGrounded != false)
         {
+            animatorRef.SetTrigger("isHurt");
             pushBackCounter = pushBackLenght;
             enemyScale = other.gameObject.transform.localScale;
         }
