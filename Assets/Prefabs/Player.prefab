@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115922458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.91, y: 0.11, z: 0}
+  m_LocalPosition: {x: -0.35, y: 0.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,9 +46,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.6817651, y: 0.14451408}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4.4084315
+  m_Radius: 5.3722224
 --- !u!114 &115922461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +112,7 @@ MonoBehaviour:
   isPFeetOnGround:
     serializedVersion: 2
     m_Bits: 64
+  animatorRef: {fileID: 776477715488756905}
   pFeet: {fileID: 6993799946060020112}
   lManager: {fileID: 0}
   pushBackCounter: 0
@@ -238,7 +239,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6993799946060020115}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.027, y: -2.24, z: 0}
+  m_LocalPosition: {x: -0.043, y: -2.317, z: 0}
   m_LocalScale: {x: 1.4285713, y: 1.4285713, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -255,7 +256,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6993799946190920028}
   - component: {fileID: 6993799946190920031}
-  - component: {fileID: 6993799946190920030}
   - component: {fileID: 6993799946190920025}
   - component: {fileID: 6993799946190920024}
   - component: {fileID: 776477715488756905}
@@ -331,38 +331,12 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.6666666, y: 2.75}
+  m_Size: {x: 8, y: 4.375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6993799946190920030
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993799946190920027}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 4a2d02c642a1b1445ae63508bab55968, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.19410706, y: -0.19384503}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8, y: 4.375}
-    newSize: {x: 1.6666666, y: 2.75}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6294861, y: 1.8967938}
-  m_EdgeRadius: 0
 --- !u!50 &6993799946190920025
 Rigidbody2D:
   serializedVersion: 4
@@ -398,7 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   animatorRef: {fileID: 776477715488756905}
-  jSpeed: 6
+  jSpeed: 4
   pFeet: {fileID: 6993799946060020112}
   lManager: {fileID: 0}
   pFeetRadius: 0.2
