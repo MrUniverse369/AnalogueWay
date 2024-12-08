@@ -4,10 +4,15 @@ using AnalogueWay;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.InputSystem;
+using System;
 
 public class ActiveCardManager : MonoBehaviour
 {
+    PlayerControls pControls;
+    bool pOneOn;
+    bool pTwoOn;
+    bool pThreeOn;
     [SerializeField] private Image cardImage;
     [SerializeField] private Image cardImage2;
     [SerializeField] private Image cardImage3;
@@ -33,9 +38,43 @@ public class ActiveCardManager : MonoBehaviour
     private AudioManager audioManager;
     private void Awake()
     {
+        pOneOn = false;
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        pControls = new PlayerControls();
+        pControls.Gameplay.powerUpOne.performed += ctx => powerUpOne();
+        pControls.Gameplay.powerUpTwo.performed += ctx => powerUpTwo();
+        pControls.Gameplay.powerUpThree.performed += ctx => powerUpThree();
+
     }
 
+    void powerUpOne()
+    {
+        pOneOn = true;
+        Debug.Log("Sqaure button registers Ps5");
+    }
+    void powerUpTwo()
+    {
+        pTwoOn = true;
+        Debug.Log("X button registers Ps5");
+    }
+    void powerUpThree()
+    {
+        pThreeOn = true;
+        Debug.Log("Circle button registers Ps5");
+    }
+
+    void OnEnable()
+    {
+        Debug.Log("OnEnable called - Input enabled");
+        pControls.Gameplay.Enable();
+    }
+
+    void OnDisable()
+    {
+        Debug.Log("DEnable called - denabled");
+
+        pControls.Gameplay.Disable();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -56,24 +95,27 @@ public class ActiveCardManager : MonoBehaviour
     private int SelectCard()
     {
 
-        if (Input.GetKeyDown(KeyCode.Z) && cardCoolDown < 1)
+        if (Input.GetKeyDown(KeyCode.Z) && cardCoolDown < 1 || pOneOn != false && cardCoolDown < 1)
         {
             activeCardNumber = 1;
             cardCoolDown = 8;
             audioManager.PlaySfx(audioManager.powerUpSound);
+            pOneOn = false;
         }
-        if (Input.GetKey(KeyCode.X) && cardCoolDown < 1)
+        if (Input.GetKey(KeyCode.X) && cardCoolDown < 1 || pTwoOn != false && cardCoolDown < 1)
         {
             activeCardNumber = 2;
             cardCoolDown = 3;
             audioManager.PlaySfx(audioManager.powerUpSound);
+            pTwoOn = false;
         }
 
-        if (Input.GetKey(KeyCode.C) && cardCoolDown < 1)
+        if (Input.GetKey(KeyCode.C) && cardCoolDown < 1 || pThreeOn != false && cardCoolDown < 1)
         {
             activeCardNumber = 3;
             cardCoolDown = 2;
             audioManager.PlaySfx(audioManager.powerUpSound);
+            pThreeOn = false;
 
         }
         return activeCardNumber;

@@ -1,5 +1,7 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace AnalogueWay
 {
@@ -9,11 +11,16 @@ namespace AnalogueWay
         private float jDir;
         private bool isGrounded;
         private Vector2 vel;
+        private Vector2 flightVel;
         private float dir;
+        private float yDir;
         private Rigidbody2D rb2D;
         private Vector2 turnLeft;
         private Vector2 turnRight;
+        private SpriteRenderer spriteRendererObj;
         public static bool playerInviInvincible;
+        PlayerControls pControls;
+        private bool mountActive;
         Vector2 enemyScale;
         [SerializeField] private float speed;
         [SerializeField] private Animator animatorRef;
@@ -28,6 +35,7 @@ namespace AnalogueWay
         [SerializeField] private float pushBackForceX;
         [SerializeField] private float pushBackForceY;
         [SerializeField] private playerBodyDetectionArea pBDARef;
+        [SerializeField] private GameObject dragon;
         private AudioManager audioManager;
 
         private void Awake()
@@ -35,8 +43,44 @@ namespace AnalogueWay
             audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
             playerInviInvincible = false;
             pBDARef = GameObject.FindGameObjectWithTag("PlayerDetectionArea").GetComponent<playerBodyDetectionArea>();
+            // dragon = GameObject.FindGameObjectWithTag("Dragon");
+            spriteRendererObj = GetComponent<SpriteRenderer>();
+            mountActive = false;
+            pControls = new PlayerControls();
+            pControls.Gameplay.Fly.performed += ctx => MountActive();
+            pControls.Gameplay.unMount.performed += ctx => UnMountActive();
+            //     pControls.Gameplay.Jump.performed += ctx => buttonSouthWorks();
+
+
         }
 
+        void OnEnable()
+        {
+            Debug.Log("OnEnable called - Input enabled");
+            pControls.Gameplay.Enable();
+        }
+
+        void OnDisable()
+        {
+            Debug.Log("DEnable called - denabled");
+
+            pControls.Gameplay.Disable();
+        }
+
+        void buttonSouthWorks()
+        {
+
+            Debug.Log("Button south work ");
+        }
+        void MountActive()
+        {
+            mountActive = true;
+        }
+
+        void UnMountActive()
+        {
+            mountActive = false;
+        }
         public float GetSpeed
         {
             get { return speed; }
@@ -57,14 +101,13 @@ namespace AnalogueWay
             turnRight = new Vector2(0.32f, 0.32f);
             transform.localScale = turnRight;
             coyoteTimeCounter = coyoteTime;
+
         }
 
         // Update is called once per frame
 
         void Update()
         {
-            Debug.Log(rb2D.velocity.x);
-
             if (ActiveCardManager.speedBoostPowerUp == true)
             {
                 animatorRef.SetBool("SpeedBoost", true);
@@ -74,10 +117,12 @@ namespace AnalogueWay
                 animatorRef.SetBool("SpeedBoost", false);
             }
 
+            //checking to see that the player has is not being pushed back 
             if (pBDARef.pushBackCounter <= 0)
             {
-                CharMovement();
+                if (mountActive != true) CharMovement();
                 CharJump();
+                if (mountActive) Fly();
                 playerInviInvincible = false;
             }
 
@@ -86,6 +131,20 @@ namespace AnalogueWay
                 pBDARef.pushBackCounter -= Time.deltaTime;
                 playerInviInvincible = true;
                 PushBackPlayer();
+            }
+
+            if (mountActive)
+            {
+                spriteRendererObj.enabled = false;
+                dragon.gameObject.SetActive(true);
+            }
+
+
+
+            if (mountActive != true)
+            {
+                spriteRendererObj.enabled = true;
+                dragon.gameObject.SetActive(false);
             }
 
         }
@@ -116,6 +175,18 @@ namespace AnalogueWay
             }
 
         }
+
+        private void Fly()
+        {
+            yDir = Input.GetAxisRaw("Vertical");
+            dir = Input.GetAxisRaw("Horizontal");
+            flightVel = new Vector2(speed * dir, speed * yDir);
+            if (dir > 0) transform.localScale = turnRight;
+            if (dir < 0) transform.localScale = turnLeft;
+            rb2D.velocity = flightVel;
+
+        }
+
 
         public override void CharJump()
         {
@@ -164,6 +235,7 @@ namespace AnalogueWay
                 coyoteTime = 0;
             }
         }
+
 
 
     }

@@ -16,6 +16,7 @@ TagManager:
   - LevelManager
   - PlayerDetectionArea
   - KillPlane
+  - Dragon
   layers:
   - Default
   - TransparentFX
