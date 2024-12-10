@@ -17,6 +17,9 @@ TagManager:
   - PlayerDetectionArea
   - KillPlane
   - Dragon
+  - WordOne
+  - WorldTwo
+  - WorldOne
   layers:
   - Default
   - TransparentFX
