@@ -42,6 +42,15 @@ public class playerBodyDetectionArea : MonoBehaviour
             pushBackCounter = pushBackLenght;
             enemyScale = other.gameObject.transform.localScale;
         }
+
+        if (other.gameObject.CompareTag("WorldOneSwitch"))
+        {
+            changeWorld.sWorld = true;
+        }
+        if (other.gameObject.CompareTag("WorldTwoSwitch"))
+        {
+            changeWorld.sWorld = false;
+        }
     }
 
 }
