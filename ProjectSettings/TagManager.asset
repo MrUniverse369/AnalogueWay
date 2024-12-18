@@ -22,6 +22,10 @@ TagManager:
   - WorldOne
   - WorldOneSwitch
   - WorldTwoSwitch
+  - SpiritEnemy
+  - LivingEnemy
+  - ToriGate
+  - ToriGateBack
   layers:
   - Default
   - TransparentFX

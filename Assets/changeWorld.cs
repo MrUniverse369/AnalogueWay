@@ -10,6 +10,11 @@ namespace AnalogueWay
         [SerializeField] private GameObject worldOne;
         [SerializeField] private GameObject[] worldOneSwitches;
         [SerializeField] private GameObject[] worldTwoSwitches;
+        [SerializeField] private GameObject[] Enemy;
+        [SerializeField] private GameObject[] EnemyTwo;
+
+        [SerializeField] private Sprite switchSprite;
+        [SerializeField] private Sprite originSprite;
         [SerializeField] private GameObject worldOneTree;
         [SerializeField] private GameObject worldOneSpikes;
         [SerializeField] private GameObject worldOneBackGround;
@@ -18,46 +23,77 @@ namespace AnalogueWay
         [SerializeField] private bool switchWorld;
         [SerializeField] public static bool sWorld = false;
 
+
+
         // Start is called before the first frame update
         void Start()
         {
             // Find all switches with the respective tags
             worldOneSwitches = GameObject.FindGameObjectsWithTag("WorldOneSwitch");
             worldTwoSwitches = GameObject.FindGameObjectsWithTag("WorldTwoSwitch");
-
+            Enemy = GameObject.FindGameObjectsWithTag("SpiritEnemy");
+            EnemyTwo = GameObject.FindGameObjectsWithTag("LivingEnemy");
             switchWorld = false;
         }
 
         // Update is called once per frame
         void Update()
         {
+
+
             if (sWorld != false)
             {
-                // World One is inactive
+                // Spirit world is inactive
                 worldOne.SetActive(false);
                 worldOneBackGround.SetActive(false);
+                ToriGateAppearanceManager.insideSpiritWorld = false;
                 SetSwitchesActive(worldOneSwitches, false);
 
-                // World Two is active
+
+                // livingWorld world is active
                 worldTwo.SetActive(true);
                 worldTwoBackGround.SetActive(true);
                 SetSwitchesActive(worldTwoSwitches, true);
 
-                Debug.Log("SwitchWorld One implemented");
+                //spirit world Enemies 
+                SetSwitchesActive(Enemy, false);
+                SetSwitchesActive(EnemyTwo, true);
+                //   Debug.Log("SwitchWorld One implemented");
+
+
+                //ToriGateSWitch
+
+                gameObject.GetComponent<Animator>().SetBool("TF", true);
+
+                // animatorRef.SetTrigger("ToriBack");
+
             }
             else
             {
-                // World Two is inactive
+
+
+                //living world is inactive
                 worldTwo.SetActive(false);
                 worldTwoBackGround.SetActive(false);
                 SetSwitchesActive(worldTwoSwitches, false);
 
-                // World One is active
+
+                // Spirit world is active
                 worldOne.SetActive(true);
                 worldOneBackGround.SetActive(true);
+                ToriGateAppearanceManager.insideSpiritWorld = true;
                 SetSwitchesActive(worldOneSwitches, true);
+                SetSwitchesActive(Enemy, true);
+                SetSwitchesActive(EnemyTwo, false);
 
                 Debug.Log("SwitchWorld Two implemented");
+
+
+                //ToriGateSWitch
+
+                //   gameObject.GetComponent<Animator>().SetBool("TF", false);
+
+
             }
         }
 
@@ -82,5 +118,7 @@ namespace AnalogueWay
                 }
             }
         }
+
+
     }
 }
