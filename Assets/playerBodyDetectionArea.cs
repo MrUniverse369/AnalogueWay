@@ -45,13 +45,13 @@ public class playerBodyDetectionArea : MonoBehaviour
 
         if (other.gameObject.CompareTag("WorldOneSwitch"))
         {
-            changeWorld.sWorld = true;
+            changeWorld.lWorld = true;
 
 
         }
         if (other.gameObject.CompareTag("WorldTwoSwitch"))
         {
-            changeWorld.sWorld = false;
+            changeWorld.lWorld = false;
 
         }
     }

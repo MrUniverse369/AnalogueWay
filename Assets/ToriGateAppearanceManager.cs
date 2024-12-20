@@ -8,9 +8,9 @@ public class ToriGateAppearanceManager : MonoBehaviour
     [SerializeField] private Animator animatorRef;
 
     [SerializeField] private GameObject[] ToriGate;
-
-    public static bool SpiritGatehasExited = false;
-    public static bool insideSpiritWorld = true;
+    public bool insideSpiritWorld = true;
+    public bool insideLivingWorld = false;
+    bool iSWorld = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,41 +20,24 @@ public class ToriGateAppearanceManager : MonoBehaviour
 
     void Update()
     {
-        if (insideSpiritWorld && changeWorld.sWorld)
+        if (!changeWorld.lWorld)
         {
-            gameObject.GetComponent<Animator>().SetBool("SToridle", true);
-            animatorRef.SetBool("SBTidle", true);
+            gameObject.GetComponent<Animator>().SetBool("SFA", false);
+            animatorRef.SetBool("SBA", false);
         }
 
-        Debug.Log("InsideSWorldIS:" + insideSpiritWorld);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (insideSpiritWorld && other.CompareTag("PlayerDetectionArea") && gameObject.CompareTag("ToriGate"))
+        if (!changeWorld.lWorld && other.CompareTag("PlayerDetectionArea"))
         {
-            Debug.Log("Inside OnTriggerEnter2D");
-            gameObject.GetComponent<Animator>().SetBool("SToriActive", true);
-            animatorRef.SetBool("SBTactive", true);
+            Debug.Log("Red tori being turned on");
+            gameObject.GetComponent<Animator>().SetBool("SFA", true);
+            animatorRef.SetBool("SBA", true);
         }
-
-        /* if (!SpiritGatehasExited && other.CompareTag("PlayerDetectionArea") && gameObject.CompareTag("ToriGateBack"))
-         {
-             Debug.Log("Inside OnTriggerEnter2D");
-             gameObject.GetComponent<Animator>().SetBool("SToriActive", true);
-             animatorRef.SetBool("SBTactive", true);
-         }*/
     }
-
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("PlayerDetectionArea"))
-        {
-            Debug.Log("Inside OnTriggerExit2D");
-            gameObject.GetComponent<Animator>().SetBool("SToriActive", false);
-            animatorRef.SetBool("SBTactive", false);
 
-            SpiritGatehasExited = true;
-            insideSpiritWorld = false;
-        }
     }
 }

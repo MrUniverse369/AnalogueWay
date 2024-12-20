@@ -56,13 +56,13 @@ namespace AnalogueWay
 
         void OnEnable()
         {
-            Debug.Log("OnEnable called - Input enabled");
+
             pControls.Gameplay.Enable();
         }
 
         void OnDisable()
         {
-            Debug.Log("DEnable called - denabled");
+
 
             pControls.Gameplay.Disable();
         }
@@ -70,7 +70,7 @@ namespace AnalogueWay
         void buttonSouthWorks()
         {
 
-            Debug.Log("Button south work ");
+
         }
         void MountActive()
         {

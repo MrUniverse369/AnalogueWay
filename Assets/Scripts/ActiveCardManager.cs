@@ -55,23 +55,23 @@ public class ActiveCardManager : MonoBehaviour
     void powerUpTwo()
     {
         pTwoOn = true;
-        Debug.Log("X button registers Ps5");
+
     }
     void powerUpThree()
     {
         pThreeOn = true;
-        Debug.Log("Circle button registers Ps5");
+
     }
 
     void OnEnable()
     {
-        Debug.Log("OnEnable called - Input enabled");
+
         pControls.Gameplay.Enable();
     }
 
     void OnDisable()
     {
-        Debug.Log("DEnable called - denabled");
+
 
         pControls.Gameplay.Disable();
     }
