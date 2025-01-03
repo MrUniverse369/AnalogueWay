@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1865849586987372007}
   m_Layer: 0
   m_Name: FloatingTrap
-  m_TagString: Untagged
+  m_TagString: HurtPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRef: {fileID: 0}
+  pLives: 0
   pRespawnPos: {fileID: 0}
 --- !u!1 &1865849587138824138
 GameObject:
