@@ -102,6 +102,9 @@ TagManager:
   - name: Goal
     uniqueID: 658860049
     locked: 0
+  - name: VillagePeople
+    uniqueID: 2832753203
+    locked: 0
   - name: Player
     uniqueID: 2336263085
     locked: 0
