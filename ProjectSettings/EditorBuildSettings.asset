@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/6LeveL_Six6.unity
     guid: 7c507e41020b86342870bdbd64b88c71
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Z3A2Japan.unity
     guid: 2b08e72dd4565d14bbf82b87a35b248a
   - enabled: 0
@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/10Level_Nine_10.unity
     guid: 6f92664f6035446adace6ff806f23078
+  - enabled: 1
+    path: Assets/Scenes/Z3JapanVillage.unity
+    guid: 754f78b8820004641bd650f1b6ea8a60
   m_configObjects: {}
