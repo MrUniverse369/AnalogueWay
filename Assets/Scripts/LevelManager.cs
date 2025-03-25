@@ -15,6 +15,7 @@ namespace AnalogueWay
         [SerializeField] private Image cardImage;
         [SerializeField] private Sprite activeCard;
         [SerializeField] private Sprite inActiveCard;
+        [SerializeField] private GameObject gameOverScreen;
         private AudioManager audioManager;
 
         public Transform ReSpawnPos
@@ -52,9 +53,13 @@ namespace AnalogueWay
         {
             audioManager.PlaySfx(audioManager.gameOverSound);
             pScriptRef.gameObject.SetActive(false);
+            gameOverScreen.SetActive(true);
             yield return new WaitForSeconds(respawnDelay);
             pScriptRef.transform.position = ReSpawnPos.transform.position;
             pScriptRef.gameObject.SetActive(true);
+            gameOverScreen.SetActive(false);
+            HurtPlayer.pLivesCount = 3;
+            PlayerController.mana = 100;
             HurtPlayer.oopsCount = HurtPlayer.oopsCount + 1;
             for (int i = 0; i < resetObjsArr.Length; i++)
             {

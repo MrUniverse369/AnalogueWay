@@ -44,7 +44,6 @@ public class ResetOnRespawn : MonoBehaviour
         transform.position = startPos;
         transform.rotation = startRot;
         transform.localScale = startScale;
-        HurtPlayer.pLivesCount = 5;
         if (GetComponent<Rigidbody2D>() != null) startRb.velocity = Vector2.zero;
         if (GetComponent<MovingObstacles>() != null) fallingObj.GetComponent<MovingObstacles>().GetPDetected = false;
     }

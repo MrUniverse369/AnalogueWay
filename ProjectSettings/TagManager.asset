@@ -26,6 +26,7 @@ TagManager:
   - LivingEnemy
   - ToriGate
   - ToriGateBack
+  - ChiStone
   layers:
   - Default
   - TransparentFX

@@ -22,8 +22,10 @@ public class ToriGateAppearanceManager : MonoBehaviour
     {
         if (!changeWorld.lWorld)
         {
+
             gameObject.GetComponent<Animator>().SetBool("SFA", false);
             animatorRef.SetBool("SBA", false);
+
         }
 
     }
@@ -31,9 +33,11 @@ public class ToriGateAppearanceManager : MonoBehaviour
     {
         if (!changeWorld.lWorld && other.CompareTag("PlayerDetectionArea"))
         {
+
             Debug.Log("Red tori being turned on");
             gameObject.GetComponent<Animator>().SetBool("SFA", true);
             animatorRef.SetBool("SBA", true);
+
         }
     }
     private void OnTriggerExit2D(Collider2D other)

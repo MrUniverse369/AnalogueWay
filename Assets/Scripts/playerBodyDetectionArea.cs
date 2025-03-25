@@ -28,6 +28,10 @@ public class playerBodyDetectionArea : MonoBehaviour
         {
             animatorRef.SetTrigger("IsHurtStanding");
         }
+        if (other.CompareTag("ChiStone") && PlayerController.mana < 100)
+        {
+            PlayerController.mana += 34;
+        }
 
         isGrounded = Physics2D.OverlapCircle(pFeet.position, pFeetRadius, isPFeetOnGround);
         if (other.gameObject.CompareTag("CheckPoint"))

@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/12Level_Twelve_12.unity
     guid: 65219a3255aa94e3699e9841f8008006
   - enabled: 0
-    path: Assets/Scenes/Z2A2Sandy.unity
-    guid: 7a43749a8e57c9247a035025d13ef335
-  - enabled: 0
     path: Assets/Scenes/11LeveL_Eleven_11.unity
     guid: b4629643f36534b2fb3aadd4bd382cc2
   - enabled: 0
@@ -26,9 +23,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/6LeveL_Six6.unity
     guid: 7c507e41020b86342870bdbd64b88c71
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/Z3JapanVillage.unity
+    guid: 754f78b8820004641bd650f1b6ea8a60
+  - enabled: 1
+    path: Assets/Scenes/Z3A1Japan.unity
+    guid: 125e022cb8d024bfdba6cf3b4e895b3e
+  - enabled: 1
     path: Assets/Scenes/Z3A2Japan.unity
     guid: 2b08e72dd4565d14bbf82b87a35b248a
+  - enabled: 1
+    path: Assets/Scenes/Z2A2Sandy.unity
+    guid: 7a43749a8e57c9247a035025d13ef335
   - enabled: 0
     path: Assets/Scenes/4Level_Four_4.unity
     guid: d5dc91ada5efa2b4e8f2c744f5f89e6f
@@ -47,7 +53,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/10Level_Nine_10.unity
     guid: 6f92664f6035446adace6ff806f23078
-  - enabled: 1
-    path: Assets/Scenes/Z3JapanVillage.unity
-    guid: 754f78b8820004641bd650f1b6ea8a60
   m_configObjects: {}

@@ -11,7 +11,7 @@ namespace AnalogueWay
         [SerializeField] private GameObject playerRef;
         [SerializeField] private int pLives;
         public static int oopsCount = 0;
-        public static int pLivesCount = 5;
+        public static int pLivesCount = 3;
         [SerializeField] private GameObject pRespawnPos;
         private LevelManager lmanagerScriptRef;
         // Start is called before the first frame update

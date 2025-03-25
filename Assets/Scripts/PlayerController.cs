@@ -36,6 +36,7 @@ namespace AnalogueWay
         [SerializeField] private float pushBackForceY;
         [SerializeField] private playerBodyDetectionArea pBDARef;
         [SerializeField] private GameObject dragon;
+        public static float mana = 90;
         private AudioManager audioManager;
 
         private void Awake()
@@ -97,8 +98,8 @@ namespace AnalogueWay
         void Start()
         {
             rb2D = GetComponent<Rigidbody2D>();
-            turnLeft = new Vector2(-0.32f, 0.32f);
-            turnRight = new Vector2(0.32f, 0.32f);
+            turnLeft = new Vector2(-0.75f, 0.75f);
+            turnRight = new Vector2(0.75f, 0.75f);
             transform.localScale = turnRight;
             coyoteTimeCounter = coyoteTime;
 
@@ -122,7 +123,8 @@ namespace AnalogueWay
             {
                 if (mountActive != true) CharMovement();
                 CharJump();
-                if (mountActive) Fly();
+                if (mountActive && PlayerController.mana > 0) Fly();
+                if (PlayerController.mana <= 0) mountActive = false;
                 playerInviInvincible = false;
             }
 
@@ -184,6 +186,8 @@ namespace AnalogueWay
             if (dir > 0) transform.localScale = turnRight;
             if (dir < 0) transform.localScale = turnLeft;
             rb2D.velocity = flightVel;
+            PlayerController.mana -= 10 * Time.deltaTime;
+
 
         }
 

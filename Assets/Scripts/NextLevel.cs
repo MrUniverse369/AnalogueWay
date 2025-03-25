@@ -52,6 +52,7 @@ public class NextLevel : MonoBehaviour
         Time.timeScale = 0;
 
         // Play audio and activate the level complete UI
+
         audioManager.PlaySfx(audioManager.winSound);
         levelComplete.gameObject.SetActive(true);
         levelComplete.GetComponent<LevelComplete>().GetSetFinalTimerText.text = timerScriptRef.timerText.text;
