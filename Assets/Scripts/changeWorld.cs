@@ -25,6 +25,7 @@ namespace AnalogueWay
         [SerializeField] private GameObject worldTwoCoins;
         [SerializeField] private GameObject walkOnAirWorldTwo;
         [SerializeField] private GameObject worldTwoBackGround;
+        [SerializeField] private GameObject worldTwoCover;
         [SerializeField] public static bool lWorld = false;
 
 
@@ -61,6 +62,7 @@ namespace AnalogueWay
                 worldTwoBackGround.SetActive(true);
                 worldTwoCoins.SetActive(true);
                 walkOnAirWorldTwo.SetActive(true);
+                worldTwoCover.SetActive(true);
                 SetSwitchesActive(worldTwoSwitches, true);
 
                 //spirit world Enemies 
@@ -76,6 +78,7 @@ namespace AnalogueWay
                 worldTwoBackGround.SetActive(false);
                 worldTwoCoins.SetActive(false);
                 walkOnAirWorldTwo.SetActive(false);
+                worldTwoCover.SetActive(false);
                 SetSwitchesActive(worldTwoSwitches, false);
 
 

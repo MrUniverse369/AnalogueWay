@@ -59,7 +59,7 @@ namespace AnalogueWay
             pScriptRef.gameObject.SetActive(true);
             gameOverScreen.SetActive(false);
             HurtPlayer.pLivesCount = 3;
-            PlayerController.mana = 100;
+            PlayerController.chi = 90;
             HurtPlayer.oopsCount = HurtPlayer.oopsCount + 1;
             for (int i = 0; i < resetObjsArr.Length; i++)
             {

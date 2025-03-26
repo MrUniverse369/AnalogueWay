@@ -36,7 +36,7 @@ namespace AnalogueWay
         [SerializeField] private float pushBackForceY;
         [SerializeField] private playerBodyDetectionArea pBDARef;
         [SerializeField] private GameObject dragon;
-        public static float mana = 90;
+        public static float chi = 90;
         private AudioManager audioManager;
 
         private void Awake()
@@ -123,8 +123,8 @@ namespace AnalogueWay
             {
                 if (mountActive != true) CharMovement();
                 CharJump();
-                if (mountActive && PlayerController.mana > 0) Fly();
-                if (PlayerController.mana <= 0) mountActive = false;
+                if (mountActive && PlayerController.chi > 0) Fly();
+                if (PlayerController.chi <= 0) mountActive = false;
                 playerInviInvincible = false;
             }
 
@@ -186,7 +186,7 @@ namespace AnalogueWay
             if (dir > 0) transform.localScale = turnRight;
             if (dir < 0) transform.localScale = turnLeft;
             rb2D.velocity = flightVel;
-            PlayerController.mana -= 10 * Time.deltaTime;
+            PlayerController.chi -= 10 * Time.deltaTime;
 
 
         }
