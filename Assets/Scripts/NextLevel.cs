@@ -34,7 +34,7 @@ public class NextLevel : MonoBehaviour
     {
         if (pIsTouchingTreasure)
         {
-            if (pIsTouchingTreasure && Input.GetKeyDown(KeyCode.E))
+            if (pIsTouchingTreasure)
             {
 
                 StartCoroutine(nameof(NextLevelPauseCo));
@@ -85,6 +85,7 @@ public class NextLevel : MonoBehaviour
         {
             pIsTouchingTreasure = true;
         }
+
     }
 
     private void OnTriggerStay2D(Collider2D other)

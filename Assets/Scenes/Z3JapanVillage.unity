@@ -652,7 +652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6993799946190920028, guid: deb9879d2dbbc4fb7a2b7fb51169218b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.554
+      value: 7.4
       objectReference: {fileID: 0}
     - target: {fileID: 6993799946190920028, guid: deb9879d2dbbc4fb7a2b7fb51169218b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -57044,6 +57044,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1124704222, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124704224, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+      propertyPath: fadeOutTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124704225, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+      propertyPath: m_Color.a
+      value: 0.92941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124704225, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+      propertyPath: m_Color.b
+      value: 0.029725859
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124704225, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+      propertyPath: m_Color.g
+      value: 0.03773582
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124704225, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+      propertyPath: m_Color.r
+      value: 0.030526854
+      objectReference: {fileID: 0}
+    - target: {fileID: 1372882476, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3809942794634234805, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
       propertyPath: activeCardManagerScriptRef
       value: 
@@ -57154,6 +57182,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: bf69807c57ae14eec8f55ffcdd7aed80, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+--- !u!1 &993748755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1124704222, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+  m_PrefabInstance: {fileID: 993748754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &994414302
 GameObject:
   m_ObjectHideFlags: 0
@@ -65405,9 +65438,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1380145074}
   - component: {fileID: 1380145073}
+  - component: {fileID: 1380145075}
   m_Layer: 0
   m_Name: TownExitBlock
-  m_TagString: Untagged
+  m_TagString: VillageExit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65422,10 +65456,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.015266, y: 21.264496}
+  m_Offset: {x: -0.10823107, y: 21.264496}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -65436,7 +65470,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.030532, y: 55.21383}
+  m_Size: {x: 9.277526, y: 55.21383}
   m_EdgeRadius: 0
 --- !u!4 &1380145074
 Transform:
@@ -65453,6 +65487,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1380145075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380145072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51e6d421d5d214affa8ddd8cf2ab4317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOut: {fileID: 993748755}
+  exitVillage: 0
 --- !u!4 &1385225127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 394160351929318915, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
@@ -66061,7 +66109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501500, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: orthographic size
-      value: 7.59375
+      value: 7.328125
       objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501500, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
