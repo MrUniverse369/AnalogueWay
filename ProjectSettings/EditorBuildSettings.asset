@@ -29,10 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Z3A1Japan.unity
     guid: 125e022cb8d024bfdba6cf3b4e895b3e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Z3A2Japan.unity
     guid: 2b08e72dd4565d14bbf82b87a35b248a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Z2A2Sandy.unity
     guid: 7a43749a8e57c9247a035025d13ef335
   - enabled: 0
@@ -47,7 +47,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Z1A2Tomb.unity
     guid: 77e6fbf9305424962aa5dc200fce3c1c
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: 26584e36b337942e09bad83ae89c520f
   - enabled: 0
