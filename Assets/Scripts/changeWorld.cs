@@ -26,6 +26,7 @@ namespace AnalogueWay
         [SerializeField] private GameObject walkOnAirWorldTwo;
         [SerializeField] private GameObject worldTwoBackGround;
         [SerializeField] private GameObject worldTwoCover;
+        [SerializeField] private GameObject bounceWorldOne;
         [SerializeField] public static bool lWorld = false;
 
 
@@ -53,6 +54,7 @@ namespace AnalogueWay
                 worldOneBackGround.SetActive(false);
                 worldOneCoins.SetActive(false);
                 walkOnAirWorldOne.SetActive(false);
+                bounceWorldOne.SetActive(false);
                 SetSwitchesActive(worldOneSwitches, false);
 
 
@@ -88,6 +90,7 @@ namespace AnalogueWay
                 worldOneCoins.SetActive(true);
                 worldOneTreasureChest.SetActive(true);
                 walkOnAirWorldOne.SetActive(true);
+                bounceWorldOne.SetActive(true);
                 SetSwitchesActive(worldOneSwitches, true);
                 SetSwitchesActive(Enemy, true);
                 SetSwitchesActive(EnemyTwo, false);
