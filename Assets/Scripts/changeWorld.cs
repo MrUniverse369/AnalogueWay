@@ -26,7 +26,8 @@ namespace AnalogueWay
         [SerializeField] private GameObject walkOnAirWorldTwo;
         [SerializeField] private GameObject worldTwoBackGround;
         [SerializeField] private GameObject worldTwoCover;
-        [SerializeField] private GameObject bounceWorldOne;
+        [SerializeField] private GameObject worldOneBounceBox;
+        [SerializeField] private GameObject worldTwoBounceBox;
         [SerializeField] public static bool lWorld = false;
 
 
@@ -54,7 +55,7 @@ namespace AnalogueWay
                 worldOneBackGround.SetActive(false);
                 worldOneCoins.SetActive(false);
                 walkOnAirWorldOne.SetActive(false);
-                bounceWorldOne.SetActive(false);
+                worldOneBounceBox.SetActive(false);
                 SetSwitchesActive(worldOneSwitches, false);
 
 
@@ -65,6 +66,7 @@ namespace AnalogueWay
                 worldTwoCoins.SetActive(true);
                 walkOnAirWorldTwo.SetActive(true);
                 worldTwoCover.SetActive(true);
+                worldTwoBounceBox.SetActive(true);
                 SetSwitchesActive(worldTwoSwitches, true);
 
                 //spirit world Enemies 
@@ -81,6 +83,7 @@ namespace AnalogueWay
                 worldTwoCoins.SetActive(false);
                 walkOnAirWorldTwo.SetActive(false);
                 worldTwoCover.SetActive(false);
+                worldTwoBounceBox.SetActive(false);
                 SetSwitchesActive(worldTwoSwitches, false);
 
 
@@ -90,7 +93,7 @@ namespace AnalogueWay
                 worldOneCoins.SetActive(true);
                 worldOneTreasureChest.SetActive(true);
                 walkOnAirWorldOne.SetActive(true);
-                bounceWorldOne.SetActive(true);
+                worldOneBounceBox.SetActive(true);
                 SetSwitchesActive(worldOneSwitches, true);
                 SetSwitchesActive(Enemy, true);
                 SetSwitchesActive(EnemyTwo, false);
