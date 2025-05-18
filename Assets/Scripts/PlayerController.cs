@@ -23,6 +23,7 @@ namespace AnalogueWay
         private bool mountActive;
         Vector2 enemyScale;
         [SerializeField] private float speed;
+        [SerializeField] private float speedDefault;
         [SerializeField] private Animator animatorRef;
         [SerializeField] private float jSpeed;
         [SerializeField] private Transform pFeet;
@@ -82,6 +83,13 @@ namespace AnalogueWay
         {
             mountActive = false;
         }
+
+        public float GetSpeedDefault
+        {
+            get { return speedDefault; }
+            set { speedDefault = value; }
+        }
+
         public float GetSpeed
         {
             get { return speed; }

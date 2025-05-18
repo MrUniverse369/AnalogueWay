@@ -25,6 +25,7 @@ public class ActiveCardManager : MonoBehaviour
     [SerializeField] private WalkOnAirCard wOnAirCardScriptRef;
     [SerializeField] private PlayerController pScriptRef;
     [SerializeField] private float speedBoost;
+    [SerializeField] private float speedBoostMultiplier;
     [SerializeField] public float cardCoolDown;
     public static bool jumpPowerUp = false;
     public static bool speedBoostPowerUp = false;
@@ -105,7 +106,7 @@ public class ActiveCardManager : MonoBehaviour
         if (Input.GetKey(KeyCode.X) && cardCoolDown < 1 || pTwoOn != false && cardCoolDown < 1)
         {
             activeCardNumber = 2;
-            cardCoolDown = 3;
+            cardCoolDown = 1.2f;
             audioManager.PlaySfx(audioManager.powerUpSound);
             pTwoOn = false;
         }
@@ -167,7 +168,7 @@ public class ActiveCardManager : MonoBehaviour
         if (this.activeCardNumber == 2 && cardCoolDown > 1)
         {
             cardImage2.sprite = activeCardTwo;
-            pScriptRef.GetSpeed = speedBoost;
+            pScriptRef.GetSpeed = speedBoost * speedBoostMultiplier;
             speedBoostPowerUp = true;
             cardImage.color = Color.white;
         }
@@ -175,7 +176,7 @@ public class ActiveCardManager : MonoBehaviour
         {
             cardImage2.sprite = inActiveCardTwo;
             speedBoostPowerUp = false;
-            pScriptRef.GetSpeed = 4.0f;
+            pScriptRef.GetSpeed = pScriptRef.GetSpeedDefault;
         }
 
         if (this.activeCardNumber == 3 && cardCoolDown > 1)

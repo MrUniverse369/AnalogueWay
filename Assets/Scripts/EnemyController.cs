@@ -6,6 +6,9 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float bounceSpeed;
     [SerializeField] private MovingTiles mTRef;
+    [SerializeField] private Animator animator;
+    [SerializeField] private bool deActivate;
+    [SerializeField] private float animCounter;
     public float BounceSpeed
     {
         get { return bounceSpeed; }
@@ -14,13 +17,33 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        if (deActivate)
+        {
+            animCounter -= 1 * Time.deltaTime;
+            animator.SetBool("DeathAnim", deActivate);
+        }
+        if (animCounter < 0 && deActivate == true)
+        {
+            gameObject.SetActive(false);
+            deActivate = false;
+            //animCounter = 0.6f;
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("pStomp"))
+        {
+            animCounter = 0.7f;
+            deActivate = true;
+        }
     }
 }

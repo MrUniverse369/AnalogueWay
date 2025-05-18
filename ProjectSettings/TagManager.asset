@@ -28,6 +28,7 @@ TagManager:
   - ToriGateBack
   - ChiStone
   - VillageExit
+  - pStomp
   layers:
   - Default
   - TransparentFX
