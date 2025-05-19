@@ -49,4 +49,12 @@ MonoBehaviour:
   cardImage3: {fileID: 0}
   activeCard: {fileID: 21300000, guid: ebf494fbb7cc94a3e947f33320b42e04, type: 3}
   inActiveCard: {fileID: 21300000, guid: 83cded221dc3f4ea991997d953447684, type: 3}
+  activeCardTwo: {fileID: 21300000, guid: 1240aedbed15343eab83578c66ac2746, type: 3}
+  inActiveCardTwo: {fileID: 21300000, guid: bf69807c57ae14eec8f55ffcdd7aed80, type: 3}
+  activeCardThree: {fileID: 21300000, guid: 7b13ff1a6ec974ab6baf69369d84cdfb, type: 3}
+  inActiveCardThree: {fileID: 21300000, guid: 7b6f9e66c71634e5cbe87f50dab07f00, type: 3}
   wOnAirCardScriptRef: {fileID: 0}
+  pScriptRef: {fileID: 0}
+  speedBoost: 6.5
+  speedBoostMultiplier: 6
+  cardCoolDown: 0

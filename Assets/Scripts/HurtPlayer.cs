@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace AnalogueWay
-{
+
     public class HurtPlayer : MonoBehaviour
     {
         [SerializeField] private GameObject playerRef;
@@ -26,19 +25,18 @@ namespace AnalogueWay
         private void OnTriggerEnter2D(Collider2D other)
         {
 
-            if (other.CompareTag("PlayerDetectionArea"))
+            if (other.CompareTag("PlayerDetectionArea") && ActiveCardManager.speedBoostPowerUp != true )
             {
-                // playerRef.GetComponent<PlayerController>().PushBackPlayer();
+                
                 if (PlayerController.playerInviInvincible == false) pLivesCount -= 1;
                 if (pLivesCount <= 0) lmanagerScriptRef.Respawn();
             }
 
             if (other.CompareTag("PlayerDetectionArea") && gameObject.CompareTag("KillPlane"))
             {
-                // playerRef.GetComponent<PlayerController>().PushBackPlayer();
+                
                 if (PlayerController.playerInviInvincible == false) pLivesCount = 0;
                 if (pLivesCount <= 0) lmanagerScriptRef.Respawn();
             }
         }
     }
-}

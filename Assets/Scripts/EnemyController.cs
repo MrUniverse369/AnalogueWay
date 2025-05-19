@@ -45,5 +45,11 @@ public class EnemyController : MonoBehaviour
             animCounter = 0.7f;
             deActivate = true;
         }
+
+         if (other.CompareTag("PlayerDetectionArea") && ActiveCardManager.speedBoostPowerUp != false)
+        {
+            animCounter = 0.5f;
+            deActivate = true;
+        }
     }
 }

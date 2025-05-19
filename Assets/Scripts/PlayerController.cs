@@ -3,8 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace AnalogueWay
-{
+
     public class PlayerController : CharecterBehaviour
     {
         private Vector2 jVel;
@@ -136,7 +135,7 @@ namespace AnalogueWay
                 playerInviInvincible = false;
             }
 
-            if (pBDARef.pushBackCounter > 0)
+            if (pBDARef.pushBackCounter > 0 && ActiveCardManager.speedBoostPowerUp == false)
             {
                 pBDARef.pushBackCounter -= Time.deltaTime;
                 playerInviInvincible = true;
@@ -252,4 +251,4 @@ namespace AnalogueWay
 
     }
 
-}
+

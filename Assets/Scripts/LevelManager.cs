@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-namespace AnalogueWay
-{
-    public class LevelManager : MonoBehaviour
+ public class LevelManager : MonoBehaviour
     {
         [SerializeField] private float respawnDelay;
         [SerializeField] private PlayerController pScriptRef;
@@ -70,4 +68,3 @@ namespace AnalogueWay
         }
 
     }
-}

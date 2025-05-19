@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AnalogueWay
-{
 
     abstract public class CharecterBehaviour : MonoBehaviour
     {
@@ -21,4 +19,3 @@ namespace AnalogueWay
 
 
     }
-}
