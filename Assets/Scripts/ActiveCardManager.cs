@@ -106,7 +106,7 @@ public class ActiveCardManager : MonoBehaviour
         if (Input.GetKey(KeyCode.X) && cardCoolDown < 1 || pTwoOn != false && cardCoolDown < 1)
         {
             activeCardNumber = 2;
-            cardCoolDown = 1.2f;
+            cardCoolDown = 1.25f;
             audioManager.PlaySfx(audioManager.powerUpSound);
             pTwoOn = false;
         }
@@ -165,7 +165,7 @@ public class ActiveCardManager : MonoBehaviour
             activateCardOne = false;
         }
 
-        if (this.activeCardNumber == 2 && cardCoolDown > 1)
+        if (this.activeCardNumber == 2 && cardCoolDown >= 1)
         {
             cardImage2.sprite = activeCardTwo;
             pScriptRef.GetSpeed = speedBoost * speedBoostMultiplier;

@@ -56,5 +56,5 @@ MonoBehaviour:
   wOnAirCardScriptRef: {fileID: 0}
   pScriptRef: {fileID: 0}
   speedBoost: 6.5
-  speedBoostMultiplier: 6
+  speedBoostMultiplier: 4
   cardCoolDown: 0

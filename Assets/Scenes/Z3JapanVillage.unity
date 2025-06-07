@@ -66103,6 +66103,10 @@ PrefabInstance:
       propertyPath: pRef
       value: 
       objectReference: {fileID: 60412094}
+    - target: {fileID: 1315481228748501498, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
+      propertyPath: smoothing
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501500, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: m_HDR
       value: 0

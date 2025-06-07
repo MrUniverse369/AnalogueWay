@@ -23,11 +23,11 @@ public class CameraController : MonoBehaviour
     private void FollowPlayer()
     {
         targetPos = new Vector3(pObj.position.x - followAhead, pObj.transform.position.y + 1.5f, transform.position.z);
-        if (pObj.localScale.x > 0) targetPos = new Vector3(pObj.position.x + followAhead, pObj.transform.position.y + 1.5f, transform.position.z);
-        if (pObj.localScale.x < 0) targetPos = new Vector3(pObj.position.x - followAhead, pObj.transform.position.y + 1.5f, transform.position.z);
+        if (pObj.localScale.x > 0) targetPos = new Vector3(pObj.position.x + followAhead, pObj.transform.position.y - 0.25f, transform.position.z);
+        if (pObj.localScale.x < 0) targetPos = new Vector3(pObj.position.x - followAhead, pObj.transform.position.y - 0.25f, transform.position.z);
 
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothing);
-        if (pObj.transform.position.y < -8) smoothing = 3.0f;
+        // if (pObj.transform.position.y < -8);
 
 
     }
