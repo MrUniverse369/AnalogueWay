@@ -14,7 +14,16 @@ public class CameraController : MonoBehaviour
     {
 
     }
-
+    public float Smoothing
+    {
+        get { return smoothing; }
+        set { smoothing = value; }
+    }
+    public float FollowAhead
+    {
+        get { return followAhead; }
+        set { followAhead = value; }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -22,11 +31,11 @@ public class CameraController : MonoBehaviour
     }
     private void FollowPlayer()
     {
-        targetPos = new Vector3(pObj.position.x - followAhead, pObj.transform.position.y + 1.5f, transform.position.z);
-        if (pObj.localScale.x > 0) targetPos = new Vector3(pObj.position.x + followAhead, pObj.transform.position.y - 0.25f, transform.position.z);
-        if (pObj.localScale.x < 0) targetPos = new Vector3(pObj.position.x - followAhead, pObj.transform.position.y - 0.25f, transform.position.z);
+        targetPos = new Vector3(pObj.position.x - FollowAhead, pObj.transform.position.y + 1.5f, transform.position.z);
+        if (pObj.localScale.x > 0) targetPos = new Vector3(pObj.position.x + FollowAhead, pObj.transform.position.y - 0.25f, transform.position.z);
+        if (pObj.localScale.x < 0) targetPos = new Vector3(pObj.position.x - FollowAhead, pObj.transform.position.y - 0.25f, transform.position.z);
 
-        transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothing);
+        transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * Smoothing);
         // if (pObj.transform.position.y < -8);
 
 

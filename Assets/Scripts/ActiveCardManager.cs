@@ -27,6 +27,7 @@ public class ActiveCardManager : MonoBehaviour
     [SerializeField] private float speedBoost;
     [SerializeField] private float speedBoostMultiplier;
     [SerializeField] public float cardCoolDown;
+    private CameraController camControllerScriptRef;
     public static bool jumpPowerUp = false;
     public static bool speedBoostPowerUp = false;
     private float airTime;
@@ -84,6 +85,7 @@ public class ActiveCardManager : MonoBehaviour
         airTime = 0;
         walkOnAirIsActive = false;
         activateCardOne = false;
+        camControllerScriptRef = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
     }
 
     // Update is called once per frame
@@ -106,13 +108,16 @@ public class ActiveCardManager : MonoBehaviour
         if (Input.GetKey(KeyCode.X) && cardCoolDown < 1 || pTwoOn != false && cardCoolDown < 1)
         {
             activeCardNumber = 2;
-            cardCoolDown = 1.25f;
+            cardCoolDown = 1.5f;
             audioManager.PlaySfx(audioManager.powerUpSound);
             pTwoOn = false;
         }
 
+
+
         if (Input.GetKey(KeyCode.C) && cardCoolDown < 1 || pThreeOn != false && cardCoolDown < 1)
         {
+            Debug.Log("SUPER JUMPING");
             activeCardNumber = 3;
             cardCoolDown = 2;
             audioManager.PlaySfx(audioManager.powerUpSound);
@@ -181,9 +186,10 @@ public class ActiveCardManager : MonoBehaviour
 
         if (this.activeCardNumber == 3 && cardCoolDown > 1)
         {
+            Debug.Log("SuperJUMOPPGFF");
             cardImage3.sprite = activeCardThree;
             cardImage.color = Color.white;
-            pScriptRef.GetJSpeed = speedBoost * 1.4f;
+            pScriptRef.GetJSpeed = speedBoost * 2.4f;
         }
         else
         {

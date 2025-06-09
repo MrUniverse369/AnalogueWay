@@ -37,7 +37,7 @@ public class PlayerController : CharecterBehaviour
     [SerializeField] private playerBodyDetectionArea pBDARef;
     [SerializeField] private GameObject dragon;
     [SerializeField] private float turningscale;
-
+    private CameraController camControllerScriptRef;
     public static float chi = 90;
     private AudioManager audioManager;
 
@@ -111,13 +111,24 @@ public class PlayerController : CharecterBehaviour
         turnRight = new Vector2(turningscale, turningscale);
         transform.localScale = turnRight;
         coyoteTimeCounter = coyoteTime;
-
+        camControllerScriptRef = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
     }
 
     // Update is called once per frame
 
     void Update()
     {
+
+        if (rb2D.velocity.x > 5 || rb2D.velocity.x < -5)
+        {
+            camControllerScriptRef.FollowAhead = 7;
+            camControllerScriptRef.Smoothing = 3;
+        }
+        else
+        {
+            camControllerScriptRef.FollowAhead = 5;
+            camControllerScriptRef.Smoothing = 1f;
+        }
         if (ActiveCardManager.speedBoostPowerUp == true)
         {
             animatorRef.SetBool("SpeedBoost", true);

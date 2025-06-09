@@ -121,8 +121,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 45
-        height: 53
+        width: 42
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6d76d1d2467241958e863fe90e75f36
-      internalID: 4158158
+      spriteID: 26d1f46d398d44e1bbfa7cd63185451e
+      internalID: 1586402181
       vertices: []
       indices: 
       edges: []
@@ -140,10 +140,10 @@ TextureImporter:
       name: HarveyFDRsuperjump 1_1
       rect:
         serializedVersion: 2
-        x: 45
+        x: 42
         y: 0
-        width: 45
-        height: 53
+        width: 42
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c0b28f1ce3f34457a50f5a3d63833a2
-      internalID: -1753726246
+      spriteID: 954642903ec614fe79384644a6fd2f69
+      internalID: -1558512113
       vertices: []
       indices: 
       edges: []
@@ -161,10 +161,10 @@ TextureImporter:
       name: HarveyFDRsuperjump 1_2
       rect:
         serializedVersion: 2
-        x: 90
+        x: 84
         y: 0
-        width: 45
-        height: 53
+        width: 42
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26691e6c284c1461ea159ecc71d6a608
-      internalID: 1468949801
+      spriteID: c520e7556193847f095f1823ced86555
+      internalID: 126241686
       vertices: []
       indices: 
       edges: []
@@ -182,10 +182,10 @@ TextureImporter:
       name: HarveyFDRsuperjump 1_3
       rect:
         serializedVersion: 2
-        x: 135
+        x: 126
         y: 0
-        width: 45
-        height: 53
+        width: 42
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3627ad0da433649c19dd473121dc23e9
-      internalID: 1309722378
+      spriteID: 54ceccf33a2b84a4e822f894ab152505
+      internalID: 1180695710
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HarveyFDRsuperjump 1_0: 4158158
-      HarveyFDRsuperjump 1_3: 1309722378
-      HarveyFDRsuperjump 1_2: 1468949801
-      HarveyFDRsuperjump 1_1: -1753726246
+      HarveyFDRsuperjump 1_0: 1586402181
+      HarveyFDRsuperjump 1_3: 1180695710
+      HarveyFDRsuperjump 1_2: 126241686
+      HarveyFDRsuperjump 1_1: -1558512113
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
