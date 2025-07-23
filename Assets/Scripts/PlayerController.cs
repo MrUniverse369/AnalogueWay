@@ -126,7 +126,7 @@ public class PlayerController : CharecterBehaviour
         }
         else
         {
-            camControllerScriptRef.FollowAhead = 5;
+            camControllerScriptRef.FollowAhead = camControllerScriptRef.FollowAheadDefault;
             camControllerScriptRef.Smoothing = 1f;
         }
         if (ActiveCardManager.speedBoostPowerUp == true)

@@ -5,6 +5,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform pObj;
+
+    [SerializeField] private float followAheadDefault;
     [SerializeField] private float followAhead;
     [SerializeField] private float smoothing;
     [SerializeField] private GameObject pRef;
@@ -23,6 +25,11 @@ public class CameraController : MonoBehaviour
     {
         get { return followAhead; }
         set { followAhead = value; }
+    }
+
+    public float FollowAheadDefault
+    {
+        get { return followAheadDefault; }
     }
     // Update is called once per frame
     void Update()

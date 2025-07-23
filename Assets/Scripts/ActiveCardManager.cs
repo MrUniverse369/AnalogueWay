@@ -189,7 +189,7 @@ public class ActiveCardManager : MonoBehaviour
             Debug.Log("SuperJUMOPPGFF");
             cardImage3.sprite = activeCardThree;
             cardImage.color = Color.white;
-            pScriptRef.GetJSpeed = speedBoost * 2.4f;
+            pScriptRef.GetJSpeed = pScriptRef.GetSpeedDefault * 1.5f;
         }
         else
         {
