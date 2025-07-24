@@ -55,6 +55,7 @@ MonoBehaviour:
   inActiveCardThree: {fileID: 21300000, guid: 7b6f9e66c71634e5cbe87f50dab07f00, type: 3}
   wOnAirCardScriptRef: {fileID: 0}
   pScriptRef: {fileID: 0}
-  speedBoost: 6.5
-  speedBoostMultiplier: 3.5
+  speedBoost: 4
+  speedBoostMultiplier: 4
+  JspeedBoostMultiplier: 1.8
   cardCoolDown: 0

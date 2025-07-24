@@ -26,6 +26,7 @@ public class ActiveCardManager : MonoBehaviour
     [SerializeField] private PlayerController pScriptRef;
     [SerializeField] private float speedBoost;
     [SerializeField] private float speedBoostMultiplier;
+    [SerializeField] private float JspeedBoostMultiplier;
     [SerializeField] public float cardCoolDown;
     private CameraController camControllerScriptRef;
     public static bool jumpPowerUp = false;
@@ -189,7 +190,7 @@ public class ActiveCardManager : MonoBehaviour
             Debug.Log("SuperJUMOPPGFF");
             cardImage3.sprite = activeCardThree;
             cardImage.color = Color.white;
-            pScriptRef.GetJSpeed = pScriptRef.GetSpeedDefault * 1.5f;
+            pScriptRef.GetJSpeed = pScriptRef.GetSpeedDefault * JspeedBoostMultiplier;
         }
         else
         {
