@@ -21,6 +21,7 @@ namespace AnalogueWay
         [SerializeField] private GameObject walkOnAirWorldOne;
         [SerializeField] private GameObject worldOneTreasureChest;
         [SerializeField] private GameObject worldOneBackGround;
+        [SerializeField] private GameObject[] worldOneFloatingTrap;
         [SerializeField] private GameObject worldOneCover;
         [SerializeField] private GameObject worldTwo;
         [SerializeField] private GameObject worldTwoCoins;
@@ -39,6 +40,7 @@ namespace AnalogueWay
             // Find all switches with the respective tags
             worldOneSwitches = GameObject.FindGameObjectsWithTag("WorldOneSwitch");
             worldTwoSwitches = GameObject.FindGameObjectsWithTag("WorldTwoSwitch");
+            worldOneFloatingTrap = GameObject.FindGameObjectsWithTag("worldOneFloatingTrap");
             Enemy = GameObject.FindGameObjectsWithTag("SpiritEnemy");
             EnemyTwo = GameObject.FindGameObjectsWithTag("LivingEnemy");
 
@@ -58,6 +60,7 @@ namespace AnalogueWay
                 walkOnAirWorldOne.SetActive(false);
                 worldOneBounceBox.SetActive(false);
                 worldOneCover.SetActive(false);
+                SetSwitchesActive(worldOneFloatingTrap, false);
                 SetSwitchesActive(worldOneSwitches, false);
 
 
@@ -87,6 +90,7 @@ namespace AnalogueWay
                 worldTwoCover.SetActive(false);
                 worldTwoBounceBox.SetActive(false);
                 SetSwitchesActive(worldTwoSwitches, false);
+                SetSwitchesActive(EnemyTwo, false);
 
 
                 // Spirit world is active
@@ -99,7 +103,7 @@ namespace AnalogueWay
                 worldOneCover.SetActive(true);
                 SetSwitchesActive(worldOneSwitches, true);
                 SetSwitchesActive(Enemy, true);
-                SetSwitchesActive(EnemyTwo, false);
+                SetSwitchesActive(worldOneFloatingTrap, true);
 
             }
         }

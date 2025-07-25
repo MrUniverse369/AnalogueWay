@@ -29,6 +29,7 @@ TagManager:
   - ChiStone
   - VillageExit
   - pStomp
+  - worldOneFloatingTrap
   layers:
   - Default
   - TransparentFX
