@@ -30,6 +30,7 @@ TagManager:
   - VillageExit
   - pStomp
   - worldOneFloatingTrap
+  - Fspike
   layers:
   - Default
   - TransparentFX
