@@ -34,7 +34,7 @@ public class HurtPlayer : MonoBehaviour
 
         if (other.CompareTag("PlayerDetectionArea") && gameObject.CompareTag("Fspike"))
         {
-            if (PlayerController.playerInviInvincible == false) pLivesCount -= 1;
+            if (PlayerController.playerInviInvincible == false) pLivesCount = 0;
             if (pLivesCount <= 0) lmanagerScriptRef.Respawn();
         }
         if (other.CompareTag("PlayerDetectionArea") && gameObject.CompareTag("KillPlane"))
