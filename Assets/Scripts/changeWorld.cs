@@ -22,6 +22,7 @@ namespace AnalogueWay
         [SerializeField] private GameObject worldOneTreasureChest;
         [SerializeField] private GameObject worldOneBackGround;
         [SerializeField] private GameObject[] worldOneFloatingTrap;
+        [SerializeField] private GameObject[] worldOneFallingTile;
         [SerializeField] private GameObject worldOneCover;
         [SerializeField] private GameObject worldTwo;
         [SerializeField] private GameObject worldTwoCoins;
@@ -41,6 +42,7 @@ namespace AnalogueWay
             worldOneSwitches = GameObject.FindGameObjectsWithTag("WorldOneSwitch");
             worldTwoSwitches = GameObject.FindGameObjectsWithTag("WorldTwoSwitch");
             worldOneFloatingTrap = GameObject.FindGameObjectsWithTag("worldOneFloatingTrap");
+            worldOneFallingTile = GameObject.FindGameObjectsWithTag("FTile");
             Enemy = GameObject.FindGameObjectsWithTag("SpiritEnemy");
             EnemyTwo = GameObject.FindGameObjectsWithTag("LivingEnemy");
 
@@ -61,6 +63,7 @@ namespace AnalogueWay
                 worldOneBounceBox.SetActive(false);
                 worldOneCover.SetActive(false);
                 SetSwitchesActive(worldOneFloatingTrap, false);
+                SetSwitchesActive(worldOneFallingTile, false);
                 SetSwitchesActive(worldOneSwitches, false);
 
 
@@ -104,6 +107,7 @@ namespace AnalogueWay
                 SetSwitchesActive(worldOneSwitches, true);
                 SetSwitchesActive(Enemy, true);
                 SetSwitchesActive(worldOneFloatingTrap, true);
+                SetSwitchesActive(worldOneFallingTile, true);
 
             }
         }
