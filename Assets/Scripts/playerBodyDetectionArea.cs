@@ -41,7 +41,7 @@ public class playerBodyDetectionArea : MonoBehaviour
         }
         //if the player is touching the ground when the enemy has
         // made contact we push the player in the direction opposite of the enemy 
-        if (other.gameObject.CompareTag("Enemy") && isGrounded != false && ActiveCardManager.speedBoostPowerUp != true)
+        if (other.gameObject.CompareTag("Enemy") && ActiveCardManager.speedBoostPowerUp != true)
         {
             animatorRef.SetTrigger("isHurt");
             pushBackCounter = pushBackLenght;

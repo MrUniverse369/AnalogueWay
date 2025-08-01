@@ -36,6 +36,7 @@ public class PlayerController : CharecterBehaviour
     [SerializeField] private float pushBackForceY;
     [SerializeField] private playerBodyDetectionArea pBDARef;
     [SerializeField] private GameObject dragon;
+    [SerializeField] private GameObject stompBox;
     [SerializeField] private float turningscale;
     private CameraController camControllerScriptRef;
     public static float chi = 90;
@@ -118,6 +119,14 @@ public class PlayerController : CharecterBehaviour
 
     void Update()
     {
+        if (rb2D.velocity.y < 0)
+        {
+            stompBox.SetActive(true);
+        }
+        else
+        {
+            stompBox.SetActive(false);
+        }
 
         if (rb2D.velocity.x > 5 || rb2D.velocity.x < -5)
         {

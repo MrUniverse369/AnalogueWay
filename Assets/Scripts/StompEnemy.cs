@@ -11,12 +11,12 @@ public class StompEnemy : MonoBehaviour
     [SerializeField] private float setactiveCountDown = 3;
     [SerializeField] private bool enemTouched;
 
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy") && !ActiveCardManager.speedBoostPowerUp)
         {
             pref.GetComponent<Rigidbody2D>().velocity = new Vector2(pref.GetComponent<Rigidbody2D>().velocity.x, other.GetComponent<EnemyController>().BounceSpeed);
-            //   other.gameObject.SetActive(false);
             CollectableCollisiondetector.coinCollected = CollectableCollisiondetector.coinCollected + 10;
         }
     }

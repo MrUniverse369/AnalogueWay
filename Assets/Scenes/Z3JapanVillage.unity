@@ -62952,6 +62952,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1372882477, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.860962
+      objectReference: {fileID: 0}
     - target: {fileID: 3809942794634234805, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
       propertyPath: activeCardManagerScriptRef
       value: 
@@ -62964,6 +62968,14 @@ PrefabInstance:
       propertyPath: activeCardManagerScriptRef
       value: 
       objectReference: {fileID: 347960315}
+    - target: {fileID: 8700116598695048666, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -272.30005
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700116598695048666, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -53
+      objectReference: {fileID: 0}
     - target: {fileID: 8700116598772592214, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -63055,6 +63067,14 @@ PrefabInstance:
     - target: {fileID: 8700116599148902365, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700116599320480116, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -163.3999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700116599320480116, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -53
       objectReference: {fileID: 0}
     - target: {fileID: 8700116599627022468, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
       propertyPath: m_Sprite
@@ -71909,7 +71929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501500, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: orthographic size
-      value: 8.25
+      value: 6.6875
       objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501500, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
