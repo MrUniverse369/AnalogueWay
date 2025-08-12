@@ -40,13 +40,13 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("pStomp"))
+        if (other.CompareTag("pStomp") && gameObject.CompareTag("japanBoss") != true)
         {
             animCounter = 0.7f;
             deActivate = true;
         }
 
-        if (other.CompareTag("PlayerDetectionArea") && ActiveCardManager.speedBoostPowerUp != false)
+        if (other.CompareTag("PlayerDetectionArea") && ActiveCardManager.speedBoostPowerUp != false && gameObject.CompareTag("japanBoss") != true)
         {
             animCounter = 0.5f;
             BounceSpeed = 0;

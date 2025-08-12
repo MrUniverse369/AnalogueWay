@@ -32,6 +32,7 @@ TagManager:
   - worldOneFloatingTrap
   - Fspike
   - FTile
+  - japanBoss
   layers:
   - Default
   - TransparentFX
