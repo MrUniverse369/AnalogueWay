@@ -516,6 +516,11 @@ MonoBehaviour:
   dragon: {fileID: 2124563213}
   stompBox: {fileID: 5809645258820347545}
   turningscale: 0.6
+  normalizedVerticalVelocity: 0
+  charCamViewFallOffset: 15
+  fallOffsetSpeed: 7
+  dashFollowAhead: 0
+  dashSmoothing: 0
 --- !u!95 &776477715488756905
 Animator:
   serializedVersion: 4

@@ -123822,7 +123822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501500, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: orthographic size
-      value: 9.875
+      value: 6.5390625
       objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501500, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
@@ -220779,14 +220779,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2241056416323049110, guid: b9f752e5a634d4a8d96057bd8f73acc3, type: 3}
-      propertyPath: pLives
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2241056416323049110, guid: b9f752e5a634d4a8d96057bd8f73acc3, type: 3}
-      propertyPath: animatorRef
-      value: 
-      objectReference: {fileID: 1435180984}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9f752e5a634d4a8d96057bd8f73acc3, type: 3}
 --- !u!1001 &2930184672014359662

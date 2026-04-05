@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.SceneManagement;
 
 public class ActiveCardManager : MonoBehaviour
 {
@@ -39,14 +40,17 @@ public class ActiveCardManager : MonoBehaviour
     private bool activateCardOne;
     private int activeCardNumber;
     private AudioManager audioManager;
+    private int index;
+
     private void Awake()
     {
         pOneOn = false;
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         pControls = new PlayerControls();
         pControls.Gameplay.powerUpOne.performed += ctx => powerUpOne();
-        pControls.Gameplay.powerUpTwo.performed += ctx => powerUpTwo();
+        pControls.Gameplay.powerUpTwo.performed += ctx => this.powerUpTwo();
         pControls.Gameplay.powerUpThree.performed += ctx => powerUpThree();
+
 
     }
 
@@ -94,6 +98,7 @@ public class ActiveCardManager : MonoBehaviour
     {
         ActivateCard(SelectCard());
         ActivateWalkOnAir();
+        index = SceneManager.GetActiveScene().buildIndex;
     }
 
     private int SelectCard()
@@ -171,7 +176,7 @@ public class ActiveCardManager : MonoBehaviour
             activateCardOne = false;
         }
 
-        if (this.activeCardNumber == 2 && cardCoolDown >= 1)
+        if (this.activeCardNumber == 2 && cardCoolDown >= 1 && index != 1 && index != 2 && index != 3)
         {
             cardImage2.sprite = activeCardTwo;
             pScriptRef.GetSpeed = speedBoost * speedBoostMultiplier;

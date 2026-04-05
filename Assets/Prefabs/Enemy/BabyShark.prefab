@@ -211,7 +211,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRef: {fileID: 0}
-  pLives: 0
   pRespawnPos: {fileID: 0}
 --- !u!114 &3339168232959928248
 MonoBehaviour:
@@ -245,6 +244,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounceSpeed: 8
   mTRef: {fileID: 0}
+  animator: {fileID: 0}
+  enemyDeathAnimActivate: 0
+  animCounter: 0
 --- !u!95 &6674631592096508338
 Animator:
   serializedVersion: 4

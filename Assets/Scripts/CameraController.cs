@@ -17,6 +17,11 @@ public class CameraController : MonoBehaviour
     {
 
     }
+
+    public float SetyAxisOffset
+    {
+        set { yAxisOffset = value; }
+    }
     public float Smoothing
     {
         get { return smoothing; }
@@ -42,10 +47,7 @@ public class CameraController : MonoBehaviour
         targetPos = new Vector3(pObj.position.x - FollowAhead, pObj.transform.position.y + 1.5f, transform.position.z);
         if (pObj.localScale.x > 0) targetPos = new Vector3(pObj.position.x + FollowAhead, pObj.transform.position.y - yAxisOffset, transform.position.z);
         if (pObj.localScale.x < 0) targetPos = new Vector3(pObj.position.x - FollowAhead, pObj.transform.position.y - yAxisOffset, transform.position.z);
-
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * Smoothing);
         // if (pObj.transform.position.y < -8);
-
-
     }
 }

@@ -19,14 +19,12 @@ public class NextLevel : MonoBehaviour
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         pScriptRef = pScriptObjRef.GetComponent<PlayerController>();
-
     }
 
     // Start is called before the first frame update
     void Start()
     {
         pIsTouchingTreasure = false;
-
     }
 
     // Update is called once per frame
@@ -61,16 +59,13 @@ public class NextLevel : MonoBehaviour
         levelComplete.GetComponent<LevelComplete>().GetCompleteScoreText.text =
             "Score: " + (CollectableCollisiondetector.coinCollected * 1.5f);
 
-        // Wait for 5 real-time seconds while the game is frozen
         yield return new WaitForSecondsRealtime(5);
 
-        // Load the next level
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
-        // Unfreeze the game (this happens after the scene is loaded)
+
         Time.timeScale = 1;
 
-        // Optionally deactivate the levelComplete UI after scene transition
         levelComplete.gameObject.SetActive(false);
 
         Debug.Log("Time should be resuming and next level loaded");
@@ -78,7 +73,7 @@ public class NextLevel : MonoBehaviour
 
 
 
-    //loads the next scene 
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

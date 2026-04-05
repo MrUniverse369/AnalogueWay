@@ -38,6 +38,11 @@ public class PlayerController : CharecterBehaviour
     [SerializeField] private GameObject dragon;
     [SerializeField] private GameObject stompBox;
     [SerializeField] private float turningscale;
+    [SerializeField] private bool normalizedVerticalVelocity;
+    [SerializeField] private float charCamViewFallOffset;
+    [SerializeField] private float fallOffsetSpeed;
+    [SerializeField] private float dashFollowAhead;
+    [SerializeField] private float dashSmoothing;
     private CameraController camControllerScriptRef;
     public static float chi = 90;
     private AudioManager audioManager;
@@ -53,7 +58,7 @@ public class PlayerController : CharecterBehaviour
         pControls = new PlayerControls();
         pControls.Gameplay.Fly.performed += ctx => MountActive();
         pControls.Gameplay.unMount.performed += ctx => UnMountActive();
-        //     pControls.Gameplay.Jump.performed += ctx => buttonSouthWorks();
+        // pControls.Gameplay.Jump.performed += ctx => buttonSouthWorks();
 
 
     }
@@ -108,9 +113,9 @@ public class PlayerController : CharecterBehaviour
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        turnLeft = new Vector2(-turningscale, turningscale);
-        turnRight = new Vector2(turningscale, turningscale);
-        transform.localScale = turnRight;
+        // turnLeft = new Vector2(-turningscale, turningscale);
+        //turnRight = new Vector2(turningscale, turningscale);
+        //transform.localScale = turnRight;
         coyoteTimeCounter = coyoteTime;
         camControllerScriptRef = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
     }
@@ -119,6 +124,17 @@ public class PlayerController : CharecterBehaviour
 
     void Update()
     {
+        if (rb2D.velocity.y <= -fallOffsetSpeed)
+        {
+            normalizedVerticalVelocity = true;
+        }
+        else
+        {
+            normalizedVerticalVelocity = false;
+        }
+
+        if (normalizedVerticalVelocity) camControllerScriptRef.SetyAxisOffset = charCamViewFallOffset;
+
         if (rb2D.velocity.y < 0)
         {
             stompBox.SetActive(true);
@@ -128,16 +144,38 @@ public class PlayerController : CharecterBehaviour
             stompBox.SetActive(false);
         }
 
+        //WHY OFFESSEET CANNOT BE MINUS INBOTH DIRECTIONS IF ANY DIRECTION OFF X IT AFFECTS THE OFFSET IN CAM SCRIPT
+
+        if (rb2D.velocity.y >= -8)
+        {
+
+            camControllerScriptRef.FollowAhead = camControllerScriptRef.FollowAheadDefault;
+            camControllerScriptRef.Smoothing = 1f;
+            camControllerScriptRef.SetyAxisOffset = -3;
+        }
+
+        if (rb2D.velocity.y >= 8)
+        {
+
+            camControllerScriptRef.FollowAhead = camControllerScriptRef.FollowAheadDefault;
+            camControllerScriptRef.Smoothing = 1f;
+            camControllerScriptRef.SetyAxisOffset = -8;
+        }
+
+
         if (rb2D.velocity.x > 5 || rb2D.velocity.x < -5)
         {
             camControllerScriptRef.FollowAhead = 7;
             camControllerScriptRef.Smoothing = 3;
+
         }
-        else
+        else if (rb2D.velocity.y >= -8)
         {
-            camControllerScriptRef.FollowAhead = camControllerScriptRef.FollowAheadDefault;
-            camControllerScriptRef.Smoothing = 1f;
+            //  camControllerScriptRef.FollowAhead = camControllerScriptRef.FollowAheadDefault;
+            //    camControllerScriptRef.Smoothing = 1f;
+            //    camControllerScriptRef.SetyAxisOffset = -3;
         }
+
         if (ActiveCardManager.speedBoostPowerUp == true)
         {
             animatorRef.SetBool("SpeedBoost", true);
@@ -150,8 +188,9 @@ public class PlayerController : CharecterBehaviour
         //checking to see that the player has is not being pushed back 
         if (pBDARef.pushBackCounter <= 0)
         {
-            if (mountActive != true) CharMovement();
-            CharJump();
+            if (mountActive != true) CharJump();
+            CharMovement();
+
             if (mountActive && PlayerController.chi > 0) Fly();
             if (PlayerController.chi <= 0) mountActive = false;
             playerInviInvincible = false;
@@ -188,8 +227,10 @@ public class PlayerController : CharecterBehaviour
     {
         dir = Input.GetAxisRaw("Horizontal");
         vel = new Vector2(speed * dir, rb2D.velocity.y);
-        if (dir > 0) transform.localScale = turnRight;
-        if (dir < 0) transform.localScale = turnLeft;
+        Flip(dir);
+
+
+
         rb2D.velocity = vel;
         coyoteTime = 0.25f;
         animatorRef.SetFloat("Speed", Mathf.Abs(dir));
@@ -207,17 +248,26 @@ public class PlayerController : CharecterBehaviour
 
     }
 
+    void Flip(float dir)
+    {
+        Vector3 scale = transform.localScale;
+        if (dir > 0)
+            scale.x = Mathf.Abs(scale.x);
+        else if (dir < 0)
+            scale.x = -Mathf.Abs(scale.x);
+        transform.localScale = scale;
+    }
+
+
     private void Fly()
     {
         yDir = Input.GetAxisRaw("Vertical");
         dir = Input.GetAxisRaw("Horizontal");
         flightVel = new Vector2(speed * dir, speed * yDir);
-        if (dir > 0) transform.localScale = turnRight;
-        if (dir < 0) transform.localScale = turnLeft;
+        Flip(dir);
+
         rb2D.velocity = flightVel;
         PlayerController.chi -= 10 * Time.deltaTime;
-
-
     }
 
 

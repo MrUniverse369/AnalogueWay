@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float bounceSpeed;
     [SerializeField] private MovingTiles mTRef;
     [SerializeField] private Animator animator;
-    [SerializeField] private bool deActivate;
+    [SerializeField] private bool enemyDeathAnimActivate;
     [SerializeField] private float animCounter;
     public float BounceSpeed
     {
@@ -24,15 +24,16 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
 
-        if (deActivate)
+        if (enemyDeathAnimActivate)
         {
             animCounter -= 1 * Time.deltaTime;
-            animator.SetBool("DeathAnim", deActivate);
+            animator.SetBool("DeathAnim", enemyDeathAnimActivate);
+            Debug.Log("Death Anim played ");
         }
-        if (animCounter < 0 && deActivate == true)
+        if (animCounter < 0 && enemyDeathAnimActivate == true)
         {
             gameObject.SetActive(false);
-            deActivate = false;
+            enemyDeathAnimActivate = false;
             //animCounter = 0.6f;
         }
 
@@ -43,14 +44,16 @@ public class EnemyController : MonoBehaviour
         if (other.CompareTag("pStomp") && gameObject.CompareTag("japanBoss") != true)
         {
             animCounter = 0.7f;
-            deActivate = true;
+            enemyDeathAnimActivate = true;
+            Debug.Log("deathanime activated from stomp");
         }
 
         if (other.CompareTag("PlayerDetectionArea") && ActiveCardManager.speedBoostPowerUp != false && gameObject.CompareTag("japanBoss") != true)
         {
             animCounter = 0.5f;
             BounceSpeed = 0;
-            deActivate = true;
+            enemyDeathAnimActivate = true;
+            Debug.Log("deathanime activated from dash");
         }
     }
 }

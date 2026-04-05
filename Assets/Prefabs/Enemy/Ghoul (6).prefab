@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 8270066567951716556}
   - component: {fileID: 4867232883192586722}
   - component: {fileID: 4867232883192586723}
+  - component: {fileID: 3531032890995641506}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -191,6 +192,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounceSpeed: 5
   mTRef: {fileID: 0}
+  animator: {fileID: 0}
+  enemyDeathAnimActivate: 0
+  animCounter: 0
+--- !u!95 &3531032890995641506
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8270066567951716552}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b8ba576a368b482f8a5670cbecd576c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8270066569510027823
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8270066569648303689}
   - component: {fileID: 8270066569648303688}
+  - component: {fileID: 152178905068648683}
   m_Layer: 0
   m_Name: Ghoul (6)
   m_TagString: Untagged
@@ -274,3 +299,23 @@ MonoBehaviour:
   objToMove: {fileID: 8270066567951716552}
   speed: 2
   enemyTurn: 0
+--- !u!95 &152178905068648683
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8270066569648303690}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f46039ca16ae3439e8bc3a7cc1faf228, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
