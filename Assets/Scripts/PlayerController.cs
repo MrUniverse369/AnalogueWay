@@ -58,7 +58,7 @@ public class PlayerController : CharecterBehaviour
         pControls = new PlayerControls();
         pControls.Gameplay.Fly.performed += ctx => MountActive();
         pControls.Gameplay.unMount.performed += ctx => UnMountActive();
-        // pControls.Gameplay.Jump.performed += ctx => buttonSouthWorks();
+        //pControls.Gameplay.Jump.performed += ctx => buttonSouthWorks();
 
 
     }
@@ -107,6 +107,10 @@ public class PlayerController : CharecterBehaviour
     {
         get { return jSpeed; }
         set { jSpeed = value; }
+    }
+    public bool GetIsGrounded
+    {
+        get { return isGrounded; }
     }
 
     // Start is called before the first frame update

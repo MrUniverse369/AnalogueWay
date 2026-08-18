@@ -175,13 +175,17 @@ public class ActiveCardManager : MonoBehaviour
             cardImage.sprite = inActiveCard;
             activateCardOne = false;
         }
-
+        
+//SPEEED BOOST POWER UP CODE 
         if (this.activeCardNumber == 2 && cardCoolDown >= 1 && index != 1 && index != 2 && index != 3)
         {
-            cardImage2.sprite = activeCardTwo;
-            pScriptRef.GetSpeed = speedBoost * speedBoostMultiplier;
-            speedBoostPowerUp = true;
-            cardImage.color = Color.white;
+            if (pScriptRef.GetIsGrounded != false)
+            {
+                cardImage2.sprite = activeCardTwo;
+                pScriptRef.GetSpeed = speedBoost * speedBoostMultiplier;
+                speedBoostPowerUp = true;
+                cardImage.color = Color.white;
+            }
         }
         else
         {

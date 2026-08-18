@@ -122292,6 +122292,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1948382544926291788, guid: 9bc686a7eed4c4f469064ef4003fe1cd, type: 3}
   m_PrefabInstance: {fileID: 67921851}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1611313536 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8951485510333820158, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
+  m_PrefabInstance: {fileID: 1708163576}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1613635134
 GameObject:
   m_ObjectHideFlags: 0
@@ -123910,6 +123915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4503825076524317023, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
+    - {fileID: 1844784713, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
 --- !u!1 &1708163577 stripped
 GameObject:
@@ -123976,7 +123982,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   m_LegacyBlendHint: 0
-  m_ComponentOwner: {fileID: 0}
+  m_ComponentOwner: {fileID: 1611313536}
 --- !u!1001 &1711301119
 PrefabInstance:
   m_ObjectHideFlags: 0

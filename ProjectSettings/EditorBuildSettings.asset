@@ -20,31 +20,31 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Z4A4GrassGreen.unity
     guid: e6704a4ce08c140168b372d05654ea3b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Z4A6GrassGreen.unity
     guid: 65219a3255aa94e3699e9841f8008006
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Z4A7GrassGreen.unity
     guid: b4629643f36534b2fb3aadd4bd382cc2
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Z1A1Tomb.unity
     guid: bb4b0d1567d8af84aad04a2d2a973c0c
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Z1A2Tomb.unity
     guid: 77e6fbf9305424962aa5dc200fce3c1c
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Z1A3Tomb.unity
     guid: 6f92664f6035446adace6ff806f23078
   - enabled: 1
     path: Assets/Scenes/Z2A2Sandy.unity
     guid: 7a43749a8e57c9247a035025d13ef335
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Z2A1Sandy.unity
     guid: 2f12dd93dfa0442faa76b54c26149112
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Z3A2Japan.unity
     guid: 2b08e72dd4565d14bbf82b87a35b248a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Z3A1Japan.unity
     guid: 125e022cb8d024bfdba6cf3b4e895b3e
   - enabled: 1

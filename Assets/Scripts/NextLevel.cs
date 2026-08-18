@@ -60,7 +60,7 @@ public class NextLevel : MonoBehaviour
             "Score: " + (CollectableCollisiondetector.coinCollected * 1.5f);
 
         yield return new WaitForSecondsRealtime(5);
-
+        ActiveCardManager.speedBoostPowerUp = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
 
