@@ -6,47 +6,26 @@ using UnityEngine;
 public class ToriGateAppearanceManagerTwo : MonoBehaviour
 {
     [SerializeField] private Animator animatorRef;
-    [SerializeField] private GameObject[] ToriGateBack;
-    public bool insideLivingWorld = false;
-    bool iSWorld = true;
-    // Start is called before the first frame update
-
     void Start()
     {
-        ToriGateBack = GameObject.FindGameObjectsWithTag("ToriGateBack");
-        // gameObject.GetComponent<Animator>().SetBool("LFA", true);
-        //   animatorRef.SetBool("LBA", true);
+
     }
 
-
-    // Update is called once per frame
     void Update()
     {
-        Debug.Log("Inside lWorld is:" + changeWorld.lWorld);
-        if (changeWorld.lWorld)
+        if (changeWorld.lworldGateActive != true)
         {
-            gameObject.GetComponent<Animator>().SetBool("LFA", false);
-            animatorRef.SetBool("LBA", false);
+            gameObject.GetComponent<Animator>().SetBool("SFA", false);
+            animatorRef.SetBool("SFA", false);
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("inside the trigga of green gate");
-        Debug.Log(other.gameObject.name);
-
-        //LFA = Living active front LBA = living back active
-        if (changeWorld.lWorld && other.CompareTag("PlayerDetectionArea"))
+        if (changeWorld.lworldGateActive && !changeWorld.SworldGateActive)
         {
-            Debug.Log("Spirit world gate active");
-            gameObject.GetComponent<Animator>().SetBool("LFA", true);
-            animatorRef.SetBool("LBA", true);
+            Debug.Log("Red tori being turned on");
+            gameObject.GetComponent<Animator>().SetBool("SFA", true);
+            animatorRef.SetBool("SFA", true);
+            changeWorld.lworldGateActive = true;
+            changeWorld.SworldGateActive = false;
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-
-
     }
 }

@@ -32,6 +32,8 @@ namespace AnalogueWay
         [SerializeField] private GameObject worldOneBounceBox;
         [SerializeField] private GameObject worldTwoBounceBox;
         [SerializeField] public static bool lWorld = false;
+        public static bool lworldGateActive = false;
+        public static bool SworldGateActive = false;
 
 
 
@@ -65,10 +67,12 @@ namespace AnalogueWay
                 SetSwitchesActive(worldOneFloatingTrap, false);
                 SetSwitchesActive(worldOneFallingTile, false);
                 SetSwitchesActive(worldOneSwitches, false);
+                SworldGateActive = false;
 
 
 
                 // livingWorld world is active
+                lworldGateActive = true;
                 worldTwo.SetActive(true);
                 worldTwoBackGround.SetActive(true);
                 worldTwoCoins.SetActive(true);
@@ -94,9 +98,11 @@ namespace AnalogueWay
                 worldTwoBounceBox.SetActive(false);
                 SetSwitchesActive(worldTwoSwitches, false);
                 SetSwitchesActive(EnemyTwo, false);
+                lworldGateActive = false;
 
 
                 // Spirit world is active
+                SworldGateActive = true;
                 worldOne.SetActive(true);
                 worldOneBackGround.SetActive(true);
                 worldOneCoins.SetActive(true);

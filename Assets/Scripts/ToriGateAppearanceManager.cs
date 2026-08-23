@@ -6,42 +6,27 @@ using UnityEngine;
 public class ToriGateAppearanceManager : MonoBehaviour
 {
     [SerializeField] private Animator animatorRef;
-
-    [SerializeField] private GameObject[] ToriGate;
-    public bool insideSpiritWorld = true;
-    public bool insideLivingWorld = false;
-    bool iSWorld = true;
-    // Start is called before the first frame update
     void Start()
     {
-        ToriGate = GameObject.FindGameObjectsWithTag("ToriGate");
 
     }
 
     void Update()
     {
-        if (!changeWorld.lWorld)
+        if (changeWorld.SworldGateActive != true)
         {
-
-            gameObject.GetComponent<Animator>().SetBool("SFA", false);
-            animatorRef.SetBool("SBA", false);
-
+            gameObject.GetComponent<Animator>().SetBool("LBA", false);
+            animatorRef.SetBool("LBA", false);
         }
 
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!changeWorld.lWorld && other.CompareTag("PlayerDetectionArea"))
+        if (changeWorld.SworldGateActive && !changeWorld.lworldGateActive)
         {
-
-            Debug.Log("Red tori being turned on");
-            gameObject.GetComponent<Animator>().SetBool("SFA", true);
-            animatorRef.SetBool("SBA", true);
-
+            Debug.Log("green tori being turned on");
+            gameObject.GetComponent<Animator>().SetBool("LBA", true);
+            animatorRef.SetBool("LBA", true);
+            changeWorld.SworldGateActive = true;
+            changeWorld.lworldGateActive = false;
         }
-    }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-
     }
 }
+

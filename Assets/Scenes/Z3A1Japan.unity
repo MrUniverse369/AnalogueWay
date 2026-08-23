@@ -9821,9 +9821,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorRef: {fileID: 841037115}
-  ToriGate: []
-  insideSpiritWorld: 1
-  insideLivingWorld: 0
 --- !u!1 &433951722
 GameObject:
   m_ObjectHideFlags: 0
@@ -12893,7 +12890,7 @@ PrefabInstance:
       objectReference: {fileID: 60412096}
     - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
       propertyPath: speedBoost
-      value: 3.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
       propertyPath: cardCoolDown
@@ -12921,7 +12918,7 @@ PrefabInstance:
       objectReference: {fileID: 807750601}
     - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
       propertyPath: speedBoostMultiplier
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
       propertyPath: JspeedBoostMultiplier
@@ -66954,8 +66951,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorRef: {fileID: 883745689}
-  ToriGateBack: []
-  insideLivingWorld: 0
 --- !u!1 &886100199
 GameObject:
   m_ObjectHideFlags: 0
@@ -297566,9 +297561,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorRef: {fileID: 1586644980}
-  ToriGate: []
-  insideSpiritWorld: 1
-  insideLivingWorld: 0
 --- !u!1001 &1588714607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311647,8 +311639,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorRef: {fileID: 1462294852}
-  ToriGateBack: []
-  insideLivingWorld: 0
 --- !u!1 &2081017559
 GameObject:
   m_ObjectHideFlags: 0
