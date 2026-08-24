@@ -233,22 +233,10 @@ public class PlayerController : CharecterBehaviour
         vel = new Vector2(speed * dir, rb2D.velocity.y);
         Flip(dir);
 
-
-
         rb2D.velocity = vel;
         coyoteTime = 0.25f;
         animatorRef.SetFloat("Speed", Mathf.Abs(dir));
         animatorRef.SetFloat("JSpeed", rb2D.velocity.y);
-
-        if (ActiveCardManager.walkOnAirIsActive && rb2D.velocity.x != 0)
-        {
-            animatorRef.SetBool("WalkingOnAir", true);
-
-        }
-        else
-        {
-            animatorRef.SetBool("WalkingOnAir", false);
-        }
 
     }
 

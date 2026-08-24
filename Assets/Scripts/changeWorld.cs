@@ -18,7 +18,7 @@ namespace AnalogueWay
         [SerializeField] private GameObject worldOneTree;
         [SerializeField] private GameObject worldOneSpikes;
         [SerializeField] private GameObject worldOneCoins;
-        [SerializeField] private GameObject walkOnAirWorldOne;
+
         [SerializeField] private GameObject worldOneTreasureChest;
         [SerializeField] private GameObject worldOneBackGround;
         [SerializeField] private GameObject[] worldOneFloatingTrap;
@@ -26,7 +26,6 @@ namespace AnalogueWay
         [SerializeField] private GameObject worldOneCover;
         [SerializeField] private GameObject worldTwo;
         [SerializeField] private GameObject worldTwoCoins;
-        [SerializeField] private GameObject walkOnAirWorldTwo;
         [SerializeField] private GameObject worldTwoBackGround;
         [SerializeField] private GameObject worldTwoCover;
         [SerializeField] private GameObject worldOneBounceBox;
@@ -61,7 +60,6 @@ namespace AnalogueWay
                 worldOneTreasureChest.SetActive(false);
                 worldOneBackGround.SetActive(false);
                 worldOneCoins.SetActive(false);
-                walkOnAirWorldOne.SetActive(false);
                 worldOneBounceBox.SetActive(false);
                 worldOneCover.SetActive(false);
                 SetSwitchesActive(worldOneFloatingTrap, false);
@@ -76,7 +74,6 @@ namespace AnalogueWay
                 worldTwo.SetActive(true);
                 worldTwoBackGround.SetActive(true);
                 worldTwoCoins.SetActive(true);
-                walkOnAirWorldTwo.SetActive(true);
                 worldTwoCover.SetActive(true);
                 worldTwoBounceBox.SetActive(true);
                 SetSwitchesActive(worldTwoSwitches, true);
@@ -93,7 +90,6 @@ namespace AnalogueWay
                 worldTwo.SetActive(false);
                 worldTwoBackGround.SetActive(false);
                 worldTwoCoins.SetActive(false);
-                walkOnAirWorldTwo.SetActive(false);
                 worldTwoCover.SetActive(false);
                 worldTwoBounceBox.SetActive(false);
                 SetSwitchesActive(worldTwoSwitches, false);
@@ -107,7 +103,6 @@ namespace AnalogueWay
                 worldOneBackGround.SetActive(true);
                 worldOneCoins.SetActive(true);
                 worldOneTreasureChest.SetActive(true);
-                walkOnAirWorldOne.SetActive(true);
                 worldOneBounceBox.SetActive(true);
                 worldOneCover.SetActive(true);
                 SetSwitchesActive(worldOneSwitches, true);

@@ -23,7 +23,6 @@ public class ActiveCardManager : MonoBehaviour
     [SerializeField] private Sprite inActiveCardTwo;
     [SerializeField] private Sprite activeCardThree;
     [SerializeField] private Sprite inActiveCardThree;
-    [SerializeField] private WalkOnAirCard wOnAirCardScriptRef;
     [SerializeField] private PlayerController pScriptRef;
     [SerializeField] private float speedBoost;
     [SerializeField] private float speedBoostMultiplier;
@@ -33,7 +32,6 @@ public class ActiveCardManager : MonoBehaviour
     public static bool jumpPowerUp = false;
     public static bool speedBoostPowerUp = false;
     private float airTime;
-    public static bool walkOnAirIsActive;
     private static float sCard;
     private bool buttonTwoIsActive;
     private bool buttonThreeIsActive;
@@ -88,7 +86,6 @@ public class ActiveCardManager : MonoBehaviour
     {
         activeCardNumber = 0;
         airTime = 0;
-        walkOnAirIsActive = false;
         activateCardOne = false;
         camControllerScriptRef = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
     }
@@ -97,7 +94,7 @@ public class ActiveCardManager : MonoBehaviour
     void Update()
     {
         ActivateCard(SelectCard());
-        ActivateWalkOnAir();
+
         index = SceneManager.GetActiveScene().buildIndex;
     }
 
@@ -143,24 +140,6 @@ public class ActiveCardManager : MonoBehaviour
         if (selectCard == 3) SwitchCardSprite(selectCard);
     }
 
-    private void ActivateWalkOnAir()
-    {
-        if (activateCardOne)
-        {
-            wOnAirCardScriptRef.gameObject.SetActive(true);
-            cardImage.sprite = activeCard;
-            walkOnAirIsActive = true;
-
-        }
-        if (!activateCardOne)
-        {
-            wOnAirCardScriptRef.gameObject.SetActive(false);
-            cardImage.sprite = inActiveCard;
-            walkOnAirIsActive = false;
-
-        }
-
-    }
 
     private void SwitchCardSprite(int activeCardNumber)
     {
@@ -175,8 +154,8 @@ public class ActiveCardManager : MonoBehaviour
             cardImage.sprite = inActiveCard;
             activateCardOne = false;
         }
-        
-//SPEEED BOOST POWER UP CODE 
+
+        //SPEEED BOOST POWER UP CODE 
         if (this.activeCardNumber == 2 && cardCoolDown >= 1 && index != 1 && index != 2 && index != 3)
         {
             if (pScriptRef.GetIsGrounded != false)
