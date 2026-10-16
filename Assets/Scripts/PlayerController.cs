@@ -19,6 +19,7 @@ public class PlayerController : CharecterBehaviour
     [SerializeField] private float speedDefault;
     [SerializeField] private Animator animatorRef;
     [SerializeField] private float jSpeed;
+    [SerializeField] private float jSpeedDefault = 5f; // POWERUP: replaces ActiveCardManager's hard-coded 5.0f jump reset
     [SerializeField] private Transform pFeet;
     [SerializeField] private LevelManager lManager;
     [SerializeField] private float pFeetRadius;
@@ -51,6 +52,8 @@ public class PlayerController : CharecterBehaviour
         pControls = new PlayerControls();
         pControls.Gameplay.Fly.performed += ctx => MountActive();
         pControls.Gameplay.unMount.performed += ctx => UnMountActive();
+        speed = speedDefault; // POWERUP: talismans no longer reset speed every frame
+        jSpeed = jSpeedDefault; // POWERUP: talismans no longer reset jump speed every frame
 
 
     }
@@ -95,10 +98,12 @@ public class PlayerController : CharecterBehaviour
         get { return jSpeed; }
         set { jSpeed = value; }
     }
+    public float GetJSpeedDefault => jSpeedDefault; // POWERUP: used by SuperJumpTalisman
     public bool GetIsGrounded
     {
         get { return isGrounded; }
     }
+    public Animator PlayerAnimator => animatorRef; // POWERUP: used by PowerUpContext
 
     // Start is called before the first frame update
     void Start()
