@@ -3,11 +3,12 @@ using UnityEngine;
 public class JumpBox : MonoBehaviour
 {
     [SerializeField] private PlayerController pref;
+    private Rigidbody2D prefRb; // PERF:
     [SerializeField] private float jForce;
     private AudioManager audioManager;
     private void Awake()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        audioManager = AudioManager.Instance; // PERF:
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -16,7 +17,8 @@ public class JumpBox : MonoBehaviour
         {
 
             audioManager.PlaySfx(audioManager.bounceSound);
-            pref.GetComponent<Rigidbody2D>().velocity = new Vector2(pref.GetComponent<Rigidbody2D>().velocity.x, jForce);
+            if (prefRb == null) prefRb = pref.GetComponent<Rigidbody2D>(); // PERF: look up once, not twice per bounce
+            prefRb.velocity = new Vector2(prefRb.velocity.x, jForce);
         }
     }
 }

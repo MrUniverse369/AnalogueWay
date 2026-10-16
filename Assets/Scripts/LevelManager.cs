@@ -13,6 +13,17 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     private AudioManager audioManager;
 
+    // PERF: one shared reference instead of every hazard scanning the whole scene for it.
+    private static LevelManager instance;
+    public static LevelManager Instance
+    {
+        get
+        {
+            if (instance == null) instance = FindObjectOfType<LevelManager>();
+            return instance;
+        }
+    }
+
     public Transform ReSpawnPos
     {
         get { return respawnPos; }
@@ -21,7 +32,8 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        instance = this; // PERF:
+        audioManager = AudioManager.Instance; // PERF:
     }
 
     // Start is called before the first frame update

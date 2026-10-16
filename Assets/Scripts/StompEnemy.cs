@@ -4,6 +4,7 @@ public class StompEnemy : MonoBehaviour
 {
 
     [SerializeField] private PlayerController pref;
+    private Rigidbody2D prefRb; // PERF:
     [SerializeField] private float setactiveCountDown = 3;
     [SerializeField] private bool enemTouched;
 
@@ -12,7 +13,8 @@ public class StompEnemy : MonoBehaviour
     {
         if (other.CompareTag("Enemy") && !PowerUpManager.Has(TalismanTrait.DefeatsEnemiesOnContact)) // POWERUP: was !ActiveCardManager.speedBoostPowerUp
         {
-            pref.GetComponent<Rigidbody2D>().velocity = new Vector2(pref.GetComponent<Rigidbody2D>().velocity.x, other.GetComponent<EnemyController>().BounceSpeed);
+            if (prefRb == null) prefRb = pref.GetComponent<Rigidbody2D>(); // PERF: look up once, not twice per stomp
+            prefRb.velocity = new Vector2(prefRb.velocity.x, other.GetComponent<EnemyController>().BounceSpeed);
             CollectableCollisiondetector.coinCollected = CollectableCollisiondetector.coinCollected + 10;
         }
     }

@@ -13,9 +13,8 @@ public class HurtPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerRef = GameObject.Find("Player");
-        lmanagerScriptRef = FindObjectOfType<LevelManager>();
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); // SFX:
+        lmanagerScriptRef = LevelManager.Instance; // PERF: was a whole-scene search in every hazard
+        audioManager = AudioManager.Instance; // SFX: PERF:
 
     }
 

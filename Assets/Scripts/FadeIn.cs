@@ -15,6 +15,12 @@ public class FadeIn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // PERF: CrossFadeAlpha starts a new tween each call; once the screen is clear there is nothing left to do
+        if (fadeScreen.canvasRenderer.GetAlpha() <= 0.001f)
+        {
+            enabled = false;
+            return;
+        }
         fadeScreen.CrossFadeAlpha(0f, fadeInTime, false);
     }
 }

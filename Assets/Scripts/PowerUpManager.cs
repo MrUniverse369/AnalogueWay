@@ -71,7 +71,7 @@ public class PowerUpManager : MonoBehaviour
             return;
         }
 
-        context = new PowerUpContext(player, FindObjectOfType<AudioManager>());
+        context = new PowerUpContext(player, AudioManager.Instance); // PERF:
 
         controls = new PlayerControls();
         BindInput(0, controls.Gameplay.powerUpOne);

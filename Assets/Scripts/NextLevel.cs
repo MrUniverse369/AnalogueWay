@@ -13,7 +13,7 @@ public class NextLevel : MonoBehaviour
 
     private void Awake()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        audioManager = AudioManager.Instance; // PERF:
         pScriptRef = pScriptObjRef.GetComponent<PlayerController>();
     }
 
@@ -29,7 +29,6 @@ public class NextLevel : MonoBehaviour
         if (pIsTouchingTreasure)
         {
             StartCoroutine(nameof(NextLevelPauseCo));
-            Debug.Log("Player is touching treasure and speed is 0");
         }
     }
 
@@ -58,7 +57,6 @@ public class NextLevel : MonoBehaviour
 
         levelComplete.gameObject.SetActive(false);
 
-        Debug.Log("Time should be resuming and next level loaded");
     }
 
 

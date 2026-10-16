@@ -11,7 +11,7 @@ public class CheckPoint : MonoBehaviour
     {
         sRender = GetComponent<SpriteRenderer>();
         sRender.sprite = checkPointClosed;
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); // SFX:
+        audioManager = AudioManager.Instance; // SFX: PERF:
     }
 
     private void OnTriggerEnter2D(Collider2D other)

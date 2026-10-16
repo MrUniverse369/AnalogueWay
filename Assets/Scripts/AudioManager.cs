@@ -43,12 +43,24 @@ public class AudioManager : MonoBehaviour
     [Range(0f, 1f)] public float dragonSummonVolume = 1f; // MIX:
     [Range(0f, 1f)] public float playerHurtVolume = 1f; // MIX:
 
+    // PERF: one shared reference instead of every script searching the scene by tag.
+    private static AudioManager instance;
+    public static AudioManager Instance
+    {
+        get
+        {
+            if (instance == null) instance = FindObjectOfType<AudioManager>();
+            return instance;
+        }
+    }
+
     private AudioSource oneShots; // MIX: separate source so one-shot volumes don't affect PlaySfx (and vice versa)
     private float sfxBaseVolume = 1f; // MIX:
 
     // MIX:
     private void Awake()
     {
+        instance = this; // PERF:
         sfxBaseVolume = sfx.volume;
         oneShots = gameObject.AddComponent<AudioSource>();
         oneShots.playOnAwake = false;

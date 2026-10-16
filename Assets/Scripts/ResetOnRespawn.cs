@@ -9,6 +9,8 @@ public class ResetOnRespawn : MonoBehaviour
     [SerializeField] private Rigidbody2D startRb;
     [SerializeField] private MovingObstacles fallingObj;
     [SerializeField] private GameObject activeCardManScriptRef;
+    private Rigidbody2D ownRb; // PERF: cached in Start
+    private MovingObstacles ownFallingObj; // PERF: cached in Start
 
     // Start is called before the first frame update
     void Start()
@@ -17,14 +19,16 @@ public class ResetOnRespawn : MonoBehaviour
         startRot = transform.rotation;
         startScale = transform.localScale;
 
-        if (GetComponent<Rigidbody2D>() != null)
+        ownRb = GetComponent<Rigidbody2D>(); // PERF:
+        ownFallingObj = GetComponent<MovingObstacles>(); // PERF:
+        if (ownRb != null)
         {
-            startRb = GetComponent<Rigidbody2D>();
+            startRb = ownRb;
         }
 
-        if (GetComponent<MovingObstacles>() != null)
+        if (ownFallingObj != null)
         {
-            fallingObj = GetComponent<MovingObstacles>();
+            fallingObj = ownFallingObj;
         }
 
     }
@@ -34,7 +38,7 @@ public class ResetOnRespawn : MonoBehaviour
         transform.position = startPos;
         transform.rotation = startRot;
         transform.localScale = startScale;
-        if (GetComponent<Rigidbody2D>() != null) startRb.velocity = Vector2.zero;
-        if (GetComponent<MovingObstacles>() != null) fallingObj.GetComponent<MovingObstacles>().GetPDetected = false;
+        if (ownRb != null) ownRb.velocity = Vector2.zero; // PERF: was two GetComponent calls per object per respawn
+        if (ownFallingObj != null) ownFallingObj.GetPDetected = false; // PERF:
     }
 }

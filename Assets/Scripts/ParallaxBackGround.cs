@@ -29,7 +29,6 @@ public class ParallaxBackGround : MonoBehaviour
         if (isPlayerInBackGroundView)
         {
             transform.position = new Vector3(startPos, transform.position.y, transform.position.z);
-            Debug.Log("Activeted script for BabckGround");
         }
         else
         {
@@ -46,20 +45,11 @@ public class ParallaxBackGround : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("PlayerDetectionArea"))
-        {
-            Debug.Log("Player is touching background");
-        }
-    }
-
     private void OnTriggerStay2D(Collider2D other)
     {
 
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("colliding with player");
             isPlayerInBackGroundView = true;
         }
 
@@ -68,11 +58,6 @@ public class ParallaxBackGround : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         isPlayerInBackGroundView = false;
-
-        if (other.CompareTag("PlayerDetectionArea"))
-        {
-            Debug.Log("Player is not touching background");
-        }
     }
 }
 

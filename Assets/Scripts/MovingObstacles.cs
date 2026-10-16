@@ -21,7 +21,6 @@ namespace AnalogueWay
         {
 
             rb2D = GetComponentInParent<Rigidbody2D>();
-            pRef = GameObject.Find("Player");
             pDetected = false;
         }
         private void FixedUpdate()

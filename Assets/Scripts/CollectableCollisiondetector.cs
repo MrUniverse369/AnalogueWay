@@ -7,7 +7,7 @@ public class CollectableCollisiondetector : MonoBehaviour
     private AudioManager audioManager;
     private void Awake()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        audioManager = AudioManager.Instance; // PERF:
     }
 
     private void OnTriggerEnter2D(Collider2D other)

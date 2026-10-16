@@ -46,13 +46,11 @@ public class MenueControl : MonoBehaviour
             if (isGamePaused)
             {
                 Resume();
-                Debug.Log("ESCAPE PRESSED RESUME");
             }
 
             else
             {
                 Pause();
-                Debug.Log("ESCAPE PRESSED PASUE");
             }
         }
     }

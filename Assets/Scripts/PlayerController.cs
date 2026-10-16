@@ -43,10 +43,15 @@ public class PlayerController : CharecterBehaviour
     private AudioManager audioManager;
     [SerializeField] private float footstepDistance = 1.25f; // SFX: world units travelled per footstep
     private float footstepTimer; // SFX:
+    // PERF: animator parameter IDs hashed once instead of from strings every frame
+    private static readonly int SpeedParam = Animator.StringToHash("Speed");
+    private static readonly int JSpeedParam = Animator.StringToHash("JSpeed");
+    private static readonly int JumpParam = Animator.StringToHash("Jump");
+    private static readonly int JumpPowerUpParam = Animator.StringToHash("JumpPowerUp");
 
     private void Awake()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        audioManager = AudioManager.Instance; // PERF:
         playerInviInvincible = false;
         pBDARef = GameObject.FindGameObjectWithTag("PlayerDetectionArea").GetComponent<playerBodyDetectionArea>();
         spriteRendererObj = GetComponent<SpriteRenderer>();
@@ -119,7 +124,8 @@ public class PlayerController : CharecterBehaviour
 
     void Update()
     {
-        if (rb2D.velocity.y <= -fallOffsetSpeed)
+        Vector2 v = rb2D.velocity; // PERF: read once; nothing below changes velocity until CharJump/CharMovement
+        if (v.y <= -fallOffsetSpeed)
         {
             normalizedVerticalVelocity = true;
         }
@@ -130,18 +136,12 @@ public class PlayerController : CharecterBehaviour
 
         if (normalizedVerticalVelocity) camControllerScriptRef.SetyAxisOffset = charCamViewFallOffset;
 
-        if (rb2D.velocity.y < 0)
-        {
-            stompBox.SetActive(true);
-        }
-        else
-        {
-            stompBox.SetActive(false);
-        }
+        bool falling = v.y < 0;
+        if (stompBox.activeSelf != falling) stompBox.SetActive(falling); // PERF: only when it actually changes
 
         //WHY OFFESSEET CANNOT BE MINUS INBOTH DIRECTIONS IF ANY DIRECTION OFF X IT AFFECTS THE OFFSET IN CAM SCRIPT
 
-        if (rb2D.velocity.y >= -8)
+        if (v.y >= -8)
         {
 
             camControllerScriptRef.FollowAhead = camControllerScriptRef.FollowAheadDefault;
@@ -149,7 +149,7 @@ public class PlayerController : CharecterBehaviour
             camControllerScriptRef.SetyAxisOffset = -3;
         }
 
-        if (rb2D.velocity.y >= 8)
+        if (v.y >= 8)
         {
 
             camControllerScriptRef.FollowAhead = camControllerScriptRef.FollowAheadDefault;
@@ -158,7 +158,7 @@ public class PlayerController : CharecterBehaviour
         }
 
 
-        if (rb2D.velocity.x > 5 || rb2D.velocity.x < -5)
+        if (v.x > 5 || v.x < -5)
         {
             camControllerScriptRef.FollowAhead = 7;
             camControllerScriptRef.Smoothing = 3;
@@ -187,16 +187,16 @@ public class PlayerController : CharecterBehaviour
         if (mountActive)
         {
             if (!dragon.activeSelf && audioManager != null) audioManager.PlaySfxOneShot(audioManager.dragonSummonSound); // SFX: only on the frame the dragon appears
-            spriteRendererObj.enabled = false;
-            dragon.gameObject.SetActive(true);
+            if (spriteRendererObj.enabled) spriteRendererObj.enabled = false; // PERF: only when it actually changes
+            if (!dragon.activeSelf) dragon.SetActive(true);
         }
 
 
 
         if (mountActive != true)
         {
-            spriteRendererObj.enabled = true;
-            dragon.gameObject.SetActive(false);
+            if (!spriteRendererObj.enabled) spriteRendererObj.enabled = true; // PERF: only when it actually changes
+            if (dragon.activeSelf) dragon.SetActive(false);
         }
 
     }
@@ -213,8 +213,8 @@ public class PlayerController : CharecterBehaviour
 
         rb2D.velocity = vel;
         coyoteTime = 0.25f;
-        animatorRef.SetFloat("Speed", Mathf.Abs(dir));
-        animatorRef.SetFloat("JSpeed", rb2D.velocity.y);
+        animatorRef.SetFloat(SpeedParam, Mathf.Abs(dir)); // PERF: hashed IDs
+        animatorRef.SetFloat(JSpeedParam, vel.y); // PERF: same value as rb2D.velocity.y, which was just set to vel
 
     }
 
@@ -274,12 +274,10 @@ public class PlayerController : CharecterBehaviour
 
         if (jSpeed > 6)
         {
-            Debug.Log("Jspeed greater than six");
 
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
-                Debug.Log("Play super Jump");
-                animatorRef.SetTrigger("JumpPowerUp");
+                animatorRef.SetTrigger(JumpPowerUpParam);
 
             }
         }
@@ -287,12 +285,11 @@ public class PlayerController : CharecterBehaviour
         {
             if (Input.GetButtonDown("Jump") && !isGrounded)
             {
-                Debug.Log("regularJump Playing");
-                animatorRef.SetBool("Jump", isGrounded);
+                animatorRef.SetBool(JumpParam, isGrounded);
             }
             else
             {
-                animatorRef.SetBool("Jump", !isGrounded);
+                animatorRef.SetBool(JumpParam, !isGrounded);
 
             }
         }

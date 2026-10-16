@@ -15,8 +15,8 @@ public class playerBodyDetectionArea : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); // SFX:
+        lManager = LevelManager.Instance; // PERF:
+        audioManager = AudioManager.Instance; // SFX: PERF:
     }
 
     // Handle player pushback when hitting the enemy trigger

@@ -8,7 +8,7 @@ public class OpenChest : MonoBehaviour
 
     private void Start()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); // SFX:
+        audioManager = AudioManager.Instance; // SFX: PERF:
     }
        
     private void OnTriggerStay2D(Collider2D other)

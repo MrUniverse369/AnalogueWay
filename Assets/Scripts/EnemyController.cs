@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); // SFX:
+        audioManager = AudioManager.Instance; // SFX: PERF:
     }
 
     // Update is called once per frame
@@ -27,7 +27,6 @@ public class EnemyController : MonoBehaviour
         {
             animCounter -= 1 * Time.deltaTime;
             animator.SetBool("DeathAnim", enemyDeathAnimActivate);
-            Debug.Log("Death Anim played ");
         }
         if (animCounter < 0 && enemyDeathAnimActivate == true)
         {
@@ -44,7 +43,6 @@ public class EnemyController : MonoBehaviour
             if (!enemyDeathAnimActivate && audioManager != null) audioManager.PlaySfxOneShot(audioManager.enemyStompDefeatSound); // SFX: once per defeat
             animCounter = 0.7f;
             enemyDeathAnimActivate = true;
-            Debug.Log("deathanime activated from stomp");
         }
 
         if (other.CompareTag("PlayerDetectionArea") && PowerUpManager.Has(TalismanTrait.DefeatsEnemiesOnContact) && gameObject.CompareTag("japanBoss") != true) // POWERUP: was ActiveCardManager.speedBoostPowerUp != false
@@ -53,7 +51,6 @@ public class EnemyController : MonoBehaviour
             animCounter = 0.5f;
             BounceSpeed = 0;
             enemyDeathAnimActivate = true;
-            Debug.Log("deathanime activated from dash");
         }
     }
 }
