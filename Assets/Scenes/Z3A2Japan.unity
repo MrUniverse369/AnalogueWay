@@ -206899,6 +206899,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 1315481228748501502, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
 --- !u!1 &1466276936
@@ -254625,6 +254629,14 @@ PrefabInstance:
       propertyPath: backgroundMusic
       value: 
       objectReference: {fileID: 8300000, guid: 0c7a73f8e35444b3a9783ff2eb9e95b1, type: 3}
+    - target: {fileID: 6491143627340585089, guid: 8b7171f7d769740ffb0091cc1881adc5, type: 3}
+      propertyPath: playerHurtSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d65854f03416c40ffb5a93db0db89f99, type: 3}
+    - target: {fileID: 6491143627340585089, guid: 8b7171f7d769740ffb0091cc1881adc5, type: 3}
+      propertyPath: dragonSummonSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6b0c5cdd5704846dcbcdf42706aed0cb, type: 3}
     - target: {fileID: 6491143627340585090, guid: 8b7171f7d769740ffb0091cc1881adc5, type: 3}
       propertyPath: m_RootOrder
       value: 31

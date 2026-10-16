@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DefaultExecutionOrder(100)] // PERF: run after CameraController (order 0) so backgrounds use this frame's camera position
 public class ParallaxBackGround : MonoBehaviour
 {
     [SerializeField] private float startPos;
@@ -18,8 +19,9 @@ public class ParallaxBackGround : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    // PERF: LateUpdate (every rendered frame, after the camera) instead of FixedUpdate (50 Hz), so backgrounds
+    // move in step with the camera instead of stuttering against it.
+    void LateUpdate()
     {
         float dist = cam.transform.position.x * parallaxEffect;
         movement = cam.transform.position.x * (1 - parallaxEffect);

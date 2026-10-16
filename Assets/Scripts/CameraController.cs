@@ -30,8 +30,9 @@ public class CameraController : MonoBehaviour
     {
         get { return followAheadDefault; }
     }
-    // Update is called once per frame
-    void Update()
+    // PERF: LateUpdate so the camera follows the player's final (interpolated) position for this frame;
+    // in Update it could run before the player moved and jitter.
+    void LateUpdate()
     {
         FollowPlayer();
     }

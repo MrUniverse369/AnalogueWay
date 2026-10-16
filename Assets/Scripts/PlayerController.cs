@@ -186,6 +186,7 @@ public class PlayerController : CharecterBehaviour
 
         if (mountActive)
         {
+            if (!dragon.activeSelf && audioManager != null) audioManager.PlaySfxOneShot(audioManager.dragonSummonSound); // SFX: only on the frame the dragon appears
             spriteRendererObj.enabled = false;
             dragon.gameObject.SetActive(true);
         }
