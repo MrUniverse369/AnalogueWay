@@ -10,11 +10,13 @@ public class playerBodyDetectionArea : MonoBehaviour
     [SerializeField] private LevelManager lManager;
     public float pushBackCounter;  // Knockback force
     [SerializeField] private float pushBackLenght;
+    private AudioManager audioManager; // SFX:
 
     // Start is called before the first frame update
     void Start()
     {
         lManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); // SFX:
     }
 
     // Handle player pushback when hitting the enemy trigger
@@ -33,6 +35,7 @@ public class playerBodyDetectionArea : MonoBehaviour
         if (other.gameObject.CompareTag("CheckPoint"))
         {
             lManager.ReSpawnPos.transform.position = other.transform.position;
+            GameSession.SaveProgress(); // SAVE: autosave at checkpoints
         }
         //if the player is touching the ground when the enemy has
         // made contact we push the player in the direction opposite of the enemy 
@@ -44,12 +47,14 @@ public class playerBodyDetectionArea : MonoBehaviour
 
         if (other.gameObject.CompareTag("WorldOneSwitch"))
         {
+            if (!changeWorld.lWorld && audioManager != null) audioManager.PlayWorldSwitch(true); // SFX: only when the world actually changes
             changeWorld.lWorld = true;
 
 
         }
         if (other.gameObject.CompareTag("WorldTwoSwitch"))
         {
+            if (changeWorld.lWorld && audioManager != null) audioManager.PlayWorldSwitch(false); // SFX: only when the world actually changes
             changeWorld.lWorld = false;
 
         }

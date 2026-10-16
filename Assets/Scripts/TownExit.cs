@@ -24,6 +24,7 @@ public class TownExit : MonoBehaviour
         fadeOut.SetActive(true);
         Time.timeScale = 0.0f;
         yield return new WaitForSecondsRealtime(5);
+        GameSession.SaveProgressForBuildIndex(SceneManager.GetActiveScene().buildIndex + 1); // SAVE: autosave so Continue starts the next level
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         Time.timeScale = 1.0f;
         fadeOut.SetActive(false);

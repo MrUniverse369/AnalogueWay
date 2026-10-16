@@ -44,8 +44,8 @@ public class Talisman : ScriptableObject
 
     [Header("Rules")]
     [SerializeField] private TalismanTrait traits;
-    [Tooltip("Scene build indices where this talisman is disabled.")]
-    [SerializeField] private int[] blockedBuildIndices;
+    [Tooltip("Scene names (e.g. Z4A1GrassGreen) where this talisman is disabled. Names, not build indices, so reordering or disabling scenes in Build Settings can't move the block.")]
+    [SerializeField] private string[] blockedScenes;
 
     [Header("Feedback")]
     [Tooltip("Optional Animator bool set true while active.")]
@@ -62,8 +62,8 @@ public class Talisman : ScriptableObject
     public bool HasAnimatorBool => !string.IsNullOrEmpty(animatorBool);
     public AudioClip ActivationSound => activationSound;
 
-    public bool IsAllowedInScene(int buildIndex) =>
-        blockedBuildIndices == null || Array.IndexOf(blockedBuildIndices, buildIndex) < 0;
+    public bool IsAllowedInScene(string sceneName) =>
+        blockedScenes == null || Array.IndexOf(blockedScenes, sceneName) < 0;
 
     /// <summary>Extra start conditions (e.g. must be grounded). Return false to refuse activation.</summary>
     public virtual bool CanActivate(PowerUpContext ctx) => true;

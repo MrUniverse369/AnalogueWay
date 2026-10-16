@@ -38,7 +38,7 @@ public class PowerUpManager : MonoBehaviour
 
     private PlayerControls controls;
     private PowerUpContext context;
-    private int buildIndex;
+    private string sceneName;
     private TalismanTrait activeTraits;
 
     /// <summary>True while any active talisman grants the trait. Safe to call from any scene.</summary>
@@ -60,7 +60,7 @@ public class PowerUpManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        buildIndex = SceneManager.GetActiveScene().buildIndex;
+        sceneName = SceneManager.GetActiveScene().name;
         if (slots == null) slots = new Slot[0];
         if (player == null) player = FindObjectOfType<PlayerController>();
 
@@ -168,7 +168,7 @@ public class PowerUpManager : MonoBehaviour
 
         if (slot.isActive || slot.cooldownLeft > 0f) return;
         if (oneAtATime && IsAnyActive()) return;
-        if (!talisman.IsAllowedInScene(buildIndex) || !talisman.CanActivate(context)) return;
+        if (!talisman.IsAllowedInScene(sceneName) || !talisman.CanActivate(context)) return;
 
         slot.isActive = true;
         slot.timeLeft = talisman.Duration;

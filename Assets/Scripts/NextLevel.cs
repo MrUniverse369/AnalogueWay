@@ -50,6 +50,7 @@ public class NextLevel : MonoBehaviour
             "Score: " + (CollectableCollisiondetector.coinCollected * 1.5f);
 
         yield return new WaitForSecondsRealtime(5);
+        GameSession.SaveProgressForBuildIndex(SceneManager.GetActiveScene().buildIndex + 1); // SAVE: autosave so Continue starts the next level
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
 

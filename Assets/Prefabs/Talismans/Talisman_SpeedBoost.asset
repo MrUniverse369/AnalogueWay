@@ -17,7 +17,10 @@ MonoBehaviour:
   cooldown: 0
   retriggerWhileHeld: 1
   traits: -1
-  blockedBuildIndices: 010000000200000003000000
+  blockedScenes:
+  - Z4A1GrassGreen
+  - Z4A2GrassGreen
+  - Z4A3GrassGreen
   animatorBool: SpeedBoost
-  activationSound: {fileID: 0}
+  activationSound: {fileID: 8300000, guid: 25d9fa76d3731442b99ac9a73cca05b4, type: 3}
   speedMultiplier: 3.5556

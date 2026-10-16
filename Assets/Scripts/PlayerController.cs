@@ -41,6 +41,8 @@ public class PlayerController : CharecterBehaviour
     private CameraController camControllerScriptRef;
     public static float chi = 90;
     private AudioManager audioManager;
+    [SerializeField] private float footstepDistance = 1.25f; // SFX: world units travelled per footstep
+    private float footstepTimer; // SFX:
 
     private void Awake()
     {
@@ -168,6 +170,7 @@ public class PlayerController : CharecterBehaviour
         {
             if (mountActive != true) CharJump();
             CharMovement();
+            PlayFootsteps(); // SFX:
 
             if (mountActive && PlayerController.chi > 0) Fly();
             if (PlayerController.chi <= 0) mountActive = false;
@@ -212,6 +215,21 @@ public class PlayerController : CharecterBehaviour
         animatorRef.SetFloat("Speed", Mathf.Abs(dir));
         animatorRef.SetFloat("JSpeed", rb2D.velocity.y);
 
+    }
+
+    // SFX: footsteps follow running speed; silent while mounted, airborne, standing or dashing (the dash has its own sound)
+    private void PlayFootsteps()
+    {
+        float speedX = Mathf.Abs(rb2D.velocity.x);
+        if (mountActive || !isGrounded || speedX < 0.5f || speedX > speedDefault * 1.5f)
+        {
+            footstepTimer = 0f;
+            return;
+        }
+        footstepTimer -= Time.deltaTime;
+        if (footstepTimer > 0f) return;
+        if (audioManager != null) audioManager.PlayFootstep();
+        footstepTimer = footstepDistance / speedX;
     }
 
     void Flip(float dir)

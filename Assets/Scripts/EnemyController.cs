@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private bool enemyDeathAnimActivate;
     [SerializeField] private float animCounter;
+    private AudioManager audioManager; // SFX:
     public float BounceSpeed
     {
         get { return bounceSpeed; }
@@ -15,6 +16,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); // SFX:
     }
 
     // Update is called once per frame
@@ -39,6 +41,7 @@ public class EnemyController : MonoBehaviour
     {
         if (other.CompareTag("pStomp") && gameObject.CompareTag("japanBoss") != true)
         {
+            if (!enemyDeathAnimActivate && audioManager != null) audioManager.PlaySfxOneShot(audioManager.enemyStompDefeatSound); // SFX: once per defeat
             animCounter = 0.7f;
             enemyDeathAnimActivate = true;
             Debug.Log("deathanime activated from stomp");
@@ -46,6 +49,7 @@ public class EnemyController : MonoBehaviour
 
         if (other.CompareTag("PlayerDetectionArea") && PowerUpManager.Has(TalismanTrait.DefeatsEnemiesOnContact) && gameObject.CompareTag("japanBoss") != true) // POWERUP: was ActiveCardManager.speedBoostPowerUp != false
         {
+            if (!enemyDeathAnimActivate && audioManager != null) audioManager.PlaySfxOneShot(audioManager.enemyDashDefeatSound); // SFX: once per defeat
             animCounter = 0.5f;
             BounceSpeed = 0;
             enemyDeathAnimActivate = true;

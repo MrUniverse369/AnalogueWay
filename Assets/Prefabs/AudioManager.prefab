@@ -183,6 +183,18 @@ MonoBehaviour:
   powerUpSound: {fileID: 8300000, guid: 9073d7525be52b846a51eec481c2c819, type: 3}
   bounceSound: {fileID: 8300000, guid: 2526b43ac9abf8f4c8e1e80d32a5f29d, type: 3}
   gameOverSound: {fileID: 8300000, guid: 7dfeba20bfcaa094b8d3d673dec17d5e, type: 3}
+  worldSwitchToLivingSound: {fileID: 8300000, guid: df2a53d3776b24932b3f4824e2a6260d, type: 3}
+  worldSwitchToSpiritSound: {fileID: 8300000, guid: 53d4fb3dcbd164f7b91cc8a87a36d67f, type: 3}
+  footstepSounds:
+  - {fileID: 8300000, guid: 3cafb31e477034ea38cec0639e5e04d7, type: 3}
+  - {fileID: 8300000, guid: 18ec142cd5490496891b6db0f25dfa51, type: 3}
+  - {fileID: 8300000, guid: ae7a01ceb00b34a2cbbaae169dfc5ac1, type: 3}
+  - {fileID: 8300000, guid: 0760b2423c89b4f568c23a03d84d4d05, type: 3}
+  footstepVolume: 0.4467
+  enemyStompDefeatSound: {fileID: 8300000, guid: 2f457c4e3c643495aaba046b67ac6361, type: 3}
+  enemyDashDefeatSound: {fileID: 8300000, guid: 8b9e76720782e4a5ba3dbee60f6f6ebb, type: 3}
+  checkpointSound: {fileID: 8300000, guid: af4a5c1a66d5f47208819ad0d885c5c3, type: 3}
+  chestOpenSound: {fileID: 8300000, guid: 897ab8182ab764842b23fb6ec9b517a9, type: 3}
 --- !u!1 &6491143628084602303
 GameObject:
   m_ObjectHideFlags: 0

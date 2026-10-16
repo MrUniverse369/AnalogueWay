@@ -45,5 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  slots: []
+  slots:
+  - talisman: {fileID: 11400000, guid: 1aac3c739622546a0b673ed8899e23df, type: 2}
+    keyboardKey: 122
+  - talisman: {fileID: 11400000, guid: ecb01effa4b78459f8dc9dc4f994df7f, type: 2}
+    keyboardKey: 120
+  - talisman: {fileID: 11400000, guid: 80bf95a927ad249a796417eb479baf4d, type: 2}
+    keyboardKey: 99
   oneAtATime: 1

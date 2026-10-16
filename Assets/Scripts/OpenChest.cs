@@ -4,6 +4,12 @@ public class OpenChest : MonoBehaviour
 {
     [SerializeField] private Animator animatorRef;
     private bool isChestOpened = false;
+    private AudioManager audioManager; // SFX:
+
+    private void Start()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); // SFX:
+    }
        
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -12,6 +18,7 @@ public class OpenChest : MonoBehaviour
             
                 isChestOpened = true;
                 animatorRef.SetTrigger("ChestOpenTrig");
+                if (audioManager != null) audioManager.PlaySfxOneShot(audioManager.chestOpenSound); // SFX:
             
         }
     }

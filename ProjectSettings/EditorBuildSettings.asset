@@ -8,16 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenue.unity
     guid: 56cb43adde0b94408a1a004added39e8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Z4A1GrassGreen.unity
     guid: 3f03d7a5b838c43ada57fe44dd2e68aa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Z4A2GrassGreen.unity
     guid: d2855b4770108413092279f476ae1c81
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Z4A3GrassGreen.unity
     guid: 97a08411199a344c18b67412d26d0215
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Z4A4GrassGreen.unity
     guid: e6704a4ce08c140168b372d05654ea3b
   - enabled: 1

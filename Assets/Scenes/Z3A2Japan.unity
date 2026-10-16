@@ -1313,17 +1313,6 @@ Transform:
   m_Father: {fileID: 1187730842}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &79518703 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8700116598772592214, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
-  m_PrefabInstance: {fileID: 993748754}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &81711052
 GameObject:
   m_ObjectHideFlags: 0
@@ -2827,17 +2816,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &198573219 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8700116599627022468, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
-  m_PrefabInstance: {fileID: 993748754}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &199685421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79566,58 +79544,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 60412096}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: cardImage
-      value: 
-      objectReference: {fileID: 729696872}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: cardImage2
-      value: 
-      objectReference: {fileID: 198573219}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: cardImage3
-      value: 
-      objectReference: {fileID: 79518703}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: pScriptRef
-      value: 
-      objectReference: {fileID: 60412096}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: slots.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: wOnAirCardScriptRef
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: speedBoostMultiplier
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: slots.Array.data[0].talisman
-      value: 
-      objectReference: {fileID: 11400000, guid: 1aac3c739622546a0b673ed8899e23df, type: 2}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: slots.Array.data[1].talisman
-      value: 
-      objectReference: {fileID: 11400000, guid: ecb01effa4b78459f8dc9dc4f994df7f, type: 2}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: slots.Array.data[2].talisman
-      value: 
-      objectReference: {fileID: 11400000, guid: 80bf95a927ad249a796417eb479baf4d, type: 2}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: slots.Array.data[0].keyboardKey
-      value: 122
-      objectReference: {fileID: 0}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: slots.Array.data[1].keyboardKey
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
-      propertyPath: slots.Array.data[2].keyboardKey
-      value: 99
-      objectReference: {fileID: 0}
     - target: {fileID: 3746618333133400249, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
       propertyPath: m_Name
       value: ActiveCardManager
@@ -81637,17 +81563,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1948382544926291788, guid: 9bc686a7eed4c4f469064ef4003fe1cd, type: 3}
   m_PrefabInstance: {fileID: 105363736}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &729696872 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8700116599366120834, guid: e70cbe4270e4b4d0caef85f8f87fe3e6, type: 3}
-  m_PrefabInstance: {fileID: 993748754}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &731813612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -206934,7 +206849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501500, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: orthographic size
-      value: 6.3
+      value: 6.26875
       objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501501, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: m_RootOrder
@@ -254709,7 +254624,7 @@ PrefabInstance:
     - target: {fileID: 6491143627340585089, guid: 8b7171f7d769740ffb0091cc1881adc5, type: 3}
       propertyPath: backgroundMusic
       value: 
-      objectReference: {fileID: 8300000, guid: 8184d0b9c17cfda4bafa3be04f59dcfb, type: 3}
+      objectReference: {fileID: 8300000, guid: 0c7a73f8e35444b3a9783ff2eb9e95b1, type: 3}
     - target: {fileID: 6491143627340585090, guid: 8b7171f7d769740ffb0091cc1881adc5, type: 3}
       propertyPath: m_RootOrder
       value: 31
