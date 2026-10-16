@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using AnalogueWay;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float bounceSpeed;
@@ -34,7 +31,6 @@ public class EnemyController : MonoBehaviour
         {
             gameObject.SetActive(false);
             enemyDeathAnimActivate = false;
-            //animCounter = 0.6f;
         }
 
     }

@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using AnalogueWay;
 
 public class Timer : MonoBehaviour
 {
@@ -11,11 +8,6 @@ public class Timer : MonoBehaviour
     [SerializeField] private LevelComplete lcScriptRef;
 
     private float elapsedTime;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -27,7 +19,6 @@ public class Timer : MonoBehaviour
         oppsText.text = string.Format("Lives:" + "{0}", HurtPlayer.pLivesCount);
         if (Input.GetKey(KeyCode.E))
         {
-            //Debug.Log(timerText.text);
             lcScriptRef.GetSetFinalTimerText.text = timerText.text;
         }
 

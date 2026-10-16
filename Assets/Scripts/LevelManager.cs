@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
@@ -32,12 +30,6 @@ public class LevelManager : MonoBehaviour
     {
         pScriptRef = FindObjectOfType<PlayerController>();
         resetObjsArr = FindObjectsOfType<ResetOnRespawn>();
-        ReSpawnPos.transform.position = respawnPos.transform.position;
-
-    }
-
-    void Update()
-    {
 
     }
 

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using AnalogueWay;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,11 +15,6 @@ public class HealthUIManager : MonoBehaviour
     [SerializeField] private Sprite manaTwo;
     [SerializeField] private Sprite manaThree;
     [SerializeField] private Sprite manaFour;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()

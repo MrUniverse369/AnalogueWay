@@ -1,11 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using AnalogueWay;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
-using System;
 using UnityEngine.SceneManagement;
 
 public class ActiveCardManager : MonoBehaviour
@@ -28,14 +22,7 @@ public class ActiveCardManager : MonoBehaviour
     [SerializeField] private float speedBoostMultiplier;
     [SerializeField] private float JspeedBoostMultiplier;
     [SerializeField] public float cardCoolDown;
-    private CameraController camControllerScriptRef;
-    public static bool jumpPowerUp = false;
     public static bool speedBoostPowerUp = false;
-    private float airTime;
-    private static float sCard;
-    private bool buttonTwoIsActive;
-    private bool buttonThreeIsActive;
-    private bool activateCardOne;
     private int activeCardNumber;
     private AudioManager audioManager;
     private int index;
@@ -85,9 +72,6 @@ public class ActiveCardManager : MonoBehaviour
     void Start()
     {
         activeCardNumber = 0;
-        airTime = 0;
-        activateCardOne = false;
-        camControllerScriptRef = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
     }
 
     // Update is called once per frame
@@ -147,12 +131,10 @@ public class ActiveCardManager : MonoBehaviour
         {
             cardImage.sprite = activeCard;
             cardImage.color = Color.white;
-            activateCardOne = true;
         }
         else
         {
             cardImage.sprite = inActiveCard;
-            activateCardOne = false;
         }
 
         //SPEEED BOOST POWER UP CODE 

@@ -1,0 +1,74 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+public class LevelManager : MonoBehaviour
+{
+    [SerializeField] private float respawnDelay;
+    [SerializeField] private PlayerController pScriptRef;
+    [SerializeField] private WalkOnAirCard wOnAirCardScriptRef;
+    [SerializeField] private ResetOnRespawn[] resetObjsArr;
+    [SerializeField] private Transform respawnPos;
+    [SerializeField] private Image cardImage;
+    [SerializeField] private Sprite activeCard;
+    [SerializeField] private Sprite inActiveCard;
+    [SerializeField] private GameObject gameOverScreen;
+    private AudioManager audioManager;
+
+    public Transform ReSpawnPos
+    {
+        get { return respawnPos; }
+        set { respawnPos = value; }
+    }
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        pScriptRef = FindObjectOfType<PlayerController>();
+        resetObjsArr = FindObjectsOfType<ResetOnRespawn>();
+        ReSpawnPos.transform.position = respawnPos.transform.position;
+
+    }
+
+    void Update()
+    {
+
+    }
+
+    public void Respawn()
+    {
+        StartCoroutine("RespawnCo");
+
+    }
+
+    public IEnumerator RespawnCo()
+    {
+        // POWERUP: end every active talisman and clear cooldowns while the player object is still active.
+        // Replaces the old ActiveCardManager.speedBoostPowerUp = false at the end of this method.
+        if (PowerUpManager.Instance != null) PowerUpManager.Instance.ResetAll();
+
+        audioManager.PlaySfx(audioManager.gameOverSound);
+        pScriptRef.gameObject.SetActive(false);
+        gameOverScreen.SetActive(true);
+        yield return new WaitForSeconds(respawnDelay);
+        pScriptRef.transform.position = ReSpawnPos.transform.position;
+        pScriptRef.gameObject.SetActive(true);
+        gameOverScreen.SetActive(false);
+        HurtPlayer.pLivesCount = 3;
+        PlayerController.chi = 90;
+        HurtPlayer.oopsCount = HurtPlayer.oopsCount + 1;
+        for (int i = 0; i < resetObjsArr.Length; i++)
+        {
+            resetObjsArr[i].ResetObjs();
+            resetObjsArr[i].gameObject.SetActive(true);
+
+        }
+    }
+
+}

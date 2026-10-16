@@ -1,7 +1,4 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 
 public class PlayerController : CharecterBehaviour
@@ -14,13 +11,10 @@ public class PlayerController : CharecterBehaviour
     private float dir;
     private float yDir;
     private Rigidbody2D rb2D;
-    private Vector2 turnLeft;
-    private Vector2 turnRight;
     private SpriteRenderer spriteRendererObj;
     public static bool playerInviInvincible;
     PlayerControls pControls;
     private bool mountActive;
-    Vector2 enemyScale;
     [SerializeField] private float speed;
     [SerializeField] private float speedDefault;
     [SerializeField] private Animator animatorRef;
@@ -52,13 +46,11 @@ public class PlayerController : CharecterBehaviour
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         playerInviInvincible = false;
         pBDARef = GameObject.FindGameObjectWithTag("PlayerDetectionArea").GetComponent<playerBodyDetectionArea>();
-        // dragon = GameObject.FindGameObjectWithTag("Dragon");
         spriteRendererObj = GetComponent<SpriteRenderer>();
         mountActive = false;
         pControls = new PlayerControls();
         pControls.Gameplay.Fly.performed += ctx => MountActive();
         pControls.Gameplay.unMount.performed += ctx => UnMountActive();
-        //pControls.Gameplay.Jump.performed += ctx => buttonSouthWorks();
 
 
     }
@@ -76,11 +68,6 @@ public class PlayerController : CharecterBehaviour
         pControls.Gameplay.Disable();
     }
 
-    void buttonSouthWorks()
-    {
-
-
-    }
     void MountActive()
     {
         mountActive = true;
@@ -117,9 +104,6 @@ public class PlayerController : CharecterBehaviour
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        // turnLeft = new Vector2(-turningscale, turningscale);
-        //turnRight = new Vector2(turningscale, turningscale);
-        //transform.localScale = turnRight;
         coyoteTimeCounter = coyoteTime;
         camControllerScriptRef = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
     }
@@ -172,12 +156,6 @@ public class PlayerController : CharecterBehaviour
             camControllerScriptRef.FollowAhead = 7;
             camControllerScriptRef.Smoothing = 3;
 
-        }
-        else if (rb2D.velocity.y >= -8)
-        {
-            //  camControllerScriptRef.FollowAhead = camControllerScriptRef.FollowAheadDefault;
-            //    camControllerScriptRef.Smoothing = 1f;
-            //    camControllerScriptRef.SetyAxisOffset = -3;
         }
 
         if (ActiveCardManager.speedBoostPowerUp == true)

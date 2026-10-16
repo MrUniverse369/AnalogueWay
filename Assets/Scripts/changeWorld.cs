@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace AnalogueWay
 {
@@ -30,7 +27,7 @@ namespace AnalogueWay
         [SerializeField] private GameObject worldTwoCover;
         [SerializeField] private GameObject worldOneBounceBox;
         [SerializeField] private GameObject worldTwoBounceBox;
-        [SerializeField] public static bool lWorld = false;
+        public static bool lWorld = false;
         public static bool lworldGateActive = false;
         public static bool SworldGateActive = false;
 

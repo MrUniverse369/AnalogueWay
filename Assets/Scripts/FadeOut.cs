@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,9 +12,6 @@ public class FadeOut : MonoBehaviour
     void Start()
     {
         fadeScreen = GetComponent<Image>();  // Get the Image component on this GameObject
-
-        // Ensure the alpha is set to 0 (fully transparent) at the start
-        //  fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, 0f);
     }
 
     // Update is called once per frame

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using AnalogueWay;
 using UnityEngine;
 
@@ -18,8 +16,6 @@ public class ResetOnRespawn : MonoBehaviour
         startPos = transform.position;
         startRot = transform.rotation;
         startScale = transform.localScale;
-        gameObject.SetActive(true);
-        //   activeCardManScriptRef = GameObject.FindGameObjectWithTag("activeCardManager");
 
         if (GetComponent<Rigidbody2D>() != null)
         {
@@ -30,12 +26,6 @@ public class ResetOnRespawn : MonoBehaviour
         {
             fallingObj = GetComponent<MovingObstacles>();
         }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 

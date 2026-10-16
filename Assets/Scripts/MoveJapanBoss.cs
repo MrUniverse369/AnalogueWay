@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveJapanBoss : MonoBehaviour
@@ -39,11 +37,6 @@ public class MoveJapanBoss : MonoBehaviour
             CurTargetPos = Pref.transform.position;
         }
 
-        /* if (objToMove.transform.position == Pref.transform.position)
-           {
-               enemyTurn = false;
-               CurTargetPos = pointB.position;
-           }  */
         FlipObject();
 
     }

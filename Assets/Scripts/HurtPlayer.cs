@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class HurtPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject playerRef;
-    [SerializeField] private const int PLIVES = 3;
+    private const int PLIVES = 3;
     public static int oopsCount = 0;
     public static int pLivesCount = 3;
     [SerializeField] private GameObject pRespawnPos;

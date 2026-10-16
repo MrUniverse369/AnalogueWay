@@ -1,8 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using AnalogueWay;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,14 +28,8 @@ public class NextLevel : MonoBehaviour
     {
         if (pIsTouchingTreasure)
         {
-            if (pIsTouchingTreasure)
-            {
-
-                StartCoroutine(nameof(NextLevelPauseCo));
-                Debug.Log("Player is touching treasure and speed is 0");
-            }
-
-
+            StartCoroutine(nameof(NextLevelPauseCo));
+            Debug.Log("Player is touching treasure and speed is 0");
         }
     }
 

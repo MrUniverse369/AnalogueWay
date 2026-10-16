@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using AnalogueWay;
 using UnityEngine;
 
@@ -12,8 +10,6 @@ public class playerBodyDetectionArea : MonoBehaviour
     [SerializeField] private LevelManager lManager;
     public float pushBackCounter;  // Knockback force
     [SerializeField] private float pushBackLenght;
-    private bool isGrounded;
-    Vector2 enemyScale;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +30,6 @@ public class playerBodyDetectionArea : MonoBehaviour
             if (PlayerController.chi > 90) PlayerController.chi = 90;
         }
 
-        isGrounded = Physics2D.OverlapCircle(pFeet.position, pFeetRadius, isPFeetOnGround);
         if (other.gameObject.CompareTag("CheckPoint"))
         {
             lManager.ReSpawnPos.transform.position = other.transform.position;
@@ -45,7 +40,6 @@ public class playerBodyDetectionArea : MonoBehaviour
         {
             animatorRef.SetTrigger("isHurt");
             pushBackCounter = pushBackLenght;
-            enemyScale = other.gameObject.transform.localScale;
         }
 
         if (other.gameObject.CompareTag("WorldOneSwitch"))

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -19,12 +17,6 @@ public class AudioManager : MonoBehaviour
     {
         music.clip = backgroundMusic;
         music.Play();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void PlaySfx(AudioClip sound)
