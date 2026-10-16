@@ -44,7 +44,7 @@ public class EnemyController : MonoBehaviour
             Debug.Log("deathanime activated from stomp");
         }
 
-        if (other.CompareTag("PlayerDetectionArea") && ActiveCardManager.speedBoostPowerUp != false && gameObject.CompareTag("japanBoss") != true)
+        if (other.CompareTag("PlayerDetectionArea") && PowerUpManager.Has(TalismanTrait.DefeatsEnemiesOnContact) && gameObject.CompareTag("japanBoss") != true) // POWERUP: was ActiveCardManager.speedBoostPowerUp != false
         {
             animCounter = 0.5f;
             BounceSpeed = 0;

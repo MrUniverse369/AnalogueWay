@@ -163,15 +163,6 @@ public class PlayerController : CharecterBehaviour
 
         }
 
-        if (ActiveCardManager.speedBoostPowerUp == true)
-        {
-            animatorRef.SetBool("SpeedBoost", true);
-        }
-        else
-        {
-            animatorRef.SetBool("SpeedBoost", false);
-        }
-
         //checking to see that the player has is not being pushed back 
         if (pBDARef.pushBackCounter <= 0)
         {
@@ -183,7 +174,7 @@ public class PlayerController : CharecterBehaviour
             playerInviInvincible = false;
         }
 
-        if (pBDARef.pushBackCounter > 0 && ActiveCardManager.speedBoostPowerUp == false)
+        if (pBDARef.pushBackCounter > 0 && !PowerUpManager.Has(TalismanTrait.EnemyImmunity)) // POWERUP: was ActiveCardManager.speedBoostPowerUp == false
         {
             pBDARef.pushBackCounter -= Time.deltaTime;
             playerInviInvincible = true;

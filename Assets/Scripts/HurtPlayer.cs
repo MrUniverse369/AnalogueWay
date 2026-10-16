@@ -22,7 +22,7 @@ public class HurtPlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.CompareTag("PlayerDetectionArea") && ActiveCardManager.speedBoostPowerUp != true)
+        if (other.CompareTag("PlayerDetectionArea") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity)) // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
         {
 
             if (PlayerController.playerInviInvincible == false) pLivesCount -= 1;

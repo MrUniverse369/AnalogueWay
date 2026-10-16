@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3746618333133400247}
   - component: {fileID: 3746618333133400248}
   m_Layer: 0
-  m_Name: ActiveCardManager
+  m_Name: PowerUpManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,18 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c25537ec01e74d69bde0956cc3afc3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardImage: {fileID: 0}
-  cardImage2: {fileID: 0}
-  cardImage3: {fileID: 0}
-  activeCard: {fileID: 21300000, guid: ebf494fbb7cc94a3e947f33320b42e04, type: 3}
-  inActiveCard: {fileID: 21300000, guid: 83cded221dc3f4ea991997d953447684, type: 3}
-  activeCardTwo: {fileID: 21300000, guid: 1240aedbed15343eab83578c66ac2746, type: 3}
-  inActiveCardTwo: {fileID: 21300000, guid: bf69807c57ae14eec8f55ffcdd7aed80, type: 3}
-  activeCardThree: {fileID: 21300000, guid: 7b13ff1a6ec974ab6baf69369d84cdfb, type: 3}
-  inActiveCardThree: {fileID: 21300000, guid: 7b6f9e66c71634e5cbe87f50dab07f00, type: 3}
-  wOnAirCardScriptRef: {fileID: 0}
-  pScriptRef: {fileID: 0}
-  speedBoost: 4
-  speedBoostMultiplier: 2.5
-  JspeedBoostMultiplier: 1.8
-  cardCoolDown: 0
+  player: {fileID: 0}
+  slots: []
+  oneAtATime: 1

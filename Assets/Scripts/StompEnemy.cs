@@ -10,7 +10,7 @@ public class StompEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy") && !ActiveCardManager.speedBoostPowerUp)
+        if (other.CompareTag("Enemy") && !PowerUpManager.Has(TalismanTrait.DefeatsEnemiesOnContact)) // POWERUP: was !ActiveCardManager.speedBoostPowerUp
         {
             pref.GetComponent<Rigidbody2D>().velocity = new Vector2(pref.GetComponent<Rigidbody2D>().velocity.x, other.GetComponent<EnemyController>().BounceSpeed);
             CollectableCollisiondetector.coinCollected = CollectableCollisiondetector.coinCollected + 10;

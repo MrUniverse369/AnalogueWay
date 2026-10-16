@@ -79563,6 +79563,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 60412096}
+    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
       propertyPath: cardImage
       value: 
       objectReference: {fileID: 729696872}
@@ -79579,12 +79583,40 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 60412096}
     - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
+      propertyPath: slots.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
       propertyPath: wOnAirCardScriptRef
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
       propertyPath: speedBoostMultiplier
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
+      propertyPath: slots.Array.data[0].talisman
+      value: 
+      objectReference: {fileID: 11400000, guid: 1aac3c739622546a0b673ed8899e23df, type: 2}
+    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
+      propertyPath: slots.Array.data[1].talisman
+      value: 
+      objectReference: {fileID: 11400000, guid: ecb01effa4b78459f8dc9dc4f994df7f, type: 2}
+    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
+      propertyPath: slots.Array.data[2].talisman
+      value: 
+      objectReference: {fileID: 11400000, guid: 80bf95a927ad249a796417eb479baf4d, type: 2}
+    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
+      propertyPath: slots.Array.data[0].keyboardKey
+      value: 122
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
+      propertyPath: slots.Array.data[1].keyboardKey
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746618333133400248, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
+      propertyPath: slots.Array.data[2].keyboardKey
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 3746618333133400249, guid: f04994c7f51474879920e59ea776e1a1, type: 3}
       propertyPath: m_Name

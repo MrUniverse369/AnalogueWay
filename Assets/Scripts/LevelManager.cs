@@ -5,7 +5,6 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private float respawnDelay;
     [SerializeField] private PlayerController pScriptRef;
-    [SerializeField] private WalkOnAirCard wOnAirCardScriptRef;
     [SerializeField] private ResetOnRespawn[] resetObjsArr;
     [SerializeField] private Transform respawnPos;
     [SerializeField] private Image cardImage;
@@ -41,6 +40,7 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator RespawnCo()
     {
+        if (PowerUpManager.Instance != null) PowerUpManager.Instance.ResetAll(); // POWERUP: replaces speedBoostPowerUp = false below
         audioManager.PlaySfx(audioManager.gameOverSound);
         pScriptRef.gameObject.SetActive(false);
         gameOverScreen.SetActive(true);
@@ -57,7 +57,6 @@ public class LevelManager : MonoBehaviour
             resetObjsArr[i].gameObject.SetActive(true);
 
         }
-        ActiveCardManager.speedBoostPowerUp = false;
     }
 
 }
