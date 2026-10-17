@@ -3,9 +3,8 @@
   MenuBackdrop.png   320x180 dawn over an archaeological dig: dithered sky bands, the sun on the horizon behind
                      silhouettes of the four zones (tomb temple, pyramids, snowy pagoda mountain, green hills),
                      sand plains with a path winding off to the horizon, and in front the dig site: an
-                     excavation pit with a ladder, a rope grid, crates, a pickaxe, a lantern post and a
-                     half-buried stone cat idol (Harvey the feline archaeologist's great find).
-  MenuTitle.png      "HARVEY'S NINE LIVES" in chunky pixel letters: warm gradient, dark outline, drop shadow.
+                     excavation pit with a ladder, a rope grid, crates, a pickaxe, and a lantern post.
+  MenuTitle.png      "HARVEY'S NINE LIVES" in soft pixel letters: warm gradient, rounded purple outline, soft shadow.
   MenuButton*.png    9-slice button plates (normal / selected / pressed) in the HUD frame style, border 5.
   Icon_*.png         gem (play), journal (continue), compass (zone select).
   MenuPaw.png        the paw pointer beside the selected button.
@@ -181,39 +180,6 @@ def backdrop():
     c.rect(126, 138, 130, 144, DARK)
     c.rect(127, 139, 129, 143, hexc("ffe478"))
     c.put(128, 141, hexc("ffffeb"))
-    # the half-buried cat idol: stone head with pointed ears and gem eyes
-    stone, stone_d, stone_l = hexc("98b2b1"), hexc("769099"), hexc("b9d2ca")
-    ix, iy = 106, 126
-    for y in range(iy, iy + 34):
-        for x in range(ix - 18, ix + 19):
-            dx, dy = x - ix, y - (iy + 18)
-            head = (dx / 15) ** 2 + (dy / 14) ** 2 <= 1
-            ear_l = y < iy + 12 and abs(x - (ix - 10)) <= (y - iy) * 0.55 and y >= iy
-            ear_r = y < iy + 12 and abs(x - (ix + 10)) <= (y - iy) * 0.55 and y >= iy
-            if head or ear_l or ear_r:
-                col = stone_l if dx < -4 and dy < 0 else stone_d if dx > 6 else stone
-                c.put(x, y, col)
-    for x in range(ix - 18, ix + 19):  # outline pass
-        for y in range(iy - 1, iy + 34):
-            if c.get(x, y) in (stone, stone_l, stone_d):
-                for ddx, ddy in ((1, 0), (-1, 0), (0, -1)):
-                    n = c.get(x + ddx, y + ddy)
-                    if n is not None and n not in (stone, stone_l, stone_d, DARK):
-                        c.put(x + ddx, y + ddy, DARK)
-    for ex in (ix - 6, ix + 6):  # gem eyes
-        c.rect(ex - 1, iy + 15, ex + 1, iy + 17, hexc("66ffe3"))
-        c.put(ex - 1, iy + 15, hexc("ffffeb"))
-        c.rect(ex - 2, iy + 14, ex - 2, iy + 18, DARK)
-        c.rect(ex + 2, iy + 14, ex + 2, iy + 18, DARK)
-    c.rect(ix - 1, iy + 21, ix + 1, iy + 22, hexc("ba6156"))  # nose
-    for k in (-1, 1):  # carved whiskers
-        for d in range(3, 9):
-            c.put(ix + k * d, iy + 23 + (d // 4), stone_d)
-    # sand mound burying the lower half
-    for x in range(ix - 26, ix + 27):
-        top = iy + 26 + int(((x - ix) / 26) ** 2 * 8)
-        for y in range(top, iy + 40):
-            c.put(x, y, hexc("e1d089") if y < top + 2 else hexc("e3ba66"))
     return c
 
 
@@ -232,10 +198,15 @@ GLYPHS = {
     "L": ["#....", "#....", "#....", "#....", "#....", "#....", "#####"],
     " ": ["..", "..", "..", "..", "..", "..", ".."],
 }
-GRADIENT = ["ffffeb", "ffffeb", "ffe478", "ffe478", "f2a65e", "f2a65e", "ce812c"]
+# per pixel row of a 21-row letter: cream top fading through yellow and orange (no 3-row glyph steps)
+GRADIENT = ["ffffeb"] * 5 + ["ffe478"] * 6 + ["f2a65e"] * 6 + ["ce812c"] * 4
+TITLE_OUTLINE = "473b78"  # the HUD frame's purple: softer than a near-black outline against the dawn sky
 
 
 def title():
+    """Soft, rounded title: glyph cells lose their outer corners and fill their inner angles (so diagonals
+    in V/Y/N read as smooth strokes), a purple outline with rounded corners, and a soft translucent shadow.
+    The canvas size matches the old blocky title so the menu layout is unchanged."""
     s = 3
     lines = ["HARVEY'S", "NINE LIVES"]
 
@@ -249,34 +220,68 @@ def title():
     fill = {}
     y0 = 3
     for line in lines:
+        # the line as one grid of cells so rounding also sees neighbouring cells within a letter
+        cells = set()
         x = (tw - width(line)) // 2
+        x_cell0 = x
         for ch in line:
             g = GLYPHS[ch]
             for gy, row in enumerate(g):
                 for gx, v in enumerate(row):
                     if v == "#":
-                        for yy in range(s):
-                            for xx in range(s):
-                                px, py = x + gx * s + xx, y0 + gy * s + yy
-                                mask[py][px] = True
-                                fill[(px, py)] = hexc(GRADIENT[gy])
+                        cells.add(((x - x_cell0) // s + gx, gy))
             x += (len(g[0]) + 1) * s
+        lit = lambda cx, cy: (cx, cy) in cells  # noqa: E731
+        ncols = (x - x_cell0) // s
+        for cy in range(7):
+            for cx in range(-1, ncols + 1):
+                on = lit(cx, cy)
+                for yy in range(s):
+                    for xx in range(s):
+                        keep = on
+                        if not on and xx != 1 and yy != 1:  # a corner sub-pixel of an empty cell
+                            hx = 1 if xx == 2 else -1
+                            hy = 1 if yy == 2 else -1
+                            if lit(cx + hx, cy) and lit(cx, cy + hy):
+                                keep = True  # fill the inner angle, so diagonal steps read as one stroke
+                        if keep:
+                            px, py = x_cell0 + cx * s + xx, y0 + cy * s + yy
+                            if 0 <= px < tw and 0 <= py < th:
+                                mask[py][px] = True
+                                fill[(px, py)] = hexc(GRADIENT[cy * s + yy])
         y0 += 7 * s + 6
-    # shadow (down-right), then outline, then the letters
+
+    def free(px, py):
+        return 0 <= px < tw and 0 <= py < th and not mask[py][px]
+
+    # 4-way outline only: its corners stay open, which rounds every letter's silhouette
+    outline = hexc(TITLE_OUTLINE)
+    ring = set()
     for (px, py) in fill:
-        for dx, dy in ((2, 2), (1, 2), (2, 1)):
-            if 0 <= px + dx < tw and 0 <= py + dy < th and not mask[py + dy][px + dx]:
-                c.put(px + dx, py + dy, hexc("32395c"))
-    for (px, py) in fill:
-        for dx in (-1, 0, 1):
-            for dy in (-1, 0, 1):
-                if 0 <= px + dx < tw and 0 <= py + dy < th and not mask[py + dy][px + dx]:
-                    c.put(px + dx, py + dy, DARK)
+        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            if free(px + dx, py + dy):
+                ring.add((px + dx, py + dy))
+    # one soft shadow under the outlined shape (translucent, so the dawn sky tints it)
+    shadow = hexc("32395c")
+    for (px, py) in list(fill) + list(ring):
+        q = (px, py + 2)
+        if free(*q) and q not in ring:
+            c.put(q[0], q[1], (shadow[0], shadow[1], shadow[2], 140))
+    for (px, py) in ring:
+        c.put(px, py, outline)
     for (px, py), col in fill.items():
         c.put(px, py, col)
-    # a glint on the H
-    c.put(5, 4, hexc("ffffff"))
+    # the outer corner pixel of each stroke takes the next tone down, so corners read soft rather than square
+    for (px, py), col in fill.items():
+        open_x = free(px - 1, py) or free(px + 1, py)
+        open_y = free(px, py - 1) or free(px, py + 1)
+        if open_x and open_y:
+            c.put(px, py, mix(col, outline, 0.35))
     return c
+
+
+def mix(a, b, t):
+    return tuple(int(round(a[i] + (b[i] - a[i]) * t)) for i in range(3)) + (255,)
 
 
 # ---------------------------------------------------------------- buttons and icons

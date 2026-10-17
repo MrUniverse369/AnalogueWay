@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19658fa23b75415ab0ae9215d8608d9, type: 3}
   m_Name: Talisman_SpeedBoost
   m_EditorClassIdentifier: 
-  displayName: 
+  displayName: Spirit Dash
+  icon: {fileID: 21300000, guid: c357b699474494ad18b031a9f12061b7, type: 3}
+  description: Hold to dash along the ground. Enemies in the way are knocked out
+    and can't hurt Harvey.
+  unlockHint: 
   duration: 0.5
   cooldown: 0
   retriggerWhileHeld: 1

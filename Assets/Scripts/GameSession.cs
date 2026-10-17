@@ -21,12 +21,13 @@ public static class GameSession
         PlayerController.chi = StartingChi;
         HurtPlayer.oopsCount = 0;
         changeWorld.lWorld = false;
+        Inventory.ResetToNewGame(); // MENUS:
     }
 
     public static SaveData Capture(string sceneName)
     {
         NoteReached(sceneName); // ZONEMAP:
-        return new SaveData
+        var data = new SaveData
         {
             sceneName = sceneName,
             coins = CollectableCollisiondetector.coinCollected,
@@ -36,6 +37,8 @@ public static class GameSession
             inLivingWorld = changeWorld.lWorld,
             furthestScene = furthestScene, // ZONEMAP:
         };
+        Inventory.Capture(data); // MENUS: talismans and the bag
+        return data;
     }
 
     // ZONEMAP: the furthest level reached. It survives NewGame, so starting over never re-locks the zone select.
@@ -97,6 +100,7 @@ public static class GameSession
         PlayerController.chi = data.chi;
         HurtPlayer.oopsCount = data.deaths;
         changeWorld.lWorld = data.inLivingWorld;
+        Inventory.Apply(data); // MENUS:
     }
 
     /// <summary>Save current progress against the active scene (used by checkpoints).</summary>

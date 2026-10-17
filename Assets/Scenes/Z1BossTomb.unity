@@ -15193,7 +15193,7 @@ PrefabInstance:
     - target: {fileID: 6491143627340585089, guid: 8b7171f7d769740ffb0091cc1881adc5, type: 3}
       propertyPath: backgroundMusic
       value: 
-      objectReference: {fileID: 8300000, guid: 8184d0b9c17cfda4bafa3be04f59dcfb, type: 3}
+      objectReference: {fileID: 8300000, guid: f810647052ab8436781ce8ddb117fc11, type: 3}
     - target: {fileID: 6491143627340585090, guid: 8b7171f7d769740ffb0091cc1881adc5, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -40368,6 +40368,7 @@ GameObject:
   - component: {fileID: 2033284538}
   - component: {fileID: 2033284537}
   - component: {fileID: 2033284536}
+  - component: {fileID: 2033284540}
   m_Layer: 0
   m_Name: BossTreasure
   m_TagString: Untagged
@@ -40510,6 +40511,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2033284540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033284535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36d4e8631aa94d3ea3f6f299282af8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TalismanUnlock
+  talisman: {fileID: 11400000, guid: 1aac3c739622546a0b673ed8899e23df, type: 2}
 --- !u!1 &2083396031
 GameObject:
   m_ObjectHideFlags: 0

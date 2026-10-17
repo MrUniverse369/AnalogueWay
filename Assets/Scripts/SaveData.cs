@@ -23,4 +23,19 @@ public class SaveData
 
     // ZONEMAP: the furthest level reached, which unlocks the zone select. Older saves leave it empty and use sceneName.
     public string furthestScene;
+
+    // MENUS: the Talisman Holder and Harvey's Bag (see Inventory). Older saves leave these empty and get the
+    // new-game loadout. Talismans are saved by asset name, items by ItemDefinition.Id.
+    public string[] ownedTalismans;
+    public string[] equippedTalismans;
+    public ItemStack[] items;
+    public string[] claimed; // one-time rewards already taken (chest bonus items)
+}
+
+/// <summary>MENUS: a saved stack of one item.</summary>
+[Serializable]
+public class ItemStack
+{
+    public string id;
+    public int count;
 }

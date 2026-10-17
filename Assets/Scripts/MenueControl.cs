@@ -9,6 +9,9 @@ public class MenueControl : MonoBehaviour
     public static bool isGamePaused = false;
     [SerializeField] private GameObject pauseMenueUI;
 
+    /// <summary>MENUS: HarveyMenus adds its Talismans and Bag buttons to this panel.</summary>
+    public GameObject PausePanel => pauseMenueUI;
+
     public void LoadMainMenue()
     {
         Time.timeScale = 1f;
@@ -51,6 +54,7 @@ public class MenueControl : MonoBehaviour
 
     public void PauseMenue()
     {
+        if (HarveyMenus.BlocksPause) return; // MENUS: Esc/Options belong to the open Talisman Holder, Bag or shop
         // PAUSE: only a real pause panel toggles. In the main menu pauseMenueUI is the menu itself, so pausing
         // there used to freeze time and then hide the whole menu (with this script on it), leaving no way back.
         if (pauseMenueUI != null && pauseMenueUI != gameObject && PausePressed())

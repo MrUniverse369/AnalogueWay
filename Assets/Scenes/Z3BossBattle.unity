@@ -617,8 +617,8 @@ Transform:
   m_GameObject: {fileID: 82693633}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 218.6471, y: 55.1563, z: 0}
-  m_LocalScale: {x: 519.3, y: 99.488, z: 1}
+  m_LocalPosition: {x: 218.6471, y: 54.6563, z: 0}
+  m_LocalScale: {x: 519.3, y: 100.488, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 878351801}
@@ -668,9 +668,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1372318903
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: bb1e0cdb3d0d94ab48ed5247273dd5ad, type: 3}
   m_Color: {r: 0.21568629, g: 0.2509804, b: 0.3137255, a: 1}
@@ -3343,13 +3343,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7080670360961270008, guid: e471a4107139d4161a9bc4ff977cf3e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 562924810}
   m_SourcePrefab: {fileID: 100100000, guid: e471a4107139d4161a9bc4ff977cf3e8, type: 3}
 --- !u!1 &562924809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7080670360961270008, guid: e471a4107139d4161a9bc4ff977cf3e8, type: 3}
   m_PrefabInstance: {fileID: 562924808}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &562924810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562924809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36d4e8631aa94d3ea3f6f299282af8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TalismanUnlock
+  talisman: {fileID: 11400000, guid: 11a02f3062d38437e95a1d830c77c021, type: 2}
 --- !u!1001 &588144881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62167,6 +62183,8 @@ MonoBehaviour:
   rightLimit: {fileID: 704733377}
   shockwaveTemplate: {fileID: 9830323}
   rockTemplate: {fileID: 216146240}
+  projectileTemplate: {fileID: 0}
+  spikeTemplate: {fileID: 0}
   lifePips:
   - {fileID: 1476774487}
   - {fileID: 363720743}
@@ -62182,6 +62200,8 @@ MonoBehaviour:
     pauseBetweenMoves: 0.8
     slamShockwaves: 0
     rocks: 0
+    volley: 3
+    spikes: 3
     pattern: 0000000003000000
   - name: Stage 2 - Enraged
     tint: {r: 1, g: 0.72, b: 0.45, a: 1}
@@ -62191,6 +62211,8 @@ MonoBehaviour:
     pauseBetweenMoves: 0.5
     slamShockwaves: 1
     rocks: 0
+    volley: 3
+    spikes: 3
     pattern: 00000000010000000100000003000000
   - name: Stage 3 - Desperate
     tint: {r: 1, g: 0.45, b: 0.45, a: 1}
@@ -62200,6 +62222,8 @@ MonoBehaviour:
     pauseBetweenMoves: 0.35
     slamShockwaves: 1
     rocks: 6
+    volley: 3
+    spikes: 3
     pattern: 000000000200000001000000000000000100000003000000
   startDelay: 1.5
   hurtboxWidth: 1.2
@@ -62213,6 +62237,16 @@ MonoBehaviour:
   rockFallSpeed: 10
   rockSpawnHeight: 6.5
   stompBounce: 9
+  projectileSpeed: 6
+  projectileLowHeight: 0.45
+  projectileHighHeight: 1.6
+  burrowTime: 1.6
+  burrowHeight: 0.3
+  spikeWarnTime: 0.7
+  spikeBuriedDepth: 1.45
+  spikeRiseSpeed: 5
+  spikeLife: 0.32
+  teleportFadeTime: 0.35
   hurtGrace: 1
   knockbackTime: 0.35
   openingColor: {r: 0.55, g: 1, b: 1, a: 1}
@@ -93544,7 +93578,7 @@ PrefabInstance:
     - target: {fileID: 6491143627340585089, guid: 8b7171f7d769740ffb0091cc1881adc5, type: 3}
       propertyPath: backgroundMusic
       value: 
-      objectReference: {fileID: 8300000, guid: 0c7a73f8e35444b3a9783ff2eb9e95b1, type: 3}
+      objectReference: {fileID: 8300000, guid: 2c56ff7ad25224a398d0fd286140b694, type: 3}
     - target: {fileID: 6491143627340585090, guid: 8b7171f7d769740ffb0091cc1881adc5, type: 3}
       propertyPath: m_RootOrder
       value: 14

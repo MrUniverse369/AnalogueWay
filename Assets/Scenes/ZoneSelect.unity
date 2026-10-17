@@ -146,7 +146,7 @@ Transform:
   m_GameObject: {fileID: 46805309}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.25, y: -2.5, z: 0}
+  m_LocalPosition: {x: 5.25, y: -1.9375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
   sceneName: Z3A3Japan
-  zoneName: Snow Temple Pass
+  zoneName: Sunlit Shrine Road
   levelName: Act 3
   kind: 0
   zoneColour: {r: 0.92156863, g: 0.3372549, b: 0.29411766, a: 1}
@@ -560,7 +560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
   sceneName: Z3A1Japan
-  zoneName: Snow Temple Pass
+  zoneName: Sunlit Shrine Road
   levelName: Act 1
   kind: 0
   zoneColour: {r: 0.92156863, g: 0.3372549, b: 0.29411766, a: 1}
@@ -1604,6 +1604,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664990306}
   m_CullTransparentMesh: 1
+--- !u!1 &680642707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 680642708}
+  m_Layer: 0
+  m_Name: Gates
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &680642708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680642707}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1879825726}
+  m_Father: {fileID: 1314569743}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &704747358
 GameObject:
   m_ObjectHideFlags: 0
@@ -2478,6 +2510,10 @@ MonoBehaviour:
   - {fileID: 1882316698}
   cloudSpeed: 0.25
   cloudWrapX: 12
+  gates:
+  - {fileID: 1879825726}
+  gateHalfWidth: 0.5
+  gateSound: {fileID: 8300000, guid: 53d4fb3dcbd164f7b91cc8a87a36d67f, type: 3}
   moveSound: {fileID: 8300000, guid: fcfb712341919964fbdc6f7c1208928b, type: 3}
   blockedSound: {fileID: 8300000, guid: a5068912e74b9d14bae7da9573bbc124, type: 3}
   selectSound: {fileID: 8300000, guid: b952c0d8df8e8af439fcbaaea9ad36c2, type: 3}
@@ -2499,6 +2535,7 @@ Transform:
   - {fileID: 947991584}
   - {fileID: 1404982968}
   - {fileID: 2131163703}
+  - {fileID: 680642708}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1334004173
@@ -3069,7 +3106,7 @@ Transform:
   m_GameObject: {fileID: 1461039178}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.375, y: 2, z: 0}
+  m_LocalPosition: {x: 6.375, y: 3.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3152,7 +3189,14 @@ MonoBehaviour:
   kind: 2
   zoneColour: {r: 0.92156863, g: 0.3372549, b: 0.29411766, a: 1}
   openIcon: {fileID: 0}
-  bendsToNext: []
+  bendsToNext:
+  - {x: 1.1875, y: 3.125}
+  - {x: 1.0538, y: 3.1128}
+  - {x: 0.9444, y: 3.0764}
+  - {x: 0.8594, y: 3.0156}
+  - {x: 0.7986, y: 2.9306}
+  - {x: 0.7622, y: 2.8212}
+  - {x: 0.75, y: 2.6875}
   icon: {fileID: 0}
 --- !u!1 &1505627966
 GameObject:
@@ -3747,7 +3791,7 @@ Transform:
   m_GameObject: {fileID: 1742612961}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.125, y: -2.5, z: 0}
+  m_LocalPosition: {x: 7.125, y: -1.9375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3825,19 +3869,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
   sceneName: Z3A4Japan
-  zoneName: Snow Temple Pass
+  zoneName: Sunlit Shrine Road
   levelName: Act 4
   kind: 0
   zoneColour: {r: 0.92156863, g: 0.3372549, b: 0.29411766, a: 1}
   openIcon: {fileID: 21300000, guid: 19685438892a04d1e8d190bb36f000a9, type: 3}
   bendsToNext:
-  - {x: 7.5625, y: -2.5}
-  - {x: 7.6962, y: -2.4878}
-  - {x: 7.8056, y: -2.4514}
-  - {x: 7.8906, y: -2.3906}
-  - {x: 7.9514, y: -2.3056}
-  - {x: 7.9878, y: -2.1962}
-  - {x: 8, y: -2.0625}
+  - {x: 8.0625, y: -1.9375}
+  - {x: 8.1962, y: -1.9253}
+  - {x: 8.3056, y: -1.8889}
+  - {x: 8.3906, y: -1.8281}
+  - {x: 8.4514, y: -1.7431}
+  - {x: 8.4878, y: -1.6337}
+  - {x: 8.5, y: -1.5}
   icon: {fileID: 0}
 --- !u!1 &1806681823
 GameObject:
@@ -3957,7 +4001,7 @@ Transform:
   m_GameObject: {fileID: 1850954340}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: -0.625, z: 0}
+  m_LocalPosition: {x: 8.5, y: 1.875, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4041,21 +4085,105 @@ MonoBehaviour:
   zoneColour: {r: 0.92156863, g: 0.3372549, b: 0.29411766, a: 1}
   openIcon: {fileID: 0}
   bendsToNext:
-  - {x: 8, y: 0.3125}
-  - {x: 7.9878, y: 0.4462}
-  - {x: 7.9514, y: 0.5556}
-  - {x: 7.8906, y: 0.6406}
-  - {x: 7.8056, y: 0.7014}
-  - {x: 7.6962, y: 0.7378}
-  - {x: 7.5625, y: 0.75}
-  - {x: 6.8125, y: 0.75}
-  - {x: 6.6788, y: 0.7622}
-  - {x: 6.5694, y: 0.7986}
-  - {x: 6.4844, y: 0.8594}
-  - {x: 6.4236, y: 0.9444}
-  - {x: 6.3872, y: 1.0538}
-  - {x: 6.375, y: 1.1875}
+  - {x: 8.5, y: 2.6875}
+  - {x: 8.4878, y: 2.8212}
+  - {x: 8.4514, y: 2.9306}
+  - {x: 8.3906, y: 3.0156}
+  - {x: 8.3056, y: 3.0764}
+  - {x: 8.1962, y: 3.1128}
+  - {x: 8.0625, y: 3.125}
   icon: {fileID: 0}
+--- !u!1 &1879825725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1879825726}
+  - component: {fileID: 1879825727}
+  m_Layer: 0
+  m_Name: ToriiGate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1879825726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879825725}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.5, y: 0.375, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 680642708}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1879825727
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879825725}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 6
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 21300000, guid: 55621bff7158c40eba822cb28a69b097, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.375, y: 1.125}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
 --- !u!1 &1882316697
 GameObject:
   m_ObjectHideFlags: 0
@@ -4547,7 +4675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
   sceneName: Z3A2Japan
-  zoneName: Snow Temple Pass
+  zoneName: Sunlit Shrine Road
   levelName: Act 2
   kind: 0
   zoneColour: {r: 0.92156863, g: 0.3372549, b: 0.29411766, a: 1}

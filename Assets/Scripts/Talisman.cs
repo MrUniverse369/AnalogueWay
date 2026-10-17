@@ -35,6 +35,11 @@ public class Talisman : ScriptableObject
 {
     [Header("Identity")]
     [SerializeField] private string displayName;
+    [Tooltip("MENUS: shown in the Talisman Holder.")]
+    [SerializeField] private Sprite icon;
+    [SerializeField, TextArea(2, 4)] private string description;
+    [Tooltip("MENUS: how a locked talisman is found, shown in the Talisman Holder.")]
+    [SerializeField] private string unlockHint;
 
     [Header("Timing (seconds)")]
     [SerializeField, Min(0.01f)] private float duration = 1f;
@@ -54,7 +59,10 @@ public class Talisman : ScriptableObject
     [Tooltip("Optional. Falls back to AudioManager.powerUpSound.")]
     [SerializeField] private AudioClip activationSound;
 
-    public string DisplayName => displayName;
+    public string DisplayName => string.IsNullOrEmpty(displayName) ? name : displayName;
+    public Sprite Icon => icon;
+    public string Description => description;
+    public string UnlockHint => unlockHint;
     public float Duration => duration;
     public float Cooldown => cooldown;
     public bool RetriggerWhileHeld => retriggerWhileHeld;
@@ -72,4 +80,7 @@ public class Talisman : ScriptableObject
     public virtual void OnActivated(PowerUpContext ctx) { }
 
     public virtual void OnDeactivated(PowerUpContext ctx) { }
+
+    /// <summary>Called every frame while active, for effects that need continuous work (pulling coins, slowing a fall).</summary>
+    public virtual void OnTick(PowerUpContext ctx, float dt) { }
 }

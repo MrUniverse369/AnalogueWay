@@ -53,6 +53,13 @@ public class ZoneSelectMap : MonoBehaviour
     [Tooltip("Clouds wrap around between -x and +x.")]
     [SerializeField] private float cloudWrapX = 12f;
 
+    [Header("Gates")]
+    [Tooltip("Gates Harvey walks through on the path (the torii between the sunny foothills and the snow). Their sprites sort above Harvey; crossing one plays gateSound.")]
+    [SerializeField] private Transform[] gates;
+    [Tooltip("World units either side of a gate's centre that count as walking through it.")]
+    [SerializeField] private float gateHalfWidth = 0.5f;
+    [SerializeField] private AudioClip gateSound;
+
     [Header("Sounds")]
     [SerializeField] private AudioClip moveSound;
     [SerializeField] private AudioClip blockedSound;
@@ -198,7 +205,9 @@ public class ZoneSelectMap : MonoBehaviour
             if (Mathf.Abs(goal.x - player.position.x) > 0.01f) playerSprite.flipX = goal.x < player.position.x;
             while (player.position != goal)
             {
+                Vector3 before = player.position;
                 player.position = Vector3.MoveTowards(player.position, goal, walkSpeed * Time.deltaTime);
+                CheckGates(before, player.position);
                 yield return null;
             }
         }
@@ -206,6 +215,18 @@ public class ZoneSelectMap : MonoBehaviour
         lastNode = current;
         ShowNode(current);
         busy = false;
+    }
+
+    // a chime as Harvey passes under a gate (either direction)
+    private void CheckGates(Vector3 before, Vector3 after)
+    {
+        if (gates == null) return;
+        foreach (Transform gate in gates)
+        {
+            if (gate == null || Mathf.Abs(after.x - gate.position.x) > gateHalfWidth) continue;
+            if ((before.y < gate.position.y) != (after.y < gate.position.y))
+                PlaySound(gateSound);
+        }
     }
 
     private IEnumerator Shake()

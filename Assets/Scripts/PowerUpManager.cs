@@ -85,6 +85,9 @@ public class PowerUpManager : MonoBehaviour
         BindInput(0, controls.Gameplay.powerUpOne);
         BindInput(1, controls.Gameplay.powerUpTwo);
         BindInput(2, controls.Gameplay.powerUpThree);
+
+        ApplyLoadout(); // MENUS: the talismans the player equipped in the Talisman Holder
+        Inventory.LoadoutChanged += ApplyLoadout;
     }
 
     private void OnEnable() => controls?.Gameplay.Enable();
@@ -94,7 +97,20 @@ public class PowerUpManager : MonoBehaviour
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+        Inventory.LoadoutChanged -= ApplyLoadout; // MENUS:
         controls?.Dispose();
+    }
+
+    // MENUS: slot i holds the talisman equipped in holder slot i. Without a catalog (Resources/HNLCatalog) the
+    // inspector slots are kept as they are.
+    private void ApplyLoadout()
+    {
+        if (!Inventory.HasCatalog) return;
+        for (int i = 0; i < slots.Length && i < Inventory.SlotCount; i++)
+        {
+            Talisman wanted = Inventory.Equipped(i);
+            if (slots[i].talisman != wanted) Equip(i, wanted);
+        }
     }
 
     private void Update()
@@ -137,7 +153,7 @@ public class PowerUpManager : MonoBehaviour
     {
         if ((uint)slotIndex >= (uint)slots.Length) return;
 
-        if (slots[slotIndex].isActive) End(slotIndex);
+        if (slots[slotIndex].isActive && slots[slotIndex].talisman != null) End(slotIndex);
         slots[slotIndex].talisman = talisman;
         slots[slotIndex].cooldownLeft = 0f;
     }
@@ -157,6 +173,7 @@ public class PowerUpManager : MonoBehaviour
         {
             slot.timeLeft -= dt;
             if (slot.timeLeft <= 0f) End(index);
+            else slot.talisman.OnTick(context, dt); // MENUS: Feather Fall, Coin Magnet
         }
         else if (slot.cooldownLeft > 0f)
         {

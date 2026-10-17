@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6ca407316224c07b2418d537ad21f5, type: 3}
+  m_Name: HNLCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::HNLCatalog
+  talismans:
+  - {fileID: 11400000, guid: 3e168233ebdfd42ff97ad737cfd876c9, type: 2}
+  - {fileID: 11400000, guid: ecb01effa4b78459f8dc9dc4f994df7f, type: 2}
+  - {fileID: 11400000, guid: 80bf95a927ad249a796417eb479baf4d, type: 2}
+  - {fileID: 11400000, guid: 1aac3c739622546a0b673ed8899e23df, type: 2}
+  - {fileID: 11400000, guid: 58e55503245224eebbcf5624eded72a8, type: 2}
+  - {fileID: 11400000, guid: 11a02f3062d38437e95a1d830c77c021, type: 2}
+  startingLoadout:
+  - {fileID: 11400000, guid: 3e168233ebdfd42ff97ad737cfd876c9, type: 2}
+  - {fileID: 11400000, guid: ecb01effa4b78459f8dc9dc4f994df7f, type: 2}
+  - {fileID: 11400000, guid: 80bf95a927ad249a796417eb479baf4d, type: 2}
+  items:
+  - {fileID: 11400000, guid: 8eac2b21eed87453d89f2003c0a8c5d4, type: 2}
+  - {fileID: 11400000, guid: 3479614a34a9c4e7888685f3baa92b92, type: 2}
+  - {fileID: 11400000, guid: eb17b9447598c4aa9ab2261bd49c06c5, type: 2}
+  - {fileID: 11400000, guid: f450cd41240234dc488a8f8c78454ae2, type: 2}
+  - {fileID: 11400000, guid: 068a935ca073d44b79c9495a655e5069, type: 2}
+  - {fileID: 11400000, guid: 5b86b5cfccac64c67bd1586a24d7c935, type: 2}
+  - {fileID: 11400000, guid: 56e7567300e3f417186a1f10ea0f8246, type: 2}
+  - {fileID: 11400000, guid: 50602a63b03e944b9b6287d126c855de, type: 2}
+  - {fileID: 11400000, guid: 1bab47d24b7b34f0496658c639d0b8b6, type: 2}
+  - {fileID: 11400000, guid: a199a8c415bda427fb7d47aff622ccaf, type: 2}
+  - {fileID: 11400000, guid: fdfbcc196d3d04d7bab5bdb23a2d4a6a, type: 2}
+  - {fileID: 11400000, guid: bff5304bbc6d44e8eaa6609810bff27c, type: 2}
+  - {fileID: 11400000, guid: 2c25a84072a1845afb542ea35fecbc42, type: 2}
+  - {fileID: 11400000, guid: 95c5affd1f3b54f499da29c1172d024f, type: 2}
+  - {fileID: 11400000, guid: 729ca2d6e679047259d01e7fced85efd, type: 2}
+  - {fileID: 11400000, guid: 2fa23d82a8c5a42588be0912c4b0bf3d, type: 2}
+  - {fileID: 11400000, guid: ba31e874251b84ef3a329742e24d9102, type: 2}
+  villageStock:
+  - {fileID: 11400000, guid: 95c5affd1f3b54f499da29c1172d024f, type: 2}
+  - {fileID: 11400000, guid: 729ca2d6e679047259d01e7fced85efd, type: 2}
+  - {fileID: 11400000, guid: 2fa23d82a8c5a42588be0912c4b0bf3d, type: 2}
+  - {fileID: 11400000, guid: ba31e874251b84ef3a329742e24d9102, type: 2}
+  font: {fileID: 11400000, guid: dc93bed77bab34b9c872bb5387a64cb3, type: 2}
+  holderPanel: {fileID: 21300000, guid: 794dff70c121844f0a12dd22cac348b2, type: 3}
+  bagPanel: {fileID: 21300000, guid: 6df5de703e0a240b3ba528dccb26a3c7, type: 3}
+  shopPanel: {fileID: 21300000, guid: 809c174e743e44a269d85dbc6a5327c3, type: 3}
+  frame: {fileID: 21300000, guid: ec81391ec97c443c79acc4e32a86232a, type: 3}
+  card: {fileID: 21300000, guid: 1dfd16659b3a244e6905ae574f6f5458, type: 3}
+  cardSelected: {fileID: 21300000, guid: 0e72fccc03e3c404697dc50f0cf4c727, type: 3}
+  socket: {fileID: 21300000, guid: 937643518bbc04553b1bf9af12acee2f, type: 3}
+  socketSelected: {fileID: 21300000, guid: c7c2b95aa2a644622a27acf74f5b5ca4, type: 3}
+  pocket: {fileID: 21300000, guid: 65a16d7eeaf2a4a2db22adce62925734, type: 3}
+  pocketSelected: {fileID: 21300000, guid: 90cc0199179114809862aa69cc8545c9, type: 3}
+  tab: {fileID: 21300000, guid: 25255ed5b197740f89250e5efe8ade60, type: 3}
+  tabSelected: {fileID: 21300000, guid: 09d2e12b544fd468ca1dda240c34d5e3, type: 3}
+  lockedTalisman: {fileID: 21300000, guid: 622bd0646e08d4e178e8b8bb9429f0a9, type: 3}
+  coin: {fileID: 21300000, guid: 29a2132b6c4804a5fb56849f71354481, type: 3}
+  moveSound: {fileID: 8300000, guid: fcfb712341919964fbdc6f7c1208928b, type: 3}
+  selectSound: {fileID: 8300000, guid: b952c0d8df8e8af439fcbaaea9ad36c2, type: 3}
+  backSound: {fileID: 8300000, guid: 613252b121e238d43b44291611d0e556, type: 3}
+  blockedSound: {fileID: 8300000, guid: a5068912e74b9d14bae7da9573bbc124, type: 3}
+  equipSound: {fileID: 8300000, guid: 9073d7525be52b846a51eec481c2c819, type: 3}
+  buySound: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
+  pickupSound: {fileID: 8300000, guid: 897ab8182ab764842b23fb6ec9b517a9, type: 3}

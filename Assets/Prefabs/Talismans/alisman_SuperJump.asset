@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ce4b291ae82433cb7c6e57ed7aa275, type: 3}
   m_Name: alisman_SuperJump
   m_EditorClassIdentifier: 
-  displayName: 
+  displayName: Super Jump
+  icon: {fileID: 21300000, guid: beb7affd6c6f145d8b4a43a12fdfbc81, type: 3}
+  description: Hold for a much higher jump, to reach ledges far overhead.
+  unlockHint: 
   duration: 1
   cooldown: 0
   retriggerWhileHeld: 1
   traits: 0
-  blockedBuildIndices: 
+  blockedScenes: []
   animatorBool: 
   activationSound: {fileID: 0}
   jumpMultiplier: 1.62

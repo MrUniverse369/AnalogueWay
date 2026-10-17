@@ -28,7 +28,7 @@ PPU = 16
 NODES = {
     "Z1A1": (22, 158), "Z1A2": (22, 132), "Z1A3": (22, 106), "Z1A4": (52, 106), "Z1A5": (52, 132), "Z1Boss": (68, 158),
     "Z2A1": (100, 158), "Z2A2": (100, 132), "Z2A3": (100, 106), "Z2A4": (130, 106), "Z2A5": (130, 132), "Z2Boss": (160, 158),
-    "Z3A1": (214, 158), "Z3A2": (244, 158), "Z3A3": (244, 130), "Z3A4": (274, 130), "Village": (288, 100), "Boss": (262, 58),
+    "Z3A1": (214, 158), "Z3A2": (244, 158), "Z3A3": (244, 121), "Z3A4": (274, 121), "Village": (296, 60), "Boss": (262, 40),
     "Z4A1": (172, 58), "Z4A2": (144, 58), "Z4A3": (116, 58), "Z4A4": (116, 30), "Z4A5": (88, 30), "Z4Boss": (60, 30),
     "Win": (28, 52),
 }
@@ -41,12 +41,17 @@ BOSSES = {"Z1Boss", "Z2Boss", "Boss", "Z4Boss"}
 CORNERS = [
     [], [], [], [], [(52, 158)], [],          # Tomb, ending at its boss
     [], [], [], [], [(130, 158)], [],         # Sandy (the boss -> Japan run is straight along y 158)
-    [], [], [], [(288, 130)], [(288, 78), (262, 78)], [],   # Japan, up the mountain to the shrine
+    [], [], [], [(296, 121)], [(296, 40)], [(172, 40)],   # Japan: sunny foothills, the torii, the snowy peak
     [], [], [], [], [], [(28, 30)],           # Meadow, then home
 ]
 BEND_RADIUS = 7
-RIVER = [(194, -6), (194, 44), (198, 64), (206, 80), (226, 90), (240, 96)]
-LAKE = (246, 98, 12, 7)  # centre x, y, radius x, y
+RIVER = [(194, -6), (194, 44), (198, 64), (204, 84), (210, 104), (218, 120)]  # snow melt running down to the koi pond
+LAKE = (224, 126, 10, 6)  # centre x, y, radius x, y
+# The sunny Japan foothills (Z3A1, Z3A2) sit beside the dunes; the snow starts at SUN_EDGE_Y. The torii stands on
+# the Z3A2 -> Z3A3 path right on that border (a separate sprite above Harvey, so he walks through it).
+SUN_EDGE_Y, GATE_X = 90, 296  # Japan is split about 50/50: sunny lower half, snowy upper half
+GATE_W, GATE_H = 22, 18
+GATE_TOP = SUN_EDGE_Y - 15  # pixel row of the gate sprite's top edge (its feet stand on SUN_EDGE_Y)
 
 
 # ---------------------------------------------------------------- png helpers
@@ -204,10 +209,13 @@ TOMB = dict(base=hexc("32395c"), dark=hexc("213447"), light=hexc("5a697d"), lip=
 # sand (Egypt tile)
 SAND = dict(base=hexc("e1d089"), dark=hexc("ce812c"), light=hexc("e3ba66"), lip=hexc("ffffeb"), edge=hexc("e3ba66"),
             cliff=(hexc("ce812c"), hexc("663931")))
+# sunny Japan foothills (the warm half of the Japan levels: soft green hills, dark tree clumps, red shrines)
+SUN = dict(base=hexc("52ab61"), dark=hexc("3c796e"), light=hexc("88ce6e"), lip=hexc("ffffeb"), edge=hexc("529271"),
+           cliff=(hexc("663931"), hexc("45283c")))
 # snow (Japan winter tile)
 SNOW = dict(base=hexc("f0f2fe"), dark=hexc("b9d2ca"), light=hexc("ffffff"), lip=hexc("ffffff"), edge=hexc("b9d2ca"),
             cliff=(hexc("6583a7"), hexc("405874")))
-ZONES = {"grass": GRASS, "tomb": TOMB, "sand": SAND, "snow": SNOW}
+ZONES = {"grass": GRASS, "tomb": TOMB, "sand": SAND, "snow": SNOW, "sun": SUN}
 # path in the HUD colours
 PATH_FILL, PATH_EDGE, PATH_SHADE = hexc("ffffeb"), hexc("f2a65e"), hexc("ce812c")
 HUD_DARK, HUD_CREAM, HUD_YELLOW, HUD_ORANGE, HUD_PURPLE = (hexc("333941"), hexc("ffffeb"), hexc("ffe478"),
@@ -230,10 +238,16 @@ def zone_at(x, y):
     if ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 < 1 or poly_dist(x, y, RIVER) < 3.4 + 0.6 * math.sin(y / 9.0):
         return "river"
     if x > 199 + 8 * math.sin(y / 17.0 + 0.6) + 5 * (vnoise(x, y, 16, 3) - 0.5) or (y < 70 and x > 195):
-        return "snow"  # north of the lake the river is the border
+        return "sun" if y > sun_edge(x) else "snow"  # north of the lake the river is the border
     if y < 86 + 7 * math.sin(x / 23.0 + 1.0) + 5 * (vnoise(x, y, 16, 4) - 0.5):
         return "grass"
     return "tomb" if x < 92 + 8 * math.sin(y / 19.0 + 2.0) + 4 * (vnoise(x, y, 16, 6) - 0.5) else "sand"
+
+
+def sun_edge(x):
+    """The sunny/snow border: gently wavy, but exactly SUN_EDGE_Y under the torii so the gate marks the crossing."""
+    calm = min(1.0, abs(x - GATE_X) / 14.0)
+    return SUN_EDGE_Y + calm * (3 * math.sin((x - GATE_X) / 9.0) + 4 * (vnoise(x, 0, 12, 31) - 0.5))
 
 
 # ---------------------------------------------------------------- the map
@@ -284,6 +298,13 @@ def build_map():
                         col = p["light"]
                     elif band == 2 and wave > 0.2:
                         col = p["dark"]
+                elif z == "sun":
+                    # rolling hills: soft light patches and a darker crest line on each hill
+                    crest = (y + int(4 * math.sin(x / 11.0) + 3 * math.sin(x / 5.0 + 1.3))) % 11
+                    if crest == 0:
+                        col = p["edge"]
+                    elif crest in (1, 2) and n > 0.45:
+                        col = p["light"]
                 elif z == "snow":
                     # soft drifts: a shaded underside on each white bank
                     if n > 0.7:
@@ -390,17 +411,33 @@ def build_map():
         c.rect(x0 - 1, y0 + 17, x0 + 19, y0 + 17, hexc("5a697d"))
         reserve(x0 - 3, y0 - 1, x0 + 21, y0 + 19)
 
-    def torii(cx, top):
-        red, dred, dark = hexc("eb564b"), hexc("b0305c"), hexc("422445")
-        c.rect(cx - 8, top, cx + 8, top + 1, dark)
-        c.put(cx - 9, top - 1, dark)
-        c.put(cx + 9, top - 1, dark)
-        c.rect(cx - 7, top + 2, cx + 7, top + 2, dred)
-        c.rect(cx - 6, top + 4, cx + 6, top + 4, red)
-        for px in (cx - 5, cx + 5):
-            c.rect(px - 1, top + 2, px - 1, top + 14, red)
-            c.rect(px, top + 2, px, top + 14, dred)
-        reserve(cx - 10, top - 2, cx + 10, top + 15)
+    def pagoda(cx, base, tiers):
+        """A red pagoda like the sunny Japan backdrop: navy roofs with cream trim, red walls, a gold spire."""
+        roof, roof_d, trim = hexc("314358"), hexc("213447"), hexc("ffffeb")
+        wall, wall_d, window, bar = hexc("eb564b"), hexc("b0305c"), hexc("ffffeb"), hexc("333941")
+        y = base
+        c.rect(cx - 6, y - 1, cx + 6, y, hexc("5a697d"))  # stone footing
+        y -= 2
+        for t in range(tiers):
+            half = 5 - t
+            c.rect(cx - half + 1, y - 3, cx + half - 1, y, wall)
+            c.rect(cx + half - 2, y - 3, cx + half - 1, y, wall_d)
+            for wx in range(cx - half + 2, cx + half - 1, 2):  # a row of lit windows
+                c.put(wx, y - 2, window)
+                c.put(wx, y - 1, bar)
+            y -= 4
+            c.rect(cx - half - 1, y, cx + half + 1, y, trim)  # roof: a cream eave over two navy rows
+            c.rect(cx - half, y - 1, cx + half, y - 1, roof)
+            c.rect(cx + 1, y - 1, cx + half, y - 1, roof_d)
+            c.put(cx - half - 2, y - 1, roof)  # upturned eaves
+            c.put(cx + half + 2, y - 1, roof_d)
+            y -= 2
+        c.rect(cx, y - 3, cx, y, hexc("ffe478"))  # spire
+        c.put(cx, y - 4, hexc("f2a65e"))
+        for k in range(1, 4, 2):
+            c.put(cx - 1, y - k, hexc("f2a65e"))
+            c.put(cx + 1, y - k, hexc("f2a65e"))
+        reserve(cx - 8, y - 5, cx + 8, base + 1)
 
     def oasis(cx, cy):
         for y in range(cy - 4, cy + 5):
@@ -415,8 +452,11 @@ def build_map():
     oasis(163, 108)
     mausoleum(64, 100)
     mountain(262, 76, 30, 38)
-    mountain(300, 62, 15, 24)
-    mountain(226, 50, 13, 22)
+    mountain(230, 72, 13, 22)
+    pagoda(279, 166, 3)
+    pagoda(303, 161, 2)
+    pagoda(259, 109, 2)
+    reserve(GATE_X - GATE_W // 2 - 2, GATE_TOP - 2, GATE_X + GATE_W // 2 + 2, SUN_EDGE_Y + 3)  # under the torii sprite
 
     # ---- the path (curved corners, cream with an orange edge and a soft shadow underneath)
     routes = []
@@ -446,9 +486,8 @@ def build_map():
         reserve(nx - 10, ny - 12, nx + 10, ny + 8)
     path_near = [row[:] for row in reserved]
 
-    torii(205, 128)  # the gate into the snow zone, beside the road
-    for hx, hy in ((296, 86), (296, 110), (266, 110), (270, 86), (300, 120)):
-        if free(hx, hy, hx + 10, hy + 7):
+    for hx, hy in ((304, 44), (304, 66), (274, 80), (248, 80), (214, 82), (280, 20)):  # the snowy village
+        if free(hx, hy, hx + 10, hy + 7) and all(zone[yy][xx] == "snow" for yy in (hy, hy + 7) for xx in (hx, hx + 10)):
             c.stamp(HOUSE, HOUSE_PAL, hx, hy)
             reserve(hx - 1, hy - 1, hx + 11, hy + 8)
 
@@ -491,6 +530,13 @@ def build_map():
                 art = (PALM, PALM_PAL)
             elif roll < 0.4:
                 art = (ROCK, SANDROCK_PAL)
+        elif z == "sun":
+            if roll < 0.45:
+                art = (HILLTREE, HILLTREE_PAL)
+            elif roll < 0.7:
+                art = (CHERRY, CHERRY_PAL)
+            elif roll < 0.8:
+                art = (LANTERN, LANTERN_PAL)
         elif z == "snow":
             if roll < 0.6:
                 art = (PINE, PINE_PAL)
@@ -606,6 +652,31 @@ PALM = [
     "..ttt..",
 ]
 PALM_PAL = {"L": hexc("88ce6e"), "G": hexc("52ab61"), "t": hexc("ce812c")}
+HILLTREE = [  # the dark round tree clumps dotting the sunny hills
+    ".dd.",
+    "dddd",
+    "Dddd",
+    ".DD.",
+]
+HILLTREE_PAL = {"d": hexc("314358"), "D": hexc("213447")}
+CHERRY = [
+    "..pPp..",
+    ".pPPPp.",
+    "pPPpPPp",
+    "ppPPPpp",
+    ".ppppp.",
+    "...t...",
+    "..ttt..",
+]
+CHERRY_PAL = {"P": hexc("ffd2dc"), "p": hexc("ff6b97"), "t": hexc("45283c")}
+LANTERN = [  # a stone toro lantern
+    ".rrr.",
+    "..l..",
+    ".sss.",
+    "..s..",
+    ".sss.",
+]
+LANTERN_PAL = {"r": hexc("5a697d"), "l": hexc("ffe478"), "s": hexc("98b2b1")}
 HOUSE = [
     "...WWWWW...",
     "..WWWWWWW..",
@@ -754,6 +825,36 @@ def icon_goal():
     return c
 
 
+def torii_gate():
+    """The red torii Harvey walks through between the sunny foothills and the snow. Separate sprite, drawn above
+    Harvey: the posts stand either side of the path and the beams pass over him. Snow dusts the top beam."""
+    c = Canvas(GATE_W, GATE_H)
+    red, red_d, beam, beam_l = hexc("eb564b"), hexc("b0305c"), hexc("422445"), hexc("73275c")
+    last = GATE_W - 1
+    c.rect(1, 1, last - 1, 2, beam)  # kasagi (top beam), its ends curling up
+    c.rect(2, 1, last - 2, 1, beam_l)
+    c.put(0, 0, beam)
+    c.put(last, 0, beam)
+    c.put(1, 0, beam_l)
+    c.put(last - 1, 0, beam_l)
+    for x in range(3, last - 2):  # a dusting of snow on top (the snowy side starts here)
+        if hsh(x, 0, 41) < 0.55:
+            c.put(x, 0, hexc("ffffff") if x % 3 else hexc("e7fbfe"))
+    c.rect(2, 3, last - 2, 3, red)  # shimaki under it
+    c.rect(3, 4, last - 3, 4, red_d)
+    c.rect(10, 5, 11, 6, red)  # the plaque between the beams
+    c.put(11, 6, red_d)
+    c.rect(2, 7, last - 2, 7, red)  # nuki (tie beam)
+    c.rect(3, 8, last - 3, 8, red_d)
+    for px in (4, last - 5):  # pillars
+        c.rect(px, 3, px, 15, red)
+        c.rect(px + 1, 3, px + 1, 15, red_d)
+        c.rect(px - 1, 14, px + 2, 15, beam)  # black footings
+        for x in range(px - 2, px + 4):  # a soft shadow on the ground
+            c.put(x, 16, (0x21, 0x34, 0x47, 90))
+    return c
+
+
 def marker():
     """Selection ring around the pad: HUD yellow with a cream top edge."""
     c = Canvas(22, 12)
@@ -812,6 +913,7 @@ def main():
     icon_village().save("Node_Village.png")
     icon_goal().save("Node_Goal.png")
     marker().save("Marker.png")
+    torii_gate().save("ToriiGate.png")
     label_frame().save("LabelFrame.png")
     cloud(30, 11, 1).save("Cloud_A.png")
     cloud(22, 9, 4).save("Cloud_B.png")
@@ -819,10 +921,12 @@ def main():
     # Plain lines so the Unity build step can read it with string splitting:
     #   node <id> <x> <y>             world units, in path order
     #   route <i> <x,y> <x,y> ...     the walkable bends from node i to node i + 1
+    #   gate <x> <y>                  centre of the torii sprite Harvey walks through
     to_world = lambda p: f"{(p[0] - W / 2) / PPU:.4f},{(H / 2 - p[1]) / PPU:.4f}"
     lines = [f"# written by Tools/Art/zone_map.py ({W}x{H} map, {PPU} px per unit)"]
     lines += [f"node {n} {to_world(NODES[n]).replace(',', ' ')}" for n in ORDER]
     lines += [f"route {i} " + " ".join(to_world(p) for p in r[1:-1]) for i, r in enumerate(routes)]
+    lines += ["gate " + to_world((GATE_X, GATE_TOP + GATE_H / 2)).replace(",", " ")]
     with open(LAYOUT, "w") as f:
         f.write("\n".join(lines) + "\n")
     print("wrote", OUT_DIR, "and", LAYOUT)

@@ -37,10 +37,10 @@ public static class ZoneSelectSceneBuilder
             { "Z2A4", ("Z2A4Sandy", "Sandy Dunes", "Act 4", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2A5", ("Z2A5Sandy", "Sandy Dunes", "Act 5", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2Boss", ("Z2BossSandy", "Sandy Dunes", "Boss: The Sandscale Scarab", ZoneNodeKind.Boss, Sand, null) },
-            { "Z3A1", ("Z3A1Japan", "Snow Temple Pass", "Act 1", ZoneNodeKind.Level, Snow, "Red") },
-            { "Z3A2", ("Z3A2Japan", "Snow Temple Pass", "Act 2", ZoneNodeKind.Level, Snow, "Red") },
-            { "Z3A3", ("Z3A3Japan", "Snow Temple Pass", "Act 3", ZoneNodeKind.Level, Snow, "Red") },
-            { "Z3A4", ("Z3A4Japan", "Snow Temple Pass", "Act 4", ZoneNodeKind.Level, Snow, "Red") },
+            { "Z3A1", ("Z3A1Japan", "Sunlit Shrine Road", "Act 1", ZoneNodeKind.Level, Snow, "Red") },
+            { "Z3A2", ("Z3A2Japan", "Sunlit Shrine Road", "Act 2", ZoneNodeKind.Level, Snow, "Red") },
+            { "Z3A3", ("Z3A3Japan", "Sunlit Shrine Road", "Act 3", ZoneNodeKind.Level, Snow, "Red") },
+            { "Z3A4", ("Z3A4Japan", "Sunlit Shrine Road", "Act 4", ZoneNodeKind.Level, Snow, "Red") },
             { "Village", ("Z3JapanVillage", "Snow Temple Pass", "Act 5: Mountain Village", ZoneNodeKind.Village, Snow, null) },
             { "Boss", ("Z3BossBattle", "Snow Temple Pass", "Boss: The Yokai Warrior", ZoneNodeKind.Boss, Snow, null) },
             { "Z4A1", ("Z4A6GrassGreen", "Grassy Meadow", "Act 1", ZoneNodeKind.Level, Grass, "Green") },
@@ -65,7 +65,7 @@ public static class ZoneSelectSceneBuilder
     public static string Build()
     {
         ImportArt();
-        var (nodePos, routes) = ReadLayout();
+        var (nodePos, routes, gatePos) = ReadLayout();
         spriteMat = AssetDatabase.GetBuiltinExtraResource<Material>("Sprites-Default.mat");
         font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Fonts/PerfectDOSVGA437 SDF.asset");
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -121,6 +121,12 @@ public static class ZoneSelectSceneBuilder
         var body = SpriteObject("Sprite", idle[0], Vector3.zero, 5, player);
         body.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         body.transform.localPosition = new Vector3(0, -idle[0].bounds.min.y * 0.5f - 0.25f, 0);
+
+        // torii Harvey walks through: above Harvey (order 5), so the beams pass over him between the pillars
+        var gates = new List<Transform>();
+        var gatesRoot = new GameObject("Gates").transform;
+        gatesRoot.SetParent(root.transform);
+        foreach (var pos in gatePos) gates.Add(SpriteObject("ToriiGate", S("ToriiGate"), pos, 6, gatesRoot).transform);
 
         var cloudsRoot = new GameObject("Clouds").transform;
         cloudsRoot.SetParent(root.transform);
@@ -179,6 +185,7 @@ public static class ZoneSelectSceneBuilder
         SetArray("idleFrames", idle);
         SetArray("runFrames", run);
         SetArray("clouds", clouds.ToArray());
+        SetArray("gates", gates.ToArray());
         Set("cursor", cursor);
         Set("openIcon", S("Node_Open_Gold"));
         Set("clearedIcon", S("Node_Cleared"));
@@ -193,6 +200,7 @@ public static class ZoneSelectSceneBuilder
         Set("blockedSound", Sound("Trap_05.wav"));
         Set("selectSound", Sound("ReadyGo.wav"));
         Set("backSound", Sound("Transition_Out.wav"));
+        Set("gateSound", Sound("Japan/ToriGate_ToSpirit.wav"));
         so.ApplyModifiedPropertiesWithoutUndo();
 
         EditorSceneManager.SaveScene(scene, ScenePath);
@@ -224,20 +232,22 @@ public static class ZoneSelectSceneBuilder
         }
     }
 
-    private static (List<(string id, Vector3 pos)>, Dictionary<int, Vector2[]>) ReadLayout()
+    private static (List<(string id, Vector3 pos)>, Dictionary<int, Vector2[]>, List<Vector3>) ReadLayout()
     {
         float F(string s) => float.Parse(s, CultureInfo.InvariantCulture);
         var nodes = new List<(string, Vector3)>();
         var routes = new Dictionary<int, Vector2[]>();
+        var gates = new List<Vector3>();
         foreach (var raw in System.IO.File.ReadAllLines(Layout))
         {
             var parts = raw.Trim().Split(new[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length == 0 || parts[0].StartsWith("#")) continue;
             if (parts[0] == "node") nodes.Add((parts[1], new Vector3(F(parts[2]), F(parts[3]), 0)));
+            else if (parts[0] == "gate") gates.Add(new Vector3(F(parts[1]), F(parts[2]), 0));
             else if (parts[0] == "route")
                 routes[int.Parse(parts[1])] = parts.Skip(2).Select(p => { var xy = p.Split(','); return new Vector2(F(xy[0]), F(xy[1])); }).ToArray();
         }
-        return (nodes, routes);
+        return (nodes, routes, gates);
     }
 
     private static Sprite S(string name) => AssetDatabase.LoadAssetAtPath<Sprite>(Art + name + ".png");

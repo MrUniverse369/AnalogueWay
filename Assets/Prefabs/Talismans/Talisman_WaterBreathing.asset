@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Talisman_WaterBreathing
   m_EditorClassIdentifier: Assembly-CSharp::Talisman
   displayName: Water Breathing
+  icon: {fileID: 21300000, guid: c9a7ea80634cb4b18b80461eedb832bb, type: 3}
+  description: Breathe underwater for 10 seconds. Harvey glows aqua and wears a bubble
+    helmet.
+  unlockHint: 
   duration: 10
   cooldown: 0
   retriggerWhileHeld: 0

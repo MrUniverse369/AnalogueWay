@@ -22,6 +22,11 @@ public class OpenChest : MonoBehaviour
     [Tooltip("Time between each coin leaving the chest (seconds).")]
     [SerializeField] private float coinInterval = 0.05f;
 
+    // MENUS: an optional item for Harvey's Bag, given the first time this chest is opened on a save
+    [Header("Bonus item")]
+    [SerializeField] private ItemDefinition bonusItem;
+    [SerializeField, Min(1)] private int bonusAmount = 1;
+
     private void Start()
     {
         audioManager = AudioManager.Instance; // SFX: PERF:
@@ -39,8 +44,17 @@ public class OpenChest : MonoBehaviour
                 animatorRef.SetTrigger("ChestOpenTrig");
                 if (audioManager != null) audioManager.PlaySfxOneShot(audioManager.chestOpenSound); // SFX:
                 if (coinCount > 0) StartCoroutine(BurstCoins()); // COINS:
+                GiveBonusItem(); // MENUS:
 
         }
+    }
+
+    // MENUS: one-time per save (keyed by scene and chest), so replaying a level doesn't farm items
+    private void GiveBonusItem()
+    {
+        if (bonusItem == null || !Inventory.Claim($"chest:{gameObject.scene.name}/{name}@{Mathf.RoundToInt(transform.position.x * 10f)}")) return;
+        if (Inventory.Add(bonusItem, bonusAmount) == 0) return;
+        HarveyMenus.Toast(bonusItem.Icon, "FOUND " + bonusItem.DisplayName.ToUpperInvariant(), "IT'S IN YOUR BAG");
     }
 
     // COINS:

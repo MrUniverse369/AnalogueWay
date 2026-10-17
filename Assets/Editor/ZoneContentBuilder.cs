@@ -171,6 +171,16 @@ public static class ZoneContentBuilder
         }
         so.ApplyModifiedPropertiesWithoutUndo();
 
+        // each boss has its own theme (Tools/Music/boss_themes.py) instead of the base level's zone music
+        var music = AssetDatabase.LoadAssetAtPath<AudioClip>($"Assets/Music/Boss_{def.name}.wav");
+        var audio = Object.FindFirstObjectByType<AudioManager>(FindObjectsInactive.Include);
+        if (music != null && audio != null)
+        {
+            audio.backgroundMusic = music;
+            if (PrefabUtility.IsPartOfPrefabInstance(audio)) PrefabUtility.RecordPrefabInstancePropertyModifications(audio);
+        }
+        HarveyMenusContentBuilder.AddBossTalismanAfterRebuild(def.scene); // MENUS: the boss's talisman reward
+
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene);
         return $"{def.scene}: {def.name}, {def.stages.Length} stages";
