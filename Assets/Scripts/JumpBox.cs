@@ -18,7 +18,7 @@ public class JumpBox : MonoBehaviour
 
             audioManager.PlaySfx(audioManager.bounceSound);
             if (prefRb == null) prefRb = pref.GetComponent<Rigidbody2D>(); // PERF: look up once, not twice per bounce
-            prefRb.velocity = new Vector2(prefRb.velocity.x, jForce);
+            prefRb.linearVelocity = new Vector2(prefRb.linearVelocity.x, jForce);
         }
     }
 }

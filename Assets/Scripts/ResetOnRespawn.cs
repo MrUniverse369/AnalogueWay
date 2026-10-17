@@ -38,7 +38,7 @@ public class ResetOnRespawn : MonoBehaviour
         transform.position = startPos;
         transform.rotation = startRot;
         transform.localScale = startScale;
-        if (ownRb != null) ownRb.velocity = Vector2.zero; // PERF: was two GetComponent calls per object per respawn
+        if (ownRb != null) ownRb.linearVelocity = Vector2.zero; // PERF: was two GetComponent calls per object per respawn
         if (ownFallingObj != null) ownFallingObj.GetPDetected = false; // PERF:
     }
 }

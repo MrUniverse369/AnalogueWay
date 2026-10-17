@@ -1,16 +1,12 @@
 using System.Collections;
 using AnalogueWay;
 using UnityEngine;
-using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private float respawnDelay;
     [SerializeField] private PlayerController pScriptRef;
     [SerializeField] private ResetOnRespawn[] resetObjsArr;
     [SerializeField] private Transform respawnPos;
-    [SerializeField] private Image cardImage;
-    [SerializeField] private Sprite activeCard;
-    [SerializeField] private Sprite inActiveCard;
     [SerializeField] private GameObject gameOverScreen;
     private AudioManager audioManager;
 

@@ -34,7 +34,7 @@ namespace AnalogueWay
         private void Drop()
         {
 
-            rb2D.velocity = new Vector2(rb2D.velocity.x, -dropSpeed);
+            rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, -dropSpeed);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

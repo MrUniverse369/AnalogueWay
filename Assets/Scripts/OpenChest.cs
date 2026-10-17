@@ -27,7 +27,7 @@ public class OpenChest : MonoBehaviour
         audioManager = AudioManager.Instance; // SFX: PERF:
         // ANIM: chests sit inside world containers that are switched off/on by changeWorld; without this the
         // Animator resets on re-enable and an opened chest shows as closed again (and can never be reopened)
-        if (animatorRef != null) animatorRef.keepAnimatorControllerStateOnDisable = true;
+        if (animatorRef != null) animatorRef.keepAnimatorStateOnDisable = true;
     }
 
     private void OnTriggerStay2D(Collider2D other)

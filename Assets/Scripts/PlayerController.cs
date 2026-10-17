@@ -126,7 +126,7 @@ public class PlayerController : CharecterBehaviour
 
     void Update()
     {
-        Vector2 v = rb2D.velocity; // PERF: read once; nothing below changes velocity until CharJump/CharMovement
+        Vector2 v = rb2D.linearVelocity; // PERF: read once; nothing below changes velocity until CharJump/CharMovement
         if (v.y <= -fallOffsetSpeed)
         {
             normalizedVerticalVelocity = true;
@@ -206,16 +206,16 @@ public class PlayerController : CharecterBehaviour
     }
     public void PushBackPlayer()
     {
-        if (transform.localScale.x > 0) rb2D.velocity = new Vector2(-pushBackForceX, pushBackForceY);
-        if (transform.localScale.x < 0) rb2D.velocity = new Vector2(pushBackForceX, pushBackForceY);
+        if (transform.localScale.x > 0) rb2D.linearVelocity = new Vector2(-pushBackForceX, pushBackForceY);
+        if (transform.localScale.x < 0) rb2D.linearVelocity = new Vector2(pushBackForceX, pushBackForceY);
     }
     public override void CharMovement()
     {
         dir = Input.GetAxisRaw("Horizontal");
-        vel = new Vector2(speed * dir, rb2D.velocity.y);
+        vel = new Vector2(speed * dir, rb2D.linearVelocity.y);
         Flip(dir);
 
-        rb2D.velocity = vel;
+        rb2D.linearVelocity = vel;
         coyoteTime = 0.25f;
         animatorRef.SetFloat(SpeedParam, Mathf.Abs(dir)); // PERF: hashed IDs
         animatorRef.SetFloat(JSpeedParam, vel.y); // PERF: same value as rb2D.velocity.y, which was just set to vel
@@ -225,7 +225,7 @@ public class PlayerController : CharecterBehaviour
     // SFX: footsteps follow running speed; silent while mounted, airborne, standing or dashing (the dash has its own sound)
     private void PlayFootsteps()
     {
-        float speedX = Mathf.Abs(rb2D.velocity.x);
+        float speedX = Mathf.Abs(rb2D.linearVelocity.x);
         if (mountActive || !isGrounded || speedX < 0.5f || speedX > speedDefault * 1.5f)
         {
             footstepTimer = 0f;
@@ -255,7 +255,7 @@ public class PlayerController : CharecterBehaviour
         flightVel = new Vector2(speed * dir, speed * yDir);
         Flip(dir);
 
-        rb2D.velocity = flightVel;
+        rb2D.linearVelocity = flightVel;
         PlayerController.chi -= 10 * Time.deltaTime;
     }
 
@@ -263,7 +263,7 @@ public class PlayerController : CharecterBehaviour
     public override void CharJump()
     {
         jDir = Input.GetAxisRaw("Jump");
-        jVel = new Vector2(rb2D.velocity.x, jDir * jSpeed);
+        jVel = new Vector2(rb2D.linearVelocity.x, jDir * jSpeed);
         isGrounded = Physics2D.OverlapCircle(pFeet.position, pFeetRadius, isPFeetOnGround);
         if (isGrounded)
         {
@@ -274,7 +274,7 @@ public class PlayerController : CharecterBehaviour
         if (coyoteTimeCounter > 0 && Input.GetButtonDown("Jump"))
         {
             jumpedThisFrame = true; // ANIM:
-            rb2D.velocity = jVel;
+            rb2D.linearVelocity = jVel;
             audioManager.PlaySfx(audioManager.jumpSound);
         }
 
@@ -286,7 +286,7 @@ public class PlayerController : CharecterBehaviour
         }
         // ANIM: the super-jump pose lasts while rising, then the normal jump/fall takes over until landing.
         // The JumpPowerUp state has no exit of its own, so if the player lands while still in it, go back to Movement.
-        if (superJumpAnimPlaying && !jumpedThisFrame && rb2D.velocity.y <= 0f)
+        if (superJumpAnimPlaying && !jumpedThisFrame && rb2D.linearVelocity.y <= 0f)
         {
             superJumpAnimPlaying = false;
             if (isGrounded) animatorRef.CrossFade(MovementState, 0.1f);
