@@ -120,6 +120,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorRef: {fileID: 63857375099794768}
+  coinPrefab: {fileID: 1948382544926291784, guid: 9bc686a7eed4c4f469064ef4003fe1cd, type: 3}
+  coinCount: 5
+  burstSpread: 1.8
+  burstHeight: 2.2
+  flightTime: 0.6
+  burstDelay: 0.15
+  coinInterval: 0.05
 --- !u!61 &-6062377953443090434
 BoxCollider2D:
   m_ObjectHideFlags: 0

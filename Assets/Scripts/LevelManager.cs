@@ -1,4 +1,5 @@
 using System.Collections;
+using AnalogueWay;
 using UnityEngine;
 using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
@@ -69,6 +70,7 @@ public class LevelManager : MonoBehaviour
             resetObjsArr[i].gameObject.SetActive(true);
 
         }
+        changeWorld.RequestRefresh(); // PERF: the loop above re-enables objects from both worlds; let changeWorld correct them
     }
 
 }

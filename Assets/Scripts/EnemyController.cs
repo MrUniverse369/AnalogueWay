@@ -7,6 +7,20 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private bool enemyDeathAnimActivate;
     [SerializeField] private float animCounter;
     private AudioManager audioManager; // SFX:
+
+    // DEATH: wait for the real death animation instead of a fixed timer. The death transitions use
+    // "Has Exit Time", so the animation can start up to a full walk cycle after the hit; a fixed
+    // 0.5 s (dash) / 0.7 s (stomp) timer often hid the enemy before the smoke played, or before it started.
+    private const float MaxDeathTime = 2.5f;                                   // DEATH: safety cap, an enemy can never get stuck
+    private static readonly int DeathAnimParam = Animator.StringToHash("DeathAnim"); // DEATH: (also PERF: hashed once)
+    private bool hasDeathAnim;        // DEATH: controller has a DeathAnim parameter (otherwise use the old timers)
+    private int stateWhenKilled;      // DEATH: animator state at the moment of the hit
+    private bool deathClipStarted;    // DEATH: the death state has begun
+    private float deathClipLeft;      // DEATH: seconds of the death clip still to play
+    private float deathTimeLeft;      // DEATH: counts down from MaxDeathTime
+
+    public bool IsDying => enemyDeathAnimActivate; // DEATH: lets HurtPlayer / knockback ignore an enemy that is already dying
+
     public float BounceSpeed
     {
         get { return bounceSpeed; }
@@ -17,6 +31,7 @@ public class EnemyController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         audioManager = AudioManager.Instance; // SFX: PERF:
+        hasDeathAnim = HasParameter(animator, "DeathAnim"); // DEATH:
     }
 
     // Update is called once per frame
@@ -26,9 +41,10 @@ public class EnemyController : MonoBehaviour
         if (enemyDeathAnimActivate)
         {
             animCounter -= 1 * Time.deltaTime;
-            animator.SetBool("DeathAnim", enemyDeathAnimActivate);
+            animator.SetBool(DeathAnimParam, enemyDeathAnimActivate);
+            if (hasDeathAnim) TrackDeathClip(); // DEATH:
         }
-        if (animCounter < 0 && enemyDeathAnimActivate == true)
+        if (enemyDeathAnimActivate == true && FinishedDying()) // DEATH: was animCounter < 0
         {
             gameObject.SetActive(false);
             enemyDeathAnimActivate = false;
@@ -41,6 +57,7 @@ public class EnemyController : MonoBehaviour
         if (other.CompareTag("pStomp") && gameObject.CompareTag("japanBoss") != true)
         {
             if (!enemyDeathAnimActivate && audioManager != null) audioManager.PlaySfxOneShot(audioManager.enemyStompDefeatSound); // SFX: once per defeat
+            if (!enemyDeathAnimActivate) BeginDeath(); // DEATH:
             animCounter = 0.7f;
             enemyDeathAnimActivate = true;
         }
@@ -48,9 +65,62 @@ public class EnemyController : MonoBehaviour
         if (other.CompareTag("PlayerDetectionArea") && PowerUpManager.Has(TalismanTrait.DefeatsEnemiesOnContact) && gameObject.CompareTag("japanBoss") != true) // POWERUP: was ActiveCardManager.speedBoostPowerUp != false
         {
             if (!enemyDeathAnimActivate && audioManager != null) audioManager.PlaySfxOneShot(audioManager.enemyDashDefeatSound); // SFX: once per defeat
+            if (!enemyDeathAnimActivate) BeginDeath(); // DEATH:
             animCounter = 0.5f;
             BounceSpeed = 0;
             enemyDeathAnimActivate = true;
         }
+    }
+
+    // DEATH: remember which state we were in, so we can tell when the death state takes over
+    private void BeginDeath()
+    {
+        stateWhenKilled = animator != null ? animator.GetCurrentAnimatorStateInfo(0).fullPathHash : 0;
+        deathClipStarted = false;
+        deathClipLeft = 0f;
+        deathTimeLeft = MaxDeathTime;
+    }
+
+    // DEATH: start timing the death clip as soon as the animator moves into it (during or after the transition)
+    private void TrackDeathClip()
+    {
+        deathTimeLeft -= Time.deltaTime;
+        if (deathClipStarted)
+        {
+            deathClipLeft -= Time.deltaTime;
+            return;
+        }
+        if (animator.IsInTransition(0))
+        {
+            AnimatorStateInfo next = animator.GetNextAnimatorStateInfo(0);
+            if (next.fullPathHash != stateWhenKilled) StartClip(next.length);
+        }
+        else
+        {
+            AnimatorStateInfo current = animator.GetCurrentAnimatorStateInfo(0);
+            if (current.fullPathHash != stateWhenKilled) StartClip(current.length);
+        }
+    }
+
+    private void StartClip(float length)
+    {
+        deathClipStarted = true;
+        deathClipLeft = length;
+    }
+
+    // DEATH: with a death animation, hide the enemy when its clip has fully played (or at the safety cap);
+    // without one, keep the original 0.5 s / 0.7 s timers
+    private bool FinishedDying()
+    {
+        if (!hasDeathAnim) return animCounter < 0;
+        return (deathClipStarted && deathClipLeft <= 0f) || deathTimeLeft <= 0f;
+    }
+
+    private static bool HasParameter(Animator anim, string name)
+    {
+        if (anim == null || anim.runtimeAnimatorController == null) return false;
+        foreach (AnimatorControllerParameter p in anim.parameters)
+            if (p.name == name) return true;
+        return false;
     }
 }

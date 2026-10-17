@@ -7,6 +7,7 @@ public class TownExit : MonoBehaviour
 {
     [SerializeField] private GameObject fadeOut;
     [SerializeField] private bool exitVillage;
+    private bool exiting; // PERF: B1 fix - the exit sequence must only start once
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,12 @@ public class TownExit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (exitVillage) StartCoroutine(nameof(VillageExitPauseCo));
+        // PERF: B1 fix - this used to start a new coroutine every frame of the 5 s freeze
+        if (exitVillage && !exiting)
+        {
+            exiting = true;
+            StartCoroutine(VillageExitPauseCo());
+        }
     }
     public IEnumerator VillageExitPauseCo()
     {

@@ -31,6 +31,20 @@ namespace AnalogueWay
         public static bool lworldGateActive = false;
         public static bool SworldGateActive = false;
 
+        // PERF: world objects are only switched when something could have changed them, not every frame.
+        private static int refreshGeneration;   // bumped by RequestRefresh()
+        private bool hasApplied;                // false until this instance has applied the world (reset on enable)
+        private bool appliedWorld;
+        private int appliedGeneration;
+
+        /// <summary>Call after code re-enables world objects (e.g. respawn) so every active instance reapplies once.</summary>
+        public static void RequestRefresh() => refreshGeneration++;
+
+        private void OnEnable()
+        {
+            hasApplied = false; // PERF: several instances switch each other on/off; reapply whenever this one wakes up
+        }
+
 
 
         // Start is called before the first frame update
@@ -46,10 +60,21 @@ namespace AnalogueWay
 
         }
 
-        // Update is called once per frame
         void Update()
         {
+            // PERF: skip when nothing changed (used to set every world object active/inactive every frame)
+            if (hasApplied && appliedWorld == lWorld && appliedGeneration == refreshGeneration) return;
+            bool world = lWorld;
+            int generation = refreshGeneration;
+            ApplyWorld();
+            hasApplied = true;
+            appliedWorld = world;
+            appliedGeneration = generation;
+        }
 
+        // PERF: unchanged body of the old Update
+        private void ApplyWorld()
+        {
             if (lWorld)
             {
                 // Spirit world is inactive

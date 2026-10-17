@@ -9,6 +9,7 @@ public class NextLevel : MonoBehaviour
     [SerializeField] private GameObject pScriptObjRef;
     private PlayerController pScriptRef;
     private bool pIsTouchingTreasure;
+    private bool levelEnding; // PERF: B1 fix - the end-of-level sequence must only start once
     private AudioManager audioManager;
 
     private void Awake()
@@ -26,9 +27,12 @@ public class NextLevel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pIsTouchingTreasure)
+        // PERF: B1 fix - this used to start a new coroutine every frame of the 5 s freeze (~300 of them),
+        // each restarting the win sound and redoing the level-complete setup.
+        if (pIsTouchingTreasure && !levelEnding)
         {
-            StartCoroutine(nameof(NextLevelPauseCo));
+            levelEnding = true;
+            StartCoroutine(NextLevelPauseCo());
         }
     }
 

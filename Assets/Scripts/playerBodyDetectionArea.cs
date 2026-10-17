@@ -39,7 +39,8 @@ public class playerBodyDetectionArea : MonoBehaviour
         }
         //if the player is touching the ground when the enemy has
         // made contact we push the player in the direction opposite of the enemy 
-        if (other.gameObject.CompareTag("Enemy") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity)) // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
+        // DEATH: no knockback from an enemy that is already dying
+        if (other.gameObject.CompareTag("Enemy") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity) && !IsDyingEnemy(other)) // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
         {
             animatorRef.SetTrigger("isHurt");
             pushBackCounter = pushBackLenght;
@@ -60,4 +61,10 @@ public class playerBodyDetectionArea : MonoBehaviour
         }
     }
 
+    // DEATH:
+    private static bool IsDyingEnemy(Collider2D other)
+    {
+        EnemyController enemy = other.GetComponent<EnemyController>();
+        return enemy != null && enemy.IsDying;
+    }
 }

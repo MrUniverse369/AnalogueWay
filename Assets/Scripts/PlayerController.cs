@@ -48,6 +48,8 @@ public class PlayerController : CharecterBehaviour
     private static readonly int JSpeedParam = Animator.StringToHash("JSpeed");
     private static readonly int JumpParam = Animator.StringToHash("Jump");
     private static readonly int JumpPowerUpParam = Animator.StringToHash("JumpPowerUp");
+    private static readonly int MovementState = Animator.StringToHash("Base Layer.Movement"); // ANIM:
+    private bool superJumpAnimPlaying; // ANIM: true from a super jump until the player stops rising
 
     private void Awake()
     {
@@ -182,6 +184,8 @@ public class PlayerController : CharecterBehaviour
             pBDARef.pushBackCounter -= Time.deltaTime;
             playerInviInvincible = true;
             PushBackPlayer();
+            animatorRef.SetBool(JumpParam, false); // ANIM: otherwise "in the air" cuts the hurt animation short
+            superJumpAnimPlaying = false; // ANIM:
         }
 
         if (mountActive)
@@ -266,33 +270,31 @@ public class PlayerController : CharecterBehaviour
             coyoteTimeCounter = coyoteTime;
         }
 
+        bool jumpedThisFrame = false; // ANIM:
         if (coyoteTimeCounter > 0 && Input.GetButtonDown("Jump"))
         {
+            jumpedThisFrame = true; // ANIM:
             rb2D.velocity = jVel;
             audioManager.PlaySfx(audioManager.jumpSound);
         }
 
-        if (jSpeed > 6)
+        // ANIM: play the super-jump animation whenever a super jump actually happens (coyote jumps included)
+        if (jSpeed > 6 && jumpedThisFrame)
         {
-
-            if (Input.GetButtonDown("Jump") && isGrounded)
-            {
-                animatorRef.SetTrigger(JumpPowerUpParam);
-
-            }
+            animatorRef.SetTrigger(JumpPowerUpParam);
+            superJumpAnimPlaying = true;
         }
-        else
+        // ANIM: the super-jump pose lasts while rising, then the normal jump/fall takes over until landing.
+        // The JumpPowerUp state has no exit of its own, so if the player lands while still in it, go back to Movement.
+        if (superJumpAnimPlaying && !jumpedThisFrame && rb2D.velocity.y <= 0f)
         {
-            if (Input.GetButtonDown("Jump") && !isGrounded)
-            {
-                animatorRef.SetBool(JumpParam, isGrounded);
-            }
-            else
-            {
-                animatorRef.SetBool(JumpParam, !isGrounded);
-
-            }
+            superJumpAnimPlaying = false;
+            if (isGrounded) animatorRef.CrossFade(MovementState, 0.1f);
         }
+        // ANIM: the Jump flag simply means "in the air", in every mode. It used to freeze while a super jump was
+        // active (leaving the player stuck in the super-jump or fall pose after landing) and flicker to false
+        // for a frame when jump was pressed in mid-air.
+        animatorRef.SetBool(JumpParam, !isGrounded && !superJumpAnimPlaying);
 
         if (!isGrounded)
         {

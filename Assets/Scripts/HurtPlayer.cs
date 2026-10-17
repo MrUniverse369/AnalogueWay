@@ -10,10 +10,12 @@ public class HurtPlayer : MonoBehaviour
     [SerializeField] private GameObject pRespawnPos;
     private LevelManager lmanagerScriptRef;
     private AudioManager audioManager; // SFX:
+    private EnemyController ownEnemy; // DEATH: set when this hazard is an enemy
     // Start is called before the first frame update
     void Start()
     {
         lmanagerScriptRef = LevelManager.Instance; // PERF: was a whole-scene search in every hazard
+        ownEnemy = GetComponent<EnemyController>(); // DEATH:
         audioManager = AudioManager.Instance; // SFX: PERF:
 
     }
@@ -21,7 +23,8 @@ public class HurtPlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.CompareTag("PlayerDetectionArea") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity)) // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
+        // DEATH: an enemy that is already dying (playing its smoke animation) can no longer hurt the player
+        if (other.CompareTag("PlayerDetectionArea") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity) && (ownEnemy == null || !ownEnemy.IsDying)) // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
         {
 
             if (PlayerController.playerInviInvincible == false) pLivesCount -= 1;
