@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// BOSS: first-draft boss for Z3BossBattle. Three lives, one stage per life, each stage faster and meaner.
-/// The boss can only be hurt (stomp or dash) while it is slumped during an opening. Attacking it at any
-/// other time hurts the player instead, so the player has to wait for the opening.
+/// BOSS: the shared boss for every zone (first written for Z3BossBattle). Three lives, one stage per life,
+/// each stage faster and meaner. The boss can only be hurt (stomp or dash) while it is slumped during an
+/// opening. Attacking it at any other time hurts the player instead, so the player has to wait for the opening.
+/// Each zone's boss is this component with its own art, hazards and move patterns (set per stage).
 /// </summary>
 public class YokaiBoss : MonoBehaviour
 {
-    public enum Move { Charge, LeapSlam, RockRain, Opening }
+    // BOSSES: new moves are appended so existing serialized patterns keep their meaning
+    public enum Move { Charge, LeapSlam, RockRain, Opening, Teleport, Burrow, Volley, GroundSpikes }
 
     [System.Serializable]
     private class Stage
@@ -24,6 +26,10 @@ public class YokaiBoss : MonoBehaviour
         public float pauseBetweenMoves = 0.8f;
         public bool slamShockwaves;
         public int rocks;
+        [Tooltip("Projectiles per Volley (BOSSES:).")]
+        public int volley = 3;
+        [Tooltip("Spikes per GroundSpikes (BOSSES:). The first one is always under the player.")]
+        public int spikes = 3;
         public Move[] pattern = { Move.Charge, Move.Opening };
     }
 
@@ -36,6 +42,10 @@ public class YokaiBoss : MonoBehaviour
     [SerializeField] private Transform rightLimit;
     [SerializeField] private BossHazard shockwaveTemplate;
     [SerializeField] private BossHazard rockTemplate;
+    [Tooltip("BOSSES: Volley projectile (flies straight at the player's side of the arena).")]
+    [SerializeField] private BossHazard projectileTemplate;
+    [Tooltip("BOSSES: GroundSpikes spike (bursts up out of the floor).")]
+    [SerializeField] private BossHazard spikeTemplate;
     [SerializeField] private SpriteRenderer[] lifePips;
     [Tooltip("Shown when the boss is defeated (the treasure that ends the level).")]
     [SerializeField] private GameObject revealOnDefeat;
@@ -58,6 +68,19 @@ public class YokaiBoss : MonoBehaviour
     [SerializeField] private float rockFallSpeed = 10f;
     [SerializeField] private float rockSpawnHeight = 6.5f;
     [SerializeField] private float stompBounce = 9f;
+    [Header("Zone moves (BOSSES:)")]
+    [SerializeField] private float projectileSpeed = 6f;
+    [Tooltip("Volley heights above the floor; shots alternate between them (low = jump it, high = stay down).")]
+    [SerializeField] private float projectileLowHeight = 0.45f;
+    [SerializeField] private float projectileHighHeight = 1.6f;
+    [SerializeField] private float burrowTime = 1.6f;
+    [SerializeField] private float burrowHeight = 0.3f;
+    [SerializeField] private float spikeWarnTime = 0.7f;
+    [Tooltip("How far below the floor a spike waits; only its tip shows during the warning.")]
+    [SerializeField] private float spikeBuriedDepth = 1.45f;
+    [SerializeField] private float spikeRiseSpeed = 5f;
+    [SerializeField] private float spikeLife = 0.32f;
+    [SerializeField] private float teleportFadeTime = 0.35f;
     [Tooltip("Seconds of grace after the boss hurts the player.")]
     [SerializeField] private float hurtGrace = 1f;
     [SerializeField] private float knockbackTime = 0.35f;
@@ -103,6 +126,8 @@ public class YokaiBoss : MonoBehaviour
         spriteHeight = bodySprite.sprite != null ? bodySprite.sprite.bounds.size.y : 1f;
         if (shockwaveTemplate != null) shockwaveTemplate.gameObject.SetActive(false);
         if (rockTemplate != null) rockTemplate.gameObject.SetActive(false);
+        if (projectileTemplate != null) projectileTemplate.gameObject.SetActive(false); // BOSSES:
+        if (spikeTemplate != null) spikeTemplate.gameObject.SetActive(false); // BOSSES:
         LevelManager.Respawned += ResetFight;
         ResetFight();
     }
@@ -128,7 +153,7 @@ public class YokaiBoss : MonoBehaviour
         hurtbox.enabled = true;
         Face(-1f);
         SetPose(standingHeight);
-        bodySprite.color = CurrentStage.tint;
+        bodySprite.color = CurrentStage.tint; // (alpha 1: also undoes a Teleport fade)
         UpdatePips();
         if (revealOnDefeat != null) revealOnDefeat.SetActive(false);
         fight = StartCoroutine(Fight(startDelay));
@@ -157,6 +182,10 @@ public class YokaiBoss : MonoBehaviour
             case Move.Charge: return Charge(s);
             case Move.LeapSlam: return LeapSlam(s);
             case Move.RockRain: return RockRain(s);
+            case Move.Teleport: return Teleport(s); // BOSSES:
+            case Move.Burrow: return Burrow(s); // BOSSES:
+            case Move.Volley: return Volley(s); // BOSSES:
+            case Move.GroundSpikes: return GroundSpikes(s); // BOSSES:
             default: return Opening(s);
         }
     }
@@ -220,6 +249,108 @@ public class YokaiBoss : MonoBehaviour
             yield return new WaitForSeconds(step);
         }
         yield return new WaitForSeconds(rockHangTime + rockSpawnHeight / rockFallSpeed);
+    }
+
+    // BOSSES: fade out, reappear high above the player, hang (the warning), then drop. Slams if the stage has shockwaves.
+    private IEnumerator Teleport(Stage s)
+    {
+        hurtbox.enabled = false;
+        yield return Fade(1f, 0f, teleportFadeTime);
+        float x = Mathf.Clamp(PlayerX, leftLimit.position.x, rightLimit.position.x);
+        float highY = GroundY + leapHeight;
+        transform.position = new Vector3(x, highY, startPos.z);
+        Face(PlayerX - x);
+        yield return Fade(0f, 1f, teleportFadeTime);
+        yield return Telegraph(s.telegraphTime * 0.6f, s.tint);
+        hurtbox.enabled = true;
+        for (float t = 0f; t < 1f; t += Time.deltaTime / (leapTime * 0.4f))
+        {
+            transform.position = new Vector3(x, Mathf.Lerp(highY, GroundY, t * t), startPos.z);
+            yield return null;
+        }
+        transform.position = new Vector3(x, GroundY, startPos.z);
+        Play(audioManager != null ? audioManager.bounceSound : null);
+        if (s.slamShockwaves)
+        {
+            SpawnShockwave(-1f);
+            SpawnShockwave(1f);
+        }
+        yield return Shake(0.3f, 0.2f);
+    }
+
+    // BOSSES: sink into a low mound that hunts the player (jumpable), then erupt with a burst.
+    private IEnumerator Burrow(Stage s)
+    {
+        yield return Shake(0.3f, 0.05f);
+        SetPose(burrowHeight);
+        for (float t = 0f; t < burrowTime; t += Time.deltaTime)
+        {
+            Vector3 p = transform.position;
+            float target = Mathf.Clamp(PlayerX, leftLimit.position.x, rightLimit.position.x);
+            p.x = Mathf.MoveTowards(p.x, target, s.chargeSpeed * 0.55f * Time.deltaTime);
+            transform.position = p;
+            body.localPosition = new Vector3(Random.Range(-0.04f, 0.04f), body.localPosition.y, 0f);
+            yield return null;
+        }
+        yield return Telegraph(s.telegraphTime * 0.5f, s.tint);
+        SetPose(standingHeight);
+        Play(audioManager != null ? audioManager.bounceSound : null);
+        if (s.slamShockwaves)
+        {
+            SpawnShockwave(-1f);
+            SpawnShockwave(1f);
+        }
+        float fromY = GroundY;
+        for (float t = 0f; t < 1f; t += Time.deltaTime / (leapTime * 0.6f))
+        {
+            transform.position = new Vector3(transform.position.x, fromY + leapHeight * 0.5f * 4f * t * (1f - t), startPos.z);
+            yield return null;
+        }
+        transform.position = new Vector3(transform.position.x, GroundY, startPos.z);
+        yield return Shake(0.25f, 0.15f);
+    }
+
+    // BOSSES: a row of shots toward the player, alternating low (jump) and high (stay down).
+    private IEnumerator Volley(Stage s)
+    {
+        Face(PlayerX - transform.position.x);
+        yield return Telegraph(s.telegraphTime * 0.7f, s.tint);
+        for (int i = 0; i < s.volley; i++)
+        {
+            Face(PlayerX - transform.position.x);
+            SpawnProjectile(facing, i % 2 == 0 ? projectileLowHeight : projectileHighHeight);
+            SetPose(standingHeight * 0.85f);
+            yield return new WaitForSeconds(0.12f);
+            SetPose(standingHeight);
+            yield return new WaitForSeconds(0.45f);
+        }
+    }
+
+    // BOSSES: spikes shake at floor level (the warning) and then burst upward; the first one targets the player.
+    private IEnumerator GroundSpikes(Stage s)
+    {
+        yield return Telegraph(s.telegraphTime * 0.6f, s.tint);
+        for (int i = 0; i < s.spikes; i++)
+        {
+            float x = i == 0 ? PlayerX : Random.Range(leftLimit.position.x, rightLimit.position.x);
+            SpawnSpike(Mathf.Clamp(x, leftLimit.position.x, rightLimit.position.x));
+            yield return new WaitForSeconds(0.25f);
+        }
+        yield return new WaitForSeconds(spikeWarnTime + spikeLife);
+    }
+
+    private IEnumerator Fade(float from, float to, float time)
+    {
+        for (float t = 0f; t < 1f; t += Time.deltaTime / Mathf.Max(0.01f, time))
+        {
+            Color c = bodySprite.color;
+            c.a = Mathf.Lerp(from, to, t);
+            bodySprite.color = c;
+            yield return null;
+        }
+        Color end = bodySprite.color;
+        end.a = to;
+        bodySprite.color = end;
     }
 
     private IEnumerator Opening(Stage s)
@@ -287,6 +418,7 @@ public class YokaiBoss : MonoBehaviour
 
         vulnerable = false;
         invulnerable = true;
+        hurtbox.enabled = true; // BOSSES: in case the hit interrupted a teleport
         lives--;
         UpdatePips();
         if (isStomp) BouncePlayer(stompBounce);
@@ -386,6 +518,28 @@ public class YokaiBoss : MonoBehaviour
         BossHazard h = Instantiate(rockTemplate, new Vector3(x, GroundY + rockSpawnHeight, 0f), Quaternion.identity);
         h.gameObject.SetActive(true);
         h.Launch(this, new Vector2(0f, -rockFallSpeed), rockHangTime, GroundY, float.NegativeInfinity, float.PositiveInfinity);
+        hazards.Add(h.gameObject);
+    }
+
+    // BOSSES:
+    private void SpawnProjectile(float dir, float height)
+    {
+        if (projectileTemplate == null) return;
+        BossHazard h = Instantiate(projectileTemplate, new Vector3(transform.position.x + dir * hurtboxWidth * 0.6f, GroundY + height, 0f), Quaternion.identity);
+        h.gameObject.SetActive(true);
+        Vector3 sc = h.transform.localScale;
+        h.transform.localScale = new Vector3(Mathf.Abs(sc.x) * dir, sc.y, sc.z);
+        h.Launch(this, new Vector2(dir * projectileSpeed, 0f), 0f, float.NegativeInfinity, leftLimit.position.x - 0.5f, rightLimit.position.x + 0.5f);
+        hazards.Add(h.gameObject);
+    }
+
+    // BOSSES:
+    private void SpawnSpike(float x)
+    {
+        if (spikeTemplate == null) return;
+        BossHazard h = Instantiate(spikeTemplate, new Vector3(x, GroundY - spikeBuriedDepth, 0f), Quaternion.identity);
+        h.gameObject.SetActive(true);
+        h.Launch(this, new Vector2(0f, spikeRiseSpeed), spikeWarnTime, float.NegativeInfinity, float.NegativeInfinity, float.PositiveInfinity, spikeLife);
         hazards.Add(h.gameObject);
     }
 

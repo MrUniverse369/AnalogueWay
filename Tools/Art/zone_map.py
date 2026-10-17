@@ -23,18 +23,26 @@ TREASURE = "Assets/Sprites/Treasure.png"
 W, H = 320, 180
 PPU = 16
 
-# Node pixel positions (y down), in play order.
+# Node pixel positions (y down), in play order: six per zone, the sixth is the zone boss. Keep in sync with the scene
+# (the scene is rebuilt from the layout file this script writes).
 NODES = {
-    "Z1A1": (30, 136), "Z1A2": (62, 136), "Z1A3": (62, 106),
-    "Z2A1": (120, 128), "Z2A2": (170, 144),
-    "Z3A1": (222, 144), "Z3A2": (276, 122), "Village": (294, 98), "Boss": (262, 58),
-    "Z4A6": (150, 58), "Z4A7": (102, 40), "Win": (42, 58),
+    "Z1A1": (22, 158), "Z1A2": (22, 132), "Z1A3": (22, 106), "Z1A4": (52, 106), "Z1A5": (52, 132), "Z1Boss": (68, 158),
+    "Z2A1": (100, 158), "Z2A2": (100, 132), "Z2A3": (100, 106), "Z2A4": (130, 106), "Z2A5": (130, 132), "Z2Boss": (160, 158),
+    "Z3A1": (214, 158), "Z3A2": (244, 158), "Z3A3": (244, 130), "Z3A4": (274, 130), "Village": (288, 100), "Boss": (262, 58),
+    "Z4A1": (172, 58), "Z4A2": (144, 58), "Z4A3": (116, 58), "Z4A4": (116, 30), "Z4A5": (88, 30), "Z4Boss": (60, 30),
+    "Win": (28, 52),
 }
-ORDER = ["Z1A1", "Z1A2", "Z1A3", "Z2A1", "Z2A2", "Z3A1", "Z3A2", "Village", "Boss", "Z4A6", "Z4A7", "Win"]
+ORDER = ["Z1A1", "Z1A2", "Z1A3", "Z1A4", "Z1A5", "Z1Boss",
+         "Z2A1", "Z2A2", "Z2A3", "Z2A4", "Z2A5", "Z2Boss",
+         "Z3A1", "Z3A2", "Z3A3", "Z3A4", "Village", "Boss",
+         "Z4A1", "Z4A2", "Z4A3", "Z4A4", "Z4A5", "Z4Boss", "Win"]
+BOSSES = {"Z1Boss", "Z2Boss", "Boss", "Z4Boss"}
 # Corners between consecutive nodes (ORDER[i] -> ORDER[i + 1]); they are rounded off when drawn.
 CORNERS = [
-    [], [], [(92, 106), (92, 128)], [(142, 128), (142, 144)], [],
-    [(248, 144), (248, 122)], [(294, 122)], [(294, 80), (262, 80)], [], [(150, 40)], [(102, 58)],
+    [], [], [], [], [(52, 158)], [],          # Tomb, ending at its boss
+    [], [], [], [], [(130, 158)], [],         # Sandy (the boss -> Japan run is straight along y 158)
+    [], [], [], [(288, 130)], [(288, 78), (262, 78)], [],   # Japan, up the mountain to the shrine
+    [], [], [], [], [], [(28, 30)],           # Meadow, then home
 ]
 BEND_RADIUS = 7
 RIVER = [(194, -6), (194, 44), (198, 64), (206, 80), (226, 90), (240, 96)]
@@ -402,10 +410,10 @@ def build_map():
                     c.put(x, y, FOAM if d > 0.72 else (GLINT if hsh(x, y, 9) < 0.08 else WATER_LIGHT))
         reserve(cx - 10, cy - 5, cx + 10, cy + 5)
 
-    pyramid(160, 122, 15)
-    pyramid(184, 112, 8)
-    oasis(110, 152)
-    mausoleum(16, 92)
+    pyramid(168, 142, 13)
+    pyramid(186, 124, 8)
+    oasis(163, 108)
+    mausoleum(64, 100)
     mountain(262, 76, 30, 38)
     mountain(300, 62, 15, 24)
     mountain(226, 50, 13, 22)
@@ -438,8 +446,8 @@ def build_map():
         reserve(nx - 10, ny - 12, nx + 10, ny + 8)
     path_near = [row[:] for row in reserved]
 
-    torii(248, 124)
-    for hx, hy in ((280, 84), (302, 106), (268, 104), (306, 84), (282, 106)):
+    torii(205, 128)  # the gate into the snow zone, beside the road
+    for hx, hy in ((296, 86), (296, 110), (266, 110), (270, 86), (300, 120)):
         if free(hx, hy, hx + 10, hy + 7):
             c.stamp(HOUSE, HOUSE_PAL, hx, hy)
             reserve(hx - 1, hy - 1, hx + 11, hy + 8)
@@ -697,11 +705,21 @@ def icon_locked():
 
 
 def icon_boss():
+    """Zone boss: a horned skull on a dark pad (clearly not a level gem)."""
     c = Canvas(16, 16)
     pad(c, dark=True)
-    gem(c, GEMS["red"], top=1, size=5)
-    for x, y in ((2, 1), (3, 2), (13, 1), (12, 2)):  # little horns
-        c.put(x, y, HUD_CREAM)
+    c.stamp([
+        "o.........o",
+        "Ho.......oH",
+        "oHoooooooHo",
+        ".oWWWWWWWo.",
+        "oWWWWWWWWWo",
+        "oWRRWWWRRWo",
+        "oWRRWoWRRWo",
+        ".oWWWWWWWo.",
+        "..oWoWoWo..",
+        "...ooooo...",
+    ], {"o": HUD_DARK, "W": HUD_CREAM, "H": HUD_YELLOW, "R": hexc("eb564b")}, 2, 1)
     return c
 
 

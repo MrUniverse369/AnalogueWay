@@ -48,7 +48,11 @@ public static class GameSession
         get
         {
             LoadFurthest();
-            return Mathf.Max(1, BuildIndexOf(furthestScene));
+            int index = BuildIndexOf(furthestScene);
+            // ZONEMAP: a save can name a level that is no longer in the build (renamed, disabled or reordered);
+            // fall back to the level Continue would load rather than locking the whole map
+            if (index < 0 && SaveSystem.TryLoad(out SaveData data)) index = BuildIndexOf(data.sceneName);
+            return Mathf.Max(1, index);
         }
     }
 
