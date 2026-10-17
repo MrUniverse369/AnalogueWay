@@ -205,7 +205,7 @@ public class YokaiBoss : MonoBehaviour
             transform.position = p;
             yield return null;
         }
-        Play(audioManager != null ? audioManager.bounceSound : null);
+        Play(audioManager != null ? audioManager.BossSlamSound : null);
         SetPose(standingHeight);
         yield return Shake(0.25f, 0.15f);
     }
@@ -228,7 +228,7 @@ public class YokaiBoss : MonoBehaviour
             yield return null;
         }
         transform.position = new Vector3(toX, GroundY, startPos.z);
-        Play(audioManager != null ? audioManager.bounceSound : null);
+        Play(audioManager != null ? audioManager.BossSlamSound : null);
         if (s.slamShockwaves)
         {
             SpawnShockwave(-1f);
@@ -269,7 +269,7 @@ public class YokaiBoss : MonoBehaviour
             yield return null;
         }
         transform.position = new Vector3(x, GroundY, startPos.z);
-        Play(audioManager != null ? audioManager.bounceSound : null);
+        Play(audioManager != null ? audioManager.BossSlamSound : null);
         if (s.slamShockwaves)
         {
             SpawnShockwave(-1f);
@@ -294,7 +294,7 @@ public class YokaiBoss : MonoBehaviour
         }
         yield return Telegraph(s.telegraphTime * 0.5f, s.tint);
         SetPose(standingHeight);
-        Play(audioManager != null ? audioManager.bounceSound : null);
+        Play(audioManager != null ? audioManager.BossSlamSound : null);
         if (s.slamShockwaves)
         {
             SpawnShockwave(-1f);
@@ -393,7 +393,7 @@ public class YokaiBoss : MonoBehaviour
             yield return null;
         }
         body.gameObject.SetActive(false);
-        Play(audioManager != null ? audioManager.powerUpSound : null);
+        Play(audioManager != null ? audioManager.BossDefeatSound : null);
         if (revealOnDefeat != null) revealOnDefeat.SetActive(true);
     }
 

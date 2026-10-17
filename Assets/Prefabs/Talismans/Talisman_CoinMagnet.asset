@@ -22,7 +22,7 @@ MonoBehaviour:
   traits: 0
   blockedScenes: []
   animatorBool: 
-  activationSound: {fileID: 0}
+  activationSound: {fileID: 8300000, guid: 9d38e018eb68f4bd1a3092d6da4492d0, type: 3}
   radius: 4.5
   pullSpeed: 7
   rescanInterval: 0.25

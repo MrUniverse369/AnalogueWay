@@ -2513,11 +2513,11 @@ MonoBehaviour:
   gates:
   - {fileID: 1879825726}
   gateHalfWidth: 0.5
-  gateSound: {fileID: 8300000, guid: 53d4fb3dcbd164f7b91cc8a87a36d67f, type: 3}
-  moveSound: {fileID: 8300000, guid: fcfb712341919964fbdc6f7c1208928b, type: 3}
-  blockedSound: {fileID: 8300000, guid: a5068912e74b9d14bae7da9573bbc124, type: 3}
-  selectSound: {fileID: 8300000, guid: b952c0d8df8e8af439fcbaaea9ad36c2, type: 3}
-  backSound: {fileID: 8300000, guid: 613252b121e238d43b44291611d0e556, type: 3}
+  gateSound: {fileID: 8300000, guid: 2eb9a37d986884c688d14abee987b31c, type: 3}
+  moveSound: {fileID: 8300000, guid: 0728e59b325cc43ffb90cbf74b4f71e9, type: 3}
+  blockedSound: {fileID: 8300000, guid: e3e76ce24061542619049ca82a444d94, type: 3}
+  selectSound: {fileID: 8300000, guid: db026b38afe1240c59c554f5dd7632d6, type: 3}
+  backSound: {fileID: 8300000, guid: 2fa6b18c083d04a2abcbd5fcf2ff2800, type: 3}
 --- !u!4 &1314569743
 Transform:
   m_ObjectHideFlags: 0

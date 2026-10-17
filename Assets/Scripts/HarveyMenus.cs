@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 /// <summary>
 /// MENUS: the Talisman Holder, Harvey's Bag and the village shop, plus the "found an item" toasts.
-/// It creates itself in every level that has a pause menu (no scene setup needed) and adds TALISMANS and BAG
-/// buttons to that pause menu under Resume, copying Resume's look. Tab (keyboard) or Create/Select (gamepad)
+/// It creates itself in every level that has a pause menu (no scene setup needed) and has PauseMenuStyle restyle
+/// that pause menu and add its TALISMANS and BAG buttons. Tab (keyboard) or Create/Select (gamepad)
 /// also opens the Bag straight from gameplay. While a menu is open the game is paused, and Circle/Esc goes back:
 /// to the pause menu if it was opened from there, otherwise back to the game.
 /// Art and sounds come from Resources/HNLCatalog.
@@ -107,68 +107,19 @@ public class HarveyMenus : MonoBehaviour
         canvasRoot = (RectTransform)canvasGo.transform;
         BuildToast();
         BuildPrompt();
-        if (pause != null) AddPauseButtons(pause.PausePanel);
+        if (pause != null)
+        {
+            pausePanel = pause.PausePanel;
+            PauseMenuStyle.Apply(pausePanel,
+                () => OpenFromPause(View(ref holder, p => new TalismanHolderView(p))),
+                () => OpenFromPause(View(ref bag, p => new BagView(p))));
+        }
     }
 
     private T View<T>(ref T view, System.Func<RectTransform, T> make) where T : MenuView
     {
         if (view == null) view = make(canvasRoot);
         return view;
-    }
-
-    // ---------------------------------------------------------------- pause menu buttons
-    private void AddPauseButtons(GameObject panel)
-    {
-        pausePanel = panel;
-        var buttons = new List<Button>(panel.GetComponentsInChildren<Button>(true));
-        if (buttons.Count == 0) return;
-        buttons.Sort((a, b) => ((RectTransform)b.transform).anchoredPosition.y.CompareTo(((RectTransform)a.transform).anchoredPosition.y));
-        Button template = buttons[0];
-        var first = (RectTransform)template.transform;
-        float height = first.sizeDelta.y;
-        float top = first.anchoredPosition.y;
-        float gap = buttons.Count > 1 ? top - ((RectTransform)buttons[1].transform).anchoredPosition.y : 0f;
-        // fit them between Resume and the next button when there's room, else push the rest down
-        bool fits = gap >= height * 3f;
-        float step = fits ? gap / 3f : height * 1.5f;
-        if (!fits)
-            for (int i = 1; i < buttons.Count; i++) ((RectTransform)buttons[i].transform).anchoredPosition -= new Vector2(0, step * 2f);
-
-        Button talismans = ClonePauseButton(template, "Talismans", "TALISMANS", top - step, () => OpenFromPause(View(ref holder, p => new TalismanHolderView(p))));
-        Button bagButton = ClonePauseButton(template, "Bag", "BAG", top - step * 2f, () => OpenFromPause(View(ref bag, p => new BagView(p))));
-        talismans.transform.SetSiblingIndex(template.transform.GetSiblingIndex() + 1);
-        bagButton.transform.SetSiblingIndex(talismans.transform.GetSiblingIndex() + 1);
-
-        buttons.Insert(1, talismans);
-        buttons.Insert(2, bagButton);
-        for (int i = 0; i < buttons.Count; i++)
-        {
-            var n = buttons[i].navigation;
-            n.mode = Navigation.Mode.Explicit;
-            n.selectOnUp = buttons[(i + buttons.Count - 1) % buttons.Count];
-            n.selectOnDown = buttons[(i + 1) % buttons.Count];
-            n.selectOnLeft = n.selectOnRight = null;
-            buttons[i].navigation = n;
-        }
-    }
-
-    private static Button ClonePauseButton(Button template, string name, string label, float y, UnityEngine.Events.UnityAction onClick)
-    {
-        var copy = Instantiate(template.gameObject, template.transform.parent);
-        copy.name = name;
-        var rt = (RectTransform)copy.transform;
-        rt.anchoredPosition = new Vector2(rt.anchoredPosition.x, y);
-        var b = copy.GetComponent<Button>();
-        b.onClick = new Button.ButtonClickedEvent(); // drop Resume's persistent listener
-        b.onClick.AddListener(onClick);
-        var text = copy.GetComponentInChildren<TMP_Text>(true);
-        if (text != null) text.text = label;
-        else
-        {
-            var legacy = copy.GetComponentInChildren<Text>(true);
-            if (legacy != null) legacy.text = label;
-        }
-        return b;
     }
 
     // ---------------------------------------------------------------- opening and closing

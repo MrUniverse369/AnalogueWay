@@ -67,7 +67,9 @@ public static class HarveyMenusContentBuilder
             s.spriteAlignment = (int)(stall ? SpriteAlignment.BottomCenter : SpriteAlignment.Center);
             ti.SetTextureSettings(s);
             string file = System.IO.Path.GetFileNameWithoutExtension(p);
-            ti.spriteBorder = file.StartsWith("Card") || file.StartsWith("Tab") ? new Vector4(4, 4, 4, 4) : Vector4.zero;
+            ti.spriteBorder = file.StartsWith("Card") || file.StartsWith("Tab") ? new Vector4(4, 4, 4, 4)
+                            : file == "PauseFrame" ? new Vector4(10, 10, 10, 10)
+                            : file == "PausePlaque" ? new Vector4(5, 5, 5, 5) : Vector4.zero;
             ti.SaveAndReimport();
         }
     }
@@ -238,6 +240,14 @@ public static class HarveyMenusContentBuilder
         cat.tabSelected = S("Tab_Selected");
         cat.lockedTalisman = S("Talisman_Locked");
         cat.coin = S("Coin");
+        cat.pauseFrame = S("PauseFrame");
+        cat.pausePlaque = S("PausePlaque");
+        Sprite MainMenu(string n) => AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/UI/MainMenu/" + n + ".png");
+        cat.menuButton = MainMenu("MenuButton");
+        cat.menuButtonSelected = MainMenu("MenuButton_Selected");
+        cat.menuButtonPressed = MainMenu("MenuButton_Pressed");
+        cat.paw = MainMenu("MenuPaw");
+        cat.pauseIcons = new[] { S("Pause_Resume"), S("Pause_Talismans"), S("Pause_Bag"), S("Pause_Home"), S("Pause_Quit") };
         AudioClip Sound(string p) => AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Sound/" + p);
         cat.moveSound = Sound("Btn_Common.wav");
         cat.selectSound = Sound("ReadyGo.wav");

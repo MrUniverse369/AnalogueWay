@@ -61,10 +61,22 @@ MonoBehaviour:
   tabSelected: {fileID: 21300000, guid: 09d2e12b544fd468ca1dda240c34d5e3, type: 3}
   lockedTalisman: {fileID: 21300000, guid: 622bd0646e08d4e178e8b8bb9429f0a9, type: 3}
   coin: {fileID: 21300000, guid: 29a2132b6c4804a5fb56849f71354481, type: 3}
-  moveSound: {fileID: 8300000, guid: fcfb712341919964fbdc6f7c1208928b, type: 3}
-  selectSound: {fileID: 8300000, guid: b952c0d8df8e8af439fcbaaea9ad36c2, type: 3}
-  backSound: {fileID: 8300000, guid: 613252b121e238d43b44291611d0e556, type: 3}
-  blockedSound: {fileID: 8300000, guid: a5068912e74b9d14bae7da9573bbc124, type: 3}
-  equipSound: {fileID: 8300000, guid: 9073d7525be52b846a51eec481c2c819, type: 3}
-  buySound: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
-  pickupSound: {fileID: 8300000, guid: 897ab8182ab764842b23fb6ec9b517a9, type: 3}
+  pauseFrame: {fileID: 21300000, guid: 85c460357f69f475c9f8ee23862c9ed0, type: 3}
+  pausePlaque: {fileID: 21300000, guid: 73790a4e9f4d045c4ba344d5fbcc6782, type: 3}
+  menuButton: {fileID: 21300000, guid: 304f9f467e57540b4b2fdeba69842d32, type: 3}
+  menuButtonSelected: {fileID: 21300000, guid: 396bb122580564ea4b20553579227878, type: 3}
+  menuButtonPressed: {fileID: 21300000, guid: df8619fb5329b4e50b6830537caf3748, type: 3}
+  paw: {fileID: 21300000, guid: c467396d55765439595ffa65d66ce9f9, type: 3}
+  pauseIcons:
+  - {fileID: 21300000, guid: 2a40f98369b414ace82011406229e2f0, type: 3}
+  - {fileID: 21300000, guid: 921a5d2c739b64770915bc3af63ce1f4, type: 3}
+  - {fileID: 21300000, guid: 425e7ff6fe0ce457bb61f51c728c5f99, type: 3}
+  - {fileID: 21300000, guid: b5ee770817d1a490fafb75b93678e9fe, type: 3}
+  - {fileID: 21300000, guid: 2f58bde3c513d41208f8518b1d77f738, type: 3}
+  moveSound: {fileID: 8300000, guid: 0728e59b325cc43ffb90cbf74b4f71e9, type: 3}
+  selectSound: {fileID: 8300000, guid: db026b38afe1240c59c554f5dd7632d6, type: 3}
+  backSound: {fileID: 8300000, guid: 2fa6b18c083d04a2abcbd5fcf2ff2800, type: 3}
+  blockedSound: {fileID: 8300000, guid: e3e76ce24061542619049ca82a444d94, type: 3}
+  equipSound: {fileID: 8300000, guid: 06141f7fd66ca4b9badfb25325c724ec, type: 3}
+  buySound: {fileID: 8300000, guid: fb4b593fb119548c199f27eec9c2ac4e, type: 3}
+  pickupSound: {fileID: 8300000, guid: 13307083730e84095bd966285b651130, type: 3}

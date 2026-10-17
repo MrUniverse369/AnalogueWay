@@ -7,6 +7,7 @@
   Socket / Socket_Selected  28x28  equipped-talisman slot      Pocket / Pocket_Selected  24x24  bag pocket
   Talisman_<Name>.png  16x16 talisman gems   Item_<Name>.png  16x16 item icons   Coin.png 8x8   Talisman_Locked.png
   ShopStall.png    40x36    the village shop counter placed in the level
+  PauseFrame.png 32x32 9-slice (border 10), PausePlaque.png 16x16 9-slice (border 5), Pause_<Button>.png 12x12 icons
 
 Style: the HNL palette, flat 2-3 tone shading, soft rounded shapes (no hard corners), dark 333941 outline and a
 cream rim on the small icons like the HUD gems. Pure Python. Run from the project root:  python3 Tools/UI/menus_art.py
@@ -497,6 +498,62 @@ def shop_stall():
     return c
 
 
+# ---------------------------------------------------------------- pause menu
+def pause_frame():
+    """32x32 9-slice card (border 10): dark wood frame lit from the top, gold trim, plain purple board."""
+    c = Canvas(32, 32)
+    for y in range(32):
+        for x in range(32):
+            d = rr_dist(x, y, 32, 32, 8)
+            if d > 0:
+                continue
+            if d > -1:
+                col = WOOD_D
+            elif d > -5:
+                col = WOOD_L if y < 5 else WOOD
+            elif d > -6:
+                col = YELLOW if y < 16 else ORANGE
+            elif d > -7:
+                col = hexc("32395c")
+            else:
+                col = PURPLE
+            c.put(x, y, col)
+    return c
+
+
+def pause_plaque():
+    """16x16 9-slice title plaque (border 5), like the Talisman Holder's."""
+    c = Canvas(16, 16)
+    for y in range(16):
+        for x in range(16):
+            d = rr_dist(x, y, 16, 16, 5)
+            if d > 0:
+                continue
+            c.put(x, y, DARK if d > -1 else YELLOW if d > -2 else hexc("73275c") if y < 9 else hexc("5a2540"))
+    return c
+
+
+def pause_icon(rows, pal):
+    c = Canvas(12, 12)
+    h, w = len(rows), max(len(r) for r in rows)
+    ox, oy = (12 - w) // 2, (12 - h) // 2
+    for j, row in enumerate(rows):
+        for i, ch in enumerate(row):
+            if ch in pal:
+                c.put(ox + i, oy + j, pal[ch])
+    outline_and_rim(c)
+    return c
+
+
+PAUSE_ICONS = {
+    "Resume": (["a.....", "aaa...", "aaaaa.", "aaaaaa", "aaaab.", "aab...", "b....."], {"a": hexc("8fde5d"), "b": hexc("3ca370")}),
+    "Talismans": (["..r..", ".rpr.", "rpppr", "rprpr", "rpppr", ".rrr."], {"r": hexc("eb564b"), "p": hexc("ffffeb")}),
+    "Bag": ([".yy.", "y..y", "llll", "lbbl", "llll", "dddd"], {"y": YELLOW, "l": LEATHER_L, "b": YELLOW, "d": LEATHER}),
+    "Home": (["..rr..", ".rrrr.", "rrrrrr", ".wwww.", ".wddw.", ".wddw."], {"r": hexc("eb564b"), "w": hexc("ffffeb"), "d": hexc("a35a3c")}),
+    "Quit": (["g...g", ".g.g.", "..g..", ".g.g.", "g...g"], {"g": hexc("98b2b1")}),
+}
+
+
 def coin():
     c = Canvas(8, 8)
     for y in range(8):
@@ -523,6 +580,10 @@ def main():
     save(tab(True), "Tab_Selected.png")
     save(coin(), "Coin.png")
     save(shop_stall(), "ShopStall.png")
+    save(pause_frame(), "PauseFrame.png")
+    save(pause_plaque(), "PausePlaque.png")
+    for name, (rows, pal) in PAUSE_ICONS.items():
+        save(pause_icon(rows, pal), f"Pause_{name}.png")
     save(locked_icon(), "Talisman_Locked.png")
     for name, (cols, symbol) in TALISMANS.items():
         save(gem_icon(*cols, symbol=symbol), f"Talisman_{name}.png")

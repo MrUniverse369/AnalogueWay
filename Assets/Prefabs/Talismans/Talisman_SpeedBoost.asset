@@ -26,5 +26,5 @@ MonoBehaviour:
   - Z4A2GrassGreen
   - Z4A3GrassGreen
   animatorBool: SpeedBoost
-  activationSound: {fileID: 8300000, guid: 25d9fa76d3731442b99ac9a73cca05b4, type: 3}
+  activationSound: {fileID: 8300000, guid: 52c21f04b3d9646e08b506b42542a505, type: 3}
   speedMultiplier: 3.5556

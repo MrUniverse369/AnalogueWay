@@ -23,4 +23,4 @@ MonoBehaviour:
   traits: 4
   blockedScenes: []
   animatorBool: 
-  activationSound: {fileID: 0}
+  activationSound: {fileID: 8300000, guid: 01ce62c469f774993864f11b7bf7e619, type: 3}

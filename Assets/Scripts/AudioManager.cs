@@ -21,7 +21,12 @@ public class AudioManager : MonoBehaviour
    public AudioClip chestOpenSound; // SFX:
    public AudioClip dragonSummonSound; // SFX:
    public AudioClip playerHurtSound; // SFX: a life lost with lives remaining (losing the last life plays gameOverSound)
+   public AudioClip bossSlamSound; // SFX: a boss lands from a charge, leap or slam (falls back to bounceSound)
+   public AudioClip bossDefeatSound; // SFX: a boss vanishes when beaten (falls back to powerUpSound)
    private int lastFootstep = -1; // SFX:
+
+   public AudioClip BossSlamSound => bossSlamSound != null ? bossSlamSound : bounceSound; // SFX:
+   public AudioClip BossDefeatSound => bossDefeatSound != null ? bossDefeatSound : powerUpSound; // SFX:
 
     // MIX: one place to balance everything. 1 = the clip as recorded.
     // Defaults were measured so each sound sits at a set level against the music at musicVolume 0.35:

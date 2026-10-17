@@ -38,6 +38,16 @@ public class HNLCatalog : ScriptableObject
     public Sprite lockedTalisman;
     public Sprite coin;
 
+    [Header("Pause menu")]
+    public Sprite pauseFrame;          // 9-slice card (border 10)
+    public Sprite pausePlaque;         // 9-slice title plaque (border 5)
+    public Sprite menuButton;          // the main menu's button plates (9-slice, border 5)
+    public Sprite menuButtonSelected;
+    public Sprite menuButtonPressed;
+    public Sprite paw;                 // the main menu's paw pointer
+    [Tooltip("Resume, Talismans, Bag, Main Menu, Quit.")]
+    public Sprite[] pauseIcons;
+
     [Header("Sounds")]
     public AudioClip moveSound;
     public AudioClip selectSound;

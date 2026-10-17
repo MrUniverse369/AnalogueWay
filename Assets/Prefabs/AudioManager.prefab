@@ -178,32 +178,34 @@ MonoBehaviour:
   music: {fileID: 6491143628084602272}
   sfx: {fileID: 6491143627039374132}
   backgroundMusic: {fileID: 8300000, guid: 90eae78e8ce85a849b5b0ca11b2de641, type: 3}
-  coinSound: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
-  winSound: {fileID: 8300000, guid: 3f192a83b0ea1e043a78085be34808df, type: 3}
-  jumpSound: {fileID: 8300000, guid: 506978501e99e1440b53374fafe91e13, type: 3}
-  powerUpSound: {fileID: 8300000, guid: 9073d7525be52b846a51eec481c2c819, type: 3}
-  bounceSound: {fileID: 8300000, guid: 2526b43ac9abf8f4c8e1e80d32a5f29d, type: 3}
-  gameOverSound: {fileID: 8300000, guid: 7dfeba20bfcaa094b8d3d673dec17d5e, type: 3}
-  worldSwitchToLivingSound: {fileID: 8300000, guid: df2a53d3776b24932b3f4824e2a6260d, type: 3}
-  worldSwitchToSpiritSound: {fileID: 8300000, guid: 53d4fb3dcbd164f7b91cc8a87a36d67f, type: 3}
+  coinSound: {fileID: 8300000, guid: 610ea74cbbbac4f7e92ca78bf6a56f67, type: 3}
+  winSound: {fileID: 8300000, guid: a4319f57e3594404a9a720498b9f189b, type: 3}
+  jumpSound: {fileID: 8300000, guid: 422d659f0e7094f1bb59c509e05ccba9, type: 3}
+  powerUpSound: {fileID: 8300000, guid: 15dc7d34817da449d88c413a83aedcf8, type: 3}
+  bounceSound: {fileID: 8300000, guid: 736fe38226aa94736aa32d933769ea36, type: 3}
+  gameOverSound: {fileID: 8300000, guid: b6a4afba0e0f94824bd5dfe1e0488257, type: 3}
+  worldSwitchToLivingSound: {fileID: 8300000, guid: b36f692836b9748f9b5817cfd98e4cc0, type: 3}
+  worldSwitchToSpiritSound: {fileID: 8300000, guid: d914dd2da4b6d46efa66c3e2b84fd917, type: 3}
   footstepSounds:
-  - {fileID: 8300000, guid: 3cafb31e477034ea38cec0639e5e04d7, type: 3}
-  - {fileID: 8300000, guid: 18ec142cd5490496891b6db0f25dfa51, type: 3}
-  - {fileID: 8300000, guid: ae7a01ceb00b34a2cbbaae169dfc5ac1, type: 3}
-  - {fileID: 8300000, guid: 0760b2423c89b4f568c23a03d84d4d05, type: 3}
+  - {fileID: 8300000, guid: b63e47bd79d1148c58e73c6c2f92a7da, type: 3}
+  - {fileID: 8300000, guid: 17ec4d23c757c478c848a7c29ca266b6, type: 3}
+  - {fileID: 8300000, guid: 07487909cfd1a427dabd44edc49ea563, type: 3}
+  - {fileID: 8300000, guid: e3c1ccb7ca56b4b15a66477987a434b4, type: 3}
   footstepVolume: 0.4467
-  enemyStompDefeatSound: {fileID: 8300000, guid: 2f457c4e3c643495aaba046b67ac6361, type: 3}
-  enemyDashDefeatSound: {fileID: 8300000, guid: 8b9e76720782e4a5ba3dbee60f6f6ebb, type: 3}
-  checkpointSound: {fileID: 8300000, guid: af4a5c1a66d5f47208819ad0d885c5c3, type: 3}
-  chestOpenSound: {fileID: 8300000, guid: 897ab8182ab764842b23fb6ec9b517a9, type: 3}
-  dragonSummonSound: {fileID: 8300000, guid: 6b0c5cdd5704846dcbcdf42706aed0cb, type: 3}
-  playerHurtSound: {fileID: 8300000, guid: d65854f03416c40ffb5a93db0db89f99, type: 3}
+  enemyStompDefeatSound: {fileID: 8300000, guid: 23697a52fb5ea4e52b35005851309db2, type: 3}
+  enemyDashDefeatSound: {fileID: 8300000, guid: 782ec72ab7aea406383a0521bd779c47, type: 3}
+  checkpointSound: {fileID: 8300000, guid: d65be3872551744fba12e13c331daf0f, type: 3}
+  chestOpenSound: {fileID: 8300000, guid: 5852cbd9d77884b12a64c659a5b0b04e, type: 3}
+  dragonSummonSound: {fileID: 8300000, guid: 51edf5c8dfe944a60b298661a0801d9f, type: 3}
+  playerHurtSound: {fileID: 8300000, guid: 83e36206b24d74ee284f0d83000b2642, type: 3}
+  bossSlamSound: {fileID: 8300000, guid: f78bd4cbbf115468bba53d1711d0b05d, type: 3}
+  bossDefeatSound: {fileID: 8300000, guid: f6b5f1432d1ee486685506dd77763cb5, type: 3}
   musicVolume: 0.35
   coinVolume: 0.18
   winVolume: 0.54
   jumpVolume: 0.82
   powerUpVolume: 0.79
-  bounceVolume: 0.3
+  bounceVolume: 0.43
   gameOverVolume: 1
   worldSwitchVolume: 1
   enemyDefeatVolume: 1

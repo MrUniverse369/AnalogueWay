@@ -23,5 +23,5 @@ MonoBehaviour:
   traits: 0
   blockedScenes: []
   animatorBool: 
-  activationSound: {fileID: 0}
+  activationSound: {fileID: 8300000, guid: b43b4f8c6c4dd434aa741bfa7994b89d, type: 3}
   maxFallSpeed: 1.6

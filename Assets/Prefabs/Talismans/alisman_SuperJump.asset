@@ -22,5 +22,5 @@ MonoBehaviour:
   traits: 0
   blockedScenes: []
   animatorBool: 
-  activationSound: {fileID: 0}
+  activationSound: {fileID: 8300000, guid: 616dee9c25aec4ce8ab13be307fadf61, type: 3}
   jumpMultiplier: 1.62
