@@ -25,6 +25,7 @@ public static class GameSession
 
     public static SaveData Capture(string sceneName)
     {
+        NoteReached(sceneName); // ZONEMAP:
         return new SaveData
         {
             sceneName = sceneName,
@@ -33,7 +34,56 @@ public static class GameSession
             chi = PlayerController.chi,
             deaths = HurtPlayer.oopsCount,
             inLivingWorld = changeWorld.lWorld,
+            furthestScene = furthestScene, // ZONEMAP:
         };
+    }
+
+    // ZONEMAP: the furthest level reached. It survives NewGame, so starting over never re-locks the zone select.
+    private static string furthestScene;
+    private static bool furthestLoaded;
+
+    /// <summary>Build index of the furthest level reached (1 = the first level if there is no save yet).</summary>
+    public static int FurthestBuildIndex
+    {
+        get
+        {
+            LoadFurthest();
+            return Mathf.Max(1, BuildIndexOf(furthestScene));
+        }
+    }
+
+    private static void LoadFurthest()
+    {
+        if (furthestLoaded) return;
+        furthestLoaded = true;
+        if (SaveSystem.TryLoad(out SaveData data))
+            furthestScene = string.IsNullOrEmpty(data.furthestScene) ? data.sceneName : data.furthestScene;
+    }
+
+    private static void NoteReached(string sceneName)
+    {
+        LoadFurthest();
+        if (BuildIndexOf(sceneName) > BuildIndexOf(furthestScene)) furthestScene = sceneName;
+    }
+
+    /// <summary>ZONEMAP: start a level picked on the zone select. Keeps saved coins/chi, with full lives in the default world.</summary>
+    public static void StartLevel(string sceneName)
+    {
+        if (SaveSystem.TryLoad(out SaveData data)) Apply(data);
+        else NewGame();
+        HurtPlayer.pLivesCount = StartingLives;
+        changeWorld.lWorld = false;
+        SaveProgress(sceneName);
+        SceneManager.LoadScene(sceneName);
+    }
+
+    /// <summary>Build index of a scene by name, or -1 if it isn't in Build Settings.</summary>
+    public static int BuildIndexOf(string sceneName)
+    {
+        if (string.IsNullOrEmpty(sceneName)) return -1;
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+            if (SceneNameAt(i) == sceneName) return i;
+        return -1;
     }
 
     public static void Apply(SaveData data)

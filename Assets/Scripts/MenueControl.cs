@@ -31,6 +31,13 @@ public class MenueControl : MonoBehaviour
         isGamePaused = false;
         if (!GameSession.TryContinue()) LoadFirstLevel();
     }
+    // ZONEMAP: main menu Zone Select button
+    public void LoadZoneSelect()
+    {
+        Time.timeScale = 1f;
+        isGamePaused = false;
+        SceneManager.LoadScene(ZoneSelectMap.SceneName);
+    }
     public void QuitGame()
     {
 

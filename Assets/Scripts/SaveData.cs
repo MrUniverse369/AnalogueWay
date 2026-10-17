@@ -20,4 +20,7 @@ public class SaveData
     public float chi = GameSession.StartingChi;
     public int deaths;
     public bool inLivingWorld;
+
+    // ZONEMAP: the furthest level reached, which unlocks the zone select. Older saves leave it empty and use sceneName.
+    public string furthestScene;
 }
