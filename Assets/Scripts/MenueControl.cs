@@ -1,5 +1,8 @@
 using UnityEngine;
+using UnityEngine.EventSystems; // PAUSE:
+using UnityEngine.InputSystem; // PAUSE:
 using UnityEngine.SceneManagement;
+using UnityEngine.UI; // PAUSE:
 
 public class MenueControl : MonoBehaviour
 {
@@ -41,7 +44,9 @@ public class MenueControl : MonoBehaviour
 
     public void PauseMenue()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // PAUSE: only a real pause panel toggles. In the main menu pauseMenueUI is the menu itself, so pausing
+        // there used to freeze time and then hide the whole menu (with this script on it), leaving no way back.
+        if (pauseMenueUI != null && pauseMenueUI != gameObject && PausePressed())
         {
             if (isGamePaused)
             {
@@ -55,11 +60,21 @@ public class MenueControl : MonoBehaviour
         }
     }
 
+    // PAUSE: Esc on the keyboard, or the gamepad Start button (Options on a PS5 DualSense, Menu on Xbox)
+    private static bool PausePressed()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) return true;
+        Gamepad pad = Gamepad.current;
+        return pad != null && pad.startButton.wasPressedThisFrame;
+    }
+
     public void Resume()
     {
         pauseMenueUI.SetActive(false);
         Time.timeScale = 1f;
         isGamePaused = false;
+        if (PowerUpManager.Instance != null) PowerUpManager.Instance.CancelQueuedPresses(); // PAUSE: the Cross that clicked Resume isn't a dash
+        if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(null); // PAUSE:
     }
 
     public void Pause()
@@ -67,6 +82,15 @@ public class MenueControl : MonoBehaviour
         pauseMenueUI.SetActive(true);
         Time.timeScale = 0f;
         isGamePaused = true;
+        SelectFirstButton(); // PAUSE: gives a controller something to navigate from
+    }
+
+    // PAUSE: highlight the first button in the pause panel (Resume) so the stick/d-pad and Cross work straight away
+    private void SelectFirstButton()
+    {
+        if (EventSystem.current == null) return;
+        Button first = pauseMenueUI.GetComponentInChildren<Button>();
+        EventSystem.current.SetSelectedGameObject(first != null ? first.gameObject : null);
     }
 }
 

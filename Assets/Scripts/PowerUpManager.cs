@@ -50,6 +50,14 @@ public class PowerUpManager : MonoBehaviour
     public bool IsSlotActive(int slotIndex) =>
         (uint)slotIndex < (uint)slots.Length && slots[slotIndex].isActive;
 
+    /// <summary>HUD: seconds left on an active slot (0 when not active).</summary>
+    public float TimeLeft(int slotIndex) =>
+        IsSlotActive(slotIndex) ? slots[slotIndex].timeLeft : 0f;
+
+    /// <summary>HUD: the talisman equipped in a slot (null when empty or out of range).</summary>
+    public Talisman TalismanIn(int slotIndex) =>
+        (uint)slotIndex < (uint)slots.Length ? slots[slotIndex].talisman : null;
+
     public bool IsActive(Talisman talisman)
     {
         foreach (Slot slot in slots)
@@ -96,6 +104,13 @@ public class PowerUpManager : MonoBehaviour
         // Expire first, then read input, so a held key re-triggers in the same frame
         // with no one-frame gap in the effect.
         for (int i = 0; i < slots.Length; i++) Tick(slots[i], dt, i);
+
+        // PAUSE: menu presses (Cross is also "submit") must not queue a talisman for when the game resumes
+        if (MenueControl.isGamePaused)
+        {
+            foreach (Slot slot in slots) slot.pressQueued = false;
+            return;
+        }
         for (int i = 0; i < slots.Length; i++) HandleInput(i);
     }
 
@@ -109,6 +124,12 @@ public class PowerUpManager : MonoBehaviour
             if (slots[i].isActive) End(i);
             slots[i].cooldownLeft = 0f;
         }
+    }
+
+    /// <summary>PAUSE: drop presses that arrived this frame (e.g. the Cross that clicked Resume).</summary>
+    public void CancelQueuedPresses()
+    {
+        foreach (Slot slot in slots) slot.pressQueued = false;
     }
 
     /// <summary>Swap the talisman in a slot at runtime (pickups, shops, unlocks).</summary>

@@ -16,7 +16,7 @@ MonoBehaviour:
   duration: 0.5
   cooldown: 0
   retriggerWhileHeld: 1
-  traits: -1
+  traits: 3
   blockedScenes:
   - Z4A1GrassGreen
   - Z4A2GrassGreen

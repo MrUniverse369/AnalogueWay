@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3746618333133400249}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.770655, y: 0.33368516, z: 0.60372025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3746618333133400248
 MonoBehaviour:
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   slots:
-  - talisman: {fileID: 11400000, guid: 1aac3c739622546a0b673ed8899e23df, type: 2}
+  - talisman: {fileID: 11400000, guid: 3e168233ebdfd42ff97ad737cfd876c9, type: 2}
     keyboardKey: 122
   - talisman: {fileID: 11400000, guid: ecb01effa4b78459f8dc9dc4f994df7f, type: 2}
     keyboardKey: 120

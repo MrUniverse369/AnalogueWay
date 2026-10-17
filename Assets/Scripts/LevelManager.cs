@@ -10,6 +10,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     private AudioManager audioManager;
 
+    /// <summary>BOSS: raised after the player has respawned, so things like the boss fight can reset.</summary>
+    public static event System.Action Respawned;
+
     // PERF: one shared reference instead of every hazard scanning the whole scene for it.
     private static LevelManager instance;
     public static LevelManager Instance
@@ -67,6 +70,7 @@ public class LevelManager : MonoBehaviour
 
         }
         changeWorld.RequestRefresh(); // PERF: the loop above re-enables objects from both worlds; let changeWorld correct them
+        Respawned?.Invoke(); // BOSS:
     }
 
 }

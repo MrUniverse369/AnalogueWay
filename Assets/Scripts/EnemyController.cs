@@ -54,7 +54,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("pStomp") && gameObject.CompareTag("japanBoss") != true)
+        if (other.CompareTag("pStomp") && gameObject.CompareTag("japanBoss") != true && StompEnemy.LandsOnTop(other, GetComponent<Collider2D>())) // STOMP: only from above
         {
             if (!enemyDeathAnimActivate && audioManager != null) audioManager.PlaySfxOneShot(audioManager.enemyStompDefeatSound); // SFX: once per defeat
             if (!enemyDeathAnimActivate) BeginDeath(); // DEATH:

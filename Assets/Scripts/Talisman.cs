@@ -8,6 +8,7 @@ public enum TalismanTrait
     None = 0,
     EnemyImmunity = 1 << 0,            // enemies can't hurt or knock back the player
     DefeatsEnemiesOnContact = 1 << 1,  // touching an enemy destroys it
+    WaterBreathing = 1 << 2,           // WATER: no breath is used underwater
 }
 
 /// <summary>Everything a talisman is allowed to touch.</summary>

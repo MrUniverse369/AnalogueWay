@@ -31,6 +31,8 @@ public class PlayerController : CharecterBehaviour
     [SerializeField] private float pushBackForceY;
     [SerializeField] private playerBodyDetectionArea pBDARef;
     [SerializeField] private GameObject dragon;
+    [Tooltip("Untick in levels where the dragon mount isn't allowed (boss battles).")]
+    [SerializeField] private bool canSummonDragon = true; // DRAGON:
     [SerializeField] private GameObject stompBox;
     [SerializeField] private float turningscale;
     [SerializeField] private bool normalizedVerticalVelocity;
@@ -50,6 +52,12 @@ public class PlayerController : CharecterBehaviour
     private static readonly int JumpPowerUpParam = Animator.StringToHash("JumpPowerUp");
     private static readonly int MovementState = Animator.StringToHash("Base Layer.Movement"); // ANIM:
     private bool superJumpAnimPlaying; // ANIM: true from a super jump until the player stops rising
+    // STOMP: true while the player is airborne without having chosen to be (knocked back, or dropped in at the
+    // level start / a respawn). Cleared on landing. Stomps only count during a deliberate jump or fall.
+    private bool uncontrolledFall;
+    private const float StompMinFallSpeed = 0.5f; // STOMP: units/second downward before a fall counts
+    /// <summary>STOMP: false while a fall isn't the player's own doing, so landing on an enemy isn't a stomp.</summary>
+    public static bool StompsAllowed { get; private set; }
 
     private void Awake()
     {
@@ -69,7 +77,7 @@ public class PlayerController : CharecterBehaviour
 
     void OnEnable()
     {
-
+        uncontrolledFall = true; // STOMP: level start and respawn drop the player in; that landing isn't a stomp
         pControls.Gameplay.Enable();
     }
 
@@ -82,6 +90,7 @@ public class PlayerController : CharecterBehaviour
 
     void MountActive()
     {
+        if (!canSummonDragon) return; // DRAGON: switched off in levels like boss battles
         mountActive = true;
     }
 
@@ -138,7 +147,11 @@ public class PlayerController : CharecterBehaviour
 
         if (normalizedVerticalVelocity) camControllerScriptRef.SetyAxisOffset = charCamViewFallOffset;
 
-        bool falling = v.y < 0;
+        if (pBDARef.pushBackCounter > 0) uncontrolledFall = true; // STOMP: a knockback takes the fall out of the player's hands
+        StompsAllowed = !uncontrolledFall; // STOMP:
+        // STOMP: the stomp box only exists during a deliberate, real fall. Standing still can read as a tiny negative
+        // speed, which used to switch the box on for a frame and "stomp" an enemy the player was merely standing in.
+        bool falling = v.y < -StompMinFallSpeed && StompsAllowed;
         if (stompBox.activeSelf != falling) stompBox.SetActive(falling); // PERF: only when it actually changes
 
         //WHY OFFESSEET CANNOT BE MINUS INBOTH DIRECTIONS IF ANY DIRECTION OFF X IT AFFECTS THE OFFSET IN CAM SCRIPT
@@ -171,6 +184,8 @@ public class PlayerController : CharecterBehaviour
         if (pBDARef.pushBackCounter <= 0)
         {
             if (mountActive != true) CharJump();
+            // STOMP: back in control once really landed (feet down and not still rising from the knockback), or flying the dragon
+            if ((isGrounded && rb2D.linearVelocity.y <= 0.01f) || mountActive) uncontrolledFall = false;
             CharMovement();
             PlayFootsteps(); // SFX:
 
