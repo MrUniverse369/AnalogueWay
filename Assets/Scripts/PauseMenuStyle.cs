@@ -95,8 +95,12 @@ public class PauseMenuStyle : MonoBehaviour
         for (int i = 0; i < buttons.Count; i++)
             MenuUI.Link(buttons[i], buttons[(i + buttons.Count - 1) % buttons.Count], buttons[(i + 1) % buttons.Count], null, null);
 
-        MenuUI.Text("Hint", card, new Vector2(0, -top + 11), new Vector2(CardWidth - 16, 7), 5, MenuUI.Cream, TextAlignmentOptions.Center,
-            "CROSS/ENTER: SELECT   OPTIONS/ESC: RESUME");
+        if (GameSession.IsArcade) // ARCADE: nothing is saved, so say so where quitting happens
+            MenuUI.Text("Hint", card, new Vector2(0, -top + 11), new Vector2(CardWidth - 16, 7), 5, MenuUI.Orange, TextAlignmentOptions.Center,
+                "ARCADE: PROGRESS IS NOT SAVED");
+        else
+            MenuUI.Text("Hint", card, new Vector2(0, -top + 11), new Vector2(CardWidth - 16, 7), 5, MenuUI.Cream, TextAlignmentOptions.Center,
+                "CROSS/ENTER: SELECT   OPTIONS/ESC: RESUME");
 
         paw = MenuUI.Image("Paw", panel.transform, Vector2.zero, new Vector2(11, 10), cat.paw).rectTransform;
         paw.gameObject.SetActive(false);

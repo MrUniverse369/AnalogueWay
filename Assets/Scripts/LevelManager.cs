@@ -39,9 +39,51 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pScriptRef = FindObjectOfType<PlayerController>();
+        if (pScriptRef == null) pScriptRef = FindObjectOfType<PlayerController>(); // ARCADE: keep the scene's reference; the search misses a player hidden by a game over
         resetObjsArr = FindObjectsOfType<ResetOnRespawn>();
 
+    }
+
+    // ARCADE: where Harvey last stood still on solid ground, used instead of the checkpoint on game over
+    private const float SafeGroundTime = 0.25f; // on the same ground this long before it counts
+    private Vector3? arcadeSafePoint;
+    private float groundedFor;
+    private readonly RaycastHit2D[] groundHits = new RaycastHit2D[8];
+    private Collider2D lastGround; // PERF: the ground checked last time, so standing on it costs one raycast
+    private bool lastGroundSolid;
+
+    private void FixedUpdate()
+    {
+        if (GameSession.IsArcade) TrackArcadeSafePoint();
+    }
+
+    private void TrackArcadeSafePoint()
+    {
+        if (pScriptRef == null || !pScriptRef.gameObject.activeInHierarchy || !pScriptRef.GetIsGrounded || !OnSolidGround(pScriptRef.transform))
+        {
+            groundedFor = 0f;
+            return;
+        }
+        groundedFor += Time.fixedDeltaTime;
+        if (groundedFor >= SafeGroundTime) arcadeSafePoint = pScriptRef.transform.position;
+    }
+
+    // ground that stays put: not a moving or falling tile, an enemy or a hazard, so respawning there is safe
+    private bool OnSolidGround(Transform player)
+    {
+        int count = Physics2D.RaycastNonAlloc(player.position, Vector2.down, groundHits, 2f);
+        for (int i = 0; i < count; i++)
+        {
+            Collider2D c = groundHits[i].collider;
+            if (c == null || c.isTrigger || c.transform.IsChildOf(player)) continue;
+            if (c == lastGround) return lastGroundSolid; // PERF:
+            lastGround = c;
+            lastGroundSolid = !(c.attachedRigidbody != null && c.attachedRigidbody.bodyType != RigidbodyType2D.Static)
+                && c.GetComponentInParent<ResetOnRespawn>() == null && c.GetComponentInParent<MovingTiles>() == null
+                && c.GetComponentInParent<MovingObstacles>() == null && c.GetComponentInParent<HurtPlayer>() == null;
+            return lastGroundSolid; // the first solid thing under his feet
+        }
+        return false;
     }
 
     public void Respawn()
@@ -57,7 +99,9 @@ public class LevelManager : MonoBehaviour
         pScriptRef.gameObject.SetActive(false);
         gameOverScreen.SetActive(true);
         yield return new WaitForSeconds(respawnDelay);
-        pScriptRef.transform.position = ReSpawnPos.transform.position;
+        // ARCADE: back where he fell (the last safe ground before it); saved play goes back to the checkpoint
+        pScriptRef.transform.position = GameSession.IsArcade && arcadeSafePoint.HasValue ? arcadeSafePoint.Value : ReSpawnPos.transform.position;
+        groundedFor = 0f;
         pScriptRef.gameObject.SetActive(true);
         gameOverScreen.SetActive(false);
         HurtPlayer.pLivesCount = 3;

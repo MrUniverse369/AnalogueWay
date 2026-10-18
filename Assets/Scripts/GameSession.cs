@@ -13,6 +13,60 @@ public static class GameSession
     public const int StartingLives = 3;
     public const float StartingChi = 90f;
 
+    /// <summary>
+    /// ARCADE: a run that is never saved. Nothing is written to any save file while it is on, and on game over
+    /// Harvey comes back where he fell (see LevelManager). It ends when the player goes back to the main menu.
+    /// </summary>
+    public static bool IsArcade { get; private set; }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        IsArcade = false;
+        furthestScene = null;
+        furthestLoaded = false;
+    }
+
+    // ---------------------------------------------------------------- SLOTS: save files
+    /// <summary>SLOTS: make save file n (1 to SaveSystem.SlotCount) the one that is played and saved to.</summary>
+    public static void SelectSlot(int number)
+    {
+        SaveSystem.ActiveSlot = SaveSystem.SlotKey(number);
+        furthestScene = null; // the zone select unlocks per file
+        furthestLoaded = false;
+    }
+
+    /// <summary>SLOTS: start a new game in save file n, replacing whatever was in it, and open the first level.</summary>
+    public static void StartNewGame(int number)
+    {
+        IsArcade = false;
+        SelectSlot(number);
+        SaveSystem.Delete(); // a fresh file: nothing (not even the zone select) carries over from what was there
+        furthestLoaded = true; // and there is nothing to read back
+        NewGame();
+        SaveProgressForBuildIndex(1);
+        SceneManager.LoadScene(1);
+    }
+
+    /// <summary>SLOTS: load save file n and open its level. Returns false if the file is empty or unusable.</summary>
+    public static bool ContinueSlot(int number)
+    {
+        IsArcade = false;
+        SelectSlot(number);
+        return TryContinue();
+    }
+
+    /// <summary>ARCADE: start an unsaved run from the first level with a new-game loadout.</summary>
+    public static void StartArcade()
+    {
+        IsArcade = true;
+        NewGame();
+        SceneManager.LoadScene(1);
+    }
+
+    /// <summary>ARCADE: back to normal, saved play (called when the player returns to the main menu).</summary>
+    public static void EndArcade() => IsArcade = false;
+
     /// <summary>Reset progress to the start of a new game.</summary>
     public static void NewGame()
     {
@@ -41,7 +95,7 @@ public static class GameSession
         return data;
     }
 
-    // ZONEMAP: the furthest level reached. It survives NewGame, so starting over never re-locks the zone select.
+    // ZONEMAP: the furthest level reached in the active save file. SLOTS: read per file; StartNewGame clears it.
     private static string furthestScene;
     private static bool furthestLoaded;
 
@@ -76,6 +130,7 @@ public static class GameSession
     /// <summary>ZONEMAP: start a level picked on the zone select. Keeps saved coins/chi, with full lives in the default world.</summary>
     public static void StartLevel(string sceneName)
     {
+        IsArcade = false; // ARCADE: the zone select plays the active save file
         if (SaveSystem.TryLoad(out SaveData data)) Apply(data);
         else NewGame();
         HurtPlayer.pLivesCount = StartingLives;
@@ -106,8 +161,12 @@ public static class GameSession
     /// <summary>Save current progress against the active scene (used by checkpoints).</summary>
     public static void SaveProgress() => SaveProgress(SceneManager.GetActiveScene().name);
 
-    /// <summary>Save current progress against a given scene (used when leaving a level).</summary>
-    public static void SaveProgress(string sceneName) => SaveSystem.Save(Capture(sceneName));
+    /// <summary>Save current progress against a given scene (used when leaving a level). Does nothing in arcade mode.</summary>
+    public static void SaveProgress(string sceneName)
+    {
+        if (IsArcade) return; // ARCADE: never saved
+        SaveSystem.Save(Capture(sceneName));
+    }
 
     /// <summary>Save progress so Continue starts at the scene with this build index (falls back to the active scene).</summary>
     public static void SaveProgressForBuildIndex(int buildIndex) =>

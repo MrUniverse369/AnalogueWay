@@ -6,7 +6,7 @@
                      excavation pit with a ladder, a rope grid, crates, a pickaxe, and a lantern post.
   MenuTitle.png      "HARVEY'S NINE LIVES" in soft pixel letters: warm gradient, rounded purple outline, soft shadow.
   MenuButton*.png    9-slice button plates (normal / selected / pressed) in the HUD frame style, border 5.
-  Icon_*.png         gem (play), journal (continue), compass (zone select).
+  Icon_*.png         gem (play), journal (continue), compass (zone select), joystick (arcade).
   MenuPaw.png        the paw pointer beside the selected button.
   LanternGlow.png    soft glow the menu flickers over the lantern.
   DustMote.png       a speck of drifting dust.
@@ -379,6 +379,24 @@ def mote():
     return c
 
 
+def icon_arcade():
+    """A little arcade joystick: red ball on a stick, in a purple base with a yellow button."""
+    c = Canvas(12, 12)
+    for y in range(12):
+        for x in range(12):
+            d = math.hypot(x - 5.5, y - 2.5)
+            if d <= 2.7:
+                c.put(x, y, DARK if d > 2.0 else hexc("ffffeb") if (x, y) == (4, 1) else hexc("eb564b") if x + y < 9 else hexc("a33a3a"))
+    c.rect(5, 5, 6, 7, DARK)
+    c.rect(0, 7, 11, 11, DARK)
+    c.rect(1, 8, 10, 10, hexc("473b78"))
+    c.rect(1, 8, 10, 8, hexc("6a5aa8"))
+    c.rect(5, 6, 6, 8, hexc("98b2b1"))
+    c.put(8, 9, hexc("ffe478"))
+    c.put(9, 9, hexc("ffe478"))
+    return c
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     save(backdrop(), "MenuBackdrop.png")
@@ -389,6 +407,7 @@ def main():
     save(icon_gem(), "Icon_Play.png")
     save(icon_journal(), "Icon_Continue.png")
     save(icon_compass(), "Icon_ZoneSelect.png")
+    save(icon_arcade(), "Icon_Arcade.png")
     save(paw(), "MenuPaw.png")
     save(glow(), "LanternGlow.png")
     save(mote(), "DustMote.png")

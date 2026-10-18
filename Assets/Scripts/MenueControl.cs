@@ -15,30 +15,39 @@ public class MenueControl : MonoBehaviour
     public void LoadMainMenue()
     {
         Time.timeScale = 1f;
+        GameSession.EndArcade(); // ARCADE: quitting a run keeps nothing
         SceneManager.LoadScene(0);
         isGamePaused = false;
 
     }
+    // SLOTS: main menu Play button. Opens the save files: pick an empty one for a new game, or a used one to
+    // continue it or start over in it (SaveSlotMenu asks before anything is overwritten).
     public void LoadFirstLevel()
     {
         Time.timeScale = 1f;
-        GameSession.NewGame(); // SAVE: Play starts fresh
-        GameSession.SaveProgressForBuildIndex(1); // SAVE: and replaces the old save
-        SceneManager.LoadScene(1);
         isGamePaused = false;
+        SaveSlotMenu.Open(SaveSlotMenu.Mode.Play);
     }
-    // SAVE: hook the main menu Continue button to this. Starts a new game if there is no usable save.
+    // SLOTS: main menu Continue button. Opens the save files to pick one to continue.
     public void ContinueGame()
     {
         Time.timeScale = 1f;
         isGamePaused = false;
-        if (!GameSession.TryContinue()) LoadFirstLevel();
+        SaveSlotMenu.Open(SaveSlotMenu.Mode.Continue);
     }
-    // ZONEMAP: main menu Zone Select button
+    // ARCADE: main menu Arcade button. An unsaved run from the first level.
+    public void StartArcade()
+    {
+        Time.timeScale = 1f;
+        isGamePaused = false;
+        GameSession.StartArcade();
+    }
+    // ZONEMAP: main menu Zone Select button (plays the save file used last)
     public void LoadZoneSelect()
     {
         Time.timeScale = 1f;
         isGamePaused = false;
+        GameSession.EndArcade(); // ARCADE:
         SceneManager.LoadScene(ZoneSelectMap.SceneName);
     }
     public void QuitGame()

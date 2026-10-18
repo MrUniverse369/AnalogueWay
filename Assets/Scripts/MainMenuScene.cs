@@ -31,6 +31,7 @@ public class MainMenuScene : MonoBehaviour
     [SerializeField] private GameObject firstSelected;
 
     private Vector3 titleHome;
+    private readonly Vector3[] corners = new Vector3[4]; // PERF: reused by FollowSelection instead of a new array each frame
     private Transform[] dust;
     private Vector2[] dustVelocity;
     private float animTime;
@@ -118,7 +119,6 @@ public class MainMenuScene : MonoBehaviour
         pointer.gameObject.SetActive(target != null);
         if (target == null) return;
         // sit just left of the button, nudging toward it like a beckoning paw
-        Vector3[] corners = new Vector3[4];
         target.GetWorldCorners(corners);
         float scale = pointer.lossyScale.x;
         float nudge = Mathf.Round(Mathf.Sin(animTime * 6f) * 1.5f);

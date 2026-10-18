@@ -91,7 +91,7 @@ public class ZoneSelectMap : MonoBehaviour
         player.position = nodes[current].transform.position;
         ShowNode(current);
         if (coinsText != null)
-            coinsText.text = $"COINS {(SaveSystem.TryLoad(out SaveData data) ? data.coins : 0)}"; // what a level picked here starts with
+            coinsText.text = $"FILE {SaveSystem.SlotNumber(SaveSystem.ActiveSlot)}   COINS {(SaveSystem.TryLoad(out SaveData data) ? data.coins : 0)}"; // SLOTS: which file a level picked here plays, and what it starts with
         StartCoroutine(FadeTo(0f, () => busy = false));
     }
 
