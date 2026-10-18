@@ -44,6 +44,7 @@ public class OpenChest : MonoBehaviour
                 animatorRef.SetTrigger("ChestOpenTrig");
                 if (audioManager != null) audioManager.PlaySfxOneShot(audioManager.chestOpenSound); // SFX:
                 if (coinCount > 0) StartCoroutine(BurstCoins()); // COINS:
+                StartCoroutine(SparkleBurst()); // FX:
                 GiveBonusItem(); // MENUS:
 
         }
@@ -55,6 +56,17 @@ public class OpenChest : MonoBehaviour
         if (bonusItem == null || !Inventory.Claim($"chest:{gameObject.scene.name}/{name}@{Mathf.RoundToInt(transform.position.x * 10f)}")) return;
         if (Inventory.Add(bonusItem, bonusAmount) == 0) return;
         HarveyMenus.Toast(bonusItem.Icon, "FOUND " + bonusItem.DisplayName.ToUpperInvariant(), "IT'S IN YOUR BAG");
+    }
+
+    // FX: sparkles fountain out of the opening lid, alongside the coin arcs
+    private IEnumerator SparkleBurst()
+    {
+        yield return new WaitForSeconds(burstDelay);
+        Vector3 lid = transform.position + Vector3.up * 0.35f;
+        PixelFX.Burst(lid, 10, 2f, 4.2f, PixelFX.CoinGold, 0.35f, 0.6f, 1, PixelShape.Square, PixelMotion.Fall, true, PixelLayer.Front, 90f, 100f);
+        PixelFX.Burst(lid, 5, 1.2f, 2.6f, new[] { PixelFX.Cream, PixelFX.Yellow }, 0.4f, 0.6f, 1, PixelShape.Star, PixelMotion.Float, true, PixelLayer.Front, 90f, 140f);
+        yield return new WaitForSeconds(0.2f);
+        PixelFX.Burst(lid, 4, 0.8f, 1.6f, new[] { PixelFX.Cream }, 0.4f, 0.7f, 1, PixelShape.Cross, PixelMotion.Float, true, PixelLayer.Front, 90f, 160f);
     }
 
     // COINS:

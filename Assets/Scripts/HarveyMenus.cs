@@ -157,6 +157,7 @@ public class HarveyMenus : MonoBehaviour
         openedFromPause = false;
         Time.timeScale = 0f;
         MenueControl.isGamePaused = true;
+        MenuBlur.Show(GetComponentInChildren<Canvas>(true), this); // FX: pixelated game view behind the bag/shop
         Show(view);
     }
 
@@ -181,6 +182,7 @@ public class HarveyMenus : MonoBehaviour
             if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(pauseButtonToReselect);
             return;
         }
+        MenuBlur.Hide(this); // FX:
         Time.timeScale = 1f;
         MenueControl.isGamePaused = false;
         if (PowerUpManager.Instance != null) PowerUpManager.Instance.CancelQueuedPresses(); // the Cross that bought or equipped isn't a dash

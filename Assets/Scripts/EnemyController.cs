@@ -57,6 +57,7 @@ public class EnemyController : MonoBehaviour
         if (other.CompareTag("pStomp") && gameObject.CompareTag("japanBoss") != true && StompEnemy.LandsOnTop(other, GetComponent<Collider2D>())) // STOMP: only from above
         {
             if (!enemyDeathAnimActivate && audioManager != null) audioManager.PlaySfxOneShot(audioManager.enemyStompDefeatSound); // SFX: once per defeat
+            if (!enemyDeathAnimActivate) StompCombo.Register(transform.position); // FX: only successful stomps build the combo
             if (!enemyDeathAnimActivate) BeginDeath(); // DEATH:
             animCounter = 0.7f;
             enemyDeathAnimActivate = true;
@@ -75,6 +76,9 @@ public class EnemyController : MonoBehaviour
     // DEATH: remember which state we were in, so we can tell when the death state takes over
     private void BeginDeath()
     {
+        // FX: the shared hit flash (as on Harvey and the bosses) for a moment before the smoke plays
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (sr != null) SpriteFX.On(sr).Flash(Color.white, 0.12f);
         stateWhenKilled = animator != null ? animator.GetCurrentAnimatorStateInfo(0).fullPathHash : 0;
         deathClipStarted = false;
         deathClipLeft = 0f;

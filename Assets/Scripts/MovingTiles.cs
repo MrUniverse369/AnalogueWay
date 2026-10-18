@@ -10,6 +10,11 @@ public class MovingTiles : MonoBehaviour
     private Vector3 CurTargetPos;
     private Vector3 originalScale;
 
+    /// <summary>SLASH: the object this patrol moves, and the x range of the patrol (for the samurai's dash).</summary>
+    public Transform ObjToMove => objToMove != null ? objToMove.transform : null;
+    public float MinX => Mathf.Min(pointA.position.x, pointB.position.x);
+    public float MaxX => Mathf.Max(pointA.position.x, pointB.position.x);
+
 
     void Start()
     {

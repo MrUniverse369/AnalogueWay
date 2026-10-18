@@ -1,0 +1,9 @@
+# x y w h pivotX  (pixels; y from the bottom; pivotX from the frame's left edge)
+0 0 39 48 4
+40 0 41 48 7
+82 0 66 48 14
+149 0 59 48 9
+209 0 63 48 6
+273 0 40 48 6
+314 0 43 48 8
+358 0 37 48 6

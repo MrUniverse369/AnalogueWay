@@ -82,6 +82,7 @@ public class PlayerWater : MonoBehaviour
     private readonly Collider2D[] hits = new Collider2D[8];
 
     private SpriteRenderer overlay;
+    private MaterialPropertyBlock overlayBlock; // FX:
     private ParticleSystem bubbles;
     private Transform meterRoot;
     private SpriteRenderer[] meter;
@@ -165,12 +166,52 @@ public class PlayerWater : MonoBehaviour
         rb.gravityScale = baseGravity * gravityMultiplier;
         gravityLowered = true;
         if (bubbles != null) bubbles.Emit(6); // splash
+        Splash(rb.linearVelocity.y); // FX:
+    }
+
+    // FX: water flies up where Harvey breaks the surface (bigger the faster he hits it)
+    private void Splash(float verticalSpeed)
+    {
+        float y = currentWater != null ? currentWater.bounds.max.y : body.bounds.min.y;
+        Vector3 at = new Vector3(body.bounds.center.x, y, 0f);
+        int count = Mathf.Clamp(Mathf.RoundToInt(6 + Mathf.Abs(verticalSpeed) * 1.5f), 6, 16);
+        PixelFX.Burst(at, count, 1.5f, 3f + Mathf.Abs(verticalSpeed) * 0.3f, PixelFX.Water, 0.35f, 0.6f, 1, PixelShape.Square, PixelMotion.Fall, false, PixelLayer.Front, 90f, 80f, 0.15f);
     }
 
     private void LeaveWater()
     {
         if (gravityLowered) rb.gravityScale = baseGravity;
         gravityLowered = false;
+        Splash(rb.linearVelocity.y * 0.6f); // FX:
+        dripLeft = 1.2f;                   // FX: water drips off Harvey for a moment after he climbs out
+    }
+
+    private float dripLeft, dripTimer, speckTimer; // FX:
+
+    // FX: drips after leaving the water; drifting specks while underwater (alongside the bubbles)
+    private void WaterParticles()
+    {
+        if (dripLeft > 0f && !BodyInWater)
+        {
+            dripLeft -= Time.deltaTime;
+            dripTimer -= Time.deltaTime;
+            if (dripTimer <= 0f)
+            {
+                dripTimer = Random.Range(0.08f, 0.2f);
+                Bounds b = body.bounds;
+                PixelFX.Emit(new Vector3(Random.Range(b.min.x, b.max.x), Random.Range(b.min.y, b.center.y), 0f), new Vector2(0f, -0.5f),
+                    PixelFX.Pick(PixelFX.Water), 0.45f, 1, PixelShape.Square, PixelMotion.Fall);
+            }
+        }
+        if (!HeadUnderwater || currentWater == null) return;
+        speckTimer -= Time.deltaTime;
+        if (speckTimer > 0f) return;
+        speckTimer = Random.Range(0.12f, 0.25f);
+        Bounds w = currentWater.bounds;
+        Vector3 around = transform.position + (Vector3)(Random.insideUnitCircle * 4f);
+        if (!w.Contains(new Vector3(around.x, around.y, w.center.z))) return;
+        PixelFX.Emit(around, new Vector2(Random.Range(-0.15f, 0.15f), Random.Range(-0.05f, 0.1f)),
+            PixelFX.Pick(new[] { PixelFX.Hex("d5ebff"), PixelFX.Hex("8fd3ff"), PixelFX.Hex("b9d2ca") }), Random.Range(2f, 3.5f), 1, PixelShape.Square, PixelMotion.Drift, false, PixelLayer.Front);
     }
 
     // after PlayerController has set this frame's velocity
@@ -215,6 +256,7 @@ public class PlayerWater : MonoBehaviour
         overlayAmount = Mathf.MoveTowards(overlayAmount, target, overlayFadeSpeed * Time.unscaledDeltaTime);
         ApplyLook();
         UpdateMeter(waterBreathing);
+        WaterParticles(); // FX:
     }
 
     private bool Drowning => HeadUnderwater && breath <= 0f && !PowerUpManager.Has(TalismanTrait.WaterBreathing);
@@ -222,6 +264,7 @@ public class PlayerWater : MonoBehaviour
     private void Drown()
     {
         HurtPlayer.pLivesCount -= 1;
+        if (player != null) PlayerFX.Hurt(player.transform.position + Vector3.up * 0.3f); // FX:
         if (HurtPlayer.pLivesCount <= 0)
         {
             LevelManager.Instance.Respawn();
@@ -239,9 +282,16 @@ public class PlayerWater : MonoBehaviour
         {
             overlay.enabled = overlayAmount > 0.001f;
             Color c = Color.white;
-            if (Drowning) c = Color.Lerp(Color.white, drowningTint, 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 6f));
             c.a = overlayAmount;
             overlay.color = c;
+            // FX: the air warning is now the overlay's own vignette (closes in as breath runs out, pulses when drowning)
+            if (overlayBlock == null) overlayBlock = new MaterialPropertyBlock();
+            overlay.GetPropertyBlock(overlayBlock);
+            overlayBlock.SetFloat("_TintStrength", screenOverlay ? 1f : 0f);
+            overlayBlock.SetFloat("_Air", PowerUpManager.Has(TalismanTrait.WaterBreathing) ? 1f : Breath01);
+            overlayBlock.SetFloat("_Drowning", Drowning ? 1f : 0f);
+            overlayBlock.SetColor("_PulseColor", drowningTint);
+            overlay.SetPropertyBlock(overlayBlock);
         }
         if (filters != null)
         {
@@ -335,7 +385,8 @@ public class PlayerWater : MonoBehaviour
 
     private void BuildOverlay()
     {
-        if (!screenOverlay || overlayMaterial == null || whiteSprite == null) return;
+        // FX: always built (for the air vignette); screenOverlay only decides whether the blue tint shows too
+        if (overlayMaterial == null || whiteSprite == null) return;
         var go = new GameObject("UnderwaterOverlay");
         overlay = go.AddComponent<SpriteRenderer>();
         overlay.sprite = whiteSprite;

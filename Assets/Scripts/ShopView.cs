@@ -68,6 +68,8 @@ public class ShopView : MenuView
 
     protected override void OnTick() => coinsText.text = CollectableCollisiondetector.coinCollected.ToString();
 
+    private static Material greyMaterial; // FX: HNLUI with _Grey 1
+
     private bool SoldOut(ItemDefinition item) => item.Unique && Inventory.Count(item) > 0;
 
     private void Refresh()
@@ -82,6 +84,10 @@ public class ShopView : MenuView
             rowNames[i].color = sold ? MenuUI.Grey : MenuUI.Cream;
             rowPrices[i].text = sold ? "OWNED" : item.Price.ToString();
             rowPrices[i].color = sold ? MenuUI.Grey : CollectableCollisiondetector.coinCollected >= item.Price ? MenuUI.Yellow : MenuUI.Red;
+            // FX: goods Harvey can't afford are shown in greyscale
+            bool cantAfford = !sold && CollectableCollisiondetector.coinCollected < item.Price;
+            if (greyMaterial == null) greyMaterial = Resources.Load<Material>("FX/UIGrey");
+            rowIcons[i].material = cantAfford ? greyMaterial : null;
         }
     }
 

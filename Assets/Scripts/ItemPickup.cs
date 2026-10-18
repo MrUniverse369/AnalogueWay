@@ -23,6 +23,7 @@ public class ItemPickup : MonoBehaviour
     private void Start()
     {
         home = transform.localPosition;
+        SpriteAura.On(GetComponent<SpriteRenderer>())?.Set("glow", new Color(1f, 0.89f, 0.47f, 0.7f), 2, 4f); // FX: a pulsing glow marks it out
         bool gone = item == null || (item.Unique ? Inventory.Count(item) > 0 : Inventory.IsClaimed(ClaimKey));
         if (gone) gameObject.SetActive(false);
     }
@@ -41,7 +42,23 @@ public class ItemPickup : MonoBehaviour
         Inventory.Add(item, amount);
         HarveyMenus.Toast(item.Icon, "FOUND " + item.DisplayName.ToUpperInvariant(), "IT'S IN YOUR BAG");
         HarveyMenus.PlayUiSound(Inventory.Catalog != null ? Inventory.Catalog.pickupSound : null);
+        PickupMotes(transform.position, other.transform); // FX:
         gameObject.SetActive(false);
+    }
+
+    // FX: motes gather from a ring around the item and stream into Harvey
+    public static void PickupMotes(Vector3 at, Transform harvey)
+    {
+        Vector3 target = harvey != null ? harvey.position : at;
+        const int count = 10;
+        for (int i = 0; i < count; i++)
+        {
+            float a = i * Mathf.PI * 2f / count;
+            Vector3 start = at + new Vector3(Mathf.Cos(a), Mathf.Sin(a), 0f) * 0.9f;
+            Vector2 to = target - start;
+            float life = Random.Range(0.25f, 0.4f);
+            PixelFX.Emit(start, to / life, PixelFX.Pick(new[] { PixelFX.Cream, PixelFX.Yellow }), life, 1, PixelShape.Square, PixelMotion.Straight, true);
+        }
     }
 
     private void OnValidate()

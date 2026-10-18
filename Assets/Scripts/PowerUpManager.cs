@@ -54,6 +54,10 @@ public class PowerUpManager : MonoBehaviour
     public float TimeLeft(int slotIndex) =>
         IsSlotActive(slotIndex) ? slots[slotIndex].timeLeft : 0f;
 
+    /// <summary>HUD: seconds of cooldown left on a slot (0 when ready or out of range).</summary>
+    public float CooldownLeft(int slotIndex) =>
+        (uint)slotIndex < (uint)slots.Length ? Mathf.Max(0f, slots[slotIndex].cooldownLeft) : 0f;
+
     /// <summary>HUD: the talisman equipped in a slot (null when empty or out of range).</summary>
     public Talisman TalismanIn(int slotIndex) =>
         (uint)slotIndex < (uint)slots.Length ? slots[slotIndex].talisman : null;

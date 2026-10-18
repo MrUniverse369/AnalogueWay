@@ -45,6 +45,7 @@ public class NextLevel : MonoBehaviour
         // Play audio and activate the level complete UI
 
         audioManager.PlaySfx(audioManager.winSound);
+        StartCoroutine(Celebrate()); // FX: confetti and a coin shower (unscaled: the game is frozen)
         levelComplete.gameObject.SetActive(true);
         levelComplete.GetComponent<LevelComplete>().GetSetFinalTimerText.text = timerScriptRef.timerText.text;
         levelComplete.GetComponent<LevelComplete>().GetCoinsCountText.text =
@@ -65,6 +66,30 @@ public class NextLevel : MonoBehaviour
 
 
 
+
+    // FX: confetti bursts from the treasure and coins shower down across the screen for the first few seconds
+    private IEnumerator Celebrate()
+    {
+        Vector3 at = transform.position + Vector3.up * 0.4f;
+        Camera cam = Camera.main;
+        PixelFX.Burst(at, 30, 3f, 7f, PixelFX.Confetti, 1.2f, 1.8f, 1, PixelShape.Square, PixelMotion.Fall, false, PixelLayer.Front, 90f, 100f, 0f, true);
+        for (int wave = 0; wave < 14; wave++)
+        {
+            if (cam != null)
+            {
+                float h = cam.orthographicSize, w = h * cam.aspect;
+                Vector3 c = cam.transform.position;
+                for (int i = 0; i < 5; i++)
+                {
+                    var p = new Vector3(c.x + Random.Range(-w, w), c.y + h + 0.2f, 0f);
+                    bool coin = i < 2;
+                    PixelFX.Emit(p, new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-2f, -0.5f)), coin ? PixelFX.Pick(PixelFX.CoinGold) : PixelFX.Pick(PixelFX.Confetti),
+                        2.2f, coin ? 2 : 1, PixelShape.Square, PixelMotion.Fall, coin, PixelLayer.Front, true);
+                }
+            }
+            yield return new WaitForSecondsRealtime(0.15f);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

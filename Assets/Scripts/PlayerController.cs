@@ -71,6 +71,7 @@ public class PlayerController : CharecterBehaviour
         pControls.Gameplay.unMount.performed += ctx => UnMountActive();
         speed = speedDefault; // POWERUP: talismans no longer reset speed every frame
         jSpeed = jSpeedDefault; // POWERUP: talismans no longer reset jump speed every frame
+        if (GetComponent<PlayerFX>() == null) gameObject.AddComponent<PlayerFX>(); // FX: hit flash, dust, stomp combo, talisman effects
 
 
     }
@@ -122,6 +123,7 @@ public class PlayerController : CharecterBehaviour
         get { return isGrounded; }
     }
     public Animator PlayerAnimator => animatorRef; // POWERUP: used by PowerUpContext
+    public Vector3 FeetPosition => pFeet != null ? pFeet.position : transform.position; // FX: where dust puffs start
 
     // Start is called before the first frame update
     void Start()
@@ -249,6 +251,7 @@ public class PlayerController : CharecterBehaviour
         footstepTimer -= Time.deltaTime;
         if (footstepTimer > 0f) return;
         if (audioManager != null) audioManager.PlayFootstep();
+        PlayerFX.Footstep(); // FX: running dust in step with the footstep sounds
         footstepTimer = footstepDistance / speedX;
     }
 
@@ -291,6 +294,7 @@ public class PlayerController : CharecterBehaviour
             jumpedThisFrame = true; // ANIM:
             rb2D.linearVelocity = jVel;
             audioManager.PlaySfx(audioManager.jumpSound);
+            PlayerFX.Jump(jSpeed > 6); // FX: take-off puffs (a super jump adds its dust ring and spark trail)
         }
 
         // ANIM: play the super-jump animation whenever a super jump actually happens (coyote jumps included)

@@ -27,7 +27,11 @@ public class HurtPlayer : MonoBehaviour
         if (other.CompareTag("PlayerDetectionArea") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity) && (ownEnemy == null || !ownEnemy.IsDying)) // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
         {
 
-            if (PlayerController.playerInviInvincible == false) pLivesCount -= 1;
+            if (PlayerController.playerInviInvincible == false)
+            {
+                pLivesCount -= 1;
+                PlayerFX.Hurt(transform.position); // FX: cream hit flash, sparks, then the dithered flicker
+            }
             // SFX: hurt sound only when a life was really lost and some remain; spikes/kill planes go straight to the game-over sound
             if (PlayerController.playerInviInvincible == false && pLivesCount > 0 && !gameObject.CompareTag("Fspike") && !gameObject.CompareTag("KillPlane") && audioManager != null)
                 audioManager.PlaySfxOneShot(audioManager.playerHurtSound);

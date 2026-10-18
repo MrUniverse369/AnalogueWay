@@ -1,12 +1,13 @@
 """Renders the main menu art into Assets/Sprites/UI/MainMenu, in the HNL style and palette.
 
-  MenuBackdrop.png   320x180 dawn over an archaeological dig: dithered sky bands, the sun on the horizon behind
-                     silhouettes of the four zones (tomb temple, pyramids, snowy pagoda mountain, green hills),
-                     sand plains with a path winding off to the horizon, and in front the dig site: an
-                     excavation pit with a ladder, a rope grid, crates, a pickaxe, and a lantern post.
+  MenuBackdrop.png   320x180 title backdrop, deliberately simple: calm purple bands (the HNL HUD purples) over
+                     a low sand ledge with Harvey's dig site (pit, ladder, crates, pickaxe, lantern post).
+                     The paw-print and star pattern over the purple is drawn by the HNLSprite shader
+                     (Resources/FX/HNLSprite_MenuPattern.mat) so it can scroll and twinkle.
+                     (backdrop_dawn() is the earlier detailed dawn-over-the-dunes version, no longer rendered.)
   MenuTitle.png      "HARVEY'S NINE LIVES" in soft pixel letters: warm gradient, rounded purple outline, soft shadow.
   MenuButton*.png    9-slice button plates (normal / selected / pressed) in the HUD frame style, border 5.
-  Icon_*.png         gem (play), journal (continue), compass (zone select), joystick (arcade).
+  Icon_*.png         gem (play), journal (continue), compass (zone select), joystick (arcade), gear (options).
   MenuPaw.png        the paw pointer beside the selected button.
   LanternGlow.png    soft glow the menu flickers over the lantern.
   DustMote.png       a speck of drifting dust.
@@ -31,7 +32,82 @@ def save(c, name):
 
 
 # ---------------------------------------------------------------- backdrop
+GROUND = 161  # top of the sand ledge (Harvey's sprite bottom sits at row 163)
+
+
 def backdrop():
+    """The simple title backdrop: purple bands, then the sand ledge with the dig site."""
+    c = Canvas(W, H)
+    bands = [(0, "2a2346"), (46, "32395c"), (96, "3b3468"), (134, "473b78")]
+    for y in range(GROUND):
+        idx = max(i for i, (y0, _) in enumerate(bands) if y >= y0)
+        nxt = bands[idx + 1][0] if idx + 1 < len(bands) else 999
+        for x in range(W):
+            seam = nxt - y <= 2 and (x + y) % 2 == 0
+            c.put(x, y, hexc(bands[idx + 1][1] if seam else bands[idx][1]))
+    # a soft warm haze along the ledge, dithered (the lantern's light catching the dust)
+    for y in range(GROUND - 10, GROUND):
+        for x in range(W):
+            k = (y - (GROUND - 10)) / 10.0
+            if hsh(x, y, 9) < k * 0.35 and (x + y) % 2 == 0:
+                c.put(x, y, hexc("5a4a8f"))
+
+    # the sand ledge: soft rounded lip, two-tone fill and the HNL wave bands
+    for x in range(W):
+        top = GROUND + int(round(1.2 * math.sin(x / 23.0) + 0.8 * math.sin(x / 9.0 + 1.3)))
+        for y in range(top, H):
+            d = y - top
+            col = hexc("e1d089") if d == 0 else hexc("ffe478") if d == 1 and x % 3 else hexc("e3ba66") if d < 8 else hexc("ce812c")
+            if d >= 3 and (y + int(2 * math.sin(x / 7.0))) % 6 == 0:
+                col = hexc("ce812c") if d < 8 else hexc("a35a3c")
+            c.put(x, y, col)
+
+    wood, wood_d, wood_l = hexc("a35a3c"), hexc("663931"), hexc("ce812c")
+    # the pit
+    c.rect(26, GROUND + 2, 84, H - 1, hexc("663931"))
+    c.rect(30, GROUND + 5, 80, H - 1, hexc("45283c"))
+    for x in range(26, 85):
+        c.put(x, GROUND + 2, hexc("ce812c"))
+    # ladder into the pit
+    for y in range(GROUND - 8, H):
+        c.put(36, y, wood_l)
+        c.put(43, y, wood)
+    for y in range(GROUND - 6, H, 5):
+        c.rect(37, y, 42, y, wood)
+    # rope line on stakes
+    stakes = [(20, GROUND - 9), (54, GROUND - 12), (90, GROUND - 9)]
+    for sx2, sy2 in stakes:
+        c.rect(sx2, sy2, sx2 + 1, GROUND + 1, wood_d)
+        c.put(sx2, sy2, wood_l)
+    for (ax, ay), (bx, by) in zip(stakes, stakes[1:]):
+        for x in range(ax + 1, bx + 1):
+            t = (x - ax) / (bx - ax)
+            c.put(x, int(ay + (by - ay) * t + 2 * math.sin(t * math.pi)) + 1, hexc("ffffeb"))
+    # crates and a pickaxe on the ledge, right of the pit
+    for (x0, s) in ((270, 11), (283, 14)):
+        y0 = GROUND - s
+        c.rect(x0, y0, x0 + s, y0 + s, wood)
+        c.rect(x0, y0, x0 + s, y0, wood_l)
+        c.rect(x0, y0 + s, x0 + s, y0 + s, wood_d)
+        c.rect(x0, y0, x0, y0 + s, wood_d)
+        c.rect(x0 + s, y0, x0 + s, y0 + s, wood_d)
+        for k in range(s + 1):
+            c.put(x0 + k, y0 + k, wood_d)
+    for k in range(14):
+        c.put(262 + k // 3, GROUND - k, wood_l)
+    for dx in range(-4, 5):
+        c.put(266 + dx, GROUND - 14 - abs(dx) // 2, hexc("98b2b1") if dx < 0 else hexc("769099"))
+    # lantern post (the glow is a separate sprite so it can flicker)
+    c.rect(132, 134, 133, GROUND + 1, wood_d)
+    c.rect(128, 134, 137, 134, wood_d)
+    c.rect(128, 135, 128, 137, wood_d)
+    c.rect(126, 138, 130, 144, DARK)
+    c.rect(127, 139, 129, 143, hexc("ffe478"))
+    c.put(128, 141, hexc("ffffeb"))
+    return c
+
+
+def backdrop_dawn():
     c = Canvas(W, H)
     # dawn sky: flat bands with 2-row dithered seams (night blue at the top to gold at the horizon)
     bands = [(0, "32395c"), (18, "473b78"), (40, "6a3f6e"), (60, "8c3f5d"), (76, "ba6156"), (90, "f2a65e"), (102, "ffe478")]
@@ -397,6 +473,23 @@ def icon_arcade():
     return c
 
 
+def icon_gear():
+    """A cream cog with a purple hub (options)."""
+    c = Canvas(12, 12)
+    for y in range(12):
+        for x in range(12):
+            dx, dy = x - 5.5, y - 5.5
+            d = math.hypot(dx, dy)
+            a = math.atan2(dy, dx)
+            tooth = math.cos(a * 6) > 0.35
+            r = 5.6 if tooth else 4.3
+            if d <= r:
+                c.put(x, y, DARK if d > r - 1 else hexc("ffffeb") if dy < -0.5 else hexc("98b2b1"))
+            if d <= 2.2:
+                c.put(x, y, DARK if d > 1.3 else hexc("473b78"))
+    return c
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     save(backdrop(), "MenuBackdrop.png")
@@ -408,6 +501,7 @@ def main():
     save(icon_journal(), "Icon_Continue.png")
     save(icon_compass(), "Icon_ZoneSelect.png")
     save(icon_arcade(), "Icon_Arcade.png")
+    save(icon_gear(), "Icon_Options.png")
     save(paw(), "MenuPaw.png")
     save(glow(), "LanternGlow.png")
     save(mote(), "DustMote.png")

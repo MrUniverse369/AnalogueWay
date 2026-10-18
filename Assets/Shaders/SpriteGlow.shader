@@ -1,6 +1,9 @@
 // WATER: draws a sprite as a solid glowing silhouette (additive). WaterBreathingVisual places four of these,
 // each nudged one pixel out, behind Harvey to give him a pulsing aqua outline while the Water Breathing
 // talisman is active. The SpriteRenderer colour sets the glow colour and strength.
+// FX: also used by SpriteAura (talisman auras, the stomp combo glow, Chi Stone and item glows). The renderer
+// colour is read through unity_SpriteColor as well as the vertex colour: in Unity 6 a SpriteRenderer's colour
+// isn't always in the vertex colour, which drew every glow white.
 Shader "AnalogueWay/SpriteGlow"
 {
     Properties
@@ -20,13 +23,16 @@ Shader "AnalogueWay/SpriteGlow"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/Core2D.hlsl"
 
             struct Attributes
             {
                 float4 positionOS : POSITION;
                 float4 color : COLOR;
                 float2 uv : TEXCOORD0;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct Varyings
@@ -46,9 +52,11 @@ Shader "AnalogueWay/SpriteGlow"
             Varyings vert(Attributes v)
             {
                 Varyings o;
-                o.positionCS = TransformObjectToHClip(v.positionOS.xyz);
+                UNITY_SETUP_INSTANCE_ID(v);
+                SetUpSpriteInstanceProperties();
+                o.positionCS = TransformObjectToHClip(UnityFlipSprite(v.positionOS.xyz, unity_SpriteProps.xy));
                 o.uv = v.uv;
-                o.color = v.color;
+                o.color = v.color * unity_SpriteColor;
                 return o;
             }
 

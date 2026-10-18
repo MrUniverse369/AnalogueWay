@@ -153,7 +153,7 @@ public class YokaiBoss : MonoBehaviour
         hurtbox.enabled = true;
         Face(-1f);
         SetPose(standingHeight);
-        bodySprite.color = CurrentStage.tint; // (alpha 1: also undoes a Teleport fade)
+        ShowStage(); // FX: stage palette, no flash, fully solid (also undoes a Teleport dissolve)
         UpdatePips();
         if (revealOnDefeat != null) revealOnDefeat.SetActive(false);
         fight = StartCoroutine(Fight(startDelay));
@@ -206,6 +206,7 @@ public class YokaiBoss : MonoBehaviour
             yield return null;
         }
         Play(audioManager != null ? audioManager.BossSlamSound : null);
+        SlamDebris(); // FX:
         SetPose(standingHeight);
         yield return Shake(0.25f, 0.15f);
     }
@@ -229,6 +230,7 @@ public class YokaiBoss : MonoBehaviour
         }
         transform.position = new Vector3(toX, GroundY, startPos.z);
         Play(audioManager != null ? audioManager.BossSlamSound : null);
+        SlamDebris(); // FX:
         if (s.slamShockwaves)
         {
             SpawnShockwave(-1f);
@@ -270,6 +272,7 @@ public class YokaiBoss : MonoBehaviour
         }
         transform.position = new Vector3(x, GroundY, startPos.z);
         Play(audioManager != null ? audioManager.BossSlamSound : null);
+        SlamDebris(); // FX:
         if (s.slamShockwaves)
         {
             SpawnShockwave(-1f);
@@ -295,6 +298,7 @@ public class YokaiBoss : MonoBehaviour
         yield return Telegraph(s.telegraphTime * 0.5f, s.tint);
         SetPose(standingHeight);
         Play(audioManager != null ? audioManager.BossSlamSound : null);
+        SlamDebris(); // FX:
         if (s.slamShockwaves)
         {
             SpawnShockwave(-1f);
@@ -339,18 +343,17 @@ public class YokaiBoss : MonoBehaviour
         yield return new WaitForSeconds(spikeWarnTime + spikeLife);
     }
 
+    // FX: a pixel dissolve (random pixels drop out / come back) with spirit wisps, instead of an alpha fade
     private IEnumerator Fade(float from, float to, float time)
     {
+        Wisps(10);
         for (float t = 0f; t < 1f; t += Time.deltaTime / Mathf.Max(0.01f, time))
         {
-            Color c = bodySprite.color;
-            c.a = Mathf.Lerp(from, to, t);
-            bodySprite.color = c;
+            Fx.SetDither(1f - Mathf.Lerp(from, to, t), 0f, 1f);
             yield return null;
         }
-        Color end = bodySprite.color;
-        end.a = to;
-        bodySprite.color = end;
+        Fx.SetDither(1f - to, 0f, 1f);
+        if (to > 0.5f) Wisps(6);
     }
 
     private IEnumerator Opening(Stage s)
@@ -360,11 +363,11 @@ public class YokaiBoss : MonoBehaviour
         SetPose(slumpedHeight);
         for (float t = 0f; t < s.openingTime && vulnerable; t += Time.deltaTime)
         {
-            bodySprite.color = Mathf.Repeat(t * 8f, 1f) < 0.5f ? openingColor : s.tint;
+            Fx.HoldFlash(Mathf.Repeat(t * 8f, 1f) < 0.5f ? WithAlpha(openingColor, 0.7f) : Color.clear); // FX: a real cyan flash
             yield return null;
         }
         vulnerable = false;
-        bodySprite.color = s.tint;
+        ShowStage(); // FX:
         SetPose(standingHeight);
     }
 
@@ -376,7 +379,7 @@ public class YokaiBoss : MonoBehaviour
         SetPose(standingHeight);
         transform.position = new Vector3(transform.position.x, GroundY, startPos.z);
         yield return Telegraph(1f, CurrentStage.tint); // roar into the next stage
-        bodySprite.color = CurrentStage.tint;
+        ShowStage(); // FX: the new stage's palette
         invulnerable = false;
         fight = StartCoroutine(Fight(0.3f));
     }
@@ -387,12 +390,16 @@ public class YokaiBoss : MonoBehaviour
         ClearHazards();
         hurtbox.enabled = false;
         yield return Blink(1.2f, hitColor);
+        // FX: the boss dissolves into pixels and spirit wisps instead of shrinking away
+        DefeatBurst();
         for (float t = 0f; t < 1f; t += Time.deltaTime / 0.8f)
         {
-            body.localScale = Vector3.Lerp(FacedScale(1f), Vector3.zero, t);
+            Fx.SetDither(t, 0f, 1f);
+            if (Time.frameCount % 3 == 0) Wisps(2);
             yield return null;
         }
         body.gameObject.SetActive(false);
+        Fx.SetDither(0f);
         Play(audioManager != null ? audioManager.BossDefeatSound : null);
         if (revealOnDefeat != null) revealOnDefeat.SetActive(true);
     }
@@ -422,6 +429,7 @@ public class YokaiBoss : MonoBehaviour
         lives--;
         UpdatePips();
         if (isStomp) BouncePlayer(stompBounce);
+        if (isStomp) StompCombo.Register(transform.position); // FX: a boss stomp continues the combo
         if (audioManager != null) Play(isStomp ? audioManager.enemyStompDefeatSound : audioManager.enemyDashDefeatSound);
         if (fight != null) StopCoroutine(fight);
         StopAllCoroutines();
@@ -480,6 +488,7 @@ public class YokaiBoss : MonoBehaviour
         Log("player hurt from " + from);
 
         HurtPlayer.pLivesCount -= 1;
+        PlayerFX.Hurt(from); // FX:
         if (HurtPlayer.pLivesCount <= 0)
         {
             LevelManager.Instance.Respawn();
@@ -583,11 +592,11 @@ public class YokaiBoss : MonoBehaviour
         for (float t = 0f; t < time; t += Time.deltaTime)
         {
             body.localPosition = basePos + new Vector3(Random.Range(-0.06f, 0.06f), 0f, 0f);
-            bodySprite.color = Color.Lerp(tint, Color.red, Mathf.PingPong(t * 6f, 1f));
+            Fx.HoldFlash(new Color(1f, 0.25f, 0.2f, 0.6f * Mathf.PingPong(t * 6f, 1f))); // FX: red warning flash over the stage palette
             yield return null;
         }
         body.localPosition = basePos;
-        bodySprite.color = tint;
+        Fx.HoldFlash(Color.clear);
     }
 
     private IEnumerator Shake(float time, float amount)
@@ -603,13 +612,64 @@ public class YokaiBoss : MonoBehaviour
 
     private IEnumerator Blink(float time, Color flash)
     {
-        Color tint = CurrentStage.tint;
+        // FX: a real white hit flash (multiplying by white used to show nothing)
         for (float t = 0f; t < time; t += Time.deltaTime)
         {
-            bodySprite.color = Mathf.Repeat(t * 10f, 1f) < 0.5f ? flash : tint;
+            Fx.HoldFlash(Mathf.Repeat(t * 10f, 1f) < 0.5f ? WithAlpha(flash, 1f) : Color.clear);
             yield return null;
         }
-        bodySprite.color = tint;
+        Fx.HoldFlash(Color.clear);
+    }
+
+    // ---------------------------------------------------------------- FX
+    private SpriteFX fx;
+    private SpriteFX Fx => fx != null ? fx : (fx = SpriteFX.On(bodySprite));
+
+    private static readonly Color[] WispColours = { new Color(0.72f, 0.96f, 1f), new Color(0.79f, 0.72f, 1f), new Color(1f, 1f, 0.92f) };
+    private static readonly Color[] RockColours = { new Color(0.6f, 0.56f, 0.5f), new Color(0.46f, 0.41f, 0.38f), new Color(0.8f, 0.74f, 0.6f) };
+
+    // FX: stage colours are a palette swap (each brightness level onto the stage's own ramp) instead of multiplying
+    // the sprite by the tint, so later stages stay bright. A white tint is the boss's own colours.
+    private void ShowStage()
+    {
+        Color tint = CurrentStage.tint;
+        bodySprite.color = Color.white;
+        Fx.HoldFlash(Color.clear);
+        Fx.SetDither(0f);
+        bool own = tint.r > 0.97f && tint.g > 0.97f && tint.b > 0.97f;
+        Color dark = Color.Lerp(tint * 0.3f, new Color(0.2f, 0.16f, 0.32f), 0.45f);
+        Color light = Color.Lerp(tint, Color.white, 0.6f);
+        Fx.SetPalette(dark, tint, light, own ? 0f : 0.9f);
+    }
+
+    private void Wisps(int count)
+    {
+        Bounds b = bodySprite.bounds;
+        for (int i = 0; i < count; i++)
+            PixelFX.Emit(new Vector3(Random.Range(b.min.x, b.max.x), Random.Range(b.min.y, b.max.y), 0f), new Vector2(Random.Range(-0.4f, 0.4f), Random.Range(0.6f, 1.4f)),
+                PixelFX.Pick(WispColours), Random.Range(0.6f, 1.1f), Random.value < 0.3f ? 2 : 1, PixelShape.Square, PixelMotion.Drift, true);
+    }
+
+    // FX: rock chips and dust thrown up where the boss lands
+    private void SlamDebris()
+    {
+        Vector3 feet = new Vector3(transform.position.x, GroundY, 0f);
+        PixelFX.Burst(feet, 10, 2.5f, 5f, RockColours, 0.5f, 0.8f, 2, PixelShape.Square, PixelMotion.Fall, false, PixelLayer.Front, 90f, 120f, 0.3f);
+        PixelFX.Ring(feet + Vector3.up * 0.1f, 16, 3.2f, PixelFX.ZoneDust(), 0.35f, 1, PixelShape.Square, false, PixelLayer.Front, 0.2f, 0.4f);
+    }
+
+    private void DefeatBurst()
+    {
+        Vector3 c = bodySprite.bounds.center;
+        PixelFX.Ring(c, 28, 5f, new[] { PixelFX.Cream, PixelFX.Yellow, PixelFX.Orange }, 0.5f, 2, PixelShape.Square, true, PixelLayer.Front, 1f, 0.6f);
+        PixelFX.Burst(c, 12, 2f, 5f, new[] { PixelFX.Cream, PixelFX.Yellow }, 0.5f, 0.9f, 1, PixelShape.Star, PixelMotion.Float, true, PixelLayer.Front, 90f, 360f, 0.4f);
+        PixelFX.Burst(c, 24, 3f, 7f, PixelFX.Confetti, 1f, 1.6f, 1, PixelShape.Square, PixelMotion.Fall, false, PixelLayer.Front, 90f, 140f, 0.4f);
+    }
+
+    private static Color WithAlpha(Color c, float a)
+    {
+        c.a = a;
+        return c;
     }
 
     private void UpdatePips()

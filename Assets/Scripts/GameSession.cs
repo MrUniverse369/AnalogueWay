@@ -34,9 +34,13 @@ public static class GameSession
         SaveSystem.ActiveSlot = SaveSystem.SlotKey(number);
         furthestScene = null; // the zone select unlocks per file
         furthestLoaded = false;
+        ZoneSelectMap.ForgetLastNode(); // FLOW: the map opens on this file's level
     }
 
-    /// <summary>SLOTS: start a new game in save file n, replacing whatever was in it, and open the first level.</summary>
+    /// <summary>
+    /// SLOTS: start a new game in save file n, replacing whatever was in it. FLOW: opens the Zone Select (with only
+    /// the first level unlocked) rather than going straight into a level.
+    /// </summary>
     public static void StartNewGame(int number)
     {
         IsArcade = false;
@@ -45,15 +49,21 @@ public static class GameSession
         furthestLoaded = true; // and there is nothing to read back
         NewGame();
         SaveProgressForBuildIndex(1);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(ZoneSelectMap.SceneName); // FLOW: Play -> save file -> Zone Select
     }
 
-    /// <summary>SLOTS: load save file n and open its level. Returns false if the file is empty or unusable.</summary>
+    /// <summary>
+    /// SLOTS: load save file n and open the Zone Select for it. FLOW: was straight into the saved level.
+    /// Returns false if the file is empty or unusable.
+    /// </summary>
     public static bool ContinueSlot(int number)
     {
         IsArcade = false;
         SelectSlot(number);
-        return TryContinue();
+        if (!SaveSystem.TryLoad(out SaveData data)) return false;
+        Apply(data);
+        SceneManager.LoadScene(ZoneSelectMap.SceneName); // FLOW: the zone map starts on the file's saved level
+        return true;
     }
 
     /// <summary>ARCADE: start an unsaved run from the first level with a new-game loadout.</summary>

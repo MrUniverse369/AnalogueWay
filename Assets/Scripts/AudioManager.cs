@@ -23,10 +23,14 @@ public class AudioManager : MonoBehaviour
    public AudioClip playerHurtSound; // SFX: a life lost with lives remaining (losing the last life plays gameOverSound)
    public AudioClip bossSlamSound; // SFX: a boss lands from a charge, leap or slam (falls back to bounceSound)
    public AudioClip bossDefeatSound; // SFX: a boss vanishes when beaten (falls back to powerUpSound)
+   public AudioClip cloudBounceSound; // SFX: soft springy bounce on the Green Zone clouds (falls back to bounceSound)
+   public AudioClip samuraiSlashSound; // SLASH: the samurai monkey's dashing sword slice (falls back to enemyDashDefeatSound)
    private int lastFootstep = -1; // SFX:
 
    public AudioClip BossSlamSound => bossSlamSound != null ? bossSlamSound : bounceSound; // SFX:
    public AudioClip BossDefeatSound => bossDefeatSound != null ? bossDefeatSound : powerUpSound; // SFX:
+   public AudioClip CloudBounceSound => cloudBounceSound != null ? cloudBounceSound : bounceSound; // SFX:
+   public AudioClip SamuraiSlashSound => samuraiSlashSound != null ? samuraiSlashSound : enemyDashDefeatSound; // SLASH:
 
     // MIX: one place to balance everything. 1 = the clip as recorded.
     // Defaults were measured so each sound sits at a set level against the music at musicVolume 0.35:
@@ -47,6 +51,7 @@ public class AudioManager : MonoBehaviour
     [Range(0f, 1f)] public float chestOpenVolume = 1f; // MIX:
     [Range(0f, 1f)] public float dragonSummonVolume = 1f; // MIX:
     [Range(0f, 1f)] public float playerHurtVolume = 1f; // MIX:
+    [Range(0f, 1f)] public float cloudBounceVolume = 1f; // MIX:
 
     // PERF: one shared reference instead of every script searching the scene by tag.
     private static AudioManager instance;
@@ -73,6 +78,37 @@ public class AudioManager : MonoBehaviour
         oneShots.outputAudioMixerGroup = sfx.outputAudioMixerGroup;
         oneShots.spatialBlend = sfx.spatialBlend;
         oneShots.priority = sfx.priority;
+        // SFX: a few voices for coins, so quick pickups overlap and each can have its own pitch
+        coinVoices = new AudioSource[4];
+        for (int i = 0; i < coinVoices.Length; i++)
+        {
+            AudioSource v = gameObject.AddComponent<AudioSource>();
+            v.playOnAwake = false;
+            v.loop = false;
+            v.outputAudioMixerGroup = sfx.outputAudioMixerGroup;
+            v.spatialBlend = sfx.spatialBlend;
+            v.priority = sfx.priority;
+            coinVoices[i] = v;
+        }
+    }
+
+    // SFX: coins collected in quick succession climb a bright major scale (and restart after a short gap),
+    // so a run of pickups sounds like a rising chime rather than the same blip stacking up
+    private AudioSource[] coinVoices;
+    private int coinVoice;
+    private int coinStep;
+    private float lastCoinTime = -10f;
+    private static readonly float[] CoinSteps = { 0f, 2f, 4f, 5f, 7f, 9f, 12f };
+
+    public void PlayCoin()
+    {
+        if (coinSound == null || coinVoices == null) return;
+        coinStep = Time.unscaledTime - lastCoinTime > 0.45f ? 0 : Mathf.Min(coinStep + 1, CoinSteps.Length - 1);
+        lastCoinTime = Time.unscaledTime;
+        AudioSource v = coinVoices[coinVoice];
+        coinVoice = (coinVoice + 1) % coinVoices.Length;
+        v.pitch = Mathf.Pow(2f, CoinSteps[coinStep] / 12f);
+        v.PlayOneShot(coinSound, sfxBaseVolume * coinVolume);
     }
 
     // Start is called before the first frame update
@@ -112,6 +148,7 @@ public class AudioManager : MonoBehaviour
         if (sound == chestOpenSound) return chestOpenVolume;
         if (sound == dragonSummonSound) return dragonSummonVolume;
         if (sound == playerHurtSound) return playerHurtVolume;
+        if (sound == cloudBounceSound) return cloudBounceVolume;
         return 1f;
     }
 

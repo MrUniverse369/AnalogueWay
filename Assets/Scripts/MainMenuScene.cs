@@ -4,7 +4,9 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 /// MENU: the living parts of the main menu scene: Harvey idling at the dig, the lantern flickering, the title
-/// bobbing, dust drifting through the dawn light, and the paw pointer that sits beside the selected button.
+/// bobbing, and the paw pointer that sits beside the selected button. FX: the particles are PixelFX (the game's
+/// pixel particle system), replacing the hand-made dust sprites: dust motes drifting through the air, embers
+/// rising from the lantern, and dirt flicked up out of the dig pit every few seconds.
 /// Selection itself (and the buttons' OnClick) stays with the EventSystem and MenueControl.
 /// </summary>
 public class MainMenuScene : MonoBehaviour
@@ -21,9 +23,11 @@ public class MainMenuScene : MonoBehaviour
     [SerializeField] private Transform title;
     [SerializeField] private float titleBobPixels = 2f;
     [SerializeField] private float titleBobSpeed = 1.2f;
-    [SerializeField] private Sprite dustSprite;
+    [Tooltip("FX: dust motes alive at once (roughly).")]
     [SerializeField] private int dustCount = 14;
     [SerializeField] private Rect dustArea = new Rect(-10f, -5.6f, 20f, 7f);
+    [Tooltip("FX: where dirt flies up out of the dig pit (world).")]
+    [SerializeField] private Vector2 digSpot = new Vector2(-6.5f, -4.6f);
 
     [Header("Menu")]
     [SerializeField] private RectTransform pointer;
@@ -32,14 +36,13 @@ public class MainMenuScene : MonoBehaviour
 
     private Vector3 titleHome;
     private readonly Vector3[] corners = new Vector3[4]; // PERF: reused by FollowSelection instead of a new array each frame
-    private Transform[] dust;
-    private Vector2[] dustVelocity;
     private float animTime;
+    private float moteTimer, emberTimer, digTimer = 1.2f; // FX:
 
     private void Start()
     {
         if (title != null) titleHome = title.localPosition;
-        SpawnDust();
+        for (int i = 0; i < dustCount; i++) Mote(true); // FX: start with the air already full of motes
         if (EventSystem.current != null && firstSelected != null) EventSystem.current.SetSelectedGameObject(firstSelected);
     }
 
@@ -62,42 +65,50 @@ public class MainMenuScene : MonoBehaviour
             title.localPosition = titleHome + new Vector3(0f, bob, 0f);
         }
 
-        DriftDust();
+        Particles(Time.unscaledDeltaTime); // FX:
         KeepSomethingSelected();
         FollowSelection();
     }
 
-    private void SpawnDust()
+    // FX: motes, lantern embers and dig-pit dirt, all through PixelFX (unscaled, so they keep moving in menus)
+    private static readonly Color[] MoteColours = { PixelFX.Hex("ffffeb"), PixelFX.Hex("ffe478"), PixelFX.Hex("c9b8ff") };
+    private static readonly Color[] EmberColours = { PixelFX.Hex("ffe478"), PixelFX.Hex("f2a65e"), PixelFX.Hex("ffffeb") };
+    private static readonly Color[] DirtColours = { PixelFX.Hex("ce812c"), PixelFX.Hex("a35a3c"), PixelFX.Hex("663931"), PixelFX.Hex("e3ba66") };
+
+    private void Particles(float dt)
     {
-        if (dustSprite == null || dustCount <= 0) return;
-        dust = new Transform[dustCount];
-        dustVelocity = new Vector2[dustCount];
-        var rng = new System.Random(7);
-        for (int i = 0; i < dustCount; i++)
+        moteTimer -= dt;
+        if (moteTimer <= 0f)
         {
-            var go = new GameObject("Dust");
-            go.transform.SetParent(transform, false);
-            var sr = go.AddComponent<SpriteRenderer>();
-            sr.sprite = dustSprite;
-            sr.sortingOrder = 50;
-            sr.color = new Color(1f, 1f, 1f, 0.35f + 0.4f * (float)rng.NextDouble());
-            go.transform.position = new Vector3(dustArea.x + dustArea.width * (float)rng.NextDouble(), dustArea.y + dustArea.height * (float)rng.NextDouble(), 0f);
-            dust[i] = go.transform;
-            dustVelocity[i] = new Vector2(0.15f + 0.25f * (float)rng.NextDouble(), 0.05f + 0.1f * (float)rng.NextDouble());
+            moteTimer = 5f / Mathf.Max(1, dustCount);
+            Mote(false);
+        }
+        emberTimer -= dt;
+        if (emberTimer <= 0f && lanternGlow != null)
+        {
+            emberTimer = Random.Range(0.25f, 0.6f);
+            Vector3 lamp = lanternGlow.transform.position + new Vector3(Random.Range(-0.08f, 0.08f), 0.1f, 0f);
+            PixelFX.Emit(lamp, new Vector2(Random.Range(-0.15f, 0.25f), Random.Range(0.35f, 0.8f)), PixelFX.Pick(EmberColours),
+                Random.Range(1f, 1.8f), 1, PixelShape.Square, PixelMotion.Drift, true, PixelLayer.Front, true);
+        }
+        digTimer -= dt;
+        if (digTimer <= 0f)
+        {
+            digTimer = Random.Range(1.6f, 2.8f);
+            Vector3 pit = new Vector3(digSpot.x + Random.Range(-0.6f, 0.6f), digSpot.y, 0f);
+            float side = Random.value < 0.5f ? -1f : 1f;
+            PixelFX.Burst(pit, Random.Range(4, 7), 2.4f, 3.6f, DirtColours, 0.55f, 0.85f, 1, PixelShape.Square, PixelMotion.Fall, false,
+                PixelLayer.Front, 90f + side * 25f, 40f, 0f, true);
         }
     }
 
-    private void DriftDust()
+    // one dust mote drifting slowly up and to the right somewhere in the dust area
+    private void Mote(bool anywhere)
     {
-        if (dust == null) return;
-        for (int i = 0; i < dust.Length; i++)
-        {
-            Vector3 p = dust[i].position + (Vector3)(dustVelocity[i] * Time.unscaledDeltaTime);
-            p.y += Mathf.Sin(animTime * 1.3f + i) * 0.002f;
-            if (p.x > dustArea.xMax) p.x = dustArea.xMin;
-            if (p.y > dustArea.yMax) p.y = dustArea.yMin;
-            dust[i].position = p;
-        }
+        float x = anywhere ? Random.Range(dustArea.xMin, dustArea.xMax) : dustArea.xMin + Random.Range(0f, dustArea.width * 0.5f);
+        var p = new Vector3(x, Random.Range(dustArea.yMin, dustArea.yMax), 0f);
+        PixelFX.Emit(p, new Vector2(Random.Range(0.15f, 0.4f), Random.Range(0.04f, 0.15f)), PixelFX.Pick(MoteColours),
+            Random.Range(4f, 7f), Random.value < 0.25f ? 2 : 1, PixelShape.Square, PixelMotion.Drift, true, PixelLayer.Front, true);
     }
 
     // a controller or the keyboard needs a selected button to navigate from (a mouse click can clear it)

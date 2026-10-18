@@ -68,6 +68,9 @@ public class ZoneSelectMap : MonoBehaviour
 
     private static int lastNode = -1; // where Harvey stood last time the map was open this session
 
+    /// <summary>FLOW: a different save file was picked, so the map starts on that file's level, not the last one's.</summary>
+    public static void ForgetLastNode() => lastNode = -1;
+
     private bool[] open;
     private int current;
     private bool busy = true; // walking or fading
@@ -79,13 +82,16 @@ public class ZoneSelectMap : MonoBehaviour
     {
         int furthest = unlockAll ? int.MaxValue : GameSession.FurthestBuildIndex;
         open = new bool[nodes.Length];
+        bool[] clearedNodes = new bool[nodes.Length]; // FX:
         for (int i = 0; i < nodes.Length; i++)
         {
             int index = GameSession.BuildIndexOf(nodes[i].sceneName);
             open[i] = index > 0 && index <= furthest;
             bool cleared = index > 0 && index < furthest;
+            clearedNodes[i] = cleared;
             StyleNode(nodes[i], open[i], cleared);
         }
+        gameObject.AddComponent<ZoneMapFX>().Init(nodes, open, clearedNodes, player); // FX: greyscale locks, gem shine, marching path, dust
 
         current = PickStartNode();
         player.position = nodes[current].transform.position;
@@ -342,7 +348,23 @@ public class ZoneSelectMap : MonoBehaviour
 
     private IEnumerator FadeTo(float alpha, System.Action done)
     {
-        if (fade != null)
+        if (fade != null && IrisWipe.Attach(fade)) // FX: a cat-head iris around Harvey on the map
+        {
+            fade.gameObject.SetActive(true);
+            Color full = fade.color;
+            full.a = 1f;
+            fade.color = full;
+            float from = alpha > 0.5f ? 1f : 0f; // open amount
+            float to = alpha > 0.5f ? 0f : 1f;
+            for (float t = 0; t < fadeTime; t += Time.unscaledDeltaTime)
+            {
+                IrisWipe.Set(fade, IrisWipe.SizeFor(Mathf.Lerp(from, to, t / fadeTime)), player.position);
+                yield return null;
+            }
+            IrisWipe.Set(fade, IrisWipe.SizeFor(to), player.position);
+            fade.raycastTarget = alpha > 0f;
+        }
+        else if (fade != null)
         {
             fade.gameObject.SetActive(true);
             Color c = fade.color;

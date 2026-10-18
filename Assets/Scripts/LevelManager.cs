@@ -96,6 +96,8 @@ public class LevelManager : MonoBehaviour
     {
         if (PowerUpManager.Instance != null) PowerUpManager.Instance.ResetAll(); // POWERUP: replaces speedBoostPowerUp = false below
         audioManager.PlaySfx(audioManager.gameOverSound);
+        ScreenGrade.GreyPulse(); // FX: a brief greyscale pulse on game over
+        PixelFX.Burst(pScriptRef.transform.position, 12, 1.5f, 3.5f, new[] { PixelFX.Cream, PixelFX.Hex("98b2b1") }, 0.4f, 0.7f, 1, PixelShape.Square, PixelMotion.Float, true); // FX:
         pScriptRef.gameObject.SetActive(false);
         gameOverScreen.SetActive(true);
         yield return new WaitForSeconds(respawnDelay);

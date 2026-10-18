@@ -50,6 +50,13 @@ public class MenueControl : MonoBehaviour
         GameSession.EndArcade(); // ARCADE:
         SceneManager.LoadScene(ZoneSelectMap.SceneName);
     }
+    // OPTIONS: main menu Options button (Controls page)
+    public void OpenOptions()
+    {
+        Time.timeScale = 1f;
+        isGamePaused = false;
+        OptionsMenu.Open();
+    }
     public void QuitGame()
     {
 
@@ -78,6 +85,20 @@ public class MenueControl : MonoBehaviour
                 Pause();
             }
         }
+        // PAUSE: Circle (O) or Backspace backs out of the pause menu straight into the game, like Resume
+        else if (pauseMenueUI != null && pauseMenueUI != gameObject && isGamePaused && pauseMenueUI.activeSelf && BackPressed())
+        {
+            if (Inventory.Catalog != null) HarveyMenus.PlayUiSound(Inventory.Catalog.backSound);
+            Resume();
+        }
+    }
+
+    // PAUSE: the menu "back" buttons. Esc and Options already toggle the pause in PausePressed.
+    private static bool BackPressed()
+    {
+        Keyboard kb = Keyboard.current;
+        Gamepad pad = Gamepad.current;
+        return (kb != null && kb.backspaceKey.wasPressedThisFrame) || (pad != null && pad.buttonEast.wasPressedThisFrame);
     }
 
     // PAUSE: Esc on the keyboard, or the gamepad Start button (Options on a PS5 DualSense, Menu on Xbox)
@@ -91,6 +112,7 @@ public class MenueControl : MonoBehaviour
     public void Resume()
     {
         pauseMenueUI.SetActive(false);
+        MenuBlur.Hide(this); // FX:
         Time.timeScale = 1f;
         isGamePaused = false;
         if (PowerUpManager.Instance != null) PowerUpManager.Instance.CancelQueuedPresses(); // PAUSE: the Cross that clicked Resume isn't a dash
@@ -99,6 +121,7 @@ public class MenueControl : MonoBehaviour
 
     public void Pause()
     {
+        MenuBlur.Show(pauseMenueUI.GetComponentInParent<Canvas>(), this); // FX: pixelated game view behind the menu
         pauseMenueUI.SetActive(true);
         Time.timeScale = 0f;
         isGamePaused = true;

@@ -49,6 +49,7 @@ public class playerBodyDetectionArea : MonoBehaviour
         if (other.gameObject.CompareTag("WorldOneSwitch"))
         {
             if (!changeWorld.lWorld && audioManager != null) audioManager.PlayWorldSwitch(true); // SFX: only when the world actually changes
+            if (!changeWorld.lWorld) WorldSwitchFX(false); // FX:
             changeWorld.lWorld = true;
 
 
@@ -56,9 +57,21 @@ public class playerBodyDetectionArea : MonoBehaviour
         if (other.gameObject.CompareTag("WorldTwoSwitch"))
         {
             if (changeWorld.lWorld && audioManager != null) audioManager.PlayWorldSwitch(false); // SFX: only when the world actually changes
+            if (changeWorld.lWorld) WorldSwitchFX(true); // FX:
             changeWorld.lWorld = false;
 
         }
+    }
+
+    // FX: switching worlds: a screen ripple from Harvey, a burst of spirit wisps, and the spirit-world colour shift
+    // (lWorld false is the spirit world: its enemies are the SpiritEnemy ones and switching away plays "to living")
+    private void WorldSwitchFX(bool toSpirit)
+    {
+        Vector3 at = transform.position;
+        ScreenGrade.Ripple(at);
+        ScreenGrade.SpiritWorld(toSpirit);
+        PixelFX.Ring(at, 22, 4.5f, PixelFX.Spirit, 0.45f, 1, PixelShape.Square, true, PixelLayer.Front, 1f, 0.4f);
+        PixelFX.Burst(at, 10, 0.6f, 1.6f, toSpirit ? PixelFX.Spirit : new[] { PixelFX.Cream, PixelFX.Yellow }, 0.8f, 1.4f, 1, PixelShape.Cross, PixelMotion.Drift, true, PixelLayer.Front, 90f, 360f, 0.5f);
     }
 
     // DEATH:

@@ -15,6 +15,7 @@ using UnityEngine.UI;
 ///             the hint says to pick one to continue or replace.
 ///   Continue: picks a used file to continue; empty files can't be picked.
 /// Only the chosen file is ever loaded, written or replaced (GameSession.StartNewGame / ContinueSlot).
+/// FLOW: whichever way a file is chosen, the Zone Select opens next (Main Menu -> Play -> save file -> Zone Select).
 /// Circle/Esc goes back: out of a question, then back to the main menu. Built in code, so the scene needs no setup.
 /// </summary>
 public class SaveSlotMenu : MonoBehaviour
@@ -175,6 +176,7 @@ public class SaveSlotMenu : MonoBehaviour
         if (mainMenu != null) mainMenu.SetActive(false);
 
         canvasRoot.gameObject.SetActive(true);
+        MenuBlur.Show(canvasRoot.GetComponent<Canvas>(), this); // FX:
         CloseDialog(false);
         Refresh();
         title.text = mode == Mode.Play ? "PLAY" : "CONTINUE";
@@ -188,7 +190,7 @@ public class SaveSlotMenu : MonoBehaviour
         if (mode == Mode.Continue)
             SetHint(anySaved ? "PICK A FILE TO CONTINUE" : "NO SAVED FILES YET: CHOOSE PLAY TO START ONE", anySaved ? MenuUI.Cream : MenuUI.Orange);
         else
-            SetHint(allFull ? "ALL FILES IN USE: PICK ONE TO CONTINUE OR REPLACE" : "PICK AN EMPTY FILE FOR A NEW GAME", allFull ? MenuUI.Orange : MenuUI.Cream);
+            SetHint(allFull ? "ALL FILES IN USE: PICK ONE TO CONTINUE OR REPLACE" : "PICK A FILE: EMPTY FOR A NEW GAME, USED TO CONTINUE", allFull ? MenuUI.Orange : MenuUI.Cream); // FLOW: Zone Select follows
 
         lastRow = StartRow();
         muteCursorUntilFrame = Time.frameCount + 1; // the first selection isn't a cursor move
@@ -217,6 +219,7 @@ public class SaveSlotMenu : MonoBehaviour
         HarveyMenus.PlayUiSound(cat.backSound);
         CloseDialog(false);
         canvasRoot.gameObject.SetActive(false);
+        MenuBlur.Hide(this); // FX:
         if (mainMenu != null) mainMenu.SetActive(true);
         if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(reselectOnClose);
     }
@@ -290,7 +293,7 @@ public class SaveSlotMenu : MonoBehaviour
         if (busy) return;
         busy = true;
         HarveyMenus.PlayUiSound(cat.selectSound);
-        if (GameSession.ContinueSlot(number)) return; // the level is loading
+        if (GameSession.ContinueSlot(number)) return; // FLOW: the Zone Select is loading
         busy = false;
         CloseDialog(true);
         HarveyMenus.PlayUiSound(cat.blockedSound);
