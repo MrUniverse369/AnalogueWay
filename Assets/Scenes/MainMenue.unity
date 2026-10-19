@@ -145,7 +145,7 @@ Transform:
   m_GameObject: {fileID: 7045244}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03125, y: 3.1875, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5625, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1036,9 +1036,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PixelTextOutline
   colour: {r: 0.12941177, g: 0.20392157, b: 0.2784314, a: 1}
-  pixel: 1
-  corners: 1
-  drop: 1
+  offsets:
+  - {x: 0, y: -0.5}
+  - {x: 0.5, y: -0.5}
 --- !u!114 &162582995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1427,9 +1427,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PixelTextOutline
   colour: {r: 0.12941177, g: 0.20392157, b: 0.2784314, a: 1}
-  pixel: 1
-  corners: 1
-  drop: 1
+  offsets:
+  - {x: 0, y: -0.5}
+  - {x: 0.5, y: -0.5}
 --- !u!1 &593391466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,7 +1675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &726900002
 Transform:
   m_ObjectHideFlags: 0
@@ -1938,7 +1938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1016916056
 Transform:
   m_ObjectHideFlags: 0
@@ -2120,7 +2120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1066045351
 Transform:
   m_ObjectHideFlags: 0
@@ -2337,8 +2337,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4291268505
-  m_fontColor: {r: 1, g: 1, b: 0.92156863, a: 1}
+    rgba: 4293656575
+  m_fontColor: {r: 0.08235294, g: 0.13333334, b: 0.21176471, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2415,15 +2415,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109250455}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25b3fea934df341f4a218d8af8be8364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PixelTextOutline
   colour: {r: 0.12941177, g: 0.20392157, b: 0.2784314, a: 1}
-  pixel: 1
-  corners: 1
-  drop: 1
+  offsets:
+  - {x: 0, y: -0.5}
+  - {x: 0.5, y: -0.5}
 --- !u!1 &1144264447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,7 +2515,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1191592456
 Transform:
   m_ObjectHideFlags: 0
@@ -4665,7 +4665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1468049374
 Transform:
   m_ObjectHideFlags: 0
@@ -5234,9 +5234,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PixelTextOutline
   colour: {r: 0.12941177, g: 0.20392157, b: 0.2784314, a: 1}
-  pixel: 1
-  corners: 1
-  drop: 1
+  offsets:
+  - {x: 0, y: -0.5}
+  - {x: 0.5, y: -0.5}
 --- !u!1 &1819620210
 GameObject:
   m_ObjectHideFlags: 0
@@ -5342,7 +5342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1879799124
 Transform:
   m_ObjectHideFlags: 0
@@ -5508,7 +5508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1931243844
 Transform:
   m_ObjectHideFlags: 0
@@ -6185,7 +6185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2140997813
 Transform:
   m_ObjectHideFlags: 0

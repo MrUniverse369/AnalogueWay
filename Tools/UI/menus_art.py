@@ -358,6 +358,37 @@ def book_icon(cover, cover_d, gem):
     return sprite_icon(rows, {"c": cover_d, "d": cover, "g": gem, "p": hexc("ffffeb"), "r": hexc("e1d089")})
 
 
+def cut_gem_icon(shine, light, mid, dark):
+    """CHEST: a cut gem (flat table, wide girdle, pointed base) lit from the top left, for the chest gem rewards."""
+    rows = [
+        "..hhaab..",
+        ".haaabbc.",
+        "ahaabbbcc",
+        ".aaabbbc.",
+        "..aabbc..",
+        "...abc...",
+        "....b....",
+    ]
+    return sprite_icon(rows, {"h": shine, "a": light, "b": mid, "c": dark})
+
+
+# CHEST: gems a treasure chest can award (non-unique collectibles, so they stack in the bag)
+GEMS = {
+    "JadeGem": (hexc("cfff70"), hexc("88ce6e"), hexc("52ab61"), hexc("37946e")),
+    "LapisGem": (hexc("e7fbfe"), hexc("8fd3ff"), hexc("4da6ff"), hexc("4b5bab")),
+    "RubyGem": (hexc("ffd2dc"), hexc("ff6b97"), hexc("eb564b"), hexc("b0305c")),
+    "TopazGem": (hexc("ffffeb"), hexc("ffe478"), hexc("f2a65e"), hexc("ce812c")),
+}
+
+
+def gem_icons_only():
+    """CHEST: writes just the gem item icons (python3 Tools/UI/menus_art.py gems), leaving the other art alone."""
+    os.makedirs(OUT, exist_ok=True)
+    for name, cols in GEMS.items():
+        save(cut_gem_icon(*cols), f"Item_{name}.png")
+    print("wrote gem icons to", OUT)
+
+
 ITEMS = {
     "TombMap": lambda: map_icon(hexc("4da6ff")),
     "DuneMap": lambda: map_icon(hexc("ce812c")),
@@ -457,6 +488,7 @@ ITEMS = {
         "pppppppppp",
     ], {"p": hexc("ffffeb"), "s": hexc("5fcde4"), "W": hexc("ffffff"), "m": hexc("6583a7"), "g": hexc("52ab61")}),
 }
+ITEMS.update({name: (lambda cols=cols: cut_gem_icon(*cols)) for name, cols in GEMS.items()})  # CHEST:
 
 
 def shop_stall():
@@ -599,4 +631,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if sys.argv[1:] == ["gems"]:
+        gem_icons_only()  # CHEST:
+    else:
+        main()

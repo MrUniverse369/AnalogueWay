@@ -48,6 +48,10 @@ public class HNLCatalog : ScriptableObject
     [Tooltip("Resume, Talismans, Bag, Main Menu, Quit.")]
     public Sprite[] pauseIcons;
 
+    [Header("World")]
+    [Tooltip("BOSSCHEST: the treasure chest prefab that drops into a boss arena when the boss is beaten.")]
+    public GameObject treasureChest;
+
     [Header("Sounds")]
     public AudioClip moveSound;
     public AudioClip selectSound;

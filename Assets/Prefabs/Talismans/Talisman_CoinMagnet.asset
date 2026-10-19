@@ -19,6 +19,7 @@ MonoBehaviour:
   duration: 8
   cooldown: 6
   retriggerWhileHeld: 0
+  chiPerSecond: 1.25
   traits: 0
   blockedScenes: []
   animatorBool: 

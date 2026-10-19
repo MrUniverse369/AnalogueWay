@@ -10,8 +10,10 @@ using UnityEngine;
 ///   - imports the art from Tools/UI/menus_art.py (Assets/Sprites/UI/Menus)
 ///   - fills in the six talismans (the four existing assets plus Feather Fall and Coin Magnet)
 ///   - creates the items (Assets/Prefabs/Items) and Assets/Resources/HNLCatalog.asset
-///   - places the books, maps and relics in the hand-made levels, puts bonus items in chests, gives the Tomb,
-///     Sandy and Japan bosses' treasure a talisman reward, and puts a shop stall in the Japan village.
+///   - places the books, maps and relics in the hand-made levels, gives the Tomb, Sandy and Japan bosses'
+///     treasure a talisman reward, and puts a shop stall in the Japan village.
+///   CHEST: chests no longer get a fixed bonus item; OpenChest rolls a random reward (coins, a Spirit Peach, Chi
+///   Crystals or the gems below) or a trap. Tools/HNL/Refresh Items and Catalog updates the items and catalog only.
 /// Safe to re-run: assets are updated in place and scene objects are only added once.
 /// Menu: Tools/HNL/Build Talisman and Bag Content.
 /// </summary>
@@ -27,6 +29,27 @@ public static class HarveyMenusContentBuilder
     {
         if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
         foreach (string line in BuildAll()) Debug.Log(line);
+    }
+
+    /// <summary>
+    /// CHEST: adds items that are new in ItemSpecs (the chest gems) to Assets/Prefabs/Items and the catalog. Existing
+    /// items, talismans and catalog settings are left exactly as they are, and no scene is opened.
+    /// </summary>
+    [MenuItem("Tools/HNL/Refresh Items and Catalog")]
+    public static void RefreshItemsAndCatalog()
+    {
+        var cat = AssetDatabase.LoadAssetAtPath<HNLCatalog>(CatalogPath);
+        if (cat == null)
+        {
+            Debug.LogWarning("No catalog yet: run Tools/HNL/Build Talisman and Bag Content first.");
+            return;
+        }
+        ImportArt();
+        var items = BuildItems(onlyMissing: true);
+        cat.items = ItemSpecs.Select(s => items[s.file]).ToArray(); // the same order as a full build
+        EditorUtility.SetDirty(cat);
+        AssetDatabase.SaveAssets();
+        Debug.Log($"Catalog refreshed: {cat.items.Length} items");
     }
 
     public static List<string> BuildAll()
@@ -172,6 +195,15 @@ public static class HarveyMenusContentBuilder
             effect = ItemEffect.ExtraLife, amount = 1, description = "A glowing peach from a temple orchard. Eat it to win back one life." },
         new ItemSpec { file = "ChiCrystal", name = "Chi Crystal", category = ItemCategory.PowerUp, unique = false,
             effect = ItemEffect.RestoreChi, amount = 30, description = "A shard of pure chi. Use it to refill part of the chi meter." },
+        // CHEST: gems from treasure chests; they stack in the Collectibles tab
+        new ItemSpec { file = "JadeGem", name = "Jade Gem", category = ItemCategory.Collectible, unique = false,
+            description = "Cool green jade from a treasure chest, polished smooth by long years in the dark." },
+        new ItemSpec { file = "LapisGem", name = "Lapis Gem", category = ItemCategory.Collectible, unique = false,
+            description = "A deep blue stone flecked with gold, the colour of a desert night sky." },
+        new ItemSpec { file = "TopazGem", name = "Sun Topaz", category = ItemCategory.Collectible, unique = false,
+            description = "A golden gem as warm as the afternoon sun. Treasure hunters call it lucky." },
+        new ItemSpec { file = "RubyGem", name = "Ruby", category = ItemCategory.Collectible, unique = false,
+            description = "A rare fiery red gem. It glints even in the deepest part of the tomb." },
         new ItemSpec { file = "Onigiri", name = "Onigiri", category = ItemCategory.VillageGoods, unique = false,
             effect = ItemEffect.RestoreChi, amount = 45, price = 8, description = "A rice ball wrapped in nori. Restores half of Harvey's chi." },
         new ItemSpec { file = "DarumaCharm", name = "Daruma Charm", category = ItemCategory.VillageGoods, unique = false,
@@ -182,7 +214,7 @@ public static class HarveyMenusContentBuilder
             description = "Greetings from the Snow Temple! Harvey means to send it home." },
     };
 
-    private static Dictionary<string, ItemDefinition> BuildItems()
+    private static Dictionary<string, ItemDefinition> BuildItems(bool onlyMissing = false)
     {
         if (!AssetDatabase.IsValidFolder("Assets/Prefabs/Items")) AssetDatabase.CreateFolder("Assets/Prefabs", "Items");
         var items = new Dictionary<string, ItemDefinition>();
@@ -190,6 +222,11 @@ public static class HarveyMenusContentBuilder
         {
             string path = ItemDir + "Item_" + spec.file + ".asset";
             var item = AssetDatabase.LoadAssetAtPath<ItemDefinition>(path);
+            if (item != null && onlyMissing) // CHEST: leave existing items as they are
+            {
+                items[spec.file] = item;
+                continue;
+            }
             if (item == null)
             {
                 item = ScriptableObject.CreateInstance<ItemDefinition>();
@@ -248,6 +285,7 @@ public static class HarveyMenusContentBuilder
         cat.menuButtonPressed = MainMenu("MenuButton_Pressed");
         cat.paw = MainMenu("MenuPaw");
         cat.pauseIcons = new[] { S("Pause_Resume"), S("Pause_Talismans"), S("Pause_Bag"), S("Pause_Home"), S("Pause_Quit") };
+        cat.treasureChest = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Treasure_Chest_One.prefab"); // BOSSCHEST:
         AudioClip Sound(string p) => AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Sound/" + p);
         cat.moveSound = Sound("Btn_Common.wav");
         cat.selectSound = Sound("ReadyGo.wav");
@@ -271,9 +309,6 @@ public static class HarveyMenusContentBuilder
         ("Z4A6GrassGreen", "MeadowMap", 0.5f), ("Z4A7GrassGreen", "HerbalistsNotes", 0.4f), ("Z4A7GrassGreen", "OldCompass", 0.85f),
     };
 
-    private static readonly string[] ChestScenes =
-        { "Z1A1Tomb", "Z1A2Tomb", "Z1A3Tomb", "Z2A1Sandy", "Z2A2Sandy", "Z3A1Japan", "Z3A2Japan", "Z3JapanVillage", "Z4A6GrassGreen", "Z4A7GrassGreen" };
-
     /// <summary>Boss arena scene, boss talisman (index into the Holder order).</summary>
     public static readonly Dictionary<string, int> BossTalismans = new Dictionary<string, int>
         { { "Z1BossTomb", 3 }, { "Z2BossSandy", 4 }, { "Z3BossBattle", 5 } };
@@ -285,7 +320,7 @@ public static class HarveyMenusContentBuilder
 
     private static void PlaceContent(List<string> log)
     {
-        var scenes = Pickups.Select(p => p.scene).Concat(ChestScenes).Concat(BossTalismans.Keys).Append("Z3JapanVillage").Distinct();
+        var scenes = Pickups.Select(p => p.scene).Concat(BossTalismans.Keys).Append("Z3JapanVillage").Distinct();
         foreach (string sceneName in scenes)
         {
             var scene = EditorSceneManager.OpenScene($"Assets/Scenes/{sceneName}.unity", OpenSceneMode.Single);
@@ -294,7 +329,6 @@ public static class HarveyMenusContentBuilder
             bool changed = RepairPickups(items, log, sceneName);
             foreach (var p in Pickups.Where(p => p.scene == sceneName))
                 changed |= PlacePickup(items[p.item], p.along, log, sceneName);
-            if (ChestScenes.Contains(sceneName)) changed |= FillChests(items, log, sceneName);
             if (BossTalismans.TryGetValue(sceneName, out int t)) changed |= AddBossTalisman(talismans[t], log, sceneName);
             if (sceneName == "Z3JapanVillage") changed |= PlaceShop(log);
             if (changed)
@@ -359,24 +393,6 @@ public static class HarveyMenusContentBuilder
         Object.DestroyImmediate(coin.gameObject);
         log.Add($"{sceneName}: {item.DisplayName} at {go.transform.position.x:F1}, {go.transform.position.y:F1} (replaced a coin under {go.transform.parent?.name})");
         return true;
-    }
-
-    private static bool FillChests(Dictionary<string, ItemDefinition> items, List<string> log, string sceneName)
-    {
-        bool changed = false;
-        var chests = Object.FindObjectsByType<OpenChest>(FindObjectsInactive.Include, FindObjectsSortMode.None).OrderBy(c => c.transform.position.x).ToList();
-        for (int i = 0; i < chests.Count; i++)
-        {
-            var so = new SerializedObject(chests[i]);
-            var prop = so.FindProperty("bonusItem");
-            if (prop.objectReferenceValue != null) continue;
-            // alternate chi crystals and spirit peaches through each level, starting with a crystal
-            prop.objectReferenceValue = items[i % 2 == 0 ? "ChiCrystal" : "SpiritPeach"];
-            so.ApplyModifiedPropertiesWithoutUndo();
-            changed = true;
-        }
-        if (changed) log.Add($"{sceneName}: bonus items in {chests.Count} chest(s)");
-        return changed;
     }
 
     public static bool AddBossTalisman(Talisman talisman, List<string> log, string sceneName)

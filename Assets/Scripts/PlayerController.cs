@@ -59,6 +59,16 @@ public class PlayerController : CharecterBehaviour
     /// <summary>STOMP: false while a fall isn't the player's own doing, so landing on an enemy isn't a stomp.</summary>
     public static bool StompsAllowed { get; private set; }
 
+    private float stunnedUntil; // STUN:
+    /// <summary>
+    /// STUN (2026-10-19): true while Harvey is dazed (a samurai blocked his Spirit Dash). He can't run, jump, summon the
+    /// dragon or start a talisman (PowerUpManager checks this) until it wears off; gravity and knockback still move him.
+    /// </summary>
+    public bool IsStunned => Time.time < stunnedUntil;
+
+    /// <summary>STUN: daze Harvey for 'seconds' (a longer stun already running is kept).</summary>
+    public void Stun(float seconds) => stunnedUntil = Mathf.Max(stunnedUntil, Time.time + seconds);
+
     private void Awake()
     {
         audioManager = AudioManager.Instance; // PERF:
@@ -79,6 +89,7 @@ public class PlayerController : CharecterBehaviour
     void OnEnable()
     {
         uncontrolledFall = true; // STOMP: level start and respawn drop the player in; that landing isn't a stomp
+        stunnedUntil = 0f; // STUN: a respawn wakes him up
         pControls.Gameplay.Enable();
     }
 
@@ -91,7 +102,7 @@ public class PlayerController : CharecterBehaviour
 
     void MountActive()
     {
-        if (!canSummonDragon) return; // DRAGON: switched off in levels like boss battles
+        if (!canSummonDragon || IsStunned) return; // DRAGON: switched off in levels like boss battles // STUN: or while dazed
         mountActive = true;
     }
 
@@ -228,7 +239,7 @@ public class PlayerController : CharecterBehaviour
     }
     public override void CharMovement()
     {
-        dir = Input.GetAxisRaw("Horizontal");
+        dir = IsStunned ? 0f : Input.GetAxisRaw("Horizontal"); // STUN: dazed: he stands where the knockback left him
         vel = new Vector2(speed * dir, rb2D.linearVelocity.y);
         Flip(dir);
 
@@ -289,7 +300,7 @@ public class PlayerController : CharecterBehaviour
         }
 
         bool jumpedThisFrame = false; // ANIM:
-        if (coyoteTimeCounter > 0 && Input.GetButtonDown("Jump"))
+        if (coyoteTimeCounter > 0 && Input.GetButtonDown("Jump") && !IsStunned) // STUN: no jumping while dazed
         {
             jumpedThisFrame = true; // ANIM:
             rb2D.linearVelocity = jVel;

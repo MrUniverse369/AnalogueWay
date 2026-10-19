@@ -6,6 +6,7 @@ using UnityEngine;
 ///             baked white-silhouette blink) for as long as he can't be hurt again.
 ///   Movement: landing dust scaled by the height fallen, small puffs synced to footsteps and jump take-off
 ///             puffs, all in the zone's ground colours.
+///   Stun:     STUN: stars circling his head while he is dazed (PlayerController.IsStunned).
 /// Also adds the combo (StompCombo, shared by stomps and dash defeats) and the talisman effects (TalismanFX).
 /// </summary>
 [DisallowMultipleComponent]
@@ -107,6 +108,26 @@ public class PlayerFX : MonoBehaviour
     {
         UpdateFlicker();
         UpdateLanding();
+        UpdateDaze(); // STUN:
+    }
+
+    // STUN (2026-10-19): while a samurai's block has Harvey dazed, little stars circle his head
+    private static readonly Color[] DazeColours = { PixelFX.Cream, PixelFX.Yellow, PixelFX.Yellow };
+    private float dazeTimer;
+
+    private void UpdateDaze()
+    {
+        if (player == null || !player.IsStunned || sprite == null) return;
+        dazeTimer -= Time.deltaTime;
+        if (dazeTimer > 0f) return;
+        dazeTimer = 0.05f;
+        var head = new Vector3(transform.position.x, sprite.bounds.max.y + 0.1f, 0f);
+        for (int i = 0; i < DazeColours.Length; i++)
+        {
+            float a = Time.time * 7f + i * (Mathf.PI * 2f / DazeColours.Length);
+            PixelFX.Emit(head + new Vector3(Mathf.Cos(a) * 0.3f, Mathf.Sin(a) * 0.09f, 0f), Vector2.zero, DazeColours[i], 0.07f,
+                1, PixelShape.Star, PixelMotion.Float, true);
+        }
     }
 
     // dithered invincibility flicker: two interleaved 50% patterns alternating with solid frames

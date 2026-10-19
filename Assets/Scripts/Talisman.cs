@@ -48,6 +48,11 @@ public class Talisman : ScriptableObject
     [Tooltip("Keyboard only: keep re-triggering while the key is held. Gamepad always triggers on press.")]
     [SerializeField] private bool retriggerWhileHeld;
 
+    [Header("Chi")]
+    [Tooltip("CHI: chi spent per second while active (10 chi = one unit on the meter, 90 = all nine). " +
+             "0 = free. With no chi left the talisman can't start, and an active one ends.")]
+    [SerializeField, Min(0f)] private float chiPerSecond;
+
     [Header("Rules")]
     [SerializeField] private TalismanTrait traits;
     [Tooltip("Scene names (e.g. Z4A1GrassGreen) where this talisman is disabled. Names, not build indices, so reordering or disabling scenes in Build Settings can't move the block.")]
@@ -66,6 +71,7 @@ public class Talisman : ScriptableObject
     public float Duration => duration;
     public float Cooldown => cooldown;
     public bool RetriggerWhileHeld => retriggerWhileHeld;
+    public float ChiPerSecond => chiPerSecond; // CHI:
     public TalismanTrait Traits => traits;
     public string AnimatorBool => animatorBool;
     public bool HasAnimatorBool => !string.IsNullOrEmpty(animatorBool);

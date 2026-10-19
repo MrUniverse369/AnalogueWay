@@ -73,6 +73,12 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
     [Tooltip("Shown when he is defeated (the treasure that ends the level).")]
     [SerializeField] private GameObject revealOnDefeat;
 
+    [Header("Victory chests (BOSSCHEST:)")]
+    [Tooltip("Beat the boss within this many seconds on the level timer for the most chests (6).")]
+    [SerializeField] private float chestsFastTime = 35f; // a perfect run takes about 20 s (measured 2026-10-19)
+    [Tooltip("At or past this many seconds only the fewest chests drop (3). Between the two: 5, then 4, in equal halves.")]
+    [SerializeField] private float chestsSlowTime = 110f;
+
     [Header("Fight")]
     [SerializeField] private int maxLives = 3;
     [SerializeField] private Stage[] stages;
@@ -170,14 +176,28 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
         foreach (var t in new Component[] { waveTemplate, bladeTemplate, warningTemplate })
             if (t != null) t.gameObject.SetActive(false);
         ShowDanger(0f);
-        LevelManager.Respawned += ResetFight;
+        LevelManager.Respawned += OnRespawned; // BOSSCHEST: was ResetFight
+        TreasureNeedsAction(); // BOSSCHEST:
         ResetFight();
     }
 
     private void OnDestroy()
     {
-        LevelManager.Respawned -= ResetFight;
+        LevelManager.Respawned -= OnRespawned;
         ClearHazards();
+    }
+
+    // BOSSCHEST: once he is beaten a respawn doesn't bring him back (that would hide the treasure and drop the chests again)
+    private void OnRespawned()
+    {
+        if (!defeated) ResetFight();
+    }
+
+    // BOSSCHEST: his treasure waits for the action button, so Harvey can open the chests first
+    private void TreasureNeedsAction()
+    {
+        NextLevel exit = revealOnDefeat != null ? revealOnDefeat.GetComponent<NextLevel>() : null;
+        if (exit != null) exit.RequireAction = true;
     }
 
     // ---------------------------------------------------------------- the fight
@@ -640,6 +660,7 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
     private IEnumerator Defeat()
     {
         defeated = true;
+        float fightTime = BossChests.FightTime(); // BOSSCHEST: the clock stops at the winning hit
         ClearHazards();
         hurtbox.enabled = false;
         SetPose(Pose.Kneel);
@@ -660,6 +681,8 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
         foreach (var pip in lifePips) if (pip != null) pip.enabled = false;
         Play(audioManager != null ? audioManager.BossDefeatSound : null, 1f);
         if (revealOnDefeat != null) revealOnDefeat.SetActive(true);
+        StartCoroutine(BossChests.Drop(fightTime, chestsFastTime, chestsSlowTime, LeftX, RightX, GroundY,
+            revealOnDefeat != null ? revealOnDefeat.transform.position : transform.position)); // BOSSCHEST:
     }
 
     private void OnTriggerEnter2D(Collider2D other)

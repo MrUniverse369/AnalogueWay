@@ -18,6 +18,7 @@ using UnityEngine.UI; // TITLE:
 public class MainMenuScene : MonoBehaviour
 {
     private const float PixelSize = 1f / 16f; // world units per art pixel (16 PPU)
+    private const float SkyPixelSize = 1f / 32f; // CLEAN: the sky art is drawn twice as fine (32 PPU, Tools/Art/menu_sky.py)
 
     [Header("Harvey")]
     [SerializeField] private SpriteRenderer harvey;
@@ -132,7 +133,7 @@ public class MainMenuScene : MonoBehaviour
             driftX[i] += driftSpeed * (0.7f + 0.25f * i) * PixelSize * dt;
             if (driftX[i] > driftWrapX) driftX[i] = -driftWrapX;
             Vector3 p = drifters[i].localPosition;
-            p.x = Mathf.Round(driftX[i] / PixelSize) * PixelSize;
+            p.x = Mathf.Round(driftX[i] / SkyPixelSize) * SkyPixelSize; // CLEAN: whole sky pixels, so half the old step
             drifters[i].localPosition = p;
         }
     }

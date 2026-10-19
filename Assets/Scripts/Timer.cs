@@ -8,6 +8,9 @@ public class Timer : MonoBehaviour
     [SerializeField] private LevelComplete lcScriptRef;
 
     private float elapsedTime;
+
+    /// <summary>BOSSCHEST: seconds on the level clock (what the HUD shows).</summary>
+    public float Elapsed => elapsedTime;
     private int shownSeconds = -1; // PERF: last value written to timerText
     private int shownLives = int.MinValue; // PERF: last value written to oppsText
 

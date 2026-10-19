@@ -13,10 +13,14 @@ using UnityEngine;
 /// Lives on the samurai's sprite object (the one with the Animator, Walk state and the "Slash" state).
 /// Frames: JSEAnim_SwordAttack.png (made from SamuraiSwoardattack.jpg by Tools/Art/samurai_slash.py).
 ///
-/// CLASH: if Harvey's Spirit Dash meets the monkey head-on (Harvey in front of it, facing or moving toward it) during
-/// the wind-up or the slash, the two attacks cancel out: blades clang, Harvey's dash ends and he is knocked back without
-/// losing a life, and the monkey staggers back and returns to its patrol. Dashing into it from behind, or during the
-/// recovery, still defeats it as before.
+/// CLASH: if Harvey's Spirit Dash meets the monkey while he is in its line of sight (coming at it from the front, not
+/// from above), it blocks: blades clang, Harvey's dash ends and he is knocked back without losing a life, and the
+/// monkey slides back and returns to its patrol. BLOCK (2026-10-19): this holds at any time, not only during the
+/// wind-up and the slash. Dashing into it from behind (or from above) still defeats it, as does a stomp.
+/// BLOCK (2026-10-19, later): every block plays the monkey's block stance (the "Block" state: Block.anim from
+/// JSEAnim_Block.png, the braced draw stance with his hand on the hilt; Tools/Art/samurai_block.py +
+/// Assets/Editor/SamuraiBlockSetup.cs) for the whole slide and hold, never a walk frame, and stuns Harvey for stunTime
+/// (2 s: no running, jumping, dashing or talismans, PlayerController.Stun), so he can't keep dashing into it.
 /// AFTERIMAGE: the dash leaves fading red afterimages (AfterimageTrail, the same effect as Harvey's Spirit Dash).
 /// </summary>
 [RequireComponent(typeof(Animator))]
@@ -24,6 +28,7 @@ public class SamuraiSlash : MonoBehaviour
 {
     private static readonly int SlashState = Animator.StringToHash("Base Layer.Slash");
     private static readonly int WalkState = Animator.StringToHash("Base Layer.Walk");
+    private static readonly int BlockState = Animator.StringToHash("Base Layer.Block"); // BLOCK:
     private static readonly int IsHurtParam = Animator.StringToHash("isHurt");
 
     [Header("When it attacks")]
@@ -49,13 +54,15 @@ public class SamuraiSlash : MonoBehaviour
     [SerializeField] private Vector2 hitBox = new Vector2(1.7f, 1.4f);
     [SerializeField] private float knockbackTime = 0.3f;
 
-    [Header("Clash (Harvey's Spirit Dash meets the attack head-on)")]
-    [Tooltip("How far the monkey staggers back along its path.")]
+    [Header("Clash (the monkey blocks Harvey's Spirit Dash)")]
+    [Tooltip("How far the monkey slides back along its path, in its block stance.")]
     [SerializeField] private float clashRecoil = 0.6f;
-    [Tooltip("How long it stands stunned before patrolling again.")]
+    [Tooltip("How long it then holds the block stance before patrolling again.")]
     [SerializeField] private float clashStun = 0.4f;
     [Tooltip("Harvey's knockback time (no life lost).")]
     [SerializeField] private float clashKnockback = 0.2f;
+    [Tooltip("BLOCK: how long Harvey is stunned after a blocked dash: he can't run, jump, dash or use a talisman.")]
+    [SerializeField] private float stunTime = 2f;
     [Tooltip("Empty = the slash sound, pitched up.")]
     [SerializeField] private AudioClip clashSound;
 
@@ -75,7 +82,6 @@ public class SamuraiSlash : MonoBehaviour
     private bool clashable; // CLASH: during the wind-up and while the blade is live
     private static float clashGraceUntil = -1f;
     private AfterimageTrail trail; // AFTERIMAGE:
-    private Rigidbody2D playerRb;
 
     /// <summary>CLASH: just after a clash; Harvey's knockback isn't a hurt (no flicker, no hurt animation, no life lost).</summary>
     public static bool ClashProtected => Time.time < clashGraceUntil;
@@ -83,6 +89,9 @@ public class SamuraiSlash : MonoBehaviour
     private PlayerController player;
     private playerBodyDetectionArea playerBody;
     private Collider2D playerArea;
+    private Rigidbody2D playerRb; // LOS: which way Harvey is moving
+    private Collider2D hitbox;    // LOS: the monkey's own body (the sprite is wider: it includes the sword)
+    private bool blockStance;     // BLOCK: this block plays the Block state (else the old freeze-frame stagger)
 
     public bool IsAttacking => attack != null;
 
@@ -91,6 +100,7 @@ public class SamuraiSlash : MonoBehaviour
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         enemy = GetComponent<EnemyController>();
+        hitbox = GetComponent<Collider2D>(); // LOS:
         patrol = GetComponentInParent<MovingTiles>();
         mover = patrol != null && patrol.ObjToMove != null ? patrol.ObjToMove : transform;
         trail = AfterimageTrail.On(sprite, 7); // AFTERIMAGE:
@@ -127,7 +137,7 @@ public class SamuraiSlash : MonoBehaviour
             if (player == null) return false;
             playerBody = player.GetComponentInChildren<playerBodyDetectionArea>(true);
             playerArea = playerBody != null ? playerBody.GetComponent<Collider2D>() : null;
-            playerRb = player.GetComponent<Rigidbody2D>();
+            playerRb = player.GetComponent<Rigidbody2D>(); // LOS:
         }
         return player.isActiveAndEnabled;
     }
@@ -205,7 +215,7 @@ public class SamuraiSlash : MonoBehaviour
             TryHit();
             yield return null;
         }
-        clashable = false; // CLASH: the recovery is the opening: a dash now defeats it
+        clashable = false; // CLASH: the blade is no longer live (a dash from the front is still blocked, see TryClash)
         yield return Wait(recover - 0.08f);
         Finish();
     }
@@ -231,20 +241,22 @@ public class SamuraiSlash : MonoBehaviour
 
     // ---------------------------------------------------------------- CLASH
     /// <summary>
-    /// CLASH: called by EnemyController when Harvey's dash touches the monkey. True when the touch was a head-on clash
-    /// (the attacks cancel, nobody is hurt), false when the dash should defeat it as usual.
+    /// CLASH: called by EnemyController when Harvey's dash touches the monkey. True when the monkey blocks it (the
+    /// attacks cancel, nobody is hurt), false when the dash should defeat it as usual.
+    /// BLOCK (2026-10-19): it blocks every dash that comes from where it can see (InLineOfSight), at any time, not only
+    /// during its own attack. Dashing into its back or from above still defeats it; so does a stomp.
     /// </summary>
     public bool TryClash()
     {
-        if (!HeadOnDash()) return false;
+        if (!DashInSight()) return false;
         Clash();
         return true;
     }
 
-    // each frame of the wind-up and the slash: Harvey's dash reaching the blade or the body
+    // each frame of the wind-up and the slash: Harvey's dash reaching the blade (in front of the body) or the body
     private bool CheckClash()
     {
-        if (!HeadOnDash() || playerArea == null) return false;
+        if (!clashable || !DashInSight() || playerArea == null) return false;
         Bounds his = playerArea.bounds;
         his.center = new Vector3(his.center.x, his.center.y, 0f);
         Bounds body = sprite.bounds;
@@ -254,16 +266,30 @@ public class SamuraiSlash : MonoBehaviour
         return true;
     }
 
-    // Spirit Dash on, Harvey in front of the monkey, and facing or moving toward it
-    private bool HeadOnDash()
+    // BLOCK: Spirit Dash on and Harvey in the monkey's line of sight
+    private bool DashInSight()
     {
-        if (!clashable || (enemy != null && enemy.IsDying) || !FindPlayer()) return false;
+        if ((enemy != null && enemy.IsDying) || !FindPlayer()) return false;
         if (!PowerUpManager.Has(TalismanTrait.DefeatsEnemiesOnContact)) return false;
-        float dx = player.transform.position.x - sprite.bounds.center.x;
-        if (Mathf.Sign(dx) != Facing) return false; // behind it: the dash just defeats it
-        bool facingIt = Mathf.Sign(player.transform.localScale.x) == -Facing;
-        bool movingAtIt = playerRb != null && playerRb.linearVelocity.x * Facing < -0.5f;
-        return facingIt || movingAtIt;
+        return InLineOfSight();
+    }
+
+    // LOS (2026-10-19): the monkey sees Harvey when he comes at it from the front (the way it faces) and not from above
+    // its head. Where he came from decides it, not where he is at the touch: a dash covers about a third of a unit per
+    // physics step and the monkey's hitbox is only half a unit wide, so by the time the touch registers his middle has
+    // reached the monkey's middle, and a dash into its back used to read as "in front" (and was blocked).
+    private bool InLineOfSight()
+    {
+        Bounds me = hitbox != null ? hitbox.bounds : sprite.bounds;
+        if (player.FeetPosition.y >= me.max.y) return false; // above its head: it can't see a dash coming down
+        float x = playerRb != null ? playerRb.position.x : player.transform.position.x;
+        float dx = (x - me.center.x) * Facing;                             // > 0: on the side it faces
+        float atItsFace = playerRb != null ? -playerRb.linearVelocity.x * Facing : 0f; // > 0: moving toward its face
+        if (atItsFace > 0.5f) return true; // coming at its face: from the front
+        float touching = me.extents.x + (playerArea != null ? playerArea.bounds.extents.x : 0f);
+        if (atItsFace < -0.5f) return dx > touching; // moving the way it faces: into its back, unless he is clear in
+                                                     // front of it (running from its blade)
+        return dx > 0f; // not moving: whichever side he's on
     }
 
     private void Clash()
@@ -271,6 +297,7 @@ public class SamuraiSlash : MonoBehaviour
         clashable = false;
         hitThisAttack = true;
         if (attack != null) StopCoroutine(attack);
+        if (patrol != null) patrol.enabled = false; // BLOCK: a block mid-patrol stops the walk for the stagger too
         clashGraceUntil = Time.time + clashKnockback + 0.3f;
 
         // Harvey: the dash ends and he bounces back off the blade; no life, no hurt animation
@@ -281,6 +308,17 @@ public class SamuraiSlash : MonoBehaviour
         pt.localScale = scale;
         PlayerController.playerInviInvincible = true;
         if (playerBody != null) playerBody.pushBackCounter = clashKnockback;
+        player.Stun(stunTime); // BLOCK: dazed: no running, jumping, dashing or talismans for a while
+
+        // BLOCK: the block stance for the whole slide and hold (the old stagger froze whatever frame was showing,
+        // usually a walk frame). Without the Block state (an older controller) it still freezes as before.
+        blockStance = anim.HasState(0, BlockState);
+        if (blockStance)
+        {
+            anim.speed = 1f;
+            anim.Play(BlockState, 0, 0f);
+            anim.Update(0f); // show the stance this frame, not on the animator's next pass
+        }
 
         // the clang where the blades meet
         Vector3 mid = (sprite.bounds.center + pt.position) * 0.5f;
@@ -299,10 +337,10 @@ public class SamuraiSlash : MonoBehaviour
         attack = StartCoroutine(Recoil());
     }
 
-    // CLASH: staggers back along the patrol path, frozen on its frame, then back to the patrol
+    // CLASH: slides back along the patrol path in its block stance, holds it, then back to the patrol
     private IEnumerator Recoil()
     {
-        anim.speed = 0f;
+        if (!blockStance) anim.speed = 0f; // BLOCK: no Block state: freeze on the current frame, as before
         float startX = mover.position.x;
         float targetX = startX - Facing * clashRecoil;
         if (patrol != null) targetX = Mathf.Clamp(targetX, patrol.MinX, patrol.MaxX);

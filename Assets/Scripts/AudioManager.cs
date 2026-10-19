@@ -25,12 +25,16 @@ public class AudioManager : MonoBehaviour
    public AudioClip bossDefeatSound; // SFX: a boss vanishes when beaten (falls back to powerUpSound)
    public AudioClip cloudBounceSound; // SFX: soft springy bounce on the Green Zone clouds (falls back to bounceSound)
    public AudioClip samuraiSlashSound; // SLASH: the samurai monkey's dashing sword slice (falls back to enemyDashDefeatSound)
+   public AudioClip chestTrapSound; // CHEST: a trapped chest going off like a firework (falls back to bossSlamSound)
+   public AudioClip chestFuseSound; // CHEST: the fuse fizzing in the moment before a trapped chest goes off
+   public AudioClip chestRattleSound; // CHEST: the faint rattle of a trapped chest while Harvey is nearby
    private int lastFootstep = -1; // SFX:
 
    public AudioClip BossSlamSound => bossSlamSound != null ? bossSlamSound : bounceSound; // SFX:
    public AudioClip BossDefeatSound => bossDefeatSound != null ? bossDefeatSound : powerUpSound; // SFX:
    public AudioClip CloudBounceSound => cloudBounceSound != null ? cloudBounceSound : bounceSound; // SFX:
    public AudioClip SamuraiSlashSound => samuraiSlashSound != null ? samuraiSlashSound : enemyDashDefeatSound; // SLASH:
+   public AudioClip ChestTrapSound => chestTrapSound != null ? chestTrapSound : BossSlamSound; // CHEST:
 
     // MIX: one place to balance everything. 1 = the clip as recorded.
     // Defaults were measured so each sound sits at a set level against the music at musicVolume 0.35:
@@ -52,6 +56,8 @@ public class AudioManager : MonoBehaviour
     [Range(0f, 1f)] public float dragonSummonVolume = 1f; // MIX:
     [Range(0f, 1f)] public float playerHurtVolume = 1f; // MIX:
     [Range(0f, 1f)] public float cloudBounceVolume = 1f; // MIX:
+    [Range(0f, 1f)] public float chestTrapVolume = 1f; // MIX: CHEST: the trap bang and its fuse
+    [Range(0f, 1f)] public float chestRattleVolume = 1f; // MIX: CHEST: keep it faint; it's a hint, not an alarm
 
     // PERF: one shared reference instead of every script searching the scene by tag.
     private static AudioManager instance;
@@ -215,6 +221,8 @@ public class AudioManager : MonoBehaviour
         if (sound == dragonSummonSound) return dragonSummonVolume;
         if (sound == playerHurtSound) return playerHurtVolume;
         if (sound == cloudBounceSound) return cloudBounceVolume;
+        if (sound == chestTrapSound || sound == chestFuseSound) return chestTrapVolume; // CHEST:
+        if (sound == chestRattleSound) return chestRattleVolume; // CHEST:
         return 1f;
     }
 

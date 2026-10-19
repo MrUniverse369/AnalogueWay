@@ -12,6 +12,17 @@ public class NextLevel : MonoBehaviour
     private bool levelEnding; // PERF: B1 fix - the end-of-level sequence must only start once
     private AudioManager audioManager;
 
+    // BOSSCHEST: in a boss arena Harvey takes the treasure with the action button, so he can open the chests the boss
+    // dropped first; elsewhere touching it ends the level, as before. The bosses switch this on for their treasure.
+    [Tooltip("Harvey must press Up / E at the treasure to finish (boss arenas). Off: touching it finishes the level.")]
+    [SerializeField] private bool requireAction;
+    private bool upWasHeld = true;
+    public bool RequireAction
+    {
+        get => requireAction;
+        set => requireAction = value;
+    }
+
     private void Awake()
     {
         audioManager = AudioManager.Instance; // PERF:
@@ -29,11 +40,18 @@ public class NextLevel : MonoBehaviour
     {
         // PERF: B1 fix - this used to start a new coroutine every frame of the 5 s freeze (~300 of them),
         // each restarting the win sound and redoing the level-complete setup.
-        if (pIsTouchingTreasure && !levelEnding)
+        bool up = ActionButton.Held(); // BOSSCHEST:
+        bool pressed = up && !upWasHeld;
+        upWasHeld = up;
+        if (!pIsTouchingTreasure || levelEnding) return;
+        if (requireAction) // BOSSCHEST:
         {
-            levelEnding = true;
-            StartCoroutine(NextLevelPauseCo());
+            if (MenueControl.isGamePaused || HarveyMenus.IsOpen || DialogueBox.IsOpen || OpenChest.PlayerAtChest) return; // a chest in reach answers first
+            HarveyMenus.Prompt(this, ActionButton.Prompt + "TAKE THE TREASURE AND LEAVE");
+            if (!pressed) return;
         }
+        levelEnding = true;
+        StartCoroutine(NextLevelPauseCo());
     }
 
 

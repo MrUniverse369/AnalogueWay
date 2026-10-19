@@ -183,7 +183,9 @@ public class PowerUpManager : MonoBehaviour
         if (slot.isActive)
         {
             slot.timeLeft -= dt;
-            if (slot.timeLeft <= 0f) End(index);
+            // CHI: a running talisman spends chi at its own rate and ends the moment the last unit is gone
+            bool chiLeft = slot.talisman.ChiPerSecond <= 0f || Chi.Spend(slot.talisman.ChiPerSecond * dt);
+            if (slot.timeLeft <= 0f || !chiLeft) End(index);
             else slot.talisman.OnTick(context, dt); // MENUS: Feather Fall, Coin Magnet
         }
         else if (slot.cooldownLeft > 0f)
@@ -216,8 +218,14 @@ public class PowerUpManager : MonoBehaviour
         Talisman talisman = slot.talisman;
 
         if (slot.isActive || slot.cooldownLeft > 0f) return;
+        if (player.IsStunned) return; // STUN: dazed by a samurai's block: no dashing (or any talisman) until it wears off
         if (oneAtATime && IsAnyActive()) return;
         if (!talisman.IsAllowedInScene(sceneName) || !talisman.CanActivate(context)) return;
+        if (talisman.ChiPerSecond > 0f && Chi.IsEmpty) // CHI: all nine units spent: nothing starts until chi is restored
+        {
+            DenyFeedback();
+            return;
+        }
 
         slot.isActive = true;
         slot.timeLeft = talisman.Duration;
@@ -254,6 +262,18 @@ public class PowerUpManager : MonoBehaviour
         if (context.Audio == null) return;
         AudioClip clip = talisman.ActivationSound != null ? talisman.ActivationSound : context.Audio.powerUpSound;
         context.Audio.PlaySfx(clip);
+    }
+
+    // CHI: a low fizzle and a shake of the chi meter. A held key retries every frame, so at most every DenyInterval.
+    private const float DenyInterval = 0.4f;
+    private float nextDeny;
+
+    private void DenyFeedback()
+    {
+        if (Time.unscaledTime < nextDeny) return;
+        nextDeny = Time.unscaledTime + DenyInterval;
+        Chi.Deny();
+        if (context.Audio != null) context.Audio.PlaySfxOneShotPitched(context.Audio.powerUpSound, 0.55f, 0.5f);
     }
 
     private bool IsAnyActive()

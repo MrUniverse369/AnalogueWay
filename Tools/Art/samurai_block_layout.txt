@@ -1,0 +1,2 @@
+# x y w h pivotX  (pixels; y from the bottom; pivotX from the frame's left edge)
+0 0 39 48 4

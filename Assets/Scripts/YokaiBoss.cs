@@ -89,6 +89,12 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     [Tooltip("Log hits, contacts and damage to the Console while tuning the fight.")]
     [SerializeField] private bool debugLog;
 
+    [Header("Victory chests (BOSSCHEST:)")]
+    [Tooltip("Beat the boss within this many seconds on the level timer for the most chests (6).")]
+    [SerializeField] private float chestsFastTime = 40f; // a perfect run takes about 23-28 s (measured 2026-10-19)
+    [Tooltip("At or past this many seconds only the fewest chests drop (3). Between the two: 5, then 4, in equal halves.")]
+    [SerializeField] private float chestsSlowTime = 120f;
+
     private static readonly int IsHurtParam = Animator.StringToHash("isHurt");
 
     private int lives;
@@ -128,13 +134,27 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         if (rockTemplate != null) rockTemplate.gameObject.SetActive(false);
         if (projectileTemplate != null) projectileTemplate.gameObject.SetActive(false); // BOSSES:
         if (spikeTemplate != null) spikeTemplate.gameObject.SetActive(false); // BOSSES:
-        LevelManager.Respawned += ResetFight;
+        LevelManager.Respawned += OnRespawned; // BOSSCHEST: was ResetFight
+        TreasureNeedsAction(); // BOSSCHEST:
         ResetFight();
     }
 
     private void OnDestroy()
     {
-        LevelManager.Respawned -= ResetFight;
+        LevelManager.Respawned -= OnRespawned;
+    }
+
+    // BOSSCHEST: once he is beaten a respawn doesn't bring him back (that would hide the treasure and drop the chests again)
+    private void OnRespawned()
+    {
+        if (!defeated) ResetFight();
+    }
+
+    // BOSSCHEST: his treasure waits for the action button, so Harvey can open the chests first
+    private void TreasureNeedsAction()
+    {
+        NextLevel exit = revealOnDefeat != null ? revealOnDefeat.GetComponent<NextLevel>() : null;
+        if (exit != null) exit.RequireAction = true;
     }
 
     // ---------------------------------------------------------------- fight flow
@@ -387,6 +407,7 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     private IEnumerator Defeat()
     {
         defeated = true;
+        float fightTime = BossChests.FightTime(); // BOSSCHEST: the clock stops at the winning hit
         ClearHazards();
         hurtbox.enabled = false;
         yield return Blink(1.2f, hitColor);
@@ -402,6 +423,8 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         Fx.SetDither(0f);
         Play(audioManager != null ? audioManager.BossDefeatSound : null);
         if (revealOnDefeat != null) revealOnDefeat.SetActive(true);
+        StartCoroutine(BossChests.Drop(fightTime, chestsFastTime, chestsSlowTime, leftLimit.position.x, rightLimit.position.x, GroundY,
+            revealOnDefeat != null ? revealOnDefeat.transform.position : transform.position)); // BOSSCHEST:
     }
 
     private void Log(string message)

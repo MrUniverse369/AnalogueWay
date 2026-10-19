@@ -27,6 +27,7 @@ public static class SpriteGrounding
         new Sheet { path = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim.png", footDepth = 22 },             // walk
         new Sheet { path = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim_SwordAttack.png", footDepth = 22 }, // slash
         new Sheet { path = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim_Sword.png", footDepth = 22 },       // sword draw
+        new Sheet { path = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim_Block.png", footDepth = 22 },       // BLOCK: block stance
     };
 
     [MenuItem("Tools/HNL/Ground Sprite Frames")]

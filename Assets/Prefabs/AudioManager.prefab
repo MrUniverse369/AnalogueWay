@@ -202,6 +202,9 @@ MonoBehaviour:
   bossDefeatSound: {fileID: 8300000, guid: f6b5f1432d1ee486685506dd77763cb5, type: 3}
   cloudBounceSound: {fileID: 8300000, guid: e90794ce5ce8a4af68461034920e4d57, type: 3}
   samuraiSlashSound: {fileID: 8300000, guid: d2dc19cc35e1546318fe7563f9209dd4, type: 3}
+  chestTrapSound: {fileID: 8300000, guid: 1f4557896528441b290e5704b4c2fae8, type: 3}
+  chestFuseSound: {fileID: 8300000, guid: a9806222be5084a1694f5ec82b611857, type: 3}
+  chestRattleSound: {fileID: 8300000, guid: f3836bdc9526f47aa8f86f018a25f58a, type: 3}
   musicVolume: 0.35
   coinVolume: 0.18
   winVolume: 0.54
@@ -216,6 +219,8 @@ MonoBehaviour:
   dragonSummonVolume: 1
   playerHurtVolume: 1
   cloudBounceVolume: 1
+  chestTrapVolume: 1
+  chestRattleVolume: 1
 --- !u!1 &6491143628084602303
 GameObject:
   m_ObjectHideFlags: 0

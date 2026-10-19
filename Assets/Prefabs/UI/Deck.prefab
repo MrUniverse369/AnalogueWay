@@ -194,6 +194,20 @@ MonoBehaviour:
   manaTwo: {fileID: 21300000, guid: 01838e0caa3524432b98cf72903a6cbd, type: 3}
   manaThree: {fileID: 21300000, guid: 4e2d6f9dafe2347d3b320271ebd0fa90, type: 3}
   manaFour: {fileID: 21300000, guid: 786a46251029946129319584688d62fc, type: 3}
+  blueChi:
+  - {fileID: 21300000, guid: 148062c611c2f4f2fb9f83c14dcc7bdf, type: 3}
+  - {fileID: 21300000, guid: ee0fa1a7211424d43a9ff0a08fa3494f, type: 3}
+  - {fileID: 21300000, guid: 56c1f2e65a3c0464583a6e1d0607b764, type: 3}
+  greenChi:
+  - {fileID: 21300000, guid: fc7a9df7f5f6849c4a10a8fcc4db7008, type: 3}
+  - {fileID: 21300000, guid: 7c532becc555f4156ac52be9ca7175a2, type: 3}
+  - {fileID: 21300000, guid: bfea96f22c5a94cf7add666a98c0d3f3, type: 3}
+  redChi:
+  - {fileID: 21300000, guid: 51af3726519554d7bb74b87ebefc28b0, type: 3}
+  - {fileID: 21300000, guid: 7ca17347edd7243fd8e05beade7b9296, type: 3}
+  - {fileID: 21300000, guid: 8752002f7885a432aab42ab24935b9e8, type: 3}
+  tierPopTime: 0.3
+  denyShakeTime: 0.3
 --- !u!1 &749691488
 GameObject:
   m_ObjectHideFlags: 0

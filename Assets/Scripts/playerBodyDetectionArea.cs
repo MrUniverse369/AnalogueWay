@@ -75,6 +75,13 @@ public class playerBodyDetectionArea : MonoBehaviour
         PixelFX.Burst(at, 10, 0.6f, 1.6f, toSpirit ? PixelFX.Spirit : new[] { PixelFX.Cream, PixelFX.Yellow }, 0.8f, 1.4f, 1, PixelShape.Cross, PixelMotion.Drift, true, PixelLayer.Front, 90f, 360f, 0.5f);
     }
 
+    /// <summary>CHEST: knock Harvey back exactly like an enemy hit (a trapped chest going off in his face).</summary>
+    public void Knockback()
+    {
+        if (animatorRef != null) animatorRef.SetTrigger("isHurt");
+        pushBackCounter = pushBackLenght;
+    }
+
     // DEATH:
     private static bool IsDyingEnemy(Collider2D other)
     {

@@ -64,10 +64,13 @@ public class TalismanHUD : MonoBehaviour
         }
     }
 
+    private static readonly Color NoChiTint = new Color(0.5f, 0.5f, 0.56f, 1f); // CHI:
+
     private void Update()
     {
         if (icon == null) return;
         icon.sprite = CurrentSprite();
+        icon.color = Chi.IsEmpty ? NoChiTint : Color.white; // CHI: no chi left: the gems dim until it is restored
         UpdateRadials();
     }
 

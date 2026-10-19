@@ -134,7 +134,7 @@ BoxCollider2D:
   m_Offset: {x: 0.1128574, y: -0.1329835}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.5217391}
     oldSize: {x: 2.0625, y: 2.875}
     newSize: {x: 2.0625, y: 2.875}
     adaptiveTilingThreshold: 0.5
@@ -229,12 +229,20 @@ MonoBehaviour:
   triggerRange: 3.2
   levelTolerance: 0.9
   cooldown: 1.6
+  turnGrace: 0.45
   windUp: 0.28
   dashTime: 0.2
   dashDistance: 2.6
   recover: 0.52
   hitBox: {x: 1.7, y: 1.4}
   knockbackTime: 0.3
+  clashRecoil: 0.6
+  clashStun: 0.4
+  clashKnockback: 0.35
+  stunTime: 2
+  clashSound: {fileID: 0}
+  afterimageInterval: 0.035
+  afterimageTint: {r: 1, g: 0.55, b: 0.55, a: 1}
 --- !u!1 &5775275322291475926
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +325,8 @@ MonoBehaviour:
   pointB: {fileID: 5775275323808042265}
   objToMove: {fileID: 5775275322140942335}
   speed: 2
+  followPatrol: {fileID: 0}
+  followLag: 0
   enemyTurn: 0
 --- !u!1 &5775275323808042264
 GameObject:

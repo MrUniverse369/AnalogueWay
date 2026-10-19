@@ -291,7 +291,12 @@ public class HarveyMenus : MonoBehaviour
         if (instance == null) return;
         instance.promptOwner = owner;
         instance.promptFrame = Time.frameCount;
+        if (instance.promptText.text == text) return;
         instance.promptText.text = text;
+        // BOSSCHEST: the plate grows to fit longer prompts (it never shrinks below the original 110)
+        float width = Mathf.Clamp(instance.promptText.GetPreferredValues(text).x + 12f, 110f, 300f);
+        instance.prompt.sizeDelta = new Vector2(width, 14f);
+        instance.promptText.rectTransform.sizeDelta = new Vector2(width - 6f, 8f);
     }
 
     private void BuildPrompt()
@@ -308,5 +313,31 @@ public class HarveyMenus : MonoBehaviour
     {
         bool show = open == null && promptOwner != null && promptFrame >= Time.frameCount - 1;
         if (prompt.gameObject.activeSelf != show) prompt.gameObject.SetActive(show);
+        if (show) PlacePrompt(); // BOSSCHEST:
+    }
+
+    // BOSSCHEST: the prompt sits at the bottom of the screen unless that would cover Harvey (a boss arena's fixed
+    // camera keeps the floor along the bottom edge, so it hid the treasure and the chests); then it floats just
+    // above his head instead, kept on screen
+    private static readonly Vector2 PromptBottom = new Vector2(0f, 10f);
+    private void PlacePrompt()
+    {
+        Camera cam = Camera.main;
+        PlayerFX harvey = PlayerFX.Instance;
+        Vector2 at = PromptBottom;
+        if (cam != null && harvey != null && harvey.isActiveAndEnabled && harvey.Sprite != null)
+        {
+            Bounds b = harvey.Sprite.bounds;
+            Rect r = canvasRoot.rect;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRoot, cam.WorldToScreenPoint(new Vector3(b.center.x, b.min.y, 0f)), null, out Vector2 feet);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRoot, cam.WorldToScreenPoint(new Vector3(b.center.x, b.max.y, 0f)), null, out Vector2 head);
+            if (feet.y - r.yMin < PromptBottom.y + prompt.sizeDelta.y + 8f)
+            {
+                float half = prompt.sizeDelta.x / 2f + 2f;
+                float x = Mathf.Clamp(head.x - r.center.x, r.xMin - r.center.x + half, r.xMax - r.center.x - half);
+                at = new Vector2(Mathf.Round(x), Mathf.Round(head.y - r.yMin + 6f));
+            }
+        }
+        if (prompt.anchoredPosition != at) prompt.anchoredPosition = at;
     }
 }
