@@ -146,6 +146,13 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
+    /// <summary>CLASH: ends every active talisman that grants the trait (a samurai clash stops the Spirit Dash).</summary>
+    public void EndTrait(TalismanTrait trait)
+    {
+        for (int i = 0; i < slots.Length; i++)
+            if (slots[i].isActive && slots[i].talisman != null && (slots[i].talisman.Traits & trait) != TalismanTrait.None) End(i);
+    }
+
     /// <summary>PAUSE: drop presses that arrived this frame (e.g. the Cross that clicked Resume).</summary>
     public void CancelQueuedPresses()
     {

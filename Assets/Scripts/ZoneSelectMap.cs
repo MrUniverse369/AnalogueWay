@@ -66,6 +66,21 @@ public class ZoneSelectMap : MonoBehaviour
     [SerializeField] private AudioClip selectSound;
     [SerializeField] private AudioClip backSound;
 
+    // ZONEMUSIC: each part of the map has its own track; it crossfades halfway along a walk into another zone
+    [System.Serializable]
+    public class ZoneMusic
+    {
+        public string name;
+        [Tooltip("Nodes whose scene name starts with one of these play this track (e.g. Z1 = every Tomb level).")]
+        public string[] scenePrefixes;
+        [Tooltip("Empty = the map's own music (AudioManager Background Music).")]
+        public AudioClip clip;
+    }
+
+    [Header("Zone music")]
+    [SerializeField] private ZoneMusic[] zoneMusic;
+    [SerializeField] private float musicFadeTime = 1.2f;
+
     private static int lastNode = -1; // where Harvey stood last time the map was open this session
 
     /// <summary>FLOW: a different save file was picked, so the map starts on that file's level, not the last one's.</summary>
@@ -96,8 +111,14 @@ public class ZoneSelectMap : MonoBehaviour
         current = PickStartNode();
         player.position = nodes[current].transform.position;
         ShowNode(current);
+        PlayZoneMusic(current, 0f); // ZONEMUSIC: straight in with this zone's track
         if (coinsText != null)
+        {
             coinsText.text = $"FILE {SaveSystem.SlotNumber(SaveSystem.ActiveSlot)}   COINS {(SaveSystem.TryLoad(out SaveData data) ? data.coins : 0)}"; // SLOTS: which file a level picked here plays, and what it starts with
+            // UI: the plate fits its text (it used to be a fixed 70 px, so big coin counts ran off the screen)
+            var plate = coinsText.rectTransform.parent as RectTransform;
+            if (plate != null) plate.sizeDelta = new Vector2(Mathf.Ceil(coinsText.GetPreferredValues(coinsText.text).x) + 14f, plate.sizeDelta.y);
+        }
         StartCoroutine(FadeTo(0f, () => busy = false));
     }
 
@@ -204,6 +225,10 @@ public class ZoneSelectMap : MonoBehaviour
     private IEnumerator Walk(List<Vector3> route, int target)
     {
         busy = true;
+        // ZONEMUSIC: the music changes once Harvey is halfway to the next node
+        float length = 0f, walked = 0f;
+        for (int i = 1; i < route.Count; i++) length += Vector2.Distance(route[i - 1], route[i]);
+        bool musicSwitched = false;
         for (int i = 1; i < route.Count; i++)
         {
             Vector3 goal = route[i];
@@ -214,6 +239,12 @@ public class ZoneSelectMap : MonoBehaviour
                 Vector3 before = player.position;
                 player.position = Vector3.MoveTowards(player.position, goal, walkSpeed * Time.deltaTime);
                 CheckGates(before, player.position);
+                walked += Vector2.Distance(before, player.position);
+                if (!musicSwitched && walked >= length / 2f)
+                {
+                    musicSwitched = true;
+                    PlayZoneMusic(target, musicFadeTime);
+                }
                 yield return null;
             }
         }
@@ -281,6 +312,23 @@ public class ZoneSelectMap : MonoBehaviour
         }
     }
 
+    // ZONEMUSIC:
+    private void PlayZoneMusic(int node, float fadeTime)
+    {
+        AudioManager audio = AudioManager.Instance;
+        if (audio == null) return;
+        AudioClip clip = audio.backgroundMusic;
+        string scene = nodes[node].sceneName;
+        if (zoneMusic != null)
+            foreach (ZoneMusic zone in zoneMusic)
+            {
+                if (zone == null || zone.clip == null || zone.scenePrefixes == null) continue;
+                foreach (string prefix in zone.scenePrefixes)
+                    if (!string.IsNullOrEmpty(prefix) && scene.StartsWith(prefix)) clip = zone.clip;
+            }
+        audio.PlayMusic(clip, fadeTime);
+    }
+
     // ---------------------------------------------------------------- label
     private void ShowNode(int i)
     {
@@ -289,7 +337,7 @@ public class ZoneSelectMap : MonoBehaviour
         if (levelText != null)
         {
             levelText.text = node.levelName.ToUpperInvariant();
-            levelText.color = Color.Lerp(node.zoneColour, Color.white, 0.45f);
+            levelText.color = MenuUI.Cream; // UI: the HNL UI text colours (was tinted per zone)
         }
         if (label == null) return;
 
@@ -343,7 +391,7 @@ public class ZoneSelectMap : MonoBehaviour
         busy = true;
         PlaySound(backSound);
         yield return FadeTo(1f, null);
-        SceneManager.LoadScene(0);
+        LevelLoader.Load(0); // LOADING:
     }
 
     private IEnumerator FadeTo(float alpha, System.Action done)

@@ -7,6 +7,9 @@ A record of this chat: what was asked, what was changed, how it was tested, and 
 2. A markdown log of the session (this file)
 3. The samurai monkey's dashing sword attack from a new sprite sheet (the follow-up section)
 4. This updated log, with a list of what still needs finishing (the end of this file)
+5. The night follow-ups: map after a level, the Egypt fish climb, a dash combo, the AI Assistant relay error, a loading system and the tomb poison
+6. Late night: the new DragonRideTwo mount loop, the tomb octopus's walk cycle and zone-by-zone music on the map
+7. After midnight: the samurai clash, samurai afterimages and the Z3A2 ghost bounce, then a text dialogue system for the Japan village (the last two sections)
 The session started at 08:51 BST from a clean tree (last commit `8551d6d saveSystem update`). **Nothing from this session is committed yet.**
 Changed code is marked `// FX:`, `// FLOW:`, `// PAUSE:`, `// OPTIONS:` and `// SFX:`. The working checklist is in `Progress_2026-10-18_FXPass.md`.
 
@@ -356,3 +359,337 @@ Use the new sprite sheet (`SamuraiSwoardattack.jpg`) to give the Japan samurai m
   - `Tools/Art/__pycache__/`
 - [ ] **Optional:** the Z2A1 start shows black above the cave while the camera catches up. This is level layout, not the new effects.
 
+
+---
+
+## Follow-up (18 October, afternoon): leftovers, dragon ride, simpler title, pause → map
+
+### Samurai sword attack: finished
+- **Re-tested in Play mode** (Z3A1, Arcade, so no save was written):
+  - Face to face: 1 attack, **exactly 1 life lost**. The double-hit fix works.
+  - Behind: Harvey kept 1.6 units behind the monkey, looking at its back, for 6 s including a patrol turn: **0 attacks**.
+  - Stomp during the wind-up: the monkey dies at once, the slash is cancelled, 0 lives lost. (A first attempt "failed" only because the test teleported Harvey before he had landed.)
+  - Frame alignment, measured from the sprites: every attack frame's feet sit on the walk frames' line (−23 px from the pivot), and head height is within 2 px. No hop when the attack starts.
+- **New:** a 0.45 s `turnGrace` on `SamuraiSlash`. After the patrol turns the monkey round, it can't slash straight away, so sneaking up from behind isn't punished the instant it reaches the end of its path.
+- Still yours to do: listen to `HNL_SamuraiSlash.wav`, play it by hand, and decide about the Z3A2 samurai being hidden before a world switch.
+
+### DragonRide: the new mount animation
+- `Tools/Art/dragon_ride.py` cleans `DragonRide.png` (6 frames, 72x46). The original is kept at `Tools/Art/source/DragonRide_original.png`.
+  - Watermark removed (frame 6; it was the only semi-transparent art).
+  - 82 colours snapped to the sheet's own 29-colour palette. Harvey's blue eyes are kept.
+  - Loose specks dropped.
+  - **Steadied:** the frames jumped up to 8 px (frame 3). They now sit on one line with a gentle 1 px flying bob.
+  - The pivot is set so Harvey's face sits where it did on the old still mount, keeping the rider over the player's collider.
+- `Tools/HNL/Set Up Dragon Ride` (`Assets/Editor/DragonRideSetup.cs`) slices the sheet and builds `DragonRide.anim` (10 fps loop) and `DragonRide.controller`. It adds the Animator to `HarveyDragonMount` in `Player.prefab`, so it applies in every level.
+- **Mount effect** (`DragonController.cs`, which was empty):
+  - On mounting:
+    - the dragon materialises from a random-pixel dissolve, with a cream flash and a short golden aura
+    - a screen ripple
+    - a gold spark ring and a jade star ring, rising stars, and a cloud puff underneath
+  - While flying, golden motes trail off the tail.
+  - On dismounting, a cloud puff and sparks.
+- **Tested:** mounted in Z3A1. The effect and the flying loop were seen in screenshots, the frames cycle, and there were no console errors. The old `HarveyDragonMount.png` is now unused; delete it in Unity if you like.
+
+### Title screen: simpler
+- One flat deep purple. The bands, the paw/star pattern, the title shine, the dig pit, rope, lantern, crates and all ambient particles are gone.
+- The title is centred and static.
+- The menu is plain text (PLAY / ARCADE / OPTIONS): the selected item is yellow with the paw pointer, the rest cream. The button plates and icons were removed.
+- Harvey idles on a small floating sand islet below the menu, with "A SET 8 JAMS GAME" centred at the bottom in muted lilac.
+- `Tools/Art/main_menu.py` keeps the old backdrop as `backdrop_dig()`. `MainMenuScene` gained `ambientParticles` (off) and the label colouring.
+
+### Pause → MAP
+- In a save file (not Arcade) the pause menu has **MAP** between BAG and MAIN MENU, with a new folded-map icon (`Pause_Map.png`, catalog `pauseIcons[5]`). The buttons were tightened slightly so six still fit.
+- MAP asks "BACK TO THE MAP? PROGRESS SINCE YOUR LAST CHECKPOINT IS LOST" with **NO** selected by default.
+  - Circle, Backspace, Esc or Options answers no and returns to the pause menu.
+  - YES unpauses and opens the Zone Select on the active save file.
+- **Tested:** the button and dialog (screenshots). A virtual-pad Circle closed only the question (still paused, MAP reselected). YES loaded ZoneSelect with the time scale back at 1.
+- Spotted, not changed: on the Zone Select the "FILE 1  COINS 2034" plate text runs off its left edge at this window size.
+
+### Small edits (later the same afternoon)
+- **Samurai slash:** the monkey now attacks whenever **it** faces Harvey, close and on the same level, even if Harvey has his back turned. Coming from behind the monkey or from above is still safe, and the 0.45 s turn grace stays. Tested: back turned → attacked after 0.78 s; standing behind the monkey for 5 s → no attack.
+- **Stomp combo window:** 1.5 s → **5 s** (`StompCombo.comboWindow`). The stage-5 aura and the orbiting motes still fade over the window. Tested: a second stomp 3.1 s after the first → stage 2; still stage 2 at 4.5 s; reset to 0 at 5.3 s.
+
+---
+
+## UI sweep: one clean, consistent style across the game (18 October, evening)
+
+### The style (HNL UI style)
+- **Palette:** a purple ramp plus two text colours:
+  - INK 1f1a33 outline, DEEP 2a2346 rows/slots and the title screen, PANEL 3b3468 panels, LINE 5d4f96 borders and rules
+  - text roles: CREAM ffffeb text, YELLOW ffe478 the one accent (selection, titles, coins, good news), MUTED a59bd0 hints, secondary and unavailable things, RED eb564b warnings only
+  - orange, grey, aqua, magenta and the brown frames are gone from the chrome; item and talisman icons keep their colours
+- **Panels:** one flat rounded panel everywhere (pause, save files, Options/Controls, Talisman Holder, Bag, Shop, level complete, dialogs). No frames, trims, leather, tassels or patterns.
+- **Titles:** Yellow text with a 1 px rule under it, at the same height in every view.
+- **Buttons:** plain text like the title screen: Cream, and Yellow with the paw beside it when selected. No plates and no icons. This is `MenuUI.TextButton`, used by pause, Options, the save-file questions and the MAP question.
+- **Rows and slots:** deep plates with a lilac border; the selected one gets a yellow border. Tabs are text with a yellow underline.
+- **Hints:** Muted, small, on the bottom line.
+- **One font:** PerfectDOSVGA437 everywhere, at 8 / 7 / 6 / 5 (title / button / body / hint).
+
+### Where it lives
+- `Tools/UI/ui_style.py` draws every shared panel, plate, slot, tab and button sprite at the old sizes and 9-slice borders, so every layout keeps its alignment. `menus_art.py`, `main_menu.py` and `zone_map.py` call it last; re-running them was checked to give identical files. The old themed art is still in those scripts.
+- `MenuUI.cs`: the palette, standard sizes, `TextButton`, `Title`, and `MenuTextButton` (the yellow label plus a shared paw).
+- `LevelUIStyle.cs` (new; applied by HarveyMenus in every level and the Win screen) restyles the old scene-built UI at runtime, so no scene or prefab needed editing:
+  - the timer: a small plate in the top-right corner, 6 px from the edges like the map plates (it was white LiberationSans at 25 pt and its text spilled out of place)
+  - level complete: a standard panel with STAGE CLEARED and centred stats (it was 100 pt text on a grey box)
+  - game over: a big Yellow title with a rule over a purple overlay, on its own canvas
+  - a final sweep that moves any remaining text onto the game font
+- Pause menu: text buttons with a 14 px step, so all six (including MAP) fit without the compact mode. The icons are gone.
+- Zone Select: the FILE/COINS plate sizes to its text (fixes the overflow), the act name is Cream, and the hint plate uses the hint style. The builder matches.
+- Shop: the coin plate is on the title row, like the Bag.
+- Win scene (edited directly): deep purple, a DEMO COMPLETE title with a rule, a thank-you line and a hint (it was a bright green box with wrapping white text).
+- `MenuBlur` fix: the pixel-perfect camera left a grey bar along the bottom of the blurred background behind every menu. Gone.
+- `Assets/Editor/UIShot.cs`: a reliable UI screenshot for checking UI from tools.
+
+### Checked (screenshots in Play mode)
+Title, save files, Controls, pause, the MAP question, Talisman Holder, Bag, Shop, HUD timer, game over, level complete, Zone Select and Win.
+Not re-shot after the last small change: the Shop coin plate move. The Options card and the save-file questions were only seen as code (the screenshot attempts caught other screens).
+
+### Now unused (delete in Unity if you like)
+- `Assets/Sprites/UI/Menus/Pause_*.png` (6 icons, including the new Pause_Map; `HNLCatalog.pauseIcons` is no longer read)
+- `Assets/Sprites/UI/MainMenu/Icon_Play/Icon_Arcade/Icon_Options.png`
+
+---
+
+## Night follow-ups (18 October, night)
+
+Still uncommitted. New code is marked `// FLOW:`, `// MAP:`, `// STOMPAIR:`, `// DASHCOMBO:`, `// LOADING:`, `// POISON:` and `// RELAY:`.
+
+### Back to the map after a level, and clearer map spots
+- **What was done:**
+  - `GameSession.FinishLevel()` saves progress (which unlocks the next level) and loads the Zone Select instead of the next level. The treasure (`NextLevel`) and the Japan village exit (`TownExit`) both use it. Arcade runs still go straight to the next level, because they're never saved.
+  - Harvey reappears on the level he just finished, and walks to the newly unlocked one.
+  - Map pads: unlocked levels (open and cleared) stand on a **green** pad; locked ones stay **dark grey** (and greyscaled). Boss skulls got the green pad too. The change is in `pad()` in `Tools/Art/zone_map.py`; only the node icons were regenerated, not the map.
+- **Tested:** finishing Act 2 on a test save loaded the map with Act 3 green and everything after it grey, at normal speed. The real File 1 save wasn't touched.
+
+### Egypt fish climb (Z2A2Sandy, the underwater shaft)
+- **The problem:**
+  - The four fish sat at uneven heights on long patrols (7–10 units at 2 u/s) with unrelated timing.
+  - Bounces of 10 overshot the next fish by about 4 units, and the last bounce peaked below the first block above the water.
+  - Breath was the hidden problem. Harvey has 8 s of air and arrives at the ledge with about 2 s left, but the climb takes 7–9 s.
+- **What was done:**
+  - A zig-zag of fish about 3.3 units apart, on short 3-unit patrols at 1.2 u/s.
+  - Bounces of 8 / 8 / 8.5 / 12.5, so each one peaks about 2.5 units above the next fish.
+  - Fish 1 swims right up to the ledge wall. Fish 3's bounce stays under the JumpBox block. Fish 4 sits right of the block and launches Harvey about 2 units above it.
+  - **Stomps give air (your choice):** each underwater stomp gives back 3 s of breath with a bubble burst (`PlayerWater.GiveStompAir`, field `stompAir`).
+- **Tested:** a scripted run from the ledge with no bonus air from the tunnel fish:
+  - stomp combo 1 → 4 with no damage
+  - breath 1.9 → 3.1 → 3.9 → 4.6 → 8 s
+  - Harvey landed on the JumpBox block above the water
+  - If Harvey misses fish 1 he still falls to the kill plane (y −29.8) and respawns at the level start, as before.
+
+### Dash combo
+- **What was done:**
+  - `StompCombo` now runs two chains, stomp and dash, with the same look (glow, rings, impact stars, orbiting motes, 5 s window). Only the colours differ:
+    - stomp: cream → orange → cyan → violet → rainbow
+    - dash: blossom pink → hot pink → red → crimson → a pink/red flicker
+  - Dash defeats come from Spirit Dash (`EnemyController`) and a Yokai boss dash hit.
+  - While a dash chain is going, the Spirit Dash afterimages and speed streaks change to its current colour (`TalismanFX`).
+  - Getting hurt ends both chains.
+- **Tested:** dash stages 2 and 4 on screen next to a stomp stage 3 (screenshots). They were triggered directly, not by dashing through enemies with the talisman.
+
+### Luma
+The Luma connector only imports finished "Claude Motion" videos into your Luma library. It can't generate animations. Game animations are still made as pixel-art frame sheets (Python) or in Unity.
+
+### The AI Assistant "Process exited unexpectedly" error
+- **Cause:** a bug in `com.unity.ai.assistant` 2.20.0-pre.2, which is already the latest version.
+  - After a domain reload (entering Play mode or a recompile), the editor sometimes starts a second relay but keeps watching the old one.
+  - The old one has no client, so it shuts itself down after 180 s. The editor reads that as a crash, logs `Running → Failed … code=-1`, drops the working connection, and never restarts it.
+  - The whole sequence is in `Logs/relay.txt` and `Logs/traces.jsonl`.
+- **What was done:** `Assets/Editor/RelayWatchdog.cs` (editor only). When the relay goes Failed, it waits 3 s and starts a fresh one, at most 3 times in 5 minutes. If Unity changes the package it does nothing. Delete it once Unity fixes the bug.
+- **Tested:** I shut the relay down on purpose. The watchdog logged "Restarting it (1/3)" and the relay was Running again within about 7 s. Its messages appear in `~/Library/Logs/Unity/Editor.log`.
+- This relay is only for Unity's AI Assistant window. It doesn't affect the game or the Claude Code Unity tools.
+- **Not a bug:** a `NullReferenceException` at `PlayerController.cs:82` at 19:50 came from adding a script while the game was in Play mode (Unity recompiled mid-play). Restarting Play clears it.
+
+### Loading system
+- **What was done** (`LevelLoader.cs`, plus `CameraController.SnapToPlayer` / `IsOnPlayer`):
+  - Every scene change goes through `LevelLoader.Load`, so no `SceneManager.LoadScene` calls are left in Scripts. That covers the menus, map, levels, restart, Continue and arcade.
+  - A plain loading screen in the UI style: ink background, Cream "LOADING" and Yellow dots at the bottom right.
+  - A level is frozen (`timeScale 0`) until every Start has run and the camera has been snapped onto Harvey and checked as settled. Then the screen fades, the game unfreezes, `LevelReady` fires and the usual iris opens.
+  - No pausing while loading.
+  - Pressing Play on a level in the editor goes through the same wait.
+- **Tested:**
+  - Reloading Z1A1Tomb: the camera jumped from its stored scene position straight onto Harvey while hidden, and didn't move after the reveal.
+  - The level started about 1.9 s after the load began.
+  - The loading screen was screenshotted.
+
+### Tomb poison (Z1A1Tomb, the four `PosionLake` objects)
+- **Look:** `PoisonSurface.shader` (material `Assets/Resources/FX/PoisonSurface.mat`), built like the water shader:
+  - thick, slow waves with a glowing rim
+  - purple fading to near-black, with slow toxic swirls
+  - pixel bubbles rising (mostly pale purple, some sickly green) that swell the surface before they pop
+  - `PoisonLiquid.cs` adds bubble pops and rising fumes along the surface, and Harvey's splashes and drips turn purple in poison.
+- **Rules** (`PoisonLiquid.cs`):
+  - Without the Water Breathing talisman, touching the liquid is instant death, even with lives left or hit invincibility, and also if the talisman runs out mid-swim.
+  - With the talisman, Harvey swims with the water's floaty movement and uses no breath. Jump is a swim stroke upwards, because three of the four pits are bottomless shafts.
+- **Level changes:** two kill planes sat inside the liquid and would have killed a talisman swimmer. They were moved under the lakes: `KillPlane` y −12.9 → −15, `KillPlane (1)` y −20.3 → −30.5.
+- **Tested:**
+  - Without the talisman, Harvey died the moment he touched the surface of pit 1 and respawned.
+  - With Water Breathing he stayed alive in the deep shaft with all 3 lives.
+  - Screenshots of the pit show the waves, swirls and bubbles.
+
+### Files from these follow-ups
+- **New:**
+  - `Assets/Scripts/LevelLoader.cs`, `Assets/Scripts/PoisonLiquid.cs`
+  - `Assets/Shaders/PoisonSurface.shader`, `Assets/Resources/FX/PoisonSurface.mat`
+  - `Assets/Editor/RelayWatchdog.cs`
+- **Changed:**
+  - `GameSession`, `NextLevel`, `TownExit`, `StompCombo`, `EnemyController`, `YokaiBoss`, `TalismanFX`, `PlayerWater`
+  - `CameraController`, `LevelComplete`, `MenueControl`, `MenueController`, `PauseMenuStyle`, `ZoneSelectMap`
+  - `Tools/Art/zone_map.py` and the `Node_*` icons
+- **Scenes saved:** `Z2A2Sandy` (the fish), `Z1A1Tomb` (poison lakes and kill planes).
+
+### Still open from these follow-ups
+- **Swim stroke in poison:** not tested, because the test tools can't press Jump. Try it in the deep shafts. The upward speed is `swimStroke` 4.5 on each lake.
+- **Dash combo:** not yet seen with real Spirit Dash kills.
+- **Poison talisman:** Water Breathing is the one that allows swimming in poison. If a separate poison talisman was meant, it's a one-line change in `PoisonLiquid`.
+- **Tomb lighting:** the tomb darkness only lights circles, so the poison doesn't glow through the dark. A lit edge along the pools would need a TombDarkness change.
+- **Loading screen:** only one level route was tested end to end (reloading Z1A1Tomb). The menu → map → level path and Continue use the same code but weren't watched frame by frame.
+
+---
+
+## Late night (18 October): new dragon frames, octopus walk, zone music on the map
+
+### Dragon ride → DragonRideTwo
+- **What was done:**
+  - `Tools/Art/dragon_ride.py` now cleans `DragonRideTwo.png` (12 frames of 72x46, the same frame size as the first sheet). The delivered file is kept untouched in `Tools/Art/source/DragonRideTwo_original.png`.
+    - The watermark (semi-transparent, last frame, bottom right) is removed.
+    - 97 stray colours are snapped onto one 27-colour palette.
+    - The frames are steadied vertically (they moved by up to 3 px), with a 1 px wingbeat bob spread over the 12 frames.
+    - The pivot still puts Harvey's face where it was on the old still mount (42.7, 18.5 px).
+  - The clean-up steps are now a reusable `clean()` function.
+  - `DragonRideSetup` (Tools/HNL/Set Up Dragon Ride) slices the new sheet and drives the existing `DragonRide.anim` at 12 fps (a 1 s loop). The `HarveyDragonMount` in the Player prefab starts on `DragonRideTwo_0`.
+- **Fixed on the way:** the old clip kept its 10 fps sample rate, which snapped the 12 fps keys onto a 0.1 s grid. The extra closing key also showed frame 0 twice at the loop. Both setup scripts now set `clip.frameRate` and add no closing key, because Unity already holds the last key for one frame.
+- **Tested:** the menu ran without errors. The clip has 12 keys, runs 12 fps for 1.000 s, and the mount sprite is 72x46 at 16 PPU. The ride hasn't been watched in Play mode yet.
+- The old `DragonRide.png` is no longer used. It can be deleted in Unity.
+
+### Tomb octopus walk (the "Ghoul" enemy in Z1A4Tomb and Z1A5Tomb)
+- **What was done:**
+  - The user's `MrOctopus.png` was in Downloads. It's kept in `Tools/Art/source/MrOctopus_original.png`.
+  - `Tools/Art/mr_octopus.py` cleans it with the same steps (watermark, palette of 10 colours, specks) into `Assets/Sprites/Enemies/TempleTiles/OctoGhoul/MrOctopus.png`. The frames already stood on one line, so they aren't moved.
+  - `Assets/Editor/MrOctopusSetup.cs` (Tools/HNL/Set Up Mr Octopus):
+    - slices 12 frames of 46x35 at 16 PPU, point filter, with a centre pivot. The height and facing match the old still `WitchHatOctoOne`, so the octopus stays over its collider.
+    - builds `OctoGhoulWalk.anim` (10 fps, 1.2 s loop) and adds an `OctoGhoulWalk` state as the default in the octopus's `Enemy.controller`. The one-frame `OctoGhoulIdle` state is kept.
+    - turns off exit time on the Any State → `OctoGhoulDeathAnim` transition. With the longer walk loop, a stomped octopus could otherwise keep walking for up to a second before dying.
+- **Tested:** the menu ran, the clip has 12 keys at 10 fps, the default state is `OctoGhoulWalk`, and the console showed no errors. It hasn't been watched in a level yet.
+- **Worth checking:** the new frames are 46 px wide (the old sprite was 34), so the tentacles spread wider. In the Scene view the scenes and the `Ghoul (6)` prefab still show the old still sprite until Play mode.
+
+### Zone select music
+- **What was done:**
+  - `AudioManager.PlayMusic(clip, fadeTime)` crossfades through a second music source, which it creates when first needed. The same clip already playing just carries on. `Start()` leaves the music alone if a script has already picked a track.
+  - `ZoneSelectMap` has a **Zone music** list. Each entry is a name, scene-name prefixes and a clip.
+    - The map starts straight on the track for the node Harvey is standing on.
+    - Walking into another zone crossfades over 1.2 s (`musicFadeTime`) once Harvey is halfway along the path.
+    - An entry with no clip plays the map's own music (`AudioManager.backgroundMusic`).
+  - The zone list lives in `ZoneSelectSceneBuilder.ZoneTracks`, so a full rebuild keeps it. **Tools/HNL/Set Up Zone Select Music** applies it to the scene without a rebuild and sets each track to stream, like the rest of the music.
+
+  | Zone | Prefixes | Track |
+  |---|---|---|
+  | The Old Tomb | Z1 | `TombZoneSelectSoundtrack.wav` |
+  | Sandy Dunes | Z2 | `SandZoneSelectSoundtrack.wav` (not made yet: map music for now) |
+  | Japan (Shrine Road, Snow Temple village and boss) | Z3 | `JapanZoneSelectSoundTrack.wav` |
+  | Grassy Meadow + Journey's End | Z4, Win | `GrassZoneSelectSoundtrack.wav` (not made yet: map music for now) |
+
+- **The two new tracks:** the files are different from the existing music. Their loudness is already in line with the other tracks (about −14 to −16 dBFS RMS), so their levels weren't changed.
+- **Sand and Grass music wasn't made.** The ElevenLabs connector here is the restricted one: sound effects and speech only, with no music. To generate the tracks, add the full connector (`https://api.elevenlabs.io/v1/mcp`) as a custom connector. Then save the files under the names above and run Tools/HNL/Set Up Zone Select Music.
+- **Tested:** it compiles and the list is saved in `ZoneSelect.unity` (Tomb and Japan clips assigned, Sand and Grass empty). Walking the map with the music changing **hasn't been play-tested**.
+- **Problem hit:** the script edits recompiled while the user was in Play mode in Z1A1Tomb, which caused the known `PlayerController.cs:82` NullReferenceException. Play mode was stopped. Z1A1Tomb had unsaved edit-mode changes, so ZoneSelect was opened alongside it, saved and closed again, and the Tomb changes were left as they were.
+
+### Files from this section
+- **New:**
+  - `Tools/Art/mr_octopus.py`
+  - `Tools/Art/source/DragonRideTwo_original.png`, `Tools/Art/source/MrOctopus_original.png`
+  - `Assets/Editor/MrOctopusSetup.cs`
+  - `Assets/Sprites/Enemies/TempleTiles/OctoGhoul/MrOctopus.png`, `.../OctoGhoulAnim/OctoGhoulWalk.anim`
+- **Changed:**
+  - `Tools/Art/dragon_ride.py`, `Tools/Art/dragon_ride_layout.txt`
+  - `Assets/Editor/DragonRideSetup.cs`, `Assets/Editor/ZoneSelectSceneBuilder.cs`
+  - `Assets/Scripts/AudioManager.cs`, `Assets/Scripts/ZoneSelectMap.cs`
+  - `DragonRideTwo.png` (cleaned), `DragonRide.anim`, `Player.prefab`, the octopus `Enemy.controller`, `ZoneSelect.unity`, and the two new music imports
+
+### Still open from this section
+- Make and add the Sandy Dunes and Grassy Meadow map tracks (this needs the full ElevenLabs connector, or tracks from anywhere else).
+- Walk the whole map in Play mode and listen to every crossfade.
+- Watch the dragon ride and the octopus walk in a level (the octopus is in Z1A4/Z1A5).
+- Optional clean-up in Unity: delete the unused `DragonRide.png`.
+
+---
+
+## After midnight (19 October): samurai clash, samurai afterimages, Z3A2 ghost bounce
+
+### Samurai clash
+- **What was done** (`SamuraiSlash.cs`):
+  - If Harvey's Spirit Dash meets a samurai monkey **head-on** during its wind-up or slash, the two attacks cancel. Head-on means Harvey is in front of it and facing or moving toward it.
+    - Harvey's dash ends (new `PowerUpManager.EndTrait`). He is knocked back without losing a life, without the hurt animation and without the hurt flicker.
+    - The samurai staggers back about 0.6 units along its path, freezes on its frame for 0.4 s, then goes back to patrolling.
+    - Sparks, a white flash and a clang. The clang is the slash sound pitched up through the new `AudioManager.PlaySfxOneShotPitched`; the `clashSound` slot is empty for a proper one.
+  - Dashing into it **from behind**, or during its recovery, still defeats it as before.
+  - `SamuraiSlash.ClashProtected` (a short grace after a clash) stops the knockback from counting as a hit in `HurtPlayer`, `playerBodyDetectionArea` and `PlayerFX`. `EnemyController` asks `TryClash()` before a dash defeat.
+- **Tested in Z3A2 Play mode** (logged frame by frame):
+  - Head-on clash: lives stayed at 3, the samurai survived and was back on patrol about 0.6 s later.
+  - Dash from behind: the samurai died the frame they touched, with no life lost.
+  - Without a dash, a slash still costs a life.
+- Only tested with Harvey standing still and facing the samurai; a running head-on dash in real play is worth a try.
+
+### Samurai afterimages
+- Harvey's Spirit Dash afterimage code moved into a shared component, `AfterimageTrail.cs`. `TalismanFX` (Harvey) and `SamuraiSlash` both use it, so they look the same: tinted copies that fade in two steps over 0.22 s.
+- The samurai leaves a red-tinted copy every 0.035 s during its dash.
+- **Tested:** screenshot of the trail. Harvey's own afterimages after the move to the shared component weren't watched (the test tools couldn't make him run).
+
+### Z3A2 ghost bounce
+- **Cause:** `PlayerController` aims the camera 8 units above Harvey whenever he rises at 8 or faster. The ghosts bounced him at 9.5, so every stomp swung the view up and the next ghost dropped off screen.
+- **Fix:** `bounceSpeed` 6.5 on the 18 row ghosts (`SGhostBounce` to `SGhostBounce (17)`), as **scene overrides in Z3A2 only**.
+  - The peak drops from about 4 units to about 1.8.
+  - About 1.2 s in the air, still more than enough for the widest gap.
+  - The prefab and the vertical climb ghosts (`SGBvertical`) are unchanged.
+- **Tested:** at the top of the new bounce, the whole row ahead is on screen (screenshot).
+- **Z3A2Japan is not saved**: the change sits in the open scene alongside the user's own unsaved edits.
+
+---
+
+## After midnight (19 October): text dialogue system, Japan village
+
+### What it does
+- Walk up to a villager in Z3JapanVillage on the ground: the prompt says "UP / E: TALK TO HANA" (the same keys as the shop). Up / E opens a text box at the bottom of the screen.
+- **Controls:** Cross, Enter or E shows the rest of the line, then moves on. Up/Down picks a choice. Circle or Esc leaves. Space and Triangle are Jump in the old input system, so they're never used for dialogue.
+- **While talking** the game pauses like the shop. Leaving doesn't open the pause menu, and Harvey's velocity is cleared so no jump carries over.
+- **The box** is in the HNL UI style: the HUD plate, the name in Yellow, the line typed out in Cream, Muted hints, and choices as plain text with the paw.
+- **Who answers:** only the nearest villager. A shop counter Harvey is standing at takes priority (`VillageShop.PlayerAtCounter`).
+
+### Writing dialogue
+- Plain-text files in `Assets/Dialogue` (`JapanVillage.txt` for now):
+  - `== node` starts a section
+  - `Name: line` is a line; a line without a name continues the same speaker; `> line` is narration
+  - `* choice -> node` is a choice
+  - `-> node`, `-> random: a, b`, `-> cycle: a, b` (the next one each visit), `-> end`
+  - `{name}` becomes the villager's name, `{player}` becomes Harvey
+- The full format notes are at the top of `DialogueScript.cs`. **Tools/HNL/Check Dialogue Files** lists mistakes with line numbers.
+- **One catch:** a line that starts with a short word and a colon (like `Careful: …`) is read as a speaker's name. Start it with `>` or put the speaker first.
+
+### The villagers (Tools/HNL/Set Up Village Villagers, saved in Z3JapanVillage)
+| Villager | Start node | Notes |
+|---|---|---|
+| Hana (shrine maiden, by the shop) | `hana` | first meeting, then friendlier lines and small talk |
+| Genji (merchant, beside the shop) | `genji` | random gameplay tips, "another!" |
+| Kuro (guard) | `kuro` | the yokai at the Snow Temple |
+| Sakura, Yuki, Tetsu, Mochi, Ren, Old Ume | `villager` | a greeting, then random topics: weather, food, rumours, spirits, lanterns, home |
+
+### Files
+- **New:** `Assets/Scripts/DialogueScript.cs` (parser), `DialogueBox.cs` (box and runner), `Villager.cs`, `Assets/Editor/VillagerSetup.cs`, `Assets/Dialogue/JapanVillage.txt`
+- **Changed:** `VillageShop.cs` (`PlayerAtCounter`), `MenueControl.cs` (no pause toggle while talking), `Z3JapanVillage.unity` (the Villager components)
+
+### Tested (Play mode, village loaded inside Play from Z3A2 so its unsaved edits were left alone)
+- Kuro: the prompt showed, Up started the conversation (game paused), Cross completed a line and moved on to the choices.
+- Circle left the conversation: the game resumed, the pause menu stayed closed, Harvey didn't move.
+- Picking a `-> end` choice closed it cleanly.
+- Hana on a later visit (the `cycle`) went into small talk. The choice plate with the paw, then the chosen answer typing out (screenshots).
+- Nearest villager: standing between Yuki and Sakura, the closer one (Sakura) answered.
+
+### Testing notes (not game bugs)
+- Play mode freezes while the editor is in the background; the test harness forces frames with `EditorApplication.QueuePlayerLoopUpdate()`.
+- The keyboard ignores simulated keys without Game view focus, so the tests used a virtual gamepad.
+- The AI Assistant relay error tripped Error Pause again mid-test; the harness unpauses it.
+
+### Still open
+- Standing at the shop counter with a villager in reach (the counter should win) wasn't tested on the counter itself.
+- More dialogue: other zones or story moments just need a new file in `Assets/Dialogue` and a Villager component.
+- Save **Z3A2Japan** (the ghost bounce plus the user's own edits).

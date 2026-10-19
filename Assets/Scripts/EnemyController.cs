@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private bool enemyDeathAnimActivate;
     [SerializeField] private float animCounter;
     private AudioManager audioManager; // SFX:
+    private SamuraiSlash slash; // CLASH: a head-on dash into its attack cancels out instead of defeating it
 
     // DEATH: wait for the real death animation instead of a fixed timer. The death transitions use
     // "Has Exit Time", so the animation can start up to a full walk cycle after the hit; a fixed
@@ -32,6 +33,7 @@ public class EnemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         audioManager = AudioManager.Instance; // SFX: PERF:
         hasDeathAnim = HasParameter(animator, "DeathAnim"); // DEATH:
+        slash = GetComponent<SamuraiSlash>(); // CLASH:
     }
 
     // Update is called once per frame
@@ -58,14 +60,17 @@ public class EnemyController : MonoBehaviour
         {
             if (!enemyDeathAnimActivate && audioManager != null) audioManager.PlaySfxOneShot(audioManager.enemyStompDefeatSound); // SFX: once per defeat
             if (!enemyDeathAnimActivate) StompCombo.Register(transform.position); // FX: only successful stomps build the combo
+            if (!enemyDeathAnimActivate) PlayerWater.GiveStompAir(transform.position); // STOMPAIR: an underwater stomp gives back breath
             if (!enemyDeathAnimActivate) BeginDeath(); // DEATH:
             animCounter = 0.7f;
             enemyDeathAnimActivate = true;
         }
 
-        if (other.CompareTag("PlayerDetectionArea") && PowerUpManager.Has(TalismanTrait.DefeatsEnemiesOnContact) && gameObject.CompareTag("japanBoss") != true) // POWERUP: was ActiveCardManager.speedBoostPowerUp != false
+        if (other.CompareTag("PlayerDetectionArea") && PowerUpManager.Has(TalismanTrait.DefeatsEnemiesOnContact) && gameObject.CompareTag("japanBoss") != true
+            && (slash == null || !slash.TryClash())) // CLASH: // POWERUP: was ActiveCardManager.speedBoostPowerUp != false
         {
             if (!enemyDeathAnimActivate && audioManager != null) audioManager.PlaySfxOneShot(audioManager.enemyDashDefeatSound); // SFX: once per defeat
+            if (!enemyDeathAnimActivate) StompCombo.RegisterDash(transform.position); // DASHCOMBO: dash defeats build the dash combo
             if (!enemyDeathAnimActivate) BeginDeath(); // DEATH:
             animCounter = 0.5f;
             BounceSpeed = 0;

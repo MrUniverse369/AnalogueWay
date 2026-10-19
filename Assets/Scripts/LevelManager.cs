@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private ResetOnRespawn[] resetObjsArr;
     [SerializeField] private Transform respawnPos;
     [SerializeField] private GameObject gameOverScreen;
+    public GameObject GameOverScreen => gameOverScreen; // UI: LevelUIStyle restyles it
     private AudioManager audioManager;
 
     /// <summary>BOSS: raised after the player has respawned, so things like the boss fight can reset.</summary>

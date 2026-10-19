@@ -38,9 +38,26 @@ public class CameraController : MonoBehaviour
     }
     private void FollowPlayer()
     {
-        targetPos = new Vector3(pObj.position.x - FollowAhead, pObj.transform.position.y + 1.5f, transform.position.z);
-        if (pObj.localScale.x > 0) targetPos = new Vector3(pObj.position.x + FollowAhead, pObj.transform.position.y - yAxisOffset, transform.position.z);
-        if (pObj.localScale.x < 0) targetPos = new Vector3(pObj.position.x - FollowAhead, pObj.transform.position.y - yAxisOffset, transform.position.z);
+        targetPos = TargetPosition();
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * Smoothing);
     }
+
+    // where the camera is heading this frame (it eases towards this)
+    private Vector3 TargetPosition()
+    {
+        Vector3 target = new Vector3(pObj.position.x - FollowAhead, pObj.transform.position.y + 1.5f, transform.position.z);
+        if (pObj.localScale.x > 0) target = new Vector3(pObj.position.x + FollowAhead, pObj.transform.position.y - yAxisOffset, transform.position.z);
+        if (pObj.localScale.x < 0) target = new Vector3(pObj.position.x - FollowAhead, pObj.transform.position.y - yAxisOffset, transform.position.z);
+        return target;
+    }
+
+    /// <summary>LOADING: jump straight onto Harvey (LevelLoader does this while the level is hidden), no glide.</summary>
+    public void SnapToPlayer()
+    {
+        if (pObj == null) return;
+        transform.position = TargetPosition();
+    }
+
+    /// <summary>LOADING: true when the camera already sits where it would settle on Harvey.</summary>
+    public bool IsOnPlayer(float tolerance) => pObj == null || (transform.position - TargetPosition()).sqrMagnitude <= tolerance * tolerance;
 }

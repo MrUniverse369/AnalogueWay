@@ -72,10 +72,16 @@ public class MenuBlur : MonoBehaviour
     {
         Camera cam = Camera.main;
         if (cam == null || rt == null) return;
+        // UI: the pixel-perfect camera crops a render into a different-sized texture, which left a grey bar along the
+        // bottom of the mosaic; it's switched off for this one render
+        var ppc = cam.GetComponent<UnityEngine.Rendering.Universal.PixelPerfectCamera>();
+        bool ppcWasOn = ppc != null && ppc.enabled;
+        if (ppc != null) ppc.enabled = false;
         RenderTexture previous = cam.targetTexture;
         cam.targetTexture = rt;
         cam.Render();
         cam.targetTexture = previous;
+        if (ppc != null) ppc.enabled = ppcWasOn;
     }
 
     private void OnDestroy()

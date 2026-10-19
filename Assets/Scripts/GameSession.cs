@@ -49,7 +49,7 @@ public static class GameSession
         furthestLoaded = true; // and there is nothing to read back
         NewGame();
         SaveProgressForBuildIndex(1);
-        SceneManager.LoadScene(ZoneSelectMap.SceneName); // FLOW: Play -> save file -> Zone Select
+        LevelLoader.Load(ZoneSelectMap.SceneName); // FLOW: Play -> save file -> Zone Select (LOADING: behind the loading screen)
     }
 
     /// <summary>
@@ -62,7 +62,7 @@ public static class GameSession
         SelectSlot(number);
         if (!SaveSystem.TryLoad(out SaveData data)) return false;
         Apply(data);
-        SceneManager.LoadScene(ZoneSelectMap.SceneName); // FLOW: the zone map starts on the file's saved level
+        LevelLoader.Load(ZoneSelectMap.SceneName); // FLOW: the zone map starts on the file's saved level
         return true;
     }
 
@@ -71,7 +71,7 @@ public static class GameSession
     {
         IsArcade = true;
         NewGame();
-        SceneManager.LoadScene(1);
+        LevelLoader.Load(1); // LOADING:
     }
 
     /// <summary>ARCADE: back to normal, saved play (called when the player returns to the main menu).</summary>
@@ -146,7 +146,7 @@ public static class GameSession
         HurtPlayer.pLivesCount = StartingLives;
         changeWorld.lWorld = false;
         SaveProgress(sceneName);
-        SceneManager.LoadScene(sceneName);
+        LevelLoader.Load(sceneName); // LOADING: the level waits until it's ready
     }
 
     /// <summary>Build index of a scene by name, or -1 if it isn't in Build Settings.</summary>
@@ -182,6 +182,18 @@ public static class GameSession
     public static void SaveProgressForBuildIndex(int buildIndex) =>
         SaveProgress(SceneNameAt(buildIndex) ?? SceneManager.GetActiveScene().name);
 
+    /// <summary>
+    /// FLOW: the active level was finished. Unlocks the next level and goes back to the Zone Select, where Harvey
+    /// stands on the level he just cleared and can walk on to the new one. ARCADE: runs straight on to the next level.
+    /// </summary>
+    public static void FinishLevel()
+    {
+        int next = SceneManager.GetActiveScene().buildIndex + 1;
+        SaveProgressForBuildIndex(next); // SAVE: autosave so the next level is open on the map
+        Time.timeScale = 1f;
+        LevelLoader.Load(IsArcade ? SceneNameAt(next) ?? ZoneSelectMap.SceneName : ZoneSelectMap.SceneName); // LOADING:
+    }
+
     /// <summary>Load the save, restore progress and open the saved level. Returns false if there is nothing to continue.</summary>
     public static bool TryContinue()
     {
@@ -194,7 +206,7 @@ public static class GameSession
         }
 
         Apply(data);
-        SceneManager.LoadScene(data.sceneName);
+        LevelLoader.Load(data.sceneName); // LOADING:
         return true;
     }
 

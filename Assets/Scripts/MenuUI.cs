@@ -10,8 +10,14 @@ using UnityEngine.UI;
 /// </summary>
 public static class MenuUI
 {
-    public static readonly Color Cream = Hex(0xffffeb), Yellow = Hex(0xffe478), Orange = Hex(0xf2a65e),
-        Purple = Hex(0x473b78), Dark = Hex(0x333941), Grey = Hex(0x98b2b1), Red = Hex(0xeb564b), Aqua = Hex(0x66ffe3);
+    // UI: the HNL UI style (Tools/UI/ui_style.py draws the panels and plates in the same palette). Text uses four
+    // roles only: Cream for text, Yellow for the one accent (selection, titles, coins, good news), Muted for hints,
+    // secondary and unavailable things, and Red for warnings. Line is the colour of borders and title rules.
+    public static readonly Color Cream = Hex(0xffffeb), Yellow = Hex(0xffe478), Muted = Hex(0xa59bd0), Red = Hex(0xeb564b),
+        Line = Hex(0x5d4f96), Deep = Hex(0x2a2346);
+
+    /// <summary>UI: the standard text sizes (the font is pixel-perfect at these).</summary>
+    public const float TitleSize = 8f, ButtonSize = 7f, BodySize = 6f, SmallSize = 5f;
 
     public static Color Hex(int rgb) => new Color(((rgb >> 16) & 255) / 255f, ((rgb >> 8) & 255) / 255f, (rgb & 255) / 255f, 1f);
 
@@ -70,6 +76,29 @@ public static class MenuUI
         return b;
     }
 
+    /// <summary>
+    /// UI: the standard menu button: plain text, Cream normally and Yellow with the paw beside it while selected
+    /// (the same as the title screen). The plate is invisible but still takes mouse clicks.
+    /// </summary>
+    public static Button TextButton(RectTransform rt, string label, Action onSelect, Action onSubmit)
+    {
+        Button b = Button(rt, null, null, false, onSelect, onSubmit);
+        b.transition = Selectable.Transition.None;
+        b.targetGraphic.color = new Color(1f, 1f, 1f, 0f);
+        TMP_Text text = Text("Label", rt, new Vector2(0, 1), rt.sizeDelta - new Vector2(4, 0), ButtonSize, Cream, TextAlignmentOptions.Center, label);
+        rt.gameObject.AddComponent<MenuTextButton>().Init(text);
+        return b;
+    }
+
+    /// <summary>UI: a menu or panel title: Yellow text with a 1 px rule under it.</summary>
+    public static TMP_Text Title(Transform parent, float y, float ruleWidth, string text)
+    {
+        TMP_Text t = Text("Title", parent, new Vector2(0, y), new Vector2(ruleWidth, 10), TitleSize, Yellow, TextAlignmentOptions.Center, text);
+        Image rule = Image("Rule", parent, new Vector2(0, y - 7), new Vector2(ruleWidth, 1), null);
+        rule.color = Line;
+        return t;
+    }
+
     public static void Link(Selectable s, Selectable up, Selectable down, Selectable left, Selectable right)
     {
         var n = s.navigation;
@@ -87,6 +116,71 @@ public static class MenuUI
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(s.gameObject);
     }
+}
+
+/// <summary>
+/// UI: the look of a MenuUI.TextButton: its label turns Yellow and the paw sits just left of the words while the
+/// button is selected (one paw per canvas, shared by every text button on it).
+/// </summary>
+public class MenuTextButton : MonoBehaviour, ISelectHandler, IDeselectHandler
+{
+    private TMP_Text label;
+    private bool selected;
+    private static readonly System.Collections.Generic.Dictionary<Canvas, RectTransform> paws = new System.Collections.Generic.Dictionary<Canvas, RectTransform>();
+
+    public void Init(TMP_Text text) => label = text;
+
+    public void OnSelect(BaseEventData eventData) => selected = true;
+    public void OnDeselect(BaseEventData eventData) => selected = false;
+
+    private void OnEnable() => selected = EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject;
+
+    private void OnDisable()
+    {
+        selected = false;
+        RectTransform paw = Paw(false);
+        if (paw != null && paw.gameObject.activeSelf && paw.GetComponent<PawOwner>().owner == this) paw.gameObject.SetActive(false);
+    }
+
+    private void LateUpdate()
+    {
+        if (label == null) return;
+        if (EventSystem.current != null && selected != (EventSystem.current.currentSelectedGameObject == gameObject))
+            selected = !selected; // a selection changed without the events (SetSelectedGameObject on a hidden menu)
+        label.color = selected ? MenuUI.Yellow : MenuUI.Cream;
+        RectTransform paw = Paw(selected);
+        if (paw == null) return;
+        PawOwner owner = paw.GetComponent<PawOwner>();
+        if (!selected)
+        {
+            if (owner.owner == this) paw.gameObject.SetActive(false);
+            return;
+        }
+        owner.owner = this;
+        paw.gameObject.SetActive(true);
+        paw.SetAsLastSibling();
+        // just left of where the words start, nudging toward them like on the title screen
+        float words = Mathf.Min(label.preferredWidth, label.rectTransform.rect.width);
+        Vector3 centre = label.rectTransform.TransformPoint(label.rectTransform.rect.center);
+        float scale = paw.lossyScale.x;
+        float nudge = Mathf.Round(Mathf.Sin(Time.unscaledTime * 6f) * 1.5f);
+        paw.position = centre + new Vector3((-words / 2f - 4f - paw.rect.width / 2f + nudge) * scale, 0f, 0f);
+    }
+
+    private RectTransform Paw(bool create)
+    {
+        Canvas canvas = GetComponentInParent<Canvas>();
+        if (canvas == null) return null;
+        canvas = canvas.rootCanvas;
+        if (paws.TryGetValue(canvas, out RectTransform paw) && paw != null) return paw;
+        if (!create || Inventory.Catalog == null) return null;
+        paw = MenuUI.Image("Paw", canvas.transform, Vector2.zero, new Vector2(11, 10), Inventory.Catalog.paw).rectTransform;
+        paw.gameObject.AddComponent<PawOwner>();
+        paws[canvas] = paw;
+        return paw;
+    }
+
+    private class PawOwner : MonoBehaviour { public MenuTextButton owner; }
 }
 
 /// <summary>MENUS: reports when a menu element gets the cursor, so the detail pane can follow it.</summary>
@@ -132,7 +226,7 @@ public abstract class MenuView
     protected void Hint(string text, Vector2 pos)
     {
         hintText = text;
-        hint = MenuUI.Text("Hint", Panel, pos, new Vector2(290, 8), 5, MenuUI.Cream, TextAlignmentOptions.Center, text);
+        hint = MenuUI.Text("Hint", Panel, pos, new Vector2(290, 8), MenuUI.SmallSize, MenuUI.Muted, TextAlignmentOptions.Center, text); // UI: hints are Muted
     }
 
     /// <summary>Shows a message in the hint line for a moment.</summary>
@@ -149,7 +243,7 @@ public abstract class MenuView
         messageUntil = 0f;
         if (hint == null) return;
         hint.text = hintText;
-        hint.color = MenuUI.Cream;
+        hint.color = MenuUI.Muted;
     }
 
     public void Show()

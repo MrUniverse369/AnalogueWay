@@ -16,6 +16,10 @@ public class VillageShop : MonoBehaviour
     [SerializeField] private GameObject prompt;
 
     private bool playerHere;
+    private static readonly System.Collections.Generic.HashSet<VillageShop> occupied = new System.Collections.Generic.HashSet<VillageShop>();
+
+    /// <summary>DIALOGUE: Harvey is standing at a counter, so the counter gets Up / E (not a villager next to it).</summary>
+    public static bool PlayerAtCounter => occupied.Count > 0;
     private bool upWasHeld = true; // don't open on the frame Harvey walks in holding up
 
     public string ShopName => shopName;
@@ -49,11 +53,21 @@ public class VillageShop : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("PlayerDetectionArea")) playerHere = true;
+        if (!other.CompareTag("PlayerDetectionArea")) return;
+        playerHere = true;
+        occupied.Add(this); // DIALOGUE:
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("PlayerDetectionArea")) playerHere = false;
+        if (!other.CompareTag("PlayerDetectionArea")) return;
+        playerHere = false;
+        occupied.Remove(this); // DIALOGUE:
+    }
+
+    private void OnDisable()
+    {
+        playerHere = false;
+        occupied.Remove(this); // DIALOGUE: a scene change or a respawn mid-stay
     }
 }

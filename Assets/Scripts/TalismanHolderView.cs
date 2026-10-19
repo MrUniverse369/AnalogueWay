@@ -27,7 +27,7 @@ public class TalismanHolderView : MenuView
     public TalismanHolderView(RectTransform parent) : base("TalismanHolder", parent, Inventory.Catalog.holderPanel)
     {
         var panel = Panel;
-        MenuUI.Text("Title", panel, new Vector2(0, 70), new Vector2(200, 10), 8, MenuUI.Yellow, TextAlignmentOptions.Center, "TALISMAN HOLDER");
+        MenuUI.Title(panel, 71, 160, "TALISMAN HOLDER"); // UI: the standard title, same height in every view
 
         for (int i = 0; i < Inventory.SlotCount; i++)
         {
@@ -56,7 +56,7 @@ public class TalismanHolderView : MenuView
 
         MenuUI.Image("Details", panel, new Vector2(0, -46), new Vector2(276, 32), cat.frame, true);
         detailName = MenuUI.Text("Name", panel, new Vector2(-6, -36), new Vector2(256, 8), 6, MenuUI.Yellow, TextAlignmentOptions.Left, "");
-        detailStats = MenuUI.Text("Stats", panel, new Vector2(-6, -36), new Vector2(256, 8), 5, MenuUI.Aqua, TextAlignmentOptions.Right, "");
+        detailStats = MenuUI.Text("Stats", panel, new Vector2(-6, -36), new Vector2(256, 8), 5, MenuUI.Yellow, TextAlignmentOptions.Right, "");
         detailText = MenuUI.Text("Text", panel, new Vector2(-6, -50), new Vector2(256, 18), 5, MenuUI.Cream, TextAlignmentOptions.TopLeft, "", true);
         Hint("CROSS/ENTER: EQUIP OR SWAP    CIRCLE/ESC: BACK", new Vector2(0, -71));
 
@@ -129,7 +129,7 @@ public class TalismanHolderView : MenuView
             cardIcons[i].sprite = owned ? t.Icon : cat.lockedTalisman;
             cardIcons[i].color = Color.white;
             cardNames[i].text = owned ? t.DisplayName.ToUpperInvariant() : "? ? ?";
-            cardNames[i].color = owned ? MenuUI.Cream : MenuUI.Grey;
+            cardNames[i].color = owned ? MenuUI.Cream : MenuUI.Muted;
             int slot = Inventory.SlotOf(t);
             cardBadges[i].text = slot >= 0 ? SlotLetters[slot] : "";
         }
@@ -256,7 +256,7 @@ public class TalismanHolderView : MenuView
         heldSocket = heldCard = -1;
         Sound(cat.equipSound);
         Refresh();
-        Message(message, MenuUI.Aqua);
+        Message(message, MenuUI.Yellow);
         MenuUI.Select(reselect);
     }
 }

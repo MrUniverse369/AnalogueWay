@@ -3699,6 +3699,7 @@ GameObject:
   - component: {fileID: 598803634}
   - component: {fileID: 598803633}
   - component: {fileID: 598803632}
+  - component: {fileID: 598803635}
   m_Layer: 0
   m_Name: JVCharfive_0
   m_TagString: Untagged
@@ -3802,6 +3803,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &598803635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598803631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d591321e7a2654a948a63c75db83fd4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Villager
+  displayName: Kuro
+  dialogue: {fileID: 4900000, guid: 3811efd44ee6040b8aa592cc5c009f45, type: 3}
+  startNode: kuro
+  talkRange: 1.4
+  heightRange: 1.5
 --- !u!1 &609016411
 GameObject:
   m_ObjectHideFlags: 0
@@ -4748,6 +4766,7 @@ GameObject:
   - component: {fileID: 751478754}
   - component: {fileID: 751478753}
   - component: {fileID: 751478752}
+  - component: {fileID: 751478755}
   m_Layer: 0
   m_Name: JVCharfour_0
   m_TagString: Untagged
@@ -4851,6 +4870,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &751478755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751478751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d591321e7a2654a948a63c75db83fd4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Villager
+  displayName: Tetsu
+  dialogue: {fileID: 4900000, guid: 3811efd44ee6040b8aa592cc5c009f45, type: 3}
+  startNode: villager
+  talkRange: 1.4
+  heightRange: 1.5
 --- !u!1001 &811965294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -190151,6 +190187,7 @@ GameObject:
   - component: {fileID: 1121745958}
   - component: {fileID: 1121745957}
   - component: {fileID: 1121745956}
+  - component: {fileID: 1121745959}
   m_Layer: 0
   m_Name: JVCharfour_0 (1)
   m_TagString: Untagged
@@ -190254,6 +190291,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1121745959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121745955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d591321e7a2654a948a63c75db83fd4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Villager
+  displayName: Ren
+  dialogue: {fileID: 4900000, guid: 3811efd44ee6040b8aa592cc5c009f45, type: 3}
+  startNode: villager
+  talkRange: 1.4
+  heightRange: 1.5
 --- !u!114 &1127417448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190761,6 +190815,7 @@ GameObject:
   - component: {fileID: 1188721547}
   - component: {fileID: 1188721546}
   - component: {fileID: 1188721545}
+  - component: {fileID: 1188721548}
   m_Layer: 0
   m_Name: Sidecharacterone 1_0 (2)
   m_TagString: Untagged
@@ -190864,6 +190919,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!114 &1188721548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188721544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d591321e7a2654a948a63c75db83fd4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Villager
+  displayName: Genji
+  dialogue: {fileID: 4900000, guid: 3811efd44ee6040b8aa592cc5c009f45, type: 3}
+  startNode: genji
+  talkRange: 1.4
+  heightRange: 1.5
 --- !u!4 &1201756885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 394160351929318915, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
@@ -221452,6 +221524,7 @@ GameObject:
   - component: {fileID: 1547662715}
   - component: {fileID: 1547662714}
   - component: {fileID: 1547662713}
+  - component: {fileID: 1547662716}
   m_Layer: 0
   m_Name: Walkjapancharthree_0 (1)
   m_TagString: Untagged
@@ -221555,6 +221628,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1547662716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547662712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d591321e7a2654a948a63c75db83fd4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Villager
+  displayName: Mochi
+  dialogue: {fileID: 4900000, guid: 3811efd44ee6040b8aa592cc5c009f45, type: 3}
+  startNode: villager
+  talkRange: 1.4
+  heightRange: 1.5
 --- !u!1 &1556143465
 GameObject:
   m_ObjectHideFlags: 0
@@ -223778,6 +223868,7 @@ GameObject:
   - component: {fileID: 1779868861}
   - component: {fileID: 1779868860}
   - component: {fileID: 1779868859}
+  - component: {fileID: 1779868862}
   m_Layer: 0
   m_Name: Chartwojapanidle_0 (1)
   m_TagString: Untagged
@@ -223881,6 +223972,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1779868862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779868858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d591321e7a2654a948a63c75db83fd4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Villager
+  displayName: Sakura
+  dialogue: {fileID: 4900000, guid: 3811efd44ee6040b8aa592cc5c009f45, type: 3}
+  startNode: villager
+  talkRange: 1.4
+  heightRange: 1.5
 --- !u!1 &1802264194
 GameObject:
   m_ObjectHideFlags: 0
@@ -224670,6 +224778,7 @@ GameObject:
   - component: {fileID: 1854665446}
   - component: {fileID: 1854665445}
   - component: {fileID: 1854665444}
+  - component: {fileID: 1854665447}
   m_Layer: 0
   m_Name: Chartwojapanidle_0
   m_TagString: Untagged
@@ -224773,6 +224882,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1854665447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854665443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d591321e7a2654a948a63c75db83fd4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Villager
+  displayName: Hana
+  dialogue: {fileID: 4900000, guid: 3811efd44ee6040b8aa592cc5c009f45, type: 3}
+  startNode: hana
+  talkRange: 1.4
+  heightRange: 1.5
 --- !u!1 &1858039096
 GameObject:
   m_ObjectHideFlags: 0
@@ -225071,6 +225197,7 @@ GameObject:
   - component: {fileID: 1899694554}
   - component: {fileID: 1899694553}
   - component: {fileID: 1899694552}
+  - component: {fileID: 1899694555}
   m_Layer: 0
   m_Name: Sidecharacterone 1_0 (3)
   m_TagString: Untagged
@@ -225174,6 +225301,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!114 &1899694555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899694551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d591321e7a2654a948a63c75db83fd4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Villager
+  displayName: Old Ume
+  dialogue: {fileID: 4900000, guid: 3811efd44ee6040b8aa592cc5c009f45, type: 3}
+  startNode: villager
+  talkRange: 1.4
+  heightRange: 1.5
 --- !u!114 &1912916409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227078,6 +227222,7 @@ GameObject:
   - component: {fileID: 2134409209}
   - component: {fileID: 2134409208}
   - component: {fileID: 2134409210}
+  - component: {fileID: 2134409211}
   m_Layer: 0
   m_Name: Walkjapancharthree_0
   m_TagString: Untagged
@@ -227181,6 +227326,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2134409211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134409207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d591321e7a2654a948a63c75db83fd4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Villager
+  displayName: Yuki
+  dialogue: {fileID: 4900000, guid: 3811efd44ee6040b8aa592cc5c009f45, type: 3}
+  startNode: villager
+  talkRange: 1.4
+  heightRange: 1.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

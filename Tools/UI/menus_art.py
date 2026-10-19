@@ -551,6 +551,9 @@ PAUSE_ICONS = {
     "Bag": ([".yy.", "y..y", "llll", "lbbl", "llll", "dddd"], {"y": YELLOW, "l": LEATHER_L, "b": YELLOW, "d": LEATHER}),
     "Home": (["..rr..", ".rrrr.", "rrrrrr", ".wwww.", ".wddw.", ".wddw."], {"r": hexc("eb564b"), "w": hexc("ffffeb"), "d": hexc("a35a3c")}),
     "Quit": (["g...g", ".g.g.", "..g..", ".g.g.", "g...g"], {"g": hexc("98b2b1")}),
+    # a folded treasure map: cream panels, sand folds, a dotted trail to a red X (the pause menu's MAP button)
+    "Map": (["aabbaa", "apbbaa", "aapbaa", "aabpaa", "aabbpx", "aabbaa"],
+            {"a": hexc("ffffeb"), "b": hexc("e3ba66"), "p": hexc("ce812c"), "x": hexc("eb564b")}),
 }
 
 
@@ -590,6 +593,9 @@ def main():
     for name, make in ITEMS.items():
         save(make(), f"Item_{name}.png")
     print("wrote", OUT)
+    # UI sweep 2026-10-18: the shared UI chrome follows ui_style.py (runs last so it wins)
+    import ui_style  # noqa: E402
+    ui_style.main()
 
 
 if __name__ == "__main__":

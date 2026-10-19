@@ -430,6 +430,7 @@ public class YokaiBoss : MonoBehaviour
         UpdatePips();
         if (isStomp) BouncePlayer(stompBounce);
         if (isStomp) StompCombo.Register(transform.position); // FX: a boss stomp continues the combo
+        else StompCombo.RegisterDash(transform.position); // DASHCOMBO: and a boss dash hit continues the dash combo
         if (audioManager != null) Play(isStomp ? audioManager.enemyStompDefeatSound : audioManager.enemyDashDefeatSound);
         if (fight != null) StopCoroutine(fight);
         StopAllCoroutines();

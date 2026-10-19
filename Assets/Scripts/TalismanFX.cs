@@ -27,13 +27,9 @@ public class TalismanFX : MonoBehaviour
     private readonly HashSet<Kind> active = new HashSet<Kind>();
     private float timer, pulseTimer, trailLeft;
 
-    // Spirit Dash afterimages (a small fixed pool)
-    private const int GhostCount = 4;
-    private readonly SpriteRenderer[] ghosts = new SpriteRenderer[GhostCount];
-    private readonly float[] ghostAge = new float[GhostCount];
-    private int nextGhost;
+    // Spirit Dash afterimages (AFTERIMAGE: the shared AfterimageTrail, also used by the samurai's dash slash)
+    private AfterimageTrail trail;
     private float ghostTimer;
-    private const float GhostLife = 0.22f;
 
     private static readonly Color StoneGrey = PixelFX.Hex("98b2b1");
     private static readonly Color DashCyan = PixelFX.Hex("5fcde4");
@@ -49,13 +45,13 @@ public class TalismanFX : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         aura = SpriteAura.On(sprite);
         fx = SpriteFX.On(sprite);
+        trail = AfterimageTrail.On(sprite);
     }
 
     private void OnDestroy()
     {
         if (instance == this) instance = null;
         Unsubscribe();
-        foreach (SpriteRenderer g in ghosts) if (g != null) Destroy(g.gameObject);
     }
 
     private void OnDisable()
@@ -64,7 +60,6 @@ public class TalismanFX : MonoBehaviour
         active.Clear();
         if (aura != null) aura.Clear("talisman");
         if (fx != null) fx.SetStone(0f);
-        foreach (SpriteRenderer g in ghosts) if (g != null) g.enabled = false;
     }
 
     private void Subscribe()
@@ -145,7 +140,8 @@ public class TalismanFX : MonoBehaviour
     {
         Subscribe();
         float dt = Time.deltaTime;
-        UpdateGhosts(dt);
+        // tinted spirit cyan (DASHCOMBO: or the dash combo's stage colour)
+        trail.Tint = Color.Lerp(StompCombo.DashColour(0, DashCyan), Color.white, 0.25f);
         if (trailLeft > 0f) SparkTrail(dt);
         if (active.Count == 0) return;
 
@@ -165,52 +161,19 @@ public class TalismanFX : MonoBehaviour
         if (ghostTimer <= 0f && body != null && Mathf.Abs(body.linearVelocity.x) > 2f)
         {
             ghostTimer = 0.05f;
-            SpawnGhost();
+            trail.Spawn();
         }
         if (!tick || body == null || Mathf.Abs(body.linearVelocity.x) < 2f) return;
         float back = -Mathf.Sign(body.linearVelocity.x);
         for (int i = 0; i < 2; i++)
         {
             Vector3 p = transform.position + new Vector3(back * Random.Range(0.1f, 0.4f), Random.Range(-0.35f, 0.35f), 0f);
-            PixelFX.Emit(p, new Vector2(back * Random.Range(7f, 11f), 0f), PixelFX.Pick(new[] { DashCyan, PixelFX.Cream, PixelFX.Hex("b7f5ff") }),
+            // DASHCOMBO: the streaks take the dash combo's stage colour while the chain is alive
+            Color[] streak = StompCombo.DashStage > 0
+                ? new[] { StompCombo.DashColour(0, DashCyan), StompCombo.DashColour(1, DashCyan), PixelFX.Cream }
+                : new[] { DashCyan, PixelFX.Cream, PixelFX.Hex("b7f5ff") };
+            PixelFX.Emit(p, new Vector2(back * Random.Range(7f, 11f), 0f), PixelFX.Pick(streak),
                 Random.Range(0.08f, 0.14f), 1, PixelShape.Streak, PixelMotion.Straight, true);
-        }
-    }
-
-    private void SpawnGhost()
-    {
-        if (sprite == null || sprite.sprite == null || !sprite.enabled) return;
-        SpriteRenderer g = ghosts[nextGhost];
-        if (g == null)
-        {
-            g = new GameObject("DashAfterimage").AddComponent<SpriteRenderer>(); // not a child: it stays where Harvey was
-            g.sharedMaterial = sprite.sharedMaterial;
-            ghosts[nextGhost] = g;
-        }
-        g.sprite = sprite.sprite;
-        g.flipX = sprite.flipX;
-        g.sortingLayerID = sprite.sortingLayerID;
-        g.sortingOrder = sprite.sortingOrder - 2;
-        g.transform.SetPositionAndRotation(transform.position, transform.rotation);
-        g.transform.localScale = transform.lossyScale;
-        g.enabled = true;
-        ghostAge[nextGhost] = 0f;
-        nextGhost = (nextGhost + 1) % GhostCount;
-    }
-
-    private void UpdateGhosts(float dt)
-    {
-        for (int i = 0; i < GhostCount; i++)
-        {
-            SpriteRenderer g = ghosts[i];
-            if (g == null || !g.enabled) continue;
-            ghostAge[i] += dt;
-            float k = 1f - ghostAge[i] / GhostLife;
-            if (k <= 0f) { g.enabled = false; continue; }
-            // tinted spirit cyan, fading in two steps (pixel-art friendly)
-            Color c = Color.Lerp(DashCyan, Color.white, 0.25f);
-            c.a = k > 0.5f ? 0.55f : 0.28f;
-            g.color = c;
         }
     }
 

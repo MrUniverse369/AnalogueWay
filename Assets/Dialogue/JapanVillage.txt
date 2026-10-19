@@ -1,0 +1,178 @@
+// Harvey's Nine Lives: the mountain village (Z3JapanVillage).
+// How to write dialogue (full notes in Assets/Scripts/DialogueScript.cs):
+//   == node              starts a part of a conversation
+//   Name: text           a line spoken by Name ({name} = the villager you're talking to)
+//   text                 another line from the same speaker
+//   > text               narration (no name)
+//   * choice -> node     a choice (-> end leaves)
+//   -> node              jump;  -> random: a, b   pick one;  -> cycle: a, b   the next one each visit;  -> end
+// Each villager's Start Node is set on their Villager component (Tools/HNL/Set Up Village Villagers).
+// Check this file for mistakes with Tools/HNL/Check Dialogue Files.
+
+
+// ------------------------------------------------------------------ Hana, the shrine maiden by the shop
+== hana
+-> cycle: hana_first, hana_again, hana_again
+
+== hana_first
+Hana: Oh! A traveller, and on four paws too.
+Welcome to the mountain village. The snow keeps most folk away.
+* Who are you? -> hana_who
+* What is this place? -> village
+* I'm just passing through. -> hana_bye
+
+== hana_who
+Hana: I tend the little shrine at the top of the steps.
+I sweep the snow, ring the bell, and keep the lanterns lit for the spirits.
+* Spirits? -> spirits
+* That sounds peaceful. -> hana_bye
+
+== hana_again
+Hana: Back again, {player}? The lanterns burn brighter when you're about.
+-> smalltalk
+
+== hana_bye
+Hana: Then walk softly, and mind the ice on the bridge.
+-> end
+
+
+// ------------------------------------------------------------------ Genji, the merchant next to the shop
+== genji
+Genji: Ah, a customer! Well... nearly. The shop is just there.
+I only sell advice, and the first piece is free.
+* Give me some advice. -> genji_advice
+* What does the shop sell? -> genji_shop
+* Maybe later. -> genji_bye
+
+== genji_advice
+-> random: genji_tip1, genji_tip2, genji_tip3
+
+== genji_tip1
+Genji: Never turn your back on a samurai monkey.
+Come at it from above or from behind, and it can't touch you.
+-> genji_more
+
+== genji_tip2
+Genji: Those floating ghosts on the shrine road?
+Bounce from one to the next. Don't stop to admire the view.
+-> genji_more
+
+== genji_tip3
+Genji: Coins weigh nothing, but they buy a great deal.
+Pick up every one you see. Spend them where it counts.
+-> genji_more
+
+== genji_more
+* Another! -> genji_advice
+* Thanks, Genji. -> genji_bye
+
+== genji_shop
+Genji: Charms, trinkets, the odd talisman when the carts get through.
+Stand at the counter and press up. My cousin runs it. Don't haggle, he cries.
+-> genji_more
+
+== genji_bye
+Genji: Come back when your purse is heavier!
+-> end
+
+
+// ------------------------------------------------------------------ Kuro, keeping watch on the road in
+== kuro
+Kuro: Halt. ...Oh, it's only a cat in a hat.
+* Only?! -> kuro_only
+* What are you guarding? -> kuro_guard
+* Sorry, carry on. -> end
+
+== kuro_only
+Kuro: No offence meant. We've had stranger visitors this winter.
+Things that walk without feet. Things with swords and no faces.
+-> kuro_guard
+
+== kuro_guard
+Kuro: The pass. Beyond the far gate the road climbs to the Snow Temple.
+Something sits up there now. Big. Angry. Wearing armour older than the village.
+* I'll deal with it. -> kuro_brave
+* I'd rather not. -> kuro_wise
+
+== kuro_brave
+Kuro: Brave words. Keep your nine lives close, then.
+-> end
+
+== kuro_wise
+Kuro: Wise words. Shame the road home goes right past it.
+-> end
+
+
+// ------------------------------------------------------------------ the rest of the village: generic chat
+== villager
+-> cycle: greet, smalltalk, smalltalk
+
+== greet
+{name}: Hello there! We don't get many visitors this high up.
+I'm {name}. Stay warm, and don't stand still too long out on the bridge.
+-> end
+
+== smalltalk
+-> random: weather, food, rumour, spirits_talk, lanterns, home
+
+== weather
+{name}: Snow again today. Snow tomorrow too, I expect.
+The old folk say it never stopped since the temple bell went quiet.
+* The temple bell? -> bell
+* Stay warm. -> end
+
+== bell
+{name}: It used to ring every evening. Now there's only wind.
+If someone could make it ring again... well. That would be something.
+-> end
+
+== food
+{name}: Have you tried the rice cakes from the restaurant?
+Toasted on the fire, with a little sweet bean. Best thing on the mountain.
+* I'll try one. -> food_yes
+* I prefer fish. -> food_fish
+
+== food_yes
+{name}: Tell them {name} sent you. They won't give you a discount, but they'll smile.
+-> end
+
+== food_fish
+{name}: A cat who likes fish? You don't say!
+Ren fishes off the far bridge. Ask nicely and you might get the tail.
+-> end
+
+== rumour
+{name}: Have you heard? They say there's a shrine on the road where the world turns inside out.
+Walk through the red gate and the living are gone. Only spirits are left.
+* I've seen it. -> rumour_seen
+* Sounds like a story. -> end
+
+== rumour_seen
+{name}: You have? And you came back? ...With all your whiskers?
+You're braver than you look, little traveller.
+-> end
+
+== spirits_talk
+-> spirits
+
+== spirits
+{name}: The spirits were always here, keeping to their side of the gates.
+This winter they've grown restless. Some of them carry swords now.
+-> end
+
+== lanterns
+{name}: We keep the lanterns lit all night.
+It helps the lost find their way, whether they've got a pulse or not.
+-> end
+
+== home
+{name}: I was born in this village and I'll grow old in it.
+There are worse places to be a cat. Warm hearths, cold mountains, good neighbours.
+-> end
+
+
+// ------------------------------------------------------------------ shared answers
+== village
+Hana: The last village before the pass. Inns, a restaurant, a shop, and a lot of snow.
+Most travellers rest here before the climb to the Snow Temple.
+-> end

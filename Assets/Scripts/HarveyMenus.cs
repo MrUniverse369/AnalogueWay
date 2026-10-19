@@ -107,6 +107,7 @@ public class HarveyMenus : MonoBehaviour
         canvasRoot = (RectTransform)canvasGo.transform;
         BuildToast();
         BuildPrompt();
+        LevelUIStyle.Apply(); // UI: the timer, level complete and game over screens in the HNL UI style
         if (pause != null)
         {
             pausePanel = pause.PausePanel;

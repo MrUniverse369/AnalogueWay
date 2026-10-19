@@ -8,7 +8,7 @@ public class MainMenue : MonoBehaviour
 
     public void loadLevel()
     {
-        SceneManager.LoadScene(0);
+        LevelLoader.Load(0); // LOADING:
     }
     public void QuitGame()
     {

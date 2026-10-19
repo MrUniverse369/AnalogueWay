@@ -112,7 +112,7 @@ public class PlayerFX : MonoBehaviour
     // dithered invincibility flicker: two interleaved 50% patterns alternating with solid frames
     private void UpdateFlicker()
     {
-        bool invincible = flickerLeft > 0f || PlayerController.playerInviInvincible;
+        bool invincible = flickerLeft > 0f || (PlayerController.playerInviInvincible && !SamuraiSlash.ClashProtected); // CLASH: a clash isn't a hurt
         if (flickerLeft > 0f) flickerLeft -= Time.deltaTime;
         if (!invincible)
         {

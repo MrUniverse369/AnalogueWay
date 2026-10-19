@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI; // TITLE:
 
 /// <summary>
 /// MENU: the living parts of the main menu scene: Harvey idling at the dig, the lantern flickering, the title
@@ -8,6 +9,8 @@ using UnityEngine.InputSystem;
 /// pixel particle system), replacing the hand-made dust sprites: dust motes drifting through the air, embers
 /// rising from the lantern, and dirt flicked up out of the dig pit every few seconds.
 /// Selection itself (and the buttons' OnClick) stays with the EventSystem and MenueControl.
+/// TITLE: the simplified title (2026-10-18) turns the ambient particles off and uses plain text buttons, so the
+/// selected button's label turns yellow and the rest stay cream.
 /// </summary>
 public class MainMenuScene : MonoBehaviour
 {
@@ -28,11 +31,16 @@ public class MainMenuScene : MonoBehaviour
     [SerializeField] private Rect dustArea = new Rect(-10f, -5.6f, 20f, 7f);
     [Tooltip("FX: where dirt flies up out of the dig pit (world).")]
     [SerializeField] private Vector2 digSpot = new Vector2(-6.5f, -4.6f);
+    [Tooltip("TITLE: motes, lantern embers and dig dirt. Off for the simple title.")]
+    [SerializeField] private bool ambientParticles = true;
 
     [Header("Menu")]
     [SerializeField] private RectTransform pointer;
     [SerializeField] private float pointerGap = 4f;
     [SerializeField] private GameObject firstSelected;
+    [SerializeField] private Color labelColour = new Color(1f, 1f, 0.92f);       // TITLE: cream ffffeb
+    [SerializeField] private Color selectedLabelColour = new Color(1f, 0.894f, 0.47f); // TITLE: yellow ffe478
+    private Button[] menuButtons; // TITLE:
 
     private Vector3 titleHome;
     private readonly Vector3[] corners = new Vector3[4]; // PERF: reused by FollowSelection instead of a new array each frame
@@ -42,7 +50,9 @@ public class MainMenuScene : MonoBehaviour
     private void Start()
     {
         if (title != null) titleHome = title.localPosition;
-        for (int i = 0; i < dustCount; i++) Mote(true); // FX: start with the air already full of motes
+        if (ambientParticles)
+            for (int i = 0; i < dustCount; i++) Mote(true); // FX: start with the air already full of motes
+        if (firstSelected != null) menuButtons = firstSelected.transform.parent.GetComponentsInChildren<Button>(); // TITLE:
         if (EventSystem.current != null && firstSelected != null) EventSystem.current.SetSelectedGameObject(firstSelected);
     }
 
@@ -65,7 +75,7 @@ public class MainMenuScene : MonoBehaviour
             title.localPosition = titleHome + new Vector3(0f, bob, 0f);
         }
 
-        Particles(Time.unscaledDeltaTime); // FX:
+        if (ambientParticles) Particles(Time.unscaledDeltaTime); // FX:
         KeepSomethingSelected();
         FollowSelection();
     }
@@ -127,6 +137,12 @@ public class MainMenuScene : MonoBehaviour
         if (pointer == null) return;
         var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
         var target = selected != null ? selected.transform as RectTransform : null;
+        if (menuButtons != null) // TITLE: the selected label lights up
+            foreach (Button b in menuButtons)
+            {
+                var label = b.GetComponentInChildren<TMPro.TMP_Text>();
+                if (label != null) label.color = b.gameObject == selected ? selectedLabelColour : labelColour;
+            }
         pointer.gameObject.SetActive(target != null);
         if (target == null) return;
         // sit just left of the button, nudging toward it like a beckoning paw

@@ -701,9 +701,10 @@ GEMS = {  # talisman gem facets: top-left, top-right, bottom-left, bottom-right
 
 
 def pad(c, dark=False):
-    """Round stone pad (TT palette) the marker stands on."""
+    """Round pad the marker stands on. MAP: grey stone (TT palette) means locked; unlocked pads are grass green
+    so an open level reads at a glance. Locked nodes are also greyscaled by ZoneMapFX."""
     top, rim, under, hi = ((hexc("5a697d"), hexc("32395c"), hexc("213447"), hexc("769099")) if dark else
-                           (hexc("b9d2ca"), hexc("769099"), hexc("5a697d"), hexc("f0f2fe")))
+                           (hexc("99e550"), hexc("6abe30"), hexc("37946e"), hexc("cfff70")))
     cx, cy, rx, ry = 7.5, 12.0, 6.6, 2.9
     for y in range(16):
         for x in range(16):
@@ -778,7 +779,7 @@ def icon_locked():
 def icon_boss():
     """Zone boss: a horned skull on a dark pad (clearly not a level gem)."""
     c = Canvas(16, 16)
-    pad(c, dark=True)
+    pad(c)  # MAP: green like the other open nodes; ZoneMapFX greys it out while locked
     c.stamp([
         "o.........o",
         "Ho.......oH",
@@ -930,7 +931,11 @@ def main():
     with open(LAYOUT, "w") as f:
         f.write("\n".join(lines) + "\n")
     print("wrote", OUT_DIR, "and", LAYOUT)
-
+    # UI sweep 2026-10-18: the shared UI chrome follows Tools/UI/ui_style.py (runs last so it wins)
+    import sys
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "UI"))
+    import ui_style  # noqa: E402
+    ui_style.main()
 
 if __name__ == "__main__":
     main()

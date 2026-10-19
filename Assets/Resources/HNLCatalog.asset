@@ -73,6 +73,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 425e7ff6fe0ce457bb61f51c728c5f99, type: 3}
   - {fileID: 21300000, guid: b5ee770817d1a490fafb75b93678e9fe, type: 3}
   - {fileID: 21300000, guid: 2f58bde3c513d41208f8518b1d77f738, type: 3}
+  - {fileID: 21300000, guid: ce01d423c28284bb2938e7be71ed66df, type: 3}
   moveSound: {fileID: 8300000, guid: 0728e59b325cc43ffb90cbf74b4f71e9, type: 3}
   selectSound: {fileID: 8300000, guid: db026b38afe1240c59c554f5dd7632d6, type: 3}
   backSound: {fileID: 8300000, guid: 2fa6b18c083d04a2abcbd5fcf2ff2800, type: 3}

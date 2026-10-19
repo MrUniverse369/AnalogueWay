@@ -25,6 +25,8 @@ public class PlayerWater : MonoBehaviour
     [SerializeField] private float refillRate = 4f;
     [Tooltip("Seconds between lost lives once breath has run out.")]
     [SerializeField] private float drownDamageInterval = 2f;
+    [Tooltip("STOMPAIR: seconds of breath an underwater stomp gives back (the fish lets out an air bubble).")]
+    [SerializeField] private float stompAir = 3f;
 
     [Header("Movement in water")]
     [SerializeField, Range(0.1f, 1f)] private float gravityMultiplier = 0.55f;
@@ -130,6 +132,22 @@ public class PlayerWater : MonoBehaviour
         ApplyLook();
     }
 
+    /// <summary>
+    /// STOMPAIR: an enemy at 'at' was stomped. Underwater, it lets out an air bubble that gives Harvey back stompAir
+    /// seconds of breath, so a chain of stomps (the Egypt fish climb) can be finished on one breath.
+    /// </summary>
+    public static void GiveStompAir(Vector3 at)
+    {
+        PlayerWater w = Instance;
+        if (w == null || !w.isActiveAndEnabled || !w.HeadUnderwater) return;
+        w.breath = Mathf.Min(w.maxBreath, w.breath + w.stompAir);
+        w.drownTimer = 0f;
+        // FX: the air bubble pops out of the fish and rises, and Harvey breathes out a few bubbles of his own
+        PixelFX.Burst(at + Vector3.up * 0.2f, 8, 0.6f, 1.6f, new[] { PixelFX.Hex("e7fbfe"), PixelFX.Hex("b7f5ff"), PixelFX.Hex("ffffff") },
+            0.5f, 0.9f, 1, PixelShape.Square, PixelMotion.Float, true, PixelLayer.Front, 90f, 50f, 0.2f);
+        if (w.bubbles != null) w.bubbles.Emit(4);
+    }
+
     private void OnRespawned()
     {
         breath = maxBreath;
@@ -162,6 +180,8 @@ public class PlayerWater : MonoBehaviour
 
     private void EnterWater()
     {
+        // POISON: splashes and drips take the colour of what he fell into
+        liquidColours = currentWater != null && currentWater.GetComponent<PoisonLiquid>() != null ? PoisonLiquid.SplashColours : PixelFX.Water;
         baseGravity = rb.gravityScale;
         rb.gravityScale = baseGravity * gravityMultiplier;
         gravityLowered = true;
@@ -175,7 +195,7 @@ public class PlayerWater : MonoBehaviour
         float y = currentWater != null ? currentWater.bounds.max.y : body.bounds.min.y;
         Vector3 at = new Vector3(body.bounds.center.x, y, 0f);
         int count = Mathf.Clamp(Mathf.RoundToInt(6 + Mathf.Abs(verticalSpeed) * 1.5f), 6, 16);
-        PixelFX.Burst(at, count, 1.5f, 3f + Mathf.Abs(verticalSpeed) * 0.3f, PixelFX.Water, 0.35f, 0.6f, 1, PixelShape.Square, PixelMotion.Fall, false, PixelLayer.Front, 90f, 80f, 0.15f);
+        PixelFX.Burst(at, count, 1.5f, 3f + Mathf.Abs(verticalSpeed) * 0.3f, liquidColours, 0.35f, 0.6f, 1, PixelShape.Square, PixelMotion.Fall, false, PixelLayer.Front, 90f, 80f, 0.15f);
     }
 
     private void LeaveWater()
@@ -187,6 +207,7 @@ public class PlayerWater : MonoBehaviour
     }
 
     private float dripLeft, dripTimer, speckTimer; // FX:
+    private Color[] liquidColours = PixelFX.Water; // POISON: water blue, or the poison's colours
 
     // FX: drips after leaving the water; drifting specks while underwater (alongside the bubbles)
     private void WaterParticles()
@@ -200,7 +221,7 @@ public class PlayerWater : MonoBehaviour
                 dripTimer = Random.Range(0.08f, 0.2f);
                 Bounds b = body.bounds;
                 PixelFX.Emit(new Vector3(Random.Range(b.min.x, b.max.x), Random.Range(b.min.y, b.center.y), 0f), new Vector2(0f, -0.5f),
-                    PixelFX.Pick(PixelFX.Water), 0.45f, 1, PixelShape.Square, PixelMotion.Fall);
+                    PixelFX.Pick(liquidColours), 0.45f, 1, PixelShape.Square, PixelMotion.Fall);
             }
         }
         if (!HeadUnderwater || currentWater == null) return;

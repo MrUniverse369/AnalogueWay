@@ -24,7 +24,7 @@ public class HurtPlayer : MonoBehaviour
     {
 
         // DEATH: an enemy that is already dying (playing its smoke animation) can no longer hurt the player
-        if (other.CompareTag("PlayerDetectionArea") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity) && (ownEnemy == null || !ownEnemy.IsDying)) // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
+        if (other.CompareTag("PlayerDetectionArea") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity) && (ownEnemy == null || !ownEnemy.IsDying) && !SamuraiSlash.ClashProtected) // CLASH: not straight after a samurai clash // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
         {
 
             if (PlayerController.playerInviInvincible == false)

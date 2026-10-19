@@ -1,10 +1,9 @@
 """Renders the main menu art into Assets/Sprites/UI/MainMenu, in the HNL style and palette.
 
-  MenuBackdrop.png   320x180 title backdrop, deliberately simple: calm purple bands (the HNL HUD purples) over
-                     a low sand ledge with Harvey's dig site (pit, ladder, crates, pickaxe, lantern post).
-                     The paw-print and star pattern over the purple is drawn by the HNLSprite shader
-                     (Resources/FX/HNLSprite_MenuPattern.mat) so it can scroll and twinkle.
-                     (backdrop_dawn() is the earlier detailed dawn-over-the-dunes version, no longer rendered.)
+  MenuBackdrop.png   320x180 title backdrop, kept minimal (2026-10-18): one flat deep purple and a small floating
+                     sand islet in the middle for Harvey to stand on. Nothing else, so the title and menu carry it.
+                     (backdrop_dig() is the previous purple bands + dig site version, backdrop_dawn() the detailed
+                     dawn-over-the-dunes one before that; neither is rendered any more.)
   MenuTitle.png      "HARVEY'S NINE LIVES" in soft pixel letters: warm gradient, rounded purple outline, soft shadow.
   MenuButton*.png    9-slice button plates (normal / selected / pressed) in the HUD frame style, border 5.
   Icon_*.png         gem (play), journal (continue), compass (zone select), joystick (arcade), gear (options).
@@ -35,8 +34,28 @@ def save(c, name):
 GROUND = 161  # top of the sand ledge (Harvey's sprite bottom sits at row 163)
 
 
+ISLET_X = 160  # Harvey stands in the middle of the screen
+
+
 def backdrop():
-    """The simple title backdrop: purple bands, then the sand ledge with the dig site."""
+    """The minimal title backdrop: flat purple and a small rounded sand islet under Harvey (HNL soft shapes, no outline)."""
+    c = Canvas(W, H, hexc("2a2346"))
+    half = 26
+    for x in range(ISLET_X - half, ISLET_X + half):
+        u = (x - ISLET_X + 0.5) / half                        # -1..1 across the islet
+        top = GROUND + (1 if abs(u) > 0.85 else 0)              # rounded shoulders
+        depth = int(round(3 + 5 * math.sqrt(max(0.0, 1 - u * u))))  # deepest in the middle, tapering underneath
+        for y in range(top, GROUND + depth + 1):
+            d = y - top
+            col = hexc("e1d089") if d == 0 else hexc("ffe478") if d == 1 and x % 3 else hexc("e3ba66") if d < 4 else hexc("ce812c")
+            if d >= 4 and y == GROUND + depth:
+                col = hexc("a35a3c")
+            c.put(x, y, col)
+    return c
+
+
+def backdrop_dig():
+    """The previous title backdrop: purple bands, then the sand ledge with the dig site."""
     c = Canvas(W, H)
     bands = [(0, "2a2346"), (46, "32395c"), (96, "3b3468"), (134, "473b78")]
     for y in range(GROUND):
@@ -506,7 +525,10 @@ def main():
     save(glow(), "LanternGlow.png")
     save(mote(), "DustMote.png")
     print("wrote", OUT)
-
+    # UI sweep 2026-10-18: the shared UI chrome follows Tools/UI/ui_style.py (runs last so it wins)
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "UI"))
+    import ui_style  # noqa: E402
+    ui_style.main()
 
 if __name__ == "__main__":
     main()

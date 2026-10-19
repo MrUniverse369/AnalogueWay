@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// OPTIONS: the main menu's Options screen and its Controls page, built in code in the pause menu's style (the
-/// same frame, plaque, buttons, paw pointer and sounds as SaveSlotMenu), so the scene needs no setup.
+/// same HNL UI style, buttons, paw pointer and sounds as SaveSlotMenu), so the scene needs no setup.
 ///   Options:  CONTROLS / BACK
 ///   Controls: every action with its keyboard keys and PS5 controller buttons (as bound in the game's code,
 ///             PlayerControls.inputactions and the Input Manager).
@@ -38,10 +38,9 @@ public class OptionsMenu : MonoBehaviour
     private HNLCatalog cat;
     private GameObject mainMenu;
     private GameObject reselectOnClose;
-    private RectTransform canvasRoot, optionsCard, controlsCard, paw;
+    private RectTransform canvasRoot, optionsCard, controlsCard;
     private Button controlsButton, backButton, controlsBack;
     private int muteCursorUntilFrame;
-    private readonly Vector3[] corners = new Vector3[4];
 
     public static bool IsOpen => instance != null && instance.canvasRoot != null && instance.canvasRoot.gameObject.activeSelf;
 
@@ -84,8 +83,8 @@ public class OptionsMenu : MonoBehaviour
 
         // the Options card
         optionsCard = Card("Options", 140f, 74f, "OPTIONS");
-        controlsButton = MenuButton(optionsCard, "CONTROLS", new Vector2(0, 2), ShowControls);
-        backButton = MenuButton(optionsCard, "BACK", new Vector2(0, -20), Close);
+        controlsButton = MenuButton(optionsCard, "CONTROLS", new Vector2(0, 0), ShowControls);
+        backButton = MenuButton(optionsCard, "BACK", new Vector2(0, -14), Close);
         MenuUI.Link(controlsButton, backButton, backButton, null, null);
         MenuUI.Link(backButton, controlsButton, controlsButton, null, null);
 
@@ -94,44 +93,37 @@ public class OptionsMenu : MonoBehaviour
         float top = CardHeight / 2f;
         float colAction = -CardWidth / 2f + 12f, colKeys = -22f, colPad = 50f;
         float y = top - 29f;
-        MenuUI.Text("HeadKeys", controlsCard, new Vector2(colKeys + 34, y), new Vector2(68, 7), 5, MenuUI.Orange, TextAlignmentOptions.Left, "KEYBOARD");
-        MenuUI.Text("HeadPad", controlsCard, new Vector2(colPad + 40, y), new Vector2(80, 7), 5, MenuUI.Orange, TextAlignmentOptions.Left, "PS5 CONTROLLER");
+        MenuUI.Text("HeadKeys", controlsCard, new Vector2(colKeys + 34, y), new Vector2(68, 7), 5, MenuUI.Muted, TextAlignmentOptions.Left, "KEYBOARD");
+        MenuUI.Text("HeadPad", controlsCard, new Vector2(colPad + 40, y), new Vector2(80, 7), 5, MenuUI.Muted, TextAlignmentOptions.Left, "PS5 CONTROLLER");
         y -= 10f;
         for (int i = 0; i < Controls.GetLength(0); i++, y -= 8.5f) // leaves room for BACK under the last row
         {
-            MenuUI.Text("Action" + i, controlsCard, new Vector2(colAction + 33, y), new Vector2(66, 7), 5, MenuUI.Yellow, TextAlignmentOptions.Left, Controls[i, 0]);
+            MenuUI.Text("Action" + i, controlsCard, new Vector2(colAction + 33, y), new Vector2(66, 7), 5, MenuUI.Cream, TextAlignmentOptions.Left, Controls[i, 0]); // UI: Cream table, Muted headers
             MenuUI.Text("Keys" + i, controlsCard, new Vector2(colKeys + 34, y), new Vector2(68, 7), 5, MenuUI.Cream, TextAlignmentOptions.Left, Controls[i, 1]);
             MenuUI.Text("Pad" + i, controlsCard, new Vector2(colPad + 40, y), new Vector2(80, 7), 5, MenuUI.Cream, TextAlignmentOptions.Left, Controls[i, 2]);
         }
         controlsBack = MenuButton(controlsCard, "BACK", new Vector2(0, -top + 13), ShowOptions);
         MenuUI.Link(controlsBack, controlsBack, controlsBack, null, null);
 
-        paw = MenuUI.Image("Paw", canvasRoot, Vector2.zero, new Vector2(11, 10), cat.paw).rectTransform;
-        paw.gameObject.SetActive(false);
         canvasGo.SetActive(false);
     }
 
     private RectTransform Card(string name, float w, float h, string heading)
     {
         RectTransform card = MenuUI.Image(name, canvasRoot, Vector2.zero, new Vector2(w, h), cat.pauseFrame, true).rectTransform;
-        MenuUI.Image("Plaque", card, new Vector2(0, h / 2f - 14), new Vector2(92, 15), cat.pausePlaque, true);
-        MenuUI.Text("Title", card, new Vector2(0, h / 2f - 14), new Vector2(88, 10), 8, MenuUI.Yellow, TextAlignmentOptions.Center, heading);
+        MenuUI.Title(card, h / 2f - 13, w - 24, heading); // UI: the standard title
         return card;
     }
 
+    // UI: the standard text button (Yellow with the paw when selected)
     private Button MenuButton(RectTransform parent, string label, Vector2 pos, System.Action onSubmit)
     {
-        var rt = MenuUI.Rect(label, parent, pos, new Vector2(84, 18));
-        Button b = MenuUI.Button(rt, cat.menuButton, cat.menuButtonSelected, true, PlayCursorSound, () =>
+        var rt = MenuUI.Rect(label, parent, pos, new Vector2(84, 12));
+        return MenuUI.TextButton(rt, label, PlayCursorSound, () =>
         {
             HarveyMenus.PlayUiSound(cat.selectSound);
             onSubmit();
         });
-        var ss = b.spriteState;
-        ss.pressedSprite = cat.menuButtonPressed;
-        b.spriteState = ss;
-        MenuUI.Text("Label", rt, new Vector2(0, 1), new Vector2(76, 9), 7, MenuUI.Cream, TextAlignmentOptions.Center, label);
-        return b;
     }
 
     private static RectTransform Stretch(string name, Transform parent)
@@ -192,7 +184,6 @@ public class OptionsMenu : MonoBehaviour
             return;
         }
         KeepSelection();
-        FollowSelection();
     }
 
     private void KeepSelection()
@@ -203,20 +194,6 @@ public class OptionsMenu : MonoBehaviour
         if (selected != null && selected.activeInHierarchy && selected.transform.IsChildOf(page)) return;
         muteCursorUntilFrame = Time.frameCount + 1;
         MenuUI.Select(page == controlsCard ? controlsBack : controlsButton);
-    }
-
-    private void FollowSelection()
-    {
-        GameObject selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
-        var target = selected != null ? selected.transform as RectTransform : null;
-        paw.gameObject.SetActive(target != null);
-        if (target == null) return;
-        paw.SetAsLastSibling();
-        target.GetWorldCorners(corners);
-        Vector3 left = (corners[0] + corners[1]) * 0.5f;
-        float scale = paw.lossyScale.x;
-        float nudge = Mathf.Round(Mathf.Sin(Time.unscaledTime * 6f) * 1.5f);
-        paw.position = left + new Vector3((-3f - paw.rect.width * 0.5f + nudge) * scale, 0f, 0f);
     }
 
     private static bool BackPressed()

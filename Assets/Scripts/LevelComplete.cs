@@ -34,7 +34,7 @@ public class LevelComplete : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            LevelLoader.Load(SceneManager.GetActiveScene().buildIndex); // LOADING:
         }
     }
 }

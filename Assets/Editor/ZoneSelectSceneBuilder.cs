@@ -152,16 +152,16 @@ public static class ZoneSelectSceneBuilder
 
         var label = Rect("NodeLabel", canvasRt, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0f), Vector2.zero, new Vector2(80, 24));
         Img(label, frame);
-        var zoneText = Text("ZoneName", label, new Vector2(0, 0.5f), Vector2.one, new Vector2(0, -1), new Vector2(0, -3), 7, Hex("#ffe478"), "THE OLD TOMB");
-        var levelText = Text("LevelName", label, Vector2.zero, new Vector2(1, 0.5f), new Vector2(0, 4), new Vector2(0, 1), 8, Color.white, "ACT 1");
+        var zoneText = Text("ZoneName", label, new Vector2(0, 0.5f), Vector2.one, new Vector2(0, -1), new Vector2(0, -3), 7, Hex("#ffe478"), "THE OLD TOMB"); // UI: title role (Yellow)
+        var levelText = Text("LevelName", label, Vector2.zero, new Vector2(1, 0.5f), new Vector2(0, 4), new Vector2(0, 1), 7, Hex("#ffffeb"), "ACT 1"); // UI: Cream, same size as the zone name
 
-        var coinBox = Rect("Coins", canvasRt, new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1), new Vector2(6, -6), new Vector2(70, 16));
+        var coinBox = Rect("Coins", canvasRt, new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1), new Vector2(6, -6), new Vector2(70, 12)); // UI: width fits the text at runtime
         Img(coinBox, frame);
-        var coins = Text("CoinsText", coinBox, Vector2.zero, Vector2.one, new Vector2(0, 2), Vector2.zero, 8, Hex("#ffffeb"), "COINS 0");
+        var coins = Text("CoinsText", coinBox, Vector2.zero, Vector2.one, new Vector2(0, 2), Vector2.zero, 6, Hex("#ffffeb"), "COINS 0"); // UI: body size
 
-        var controls = Rect("ControlsPlate", canvasRt, new Vector2(1, 0), new Vector2(1, 0), new Vector2(1, 0), new Vector2(-6, 6), new Vector2(150, 14));
+        var controls = Rect("ControlsPlate", canvasRt, new Vector2(1, 0), new Vector2(1, 0), new Vector2(1, 0), new Vector2(-6, 6), new Vector2(116, 12));
         Img(controls, frame);
-        Text("Controls", controls, Vector2.zero, Vector2.one, new Vector2(0, 2), Vector2.zero, 6, Hex("#ffffeb"), "CROSS/ENTER PLAY  CIRCLE/ESC MENU");
+        Text("Controls", controls, Vector2.zero, Vector2.one, new Vector2(0, 2), Vector2.zero, 5, Hex("#a59bd0"), "CROSS/ENTER: PLAY   CIRCLE/ESC: MENU"); // UI: hint style (Muted, small), same wording as the menus
 
         var fadeRt = Rect("Fade", canvasRt, Vector2.zero, Vector2.one, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
         var fade = fadeRt.gameObject.AddComponent<Image>();
@@ -202,9 +202,68 @@ public static class ZoneSelectSceneBuilder
         Set("backSound", Sound("Transition_Out.wav"));
         Set("gateSound", Sound("Japan/ToriGate_ToSpirit.wav"));
         so.ApplyModifiedPropertiesWithoutUndo();
+        ApplyZoneMusic(ctrl); // ZONEMUSIC:
 
         EditorSceneManager.SaveScene(scene, ScenePath);
         return $"ZoneSelect rebuilt: {nodes.Count} nodes";
+    }
+
+    // ZONEMUSIC: each zone's map track: name, scene-name prefixes, clip. A missing file leaves the slot empty, so that
+    // zone plays the map's own music until the track is added under this name and the menu below is run again.
+    private static readonly (string name, string[] prefixes, string path)[] ZoneTracks =
+    {
+        ("The Old Tomb", new[] { "Z1" }, "Assets/Music/TombZoneSelectSoundtrack.wav"),
+        ("Sandy Dunes", new[] { "Z2" }, "Assets/Music/SandZoneSelectSoundtrack.wav"),
+        ("Japan (Shrine Road + Snow Temple Pass)", new[] { "Z3" }, "Assets/Music/JapanZoneSelectSoundTrack.wav"),
+        ("Grassy Meadow + Journey's End", new[] { "Z4", "Win" }, "Assets/Music/GrassZoneSelectSoundtrack.wav"),
+    };
+
+    /// <summary>ZONEMUSIC: puts the zone tracks on the open ZoneSelect scene's map, without rebuilding the scene.</summary>
+    [MenuItem("Tools/HNL/Set Up Zone Select Music")]
+    private static void ZoneMusicFromMenu()
+    {
+        var ctrl = Object.FindObjectOfType<ZoneSelectMap>();
+        if (ctrl == null)
+        {
+            Debug.LogWarning("Open the ZoneSelect scene first.");
+            return;
+        }
+        ApplyZoneMusic(ctrl);
+        EditorSceneManager.MarkSceneDirty(ctrl.gameObject.scene);
+        EditorSceneManager.SaveScene(ctrl.gameObject.scene);
+    }
+
+    private static void ApplyZoneMusic(ZoneSelectMap ctrl)
+    {
+        var so = new SerializedObject(ctrl);
+        var list = so.FindProperty("zoneMusic");
+        list.arraySize = ZoneTracks.Length;
+        var report = new List<string>();
+        for (int i = 0; i < ZoneTracks.Length; i++)
+        {
+            var (name, prefixes, path) = ZoneTracks[i];
+            // streamed like the rest of the game's music
+            if (AssetImporter.GetAtPath(path) is AudioImporter ai)
+            {
+                AudioImporterSampleSettings ss = ai.defaultSampleSettings;
+                if (ss.loadType != AudioClipLoadType.Streaming)
+                {
+                    ss.loadType = AudioClipLoadType.Streaming;
+                    ai.defaultSampleSettings = ss;
+                    ai.SaveAndReimport();
+                }
+            }
+            var clip = AssetDatabase.LoadAssetAtPath<AudioClip>(path);
+            var e = list.GetArrayElementAtIndex(i);
+            e.FindPropertyRelative("name").stringValue = name;
+            var pre = e.FindPropertyRelative("scenePrefixes");
+            pre.arraySize = prefixes.Length;
+            for (int j = 0; j < prefixes.Length; j++) pre.GetArrayElementAtIndex(j).stringValue = prefixes[j];
+            e.FindPropertyRelative("clip").objectReferenceValue = clip;
+            report.Add(name + ": " + (clip != null ? clip.name : "(map music)"));
+        }
+        so.ApplyModifiedPropertiesWithoutUndo();
+        Debug.Log("Zone music: " + string.Join(", ", report));
     }
 
     private static void ImportArt()

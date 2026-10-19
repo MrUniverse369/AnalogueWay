@@ -38,7 +38,7 @@ public class BagView : MenuView
         MenuUI.Image("CoinPlate", panel, new Vector2(110, 71), new Vector2(46, 13), cat.frame, true);
         MenuUI.Image("CoinIcon", panel, new Vector2(95, 71), new Vector2(8, 8), cat.coin);
         coinsText = MenuUI.Text("Coins", panel, new Vector2(114, 71), new Vector2(26, 8), 5, MenuUI.Yellow, TextAlignmentOptions.Right, "");
-        MenuUI.Text("Title", panel, new Vector2(0, 71), new Vector2(200, 10), 8, MenuUI.Yellow, TextAlignmentOptions.Center, "HARVEY'S BAG");
+        MenuUI.Title(panel, 71, 160, "HARVEY'S BAG"); // UI: the standard title, same height in every view
 
         for (int i = 0; i < tabs.Length; i++)
         {
@@ -61,9 +61,9 @@ public class BagView : MenuView
         MenuUI.Image("Note", panel, new Vector2(82, 0), new Vector2(118, 82), cat.frame, true);
         detailIcon = MenuUI.Image("Icon", panel, new Vector2(36, 28), new Vector2(16, 16), null);
         detailName = MenuUI.Text("Name", panel, new Vector2(96, 31), new Vector2(84, 16), 5, MenuUI.Yellow, TextAlignmentOptions.Left, "", true);
-        detailCount = MenuUI.Text("Count", panel, new Vector2(96, 20), new Vector2(84, 7), 5, MenuUI.Aqua, TextAlignmentOptions.Left, "");
+        detailCount = MenuUI.Text("Count", panel, new Vector2(96, 20), new Vector2(84, 7), 5, MenuUI.Yellow, TextAlignmentOptions.Left, "");
         detailText = MenuUI.Text("Text", panel, new Vector2(82, -10), new Vector2(106, 44), 5, MenuUI.Cream, TextAlignmentOptions.TopLeft, "", true);
-        detailAction = MenuUI.Text("Action", panel, new Vector2(82, -34), new Vector2(106, 7), 5, MenuUI.Aqua, TextAlignmentOptions.Center, "");
+        detailAction = MenuUI.Text("Action", panel, new Vector2(82, -34), new Vector2(106, 7), 5, MenuUI.Yellow, TextAlignmentOptions.Center, "");
         Hint("L1/R1 OR Q/E: TABS    CROSS/ENTER: USE    CIRCLE/ESC: BACK", new Vector2(0, -71));
 
         WireNavigation();
@@ -113,7 +113,7 @@ public class BagView : MenuView
         for (int i = 0; i < tabs.Length; i++)
         {
             tabs[i].image.sprite = i == tab ? cat.tabSelected : cat.tab;
-            tabLabels[i].color = i == tab ? MenuUI.Yellow : MenuUI.Grey;
+            tabLabels[i].color = i == tab ? MenuUI.Yellow : MenuUI.Muted;
         }
         Refresh();
         if (jumpToPockets)
@@ -178,7 +178,7 @@ public class BagView : MenuView
         if (!item.Usable)
         {
             Sound(cat.blockedSound);
-            Message("A KEEPSAKE: IT STAYS IN THE BAG", MenuUI.Grey);
+            Message("A KEEPSAKE: IT STAYS IN THE BAG", MenuUI.Muted);
             return;
         }
         if (!CanUseHere || !item.TryUse(out string result))
@@ -189,7 +189,7 @@ public class BagView : MenuView
         }
         Inventory.Remove(item);
         Sound(cat.equipSound);
-        Message(item.DisplayName.ToUpperInvariant() + ": " + result, MenuUI.Aqua);
+        Message(item.DisplayName.ToUpperInvariant() + ": " + result, MenuUI.Yellow);
         Refresh();
         ShowPocket(Mathf.Min(cursor, Mathf.Max(0, shown.Count - 1)));
         MenuUI.Select(pockets[Mathf.Min(cursor, Mathf.Max(0, shown.Count - 1))]);

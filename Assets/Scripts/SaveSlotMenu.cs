@@ -23,7 +23,7 @@ public class SaveSlotMenu : MonoBehaviour
     public enum Mode { Play, Continue }
 
     private const float CardWidth = 216f, CardHeight = 168f, RowWidth = 196f, RowHeight = 22f, RowStep = 25f;
-    private const float DialogWidth = 204f, DialogHeight = 66f, DialogButtonWidth = 52f, DialogButtonHeight = 16f;
+    private const float DialogWidth = 204f, DialogHeight = 66f, DialogButtonWidth = 52f, DialogButtonHeight = 12f;
     private const float DialogButtonGap = 16f; // room for the paw between answers
 
     private static SaveSlotMenu instance;
@@ -114,8 +114,7 @@ public class SaveSlotMenu : MonoBehaviour
 
         float top = CardHeight / 2f;
         card = MenuUI.Image("Card", canvasRoot, Vector2.zero, new Vector2(CardWidth, CardHeight), cat.pauseFrame, true).rectTransform;
-        MenuUI.Image("Plaque", card, new Vector2(0, top - 14), new Vector2(92, 15), cat.pausePlaque, true);
-        title = MenuUI.Text("Title", card, new Vector2(0, top - 14), new Vector2(88, 10), 8, MenuUI.Yellow, TextAlignmentOptions.Center, "");
+        title = MenuUI.Title(card, top - 13, CardWidth - 24, ""); // UI: the standard title
 
         float y = top - 36f;
         for (int i = 0; i < rows.Length; i++, y -= RowStep) BuildRow(i, y);
@@ -123,7 +122,7 @@ public class SaveSlotMenu : MonoBehaviour
             MenuUI.Link(rows[i], rows[(i + rows.Length - 1) % rows.Length], rows[(i + 1) % rows.Length], null, null);
 
         hint = MenuUI.Text("Hint", card, new Vector2(0, -top + 17), new Vector2(CardWidth - 16, 7), 5, MenuUI.Cream, TextAlignmentOptions.Center, "");
-        MenuUI.Text("Controls", card, new Vector2(0, -top + 10), new Vector2(CardWidth - 16, 7), 5, MenuUI.Grey, TextAlignmentOptions.Center,
+        MenuUI.Text("Controls", card, new Vector2(0, -top + 10), new Vector2(CardWidth - 16, 7), 5, MenuUI.Muted, TextAlignmentOptions.Center,
             "CROSS/ENTER: SELECT   CIRCLE/ESC: BACK");
 
         BuildDialog();
@@ -151,7 +150,7 @@ public class SaveSlotMenu : MonoBehaviour
         rowPlace[i] = MenuUI.Text("Place", rt, new Vector2(left + 60, -5), new Vector2(120, 8), 5, MenuUI.Cream, TextAlignmentOptions.Left, "");
         rowCoinIcon[i] = MenuUI.Image("CoinIcon", rt, new Vector2(RowWidth / 2f - 44, 4), new Vector2(8, 8), cat.coin);
         rowCoins[i] = MenuUI.Text("Coins", rt, new Vector2(RowWidth / 2f - 21, 4), new Vector2(34, 8), 6, MenuUI.Yellow, TextAlignmentOptions.Right, "");
-        rowDate[i] = MenuUI.Text("Date", rt, new Vector2(RowWidth / 2f - 30, -5), new Vector2(52, 8), 5, MenuUI.Grey, TextAlignmentOptions.Right, "");
+        rowDate[i] = MenuUI.Text("Date", rt, new Vector2(RowWidth / 2f - 30, -5), new Vector2(52, 8), 5, MenuUI.Muted, TextAlignmentOptions.Right, "");
     }
 
     private void BuildDialog()
@@ -188,9 +187,9 @@ public class SaveSlotMenu : MonoBehaviour
             allFull &= f != null;
         }
         if (mode == Mode.Continue)
-            SetHint(anySaved ? "PICK A FILE TO CONTINUE" : "NO SAVED FILES YET: CHOOSE PLAY TO START ONE", anySaved ? MenuUI.Cream : MenuUI.Orange);
+            SetHint(anySaved ? "PICK A FILE TO CONTINUE" : "NO SAVED FILES YET: CHOOSE PLAY TO START ONE", anySaved ? MenuUI.Cream : MenuUI.Yellow);
         else
-            SetHint(allFull ? "ALL FILES IN USE: PICK ONE TO CONTINUE OR REPLACE" : "PICK A FILE: EMPTY FOR A NEW GAME, USED TO CONTINUE", allFull ? MenuUI.Orange : MenuUI.Cream); // FLOW: Zone Select follows
+            SetHint(allFull ? "ALL FILES IN USE: PICK ONE TO CONTINUE OR REPLACE" : "PICK A FILE: EMPTY FOR A NEW GAME, USED TO CONTINUE", allFull ? MenuUI.Yellow : MenuUI.Cream); // FLOW: Zone Select follows
 
         lastRow = StartRow();
         muteCursorUntilFrame = Time.frameCount + 1; // the first selection isn't a cursor move
@@ -234,9 +233,9 @@ public class SaveSlotMenu : MonoBehaviour
             bool used = f != null;
             bool usable = used || mode == Mode.Play;
             rowName[i].text = $"FILE {i + 1}" + (used && i == active ? "  <color=#98b2b1>LAST PLAYED</color>" : "");
-            rowName[i].color = usable ? MenuUI.Yellow : MenuUI.Grey;
+            rowName[i].color = usable ? MenuUI.Yellow : MenuUI.Muted;
             rowPlace[i].text = used ? PlaceName(f.sceneName) : mode == Mode.Play ? "EMPTY: START A NEW GAME" : "EMPTY";
-            rowPlace[i].color = used ? MenuUI.Cream : MenuUI.Grey;
+            rowPlace[i].color = used ? MenuUI.Cream : MenuUI.Muted;
             rowCoinIcon[i].enabled = used;
             rowCoins[i].text = used ? f.coins.ToString() : "";
             rowDate[i].text = used ? SavedWhen(f.savedAtUtc) : "";
@@ -320,11 +319,7 @@ public class SaveSlotMenu : MonoBehaviour
         foreach (var (label, action) in answers)
         {
             var rt = MenuUI.Rect(label, dialogPanel, new Vector2(x, -15), new Vector2(DialogButtonWidth, DialogButtonHeight));
-            Button b = MenuUI.Button(rt, cat.menuButton, cat.menuButtonSelected, true, PlayCursorSound, () => { if (!busy) action(); });
-            var ss = b.spriteState;
-            ss.pressedSprite = cat.menuButtonPressed;
-            b.spriteState = ss;
-            MenuUI.Text("Label", rt, new Vector2(0, 1), new Vector2(DialogButtonWidth - 4, 8), 6, MenuUI.Cream, TextAlignmentOptions.Center, label);
+            Button b = MenuUI.TextButton(rt, label, PlayCursorSound, () => { if (!busy) action(); }); // UI: text answers
             dialogButtons.Add(b);
             x += step;
         }
@@ -384,10 +379,12 @@ public class SaveSlotMenu : MonoBehaviour
         MenuUI.Select(inDialog ? dialogDefault : rows[lastRow]);
     }
 
-    // the paw sits just left of the selected file or answer and nudges toward it, like on the main menu
+    // the paw sits just left of the selected file and nudges toward it, like on the main menu (UI: the answers are
+    // text buttons, which bring their own paw)
     private void FollowSelection()
     {
         GameObject selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
+        if (selected != null && selected.GetComponent<MenuTextButton>() != null) selected = null;
         var target = selected != null ? selected.transform as RectTransform : null;
         paw.gameObject.SetActive(target != null);
         if (target == null) return;

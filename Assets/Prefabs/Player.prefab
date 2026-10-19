@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 2124563215}
   - component: {fileID: 2124563216}
   - component: {fileID: 2124563217}
+  - component: {fileID: 8842997012784214472}
   m_Layer: 0
   m_Name: HarveyDragonMount
   m_TagString: Dragon
@@ -266,7 +267,7 @@ SpriteRenderer:
   m_SortingLayer: 15
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 51587068759734e7fb2df0d202847edd, type: 3}
+  m_Sprite: {fileID: -3840157330170623234, guid: 1825570c493694036b36eb68d59e5f80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -313,7 +314,7 @@ BoxCollider2D:
   m_Offset: {x: -0.09616518, y: -0.56450176}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.59305555, y: 0.4021739}
     oldSize: {x: 4.5, y: 2.875}
     newSize: {x: 9, y: 5.75}
     adaptiveTilingThreshold: 0.5
@@ -334,6 +335,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 056651f34736848609087fc906885b92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appearTime: 0.35
+  trailRate: 14
+--- !u!95 &8842997012784214472
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124563213}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 374b3c266ae16499a98b366bebaa5e7d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5809645258820347545
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,9 +691,11 @@ MonoBehaviour:
   maxBreath: 8
   refillRate: 4
   drownDamageInterval: 2
+  stompAir: 3
   gravityMultiplier: 0.55
   maxSinkSpeed: 4
   walkSpeedMultiplier: 0.8
+  screenOverlay: 0
   overlayMaterial: {fileID: 2100000, guid: d358eaf2d206e402596ad98b4ee97242, type: 2}
   whiteSprite: {fileID: 21300000, guid: 60f2a1b87f7704f3789e7d6945a2fde0, type: 3}
   overlaySortingLayer: EnemyFront

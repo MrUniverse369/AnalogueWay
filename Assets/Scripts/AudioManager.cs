@@ -78,6 +78,12 @@ public class AudioManager : MonoBehaviour
         oneShots.outputAudioMixerGroup = sfx.outputAudioMixerGroup;
         oneShots.spatialBlend = sfx.spatialBlend;
         oneShots.priority = sfx.priority;
+        pitchedShots = gameObject.AddComponent<AudioSource>(); // CLASH: made here like oneShots (adding one mid-play warns)
+        pitchedShots.playOnAwake = false;
+        pitchedShots.loop = false;
+        pitchedShots.outputAudioMixerGroup = sfx.outputAudioMixerGroup;
+        pitchedShots.spatialBlend = sfx.spatialBlend;
+        pitchedShots.priority = sfx.priority;
         // SFX: a few voices for coins, so quick pickups overlap and each can have its own pitch
         coinVoices = new AudioSource[4];
         for (int i = 0; i < coinVoices.Length; i++)
@@ -115,8 +121,59 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         music.volume = musicVolume; // MIX:
+        if (musicRequested) return; // ZONEMUSIC: a script already picked this scene's music (the zone map)
         music.clip = backgroundMusic;
         music.Play();
+    }
+
+    // ZONEMUSIC: switches the music, crossfading over fadeTime (0 = cut). The same clip already playing carries on.
+    private bool musicRequested;
+    private AudioSource musicFade; // the outgoing track while it fades out
+    private Coroutine musicFadeCo;
+
+    public void PlayMusic(AudioClip clip, float fadeTime = 1f)
+    {
+        musicRequested = true;
+        if (clip == null || (music.clip == clip && music.isPlaying)) return;
+        if (musicFadeCo != null) StopCoroutine(musicFadeCo);
+        if (musicFade == null)
+        {
+            musicFade = gameObject.AddComponent<AudioSource>();
+            musicFade.playOnAwake = false;
+            musicFade.outputAudioMixerGroup = music.outputAudioMixerGroup;
+            musicFade.spatialBlend = music.spatialBlend;
+            musicFade.priority = music.priority;
+        }
+        // the current track moves to the fade source and the new one starts on the main source
+        musicFade.Stop();
+        if (music.isPlaying && fadeTime > 0f)
+        {
+            musicFade.clip = music.clip;
+            musicFade.loop = music.loop;
+            musicFade.volume = music.volume;
+            musicFade.timeSamples = music.timeSamples;
+            musicFade.Play();
+        }
+        music.clip = clip;
+        music.loop = true;
+        music.volume = fadeTime > 0f ? 0f : musicVolume;
+        music.Play();
+        if (fadeTime > 0f) musicFadeCo = StartCoroutine(CrossfadeMusic(fadeTime));
+    }
+
+    private System.Collections.IEnumerator CrossfadeMusic(float fadeTime)
+    {
+        float outStart = musicFade.volume;
+        for (float t = 0f; t < fadeTime; t += Time.unscaledDeltaTime)
+        {
+            float k = t / fadeTime;
+            music.volume = musicVolume * k;
+            musicFade.volume = outStart * (1f - k);
+            yield return null;
+        }
+        music.volume = musicVolume;
+        musicFade.Stop();
+        musicFadeCo = null;
     }
 
     public void PlaySfx(AudioClip sound)
@@ -130,6 +187,15 @@ public class AudioManager : MonoBehaviour
     public void PlaySfxOneShot(AudioClip sound, float volume = 1f)
     {
         if (sound != null) oneShots.PlayOneShot(sound, sfxBaseVolume * volume * VolumeFor(sound)); // MIX:
+    }
+
+    // CLASH: a one-shot at another pitch (its own voice, so the shared one-shots keep pitch 1)
+    private AudioSource pitchedShots;
+    public void PlaySfxOneShotPitched(AudioClip sound, float pitch, float volume = 1f)
+    {
+        if (sound == null || pitchedShots == null) return;
+        pitchedShots.pitch = pitch;
+        pitchedShots.PlayOneShot(sound, sfxBaseVolume * volume * VolumeFor(sound));
     }
 
     // MIX: the volume for a clip based on which slot it is in (clips in no slot, like talisman sounds, play at 1)

@@ -54,8 +54,7 @@ public class NextLevel : MonoBehaviour
             "Score: " + (CollectableCollisiondetector.coinCollected * 1.5f);
 
         yield return new WaitForSecondsRealtime(5);
-        GameSession.SaveProgressForBuildIndex(SceneManager.GetActiveScene().buildIndex + 1); // SAVE: autosave so Continue starts the next level
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameSession.FinishLevel(); // FLOW: back to the Zone Select with the next level unlocked (was straight into it)
 
 
         Time.timeScale = 1;

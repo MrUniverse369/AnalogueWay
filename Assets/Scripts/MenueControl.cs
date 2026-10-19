@@ -16,7 +16,7 @@ public class MenueControl : MonoBehaviour
     {
         Time.timeScale = 1f;
         GameSession.EndArcade(); // ARCADE: quitting a run keeps nothing
-        SceneManager.LoadScene(0);
+        LevelLoader.Load(0); // LOADING:
         isGamePaused = false;
 
     }
@@ -48,7 +48,7 @@ public class MenueControl : MonoBehaviour
         Time.timeScale = 1f;
         isGamePaused = false;
         GameSession.EndArcade(); // ARCADE:
-        SceneManager.LoadScene(ZoneSelectMap.SceneName);
+        LevelLoader.Load(ZoneSelectMap.SceneName); // LOADING:
     }
     // OPTIONS: main menu Options button (Controls page)
     public void OpenOptions()
@@ -71,6 +71,9 @@ public class MenueControl : MonoBehaviour
     public void PauseMenue()
     {
         if (HarveyMenus.BlocksPause) return; // MENUS: Esc/Options belong to the open Talisman Holder, Bag or shop
+        if (PauseMenuStyle.BlocksPause) return; // MAP: the "back to the map?" question handles its own back/Esc
+        if (DialogueBox.BlocksPause) return; // DIALOGUE: Circle/Esc leaves a conversation, not into the pause menu
+        if (LevelLoader.Busy) return; // LOADING: no pausing while a level is loading or being revealed
         // PAUSE: only a real pause panel toggles. In the main menu pauseMenueUI is the menu itself, so pausing
         // there used to freeze time and then hide the whole menu (with this script on it), leaving no way back.
         if (pauseMenueUI != null && pauseMenueUI != gameObject && PausePressed())

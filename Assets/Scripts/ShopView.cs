@@ -24,10 +24,10 @@ public class ShopView : MenuView
     public ShopView(RectTransform parent) : base("VillageShop", parent, Inventory.Catalog.shopPanel)
     {
         var panel = Panel;
-        MenuUI.Image("CoinPlate", panel, new Vector2(110, 52), new Vector2(46, 13), cat.frame, true);
-        MenuUI.Image("CoinIcon", panel, new Vector2(95, 52), new Vector2(8, 8), cat.coin);
-        coinsText = MenuUI.Text("Coins", panel, new Vector2(114, 52), new Vector2(26, 8), 5, MenuUI.Yellow, TextAlignmentOptions.Right, "");
-        title = MenuUI.Text("Title", panel, new Vector2(0, 70), new Vector2(200, 10), 8, MenuUI.Yellow, TextAlignmentOptions.Center, "VILLAGE SHOP");
+        MenuUI.Image("CoinPlate", panel, new Vector2(110, 71), new Vector2(46, 13), cat.frame, true); // UI: on the title row, like the Bag
+        MenuUI.Image("CoinIcon", panel, new Vector2(95, 71), new Vector2(8, 8), cat.coin);
+        coinsText = MenuUI.Text("Coins", panel, new Vector2(114, 71), new Vector2(26, 8), 5, MenuUI.Yellow, TextAlignmentOptions.Right, "");
+        title = MenuUI.Title(panel, 71, 160, "VILLAGE SHOP"); // UI: the standard title, same height in every view
 
         for (int i = 0; i < MaxRows; i++)
         {
@@ -42,9 +42,9 @@ public class ShopView : MenuView
         MenuUI.Image("Note", panel, new Vector2(82, -6), new Vector2(118, 96), cat.frame, true);
         detailIcon = MenuUI.Image("Icon", panel, new Vector2(36, 28), new Vector2(16, 16), null);
         detailName = MenuUI.Text("Name", panel, new Vector2(96, 31), new Vector2(84, 16), 5, MenuUI.Yellow, TextAlignmentOptions.Left, "", true);
-        detailOwned = MenuUI.Text("Owned", panel, new Vector2(96, 20), new Vector2(84, 7), 5, MenuUI.Aqua, TextAlignmentOptions.Left, "");
+        detailOwned = MenuUI.Text("Owned", panel, new Vector2(96, 20), new Vector2(84, 7), 5, MenuUI.Yellow, TextAlignmentOptions.Left, "");
         detailText = MenuUI.Text("Text", panel, new Vector2(82, -12), new Vector2(106, 48), 5, MenuUI.Cream, TextAlignmentOptions.TopLeft, "", true);
-        detailAction = MenuUI.Text("Action", panel, new Vector2(82, -46), new Vector2(106, 7), 5, MenuUI.Aqua, TextAlignmentOptions.Center, "");
+        detailAction = MenuUI.Text("Action", panel, new Vector2(82, -46), new Vector2(106, 7), 5, MenuUI.Yellow, TextAlignmentOptions.Center, "");
         Hint("CROSS/ENTER: BUY    CIRCLE/ESC: LEAVE", new Vector2(0, -71));
     }
 
@@ -81,9 +81,9 @@ public class ShopView : MenuView
             rowIcons[i].color = item.Icon != null ? Color.white : new Color(1, 1, 1, 0);
             rowNames[i].text = item.DisplayName.ToUpperInvariant();
             bool sold = SoldOut(item);
-            rowNames[i].color = sold ? MenuUI.Grey : MenuUI.Cream;
+            rowNames[i].color = sold ? MenuUI.Muted : MenuUI.Cream;
             rowPrices[i].text = sold ? "OWNED" : item.Price.ToString();
-            rowPrices[i].color = sold ? MenuUI.Grey : CollectableCollisiondetector.coinCollected >= item.Price ? MenuUI.Yellow : MenuUI.Red;
+            rowPrices[i].color = sold ? MenuUI.Muted : CollectableCollisiondetector.coinCollected >= item.Price ? MenuUI.Yellow : MenuUI.Red;
             // FX: goods Harvey can't afford are shown in greyscale
             bool cantAfford = !sold && CollectableCollisiondetector.coinCollected < item.Price;
             if (greyMaterial == null) greyMaterial = Resources.Load<Material>("FX/UIGrey");
@@ -112,7 +112,7 @@ public class ShopView : MenuView
         if (SoldOut(item))
         {
             Sound(cat.blockedSound);
-            Message("YOU ALREADY HAVE ONE", MenuUI.Grey);
+            Message("YOU ALREADY HAVE ONE", MenuUI.Muted);
             return;
         }
         if (CollectableCollisiondetector.coinCollected < item.Price)
@@ -125,7 +125,7 @@ public class ShopView : MenuView
         Inventory.Add(item);
         GameSession.SaveProgress(); // like a checkpoint: what you buy is kept even if you quit right after
         Sound(cat.buySound);
-        Message("BOUGHT " + item.DisplayName.ToUpperInvariant(), MenuUI.Aqua);
+        Message("BOUGHT " + item.DisplayName.ToUpperInvariant(), MenuUI.Yellow);
         Refresh();
         ShowRow(cursor);
     }

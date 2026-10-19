@@ -950,8 +950,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8
-  m_fontSizeBase: 8
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1564,7 +1564,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -6, y: 6}
-  m_SizeDelta: {x: 150, y: 14}
+  m_SizeDelta: {x: 116, y: 12}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &664990308
 MonoBehaviour:
@@ -2228,7 +2228,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 0.92, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2245,8 +2245,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8
-  m_fontSizeBase: 8
+  m_fontSize: 7
+  m_fontSizeBase: 7
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2518,6 +2518,25 @@ MonoBehaviour:
   blockedSound: {fileID: 8300000, guid: e3e76ce24061542619049ca82a444d94, type: 3}
   selectSound: {fileID: 8300000, guid: db026b38afe1240c59c554f5dd7632d6, type: 3}
   backSound: {fileID: 8300000, guid: 2fa6b18c083d04a2abcbd5fcf2ff2800, type: 3}
+  zoneMusic:
+  - name: The Old Tomb
+    scenePrefixes:
+    - Z1
+    clip: {fileID: 8300000, guid: b50dc9122f31140788b54dea4ff1c5cb, type: 3}
+  - name: Sandy Dunes
+    scenePrefixes:
+    - Z2
+    clip: {fileID: 0}
+  - name: Japan (Shrine Road + Snow Temple Pass)
+    scenePrefixes:
+    - Z3
+    clip: {fileID: 8300000, guid: c3f0c296fc49640f183fec21798da32e, type: 3}
+  - name: Grassy Meadow + Journey's End
+    scenePrefixes:
+    - Z4
+    - Win
+    clip: {fileID: 0}
+  musicFadeTime: 1.2
 --- !u!4 &1314569743
 Transform:
   m_ObjectHideFlags: 0
@@ -3255,7 +3274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CROSS/ENTER PLAY  CIRCLE/ESC MENU
+  m_text: 'CROSS/ENTER: PLAY   CIRCLE/ESC: MENU'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc93bed77bab34b9c872bb5387a64cb3, type: 2}
   m_sharedMaterial: {fileID: -3424464330486476499, guid: dc93bed77bab34b9c872bb5387a64cb3, type: 2}
@@ -3265,7 +3284,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 0.92156863, a: 1}
+  m_fontColor: {r: 0.64705884, g: 0.60784316, b: 0.8156863, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3277,13 +3296,13 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6
-  m_fontSizeBase: 6
+  m_fontSize: 5
+  m_fontSizeBase: 5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3514,7 +3533,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 6, y: -6}
-  m_SizeDelta: {x: 70, y: 16}
+  m_SizeDelta: {x: 70, y: 12}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1635849379
 MonoBehaviour:
