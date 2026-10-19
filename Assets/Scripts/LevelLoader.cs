@@ -116,7 +116,7 @@ public class LevelLoader : MonoBehaviour
         yield return null;
 
         CameraController cam = FindFirstObjectByType<CameraController>();
-        if (cam != null)
+        if (cam != null && cam.isActiveAndEnabled) // SAMURAIBOSS: a switched-off follow camera (the boss arenas' fixed view) stays where the scene put it
         {
             for (int i = 0; i < MaxSettleFrames; i++)
             {

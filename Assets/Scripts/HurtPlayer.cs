@@ -11,6 +11,8 @@ public class HurtPlayer : MonoBehaviour
     private LevelManager lmanagerScriptRef;
     private AudioManager audioManager; // SFX:
     private EnemyController ownEnemy; // DEATH: set when this hazard is an enemy
+    private Collider2D ownCollider; // STOMPTIE:
+    private Collider2D OwnCollider => ownCollider != null ? ownCollider : (ownCollider = GetComponent<Collider2D>());
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +26,8 @@ public class HurtPlayer : MonoBehaviour
     {
 
         // DEATH: an enemy that is already dying (playing its smoke animation) can no longer hurt the player
-        if (other.CompareTag("PlayerDetectionArea") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity) && (ownEnemy == null || !ownEnemy.IsDying) && !SamuraiSlash.ClashProtected) // CLASH: not straight after a samurai clash // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
+        if (other.CompareTag("PlayerDetectionArea") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity) && (ownEnemy == null || !ownEnemy.IsDying) && !SamuraiSlash.ClashProtected // CLASH: not straight after a samurai clash // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
+            && (ownEnemy == null || !StompEnemy.StompingOnto(OwnCollider))) // STOMPTIE: a stomp landing in the same step wins
         {
 
             if (PlayerController.playerInviInvincible == false)

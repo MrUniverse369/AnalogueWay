@@ -1,0 +1,10 @@
+# sprite <name> <centre x> <centre y> in 320x180 screen pixels (y down); written by Tools/Art/menu_sky.py
+sprite MenuTitle 160 39
+sprite MenuIsland_Left 50 100
+sprite MenuIsland_Small 104 128
+sprite MenuIsland_Torii 276 104
+sprite MenuIsland_Harvey 160 171
+sprite MenuCloudBank 160 160
+sprite MenuCloud_A 40 24
+sprite MenuCloud_B 300 62
+sprite MenuCloud_C 150 140

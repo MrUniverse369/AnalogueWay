@@ -1,17 +1,20 @@
-# Harvey's Nine Lives: session log, 18 October 2026 (gameplay, audio, effects and UI pass)
+# Harvey's Nine Lives: session log, 18–19 October 2026 (gameplay, audio, effects and UI pass, then the 19 October follow-ups)
 
-A record of this chat: what was asked, what was changed, how it was tested, and what is still open.
+A record of the 18 October chat and the 19 October follow-up chat: what was asked, what was changed, how it was tested, and what is still open.
 
-**Requests in this chat**
+**Requests**
 1. The big gameplay, audio, effects and UI pass (sections 1–10 below)
 2. A markdown log of the session (this file)
 3. The samurai monkey's dashing sword attack from a new sprite sheet (the follow-up section)
 4. This updated log, with a list of what still needs finishing (the end of this file)
 5. The night follow-ups: map after a level, the Egypt fish climb, a dash combo, the AI Assistant relay error, a loading system and the tomb poison
 6. Late night: the new DragonRideTwo mount loop, the tomb octopus's walk cycle and zone-by-zone music on the map
-7. After midnight: the samurai clash, samurai afterimages and the Z3A2 ghost bounce, then a text dialogue system for the Japan village (the last two sections)
-The session started at 08:51 BST from a clean tree (last commit `8551d6d saveSystem update`). **Nothing from this session is committed yet.**
-Changed code is marked `// FX:`, `// FLOW:`, `// PAUSE:`, `// OPTIONS:` and `// SFX:`. The working checklist is in `Progress_2026-10-18_FXPass.md`.
+7. After midnight: the samurai clash, samurai afterimages and the Z3A2 ghost bounce, then a text dialogue system for the Japan village
+8. 19 October (a new chat): one shared stomp/dash combo, a sprite grounding audit, the sky-islands title screen, the Z3A2 ghost stomps and the Sumaria boss fight (the last section)
+
+The session started at 08:51 BST from a clean tree (last commit `8551d6d saveSystem update`). The 18 October work was committed on 19 October as `8b67cc1 gg`. **The 19 October work (the last section) is not committed yet.**
+
+Changed code is marked `// FX:`, `// FLOW:`, `// PAUSE:`, `// OPTIONS:` and `// SFX:` (19 October: `COMBO`, `MARKER`, `STOMPTIE`, `GROUND`, `TITLE` and `SAMURAIBOSS`). The working checklist for the 18 October pass is in `Progress_2026-10-18_FXPass.md`.
 
 ---
 
@@ -107,6 +110,8 @@ The cream flash, sparks and dithered flicker, and the enemy white flash, were ch
 ---
 
 ## 3. Stomp combo
+
+> **Updated 19 October:** stomps and dash defeats now share one combo, with new stage colours (yellow, orange, hot pink, violet, rainbow) and effects that last the whole window. See the 19 October section.
 
 ### What was done
 - Only **successful stomps** count: an enemy's stomp defeat, or a stomp hit on a boss. Jumps, bounces and dashes don't.
@@ -478,6 +483,8 @@ Still uncommitted. New code is marked `// FLOW:`, `// MAP:`, `// STOMPAIR:`, `//
   - If Harvey misses fish 1 he still falls to the kill plane (y −29.8) and respawns at the level start, as before.
 
 ### Dash combo
+> **Replaced 19 October** by one combo shared by stomps and dashes. See the 19 October section.
+
 - **What was done:**
   - `StompCombo` now runs two chains, stomp and dash, with the same look (glow, rings, impact stars, orbiting motes, 5 s window). Only the colours differ:
     - stomp: cream → orange → cyan → violet → rainbow
@@ -636,6 +643,8 @@ The Luma connector only imports finished "Claude Motion" videos into your Luma l
 - **Tested:** screenshot of the trail. Harvey's own afterimages after the move to the shared component weren't watched (the test tools couldn't make him run).
 
 ### Z3A2 ghost bounce
+> **Reverted 19 October:** the ghosts bounce at 9.5 again, and an off-screen marker points to the next ghost instead. See the 19 October section.
+
 - **Cause:** `PlayerController` aims the camera 8 units above Harvey whenever he rises at 8 or faster. The ghosts bounced him at 9.5, so every stomp swung the view up and the next ghost dropped off screen.
 - **Fix:** `bounceSpeed` 6.5 on the 18 row ghosts (`SGhostBounce` to `SGhostBounce (17)`), as **scene overrides in Z3A2 only**.
   - The peak drops from about 4 units to about 1.8.
@@ -692,4 +701,172 @@ The Luma connector only imports finished "Claude Motion" videos into your Luma l
 ### Still open
 - Standing at the shop counter with a villager in reach (the counter should win) wasn't tested on the counter itself.
 - More dialogue: other zones or story moments just need a new file in `Assets/Dialogue` and a Villager component.
-- Save **Z3A2Japan** (the ghost bounce plus the user's own edits).
+- Save **Z3A2Japan** (the ghost bounce plus the user's own edits). Done: it was saved and committed in `8b67cc1`. The bounce change was reverted on 19 October.
+
+---
+
+## 19 October (a new chat): shared combo, sprite grounding, title screen, Z3A2 ghost stomps, the Sumaria boss
+
+### What was asked
+One brief in five parts:
+1. **Stomp and dash combo:** one shared progression (dash to stage 3, then stomp, and it's stage 4), the current stage's look on both actions, and much stronger visuals that stay on for the whole combo window, even when Harvey stands still.
+2. **Sprite grounding audit:** characters (the samurai monkey above all) and props that float above the ground although their colliders touch it. Check every zone and every animation frame, and leave colliders alone.
+3. **Main menu:** match two reference screenshots (a bubbly title, and a blue sky full of floating islands) in the game's pixel style.
+4. **Z3A2 ghost stomps:** undo the lowered bounce, and instead point to the next ghost when it is off screen.
+5. **Japan boss, Sumaria:** a full three-stage fight using the new boss sprites and slash sheet (`Assets/Sprites/Enemies/JapanEnemies/JapanBoss`).
+
+The chat started from a committed tree (`8b67cc1 gg`). **Nothing from this section is committed yet.**
+
+### 1. One combo for stomps and dashes
+- **What was done** (`StompCombo.cs`, `TalismanFX.cs`, `AfterimageTrail.cs`, `SpriteAura.cs`, `PlayerFX.cs`):
+  - Stomps and dash defeats feed **one** chain. Any hit within 5 s of the last, of either kind, moves the combo up a stage.
+  - The window running out ends it, and so does **getting hurt** (from anything that costs a life). The first pass took the brief's "only the window" literally and let the combo survive hurts; that was put back at your request the same day. Dying or respawning resets the level, so that ends it too.
+  - One set of stage colours for both actions: yellow at stage 1, orange at 2, hot pink at 3, violet at 4, and rainbow from stage 5 (it cycles every colour).
+  - Cyan was dropped from the stages, so a combo dash never looks like a plain Spirit Dash.
+  - **For the whole window, whatever Harvey is doing:**
+    - A solid outline in the stage colour. It uses a new solid glow material (`Resources/FX/SpriteGlowSolid.mat`), so it reads on bright skies too.
+    - From stage 2, a soft outer glow that pulses faster each stage.
+    - Motes swirling round him: two at stage 1, one more each stage, faster and wider; a second counter-swirl from stage 4.
+    - Sparks rising off him, more each stage, with stars at stage 5.
+    - The outline blinks in the last second as a warning.
+  - **Every hit, stomp or dash, plays the same effects:**
+    - a flash on Harvey in the stage colour, rings and impact stars;
+    - falling sparks from stage 2, speed lines from stage 4, confetti at stage 5;
+    - a dash hit also throws speed lines along the dash.
+  - **Spirit Dash during a combo:**
+    - Each afterimage takes the next stage colour, giving a rainbow trail at stage 5. They come denser and stronger as the stage rises.
+    - The speed streaks use the stage colours, with sparkles from stage 3.
+    - The combo's outline shows over the talisman's cyan glow.
+- **Tested:** real ghost stomps in Z3A2 built the combo to 18, so the stage 5 look was on screen. Close-ups were taken at stages 1, 3 and 5.
+- **Tested after hurts were put back** (Z1A1, in Play mode, with a throwaway save):
+  - an enemy hit ended a stage 2 combo and cost one life, and the next stomp started again at stage 1;
+  - touching an enemy while invincible cost nothing and left the combo alone;
+  - a combo built by a dash defeat also ended on a hurt.
+
+### 2. Sprite grounding audit
+- **How it was checked:** every enemy in every Z level. For each animation frame, the lowest solid pixel was measured against the collider and the ground under it.
+  - The final checks were done in **Play mode**. In Edit mode, Z3A1 and Z3A2 draw both worlds' ground at once: the spirit world's snow hides the living monkeys' legs, so edit-mode pictures mislead.
+- **Samurai monkey (the main culprit):**
+  - Walk frames 3 and 4 have the whole body drawn 1 and 2 pixels higher than the other frames, but all the frames shared one pivot. So it floated mid-stride, and the planted frames sank about a pixel.
+  - New tool **Tools/HNL/Ground Sprite Frames** (`SpriteGrounding.cs`) sets each frame's pivot from its own lowest solid pixel. It covers the walk, slash and sword-draw sheets. Colliders, positions and animation clips are untouched.
+  - **Tested in Play mode:** every monkey in Z3A1 and Z3A2 now moves its feet at most 0.2 px across the walk (it was about 1.5 px), and stands within about 1 px of the ground.
+- **Also lowered onto the floor, with each collider kept exactly where it was** (its offset raised by the same amount):
+  - the tomb octopi and a ghoul in Z1A1 (2–3 px up);
+  - the Z1A4 and Z1A5 octopi (7 and 9 px up);
+  - one Z4A7 placeholder box (2 px up).
+- **Props:** two palm trees in Z2A2 were 1.6 px above the sand; they were lowered 0.1.
+- **Left alone:**
+  - Ghosts, sharks and the hooded spirit yokai hover by design.
+  - Patrols over uneven floors or gaps can't take one offset.
+  - Villagers, yokai guards, sand fins and the three zone bosses were already grounded.
+
+### 3. Main menu: title and sky-islands art
+- **What was done:**
+  - New `Tools/Art/menu_sky.py` draws the art; `main_menu.py`'s `main()` now runs it.
+  - The backdrop (`MenuBackdrop.png`) has sky bands, far clouds, hazy far islands and a pagoda.
+  - Separate layers sit over it: a wooded island, a small island, a torii island with a cherry tree, the cloud sea, Harvey's island and three drifting clouds. Their positions are in `Tools/Art/menu_sky_layout.txt`.
+  - **Title** (`MenuTitle.png`, 197x70):
+    - chunky rounded cream letters with a thick navy outline and a heavier drop, with a slight hand-drawn wobble;
+    - a navy cat head in the A (ears, cream eyes, pink nose);
+    - a cat's tail swooping under NINE LIVES and curling round a paw-print badge.
+  - **Motion** (`MainMenuScene.cs`): the islands bob a pixel at their own pace and the clouds drift across and wrap. Everything snaps to whole pixels.
+  - Harvey was moved up 2 px to stand on his island.
+  - **Labels:** cream (yellow when selected) with a 1-pixel navy drop (`PixelTextOutline.cs`), which also goes on the credit line. A full outline was tried two ways (copies of the text, and TMP's own outline). At this font size PerfectDOSVGA437's strokes and gaps are one pixel wide, so any outline filled each letter into a block.
+- **Tested:** Play-mode screenshots. The islands bobbed and the clouds moved between shots, and the labels are crisp.
+
+### 4. Z3A2 ghost stomps
+- **What was done:**
+  - The 18 row ghosts bounce at **9.5** again; the 6.5 scene overrides were removed.
+  - A **pointer to the next ghost** (`StompChainMarker.cs`, the `GhostRowStompMarker` object in Z3A2):
+    - While Harvey is in the air over the row, the target is the nearest live ghost ahead of him.
+    - When that ghost is off screen, a yellow pixel pointer sits at the screen edge, right where the ghost is, nudging toward it.
+    - It goes as soon as the ghost is in view or stomped (the next ghost becomes the target), or when Harvey lands.
+    - The arrow art comes from `Tools/UI/stomp_marker.py`: straight and diagonal arrows turned in 90° steps, so it stays crisp in all eight directions.
+  - **Bug found while testing, and fixed:**
+    - At full bounce speed, Harvey was sometimes hurt landing squarely on a ghost. His stomp box and body could enter the ghost in the same physics step, and Unity runs the two triggers in no fixed order.
+    - Now `HurtPlayer` and the knockback ignore an enemy the stomp box is landing on from above (`StompEnemy.StompingOnto`), so the stomp always wins. Stomps themselves are unchanged.
+- **Tested** (bots in Play mode):
+  - The pointer was never hidden while the next ghost was off screen, and never shown while it was visible.
+  - **Steering like a player** (staying a little short while rising, moving over the ghost while falling): 8 of 8 runs crossed the whole row with no hurts. Three runs hopped one ghost but never fell. Before the fix, the same line was hurt in 3 of 6 runs.
+  - **Steering straight at the ghost the whole time** can still clip a bobbing ghost's side (4 of 6 runs). A player wouldn't fly into its side, but it's worth knowing.
+
+### 5. Sumaria, the Japan boss (Z3BossBattle)
+- **The art** (`Tools/Art/samurai_boss.py`; the supplied files are untouched):
+  - Keys out the idle sprite's grey background and drops the soft edges.
+  - Snaps both sheets onto one 12-colour palette taken from the slash frames.
+  - Scales the idle down to match: it was drawn about 35% bigger.
+  - Lines every frame up on the trousers and feet.
+  - **Output:**
+    - `SamuraiBoss_Sheet.png`, six frames: idle, ready (the charge), sword raised, the slash with its crimson arc, follow-through, and a kneeling frame (built from the ready stance) for the daze;
+    - `SamuraiBoss_SlashWave.png`: the arc cut out of the slash frame, used as the projectile;
+    - a falling blade, the floor mark for it, and the danger line and band.
+- **The fight** (`SamuraiBoss.cs`): three lives with pips over his head, one stage per life.
+
+| Stage | Attacks |
+|---|---|
+| 1 | **Charging dash slash.** He leaps to the wall away from Harvey and charges: a red glow, sparks drawn in, and a dashed danger line and band across the floor that blink faster. A 0.22 s glint is the jump cue. Then he dashes the whole arena with the slash frame and crimson afterimages. Only the blade's low band (0.6 above the floor) cuts, so jumping it dodges. A **miss** carries him into the far wall: a shake, stone chips, then he drops to one knee dazed, with stars and a cyan flash, and can be stomped or dashed. A **hit** and he skids to a stop with no opening. **Attacking him while he charges** is countered: Harvey is thrown well back and loses a life. |
+| 2 | Stage 1, plus a **teleport slash**: he vanishes and reappears behind Harvey with a glint and a red tell, cuts through with a short afterimage dash, then stumbles to a knee (a short opening). Plus **slash waves**: crescents low (jump) and high (stay down), the last one thrown from the far wall after he blinks across. |
+| 3 | Stage 2, plus **blade rain**: blades drop on Harvey's spot. The first lands exactly on him, the rest around him, each marked on the floor first and blinking faster as it nears. |
+
+- **Stage tuning** (inspector, `Stages`):
+  - charge 1.35 / 1.1 / 0.95 s; dash 18 / 20 / 22 units per second;
+  - daze 2.8 / 2.3 / 1.9 s;
+  - teleport tell 0.6 / 0.5 / 0.42 s; opening after it 1.0 / 0.85 / 0.7 s;
+  - waves 3 / 3 / 4; blades 6 in stage 3;
+  - glow: none, crimson, then deep crimson.
+- **Rules, like the other bosses:**
+  - He can only be hurt in an opening, by a stomp or Spirit Dash. Touching him at other times hurts Harvey.
+  - Damage uses the usual lives, knockback and flash. His hits count toward the combo.
+  - The fight resets when Harvey respawns, and the boss treasure appears on defeat.
+  - For half a second after an opening, while he gets up, touching him doesn't hurt.
+- **Size:** he stands about 1.8 units tall and kneels at about 1.1, within reach of a normal jump's stomp.
+- **Scene setup:**
+  - **Tools/HNL/Set Up Samurai Boss** (`SamuraiBossSetup.cs`) imports the art and builds the rig in Z3BossBattle. It's safe to run again.
+  - The old YokaiBoss object stays in Z3BossBattle, **switched off**: `DraftLevelBuilder` copies it as the template for the other zones' boss arenas, and the builder now switches its copies back on.
+  - `BossHazard` can now belong to either boss.
+- **Tested** (a bot playing from the main menu into Z3BossBattle):
+  - All three stages to defeat, and the treasure appeared.
+  - The counter threw Harvey back and cost a life.
+  - Jumping as the dash starts dodged every cut. The teleport cut was dodged; the waves and blade rain fired.
+  - The final run dodged 5 of 5 cuts and landed 3 hits; Harvey lost 1 life, to a projectile.
+- **Tuning changes from those tests:**
+  - The first version was too hard to dodge: a 0.85 band and a 0.08 s cue, and the bot was hit by every dash. It's now 0.6 and 0.22 s.
+  - Harvey was twice hurt by Sumaria standing up into a stomp jump, which led to the half-second grace.
+
+### Other fixes
+- **Boss arena camera** (`LevelLoader.cs`): the loading screen snapped the camera onto Harvey even when the follow camera was switched off. So all four boss arenas lost their fixed view whenever a level loaded normally, since the loading screen arrived on 18 October. A switched-off follow camera now stays put.
+- **`UIShot`:**
+  - It now keeps the pixel-perfect camera's view size; boss arena captures had been mis-framed.
+  - It rebuilds TextMeshPro text for the capture; text had looked soft.
+
+### Files
+- **New scripts:** `SamuraiBoss.cs`, `StompChainMarker.cs`, `PixelTextOutline.cs`.
+- **New editor tools:** `SamuraiBossSetup.cs`, `SpriteGrounding.cs`.
+- **New material:** `Resources/FX/SpriteGlowSolid.mat`.
+- **New art scripts:** `Tools/Art/menu_sky.py` (+ `menu_sky_layout.txt`), `Tools/Art/samurai_boss.py` (+ `samurai_boss_layout.txt`), `Tools/UI/stomp_marker.py`.
+- **New sprites:**
+  - `Sprites/UI/MainMenu/MenuIsland_*`, `MenuCloud_*`, `MenuCloudBank`
+  - `Sprites/UI/Markers/StompMarker_*`
+  - `JapanBoss/SamuraiBoss_*`
+- **Changed scripts:** `StompCombo`, `TalismanFX`, `AfterimageTrail`, `SpriteAura`, `PlayerFX`, `StompEnemy`, `HurtPlayer`, `playerBodyDetectionArea`, `BossHazard`, `YokaiBoss`, `EnemyController` (comment only), `MainMenuScene`, `LevelLoader`.
+- **Changed editor scripts:** `DraftLevelBuilder`, `UIShot`.
+- **Other changes:**
+  - `SpriteGlow.shader` (a blend setting; the default is unchanged)
+  - `Tools/Art/main_menu.py`
+  - the monkey sheets' pivots (`JSEAnim*.png.meta`)
+  - `MenuBackdrop.png`, `MenuTitle.png`
+- **Changed scenes:** MainMenue, Z3A2Japan, Z3BossBattle, Z1A1Tomb, Z1A4Tomb, Z1A5Tomb, Z2A2Sandy and Z4A7GrassGreen.
+
+### Testing notes (not game bugs)
+- **The disk was nearly full** mid-session: down to about 90 MB free, later back to a few GB. The big items are `~/Library/Unity`, `~/Library/Developer`, `~/Library/Caches` and the project's `Recordings` folder (1.8 GB). Nothing was deleted.
+- Script recompiles sometimes waited about 10 minutes for the editor to take focus. An asset refresh from the test tools started them.
+- The test bots used a throwaway in-memory save store, so real saves weren't touched.
+
+### Still open
+- **Shared combo with real Spirit Dash kills:** dash defeats use the same code, but weren't watched in this session.
+- **Play Sumaria yourself:** the charge, cue, dash speed and openings were tuned with a bot. The numbers are in the inspector on `SamuraiBoss`.
+- **Sumaria's sounds:** he uses the existing samurai slash, boss slam and defeat sounds. A charge-up sound and a clang of his own would help.
+- **His name:** the game doesn't show it anywhere (there's no boss name plate).
+- **Hovering enemies:** the ones left hovering on purpose (shadow ghouls over uneven floors, spirit yokai) can be moved if any should stand.
+- **Python cache:** `Tools/Art/__pycache__/menu_sky.cpython-311.pyc` is a generated file (a `.gitignore` line for `__pycache__` would keep these out of git).
+- **Nothing from 19 October is committed.**

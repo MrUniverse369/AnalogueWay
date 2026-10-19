@@ -1,14 +1,21 @@
 using UnityEngine;
 
+/// <summary>SAMURAIBOSS: anything a BossHazard can hurt the player on behalf of (YokaiBoss, SamuraiBoss).</summary>
+public interface IBossAttacker
+{
+    void DamagePlayer(Vector2 from);
+}
+
 /// <summary>
 /// BOSS: a shockwave, falling rock, projectile or ground spike spawned by YokaiBoss. It shakes in place for its
 /// hang time (the warning), then moves in a straight line and hurts the player on touch.
 /// FX: while it hangs it pulses with an orange warning glow; a spike bursting up sprays dirt, and a rock
 /// hitting the floor puffs dust.
+/// SAMURAIBOSS: the owner is any IBossAttacker, so SamuraiBoss's slash waves and falling blades use it too.
 /// </summary>
 public class BossHazard : MonoBehaviour
 {
-    private YokaiBoss owner;
+    private IBossAttacker owner;
     private Vector2 velocity;
     private float hangLeft;
     private float floorY;
@@ -18,7 +25,7 @@ public class BossHazard : MonoBehaviour
     private float lifeLeft = float.PositiveInfinity; // BOSSES: spikes only live a moment after bursting out
     private SpriteFX fx; // FX:
 
-    public void Launch(YokaiBoss boss, Vector2 vel, float hangTime, float floor, float leftX, float rightX, float lifetime = float.PositiveInfinity)
+    public void Launch(IBossAttacker boss, Vector2 vel, float hangTime, float floor, float leftX, float rightX, float lifetime = float.PositiveInfinity)
     {
         lifeLeft = lifetime; // BOSSES:
         owner = boss;

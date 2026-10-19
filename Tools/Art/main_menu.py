@@ -1,6 +1,7 @@
 """Renders the main menu art into Assets/Sprites/UI/MainMenu, in the HNL style and palette.
 
-  MenuBackdrop.png   320x180 title backdrop, kept minimal (2026-10-18): one flat deep purple and a small floating
+  TITLE (2026-10-19): MenuBackdrop.png, MenuTitle.png and the sky layers are now drawn by menu_sky.py (main() runs it).
+  MenuBackdrop.png   (previous version) 320x180 title backdrop, kept minimal (2026-10-18): one flat deep purple and a small floating
                      sand islet in the middle for Harvey to stand on. Nothing else, so the title and menu carry it.
                      (backdrop_dig() is the previous purple bands + dig site version, backdrop_dawn() the detailed
                      dawn-over-the-dunes one before that; neither is rendered any more.)
@@ -511,8 +512,10 @@ def icon_gear():
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    save(backdrop(), "MenuBackdrop.png")
-    save(title(), "MenuTitle.png")
+    # TITLE (2026-10-19): the backdrop, the title and the sky layers now come from menu_sky.py (the sky-islands title
+    # screen after the user's reference); backdrop() and title() above are the previous minimal versions, kept unrendered
+    import menu_sky  # noqa: E402
+    menu_sky.main()
     save(button(hexc("473b78"), hexc("ffffeb"), 1, hexc("6a5aa8")), "MenuButton.png")
     save(button(hexc("6a5aa8"), hexc("ffe478"), 2, hexc("8a7ac8")), "MenuButton_Selected.png")
     save(button(hexc("32395c"), hexc("ffe478"), 2), "MenuButton_Pressed.png")

@@ -70,7 +70,7 @@ public class EnemyController : MonoBehaviour
             && (slash == null || !slash.TryClash())) // CLASH: // POWERUP: was ActiveCardManager.speedBoostPowerUp != false
         {
             if (!enemyDeathAnimActivate && audioManager != null) audioManager.PlaySfxOneShot(audioManager.enemyDashDefeatSound); // SFX: once per defeat
-            if (!enemyDeathAnimActivate) StompCombo.RegisterDash(transform.position); // DASHCOMBO: dash defeats build the dash combo
+            if (!enemyDeathAnimActivate) StompCombo.RegisterDash(transform.position); // DASHCOMBO: dash defeats build the same combo (COMBO: shared with stomps)
             if (!enemyDeathAnimActivate) BeginDeath(); // DEATH:
             animCounter = 0.5f;
             BounceSpeed = 0;

@@ -6,7 +6,8 @@ using UnityEngine;
 /// events, so the talisman assets and their gameplay code are untouched. Added to Harvey by PlayerFX.
 ///   every talisman  a burst ring in its colour on activation, and a glowing outline/aura (SpriteAura) while active
 ///   Stone Skin      grey stone overlay on Harvey (HNLSprite _Stone)
-///   Spirit Dash     3-4 fading tinted afterimages and speed-streak particles
+///   Spirit Dash     3-4 fading tinted afterimages and speed-streak particles (COMBO: while a combo is alive they
+///                   take the combo stage's colours, come thicker the higher the stage, and sparkle from stage 3)
 ///   Super Jump      a dust ring at launch and a short upward spark trail
 ///   Feather Fall    feathers drifting off Harvey while he falls
 ///   Coin Magnet     spark streaks flying from nearby coins to Harvey, and a pulse ring
@@ -30,6 +31,7 @@ public class TalismanFX : MonoBehaviour
     // Spirit Dash afterimages (AFTERIMAGE: the shared AfterimageTrail, also used by the samurai's dash slash)
     private AfterimageTrail trail;
     private float ghostTimer;
+    private int ghostIndex; // COMBO: steps each afterimage through the stage's colours
 
     private static readonly Color StoneGrey = PixelFX.Hex("98b2b1");
     private static readonly Color DashCyan = PixelFX.Hex("5fcde4");
@@ -45,7 +47,7 @@ public class TalismanFX : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         aura = SpriteAura.On(sprite);
         fx = SpriteFX.On(sprite);
-        trail = AfterimageTrail.On(sprite);
+        trail = AfterimageTrail.On(sprite, 8); // COMBO: room for the denser combo trail
     }
 
     private void OnDestroy()
@@ -140,8 +142,8 @@ public class TalismanFX : MonoBehaviour
     {
         Subscribe();
         float dt = Time.deltaTime;
-        // tinted spirit cyan (DASHCOMBO: or the dash combo's stage colour)
-        trail.Tint = Color.Lerp(StompCombo.DashColour(0, DashCyan), Color.white, 0.25f);
+        // tinted spirit cyan (COMBO: or the combo's stage colour, however the combo was built)
+        trail.Tint = Color.Lerp(StompCombo.StageColour(0, DashCyan), Color.white, 0.25f);
         if (trailLeft > 0f) SparkTrail(dt);
         if (active.Count == 0) return;
 
@@ -155,25 +157,41 @@ public class TalismanFX : MonoBehaviour
     }
 
     // ---------------------------------------------------------------- Spirit Dash
+    private static readonly Color[] DashStreaks = { DashCyan, PixelFX.Cream, PixelFX.Hex("b7f5ff") };
+
     private void SpiritDash(float dt, bool tick)
     {
+        int combo = Mathf.Min(StompCombo.Stage, StompCombo.MaxStage); // COMBO: 0 = no combo
         ghostTimer -= dt;
         if (ghostTimer <= 0f && body != null && Mathf.Abs(body.linearVelocity.x) > 2f)
         {
-            ghostTimer = 0.05f;
-            trail.Spawn();
+            if (combo > 0)
+            {
+                // COMBO: denser, stronger afterimages, each in the next stage colour (a rainbow trail at stage 5)
+                ghostTimer = 0.05f - 0.005f * combo;
+                trail.Spawn(Color.Lerp(StompCombo.StageColour(ghostIndex++, DashCyan), Color.white, 0.15f), 1.2f + 0.08f * combo);
+            }
+            else
+            {
+                ghostTimer = 0.05f;
+                trail.Spawn();
+            }
         }
         if (!tick || body == null || Mathf.Abs(body.linearVelocity.x) < 2f) return;
         float back = -Mathf.Sign(body.linearVelocity.x);
-        for (int i = 0; i < 2; i++)
+        Color[] streak = combo > 0 ? StompCombo.ColoursOf(combo) : DashStreaks; // COMBO: the stage's colours
+        int streaks = 2 + combo / 2;
+        for (int i = 0; i < streaks; i++)
         {
             Vector3 p = transform.position + new Vector3(back * Random.Range(0.1f, 0.4f), Random.Range(-0.35f, 0.35f), 0f);
-            // DASHCOMBO: the streaks take the dash combo's stage colour while the chain is alive
-            Color[] streak = StompCombo.DashStage > 0
-                ? new[] { StompCombo.DashColour(0, DashCyan), StompCombo.DashColour(1, DashCyan), PixelFX.Cream }
-                : new[] { DashCyan, PixelFX.Cream, PixelFX.Hex("b7f5ff") };
             PixelFX.Emit(p, new Vector2(back * Random.Range(7f, 11f), 0f), PixelFX.Pick(streak),
                 Random.Range(0.08f, 0.14f), 1, PixelShape.Streak, PixelMotion.Straight, true);
+        }
+        if (combo >= 3) // COMBO: sparkles shed along the dash
+        {
+            Vector3 p = transform.position + new Vector3(back * Random.Range(0.2f, 0.6f), Random.Range(-0.4f, 0.4f), 0f);
+            PixelFX.Emit(p, new Vector2(back * Random.Range(0.5f, 1.5f), Random.Range(-0.3f, 0.6f)), PixelFX.Pick(streak),
+                Random.Range(0.25f, 0.4f), 1, PixelShape.Star, PixelMotion.Float, true);
         }
     }
 

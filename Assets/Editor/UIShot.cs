@@ -6,6 +6,8 @@ using UnityEngine;
 /// ScreenCapture only grabs whatever the Game view last repainted). Renders Camera.main into a texture with every
 /// overlay canvas switched to camera space (on the top sorting layer, so it draws over the level) for that one
 /// render, with the pixel-perfect camera off so the UI isn't rendered at 320x180 and blurred, then puts it all back.
+/// (2026-10-19: keeps the pixel-perfect camera's view size, so the framing matches the game, and rebuilds the
+/// TextMeshPro meshes for the render, so text isn't soft.)
 /// It's a layout check: colours can look a little flatter than in the real Game view.
 /// Usage (e.g. from a Unity MCP command): UIShot.Capture("/path/shot.png");
 /// </summary>
@@ -17,7 +19,10 @@ public static class UIShot
         if (cam == null) return "no main camera";
         var ppc = cam.GetComponent<UnityEngine.Rendering.Universal.PixelPerfectCamera>();
         bool ppcWasOn = ppc != null && ppc.enabled;
+        float ortho = cam.orthographicSize; // the pixel-perfect camera's size this frame: keep the game's framing
         if (ppc != null) ppc.enabled = false;
+        float savedOrtho = cam.orthographicSize;
+        cam.orthographicSize = ortho;
         SortingLayer[] layers = SortingLayer.layers;
         int topLayer = layers[layers.Length - 1].id;
         var rt = new RenderTexture(width, height, 24);
@@ -35,6 +40,10 @@ public static class UIShot
         RenderTexture previous = cam.targetTexture;
         cam.targetTexture = rt;
         Canvas.ForceUpdateCanvases();
+        // TextMeshPro builds its text meshes for the canvas's own scale; rebuild them for this render, or the text
+        // comes out soft
+        foreach (TMPro.TMP_Text t in Object.FindObjectsByType<TMPro.TMP_Text>(FindObjectsSortMode.None)) t.ForceMeshUpdate(true, true);
+        Canvas.ForceUpdateCanvases();
         cam.Render();
         RenderTexture.active = rt;
         var tex = new Texture2D(width, height, TextureFormat.RGB24, false);
@@ -50,7 +59,9 @@ public static class UIShot
             canvas.sortingLayerID = layer;
             canvas.sortingOrder = order;
         }
+        cam.orthographicSize = savedOrtho;
         if (ppc != null) ppc.enabled = ppcWasOn;
+        foreach (TMPro.TMP_Text t in Object.FindObjectsByType<TMPro.TMP_Text>(FindObjectsSortMode.None)) t.ForceMeshUpdate(true, true);
         System.IO.File.WriteAllBytes(path, tex.EncodeToPNG());
         Object.DestroyImmediate(tex);
         rt.Release();

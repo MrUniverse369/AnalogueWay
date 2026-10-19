@@ -6,7 +6,7 @@ using UnityEngine;
 ///             baked white-silhouette blink) for as long as he can't be hurt again.
 ///   Movement: landing dust scaled by the height fallen, small puffs synced to footsteps and jump take-off
 ///             puffs, all in the zone's ground colours.
-/// Also adds the stomp combo (StompCombo) and the talisman effects (TalismanFX).
+/// Also adds the combo (StompCombo, shared by stomps and dash defeats) and the talisman effects (TalismanFX).
 /// </summary>
 [DisallowMultipleComponent]
 public class PlayerFX : MonoBehaviour
@@ -74,7 +74,7 @@ public class PlayerFX : MonoBehaviour
         Vector3 at = Vector3.Lerp(p.transform.position, from, 0.35f);
         PixelFX.Burst(at, 9, 2.5f, 5.5f, PixelFX.Sparks, 0.2f, 0.4f, 1, PixelShape.Square, PixelMotion.Fall, true);
         PixelFX.Burst(at, 3, 1.5f, 3f, new[] { PixelFX.Cream, PixelFX.Orange }, 0.18f, 0.3f, 1, PixelShape.Star, PixelMotion.Float, true);
-        StompCombo.Break(); // a hit ends any stomp chain
+        StompCombo.Break(); // COMBO: being hurt ends the combo (every lost life comes through here)
     }
 
     // ---------------------------------------------------------------- movement dust

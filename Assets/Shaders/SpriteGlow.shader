@@ -4,17 +4,20 @@
 // FX: also used by SpriteAura (talisman auras, the stomp combo glow, Chi Stone and item glows). The renderer
 // colour is read through unity_SpriteColor as well as the vertex colour: in Unity 6 a SpriteRenderer's colour
 // isn't always in the vertex colour, which drew every glow white.
+// COMBO: _DstBlend picks the blend: One (the default, additive glow) or OneMinusSrcAlpha (a solid coloured outline that
+// still reads over bright skies, where an additive glow washes out). Resources/FX/SpriteGlowSolid.mat is the solid one.
 Shader "AnalogueWay/SpriteGlow"
 {
     Properties
     {
         [PerRendererData] _MainTex ("Sprite", 2D) = "white" {}
+        [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("Dst Blend (One = glow, OneMinusSrcAlpha = solid)", Float) = 1
     }
 
     SubShader
     {
         Tags { "Queue" = "Transparent" "RenderType" = "Transparent" "RenderPipeline" = "UniversalPipeline" "IgnoreProjector" = "True" "PreviewType" = "Plane" "CanUseSpriteAtlas" = "True" }
-        Blend SrcAlpha One
+        Blend SrcAlpha [_DstBlend]
         Cull Off
         ZWrite Off
 

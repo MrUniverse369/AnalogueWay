@@ -82,6 +82,9 @@ public static class DraftLevelBuilder
         foreach (Transform child in copy.transform.Cast<Transform>().ToList()) child.SetParent(null, true);
         Object.DestroyImmediate(copy);
         EditorSceneManager.CloseScene(source, true); // not saved: Z3BossBattle is untouched
+        // SAMURAIBOSS: Sumaria (SamuraiBoss) fights in Z3BossBattle now, so its YokaiBoss is kept switched off there as
+        // the template for these arenas; the copy is switched back on
+        foreach (var root in scene.GetRootGameObjects().Where(g => g.name == "YokaiBoss")) root.SetActive(true);
 
         // unlit sprites for the copied rig: some zones light their scene with a 2D global light whose target
         // layers don't include the rig's, which would draw it black

@@ -1,0 +1,3 @@
+frame 83 56
+frames 6
+pivot 28 1

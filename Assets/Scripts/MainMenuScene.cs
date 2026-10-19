@@ -11,6 +11,9 @@ using UnityEngine.UI; // TITLE:
 /// Selection itself (and the buttons' OnClick) stays with the EventSystem and MenueControl.
 /// TITLE: the simplified title (2026-10-18) turns the ambient particles off and uses plain text buttons, so the
 /// selected button's label turns yellow and the rest stay cream.
+/// TITLE (2026-10-19): the sky-islands title screen (art from Tools/Art/menu_sky.py, after the user's reference): the
+/// floating islands bob a pixel up and down at their own pace and the clouds drift slowly across and wrap round. The
+/// labels carry a navy PixelTextOutline drop so they read over the bright sky; the drop copies are skipped here.
 /// </summary>
 public class MainMenuScene : MonoBehaviour
 {
@@ -34,6 +37,19 @@ public class MainMenuScene : MonoBehaviour
     [Tooltip("TITLE: motes, lantern embers and dig dirt. Off for the simple title.")]
     [SerializeField] private bool ambientParticles = true;
 
+    [Header("Sky (TITLE: 2026-10-19)")]
+    [Tooltip("Floating islands that bob gently up and down, in whole art pixels.")]
+    [SerializeField] private Transform[] floaters;
+    [SerializeField] private float floatPixels = 1f;
+    [Tooltip("Clouds that drift slowly to the right and come back round on the left.")]
+    [SerializeField] private Transform[] drifters;
+    [Tooltip("Art pixels per second (each cloud a little different).")]
+    [SerializeField] private float driftSpeed = 2.5f;
+    [Tooltip("World x past which a cloud has left the screen (it comes back at -driftWrapX).")]
+    [SerializeField] private float driftWrapX = 12.5f;
+    private Vector3[] floaterHome;
+    private float[] driftX;
+
     [Header("Menu")]
     [SerializeField] private RectTransform pointer;
     [SerializeField] private float pointerGap = 4f;
@@ -41,6 +57,7 @@ public class MainMenuScene : MonoBehaviour
     [SerializeField] private Color labelColour = new Color(1f, 1f, 0.92f);       // TITLE: cream ffffeb
     [SerializeField] private Color selectedLabelColour = new Color(1f, 0.894f, 0.47f); // TITLE: yellow ffe478
     private Button[] menuButtons; // TITLE:
+    private TMPro.TMP_Text[] menuLabels; // TITLE:
 
     private Vector3 titleHome;
     private readonly Vector3[] corners = new Vector3[4]; // PERF: reused by FollowSelection instead of a new array each frame
@@ -50,9 +67,28 @@ public class MainMenuScene : MonoBehaviour
     private void Start()
     {
         if (title != null) titleHome = title.localPosition;
+        if (floaters != null) // TITLE:
+        {
+            floaterHome = new Vector3[floaters.Length];
+            for (int i = 0; i < floaters.Length; i++)
+                if (floaters[i] != null) floaterHome[i] = floaters[i].localPosition;
+        }
+        if (drifters != null)
+        {
+            driftX = new float[drifters.Length];
+            for (int i = 0; i < drifters.Length; i++)
+                if (drifters[i] != null) driftX[i] = drifters[i].localPosition.x;
+        }
         if (ambientParticles)
             for (int i = 0; i < dustCount; i++) Mote(true); // FX: start with the air already full of motes
         if (firstSelected != null) menuButtons = firstSelected.transform.parent.GetComponentsInChildren<Button>(); // TITLE:
+        if (menuButtons != null) // TITLE: each button's own label (not the drop shadow's copies)
+        {
+            menuLabels = new TMPro.TMP_Text[menuButtons.Length];
+            for (int i = 0; i < menuButtons.Length; i++)
+                foreach (var t in menuButtons[i].GetComponentsInChildren<TMPro.TMP_Text>(true))
+                    if (!PixelTextOutline.IsCopy(t)) { menuLabels[i] = t; break; }
+        }
         if (EventSystem.current != null && firstSelected != null) EventSystem.current.SetSelectedGameObject(firstSelected);
     }
 
@@ -75,9 +111,30 @@ public class MainMenuScene : MonoBehaviour
             title.localPosition = titleHome + new Vector3(0f, bob, 0f);
         }
 
+        Sky(Time.unscaledDeltaTime); // TITLE:
         if (ambientParticles) Particles(Time.unscaledDeltaTime); // FX:
         KeepSomethingSelected();
         FollowSelection();
+    }
+
+    // TITLE: islands bob a pixel at their own pace; clouds drift right and wrap. Both snap to whole art pixels.
+    private void Sky(float dt)
+    {
+        for (int i = 0; floaters != null && i < floaters.Length; i++)
+        {
+            if (floaters[i] == null) continue;
+            float bob = Mathf.Round(Mathf.Sin(animTime * (0.8f + 0.21f * i) + i * 1.9f) * floatPixels) * PixelSize;
+            floaters[i].localPosition = floaterHome[i] + new Vector3(0f, bob, 0f);
+        }
+        for (int i = 0; drifters != null && i < drifters.Length; i++)
+        {
+            if (drifters[i] == null) continue;
+            driftX[i] += driftSpeed * (0.7f + 0.25f * i) * PixelSize * dt;
+            if (driftX[i] > driftWrapX) driftX[i] = -driftWrapX;
+            Vector3 p = drifters[i].localPosition;
+            p.x = Mathf.Round(driftX[i] / PixelSize) * PixelSize;
+            drifters[i].localPosition = p;
+        }
     }
 
     // FX: motes, lantern embers and dig-pit dirt, all through PixelFX (unscaled, so they keep moving in menus)
@@ -138,10 +195,10 @@ public class MainMenuScene : MonoBehaviour
         var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
         var target = selected != null ? selected.transform as RectTransform : null;
         if (menuButtons != null) // TITLE: the selected label lights up
-            foreach (Button b in menuButtons)
+            for (int i = 0; i < menuButtons.Length; i++)
             {
-                var label = b.GetComponentInChildren<TMPro.TMP_Text>();
-                if (label != null) label.color = b.gameObject == selected ? selectedLabelColour : labelColour;
+                var label = menuLabels != null ? menuLabels[i] : null;
+                if (label != null) label.color = menuButtons[i].gameObject == selected ? selectedLabelColour : labelColour;
             }
         pointer.gameObject.SetActive(target != null);
         if (target == null) return;

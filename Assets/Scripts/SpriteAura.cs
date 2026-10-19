@@ -8,6 +8,8 @@ using UnityEngine;
 ///
 /// Several things can ask for an aura at once (a talisman, the stomp combo glow); each request has a key and a
 /// priority and the highest-priority live request is the one shown. Requests can pulse and can expire by themselves.
+/// COMBO: a request can ask for a solid inner outline (Resources/FX/SpriteGlowSolid, normal alpha blending) so the
+/// outline still reads over bright skies where an additive glow washes out; the soft outer ring stays additive.
 /// Get one with SpriteAura.On(renderer).
 /// </summary>
 [DisallowMultipleComponent]
@@ -28,9 +30,13 @@ public class SpriteAura : MonoBehaviour
         public int priority;
         public float until;        // Time.time it ends (float.MaxValue = until cleared)
         public float fadeTime;     // fades out over the last fadeTime seconds
+        public bool solid;         // COMBO: inner outline drawn solid instead of additive
+        public float outerStrength = OuterStrength; // COMBO: how strong the soft outer ring is, relative to the colour
     }
 
+    private const float OuterStrength = 0.38f;
     private static Material glowMaterial;
+    private static Material solidMaterial; // COMBO:
 
     private SpriteRenderer source;
     private SpriteRenderer[] copies;
@@ -39,7 +45,11 @@ public class SpriteAura : MonoBehaviour
     private bool shown;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void ResetStatics() => glowMaterial = null;
+    private static void ResetStatics()
+    {
+        glowMaterial = null;
+        solidMaterial = null; // COMBO:
+    }
 
     public static SpriteAura On(SpriteRenderer renderer)
     {
@@ -49,8 +59,10 @@ public class SpriteAura : MonoBehaviour
         return aura;
     }
 
-    /// <summary>Show (or update) an aura. duration &lt;= 0 keeps it until Clear(key).</summary>
-    public void Set(string key, Color colour, int rings = 1, float pulseSpeed = 0f, int priority = 0, float duration = 0f, float fadeTime = 0.2f)
+    /// <summary>Show (or update) an aura. duration &lt;= 0 keeps it until Clear(key). COMBO: solid draws the inner
+    /// outline with normal blending; outerStrength scales the soft outer ring.</summary>
+    public void Set(string key, Color colour, int rings = 1, float pulseSpeed = 0f, int priority = 0, float duration = 0f, float fadeTime = 0.2f,
+        bool solid = false, float outerStrength = OuterStrength)
     {
         if (!requests.TryGetValue(key, out Request r)) requests[key] = r = new Request();
         r.colour = colour;
@@ -59,6 +71,8 @@ public class SpriteAura : MonoBehaviour
         r.priority = priority;
         r.until = duration > 0f ? Time.time + duration : float.MaxValue;
         r.fadeTime = Mathf.Max(0.01f, fadeTime);
+        r.solid = solid; // COMBO:
+        r.outerStrength = outerStrength; // COMBO:
     }
 
     public void Clear(string key) => requests.Remove(key);
@@ -67,6 +81,7 @@ public class SpriteAura : MonoBehaviour
     {
         source = GetComponent<SpriteRenderer>();
         if (glowMaterial == null) glowMaterial = Resources.Load<Material>("FX/SpriteGlow");
+        if (solidMaterial == null) solidMaterial = Resources.Load<Material>("FX/SpriteGlowSolid"); // COMBO:
     }
 
     private void Build()
@@ -131,8 +146,11 @@ public class SpriteAura : MonoBehaviour
             c.sprite = source.sprite;
             c.flipX = source.flipX;
             c.flipY = source.flipY;
+            // COMBO: the inner outline can be solid; the outer ring always glows
+            Material m = !outer && r.solid && solidMaterial != null ? solidMaterial : glowMaterial;
+            if (c.sharedMaterial != m) c.sharedMaterial = m;
             Color col = r.colour;
-            col.a *= pulse * fade * (outer ? 0.38f : 1f);
+            col.a *= pulse * fade * (outer ? r.outerStrength : 1f);
             c.color = col;
         }
     }

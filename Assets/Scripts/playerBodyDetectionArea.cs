@@ -40,7 +40,8 @@ public class playerBodyDetectionArea : MonoBehaviour
         //if the player is touching the ground when the enemy has
         // made contact we push the player in the direction opposite of the enemy 
         // DEATH: no knockback from an enemy that is already dying
-        if (other.gameObject.CompareTag("Enemy") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity) && !IsDyingEnemy(other) && !SamuraiSlash.ClashProtected) // CLASH: the clash has its own knockback // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
+        if (other.gameObject.CompareTag("Enemy") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity) && !IsDyingEnemy(other) && !SamuraiSlash.ClashProtected // CLASH: the clash has its own knockback // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
+            && !StompEnemy.StompingOnto(other)) // STOMPTIE: a stomp landing in the same step wins
         {
             animatorRef.SetTrigger("isHurt");
             pushBackCounter = pushBackLenght;

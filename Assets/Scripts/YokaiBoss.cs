@@ -8,7 +8,7 @@ using UnityEngine;
 /// opening. Attacking it at any other time hurts the player instead, so the player has to wait for the opening.
 /// Each zone's boss is this component with its own art, hazards and move patterns (set per stage).
 /// </summary>
-public class YokaiBoss : MonoBehaviour
+public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard's owner is now an interface
 {
     // BOSSES: new moves are appended so existing serialized patterns keep their meaning
     public enum Move { Charge, LeapSlam, RockRain, Opening, Teleport, Burrow, Volley, GroundSpikes }
@@ -430,7 +430,7 @@ public class YokaiBoss : MonoBehaviour
         UpdatePips();
         if (isStomp) BouncePlayer(stompBounce);
         if (isStomp) StompCombo.Register(transform.position); // FX: a boss stomp continues the combo
-        else StompCombo.RegisterDash(transform.position); // DASHCOMBO: and a boss dash hit continues the dash combo
+        else StompCombo.RegisterDash(transform.position); // DASHCOMBO: and a boss dash hit continues it too (COMBO: one shared combo)
         if (audioManager != null) Play(isStomp ? audioManager.enemyStompDefeatSound : audioManager.enemyDashDefeatSound);
         if (fight != null) StopCoroutine(fight);
         StopAllCoroutines();
