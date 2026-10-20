@@ -9,6 +9,8 @@ public enum TalismanTrait
     EnemyImmunity = 1 << 0,            // enemies can't hurt or knock back the player
     DefeatsEnemiesOnContact = 1 << 1,  // touching an enemy destroys it
     WaterBreathing = 1 << 2,           // WATER: no breath is used underwater
+    HealShield = 1 << 3,               // HEAL: no enemy or boss attack can hurt or knock back the player (spikes, pits,
+                                       // chest traps and drowning still can)
 }
 
 /// <summary>Everything a talisman is allowed to touch.</summary>
@@ -79,6 +81,10 @@ public class Talisman : ScriptableObject
 
     public bool IsAllowedInScene(string sceneName) =>
         blockedScenes == null || Array.IndexOf(blockedScenes, sceneName) < 0;
+
+    /// <summary>HEAL: chi paid once when the talisman starts (on top of ChiPerSecond). 0 = none. Without enough chi
+    /// it can't start.</summary>
+    public virtual float ChiOnActivate => 0f;
 
     /// <summary>Extra start conditions (e.g. must be grounded). Return false to refuse activation.</summary>
     public virtual bool CanActivate(PowerUpContext ctx) => true;

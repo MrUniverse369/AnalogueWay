@@ -30,6 +30,7 @@ public class SaveData
     public string[] equippedTalismans;
     public ItemStack[] items;
     public string[] claimed; // one-time rewards already taken (chest bonus items)
+    public string quickItem; // QUICKITEM: the Bag item R1 / Q uses (ItemDefinition.Id); empty = none
 }
 
 /// <summary>MENUS: a saved stack of one item.</summary>

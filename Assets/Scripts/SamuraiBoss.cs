@@ -730,6 +730,7 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
     private void DamagePlayer(Vector2 from, float knockback, bool counter)
     {
         if (player == null || defeated || PlayerController.playerInviInvincible) return;
+        if (PowerUpManager.Has(TalismanTrait.HealShield)) return; // HEAL: the Healing Stone's shield holds against bosses too
         if (Time.time - lastHurtTime < hurtGrace) return;
         lastHurtTime = Time.time;
         Log((counter ? "countered, " : "") + "player hurt from " + from);

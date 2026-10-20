@@ -12,11 +12,15 @@ using UnityEngine;
 ///   Feather Fall    feathers drifting off Harvey while he falls
 ///   Coin Magnet     spark streaks flying from nearby coins to Harvey, and a pulse ring
 ///   Water Breathing keeps its own outline and helmet (WaterBreathingVisual); only the activation ring is added
+///   Healing Stone   HEAL: a pink-red healing aura, soft crosses rising off Harvey, and a flash and ring of hearts'
+///                   colours each time a health segment fills; a grey fizzle when pressed at full health
+///                   SHIELD: the glow stays (solid, brighter) for the whole 7 s shield, with sparkles orbiting
+///                   Harvey, and blinks for the last 1.5 s so it's clear the protection is about to end
 /// </summary>
 [DisallowMultipleComponent]
 public class TalismanFX : MonoBehaviour
 {
-    private enum Kind { Other, StoneSkin, SpiritDash, SuperJump, FeatherFall, CoinMagnet, Water }
+    private enum Kind { Other, StoneSkin, SpiritDash, SuperJump, FeatherFall, CoinMagnet, Water, Heal }
 
     private static TalismanFX instance;
 
@@ -39,6 +43,13 @@ public class TalismanFX : MonoBehaviour
     private static readonly Color FeatherCream = PixelFX.Hex("ffffeb");
     private static readonly Color MagnetGold = PixelFX.Hex("f2a65e");
     private static readonly Color WaterAqua = PixelFX.Hex("8fd3ff");
+    // HEAL: health colours (the Spirit Peach's pinks and the HUD red), cream for the highlights
+    private static readonly Color HealPink = PixelFX.Hex("ff6b97");
+    private static readonly Color[] HealColours = { PixelFX.Hex("ff6b97"), PixelFX.Hex("ffd2dc"), PixelFX.Hex("eb564b"), PixelFX.Cream };
+    private int shownLives = -1;
+    private int healSlot = -1; // SHIELD:
+    private float orbit;
+    private static float nextRefuse;
 
     private void Awake()
     {
@@ -89,6 +100,7 @@ public class TalismanFX : MonoBehaviour
         if (t is SuperJumpTalisman) return Kind.SuperJump;
         if (t is FeatherFallTalisman) return Kind.FeatherFall;
         if (t is CoinMagnetTalisman) return Kind.CoinMagnet;
+        if (t is HealingTalisman) return Kind.Heal; // HEAL:
         if ((t.Traits & TalismanTrait.WaterBreathing) != 0) return Kind.Water;
         string n = (t.DisplayName + " " + t.name).ToLowerInvariant();
         return n.Contains("stone") || n.Contains("plain") ? Kind.StoneSkin : Kind.Other;
@@ -104,6 +116,7 @@ public class TalismanFX : MonoBehaviour
             case Kind.FeatherFall: return FeatherCream;
             case Kind.CoinMagnet: return MagnetGold;
             case Kind.Water: return WaterAqua;
+            case Kind.Heal: return HealPink;
             default: return PixelFX.Cream;
         }
     }
@@ -120,6 +133,14 @@ public class TalismanFX : MonoBehaviour
         if (k != Kind.Water) aura.Set("talisman", WithAlpha(c, 0.75f), 2, 5f, 0);
         if (k == Kind.StoneSkin) fx.SetStone(0.85f);
         if (k == Kind.CoinMagnet) pulseTimer = 0f;
+        if (k == Kind.Heal) // HEAL: a soft upward bloom of crosses
+        {
+            healSlot = slot;
+            aura.Set("talisman", WithAlpha(HealPink, 0.95f), 2, 3f, 0, 0f, 0.2f, true); // SHIELD: solid and bright
+            shownLives = HurtPlayer.pLivesCount;
+            fx.Flash(new Color(1f, 0.82f, 0.86f, 1f), 0.15f);
+            PixelFX.Burst(centre, 10, 0.6f, 1.6f, HealColours, 0.6f, 0.9f, 1, PixelShape.Cross, PixelMotion.Float, true, PixelLayer.Front, 90f, 140f, 0.3f);
+        }
     }
 
     private void OnDeactivated(int slot, Talisman t)
@@ -154,6 +175,43 @@ public class TalismanFX : MonoBehaviour
         if (active.Contains(Kind.SpiritDash)) SpiritDash(dt, tick);
         if (tick && active.Contains(Kind.FeatherFall)) Feathers();
         if (active.Contains(Kind.CoinMagnet)) Magnet(dt, tick);
+        if (active.Contains(Kind.Heal)) Heal(tick);
+    }
+
+    // ---------------------------------------------------------------- Healing Stone
+    private void Heal(bool tick)
+    {
+        // SHIELD: blink the glow for the last 1.5 s, and keep a ring of sparkles turning round Harvey
+        float left = manager != null && healSlot >= 0 ? manager.TimeLeft(healSlot) : 99f;
+        bool on = left > 1.5f || Mathf.Repeat(left, 0.3f) > 0.15f;
+        aura.Set("talisman", WithAlpha(HealPink, on ? 0.95f : 0.25f), 2, 3f, 0, 0f, 0.05f, true);
+        orbit += Time.deltaTime * 4f;
+        if (tick)
+        {
+            Vector3 o = new Vector3(Mathf.Cos(orbit) * 0.7f, Mathf.Sin(orbit) * 0.5f + 0.1f, 0f);
+            PixelFX.Emit(transform.position + o, Vector2.zero, PixelFX.Pick(HealColours), 0.35f, 1, PixelShape.Star, PixelMotion.Float, true);
+        }
+        if (tick && Random.value < 0.6f) // crosses drifting up off Harvey
+        {
+            Vector3 p = transform.position + new Vector3(Random.Range(-0.45f, 0.45f), Random.Range(-0.5f, 0.2f), 0f);
+            PixelFX.Emit(p, new Vector2(Random.Range(-0.15f, 0.15f), Random.Range(0.9f, 1.6f)), PixelFX.Pick(HealColours),
+                Random.Range(0.45f, 0.75f), 1, PixelShape.Cross, PixelMotion.Float, true);
+        }
+        if (HurtPlayer.pLivesCount > shownLives && shownLives >= 0) // a segment filled: flash and a small ring
+        {
+            fx.Flash(new Color(1f, 0.55f, 0.7f, 1f), 0.12f);
+            PixelFX.Ring(transform.position, 12, 2.4f, HealColours, 0.28f, 1, PixelShape.Square, true);
+        }
+        shownLives = HurtPlayer.pLivesCount;
+    }
+
+    /// <summary>HEAL: the Healing Stone was pressed at full health: a small grey fizzle and the menu's "blocked" sound.</summary>
+    public static void HealRefused(Vector3 at)
+    {
+        if (Time.unscaledTime < nextRefuse) return;
+        nextRefuse = Time.unscaledTime + 0.4f;
+        PixelFX.Burst(at + Vector3.up * 0.3f, 6, 0.4f, 1f, PixelFX.StoneDust, 0.25f, 0.4f, 1, PixelShape.Square, PixelMotion.Float, false, PixelLayer.Front, 90f, 120f);
+        if (Inventory.Catalog != null) HarveyMenus.PlayUiSound(Inventory.Catalog.blockedSound);
     }
 
     // ---------------------------------------------------------------- Spirit Dash

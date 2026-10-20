@@ -5,6 +5,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource music;
     [SerializeField] private AudioSource sfx;
    public AudioClip backgroundMusic;
+   [Tooltip("WORLDMUSIC: in a level with tori gates (changeWorld), the music for the winter spirit world (changeWorld.lWorld false); " +
+            "Background Music plays in the living world. Empty = Background Music everywhere. Set to a PLACEHOLDER track for now.")]
+   public AudioClip spiritWorldMusic;
    public AudioClip coinSound;
    public AudioClip winSound;
    public AudioClip jumpSound;
@@ -128,8 +131,27 @@ public class AudioManager : MonoBehaviour
     {
         music.volume = musicVolume; // MIX:
         if (musicRequested) return; // ZONEMUSIC: a script already picked this scene's music (the zone map)
-        music.clip = backgroundMusic;
+        music.clip = WorldTrack(); // WORLDMUSIC: the world the level starts in
         music.Play();
+        shownWorld = AnalogueWay.changeWorld.lWorld;
+    }
+
+    // WORLDMUSIC (2026-10-20): crossfade when Harvey goes through a tori gate into the other world
+    private bool shownWorld;
+    private bool? hasWorlds;
+
+    private AudioClip WorldTrack()
+    {
+        if (spiritWorldMusic == null) return backgroundMusic;
+        if (hasWorlds == null) hasWorlds = FindFirstObjectByType<AnalogueWay.changeWorld>(FindObjectsInactive.Include) != null;
+        return hasWorlds == true && !AnalogueWay.changeWorld.lWorld ? spiritWorldMusic : backgroundMusic;
+    }
+
+    private void Update()
+    {
+        if (spiritWorldMusic == null || shownWorld == AnalogueWay.changeWorld.lWorld) return;
+        shownWorld = AnalogueWay.changeWorld.lWorld;
+        PlayMusic(WorldTrack(), 1.2f);
     }
 
     // ZONEMUSIC: switches the music, crossfading over fadeTime (0 = cut). The same clip already playing carries on.

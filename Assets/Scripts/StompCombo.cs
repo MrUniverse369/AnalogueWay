@@ -58,6 +58,8 @@ public class StompCombo : MonoBehaviour
     public static int DashStage => Stage;
     /// <summary>DASHCOMBO: Time.time of the last dash defeat (tests read this).</summary>
     public static float LastDashTime => instance != null ? instance.lastDash : -1f;
+    /// <summary>CHIFREE: true while a combo is alive (a stage reached and its window not yet run out).</summary>
+    public static bool IsActive => Stage > 0 && TimeLeft > 0f;
     /// <summary>COMBO: seconds of the window left (0 with no combo).</summary>
     public static float TimeLeft => instance != null && instance.stage > 0 ? Mathf.Max(0f, instance.comboWindow - (Time.time - instance.last)) : 0f;
 

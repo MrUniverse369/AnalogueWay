@@ -66,8 +66,11 @@ public class PauseMenuStyle : MonoBehaviour
 
         var entries = new List<(Button button, string label)>();
         if (resume != null) entries.Add((resume, "RESUME"));
-        entries.Add((AddButton(template, "Talismans", openTalismans), "TALISMANS"));
-        entries.Add((AddButton(template, "Bag", openBag), "BAG"));
+        if (!GameSession.IsTutorial) // TUTORIAL: the Basic Controls level has no talismans or bag to manage
+        {
+            entries.Add((AddButton(template, "Talismans", openTalismans), "TALISMANS"));
+            entries.Add((AddButton(template, "Bag", openBag), "BAG"));
+        }
         if (!GameSession.IsArcade && GameSession.BuildIndexOf(ZoneSelectMap.SceneName) >= 0) // MAP: a save file has a map to go back to
         {
             mapButton = AddButton(template, "Map", AskMap);
@@ -96,7 +99,10 @@ public class PauseMenuStyle : MonoBehaviour
         for (int i = 0; i < buttons.Count; i++)
             MenuUI.Link(buttons[i], buttons[(i + buttons.Count - 1) % buttons.Count], buttons[(i + 1) % buttons.Count], null, null);
 
-        if (GameSession.IsArcade) // ARCADE: nothing is saved, so say so where quitting happens
+        if (GameSession.IsTutorial) // TUTORIAL:
+            MenuUI.Text("Hint", card, new Vector2(0, -top + 11), new Vector2(CardWidth - 16, 7), MenuUI.SmallSize, MenuUI.Muted, TextAlignmentOptions.Center,
+                "TUTORIAL: NOTHING HERE IS SAVED");
+        else if (GameSession.IsArcade) // ARCADE: nothing is saved, so say so where quitting happens
             MenuUI.Text("Hint", card, new Vector2(0, -top + 11), new Vector2(CardWidth - 16, 7), MenuUI.SmallSize, MenuUI.Yellow, TextAlignmentOptions.Center,
                 "ARCADE: PROGRESS IS NOT SAVED");
         else
@@ -253,6 +259,7 @@ public class PauseMenuStyle : MonoBehaviour
         Time.timeScale = 1f;
         MenueControl.isGamePaused = false;
         if (PowerUpManager.Instance != null) PowerUpManager.Instance.CancelQueuedPresses();
+        GameSession.AutoSave(); // SAVEFIX: the map reloads the save, so save first or this level's finds are lost
         LevelLoader.Load(ZoneSelectMap.SceneName); // LOADING:
     }
 

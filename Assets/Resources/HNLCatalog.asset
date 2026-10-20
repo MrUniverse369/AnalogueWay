@@ -45,9 +45,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 729ca2d6e679047259d01e7fced85efd, type: 2}
   - {fileID: 11400000, guid: 2fa23d82a8c5a42588be0912c4b0bf3d, type: 2}
   - {fileID: 11400000, guid: ba31e874251b84ef3a329742e24d9102, type: 2}
+  - {fileID: 11400000, guid: df01ead8fbc22458caf06bff5d739122, type: 2}
+  - {fileID: 11400000, guid: 317e60d723e5f428cb8c65facb0339cb, type: 2}
+  - {fileID: 11400000, guid: 3087aea1929334526a16eedf8f602801, type: 2}
+  - {fileID: 11400000, guid: 6af0de682e2c741f791f789dd3cca3a3, type: 2}
+  - {fileID: 11400000, guid: 04dae256c1eac4a90966709b7c15c18d, type: 2}
+  - {fileID: 11400000, guid: aba4c849bc4f54f44bec06e3b8688273, type: 2}
+  - {fileID: 11400000, guid: bc8bea71cda104d5fa00316468397262, type: 2}
   villageStock:
+  - {fileID: 11400000, guid: df01ead8fbc22458caf06bff5d739122, type: 2}
+  - {fileID: 11400000, guid: 317e60d723e5f428cb8c65facb0339cb, type: 2}
+  - {fileID: 11400000, guid: 3087aea1929334526a16eedf8f602801, type: 2}
+  - {fileID: 11400000, guid: 6af0de682e2c741f791f789dd3cca3a3, type: 2}
+  - {fileID: 11400000, guid: 04dae256c1eac4a90966709b7c15c18d, type: 2}
   - {fileID: 11400000, guid: 95c5affd1f3b54f499da29c1172d024f, type: 2}
-  - {fileID: 11400000, guid: 729ca2d6e679047259d01e7fced85efd, type: 2}
+  - {fileID: 11400000, guid: aba4c849bc4f54f44bec06e3b8688273, type: 2}
+  - {fileID: 11400000, guid: bc8bea71cda104d5fa00316468397262, type: 2}
   - {fileID: 11400000, guid: 2fa23d82a8c5a42588be0912c4b0bf3d, type: 2}
   - {fileID: 11400000, guid: ba31e874251b84ef3a329742e24d9102, type: 2}
   font: {fileID: 11400000, guid: dc93bed77bab34b9c872bb5387a64cb3, type: 2}

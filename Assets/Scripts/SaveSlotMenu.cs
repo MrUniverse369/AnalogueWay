@@ -445,6 +445,8 @@ public class SaveSlotMenu : MonoBehaviour
         { "Z4A8GrassGreen", "GRASSY MEADOW - ACT 3" }, { "Z4A9GrassGreen", "GRASSY MEADOW - ACT 4" },
         { "Z4A10GrassGreen", "GRASSY MEADOW - ACT 5" }, { "Z4BossGrass", "GRASSY MEADOW - BOSS" },
         { "Win", "JOURNEY'S END" },
+        // VILLAGES (2026-10-20)
+        { "Z1TombVillage", "THE OLD TOMB - VILLAGE" }, { "Z2SandyVillage", "SANDY DUNES - VILLAGE" }, { "Z4GrassVillage", "GRASSY MEADOW - VILLAGE" },
     };
 
     private static string PlaceName(string sceneName)

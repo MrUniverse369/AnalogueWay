@@ -61,7 +61,7 @@ public class ItemDefinition : ScriptableObject
             case ItemEffect.ExtraLife:
                 if (HurtPlayer.pLivesCount >= GameSession.StartingLives) { message = "LIVES ARE ALREADY FULL"; return false; }
                 HurtPlayer.pLivesCount = Mathf.Min(GameSession.StartingLives, HurtPlayer.pLivesCount + Mathf.Max(1, (int)amount));
-                message = "A LIFE RESTORED";
+                message = amount >= GameSession.StartingLives ? "HEALTH FULLY RESTORED" : amount >= 2 ? "HEALTH RESTORED" : "A LIFE RESTORED"; // SHOPFOOD:
                 return true;
             default:
                 message = "";

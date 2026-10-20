@@ -304,6 +304,8 @@ TALISMANS = {
     "StoneSkin": ((hexc("98b2b1"), hexc("f0f2fe"), hexc("5a697d"), hexc("769099")), ["###", "###", "###", ".#."]),
     "FeatherFall": ((hexc("e7fbfe"), hexc("ffffff"), hexc("b9d2ca"), hexc("d5ebff")), ["..#", ".##", "##.", "#.."]),
     "CoinMagnet": ((hexc("f2a65e"), hexc("ffe478"), hexc("ce812c"), hexc("ffe478")), ["#.#", "#.#", "###"]),
+    # HEAL (2026-10-20): the Stone talisman as a healing stone: health pinks with a cream heart
+    "HealingStone": ((hexc("ff6b97"), hexc("ffd2dc"), hexc("b0305c"), hexc("eb564b")), ["#.#", "###", "###", ".#."]),
 }
 
 
@@ -490,6 +492,79 @@ ITEMS = {
 }
 ITEMS.update({name: (lambda cols=cols: cut_gem_icon(*cols)) for name, cols in GEMS.items()})  # CHEST:
 
+# SHOPFOOD (2026-10-20): the Japan village's cat food. Health foods are fish and lobster, chi foods are flakes, tea,
+# sushi and the festival sea bream.
+FISH = {"s": hexc("b9d2ca"), "m": hexc("769099"), "d": hexc("5a697d"), "e": hexc("333941"), "w": hexc("f0f2fe")}
+FOOD_ITEMS = {
+    "DriedSardines": lambda: sprite_icon([
+        "..mmmm..s",
+        ".wsssssmm",
+        "eswssssm.",
+        ".msssssmm",
+        "..dddd..s",
+    ], FISH),
+    "GrilledMackerel": lambda: sprite_icon([
+        "...dddd....",
+        "..dmkmkmd.m",
+        ".esmkmkmmdm",
+        "dwsssssssm.",
+        ".ssssssssdm",
+        "..oooooo..m",
+    ], dict(FISH, k=hexc("32395c"), o=hexc("ce812c"))),
+    "SpinyLobster": lambda: sprite_icon([
+        "r.......r",
+        ".r.....r.",
+        "RR.rrr.RR",
+        "RR.rRr.RR",
+        "..rrRrr..",
+        "...rRr...",
+        "...rrr...",
+        "..rr.rr..",
+    ], {"r": hexc("eb564b"), "R": hexc("f2a65e")}),
+    "BonitoFlakes": lambda: sprite_icon([
+        "..pPp.Pp..",
+        ".PpPpPpPp.",
+        "bbbbbbbbbb",
+        ".bBBBBBBb.",
+        "..bbbbbb..",
+    ], {"p": hexc("ffd2dc"), "P": hexc("e3ba66"), "b": hexc("405874"), "B": hexc("6583a7")}),
+    "MatatabiTea": lambda: sprite_icon([
+        "..s.s..",
+        "...s...",
+        "ccccccc",
+        "cgggggc",
+        "cgGgggc",
+        ".ccccc.",
+    ], {"s": hexc("ffffeb"), "c": hexc("b9d2ca"), "g": hexc("52ab61"), "G": hexc("88ce6e")}),
+    "TunaNigiri": lambda: sprite_icon([
+        "..TTTTTT..",
+        ".TtTtTtTT.",
+        "TTTTTTTTTt",
+        ".wwwwwwww.",
+        "wwwwwwwwww",
+        ".wwwwwwww.",
+    ], {"T": hexc("eb564b"), "t": hexc("ff6b97"), "w": hexc("ffffff")}),
+    "GoldenSeaBream": lambda: sprite_icon([
+        "...ooo......",
+        "..yyyyyy..o.",
+        ".eyYyyyyyoo.",
+        "yyyYYYyyyyo.",
+        ".yyyyyyyyoo.",
+        "..ooyyoo..o.",
+    ], {"y": hexc("ffe478"), "Y": hexc("ffffeb"), "o": hexc("f2a65e"), "e": hexc("333941")}),
+}
+ITEMS.update(FOOD_ITEMS)
+
+
+def food_icons_only():
+    """SHOPFOOD: writes just the new shop food icons and the Healing Stone gem (no other art is touched)."""
+    os.makedirs(OUT, exist_ok=True)
+    for name, make in FOOD_ITEMS.items():
+        save(make(), f"Item_{name}.png")
+    cols, symbol = TALISMANS["HealingStone"]
+    save(gem_icon(*cols, symbol=symbol), "Talisman_HealingStone.png")
+    print("wrote", len(FOOD_ITEMS), "food icons and Talisman_HealingStone.png")
+
 
 def shop_stall():
     """A little village stall for the shop counter (in-level sprite, 40x36, feet on the bottom row)."""
@@ -633,5 +708,7 @@ def main():
 if __name__ == "__main__":
     if sys.argv[1:] == ["gems"]:
         gem_icons_only()  # CHEST:
+    elif sys.argv[1:] == ["food"]:
+        food_icons_only()  # SHOPFOOD:
     else:
         main()

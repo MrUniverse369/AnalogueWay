@@ -26,23 +26,24 @@ PPU = 16
 # Node pixel positions (y down), in play order: six per zone, the sixth is the zone boss. Keep in sync with the scene
 # (the scene is rebuilt from the layout file this script writes).
 NODES = {
-    "Z1A1": (22, 158), "Z1A2": (22, 132), "Z1A3": (22, 106), "Z1A4": (52, 106), "Z1A5": (52, 132), "Z1Boss": (68, 158),
-    "Z2A1": (100, 158), "Z2A2": (100, 132), "Z2A3": (100, 106), "Z2A4": (130, 106), "Z2A5": (130, 132), "Z2Boss": (160, 158),
+    "Z1A1": (22, 158), "Z1A2": (22, 132), "Z1A3": (22, 106), "Z1A4": (52, 106), "Z1A5": (52, 132), "Z1Village": (52, 158), "Z1Boss": (78, 158),
+    "Z2A1": (100, 158), "Z2A2": (100, 132), "Z2A3": (100, 106), "Z2A4": (130, 106), "Z2A5": (130, 132), "Z2Village": (130, 158), "Z2Boss": (160, 158),
     "Z3A1": (214, 158), "Z3A2": (244, 158), "Z3A3": (244, 121), "Z3A4": (274, 121), "Village": (296, 60), "Boss": (262, 40),
-    "Z4A1": (172, 58), "Z4A2": (144, 58), "Z4A3": (116, 58), "Z4A4": (116, 30), "Z4A5": (88, 30), "Z4Boss": (60, 30),
+    "Z4A1": (172, 58), "Z4A2": (144, 58), "Z4A3": (116, 58), "Z4A4": (116, 30), "Z4A5": (88, 30), "Z4Village": (62, 30), "Z4Boss": (38, 30),
     "Win": (28, 52),
 }
-ORDER = ["Z1A1", "Z1A2", "Z1A3", "Z1A4", "Z1A5", "Z1Boss",
-         "Z2A1", "Z2A2", "Z2A3", "Z2A4", "Z2A5", "Z2Boss",
+# VILLAGES (2026-10-20): every zone has a village between its fifth act and its boss, like Japan's
+ORDER = ["Z1A1", "Z1A2", "Z1A3", "Z1A4", "Z1A5", "Z1Village", "Z1Boss",
+         "Z2A1", "Z2A2", "Z2A3", "Z2A4", "Z2A5", "Z2Village", "Z2Boss",
          "Z3A1", "Z3A2", "Z3A3", "Z3A4", "Village", "Boss",
-         "Z4A1", "Z4A2", "Z4A3", "Z4A4", "Z4A5", "Z4Boss", "Win"]
+         "Z4A1", "Z4A2", "Z4A3", "Z4A4", "Z4A5", "Z4Village", "Z4Boss", "Win"]
 BOSSES = {"Z1Boss", "Z2Boss", "Boss", "Z4Boss"}
 # Corners between consecutive nodes (ORDER[i] -> ORDER[i + 1]); they are rounded off when drawn.
 CORNERS = [
-    [], [], [], [], [(52, 158)], [],          # Tomb, ending at its boss
-    [], [], [], [], [(130, 158)], [],         # Sandy (the boss -> Japan run is straight along y 158)
+    [], [], [], [], [], [], [],               # Tomb: act 5 down to the village, along to the boss
+    [], [], [], [], [], [], [],               # Sandy (the boss -> Japan run is straight along y 158)
     [], [], [], [(296, 121)], [(296, 40)], [(172, 40)],   # Japan: sunny foothills, the torii, the snowy peak
-    [], [], [], [], [], [(28, 30)],           # Meadow, then home
+    [], [], [], [], [], [], [(28, 30)],       # Meadow, its village and boss, then home
 ]
 BEND_RADIUS = 7
 RIVER = [(194, -6), (194, 44), (198, 64), (204, 84), (210, 104), (218, 120)]  # snow melt running down to the koi pond

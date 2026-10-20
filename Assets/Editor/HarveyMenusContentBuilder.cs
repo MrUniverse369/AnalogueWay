@@ -34,6 +34,7 @@ public static class HarveyMenusContentBuilder
     /// <summary>
     /// CHEST: adds items that are new in ItemSpecs (the chest gems) to Assets/Prefabs/Items and the catalog. Existing
     /// items, talismans and catalog settings are left exactly as they are, and no scene is opened.
+    /// SHOPFOOD: also sets the village stock.
     /// </summary>
     [MenuItem("Tools/HNL/Refresh Items and Catalog")]
     public static void RefreshItemsAndCatalog()
@@ -47,6 +48,7 @@ public static class HarveyMenusContentBuilder
         ImportArt();
         var items = BuildItems(onlyMissing: true);
         cat.items = ItemSpecs.Select(s => items[s.file]).ToArray(); // the same order as a full build
+        cat.villageStock = VillageStock.Select(f => items[f]).ToArray(); // SHOPFOOD:
         EditorUtility.SetDirty(cat);
         AssetDatabase.SaveAssets();
         Debug.Log($"Catalog refreshed: {cat.items.Length} items");
@@ -133,7 +135,7 @@ public static class HarveyMenusContentBuilder
         var water = TalismanAsset<Talisman>("Talisman_WaterBreathing");
         var dash = TalismanAsset<SpeedBoostTalisman>("Talisman_SpeedBoost");
         var jump = TalismanAsset<SuperJumpTalisman>("alisman_SuperJump");
-        var stone = TalismanAsset<Talisman>("Talisman_Plain"); // the old placeholder, now Stone Skin
+        var stone = TalismanAsset<HealingTalisman>("Talisman_Plain"); // the old placeholder, then Stone Skin, now the Healing Stone (HEAL)
         var feather = TalismanAsset<FeatherFallTalisman>("Talisman_FeatherFall");
         var magnet = TalismanAsset<CoinMagnetTalisman>("Talisman_CoinMagnet");
 
@@ -143,16 +145,16 @@ public static class HarveyMenusContentBuilder
             "Hold to dash along the ground. Enemies in the way are knocked out and can't hurt Harvey.", null);
         Describe(jump, "Super Jump", "SuperJump",
             "Hold for a much higher jump, to reach ledges far overhead.", null);
-        Describe(stone, "Stone Skin", "StoneSkin",
-            "Harvey's fur turns hard as temple stone: enemies can't hurt or knock him back for 6 seconds.",
-            "Defeat the Grave Warden in the Old Tomb.", 6f, 6f, (int)TalismanTrait.EnemyImmunity);
+        Describe(stone, "Healing Stone", "HealingStone",
+            "A warm temple stone that turns chi into health. Spends 6 chi to fill Harvey's health bar, then shields him from every enemy attack for 7 seconds.",
+            "Defeat the Grave Warden in the Old Tomb.", 7f, 4f, (int)TalismanTrait.HealShield); // HEAL: SHIELD
         Describe(feather, "Feather Fall", "FeatherFall",
             "Drift down as light as a feather for 6 seconds. Great for long drops and wide gaps.",
             "Defeat the Sandscale Scarab in the Sandy Dunes.", 6f, 4f, 0);
         Describe(magnet, "Coin Magnet", "CoinMagnet",
             "For 8 seconds every coin nearby flies straight to Harvey.",
             "Defeat the Yokai Warrior at the Snow Temple.", 8f, 6f, 0);
-        log.Add("Talismans described: 6 (Stone Skin reuses Talisman_Plain)");
+        log.Add("Talismans described: 6 (the Healing Stone reuses Talisman_Plain)");
         return new Talisman[] { water, dash, jump, stone, feather, magnet };
     }
 
@@ -205,14 +207,36 @@ public static class HarveyMenusContentBuilder
         new ItemSpec { file = "RubyGem", name = "Ruby", category = ItemCategory.Collectible, unique = false,
             description = "A rare fiery red gem. It glints even in the deepest part of the tomb." },
         new ItemSpec { file = "Onigiri", name = "Onigiri", category = ItemCategory.VillageGoods, unique = false,
-            effect = ItemEffect.RestoreChi, amount = 45, price = 8, description = "A rice ball wrapped in nori. Restores half of Harvey's chi." },
+            effect = ItemEffect.RestoreChi, amount = 45, price = 95, description = "A rice ball wrapped in nori. Restores half of Harvey's chi." },
         new ItemSpec { file = "DarumaCharm", name = "Daruma Charm", category = ItemCategory.VillageGoods, unique = false,
             effect = ItemEffect.ExtraLife, amount = 1, price = 20, description = "A lucky daruma. Use it to win back one life." },
         new ItemSpec { file = "PaperLantern", name = "Paper Lantern", category = ItemCategory.VillageGoods, price = 12,
             description = "A red paper lantern from the village festival. A keepsake." },
         new ItemSpec { file = "TemplePostcard", name = "Temple Postcard", category = ItemCategory.VillageGoods, price = 5,
             description = "Greetings from the Snow Temple! Harvey means to send it home." },
+        // SHOPFOOD (2026-10-20): cat food from the Japan village. Health (3 segments) and chi (90) at three price
+        // levels; the bigger portions are a little cheaper per point, so saving up pays. CHIPRICE: chi is the
+        // precious one, far dearer than anything else (from 50 coins), since it powers every talisman.
+        new ItemSpec { file = "DriedSardines", name = "Dried Sardines", category = ItemCategory.VillageGoods, unique = false,
+            effect = ItemEffect.ExtraLife, amount = 1, price = 6, description = "A paper twist of crunchy niboshi. A cat's favourite snack. Restores 1 health." },
+        new ItemSpec { file = "GrilledMackerel", name = "Grilled Mackerel", category = ItemCategory.VillageGoods, unique = false,
+            effect = ItemEffect.ExtraLife, amount = 2, price = 11, description = "Salt-grilled saba, hot from the charcoal. Restores 2 health." },
+        new ItemSpec { file = "SpinyLobster", name = "Spiny Lobster", category = ItemCategory.VillageGoods, unique = false,
+            effect = ItemEffect.ExtraLife, amount = 3, price = 15, description = "A whole ise-ebi, a feast for a lucky cat. Restores all health." },
+        new ItemSpec { file = "BonitoFlakes", name = "Bonito Flakes", category = ItemCategory.VillageGoods, unique = false,
+            effect = ItemEffect.RestoreChi, amount = 20, price = 50, description = "Katsuobushi shavings that dance on the tongue. Restores 2 chi." },
+        new ItemSpec { file = "MatatabiTea", name = "Matatabi Tea", category = ItemCategory.VillageGoods, unique = false,
+            effect = ItemEffect.RestoreChi, amount = 30, price = 70, description = "Silver vine tea. Every cat in the village swears by it. Restores 3 chi." },
+        new ItemSpec { file = "TunaNigiri", name = "Tuna Nigiri", category = ItemCategory.VillageGoods, unique = false,
+            effect = ItemEffect.RestoreChi, amount = 60, price = 120, description = "Rich red maguro on vinegared rice. Restores 6 chi, enough for the Healing Stone." },
+        new ItemSpec { file = "GoldenSeaBream", name = "Golden Sea Bream", category = ItemCategory.VillageGoods, unique = false,
+            effect = ItemEffect.RestoreChi, amount = 90, price = 160, description = "A festival tai, grilled whole for good fortune. Restores all chi." },
     };
+
+    /// <summary>SHOPFOOD: what the village shop sells, in shelf order (ShopView sorts it onto its Health, Chi and Goods shelves).
+    /// The Daruma Charm is no longer sold (owned ones still work); the fish do its job for less.</summary>
+    private static readonly string[] VillageStock =
+        { "DriedSardines", "GrilledMackerel", "SpinyLobster", "BonitoFlakes", "MatatabiTea", "Onigiri", "TunaNigiri", "GoldenSeaBream", "PaperLantern", "TemplePostcard" };
 
     private static Dictionary<string, ItemDefinition> BuildItems(bool onlyMissing = false)
     {
@@ -261,7 +285,7 @@ public static class HarveyMenusContentBuilder
         cat.talismans = talismans;
         cat.startingLoadout = new[] { talismans[0], talismans[1], talismans[2] }; // matches PowerUpManager.prefab: Z, X, C
         cat.items = ItemSpecs.Select(s => items[s.file]).ToArray();
-        cat.villageStock = new[] { items["Onigiri"], items["DarumaCharm"], items["PaperLantern"], items["TemplePostcard"] };
+        cat.villageStock = VillageStock.Select(f => items[f]).ToArray(); // SHOPFOOD:
         cat.font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Fonts/PerfectDOSVGA437 SDF.asset");
         cat.holderPanel = S("HolderPanel");
         cat.bagPanel = S("BagPanel");

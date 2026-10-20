@@ -507,6 +507,7 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     public void DamagePlayer(Vector2 from)
     {
         if (player == null || defeated || PlayerController.playerInviInvincible) return;
+        if (PowerUpManager.Has(TalismanTrait.HealShield)) return; // HEAL: the Healing Stone's shield holds against bosses too
         if (Time.time - lastHurtTime < hurtGrace) return;
         lastHurtTime = Time.time;
         Log("player hurt from " + from);

@@ -105,14 +105,29 @@ public class PowerUpManager : MonoBehaviour
         controls?.Dispose();
     }
 
+    /// <summary>
+    /// TUTORIAL (2026-10-20): a fixed loadout that replaces the Talisman Holder's while set (the Basic Controls level
+    /// gives only the Spirit Dash and Super Jump, in their usual X and C slots). null = the holder's loadout.
+    /// </summary>
+    public static void SetLoadoutOverride(Talisman[] loadout)
+    {
+        loadoutOverride = loadout;
+        if (Instance != null) Instance.ApplyLoadout();
+    }
+
+    private static Talisman[] loadoutOverride;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics() => loadoutOverride = null;
+
     // MENUS: slot i holds the talisman equipped in holder slot i. Without a catalog (Resources/HNLCatalog) the
     // inspector slots are kept as they are.
     private void ApplyLoadout()
     {
-        if (!Inventory.HasCatalog) return;
+        if (!Inventory.HasCatalog && loadoutOverride == null) return;
         for (int i = 0; i < slots.Length && i < Inventory.SlotCount; i++)
         {
-            Talisman wanted = Inventory.Equipped(i);
+            Talisman wanted = loadoutOverride != null ? (i < loadoutOverride.Length ? loadoutOverride[i] : null) : Inventory.Equipped(i); // TUTORIAL:
             if (slots[i].talisman != wanted) Equip(i, wanted);
         }
     }
@@ -184,7 +199,8 @@ public class PowerUpManager : MonoBehaviour
         {
             slot.timeLeft -= dt;
             // CHI: a running talisman spends chi at its own rate and ends the moment the last unit is gone
-            bool chiLeft = slot.talisman.ChiPerSecond <= 0f || Chi.Spend(slot.talisman.ChiPerSecond * dt);
+            bool chiLeft = slot.talisman.ChiPerSecond <= 0f || Chi.IsFree // CHIFREE: free at the final combo stage,
+                           || Chi.Spend(slot.talisman.ChiPerSecond * Chi.CostScale * dt); // cheaper up the ladder
             if (slot.timeLeft <= 0f || !chiLeft) End(index);
             else slot.talisman.OnTick(context, dt); // MENUS: Feather Fall, Coin Magnet
         }
@@ -221,11 +237,18 @@ public class PowerUpManager : MonoBehaviour
         if (player.IsStunned) return; // STUN: dazed by a samurai's block: no dashing (or any talisman) until it wears off
         if (oneAtATime && IsAnyActive()) return;
         if (!talisman.IsAllowedInScene(sceneName) || !talisman.CanActivate(context)) return;
-        if (talisman.ChiPerSecond > 0f && Chi.IsEmpty) // CHI: all nine units spent: nothing starts until chi is restored
+        if (talisman.ChiPerSecond > 0f && Chi.IsEmpty && !Chi.IsFree) // CHI: all nine units spent: nothing starts until chi is restored // CHIFREE: unless at the final combo stage
         {
             DenyFeedback();
             return;
         }
+        float upfront = talisman.ChiOnActivate * Chi.CostScale; // HEAL: a one-off cost (cheaper up the combo ladder, free at the top)
+        if (upfront > 0f && PlayerController.chi < upfront - 0.01f)
+        {
+            DenyFeedback();
+            return;
+        }
+        if (upfront > 0f) Chi.Spend(upfront);
 
         slot.isActive = true;
         slot.timeLeft = talisman.Duration;

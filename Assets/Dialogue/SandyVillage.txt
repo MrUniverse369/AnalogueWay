@@ -1,0 +1,68 @@
+// Harvey's Nine Lives: the oasis bazaar in the Sandy Dunes (Z2SandyVillage).
+// Format notes: see JapanVillage.txt and Assets/Scripts/DialogueScript.cs. Check with Tools/HNL/Check Dialogue Files.
+
+
+// ------------------------------------------------------------------ Amun, the bazaar merchant
+== amun
+-> cycle: amun_first, amun_again
+
+== amun_first
+Amun: Welcome to the oasis, friend! Water, shade and the finest fish this side of the dunes.
+* What is this place? -> amun_place
+* Any advice for the desert? -> amun_tip
+* Goodbye. -> amun_bye
+
+== amun_place
+Amun: Every caravan stops here. The palms keep the sand off, mostly.
+Past the dunes lies the Scarab's nest. Nobody stops there.
+-> amun_tip
+
+== amun_tip
+Amun: Sharks swim in the sand. Watch for the fins, then jump.
+And keep a fish on your quick button: R1 in a pinch is worth two in the bag!
+-> amun_bye
+
+== amun_again
+Amun: The friend with whiskers returns! Business is good when you're about.
+-> end
+
+== amun_bye
+Amun: May the wind be at your tail.
+-> end
+
+
+// ------------------------------------------------------------------ Nefi, by the well
+== nefi
+Nefi: Shh. If you listen at the well you can hear the old river underneath.
+* What river? -> nefi_river
+* I'll leave you to it. -> nefi_bye
+
+== nefi_river
+Nefi: The one that made the pyramids rich. It sank into the sand long ago.
+My grandmother says the Scarab drank it all.
+-> nefi_bye
+
+== nefi_bye
+Nefi: Stay cool out there.
+-> end
+
+
+// ------------------------------------------------------------------ everyone else
+== villager
+-> random: v1, v2, v3, v4
+
+== v1
+{name}: Mind the hot sand. It's hot. That's all, really.
+-> end
+
+== v2
+{name}: The pots on that stall? Mostly empty. The merchant says it's 'atmosphere'.
+-> end
+
+== v3
+{name}: A good stomp sends you high enough to see the next foe coming.
+-> end
+
+== v4
+{name}: Chi costs a fortune here. Spend it wisely, little cat.
+-> end

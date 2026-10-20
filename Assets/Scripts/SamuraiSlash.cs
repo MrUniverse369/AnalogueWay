@@ -20,7 +20,7 @@ using UnityEngine;
 /// BLOCK (2026-10-19, later): every block plays the monkey's block stance (the "Block" state: Block.anim from
 /// JSEAnim_Block.png, the braced draw stance with his hand on the hilt; Tools/Art/samurai_block.py +
 /// Assets/Editor/SamuraiBlockSetup.cs) for the whole slide and hold, never a walk frame, and stuns Harvey for stunTime
-/// (2 s: no running, jumping, dashing or talismans, PlayerController.Stun), so he can't keep dashing into it.
+/// (1 s: no running, jumping, dashing or talismans, PlayerController.Stun), so he can't keep dashing into it.
 /// AFTERIMAGE: the dash leaves fading red afterimages (AfterimageTrail, the same effect as Harvey's Spirit Dash).
 /// </summary>
 [RequireComponent(typeof(Animator))]
@@ -62,7 +62,7 @@ public class SamuraiSlash : MonoBehaviour
     [Tooltip("Harvey's knockback time (no life lost).")]
     [SerializeField] private float clashKnockback = 0.2f;
     [Tooltip("BLOCK: how long Harvey is stunned after a blocked dash: he can't run, jump, dash or use a talisman.")]
-    [SerializeField] private float stunTime = 2f;
+    [SerializeField] private float stunTime = 1f;
     [Tooltip("Empty = the slash sound, pitched up.")]
     [SerializeField] private AudioClip clashSound;
 
@@ -382,7 +382,7 @@ public class SamuraiSlash : MonoBehaviour
     // the same as any enemy hit: a life, the hurt sound and flash, knockback away from the blade
     private void DamagePlayer(Vector3 from)
     {
-        if (PlayerController.playerInviInvincible || PowerUpManager.Has(TalismanTrait.EnemyImmunity)) return;
+        if (PlayerController.playerInviInvincible || PowerUpManager.Has(TalismanTrait.EnemyImmunity | TalismanTrait.HealShield)) return; // HEAL:
         HurtPlayer.pLivesCount -= 1;
         PlayerController.playerInviInvincible = true; // the dashing body touching him in the same moment can't take a second life
         PlayerFX.Hurt(from);

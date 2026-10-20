@@ -26,6 +26,16 @@ public static class Chi
 
     public static bool IsEmpty => UnitsLeft == 0;
 
+    /// <summary>CHIFREE (2026-10-19): what chi skills (talismans, the dragon) cost at each combo stage, as a share of
+    /// their normal rate: [0] = no combo. It falls steeply up the ladder and is nothing at the final stage.</summary>
+    private static readonly float[] StageCost = { 1f, 0.6f, 0.35f, 0.15f, 0.05f, 0f };
+
+    /// <summary>CHIFREE: the share of the normal chi cost to pay right now (1 outside a combo, 0 at the final stage).</summary>
+    public static float CostScale => StompCombo.IsActive ? StageCost[Mathf.Clamp(StompCombo.Stage, 0, StompCombo.MaxStage)] : 1f;
+
+    /// <summary>CHIFREE: the final combo stage: chi skills cost nothing and work even with the meter empty.</summary>
+    public static bool IsFree => CostScale <= 0f;
+
     /// <summary>The tier being spent now: blue while units 7-9 are left, green for 4-6, red for 1-3.</summary>
     public static Tier CurrentTier
     {

@@ -24,6 +24,7 @@ public static class Inventory
     private static readonly Dictionary<string, int> counts = new Dictionary<string, int>();
     private static readonly List<string> itemOrder = new List<string>(); // pick-up order, so new things go last
     private static readonly HashSet<string> claimed = new HashSet<string>();
+    private static string quickItem; // QUICKITEM:
 
     public static HNLCatalog Catalog
     {
@@ -55,6 +56,7 @@ public static class Inventory
         counts.Clear();
         itemOrder.Clear();
         claimed.Clear();
+        quickItem = null; // QUICKITEM:
         for (int i = 0; i < SlotCount; i++) equipped[i] = null;
         if (Catalog != null && Catalog.startingLoadout != null)
         {
@@ -195,6 +197,28 @@ public static class Inventory
         return list;
     }
 
+    // ---------------------------------------------------------------- QUICKITEM: the quick-use item
+    /// <summary>The item R1 / Q uses (it stays set when the last one is used, shown greyed until more are found).</summary>
+    public static ItemDefinition QuickItem
+    {
+        get
+        {
+            EnsureInit();
+            return Catalog != null ? Catalog.ItemById(quickItem) : null;
+        }
+    }
+
+    /// <summary>Sets the quick item (a usable item; null clears it).</summary>
+    public static void SetQuick(ItemDefinition item)
+    {
+        EnsureInit();
+        if (item != null && !item.Usable) return;
+        string id = item != null ? item.Id : null;
+        if (id == quickItem) return;
+        quickItem = id;
+        Changed?.Invoke();
+    }
+
     // ---------------------------------------------------------------- one-time rewards
     /// <summary>Marks a one-time reward (a chest's bonus item, say) as taken. Returns false if it already was.</summary>
     public static bool Claim(string key)
@@ -220,6 +244,7 @@ public static class Inventory
         foreach (string id in itemOrder) stacks.Add(new ItemStack { id = id, count = counts[id] });
         data.items = stacks.ToArray();
         data.claimed = new List<string>(claimed).ToArray();
+        data.quickItem = quickItem ?? ""; // QUICKITEM:
     }
 
     /// <summary>Restores a save. Saves from before the Talisman Holder (no talisman data) get the new-game loadout.</summary>
@@ -251,6 +276,7 @@ public static class Inventory
                     if (!itemOrder.Contains(s.id)) itemOrder.Add(s.id);
                 }
         if (data.claimed != null) foreach (string key in data.claimed) if (!string.IsNullOrEmpty(key)) claimed.Add(key);
+        quickItem = !string.IsNullOrEmpty(data.quickItem) && (Catalog == null || Catalog.ItemById(data.quickItem) != null) ? data.quickItem : null; // QUICKITEM: older saves have none
         RaiseAll();
     }
 

@@ -1,0 +1,68 @@
+// Harvey's Nine Lives: the hill village in the Grassy Meadow (Z4GrassVillage).
+// Format notes: see JapanVillage.txt and Assets/Scripts/DialogueScript.cs. Check with Tools/HNL/Check Dialogue Files.
+
+
+// ------------------------------------------------------------------ Farmer Clover, by the barn
+== clover
+-> cycle: clover_first, clover_again
+
+== clover_first
+Clover: Well now, a traveller! You've come a long way by the look of those paws.
+* Where am I? -> clover_place
+* Any advice? -> clover_tip
+* Just passing. -> clover_bye
+
+== clover_place
+Clover: The last village before home, they say. Green hills as far as you like.
+Mind the moss king in the woods. He doesn't care for trespassers.
+-> clover_tip
+
+== clover_tip
+Clover: The bouncy clouds will carry you over the worst of it.
+And keep some lobster handy. Nothing mends a cat like lobster.
+-> clover_bye
+
+== clover_again
+Clover: Back again? The cows have missed you. Well, one of them has.
+-> end
+
+== clover_bye
+Clover: Safe travels, and wipe your feet on the way out.
+-> end
+
+
+// ------------------------------------------------------------------ Old Willow, on the bench
+== willow
+Willow: Nine lives, have you? I had nine once. Now I have a very comfy bench.
+* What happened to the others? -> willow_lives
+* Enjoy the bench. -> willow_bye
+
+== willow_lives
+Willow: Spent them all on adventures, every one worth it.
+Use yours well, young one. Home is just over the hill.
+-> willow_bye
+
+== willow_bye
+Willow: Off you go. I'll be right here.
+-> end
+
+
+// ------------------------------------------------------------------ everyone else
+== villager
+-> random: v1, v2, v3, v4
+
+== v1
+{name}: The meadow smells lovely after rain.
+-> end
+
+== v2
+{name}: I saw a cat chain six stomps in a row once. The whole village cheered.
+-> end
+
+== v3
+{name}: Chi tea? No, lad, here we sell fish. Chi's for the brave and the rich.
+-> end
+
+== v4
+{name}: The barn's haunted. By a very loud chicken.
+-> end

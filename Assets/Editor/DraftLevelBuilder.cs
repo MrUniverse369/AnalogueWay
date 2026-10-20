@@ -45,6 +45,40 @@ public static class DraftLevelBuilder
     }
 
     /// <summary>
+    /// VILLAGES (2026-10-20): copies baseScene to newScene and lays a flat street from fromX to toX (floor top at y 0)
+    /// painted with the zone's tiles, with a wall at each end, the zone's background kept. Harvey stands at startX.
+    /// The village content (houses, shop, villagers, exit) is added by VillageBuilder.
+    /// </summary>
+    public static void BuildFlatTown(string baseScene, string newScene, bool refillBackdrop, int fromX, int toX, float startX)
+    {
+        CopyFresh(baseScene, newScene);
+        Scene scene = EditorSceneManager.OpenScene(newScene, OpenSceneMode.Single);
+        var ctx = Prepare(scene, refillBackdrop);
+        foreach (var e in Object.FindObjectsByType<YokaiBoss>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            Object.DestroyImmediate(e.gameObject);
+        for (int x = fromX - 6; x <= toX + 6; x++)
+            for (int y = -10; y < 0; y++)
+                ctx.Fill(x, y);
+        for (int x = fromX - 6; x < fromX; x++)      // walls: the street can't be left except through the exit
+            for (int y = 0; y < 12; y++)
+                ctx.Fill(x, y);
+        for (int x = toX + 1; x <= toX + 6; x++)
+            for (int y = 0; y < 12; y++)
+                ctx.Fill(x, y);
+        ctx.Paint();
+        ctx.FillBackdrops(fromX - 12, toX + 12, -16, 20);
+        ctx.DestroyTemplates();
+        ctx.player.transform.position = new Vector3(startX, 0.6f, 0f);
+        ctx.respawn.position = new Vector3(startX, 1f, 0f);
+        var pso = new SerializedObject(ctx.player);
+        pso.FindProperty("canSummonDragon").boolValue = false; // a quiet street: no dragon rides in the village
+        pso.ApplyModifiedPropertiesWithoutUndo();
+        ctx.PlaceKillPlane(fromX - 6, toX + 6, -10);
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+    }
+
+    /// <summary>
     /// Copies baseScene to newScene and turns it into a boss arena: a walled 16-tile floor painted with the zone's
     /// tiles, plus the boss rig (BossArena, YokaiBoss, BossTreasure) copied from Z3BossBattle. Returns the new boss.
     /// </summary>

@@ -239,7 +239,7 @@ MonoBehaviour:
   clashRecoil: 0.6
   clashStun: 0.4
   clashKnockback: 0.35
-  stunTime: 2
+  stunTime: 1
   clashSound: {fileID: 0}
   afterimageInterval: 0.035
   afterimageTint: {r: 1, g: 0.55, b: 0.55, a: 1}

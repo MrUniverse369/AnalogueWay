@@ -9,19 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5260469d9c2b2448c986f25df5b1f815, type: 3}
+  m_Script: {fileID: 11500000, guid: 6432d11a6c8b4c17bbef46cebbb2e714, type: 3}
   m_Name: Talisman_Plain
-  m_EditorClassIdentifier: 
-  displayName: Stone Skin
-  icon: {fileID: 21300000, guid: a425d4f4ba992494b9422e1b300cc558, type: 3}
-  description: 'Harvey''s fur turns hard as temple stone: enemies can''t hurt or
-    knock him back for 6 seconds.'
+  m_EditorClassIdentifier: Assembly-CSharp::HealingTalisman
+  displayName: Healing Stone
+  icon: {fileID: 21300000, guid: 3124506afebef474ba4d0b7a14651b94, type: 3}
+  description: A warm temple stone that turns chi into health. Spends 6 chi to fill
+    Harvey's health bar, then shields him from every enemy attack for 7 seconds.
   unlockHint: Defeat the Grave Warden in the Old Tomb.
-  duration: 6
-  cooldown: 6
+  duration: 7
+  cooldown: 4
   retriggerWhileHeld: 0
-  chiPerSecond: 5
-  traits: 1
+  chiPerSecond: 0
+  traits: 8
   blockedScenes: []
   animatorBool: 
   activationSound: {fileID: 8300000, guid: 7bad300d148304104bfd0635fb803337, type: 3}
+  chiCost: 60
+  healTime: 1.2

@@ -105,7 +105,7 @@ public class ZoneAtmosphere : MonoBehaviour
             if (zone == Zone.Tomb && (n.Contains("torch") || n.Contains("lamp") || n.Contains("lantern"))) embers.Add(r.transform);
         }
 
-        if (zone == Zone.Tomb) gameObject.AddComponent<TombDarkness>();
+        if (zone == Zone.Tomb && !SceneManager.GetActiveScene().name.Contains("Village")) gameObject.AddComponent<TombDarkness>(); // VILLAGES: the dig-site camp is out in the daylight
 
         // levels with a living/spirit world switch start with the colour of the world Harvey is in
         hasWorlds = FindFirstObjectByType<AnalogueWay.changeWorld>() != null;

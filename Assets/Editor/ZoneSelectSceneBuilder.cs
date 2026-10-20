@@ -30,12 +30,14 @@ public static class ZoneSelectSceneBuilder
             { "Z1A3", ("Z1A3Tomb", "The Old Tomb", "Act 3", ZoneNodeKind.Level, Tomb, "Blue") },
             { "Z1A4", ("Z1A4Tomb", "The Old Tomb", "Act 4", ZoneNodeKind.Level, Tomb, "Blue") },
             { "Z1A5", ("Z1A5Tomb", "The Old Tomb", "Act 5", ZoneNodeKind.Level, Tomb, "Blue") },
+            { "Z1Village", ("Z1TombVillage", "The Old Tomb", "Act 6: Lantern Camp", ZoneNodeKind.Village, Tomb, null) }, // VILLAGES:
             { "Z1Boss", ("Z1BossTomb", "The Old Tomb", "Boss: The Grave Warden", ZoneNodeKind.Boss, Tomb, null) },
             { "Z2A1", ("Z2A1Sandy", "Sandy Dunes", "Act 1", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2A2", ("Z2A2Sandy", "Sandy Dunes", "Act 2", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2A3", ("Z2A3Sandy", "Sandy Dunes", "Act 3", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2A4", ("Z2A4Sandy", "Sandy Dunes", "Act 4", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2A5", ("Z2A5Sandy", "Sandy Dunes", "Act 5", ZoneNodeKind.Level, Sand, "Gold") },
+            { "Z2Village", ("Z2SandyVillage", "Sandy Dunes", "Act 6: Oasis Bazaar", ZoneNodeKind.Village, Sand, null) }, // VILLAGES:
             { "Z2Boss", ("Z2BossSandy", "Sandy Dunes", "Boss: The Sandscale Scarab", ZoneNodeKind.Boss, Sand, null) },
             { "Z3A1", ("Z3A1Japan", "Sunlit Shrine Road", "Act 1", ZoneNodeKind.Level, Snow, "Red") },
             { "Z3A2", ("Z3A2Japan", "Sunlit Shrine Road", "Act 2", ZoneNodeKind.Level, Snow, "Red") },
@@ -48,6 +50,7 @@ public static class ZoneSelectSceneBuilder
             { "Z4A3", ("Z4A8GrassGreen", "Grassy Meadow", "Act 3", ZoneNodeKind.Level, Grass, "Green") },
             { "Z4A4", ("Z4A9GrassGreen", "Grassy Meadow", "Act 4", ZoneNodeKind.Level, Grass, "Green") },
             { "Z4A5", ("Z4A10GrassGreen", "Grassy Meadow", "Act 5", ZoneNodeKind.Level, Grass, "Green") },
+            { "Z4Village", ("Z4GrassVillage", "Grassy Meadow", "Act 6: Meadowbrook", ZoneNodeKind.Village, Grass, null) }, // VILLAGES:
             { "Z4Boss", ("Z4BossGrass", "Grassy Meadow", "Boss: King Mossback", ZoneNodeKind.Boss, Grass, null) },
             { "Win", ("Win", "Journey's End", "Home at Last", ZoneNodeKind.Goal, Grass, null) },
         };
@@ -215,6 +218,9 @@ public static class ZoneSelectSceneBuilder
         ("The Old Tomb", new[] { "Z1" }, "Assets/Music/TombZoneSelectSoundtrack.wav"),
         ("Sandy Dunes", new[] { "Z2" }, "Assets/Music/SandZoneSelectSoundtrack.wav"),
         ("Japan (Shrine Road + Snow Temple Pass)", new[] { "Z3" }, "Assets/Music/JapanZoneSelectSoundTrack.wav"),
+        // WINTERMUSIC: past the torii (Snow Temple Pass). Later entries win, so this overrides the Japan track there.
+        // PLACEHOLDER: SnowTemple_Modern until the real winter track is made; swap the path and re-run the menu below.
+        ("Japan winter side (Snow Temple Pass) - PLACEHOLDER", new[] { "Z3JapanVillage", "Z3Boss" }, "Assets/Music/SnowTemple_Modern.wav"),
         ("Grassy Meadow + Journey's End", new[] { "Z4", "Win" }, "Assets/Music/GrassZoneSelectSoundtrack.wav"),
     };
 

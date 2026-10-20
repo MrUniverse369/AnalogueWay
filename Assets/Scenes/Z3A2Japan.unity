@@ -888,7 +888,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4730721119538624719, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.77
+      value: 0.38406584
       objectReference: {fileID: 0}
     - target: {fileID: 4730721119668753576, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_RootOrder
@@ -940,7 +940,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4730721119972270081, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 6.5387583
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.5387583
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.010000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4317,6 +4325,18 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1672099685
       objectReference: {fileID: 0}
+    - target: {fileID: 5775275322140942330, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24.964663
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275322140942330, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.008999973
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275322291475927, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24.964663
+      objectReference: {fileID: 0}
     - target: {fileID: 5775275323669782909, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_Name
       value: MonkieSamuraiHolder
@@ -4368,6 +4388,10 @@ PrefabInstance:
     - target: {fileID: 5775275323669782910, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275323808042265, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.865996
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5748,9 +5772,17 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1672099685
       objectReference: {fileID: 0}
+    - target: {fileID: 5775275322140942330, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 28.696276
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275322140942330, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.008999973
+      objectReference: {fileID: 0}
     - target: {fileID: 5775275322291475927, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.01
+      value: 28.696276
       objectReference: {fileID: 0}
     - target: {fileID: 5775275323669782909, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_Name
@@ -5803,6 +5835,10 @@ PrefabInstance:
     - target: {fileID: 5775275323669782910, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275323808042265, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20.074669
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -80538,6 +80574,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4730721119538624719, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.7451348
+      objectReference: {fileID: 0}
     - target: {fileID: 4730721119668753576, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_RootOrder
       value: 52
@@ -80585,6 +80625,18 @@ PrefabInstance:
     - target: {fileID: 4730721119668753579, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_Name
       value: YokaiGaurd (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721119972270081, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.0895295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.0895295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.010000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -81709,7 +81761,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4730721119538624719, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.77
+      value: -3.3087575
       objectReference: {fileID: 0}
     - target: {fileID: 4730721119668753576, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_RootOrder
@@ -81761,7 +81813,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4730721119972270081, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 2.845935
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.845935
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.010000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -82308,6 +82368,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4730721119538624719, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.87944
+      objectReference: {fileID: 0}
     - target: {fileID: 4730721119668753576, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_RootOrder
       value: 52
@@ -82355,6 +82419,18 @@ PrefabInstance:
     - target: {fileID: 4730721119668753579, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_Name
       value: YokaiGaurd (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721119972270081, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.714105
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.714105
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.010000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -83420,6 +83496,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1610871147045805498, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.452417
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871147465693079, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.452417
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871147465693079, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6299998
+      objectReference: {fileID: 0}
     - target: {fileID: 1610871148893874448, guid: 7e02908220b2248d2a3751952e398342, type: 3}
       propertyPath: m_Name
       value: YokaiWarriorTwo (15)
@@ -83467,6 +83555,14 @@ PrefabInstance:
     - target: {fileID: 1610871148893874451, guid: 7e02908220b2248d2a3751952e398342, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871149023741300, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.173472
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871149023741300, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3700002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -120167,6 +120263,18 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1672099685
       objectReference: {fileID: 0}
+    - target: {fileID: 5775275322140942330, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.393784
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275322140942330, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.008999973
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275322291475927, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.393784
+      objectReference: {fileID: 0}
     - target: {fileID: 5775275323669782909, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_Name
       value: MonkieSamuraiHolder
@@ -120218,6 +120326,10 @@ PrefabInstance:
     - target: {fileID: 5775275323669782910, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275323808042265, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.4181736
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -121014,7 +121126,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4730721119538624719, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.77
+      value: -2.4539387
       objectReference: {fileID: 0}
     - target: {fileID: 4730721119668753576, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_RootOrder
@@ -121066,7 +121178,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4730721119972270081, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 3.7007537
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.7007537
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.010000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -122043,6 +122163,18 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1672099685
       objectReference: {fileID: 0}
+    - target: {fileID: 5775275322140942330, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20.061325
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275322140942330, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.008999973
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275322291475927, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20.061325
+      objectReference: {fileID: 0}
     - target: {fileID: 5775275323669782909, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_Name
       value: MonkieSamuraiHolder
@@ -122094,6 +122226,10 @@ PrefabInstance:
     - target: {fileID: 5775275323669782910, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275323808042265, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.085716
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -203314,6 +203450,18 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1672099685
       objectReference: {fileID: 0}
+    - target: {fileID: 5775275322140942330, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.744252
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275322140942330, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.008999973
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275322291475927, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.744252
+      objectReference: {fileID: 0}
     - target: {fileID: 5775275323669782909, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_Name
       value: MonkieSamuraiHolder
@@ -203365,6 +203513,10 @@ PrefabInstance:
     - target: {fileID: 5775275323669782910, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275323808042265, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.7686425
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -256724,6 +256876,10 @@ PrefabInstance:
       propertyPath: backgroundMusic
       value: 
       objectReference: {fileID: 8300000, guid: 26553a14b0b524b02b2ef8cd7597891d, type: 3}
+    - target: {fileID: 6491143627340585089, guid: 8b7171f7d769740ffb0091cc1881adc5, type: 3}
+      propertyPath: spiritWorldMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 0c7a73f8e35444b3a9783ff2eb9e95b1, type: 3}
     - target: {fileID: 6491143627340585090, guid: 8b7171f7d769740ffb0091cc1881adc5, type: 3}
       propertyPath: m_RootOrder
       value: 31
@@ -256786,6 +256942,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1610871147045805498, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.198891
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871147465693079, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.198891
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871147465693079, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6299998
+      objectReference: {fileID: 0}
     - target: {fileID: 1610871148893874448, guid: 7e02908220b2248d2a3751952e398342, type: 3}
       propertyPath: m_Name
       value: YokaiWarriorTwo (14)
@@ -256833,6 +257001,14 @@ PrefabInstance:
     - target: {fileID: 1610871148893874451, guid: 7e02908220b2248d2a3751952e398342, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871149023741300, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.9199457
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871149023741300, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3700002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -257320,6 +257496,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4730721119538624719, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.1668844
+      objectReference: {fileID: 0}
     - target: {fileID: 4730721119668753576, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_RootOrder
       value: 52
@@ -257367,6 +257547,18 @@ PrefabInstance:
     - target: {fileID: 4730721119668753579, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_Name
       value: YokaiGaurd
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721119972270081, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.6677797
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.6677797
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.010000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -257990,7 +258182,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4730721119538624719, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.500003
+      value: 4.0372305
       objectReference: {fileID: 0}
     - target: {fileID: 4730721119668753576, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_RootOrder
@@ -258042,7 +258234,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4730721119972270081, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.01
+      value: 10.191923
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.191923
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.010000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -258283,6 +258483,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1610871147045805498, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.983816
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871147465693079, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.983816
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871147465693079, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6299998
+      objectReference: {fileID: 0}
     - target: {fileID: 1610871148893874448, guid: 7e02908220b2248d2a3751952e398342, type: 3}
       propertyPath: m_Name
       value: YokaiWarriorTwo (13)
@@ -258330,6 +258542,14 @@ PrefabInstance:
     - target: {fileID: 1610871148893874451, guid: 7e02908220b2248d2a3751952e398342, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871149023741300, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.7048712
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871149023741300, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3700002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -263693,6 +263913,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1610871147045805498, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.9453917
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871147465693079, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.9453917
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871147465693079, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6299998
+      objectReference: {fileID: 0}
     - target: {fileID: 1610871148893874448, guid: 7e02908220b2248d2a3751952e398342, type: 3}
       propertyPath: m_Name
       value: YokaiWarriorTwo (16)
@@ -263740,6 +263972,14 @@ PrefabInstance:
     - target: {fileID: 1610871148893874451, guid: 7e02908220b2248d2a3751952e398342, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871149023741300, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.3335534
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871149023741300, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3700002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -264942,6 +265182,18 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1672099685
       objectReference: {fileID: 0}
+    - target: {fileID: 5775275322140942330, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.2265544
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275322140942330, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.008999973
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275322291475927, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.2265544
+      objectReference: {fileID: 0}
     - target: {fileID: 5775275323669782909, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_Name
       value: MonkieSamuraiHolder
@@ -264993,6 +265245,10 @@ PrefabInstance:
     - target: {fileID: 5775275323669782910, guid: 214030b877c114be7a8aca902137e8be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775275323808042265, guid: 214030b877c114be7a8aca902137e8be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.3950524
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -265112,6 +265368,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: YokaiWarriorTwo (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 1610871148893874450, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: followLag
+      value: 1.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610871148893874450, guid: 7e02908220b2248d2a3751952e398342, type: 3}
+      propertyPath: followPatrol
+      value: 
+      objectReference: {fileID: 1610871148269664295}
     - target: {fileID: 1610871148893874451, guid: 7e02908220b2248d2a3751952e398342, type: 3}
       propertyPath: m_RootOrder
       value: 88
@@ -265430,6 +265694,8 @@ MonoBehaviour:
   pointB: {fileID: 1610871148131324993}
   objToMove: {fileID: 1610871147550279335}
   speed: 3
+  followPatrol: {fileID: 0}
+  followLag: 0
   enemyTurn: 0
 --- !u!1001 &2617264663500100455
 PrefabInstance:
@@ -265709,6 +265975,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4730721119538624719, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.195018
+      objectReference: {fileID: 0}
     - target: {fileID: 4730721119668753576, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_RootOrder
       value: 35
@@ -265756,6 +266026,18 @@ PrefabInstance:
     - target: {fileID: 4730721119668753579, guid: a40586629b10745d894179cb948ea7c0, type: 3}
       propertyPath: m_Name
       value: YokaiGaurd
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721119972270081, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.639646
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.639646
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730721120090303020, guid: a40586629b10745d894179cb948ea7c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.010000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,3 +1,4 @@
+using UnityEngine.InputSystem; // QUICKITEM: ApplyBindingOverride
 using UnityEngine;
 
 
@@ -79,6 +80,11 @@ public class PlayerController : CharecterBehaviour
         pControls = new PlayerControls();
         pControls.Gameplay.Fly.performed += ctx => MountActive();
         pControls.Gameplay.unMount.performed += ctx => UnMountActive();
+        // QUICKITEM (2026-10-20): R1 uses the quick item now, so the dragon is summoned with L1 (an override at runtime:
+        // the generated PlayerControls and its input asset stay as they are)
+        for (int i = 0; i < pControls.Gameplay.Fly.bindings.Count; i++)
+            if (pControls.Gameplay.Fly.bindings[i].path == "<Gamepad>/rightShoulder")
+                pControls.Gameplay.Fly.ApplyBindingOverride(i, "<Gamepad>/leftShoulder");
         speed = speedDefault; // POWERUP: talismans no longer reset speed every frame
         jSpeed = jSpeedDefault; // POWERUP: talismans no longer reset jump speed every frame
         if (GetComponent<PlayerFX>() == null) gameObject.AddComponent<PlayerFX>(); // FX: hit flash, dust, stomp combo, talisman effects
@@ -202,12 +208,13 @@ public class PlayerController : CharecterBehaviour
             CharMovement();
             PlayFootsteps(); // SFX:
 
-            if (mountActive && PlayerController.chi > 0) Fly();
-            if (PlayerController.chi <= 0) mountActive = false;
+            bool chiFree = Chi.IsFree; // CHIFREE: the final combo stage keeps the dragon flying for free
+            if (mountActive && (PlayerController.chi > 0 || chiFree)) Fly();
+            if (PlayerController.chi <= 0 && !chiFree) mountActive = false;
             playerInviInvincible = false;
         }
 
-        if (pBDARef.pushBackCounter > 0 && !PowerUpManager.Has(TalismanTrait.EnemyImmunity)) // POWERUP: was ActiveCardManager.speedBoostPowerUp == false
+        if (pBDARef.pushBackCounter > 0 && !PowerUpManager.Has(TalismanTrait.EnemyImmunity | TalismanTrait.HealShield)) // HEAL: // POWERUP: was ActiveCardManager.speedBoostPowerUp == false
         {
             pBDARef.pushBackCounter -= Time.deltaTime;
             playerInviInvincible = true;
@@ -285,7 +292,7 @@ public class PlayerController : CharecterBehaviour
         Flip(dir);
 
         rb2D.linearVelocity = flightVel;
-        PlayerController.chi -= 10 * Time.deltaTime;
+        PlayerController.chi = Mathf.Max(0f, PlayerController.chi - 10 * Chi.CostScale * Time.deltaTime); // CHIFREE: cheaper up the combo ladder
     }
 
 

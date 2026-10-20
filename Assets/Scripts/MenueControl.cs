@@ -15,6 +15,7 @@ public class MenueControl : MonoBehaviour
     public void LoadMainMenue()
     {
         Time.timeScale = 1f;
+        GameSession.AutoSave(); // SAVEFIX: leaving a level keeps what was found and bought in it (does nothing in arcade)
         GameSession.EndArcade(); // ARCADE: quitting a run keeps nothing
         LevelLoader.Load(0); // LOADING:
         isGamePaused = false;
@@ -42,6 +43,16 @@ public class MenueControl : MonoBehaviour
         isGamePaused = false;
         GameSession.StartArcade();
     }
+    /// <summary>TUTORIAL (2026-10-20): the Basic Controls level (Tools/HNL/Build Basic Controls Tutorial).</summary>
+    public const string TutorialSceneName = "Tutorial_BasicControls";
+
+    // TUTORIAL: main menu Tutorial button. Harvey's basic controls in a plain white-box level; nothing is saved.
+    public void StartTutorial()
+    {
+        Time.timeScale = 1f;
+        isGamePaused = false;
+        GameSession.StartTutorial(TutorialSceneName);
+    }
     // ZONEMAP: main menu Zone Select button (plays the save file used last)
     public void LoadZoneSelect()
     {
@@ -61,6 +72,7 @@ public class MenueControl : MonoBehaviour
     {
 
         Debug.Log("Game ShutDown");
+        GameSession.AutoSave(); // SAVEFIX: (Application.quitting saves too; this covers the editor, where Quit does nothing)
         Application.Quit();
     }
     private void Update()

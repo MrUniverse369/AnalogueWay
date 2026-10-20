@@ -64,7 +64,7 @@ public class BagView : MenuView
         detailCount = MenuUI.Text("Count", panel, new Vector2(96, 20), new Vector2(84, 7), 5, MenuUI.Yellow, TextAlignmentOptions.Left, "");
         detailText = MenuUI.Text("Text", panel, new Vector2(82, -10), new Vector2(106, 44), 5, MenuUI.Cream, TextAlignmentOptions.TopLeft, "", true);
         detailAction = MenuUI.Text("Action", panel, new Vector2(82, -34), new Vector2(106, 7), 5, MenuUI.Yellow, TextAlignmentOptions.Center, "");
-        Hint("L1/R1 OR Q/E: TABS    CROSS/ENTER: USE    CIRCLE/ESC: BACK", new Vector2(0, -71));
+        Hint("L1/R1 OR Q/E: TABS   CROSS/ENTER: USE   SQUARE/R: QUICK ITEM   CIRCLE/ESC: BACK", new Vector2(0, -71)); // QUICKITEM:
 
         WireNavigation();
     }
@@ -98,6 +98,7 @@ public class BagView : MenuView
         int step = 0;
         if ((kb != null && kb.qKey.wasPressedThisFrame) || (pad != null && pad.leftShoulder.wasPressedThisFrame)) step = -1;
         if ((kb != null && kb.eKey.wasPressedThisFrame) || (pad != null && pad.rightShoulder.wasPressedThisFrame)) step = 1;
+        if ((kb != null && kb.rKey.wasPressedThisFrame) || (pad != null && pad.buttonWest.wasPressedThisFrame)) SetQuick(cursor); // QUICKITEM:
         if (step != 0)
         {
             SetTab((tab + step + tabs.Length) % tabs.Length, false);
@@ -134,6 +135,7 @@ public class BagView : MenuView
             pocketIcons[i].color = item != null && item.Icon != null ? Color.white : new Color(1, 1, 1, 0);
             int n = item != null ? Inventory.Count(item) : 0;
             pocketCounts[i].text = n > 1 ? "x" + n : "";
+            pocketCounts[i].color = item != null && item == Inventory.QuickItem ? MenuUI.Yellow : MenuUI.Cream; // QUICKITEM: the quick item's count is yellow
         }
     }
 
@@ -155,7 +157,8 @@ public class BagView : MenuView
         int n = Inventory.Count(item);
         detailCount.text = item.Unique ? "" : "CARRYING " + n;
         detailText.text = (item.Description ?? "").ToUpperInvariant();
-        detailAction.text = item.Usable && CanUseHere ? "CROSS/ENTER: USE" : "";
+        detailAction.text = item == Inventory.QuickItem ? "QUICK ITEM: R1 / Q IN A LEVEL" // QUICKITEM:
+                          : item.Usable && CanUseHere ? "CROSS/ENTER: USE" : item.Usable ? "SQUARE/R: SET AS QUICK ITEM" : "";
     }
 
     private string EmptyTabText()
@@ -166,6 +169,23 @@ public class BagView : MenuView
             case 1: return "POWER-UPS TURN UP IN TREASURE CHESTS.";
             default: return "VILLAGE SHOPS SELL GOODS FOR COINS.";
         }
+    }
+
+    // QUICKITEM: Square / R puts the item under the cursor on R1 / Q
+    private void SetQuick(int index)
+    {
+        ItemDefinition item = index < shown.Count ? shown[index] : null;
+        if (item == null || !item.Usable)
+        {
+            Sound(cat.blockedSound);
+            Message(item == null ? "PICK AN ITEM FIRST" : "ONLY USABLE ITEMS CAN GO ON R1", MenuUI.Muted);
+            return;
+        }
+        Inventory.SetQuick(item);
+        Sound(cat.equipSound);
+        Message("QUICK ITEM: " + item.DisplayName.ToUpperInvariant() + " (R1 / Q)", MenuUI.Yellow);
+        Refresh();
+        ShowPocket(index);
     }
 
     // items can only be used where Harvey is actually playing

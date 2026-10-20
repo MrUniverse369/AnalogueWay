@@ -1,0 +1,69 @@
+// Harvey's Nine Lives: the dig-site camp outside the Old Tomb (Z1TombVillage).
+// Format notes: see JapanVillage.txt and Assets/Scripts/DialogueScript.cs. Check with Tools/HNL/Check Dialogue Files.
+
+
+// ------------------------------------------------------------------ Professor Bastet, who runs the dig
+== prof
+-> cycle: prof_first, prof_again
+
+== prof_first
+Bastet: A cat in the dig site! Mind the trenches, we've only just levelled them.
+I'm Professor Bastet. This camp has been digging out the Old Tomb for three seasons.
+* What's inside the tomb? -> prof_tomb
+* Any advice? -> prof_tip
+* Just passing through. -> prof_bye
+
+== prof_tomb
+Bastet: Corridors, traps and something old that doesn't like visitors.
+The workers call it the Grave Warden. I call it a very good reason to stay up here.
+-> prof_tip
+
+== prof_tip
+Bastet: Take a lantern-light approach: slow down where it's dark.
+And if you find a talisman down there, keep it. They're worth more than any pot.
+-> prof_bye
+
+== prof_again
+Bastet: Back for more dust, {player}? The shop has fish if you're peckish.
+-> end
+
+== prof_bye
+Bastet: Off you go then. Bring me a rubbing if you find one!
+-> end
+
+
+// ------------------------------------------------------------------ Digger Tom, by the tents
+== digger
+Tom: Phew. Forty buckets of sand today and not one golden cat.
+* Golden cat? -> digger_cat
+* Keep digging! -> digger_bye
+
+== digger_cat
+Tom: Legend says nine of them are buried round here. One for each life.
+I've found eight spoons and a very cross scorpion.
+-> digger_bye
+
+== digger_bye
+Tom: Right. Back to it.
+-> end
+
+
+// ------------------------------------------------------------------ everyone else
+== villager
+-> random: v1, v2, v3, v4
+
+== v1
+{name}: The tents are cooler than the tomb, but not by much.
+-> end
+
+== v2
+{name}: Stomp the creatures one after another and they come in a lovely rhythm, I'm told.
+-> end
+
+== v3
+{name}: Spend your coins on fish. Chi is dear, but it's worth it in the dark.
+-> end
+
+== v4
+{name}: Sometimes I hear the tomb breathing at night. Probably just the wind.
+-> end

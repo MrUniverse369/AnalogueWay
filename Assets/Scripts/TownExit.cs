@@ -27,12 +27,13 @@ public class TownExit : MonoBehaviour
     public IEnumerator VillageExitPauseCo()
     {
 
-        fadeOut.SetActive(true);
+        // VILLAGES: the newer villages have no fade of their own; the loading screen covers the change instead
+        if (fadeOut != null) fadeOut.SetActive(true);
         Time.timeScale = 0.0f;
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(fadeOut != null ? 5f : 0.3f);
         GameSession.FinishLevel(); // FLOW: back to the Zone Select with the next level unlocked (was straight into it)
         Time.timeScale = 1.0f;
-        fadeOut.SetActive(false);
+        if (fadeOut != null) fadeOut.SetActive(false);
 
     }
     void OnTriggerEnter2D(Collider2D collision)

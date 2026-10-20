@@ -70,7 +70,7 @@ public class TalismanHUD : MonoBehaviour
     {
         if (icon == null) return;
         icon.sprite = CurrentSprite();
-        icon.color = Chi.IsEmpty ? NoChiTint : Color.white; // CHI: no chi left: the gems dim until it is restored
+        icon.color = Chi.IsEmpty && !Chi.IsFree ? NoChiTint : Color.white; // CHIFREE: usable at the final combo stage // CHI: no chi left: the gems dim until it is restored
         UpdateRadials();
     }
 

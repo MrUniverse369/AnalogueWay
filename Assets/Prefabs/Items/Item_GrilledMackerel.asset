@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3134d6d37bab24f31a3587169c86276a, type: 3}
+  m_Name: Item_GrilledMackerel
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDefinition
+  id: GrilledMackerel
+  displayName: Grilled Mackerel
+  description: Salt-grilled saba, hot from the charcoal. Restores 2 health.
+  icon: {fileID: 21300000, guid: 9f71dee65be924440ac8be0ddab8cc94, type: 3}
+  category: 3
+  unique: 0
+  effect: 2
+  amount: 2
+  price: 11

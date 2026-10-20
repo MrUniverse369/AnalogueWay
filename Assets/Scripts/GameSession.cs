@@ -19,13 +19,60 @@ public static class GameSession
     /// </summary>
     public static bool IsArcade { get; private set; }
 
+    /// <summary>
+    /// TUTORIAL (2026-10-20): the Basic Controls level from the main menu. It runs as an unsaved (arcade) run, and
+    /// finishing it goes back to the main menu instead of on to the next level.
+    /// </summary>
+    public static bool IsTutorial { get; private set; }
+
+    /// <summary>
+    /// SAVEFIX (2026-10-20): a save file is being played this run (a new game, a continued file or a level picked on
+    /// the map). Autosaves only happen then, so testing a level straight from the editor never writes over a file.
+    /// </summary>
+    public static bool SessionActive { get; private set; }
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void ResetStatics()
     {
         IsArcade = false;
+        IsTutorial = false;
+        SessionActive = false;
+        autoSaving = false;
+        restoring = false;
         furthestScene = null;
         furthestLoaded = false;
+        // SAVEFIX: anything that changes Harvey's Bag or talismans is saved straight away, and so is a level left by
+        // closing the game. Before, only checkpoints, the shop and finishing a level saved, so pickups, chest rewards,
+        // boss talismans and used items were lost when the game was closed or the level was left from the pause menu
+        // (the map then reloaded the older save over them).
+        Inventory.Changed -= AutoSave;
+        Inventory.Changed += AutoSave;
+        Application.quitting -= AutoSave;
+        Application.quitting += AutoSave;
     }
+
+    private static bool autoSaving;
+    private static bool restoring; // SAVEFIX: Apply/NewGame are rewriting progress; their Inventory events aren't new finds
+
+    /// <summary>
+    /// SAVEFIX: saves the active save file now, if a level of it is being played (not the menus, the map, arcade or
+    /// the tutorial). Called whenever the Bag or talismans change, when a level is left from the pause menu, and on
+    /// quitting.
+    /// </summary>
+    public static void AutoSave()
+    {
+        if (!SessionActive || IsArcade || autoSaving || restoring) return;
+        if (LevelLoader.Busy) return; // leaving (or still revealing) a level: what's in memory may be mid-change
+        string scene = SceneManager.GetActiveScene().name;
+        if (!IsLevelScene(scene)) return;
+        autoSaving = true;
+        try { SaveProgress(scene); }
+        finally { autoSaving = false; }
+    }
+
+    /// <summary>SAVEFIX: a playable level (or village): in Build Settings, and not the main menu, the map or the win screen.</summary>
+    public static bool IsLevelScene(string sceneName) =>
+        BuildIndexOf(sceneName) > 0 && sceneName != ZoneSelectMap.SceneName && sceneName != "Win";
 
     // ---------------------------------------------------------------- SLOTS: save files
     /// <summary>SLOTS: make save file n (1 to SaveSystem.SlotCount) the one that is played and saved to.</summary>
@@ -44,6 +91,8 @@ public static class GameSession
     public static void StartNewGame(int number)
     {
         IsArcade = false;
+        IsTutorial = false; // TUTORIAL:
+        SessionActive = true; // SAVEFIX:
         SelectSlot(number);
         SaveSystem.Delete(); // a fresh file: nothing (not even the zone select) carries over from what was there
         furthestLoaded = true; // and there is nothing to read back
@@ -59,8 +108,10 @@ public static class GameSession
     public static bool ContinueSlot(int number)
     {
         IsArcade = false;
+        IsTutorial = false; // TUTORIAL:
         SelectSlot(number);
         if (!SaveSystem.TryLoad(out SaveData data)) return false;
+        SessionActive = true; // SAVEFIX:
         Apply(data);
         LevelLoader.Load(ZoneSelectMap.SceneName); // FLOW: the zone map starts on the file's saved level
         return true;
@@ -70,15 +121,57 @@ public static class GameSession
     public static void StartArcade()
     {
         IsArcade = true;
+        IsTutorial = false; // TUTORIAL:
         NewGame();
         LevelLoader.Load(1); // LOADING:
     }
 
+    /// <summary>
+    /// TUTORIAL: play the Basic Controls level. Like arcade it is never saved and a fall puts Harvey back where he
+    /// was; progress in memory is reset, and a save file is loaded again when one is picked on the main menu.
+    /// </summary>
+    public static void StartTutorial(string sceneName)
+    {
+        IsArcade = true;
+        IsTutorial = true;
+        NewGame();
+        LevelLoader.Load(sceneName); // LOADING:
+    }
+
+    /// <summary>
+    /// TUTORIAL: makes the open level run as the tutorial (unsaved) without resetting anything. Used when the tutorial
+    /// scene is played straight from the editor rather than from the main menu.
+    /// </summary>
+    public static void BeginTutorialInPlace()
+    {
+        IsArcade = true;
+        IsTutorial = true;
+    }
+
+    /// <summary>TUTORIAL: the tutorial is done: back to the main menu, with nothing saved.</summary>
+    public static void FinishTutorial()
+    {
+        EndArcade();
+        Time.timeScale = 1f;
+        LevelLoader.Load(0); // LOADING:
+    }
+
     /// <summary>ARCADE: back to normal, saved play (called when the player returns to the main menu).</summary>
-    public static void EndArcade() => IsArcade = false;
+    public static void EndArcade()
+    {
+        IsArcade = false;
+        IsTutorial = false; // TUTORIAL:
+    }
 
     /// <summary>Reset progress to the start of a new game.</summary>
     public static void NewGame()
+    {
+        restoring = true; // SAVEFIX:
+        try { ResetProgress(); }
+        finally { restoring = false; }
+    }
+
+    private static void ResetProgress()
     {
         CollectableCollisiondetector.coinCollected = 0;
         HurtPlayer.pLivesCount = StartingLives;
@@ -141,6 +234,8 @@ public static class GameSession
     public static void StartLevel(string sceneName)
     {
         IsArcade = false; // ARCADE: the zone select plays the active save file
+        IsTutorial = false; // TUTORIAL:
+        SessionActive = true; // SAVEFIX:
         if (SaveSystem.TryLoad(out SaveData data)) Apply(data);
         else NewGame();
         HurtPlayer.pLivesCount = StartingLives;
@@ -159,6 +254,13 @@ public static class GameSession
     }
 
     public static void Apply(SaveData data)
+    {
+        restoring = true; // SAVEFIX:
+        try { ApplyProgress(data); }
+        finally { restoring = false; }
+    }
+
+    private static void ApplyProgress(SaveData data)
     {
         CollectableCollisiondetector.coinCollected = data.coins;
         HurtPlayer.pLivesCount = data.lives;
@@ -188,6 +290,11 @@ public static class GameSession
     /// </summary>
     public static void FinishLevel()
     {
+        if (IsTutorial) // TUTORIAL: the Basic Controls level ends back on the main menu
+        {
+            FinishTutorial();
+            return;
+        }
         int next = SceneManager.GetActiveScene().buildIndex + 1;
         SaveProgressForBuildIndex(next); // SAVE: autosave so the next level is open on the map
         Time.timeScale = 1f;
@@ -206,6 +313,9 @@ public static class GameSession
         }
 
         Apply(data);
+        IsArcade = false; // SAVEFIX:
+        IsTutorial = false;
+        SessionActive = true;
         LevelLoader.Load(data.sceneName); // LOADING:
         return true;
     }

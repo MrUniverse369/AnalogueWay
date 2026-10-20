@@ -238,9 +238,10 @@ public class ZoneSelectMap : MonoBehaviour
             {
                 Vector3 before = player.position;
                 player.position = Vector3.MoveTowards(player.position, goal, walkSpeed * Time.deltaTime);
-                CheckGates(before, player.position);
+                bool throughGate = CheckGates(before, player.position);
                 walked += Vector2.Distance(before, player.position);
-                if (!musicSwitched && walked >= length / 2f)
+                // WINTERMUSIC: walking through the torii changes the music right there (into or out of the snow)
+                if (!musicSwitched && (throughGate || walked >= length / 2f))
                 {
                     musicSwitched = true;
                     PlayZoneMusic(target, musicFadeTime);
@@ -254,16 +255,21 @@ public class ZoneSelectMap : MonoBehaviour
         busy = false;
     }
 
-    // a chime as Harvey passes under a gate (either direction)
-    private void CheckGates(Vector3 before, Vector3 after)
+    // a chime as Harvey passes under a gate (either direction). True when he went through one.
+    private bool CheckGates(Vector3 before, Vector3 after)
     {
-        if (gates == null) return;
+        if (gates == null) return false;
+        bool through = false;
         foreach (Transform gate in gates)
         {
             if (gate == null || Mathf.Abs(after.x - gate.position.x) > gateHalfWidth) continue;
             if ((before.y < gate.position.y) != (after.y < gate.position.y))
+            {
                 PlaySound(gateSound);
+                through = true;
+            }
         }
+        return through;
     }
 
     private IEnumerator Shake()

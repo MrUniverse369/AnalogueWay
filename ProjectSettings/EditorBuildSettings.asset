@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Z1A5Tomb.unity
     guid: 7a6676472f6d248d1990c7d87f4fceaf
   - enabled: 1
+    path: Assets/Scenes/Z1TombVillage.unity
+    guid: 3ecef3a2e6cef40878ea4475fcfbc6f2
+  - enabled: 1
     path: Assets/Scenes/Z1BossTomb.unity
     guid: 1a65351426aeb495c9e061a7c6e11240
   - enabled: 1
@@ -41,6 +44,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Z2A5Sandy.unity
     guid: b64b47678b6fb4dd884262a57fbb01d4
+  - enabled: 1
+    path: Assets/Scenes/Z2SandyVillage.unity
+    guid: 82aac1cd567104affb3b22015d45efdb
   - enabled: 1
     path: Assets/Scenes/Z2BossSandy.unity
     guid: 6e1a99518c35a42eb975e7cb8f59e87d
@@ -78,6 +84,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Z4A10GrassGreen.unity
     guid: cfc22ceb08b984bffa08667a9e2ae55b
   - enabled: 1
+    path: Assets/Scenes/Z4GrassVillage.unity
+    guid: a5e3a0841a1354b2b8120e93d7935fcb
+  - enabled: 1
     path: Assets/Scenes/Z4BossGrass.unity
     guid: df29f23891b1c44b88a971cbbdfbb9d7
   - enabled: 1
@@ -113,6 +122,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/4Level_Four_4.unity
     guid: d5dc91ada5efa2b4e8f2c744f5f89e6f
+  - enabled: 1
+    path: Assets/Scenes/Tutorial_BasicControls.unity
+    guid: 480251151cf414002a83061cb058c075
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
   m_UseUCBPForAssetBundles: 0
