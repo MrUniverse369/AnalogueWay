@@ -2018,6 +2018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6472242d12404d738a2aab55bbae9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toughness: 0
   bounceSpeed: 9
   mTRef: {fileID: 1274347155}
   animator: {fileID: 0}
@@ -2677,6 +2678,8 @@ MonoBehaviour:
   pointB: {fileID: 1735328802}
   objToMove: {fileID: 1534587148}
   speed: 2
+  followPatrol: {fileID: 0}
+  followLag: 0
   enemyTurn: 0
 --- !u!4 &388687524
 Transform:
@@ -6669,6 +6672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6472242d12404d738a2aab55bbae9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toughness: 0
   bounceSpeed: 5
   mTRef: {fileID: 0}
   animator: {fileID: 0}
@@ -6950,6 +6954,8 @@ MonoBehaviour:
   pointB: {fileID: 494605733}
   objToMove: {fileID: 312161761}
   speed: 2
+  followPatrol: {fileID: 0}
+  followLag: 0
   enemyTurn: 0
 --- !u!4 &1274347156
 Transform:
@@ -7049,6 +7055,7 @@ MonoBehaviour:
   levelComplete: {fileID: 283026818}
   timerScriptRef: {fileID: 371444917}
   pScriptObjRef: {fileID: 6993799947401319139}
+  requireAction: 0
 --- !u!212 &1327454605
 SpriteRenderer:
   serializedVersion: 2
@@ -7210,6 +7217,8 @@ MonoBehaviour:
   pointB: {fileID: 1365348721}
   objToMove: {fileID: 1258024349}
   speed: 2
+  followPatrol: {fileID: 0}
+  followLag: 0
   enemyTurn: 0
 --- !u!4 &1380234479
 Transform:
@@ -7285,6 +7294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6472242d12404d738a2aab55bbae9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toughness: 0
   bounceSpeed: 9
   mTRef: {fileID: 1756331398}
   animator: {fileID: 0}
@@ -7871,6 +7881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6472242d12404d738a2aab55bbae9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toughness: 0
   bounceSpeed: 9
   mTRef: {fileID: 388687523}
   animator: {fileID: 0}
@@ -8305,6 +8316,8 @@ MonoBehaviour:
   pointB: {fileID: 481559050}
   objToMove: {fileID: 1400106079}
   speed: 2
+  followPatrol: {fileID: 0}
+  followLag: 0
   enemyTurn: 0
 --- !u!4 &1756331399
 Transform:
@@ -9250,7 +9263,7 @@ CompositeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:

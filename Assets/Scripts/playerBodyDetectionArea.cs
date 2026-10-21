@@ -22,7 +22,7 @@ public class playerBodyDetectionArea : MonoBehaviour
     // Handle player pushback when hitting the enemy trigger
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("HurtPlayer"))
+        if (other.CompareTag("HurtPlayer") && !HurtPlayer.Shielded) // SHIELD: no flinch while the Healing Stone runs
         {
             animatorRef.SetTrigger("IsHurtStanding");
         }

@@ -55,7 +55,22 @@ public class LevelManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameSession.IsArcade) TrackArcadeSafePoint();
+        TrackArcadeSafePoint(); // SHIELD: tracked in every mode now (the Healing Stone's pit rescue uses it); only Arcade respawns there
+    }
+
+    /// <summary>SHIELD (2026-10-21): the Healing Stone caught Harvey falling into a pit: put him back on the last safe
+    /// ground (or the checkpoint) with nothing lost and no game over.</summary>
+    public void RescueToSafeGround()
+    {
+        if (pScriptRef == null) return;
+        Vector3 from = pScriptRef.transform.position;
+        Vector3 to = arcadeSafePoint.HasValue ? arcadeSafePoint.Value : ReSpawnPos.transform.position;
+        PixelFX.Burst(from, 10, 0.8f, 2.2f, new[] { PixelFX.Cream, PixelFX.Hex("ff9db1") }, 0.3f, 0.6f, 1, PixelShape.Cross, PixelMotion.Float, true); // FX: the heal colours
+        pScriptRef.transform.position = to;
+        Rigidbody2D rb = pScriptRef.GetComponent<Rigidbody2D>();
+        if (rb != null) rb.linearVelocity = Vector2.zero;
+        PixelFX.Burst(to, 12, 0.8f, 2.2f, new[] { PixelFX.Cream, PixelFX.Hex("ff9db1") }, 0.3f, 0.6f, 1, PixelShape.Cross, PixelMotion.Float, true);
+        groundedFor = 0f;
     }
 
     private void TrackArcadeSafePoint()
@@ -100,13 +115,13 @@ public class LevelManager : MonoBehaviour
         ScreenGrade.GreyPulse(); // FX: a brief greyscale pulse on game over
         PixelFX.Burst(pScriptRef.transform.position, 12, 1.5f, 3.5f, new[] { PixelFX.Cream, PixelFX.Hex("98b2b1") }, 0.4f, 0.7f, 1, PixelShape.Square, PixelMotion.Float, true); // FX:
         pScriptRef.gameObject.SetActive(false);
-        gameOverScreen.SetActive(true);
+        if (gameOverScreen != null) gameOverScreen.SetActive(true); // RESPAWN: a level missing its screen (Z1A3 was) still respawns
         yield return new WaitForSeconds(respawnDelay);
         // ARCADE: back where he fell (the last safe ground before it); saved play goes back to the checkpoint
         pScriptRef.transform.position = GameSession.IsArcade && arcadeSafePoint.HasValue ? arcadeSafePoint.Value : ReSpawnPos.transform.position;
         groundedFor = 0f;
         pScriptRef.gameObject.SetActive(true);
-        gameOverScreen.SetActive(false);
+        if (gameOverScreen != null) gameOverScreen.SetActive(false);
         HurtPlayer.pLivesCount = 3;
         PlayerController.chi = 90;
         HurtPlayer.oopsCount = HurtPlayer.oopsCount + 1;

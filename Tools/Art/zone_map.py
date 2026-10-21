@@ -405,24 +405,66 @@ def build_map():
                 c.put(x, y, col)
         reserve(cx - half - 1, base - height - 1, cx + half + 1, base + 1)
 
-    def mausoleum(x0, y0):
-        roof_l, roof_d = hexc("f0f2fe"), hexc("b9d2ca")
-        wall, wall_l, wall_d = hexc("98b2b1"), hexc("b9d2ca"), hexc("769099")
-        for r in range(6):  # pediment
-            for x in range(x0 + 9 - r * 2 - 1, x0 + 9 + r * 2 + 2):
-                c.put(x, y0 + r, roof_l if x <= x0 + 9 else roof_d)
-        c.rect(x0 - 1, y0 + 6, x0 + 19, y0 + 6, hexc("5a697d"))
-        c.rect(x0, y0 + 7, x0 + 18, y0 + 16, wall)
-        for px in (x0 + 1, x0 + 15):  # columns
-            c.rect(px, y0 + 7, px + 1, y0 + 16, wall_l)
-            c.rect(px + 2, y0 + 7, px + 2, y0 + 16, wall_d)
-        c.rect(x0 + 6, y0 + 9, x0 + 12, y0 + 16, hexc("14202b"))  # doorway
-        c.rect(x0 + 7, y0 + 8, x0 + 11, y0 + 8, hexc("14202b"))
-        c.put(x0 + 9, y0 + 12, hexc("e7fbfe"))  # spirit light
-        for dx, dy in ((0, 1), (-1, 1), (1, 1), (0, 2)):
-            c.put(x0 + 9 + dx, y0 + 12 + dy, WATER_LIGHT)
-        c.rect(x0 - 1, y0 + 17, x0 + 19, y0 + 17, hexc("5a697d"))
-        reserve(x0 - 3, y0 - 1, x0 + 21, y0 + 19)
+    def step_temple(cx, base):
+        """DECLUTTER (2026-10-21): the Old Tomb's focal point, a ruined stepped temple in the Aztec style: four worn
+        tiers with a fret band on each, a steep central stair, a small shrine on top with the spirit light in its
+        doorway, a collapsed corner with rubble and moss creeping over the ledges."""
+        lit, mid, shade, deep = hexc("b9d2ca"), hexc("98b2b1"), hexc("769099"), hexc("5a697d")
+        line, door, moss, moss_d = hexc("f0f2fe"), hexc("14202b"), hexc("529271"), hexc("3c796e")
+        y = base
+        for t, half in enumerate((20, 16, 12, 8)):
+            for r in range(4):
+                for x in range(cx - half, cx + half + 1):
+                    col = lit if x < cx - 3 else mid if x <= cx + 3 else shade
+                    if r == 0:
+                        col = line if x < cx else lit  # the lit ledge on top of each tier
+                    elif r == 2 and abs(x - cx) > 4:  # the fret band: a stepped meander of dark notches
+                        col = deep if (x + t * 2) % 4 in (0, 1) and (x // 4 + t) % 2 == 0 else col
+                    elif r == 3:
+                        col = deep if x >= cx else shade
+                    if abs(x - cx) <= 3 and r != 0:  # the stair: alternating treads
+                        col = line if (y - 3 + r) % 2 == 0 else mid
+                    c.put(x, y - 3 + r, col)
+            y -= 4
+        c.rect(cx - 5, y - 6, cx + 5, y, mid)  # the shrine
+        c.rect(cx - 5, y - 6, cx - 2, y, lit)
+        c.rect(cx + 3, y - 6, cx + 5, y, shade)
+        c.rect(cx - 6, y - 7, cx + 6, y - 7, line)  # flat roof with a fret cornice
+        for x in range(cx - 6, cx + 7, 2):
+            c.put(x, y - 8, deep)
+        c.rect(cx - 2, y - 4, cx + 2, y, door)
+        c.put(cx, y - 2, hexc("e7fbfe"))  # spirit light
+        c.put(cx, y - 1, WATER_LIGHT)
+        for x in range(cx + 9, cx + 17):  # the collapsed upper-right corner
+            for yy in range(base - 12, base - 12 + (x - cx - 8) // 2 + 1):
+                c.put(x, yy, ZONES["tomb"]["base"])
+        for dx, dy, col in ((22, 0, mid), (23, 0, shade), (24, -1, lit), (26, 0, deep), (-23, 0, mid), (-22, -1, lit),
+                            (21, -1, deep), (18, -9, mid), (19, -9, shade)):
+            c.put(cx + dx, base + dy, col)  # rubble
+        for dx, dy in ((-18, -4), (-17, -4), (-9, -12), (-8, -12), (13, -8), (-14, -3), (6, -16), (16, -4)):
+            c.put(cx + dx, base + dy, moss)
+            c.put(cx + dx, base + dy + 1, moss_d)
+        reserve(cx - 24, base - 26, cx + 27, base + 2)
+
+    def sand_temple(cx, base):
+        """DECLUTTER: an Egyptian temple front of two sloping pylons and a lintel gate, in the dune sandstone."""
+        lit, mid, shade, line, door = hexc("ffffeb"), hexc("e3ba66"), hexc("ce812c"), hexc("e1d089"), hexc("a35a3c")
+        for side in (-1, 1):
+            px = cx + side * 10
+            for r in range(16):
+                y = base - r
+                half = 7 - r // 4
+                for x in range(px - half, px + half + 1):
+                    col = lit if x < px - 1 else mid if x <= px + 2 else shade
+                    if r in (4, 5, 11) and abs(x - px) < half:  # carved bands
+                        col = line if r != 5 else shade
+                    c.put(x, y, col)
+        c.rect(cx - 4, base - 11, cx + 4, base, mid)  # the gate between them
+        c.rect(cx - 5, base - 12, cx + 5, base - 12, lit)
+        c.rect(cx - 2, base - 8, cx + 2, base, door)
+        for x in range(cx - 18, cx + 19):  # its shadow on the sand
+            c.put(x, base + 1, hexc("e3ba66"))
+        reserve(cx - 19, base - 17, cx + 19, base + 2)
 
     def pagoda(cx, base, tiers):
         """A red pagoda like the sunny Japan backdrop: navy roofs with cream trim, red walls, a gold spire."""
@@ -463,7 +505,8 @@ def build_map():
     pyramid(452, 150, 13)
     pyramid(474, 124, 8)
     oasis(436, 108)
-    mausoleum(380, 200)
+    step_temple(450, 300)  # DECLUTTER: the Tomb's focal point, in the middle of its path loop
+    sand_temple(398, 44)
     mountain(244, 74, 30, 38)
     mountain(292, 52, 13, 22)
     pagoda(112, 172, 3)
@@ -504,7 +547,62 @@ def build_map():
             c.stamp(HOUSE, HOUSE_PAL, hx, hy)
             reserve(hx - 1, hy - 1, hx + 11, hy + 8)
 
-    # ---- scattered decor, drawn top to bottom so lower things overlap
+    def place(grid, pal, x, y):
+        """Stamp a decor sprite whose bottom-centre is (x, y), if the ground there is clear and all one zone."""
+        aw, ah = max(len(r) for r in grid), len(grid)
+        x0, y0 = x - aw // 2, y - ah + 1
+        z = zat(x, y)
+        corners = ((x0, y0), (x0 + aw - 1, y0), (x0, y), (x0 + aw - 1, y))
+        # trees only claim their lower half, so canopies overlap into clumps like a forest
+        claim = y0 + ah // 2 if grid is TREE else y0
+        if wet(z) or not free(x0, claim, x0 + aw - 1, y0 + ah - 1) or not all(zat(cx, cy) == z for cx, cy in corners):
+            return False
+        if any(reserved[yy][xx] for yy in range(y0, claim) for xx in range(x0 + 2, x0 + aw - 2) if path_near[yy][xx]):
+            return False
+        c.stamp(grid, pal, x0, y0)
+        reserve(x0, claim, x0 + aw - 1, y0 + ah - 1)
+        return True
+
+    # ---- DECLUTTER (2026-10-21): set pieces first, lined up along straight stretches of path
+    def avenue(a, b, step, gap, items):
+        """Pairs of pieces facing each other across the path from a to b (items cycle along it)."""
+        (ax, ay), (bx, by) = a, b
+        n = int(math.hypot(bx - ax, by - ay) // step)
+        for i in range(1, n):
+            t = i / n
+            x, y = int(ax + (bx - ax) * t), int(ay + (by - ay) * t)
+            grid, pal = items[i % len(items)]
+            if ay == by:  # horizontal: one above, one below
+                place(grid, pal, x, y - gap)
+                place(grid, pal, x, y + gap + len(grid) - 1)
+            else:  # vertical: one each side
+                place(grid, pal, x - gap - 3, y + len(grid) // 2)
+                place(grid, pal, x + gap + 3, y + len(grid) // 2)
+
+    ruins = [(PILLAR, RUIN_PAL), (BROKEN_PILLAR, RUIN_PAL), (STUMP, RUIN_PAL)]
+    avenue(NODES["Z1A2"], NODES["Z1A3"], 9, 7, ruins)  # a ruined colonnade along the Tomb's lower road
+    avenue((510, 230), (510, 172), 10, 7, ruins)  # and up the stair road towards the dunes
+    for x, y, art in ((376, 262, RUIN_WALL), (392, 266, BROKEN_PILLAR), (612, 214, RUIN_WALL), (600, 220, STUMP),
+                      (626, 222, PILLAR), (540, 290, FALLEN_COLUMN), (556, 296, STUMP), (420, 352, STAIRS),
+                      (346, 232, FALLEN_COLUMN), (470, 216, RUIN_WALL), (628, 346, BROKEN_PILLAR),
+                      (330, 346, STUMP), (566, 210, STAIRS)):
+        place(art, RUIN_PAL, x, y)
+    sandstone = [(SAND_COLUMN, SANDARCH_PAL), (OBELISK, SANDARCH_PAL)]
+    avenue(NODES["Z2A4"], NODES["Z2A5"], 12, 8, [(SAND_COLUMN, SANDARCH_PAL)])  # a colonnade on the top road
+    for x in (428, 478):  # obelisks guarding the great pyramid
+        place(OBELISK, SANDARCH_PAL, x, 168)
+    for x in (366, 430):  # flanking the temple front
+        place(OBELISK, SANDARCH_PAL, x, 46)
+    for i in range(8):  # palms ringing the oasis, nowhere else
+        a = i / 8 * 2 * math.pi
+        place(PALM, PALM_PAL, int(436 + 15 * math.cos(a)), int(110 + 8 * math.sin(a)))
+    lantern = [(LANTERN, LANTERN_PAL)]
+    avenue((276, 132), (226, 132), 10, 7, lantern)  # stone lanterns lining the approach to the village
+    avenue((176, 150), (150, 150), 9, 7, lantern)
+    for x in (100, 124, 194, 218, 288, 312):  # a pair beside each pagoda
+        place(LANTERN, LANTERN_PAL, x, {100: 172, 124: 172, 194: 116, 218: 116, 288: 170, 312: 170}[x])
+
+    # ---- then nature in clusters (groves and thickets) with open ground between, drawn top to bottom
     spots = []
     for gy in range(4, H - 4, 6):
         for gx in range(2, W - 2, 7):
@@ -518,56 +616,33 @@ def build_map():
         if wet(z):
             continue
         roll = hsh(x, y, 13)
+        grove = vnoise(x, y, 34, 41)  # 0..1; only the high patches grow anything
         art = None
         if z == "grass":
-            forest = vnoise(x, y, 22, 5) > 0.42
-            if roll < (0.9 if forest else 0.25):
-                art = (TREE, TREE_PAL)
-            elif roll < 0.85:
+            if grove > 0.66:
+                art = (TREE, TREE_PAL) if roll < 0.85 else (BUSH, TREE_PAL)
+            elif grove > 0.56 and roll < 0.35:
                 art = (BUSH, TREE_PAL)
-            elif roll < 0.95:
+            elif roll < 0.04:
                 art = (FLOWERS, FLOWERS_PAL)
         elif z == "tomb":
-            if roll < 0.28:
-                art = (GRAVE, STONE_PAL)
-            elif roll < 0.44:
-                art = (CROSS, STONE_PAL)
-            elif roll < 0.6:
-                art = (DEADTREE, DEAD_PAL)
-            elif roll < 0.68:
-                art = (WISP, WISP_PAL)
+            if grove > 0.8 and roll < 0.3:  # a few small fallen-ruin clusters in the gaps
+                art = ((STUMP, RUIN_PAL) if roll < 0.2 else (ROCK, STONE_PAL) if roll < 0.35 else (MOSS, RUIN_PAL))
         elif z == "sand":
-            if roll < 0.2:
-                art = (CACTUS, CACTUS_PAL)
-            elif roll < 0.3:
-                art = (PALM, PALM_PAL)
-            elif roll < 0.4:
-                art = (ROCK, SANDROCK_PAL)
+            if grove > 0.78 and roll < 0.45:
+                art = (CACTUS, CACTUS_PAL) if roll < 0.3 else (ROCK, SANDROCK_PAL)
         elif z == "sun":
-            if roll < 0.45:
+            if grove > 0.66:
+                art = (CHERRY, CHERRY_PAL) if roll < 0.55 else (HILLTREE, HILLTREE_PAL) if roll < 0.85 else None
+            elif roll < 0.03:
                 art = (HILLTREE, HILLTREE_PAL)
-            elif roll < 0.7:
-                art = (CHERRY, CHERRY_PAL)
-            elif roll < 0.8:
-                art = (LANTERN, LANTERN_PAL)
         elif z == "snow":
-            if roll < 0.6:
-                art = (PINE, PINE_PAL)
-            elif roll < 0.72:
+            if grove > 0.6:
+                art = (PINE, PINE_PAL) if roll < 0.8 else None
+            elif roll < 0.03:
                 art = (ROCK, SNOWROCK_PAL)
-        if not art:
-            continue
-        grid, pal = art
-        aw, ah = max(len(r) for r in grid), len(grid)
-        x0, y0 = x - aw // 2, y - ah + 1
-        corners = ((x0, y0), (x0 + aw - 1, y0), (x0, y), (x0 + aw - 1, y))
-        # trees only claim their lower half, so canopies overlap into clumps like a forest
-        claim = y0 + ah // 2 if grid is TREE else y0
-        if free(x0, claim, x0 + aw - 1, y0 + ah - 1) and all(zat(cx, cy) == z for cx, cy in corners) \
-                and not any(reserved[yy][xx] for yy in range(y0, claim) for xx in range(x0 + 2, x0 + aw - 2)
-                            if path_near[yy][xx]):
-            c.stamp(grid, pal, x0, y0)
-            reserve(x0, claim, x0 + aw - 1, y0 + ah - 1)
+        if art:
+            place(art[0], art[1], x, y)
     return c, routes
 
 
@@ -630,6 +705,93 @@ ROCK = [
 STONE_PAL = {"a": hexc("f0f2fe"), "b": hexc("b9d2ca"), "c": hexc("98b2b1"), "d": hexc("5a697d")}
 SANDROCK_PAL = {"a": hexc("ffffeb"), "b": hexc("e3ba66"), "c": hexc("ce812c")}
 SNOWROCK_PAL = {"a": hexc("ffffff"), "b": hexc("6583a7"), "c": hexc("405874")}
+# DECLUTTER (2026-10-21): the Old Tomb's temple ruins (Aztec-style stone, moss) and the dunes' sandstone architecture
+RUIN_PAL = {"a": hexc("f0f2fe"), "b": hexc("b9d2ca"), "c": hexc("98b2b1"), "d": hexc("5a697d"), "m": hexc("529271"),
+            "M": hexc("3c796e")}
+PILLAR = [
+    "abbbc",
+    "ddddd",
+    ".abc.",
+    ".abc.",
+    ".adc.",
+    ".abc.",
+    ".abc.",
+    ".adc.",
+    ".abc.",
+    "abbbc",
+    "ccccd",
+]
+BROKEN_PILLAR = [
+    ".a...",
+    ".ab.c",
+    ".abc.",
+    ".adc.",
+    ".abc.",
+    ".mbc.",
+    ".Mdc.",
+    "abbbc",
+    "ccccd",
+]
+STUMP = [
+    ".a.b.",
+    ".abc.",
+    "mbdbc",
+    "ccccd",
+]
+FALLEN_COLUMN = [
+    ".abbbbb.abbc.",
+    "abbdbbbbbdbcd",
+    "bccccccMcccdd",
+    ".ddddddddddd.",
+]
+RUIN_WALL = [
+    ".....aab.......",
+    "...aabbbbc...a.",
+    "..abdbbdbbc.abc",
+    "aabbbbbbbbbcabb",
+    "bdbdbdbdbdbdbdb",
+    "bbdddbbdddbbddd",
+    "bbbbbbmbbbbbbbc",
+    "ccccccMcccccccd",
+]
+STAIRS = [
+    "......abc",
+    "....abbcd",
+    "..abbbccd",
+    "abbbbcccd",
+    "ddddddddd",
+]
+MOSS = [
+    ".m.",
+    "mMm",
+]
+SANDARCH_PAL = {"a": hexc("ffffeb"), "b": hexc("e3ba66"), "c": hexc("ce812c"), "d": hexc("a35a3c"), "g": hexc("e1d089")}
+OBELISK = [
+    "..a..",
+    ".ab..",
+    ".abc.",
+    ".agc.",
+    ".abc.",
+    ".agc.",
+    ".abc.",
+    ".abc.",
+    ".agc.",
+    ".abc.",
+    ".abc.",
+    "abbcc",
+    "ccccd",
+]
+SAND_COLUMN = [
+    "abbbc",
+    ".abc.",
+    ".agc.",
+    ".abc.",
+    ".abc.",
+    ".agc.",
+    ".abc.",
+    "abbbc",
+    "ccccd",
+]
 DEADTREE = [
     "T...T.",
     ".T.T..",

@@ -9,6 +9,9 @@ using UnityEngine;
 /// least half out, so retracted spikes are safe to cross. The tilemap draws over the Traps layer, which hides
 /// the sunken part. Spikes that move on the same frame share one sound, quieter the further they are from the
 /// camera, so a row of traps doesn't stack up into a racket.
+/// SPIKES (2026-10-21): every Tomb spike trap runs on one of these (Tools/HNL/Set Up Tomb Spike Rhythms). A spike
+/// can sink by its own depth (the short floor spikes and the taller wall spikes share one controller), and only one
+/// pop and one retract sound play per frame across all controllers.
 /// </summary>
 public class SpikeRhythm : MonoBehaviour
 {
@@ -17,6 +20,8 @@ public class SpikeRhythm : MonoBehaviour
     {
         public Transform spike;
         [Range(0f, 1f)] public float phase;
+        [Tooltip("How far this spike sinks (its own height). 0 = the controller's retractDepth.")]
+        public float depth;
     }
 
     [SerializeField] private Spike[] spikes;
@@ -49,10 +54,12 @@ public class SpikeRhythm : MonoBehaviour
         public Collider2D col;
         public SpriteRenderer sr;
         public float lastU;
+        public float depth;
     }
 
     private State[] states;
     private float clock;
+    private static int extendFrame = -1, retractFrame = -1; // one of each sound per frame across every controller
 
     /// <summary>True while the spike at this index is out far enough to hurt (used by tests and tools).</summary>
     public bool IsDangerous(int i) => states != null && states[i].col != null && states[i].col.enabled;
@@ -70,7 +77,8 @@ public class SpikeRhythm : MonoBehaviour
                 up = t.up,
                 col = t.GetComponent<Collider2D>(),
                 sr = t.GetComponent<SpriteRenderer>(),
-                lastU = LocalTime(i)
+                lastU = LocalTime(i),
+                depth = spikes[i].depth > 0f ? spikes[i].depth : retractDepth
             };
         }
         Apply();
@@ -97,8 +105,8 @@ public class SpikeRhythm : MonoBehaviour
             float u = LocalTime(i);
             float ext = Extension(u, out float rattle);
             Transform t = spikes[i].spike;
-            Vector3 offset = -s.up * Mathf.Round((1f - ext) * retractDepth / Px) * Px;
-            t.position = s.basePos + offset + Vector3.right * rattle;
+            Vector3 offset = -s.up * Mathf.Round((1f - ext) * s.depth / Px) * Px;
+            t.position = s.basePos + offset + t.right * rattle; // SPIKES: sideways to the spike, so wall spikes shake along the wall
             if (s.col != null) s.col.enabled = ext >= 0.5f;
             if (s.sr != null) s.sr.enabled = ext > 0f;
 
@@ -114,8 +122,16 @@ public class SpikeRhythm : MonoBehaviour
 
         AudioManager audio = AudioManager.Instance;
         if (audio == null) return;
-        if (popNear < hearMax) audio.PlaySfxOneShot(extendSound, extendVolume * Falloff(popNear));
-        if (retractNear < hearMax) audio.PlaySfxOneShot(retractSound, retractVolume * Falloff(retractNear));
+        if (popNear < hearMax && extendFrame != Time.frameCount)
+        {
+            extendFrame = Time.frameCount;
+            audio.PlaySfxOneShot(extendSound, extendVolume * Falloff(popNear));
+        }
+        if (retractNear < hearMax && retractFrame != Time.frameCount)
+        {
+            retractFrame = Time.frameCount;
+            audio.PlaySfxOneShot(retractSound, retractVolume * Falloff(retractNear));
+        }
     }
 
     // 0 = sunk in the stone, 1 = fully out; rattle is a sideways shake (world units) during the warning peek
@@ -140,7 +156,7 @@ public class SpikeRhythm : MonoBehaviour
 
     private void PuffDust(State s)
     {
-        Vector3 surface = s.basePos - s.up * surfaceOffset;
+        Vector3 surface = s.basePos - s.up * surfaceOffset * s.depth / retractDepth;
         float angle = Mathf.Atan2(s.up.y, s.up.x) * Mathf.Rad2Deg;
         for (int side = -1; side <= 1; side += 2)
             PixelFX.Burst(surface + Vector3.right * side * 0.25f, 3, 0.8f, 1.8f, Dust, 0.2f, 0.4f, 1, PixelShape.Square,

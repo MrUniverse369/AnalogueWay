@@ -22,12 +22,23 @@ public class HurtPlayer : MonoBehaviour
 
     }
 
+    /// <summary>SHIELD (2026-10-21): while the Healing Stone runs nothing can hurt Harvey: enemies, spikes, traps or hazards.</summary>
+    public static bool Shielded => PowerUpManager.Has(TalismanTrait.HealShield);
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // SHIELD: no damage at all; a pit (a kill plane with nothing drawn, below the level) can't be stood in, so it
+        // lifts him back to the last safe ground instead of a game over
+        if (other.CompareTag("PlayerDetectionArea") && Shielded)
+        {
+            if ((gameObject.CompareTag("KillPlane") || gameObject.CompareTag("Fspike")) && GetComponent<Renderer>() == null && lmanagerScriptRef != null)
+                lmanagerScriptRef.RescueToSafeGround();
+            return;
+        }
 
         // DEATH: an enemy that is already dying (playing its smoke animation) can no longer hurt the player
         if (other.CompareTag("PlayerDetectionArea") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity) && (ownEnemy == null || !ownEnemy.IsDying)
-            && (ownEnemy == null || !PowerUpManager.Has(TalismanTrait.HealShield)) // HEAL: the Healing Stone's shield stops enemies, not hazards && !SamuraiSlash.ClashProtected // CLASH: not straight after a samurai clash // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
+            // HEAL: (SHIELD: the Healing Stone's shield is handled above, for hazards too) && !SamuraiSlash.ClashProtected // CLASH: not straight after a samurai clash // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
             && (ownEnemy == null || !StompEnemy.StompingOnto(OwnCollider)) // STOMPTIE: a stomp landing in the same step wins
             && (ownEnemy == null || !ownEnemy.JustHit)) // TOUGHNESS: not straight after a stomp that didn't finish it
         {

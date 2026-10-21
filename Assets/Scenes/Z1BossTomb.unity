@@ -3152,6 +3152,8 @@ MonoBehaviour:
   openingColor: {r: 0.55, g: 1, b: 1, a: 1}
   hitColor: {r: 1, g: 1, b: 1, a: 1}
   debugLog: 0
+  chestsFastTime: 40
+  chestsSlowTime: 120
 --- !u!50 &1447321657
 Rigidbody2D:
   serializedVersion: 5
@@ -4628,7 +4630,7 @@ CompositeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -40437,6 +40439,7 @@ MonoBehaviour:
   levelComplete: {fileID: 283026818}
   timerScriptRef: {fileID: 371444917}
   pScriptObjRef: {fileID: 6993799947401319139}
+  requireAction: 0
 --- !u!212 &2033284538
 SpriteRenderer:
   serializedVersion: 2

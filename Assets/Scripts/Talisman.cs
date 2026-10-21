@@ -9,8 +9,8 @@ public enum TalismanTrait
     EnemyImmunity = 1 << 0,            // enemies can't hurt or knock back the player
     DefeatsEnemiesOnContact = 1 << 1,  // touching an enemy destroys it
     WaterBreathing = 1 << 2,           // WATER: no breath is used underwater
-    HealShield = 1 << 3,               // HEAL: no enemy or boss attack can hurt or knock back the player (spikes, pits,
-                                       // chest traps and drowning still can)
+    HealShield = 1 << 3,               // HEAL: SHIELD (2026-10-21): nothing can hurt or knock back the player: enemies,
+                                       // bosses, spikes, kill planes, chest traps, poison, drowning (a pit lifts him to safe ground)
 }
 
 /// <summary>Everything a talisman is allowed to touch.</summary>

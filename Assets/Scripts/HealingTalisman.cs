@@ -6,8 +6,11 @@ using UnityEngine;
 /// Pressing it pays chiCost up front (60 = six of the nine chi units; cheaper up the combo ladder and free at the top
 /// stage, see Chi.CostScale) and fills Harvey's health bar back up over healTime, one segment at a time.
 /// SHIELD (2026-10-20): for the whole duration (7 s) no enemy or boss attack can hurt him (TalismanTrait.HealShield,
-/// set on the asset). It can't be used at full health or without enough chi. Its look (pink-red healing glow that
-/// blinks as the shield runs out, rising crosses, a flash per segment) is in TalismanFX.
+/// set on the asset). It can't be used without enough chi. Its look (pink-red healing glow that blinks as the shield
+/// runs out, rising crosses, a flash per segment) is in TalismanFX.
+/// SHIELD (2026-10-21): the shield now stops every kind of damage (spikes, kill planes, traps, poison, drowning too;
+/// see HurtPlayer.Shielded), it can be used at full health just for the shield, and after the first fill it keeps
+/// regenerating a segment every regenInterval for the rest of the duration. When it ends damage works as before.
 /// </summary>
 [CreateAssetMenu(menuName = "Talismans/Healing", fileName = "HealingTalisman")]
 public class HealingTalisman : Talisman
@@ -16,6 +19,8 @@ public class HealingTalisman : Talisman
     [SerializeField, Min(0f)] private float chiCost = 60f;
     [Tooltip("SHIELD: seconds to fill the health bar (the shield lasts the whole Duration).")]
     [SerializeField, Min(0.1f)] private float healTime = 1.2f;
+    [Tooltip("SHIELD: after the first fill, seconds per segment regenerated until the talisman ends.")]
+    [SerializeField, Min(0.05f)] private float regenInterval = 0.5f;
 
     [System.NonSerialized] private float stepTime, stepTimer, healLeft;
 
@@ -26,10 +31,7 @@ public class HealingTalisman : Talisman
 
     public override bool CanActivate(PowerUpContext ctx)
     {
-        if (HurtPlayer.pLivesCount <= 0) return false; // already on the way to a respawn
-        if (!HealthFull) return true;
-        TalismanFX.HealRefused(ctx.Player.transform.position); // a grey fizzle: nothing to heal
-        return false;
+        return HurtPlayer.pLivesCount > 0; // already on the way to a respawn // SHIELD: full health is fine now, the shield is worth it
     }
 
     public override void OnActivated(PowerUpContext ctx)
@@ -44,16 +46,16 @@ public class HealingTalisman : Talisman
     {
         healLeft -= dt;
         if (HurtPlayer.pLivesCount <= 0) return;
-        if (healLeft <= 0f) // SHIELD: healing is over; make sure the bar ended full, then it's only the shield
+        if (healLeft <= 0f && stepTime > 0f) // SHIELD: the first fill is over; make sure the bar ended full
         {
-            if (stepTime > 0f) HurtPlayer.pLivesCount = Mathf.Max(HurtPlayer.pLivesCount, GameSession.StartingLives);
+            HurtPlayer.pLivesCount = Mathf.Max(HurtPlayer.pLivesCount, GameSession.StartingLives);
             stepTime = 0f;
-            return;
+            stepTimer = regenInterval;
         }
         if (HealthFull) return;
         stepTimer -= dt;
         if (stepTimer > 0f) return;
-        stepTimer = stepTime;
+        stepTimer = stepTime > 0f ? stepTime : regenInterval; // SHIELD: then a segment every regenInterval
         HurtPlayer.pLivesCount++;
     }
 

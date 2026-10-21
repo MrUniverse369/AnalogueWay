@@ -88,6 +88,11 @@ public class PoisonLiquid : MonoBehaviour
         LevelManager lm = LevelManager.Instance;
         if (lm == null || PlayerFX.Instance == null || !PlayerFX.Instance.gameObject.activeInHierarchy) return;
         harveyInside = 0;
+        if (HurtPlayer.Shielded) // SHIELD: the Healing Stone keeps him alive; lift him out to safe ground
+        {
+            lm.RescueToSafeGround();
+            return;
+        }
         float surface = trigger.bounds.max.y;
         Vector3 splash = new Vector3(at.x, Mathf.Min(at.y, surface), 0f);
         // FX: a toxic splash, a burst of bubbles where he went in, and a puff of fumes

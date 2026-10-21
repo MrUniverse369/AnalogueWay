@@ -284,6 +284,7 @@ public class PlayerWater : MonoBehaviour
 
     private void Drown()
     {
+        if (HurtPlayer.Shielded) return; // SHIELD: no drowning while the Healing Stone runs
         HurtPlayer.pLivesCount -= 1;
         if (player != null) PlayerFX.Hurt(player.transform.position + Vector3.up * 0.3f); // FX:
         if (HurtPlayer.pLivesCount <= 0)

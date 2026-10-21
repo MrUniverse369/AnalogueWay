@@ -623,7 +623,7 @@ public class OpenChest : MonoBehaviour
             HarveyMenus.Toast(null, "IT WAS A TRAP!", "YOU GOT CLEAR JUST IN TIME");
             return;
         }
-        if (PowerUpManager.Has(TalismanTrait.EnemyImmunity))
+        if (PowerUpManager.Has(TalismanTrait.EnemyImmunity) || HurtPlayer.Shielded) // SHIELD:
         {
             HarveyMenus.Toast(null, "IT WAS A TRAP!", "YOUR TALISMAN SHIELDED YOU");
             return;
