@@ -30,7 +30,12 @@ public class SaveData
     public string[] equippedTalismans;
     public ItemStack[] items;
     public string[] claimed; // one-time rewards already taken (chest bonus items)
-    public string quickItem; // QUICKITEM: the Bag item R1 / Q uses (ItemDefinition.Id); empty = none
+    public string quickItem; // QUICKITEM: the Bag item L1 / Q uses (ItemDefinition.Id); empty = none
+
+    // SKILLS (2026-10-20): skill tree levels (id = SkillTree skill id, count = level) and the crystal change left over
+    // from cashing gems in. Older saves leave both empty: no skills learned.
+    public ItemStack[] skills;
+    public int crystalBalance;
 }
 
 /// <summary>MENUS: a saved stack of one item.</summary>

@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public static class SaveSystem
 {
-    public const int CurrentVersion = 1;
+    public const int CurrentVersion = 2; // WORLDORDER: 2 = Build Settings in world order (Grass, Tomb, Egypt, Japan)
     public const int SlotCount = 5; // SLOTS:
     private const string LegacySlot = "slot0"; // SLOTS: the single save from before save files; moved into file 1
     private const string ActiveSlotPref = "hnl_active_slot"; // SLOTS:
@@ -142,8 +142,39 @@ public static class SaveSystem
     /// <summary>Upgrade older saves here, one version at a time, when CurrentVersion is bumped.</summary>
     private static void Migrate(SaveData data)
     {
-        // Example for the future:
-        // if (data.version < 2) { data.newField = ...; }
+        if (data.version < 2) MigrateWorldOrder(data);
         data.version = CurrentVersion;
+    }
+
+    // WORLDORDER (2026-10-20): the level order before the worlds were put in order (Grass first) and the villages
+    // moved to straight after each zone's first act.
+    private static readonly string[] OldLevelOrder =
+    {
+        "MainMenue", "Z1A1Tomb", "Z1A2Tomb", "Z1A3Tomb", "Z1A4Tomb", "Z1A5Tomb", "Z1TombVillage", "Z1BossTomb",
+        "Z2A1Sandy", "Z2A2Sandy", "Z2A3Sandy", "Z2A4Sandy", "Z2A5Sandy", "Z2SandyVillage", "Z2BossSandy",
+        "Z3A1Japan", "Z3A2Japan", "Z3A3Japan", "Z3A4Japan", "Z3JapanVillage", "Z3BossBattle",
+        "Z4A6GrassGreen", "Z4A7GrassGreen", "Z4A8GrassGreen", "Z4A9GrassGreen", "Z4A10GrassGreen", "Z4GrassVillage", "Z4BossGrass",
+        "Win",
+    };
+
+    // WORLDORDER: the map unlocks every level up to the furthest one, by build order. A version 1 save's furthest level
+    // meant "everything before it in the old order", so it becomes whichever of those levels is furthest in the new
+    // order. Nothing that was open is locked again.
+    private static void MigrateWorldOrder(SaveData data)
+    {
+        string furthest = string.IsNullOrEmpty(data.furthestScene) ? data.sceneName : data.furthestScene;
+        int old = Array.IndexOf(OldLevelOrder, furthest);
+        if (old < 0) return;
+        int best = GameSession.BuildIndexOf(furthest);
+        for (int i = 0; i <= old; i++)
+        {
+            int index = GameSession.BuildIndexOf(OldLevelOrder[i]);
+            if (index > best)
+            {
+                best = index;
+                furthest = OldLevelOrder[i];
+            }
+        }
+        data.furthestScene = furthest;
     }
 }

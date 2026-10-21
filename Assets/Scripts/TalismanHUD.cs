@@ -83,15 +83,15 @@ public class TalismanHUD : MonoBehaviour
             Image img = radials[i];
             Talisman t = manager != null && i < manager.SlotCount ? manager.TalismanIn(i) : null;
             float fill = 0f;
-            if (t != null && manager.IsSlotActive(i) && t.Duration > 0f)
+            if (t != null && manager.IsSlotActive(i) && SkillTree.DurationOf(t) > 0f) // SKILLS: the learned duration
             {
                 img.color = ActiveColour;
-                fill = manager.TimeLeft(i) / t.Duration;
+                fill = manager.TimeLeft(i) / SkillTree.DurationOf(t);
             }
-            else if (t != null && manager.CooldownLeft(i) > 0f && t.Cooldown > 0f)
+            else if (t != null && manager.CooldownLeft(i) > 0f && t.Cooldown * SkillTree.CooldownScale > 0f) // SKILLS: Quick Recharge
             {
                 img.color = CooldownColour;
-                fill = manager.CooldownLeft(i) / t.Cooldown;
+                fill = manager.CooldownLeft(i) / (t.Cooldown * SkillTree.CooldownScale);
             }
             img.enabled = fill > 0.001f;
             img.fillAmount = Mathf.Clamp01(fill);
@@ -108,7 +108,7 @@ public class TalismanHUD : MonoBehaviour
             if (!manager.IsSlotActive(i)) continue;
 
             Talisman talisman = manager.TalismanIn(i);
-            float duration = talisman != null ? talisman.Duration : 0f;
+            float duration = talisman != null ? SkillTree.DurationOf(talisman) : 0f; // SKILLS:
             bool endingSoon = duration >= minBlinkDuration && manager.TimeLeft(i) <= duration * blinkFraction;
             // flicking back to the "ready" strip reads as "nearly ready again"
             if (endingSoon && Mathf.Repeat(Time.unscaledTime * blinkRate, 1f) < 0.5f) return readySprite;

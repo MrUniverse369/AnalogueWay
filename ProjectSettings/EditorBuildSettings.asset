@@ -9,68 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenue.unity
     guid: 56cb43adde0b94408a1a004added39e8
   - enabled: 1
-    path: Assets/Scenes/Z1A1Tomb.unity
-    guid: bb4b0d1567d8af84aad04a2d2a973c0c
-  - enabled: 1
-    path: Assets/Scenes/Z1A2Tomb.unity
-    guid: 77e6fbf9305424962aa5dc200fce3c1c
-  - enabled: 1
-    path: Assets/Scenes/Z1A3Tomb.unity
-    guid: 6f92664f6035446adace6ff806f23078
-  - enabled: 1
-    path: Assets/Scenes/Z1A4Tomb.unity
-    guid: 5c38bff826f6c4c7daddfaf69067586f
-  - enabled: 1
-    path: Assets/Scenes/Z1A5Tomb.unity
-    guid: 7a6676472f6d248d1990c7d87f4fceaf
-  - enabled: 1
-    path: Assets/Scenes/Z1TombVillage.unity
-    guid: 3ecef3a2e6cef40878ea4475fcfbc6f2
-  - enabled: 1
-    path: Assets/Scenes/Z1BossTomb.unity
-    guid: 1a65351426aeb495c9e061a7c6e11240
-  - enabled: 1
-    path: Assets/Scenes/Z2A1Sandy.unity
-    guid: 2f12dd93dfa0442faa76b54c26149112
-  - enabled: 1
-    path: Assets/Scenes/Z2A2Sandy.unity
-    guid: 7a43749a8e57c9247a035025d13ef335
-  - enabled: 1
-    path: Assets/Scenes/Z2A3Sandy.unity
-    guid: 5b37f60e69efe43c5b58f23559055079
-  - enabled: 1
-    path: Assets/Scenes/Z2A4Sandy.unity
-    guid: 92e0b40457e81434cbc0bf24793129fb
-  - enabled: 1
-    path: Assets/Scenes/Z2A5Sandy.unity
-    guid: b64b47678b6fb4dd884262a57fbb01d4
-  - enabled: 1
-    path: Assets/Scenes/Z2SandyVillage.unity
-    guid: 82aac1cd567104affb3b22015d45efdb
-  - enabled: 1
-    path: Assets/Scenes/Z2BossSandy.unity
-    guid: 6e1a99518c35a42eb975e7cb8f59e87d
-  - enabled: 1
-    path: Assets/Scenes/Z3A1Japan.unity
-    guid: 125e022cb8d024bfdba6cf3b4e895b3e
-  - enabled: 1
-    path: Assets/Scenes/Z3A2Japan.unity
-    guid: 2b08e72dd4565d14bbf82b87a35b248a
-  - enabled: 1
-    path: Assets/Scenes/Z3A3Japan.unity
-    guid: aaf9ad3d2635c4b47868a7ce37f3352e
-  - enabled: 1
-    path: Assets/Scenes/Z3A4Japan.unity
-    guid: 45bd00ae5d06f43188b54c3ebff531f0
-  - enabled: 1
-    path: Assets/Scenes/Z3JapanVillage.unity
-    guid: 754f78b8820004641bd650f1b6ea8a60
-  - enabled: 1
-    path: Assets/Scenes/Z3BossBattle.unity
-    guid: 30a8f4e02b1374d4ab6da2eee72cbdee
-  - enabled: 1
     path: Assets/Scenes/Z4A6GrassGreen.unity
     guid: 65219a3255aa94e3699e9841f8008006
+  - enabled: 1
+    path: Assets/Scenes/Z4GrassVillage.unity
+    guid: a5e3a0841a1354b2b8120e93d7935fcb
   - enabled: 1
     path: Assets/Scenes/Z4A7GrassGreen.unity
     guid: b4629643f36534b2fb3aadd4bd382cc2
@@ -84,17 +27,80 @@ EditorBuildSettings:
     path: Assets/Scenes/Z4A10GrassGreen.unity
     guid: cfc22ceb08b984bffa08667a9e2ae55b
   - enabled: 1
-    path: Assets/Scenes/Z4GrassVillage.unity
-    guid: a5e3a0841a1354b2b8120e93d7935fcb
-  - enabled: 1
     path: Assets/Scenes/Z4BossGrass.unity
     guid: df29f23891b1c44b88a971cbbdfbb9d7
+  - enabled: 1
+    path: Assets/Scenes/Z1A1Tomb.unity
+    guid: bb4b0d1567d8af84aad04a2d2a973c0c
+  - enabled: 1
+    path: Assets/Scenes/Z1TombVillage.unity
+    guid: 3ecef3a2e6cef40878ea4475fcfbc6f2
+  - enabled: 1
+    path: Assets/Scenes/Z1A2Tomb.unity
+    guid: 77e6fbf9305424962aa5dc200fce3c1c
+  - enabled: 1
+    path: Assets/Scenes/Z1A3Tomb.unity
+    guid: 6f92664f6035446adace6ff806f23078
+  - enabled: 1
+    path: Assets/Scenes/Z1A4Tomb.unity
+    guid: 5c38bff826f6c4c7daddfaf69067586f
+  - enabled: 1
+    path: Assets/Scenes/Z1A5Tomb.unity
+    guid: 7a6676472f6d248d1990c7d87f4fceaf
+  - enabled: 1
+    path: Assets/Scenes/Z1A6Tomb.unity
+    guid: 5858178e757584815a4953ef8f6ce776
+  - enabled: 1
+    path: Assets/Scenes/Z1BossTomb.unity
+    guid: 1a65351426aeb495c9e061a7c6e11240
+  - enabled: 1
+    path: Assets/Scenes/Z2A1Sandy.unity
+    guid: 2f12dd93dfa0442faa76b54c26149112
+  - enabled: 1
+    path: Assets/Scenes/Z2SandyVillage.unity
+    guid: 82aac1cd567104affb3b22015d45efdb
+  - enabled: 1
+    path: Assets/Scenes/Z2A2Sandy.unity
+    guid: 7a43749a8e57c9247a035025d13ef335
+  - enabled: 1
+    path: Assets/Scenes/Z2A3Sandy.unity
+    guid: 5b37f60e69efe43c5b58f23559055079
+  - enabled: 1
+    path: Assets/Scenes/Z2A4Sandy.unity
+    guid: 92e0b40457e81434cbc0bf24793129fb
+  - enabled: 1
+    path: Assets/Scenes/Z2A5Sandy.unity
+    guid: b64b47678b6fb4dd884262a57fbb01d4
+  - enabled: 1
+    path: Assets/Scenes/Z2BossSandy.unity
+    guid: 6e1a99518c35a42eb975e7cb8f59e87d
+  - enabled: 1
+    path: Assets/Scenes/Z3A1Japan.unity
+    guid: 125e022cb8d024bfdba6cf3b4e895b3e
+  - enabled: 1
+    path: Assets/Scenes/Z3JapanVillage.unity
+    guid: 754f78b8820004641bd650f1b6ea8a60
+  - enabled: 1
+    path: Assets/Scenes/Z3A2Japan.unity
+    guid: 2b08e72dd4565d14bbf82b87a35b248a
+  - enabled: 1
+    path: Assets/Scenes/Z3A3Japan.unity
+    guid: aaf9ad3d2635c4b47868a7ce37f3352e
+  - enabled: 1
+    path: Assets/Scenes/Z3A4Japan.unity
+    guid: 45bd00ae5d06f43188b54c3ebff531f0
+  - enabled: 1
+    path: Assets/Scenes/Z3BossBattle.unity
+    guid: 30a8f4e02b1374d4ab6da2eee72cbdee
   - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: 26584e36b337942e09bad83ae89c520f
   - enabled: 1
     path: Assets/Scenes/ZoneSelect.unity
     guid: 9dddd11b9cafc4c93b643945f9131679
+  - enabled: 1
+    path: Assets/Scenes/Tutorial_BasicControls.unity
+    guid: 480251151cf414002a83061cb058c075
   - enabled: 0
     path: Assets/Scenes/Z4A1GrassGreen.unity
     guid: 3f03d7a5b838c43ada57fe44dd2e68aa
@@ -111,20 +117,11 @@ EditorBuildSettings:
     path: Assets/Scenes/6LeveL_Six6.unity
     guid: 7c507e41020b86342870bdbd64b88c71
   - enabled: 0
-    path: Assets/Scenes/7LeveL_Seven7.unity
-    guid: 5858178e757584815a4953ef8f6ce776
-  - enabled: 0
-    path: Assets/Scenes/8Level_Eight_8.unity
-    guid: 32376277aceb84157b515d39092de199
-  - enabled: 0
     path: Assets/Scenes/1Level_One_1.unity
     guid: aa139e9859cadbc4e8153693764323fa
   - enabled: 0
     path: Assets/Scenes/4Level_Four_4.unity
     guid: d5dc91ada5efa2b4e8f2c744f5f89e6f
-  - enabled: 1
-    path: Assets/Scenes/Tutorial_BasicControls.unity
-    guid: 480251151cf414002a83061cb058c075
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
   m_UseUCBPForAssetBundles: 0

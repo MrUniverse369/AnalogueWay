@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
-/// MENUS: the Talisman Holder, Harvey's Bag and the village shop, plus the "found an item" toasts.
+/// MENUS: the Talisman Holder, Harvey's Bag, the Skill Tree (SKILLS) and the village shop, plus the "found an item" toasts.
 /// It creates itself in every level that has a pause menu (no scene setup needed) and has PauseMenuStyle restyle
 /// that pause menu and add its TALISMANS and BAG buttons. Tab (keyboard) or Create/Select (gamepad)
 /// also opens the Bag straight from gameplay. While a menu is open the game is paused, and Circle/Esc goes back:
@@ -24,6 +24,7 @@ public class HarveyMenus : MonoBehaviour
     private TalismanHolderView holder;
     private BagView bag;
     private ShopView shop;
+    private SkillTreeView skills; // SKILLS:
     private MenuView open;
     private bool openedFromPause;
     private GameObject pausePanel;
@@ -114,7 +115,8 @@ public class HarveyMenus : MonoBehaviour
             pausePanel = pause.PausePanel;
             PauseMenuStyle.Apply(pausePanel,
                 () => OpenFromPause(View(ref holder, p => new TalismanHolderView(p))),
-                () => OpenFromPause(View(ref bag, p => new BagView(p))));
+                () => OpenFromPause(View(ref bag, p => new BagView(p))),
+                () => OpenFromPause(View(ref skills, p => new SkillTreeView(p)))); // SKILLS:
         }
     }
 

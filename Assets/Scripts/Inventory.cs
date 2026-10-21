@@ -25,6 +25,8 @@ public static class Inventory
     private static readonly List<string> itemOrder = new List<string>(); // pick-up order, so new things go last
     private static readonly HashSet<string> claimed = new HashSet<string>();
     private static string quickItem; // QUICKITEM:
+    private static readonly Dictionary<string, int> skillLevels = new Dictionary<string, int>(); // SKILLS:
+    private static int crystalBalance; // SKILLS:
 
     public static HNLCatalog Catalog
     {
@@ -57,6 +59,8 @@ public static class Inventory
         itemOrder.Clear();
         claimed.Clear();
         quickItem = null; // QUICKITEM:
+        skillLevels.Clear(); // SKILLS:
+        crystalBalance = 0;
         for (int i = 0; i < SlotCount; i++) equipped[i] = null;
         if (Catalog != null && Catalog.startingLoadout != null)
         {
@@ -198,7 +202,7 @@ public static class Inventory
     }
 
     // ---------------------------------------------------------------- QUICKITEM: the quick-use item
-    /// <summary>The item R1 / Q uses (it stays set when the last one is used, shown greyed until more are found).</summary>
+    /// <summary>The item L1 / Q uses (it stays set when the last one is used, shown greyed until more are found).</summary>
     public static ItemDefinition QuickItem
     {
         get
@@ -217,6 +221,31 @@ public static class Inventory
         if (id == quickItem) return;
         quickItem = id;
         Changed?.Invoke();
+    }
+
+    // ---------------------------------------------------------------- SKILLS: the skill tree (rules in SkillTree)
+    /// <summary>The level learned of a skill (0 = not learned).</summary>
+    public static int SkillLevel(string id)
+    {
+        EnsureInit();
+        return !string.IsNullOrEmpty(id) && skillLevels.TryGetValue(id, out int n) ? n : 0;
+    }
+
+    /// <summary>Sets a skill's level (SkillTree.TryLearn calls this after paying).</summary>
+    public static void SetSkillLevel(string id, int level)
+    {
+        EnsureInit();
+        if (string.IsNullOrEmpty(id) || SkillLevel(id) == level) return;
+        if (level <= 0) skillLevels.Remove(id);
+        else skillLevels[id] = level;
+        Changed?.Invoke();
+    }
+
+    /// <summary>Crystals left over after cashing in gems (a Ruby is worth 5: paying 3 with it leaves 2 here).</summary>
+    public static int CrystalBalance
+    {
+        get { EnsureInit(); return crystalBalance; }
+        set { EnsureInit(); crystalBalance = Mathf.Max(0, value); }
     }
 
     // ---------------------------------------------------------------- one-time rewards
@@ -245,6 +274,10 @@ public static class Inventory
         data.items = stacks.ToArray();
         data.claimed = new List<string>(claimed).ToArray();
         data.quickItem = quickItem ?? ""; // QUICKITEM:
+        var skills = new List<ItemStack>(); // SKILLS:
+        foreach (KeyValuePair<string, int> pair in skillLevels) skills.Add(new ItemStack { id = pair.Key, count = pair.Value });
+        data.skills = skills.ToArray();
+        data.crystalBalance = crystalBalance;
     }
 
     /// <summary>Restores a save. Saves from before the Talisman Holder (no talisman data) get the new-game loadout.</summary>
@@ -276,6 +309,11 @@ public static class Inventory
                     if (!itemOrder.Contains(s.id)) itemOrder.Add(s.id);
                 }
         if (data.claimed != null) foreach (string key in data.claimed) if (!string.IsNullOrEmpty(key)) claimed.Add(key);
+        skillLevels.Clear(); // SKILLS: older saves have none
+        if (data.skills != null)
+            foreach (ItemStack s in data.skills)
+                if (s != null && !string.IsNullOrEmpty(s.id) && s.count > 0) skillLevels[s.id] = s.count;
+        crystalBalance = Mathf.Max(0, data.crystalBalance);
         quickItem = !string.IsNullOrEmpty(data.quickItem) && (Catalog == null || Catalog.ItemById(data.quickItem) != null) ? data.quickItem : null; // QUICKITEM: older saves have none
         RaiseAll();
     }

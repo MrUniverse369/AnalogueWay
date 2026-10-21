@@ -6,6 +6,9 @@ Style rules taken from the HNL art in /Applications/PixelArt/Treasured Traverse:
   - flat 2-3 tone shading with clumpy highlights and no black outlines on the scenery
   - talisman-style gems (dark outline plus cream rim) for the level markers, and the treasure pedestal as the goal
 The map is a rounded island (no hard edges) and the path bends are curved.
+WORLDMAP (2026-10-20): the island is four screens (2x2, each 320x180 = one camera view) in world order: the Grassy
+Meadow bottom-left (where the map starts), the Old Tomb bottom-right, the Sandy Dunes top-right and Japan top-left.
+Each zone's village comes straight after its first act. The ZoneSelect camera follows Harvey across it.
 
 Also writes Tools/Art/zone_map_layout.txt (node and path positions in world units) which the scene build reads,
 so the art and the walkable path always match.
@@ -20,37 +23,43 @@ import zlib
 OUT_DIR = "Assets/Sprites/ZoneMap"
 LAYOUT = "Tools/Art/zone_map_layout.txt"
 TREASURE = "Assets/Sprites/Treasure.png"
-W, H = 320, 180
+W, H = 640, 360  # WORLDMAP: 2x2 screens of 320x180
 PPU = 16
 
-# Node pixel positions (y down), in play order: six per zone, the sixth is the zone boss. Keep in sync with the scene
-# (the scene is rebuilt from the layout file this script writes).
+# Node pixel positions (y down), in play order (= Build Settings order). Keep in sync with the scene (the scene is
+# rebuilt from the layout file this script writes). Ids are the builder's node keys.
 NODES = {
-    "Z1A1": (22, 158), "Z1A2": (22, 132), "Z1A3": (22, 106), "Z1A4": (52, 106), "Z1A5": (52, 132), "Z1Village": (52, 158), "Z1Boss": (78, 158),
-    "Z2A1": (100, 158), "Z2A2": (100, 132), "Z2A3": (100, 106), "Z2A4": (130, 106), "Z2A5": (130, 132), "Z2Village": (130, 158), "Z2Boss": (160, 158),
-    "Z3A1": (214, 158), "Z3A2": (244, 158), "Z3A3": (244, 121), "Z3A4": (274, 121), "Village": (296, 60), "Boss": (262, 40),
-    "Z4A1": (172, 58), "Z4A2": (144, 58), "Z4A3": (116, 58), "Z4A4": (116, 30), "Z4A5": (88, 30), "Z4Village": (62, 30), "Z4Boss": (38, 30),
-    "Win": (28, 52),
+    # Grassy Meadow (bottom-left screen, x 0-320, y 180-360)
+    "Z4A1": (40, 318), "Z4Village": (86, 318), "Z4A2": (132, 318), "Z4A3": (132, 276), "Z4A4": (178, 276),
+    "Z4A5": (224, 276), "Z4Boss": (270, 300),
+    # Old Tomb (bottom-right, x 320-640, y 180-360)
+    "Z1A1": (360, 300), "Z1Village": (406, 330), "Z1A2": (452, 330), "Z1A3": (498, 330), "Z1A4": (544, 318),
+    "Z1A5": (590, 290), "Z1A6": (560, 250), "Z1Boss": (510, 230),
+    # Sandy Dunes (top-right, x 320-640, y 0-180)
+    "Z2A1": (510, 150), "Z2Village": (560, 150), "Z2A2": (600, 116), "Z2A3": (560, 82), "Z2A4": (512, 60),
+    "Z2A5": (452, 60), "Z2Boss": (390, 132),
+    # Japan (top-left, x 0-320, y 0-180): sunny foothills below SUN_EDGE_Y, the snowy peaks above, through the torii
+    "Z3A1": (276, 132), "Village": (226, 150), "Z3A2": (176, 132), "Z3A3": (150, 66), "Z3A4": (96, 50), "Boss": (50, 40),
+    "Win": (50, 150),
 }
-# VILLAGES (2026-10-20): every zone has a village between its fifth act and its boss, like Japan's
-ORDER = ["Z1A1", "Z1A2", "Z1A3", "Z1A4", "Z1A5", "Z1Village", "Z1Boss",
-         "Z2A1", "Z2A2", "Z2A3", "Z2A4", "Z2A5", "Z2Village", "Z2Boss",
-         "Z3A1", "Z3A2", "Z3A3", "Z3A4", "Village", "Boss",
-         "Z4A1", "Z4A2", "Z4A3", "Z4A4", "Z4A5", "Z4Village", "Z4Boss", "Win"]
-BOSSES = {"Z1Boss", "Z2Boss", "Boss", "Z4Boss"}
+ORDER = ["Z4A1", "Z4Village", "Z4A2", "Z4A3", "Z4A4", "Z4A5", "Z4Boss",
+         "Z1A1", "Z1Village", "Z1A2", "Z1A3", "Z1A4", "Z1A5", "Z1A6", "Z1Boss",
+         "Z2A1", "Z2Village", "Z2A2", "Z2A3", "Z2A4", "Z2A5", "Z2Boss",
+         "Z3A1", "Village", "Z3A2", "Z3A3", "Z3A4", "Boss", "Win"]
+BOSSES = {"Z4Boss", "Z1Boss", "Z2Boss", "Boss"}
 # Corners between consecutive nodes (ORDER[i] -> ORDER[i + 1]); they are rounded off when drawn.
 CORNERS = [
-    [], [], [], [], [], [], [],               # Tomb: act 5 down to the village, along to the boss
-    [], [], [], [], [], [], [],               # Sandy (the boss -> Japan run is straight along y 158)
-    [], [], [], [(296, 121)], [(296, 40)], [(172, 40)],   # Japan: sunny foothills, the torii, the snowy peak
-    [], [], [], [], [], [], [(28, 30)],       # Meadow, its village and boss, then home
+    [], [], [], [], [], [(270, 276)], [],                                   # Meadow, then on into the Tomb
+    [(360, 330)], [], [], [(544, 330)], [(590, 318)], [(590, 250)], [(510, 250)], [],   # Tomb, then up into the Dunes
+    [], [(600, 150)], [(600, 82)], [(512, 82)], [], [(390, 60)], [],        # Dunes, then west into Japan
+    [(226, 132)], [(176, 150)], [(150, 132)], [(96, 66)], [(96, 40)], [],   # Japan: foothills, torii, peaks, home
 ]
 BEND_RADIUS = 7
-RIVER = [(194, -6), (194, 44), (198, 64), (204, 84), (210, 104), (218, 120)]  # snow melt running down to the koi pond
-LAKE = (224, 126, 10, 6)  # centre x, y, radius x, y
+RIVER = [(118, -6), (118, 30), (116, 60), (113, 90), (110, 112)]  # snow melt running down to the koi pond
+LAKE = (108, 122, 12, 6)  # centre x, y, radius x, y
 # The sunny Japan foothills (Z3A1, Z3A2) sit beside the dunes; the snow starts at SUN_EDGE_Y. The torii stands on
 # the Z3A2 -> Z3A3 path right on that border (a separate sprite above Harvey, so he walks through it).
-SUN_EDGE_Y, GATE_X = 90, 296  # Japan is split about 50/50: sunny lower half, snowy upper half
+SUN_EDGE_Y, GATE_X = 100, 150  # Japan: sunny lower part, snowy upper part; the torii is on the Z3A2 -> Z3A3 path
 GATE_W, GATE_H = 22, 18
 GATE_TOP = SUN_EDGE_Y - 15  # pixel row of the gate sprite's top edge (its feet stand on SUN_EDGE_Y)
 
@@ -238,11 +247,14 @@ def zone_at(x, y):
     cx, cy, rx, ry = LAKE
     if ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 < 1 or poly_dist(x, y, RIVER) < 3.4 + 0.6 * math.sin(y / 9.0):
         return "river"
-    if x > 199 + 8 * math.sin(y / 17.0 + 0.6) + 5 * (vnoise(x, y, 16, 3) - 0.5) or (y < 70 and x > 195):
-        return "sun" if y > sun_edge(x) else "snow"  # north of the lake the river is the border
-    if y < 86 + 7 * math.sin(x / 23.0 + 1.0) + 5 * (vnoise(x, y, 16, 4) - 0.5):
-        return "grass"
-    return "tomb" if x < 92 + 8 * math.sin(y / 19.0 + 2.0) + 4 * (vnoise(x, y, 16, 6) - 0.5) else "sand"
+    # WORLDMAP: the four screens, with wavy borders
+    left = x < W / 2 + 8 * math.sin(y / 17.0 + 0.6) + 5 * (vnoise(x, y, 16, 3) - 0.5)
+    top = y < H / 2 + 7 * math.sin(x / 23.0 + 1.0) + 5 * (vnoise(x, y, 16, 4) - 0.5)
+    if top and left:
+        return "sun" if y > sun_edge(x) else "snow"
+    if top:
+        return "sand"
+    return "grass" if left else "tomb"
 
 
 def sun_edge(x):
@@ -448,15 +460,15 @@ def build_map():
                     c.put(x, y, FOAM if d > 0.72 else (GLINT if hsh(x, y, 9) < 0.08 else WATER_LIGHT))
         reserve(cx - 10, cy - 5, cx + 10, cy + 5)
 
-    pyramid(168, 142, 13)
-    pyramid(186, 124, 8)
-    oasis(163, 108)
-    mausoleum(64, 100)
-    mountain(262, 76, 30, 38)
-    mountain(230, 72, 13, 22)
-    pagoda(279, 166, 3)
-    pagoda(303, 161, 2)
-    pagoda(259, 109, 2)
+    pyramid(452, 150, 13)
+    pyramid(474, 124, 8)
+    oasis(436, 108)
+    mausoleum(380, 200)
+    mountain(244, 74, 30, 38)
+    mountain(292, 52, 13, 22)
+    pagoda(112, 172, 3)
+    pagoda(206, 116, 2)
+    pagoda(300, 170, 2)
     reserve(GATE_X - GATE_W // 2 - 2, GATE_TOP - 2, GATE_X + GATE_W // 2 + 2, SUN_EDGE_Y + 3)  # under the torii sprite
 
     # ---- the path (curved corners, cream with an orange edge and a soft shadow underneath)
@@ -487,7 +499,7 @@ def build_map():
         reserve(nx - 10, ny - 12, nx + 10, ny + 8)
     path_near = [row[:] for row in reserved]
 
-    for hx, hy in ((304, 44), (304, 66), (274, 80), (248, 80), (214, 82), (280, 20)):  # the snowy village
+    for hx, hy in ((20, 62), (70, 74), (184, 24), (196, 70), (14, 20)):  # snowy houses on the peaks
         if free(hx, hy, hx + 10, hy + 7) and all(zone[yy][xx] == "snow" for yy in (hy, hy + 7) for xx in (hx, hx + 10)):
             c.stamp(HOUSE, HOUSE_PAL, hx, hy)
             reserve(hx - 1, hy - 1, hx + 11, hy + 8)
@@ -903,7 +915,24 @@ def cloud(width, height, seed):
     return c
 
 
+def check_layout():
+    """WORLDMAP: the map walks to whichever neighbour lies in the pressed direction, so a node's way back and way on
+    must leave in different directions (else one of them can't be reached)."""
+    def first_leg(a, b):
+        i, j = ORDER.index(a), ORDER.index(b)
+        pts = [NODES[ORDER[min(i, j)]]] + CORNERS[min(i, j)] + [NODES[ORDER[max(i, j)]]]
+        if i > j:
+            pts = pts[::-1]
+        dx, dy = pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]
+        return ("R" if dx > 0 else "L") if abs(dx) >= abs(dy) else ("D" if dy > 0 else "U")
+    assert len(CORNERS) == len(ORDER) - 1, "one CORNERS entry per path between nodes"
+    for k in range(1, len(ORDER) - 1):
+        back, on = first_leg(ORDER[k], ORDER[k - 1]), first_leg(ORDER[k], ORDER[k + 1])
+        assert back != on, f"{ORDER[k]}: the way back and the way on both leave {back}"
+
+
 def main():
+    check_layout()
     os.makedirs(OUT_DIR, exist_ok=True)
     m, routes = build_map()
     m.save("ZoneMap.png")

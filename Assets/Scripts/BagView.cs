@@ -157,8 +157,9 @@ public class BagView : MenuView
         int n = Inventory.Count(item);
         detailCount.text = item.Unique ? "" : "CARRYING " + n;
         detailText.text = (item.Description ?? "").ToUpperInvariant();
-        detailAction.text = item == Inventory.QuickItem ? "QUICK ITEM: R1 / Q IN A LEVEL" // QUICKITEM:
-                          : item.Usable && CanUseHere ? "CROSS/ENTER: USE" : item.Usable ? "SQUARE/R: SET AS QUICK ITEM" : "";
+        detailAction.text = item == Inventory.QuickItem ? "QUICK ITEM: L1 / Q IN A LEVEL" // QUICKITEM:
+                          : item.Usable && CanUseHere ? "CROSS/ENTER: USE" : item.Usable ? "SQUARE/R: SET AS QUICK ITEM"
+                          : SkillTree.CrystalValue(item) > 0 ? "WORTH " + SkillTree.CrystalValue(item) + " IN THE SKILL TREE" : ""; // SKILLS: gems are crystals
     }
 
     private string EmptyTabText()
@@ -171,19 +172,19 @@ public class BagView : MenuView
         }
     }
 
-    // QUICKITEM: Square / R puts the item under the cursor on R1 / Q
+    // QUICKITEM: Square / R puts the item under the cursor on L1 / Q
     private void SetQuick(int index)
     {
         ItemDefinition item = index < shown.Count ? shown[index] : null;
         if (item == null || !item.Usable)
         {
             Sound(cat.blockedSound);
-            Message(item == null ? "PICK AN ITEM FIRST" : "ONLY USABLE ITEMS CAN GO ON R1", MenuUI.Muted);
+            Message(item == null ? "PICK AN ITEM FIRST" : "ONLY USABLE ITEMS CAN GO ON L1", MenuUI.Muted);
             return;
         }
         Inventory.SetQuick(item);
         Sound(cat.equipSound);
-        Message("QUICK ITEM: " + item.DisplayName.ToUpperInvariant() + " (R1 / Q)", MenuUI.Yellow);
+        Message("QUICK ITEM: " + item.DisplayName.ToUpperInvariant() + " (L1 / Q)", MenuUI.Yellow);
         Refresh();
         ShowPocket(index);
     }

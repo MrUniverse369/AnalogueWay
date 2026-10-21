@@ -49,7 +49,7 @@ public class StompEnemy : MonoBehaviour
         {
             if (prefRb == null) prefRb = pref.GetComponent<Rigidbody2D>(); // PERF: look up once, not twice per stomp
             prefRb.linearVelocity = new Vector2(prefRb.linearVelocity.x, other.GetComponent<EnemyController>().BounceSpeed);
-            CollectableCollisiondetector.coinCollected = CollectableCollisiondetector.coinCollected + 10;
+            // TOUGHNESS: the 10 coins a stomp paid are now paid by EnemyController when the stomp defeats the enemy
         }
     }
 

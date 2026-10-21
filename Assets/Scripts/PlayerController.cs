@@ -1,4 +1,3 @@
-using UnityEngine.InputSystem; // QUICKITEM: ApplyBindingOverride
 using UnityEngine;
 
 
@@ -78,15 +77,13 @@ public class PlayerController : CharecterBehaviour
         spriteRendererObj = GetComponent<SpriteRenderer>();
         mountActive = false;
         pControls = new PlayerControls();
-        pControls.Gameplay.Fly.performed += ctx => MountActive();
+        // R1BUTTON (2026-10-20): the dragon is back on R1 (its binding in the input asset; the L1 override is gone, L1 is
+        // the quick item now) and R1 toggles: press to summon, press again to dismount. R2 still dismounts too.
+        pControls.Gameplay.Fly.performed += ctx => ToggleMount();
         pControls.Gameplay.unMount.performed += ctx => UnMountActive();
-        // QUICKITEM (2026-10-20): R1 uses the quick item now, so the dragon is summoned with L1 (an override at runtime:
-        // the generated PlayerControls and its input asset stay as they are)
-        for (int i = 0; i < pControls.Gameplay.Fly.bindings.Count; i++)
-            if (pControls.Gameplay.Fly.bindings[i].path == "<Gamepad>/rightShoulder")
-                pControls.Gameplay.Fly.ApplyBindingOverride(i, "<Gamepad>/leftShoulder");
         speed = speedDefault; // POWERUP: talismans no longer reset speed every frame
-        jSpeed = jSpeedDefault; // POWERUP: talismans no longer reset jump speed every frame
+        jumpScaleApplied = SkillTree.JumpScale; // SKILLS: Jump Power
+        jSpeed = jSpeedDefault * jumpScaleApplied; // POWERUP: talismans no longer reset jump speed every frame
         if (GetComponent<PlayerFX>() == null) gameObject.AddComponent<PlayerFX>(); // FX: hit flash, dust, stomp combo, talisman effects
 
 
@@ -112,6 +109,30 @@ public class PlayerController : CharecterBehaviour
         mountActive = true;
     }
 
+    // R1BUTTON: R1 summons the dragon, and R1 again sends it away. Ignored while a menu has the game paused (R1 also
+    // changes tabs in the Bag and the shop).
+    void ToggleMount()
+    {
+        if (MenueControl.isGamePaused || Time.timeScale == 0f) return;
+        if (mountActive) UnMountActive();
+        else MountActive();
+    }
+
+    /// <summary>R1BUTTON: true while Harvey rides the dragon.</summary>
+    public bool IsMounted => mountActive;
+
+    /// <summary>COMBO: the dragon's sprite while it is out (Harvey's own sprite is hidden then), else null.</summary>
+    public SpriteRenderer DragonSprite
+    {
+        get
+        {
+            if (dragon == null || !dragon.activeInHierarchy) return null;
+            if (dragonSprite == null) dragonSprite = dragon.GetComponent<SpriteRenderer>();
+            return dragonSprite;
+        }
+    }
+    private SpriteRenderer dragonSprite;
+
     void UnMountActive()
     {
         mountActive = false;
@@ -134,7 +155,7 @@ public class PlayerController : CharecterBehaviour
         get { return jSpeed; }
         set { jSpeed = value; }
     }
-    public float GetJSpeedDefault => jSpeedDefault; // POWERUP: used by SuperJumpTalisman
+    public float GetJSpeedDefault => jSpeedDefault * SkillTree.JumpScale; // POWERUP: used by SuperJumpTalisman // SKILLS: Jump Power
     public bool GetIsGrounded
     {
         get { return isGrounded; }
@@ -154,6 +175,7 @@ public class PlayerController : CharecterBehaviour
 
     void Update()
     {
+        ApplyJumpPower(); // SKILLS:
         Vector2 v = rb2D.linearVelocity; // PERF: read once; nothing below changes velocity until CharJump/CharMovement
         if (v.y <= -fallOffsetSpeed)
         {
@@ -296,6 +318,28 @@ public class PlayerController : CharecterBehaviour
     }
 
 
+    // ---------------------------------------------------------------- SKILLS
+    private float jumpScaleApplied = 1f;
+    private bool airJumpUsed;
+    private const float AirJumpStrength = 0.9f; // the second jump is a little lower than the first
+
+    // Jump Power learned mid-level (from the pause menu) applies straight away, to a super jump in progress too
+    private void ApplyJumpPower()
+    {
+        float scale = SkillTree.JumpScale;
+        if (Mathf.Approximately(scale, jumpScaleApplied)) return;
+        jSpeed *= scale / jumpScaleApplied;
+        jumpScaleApplied = scale;
+    }
+
+    // one mid-air jump: after leaving the ground (and its coyote time), not while swimming, dazed or knocked back
+    private bool CanAirJump()
+    {
+        if (!SkillTree.HasDoubleJump || airJumpUsed || isGrounded || coyoteTimeCounter > 0 || IsStunned) return false;
+        PlayerWater water = PlayerWater.Instance;
+        return water == null || !water.BodyInWater;
+    }
+
     public override void CharJump()
     {
         jDir = Input.GetAxisRaw("Jump");
@@ -306,6 +350,8 @@ public class PlayerController : CharecterBehaviour
             coyoteTimeCounter = coyoteTime;
         }
 
+        if (isGrounded) airJumpUsed = false; // SKILLS: Double Jump comes back on landing
+
         bool jumpedThisFrame = false; // ANIM:
         if (coyoteTimeCounter > 0 && Input.GetButtonDown("Jump") && !IsStunned) // STUN: no jumping while dazed
         {
@@ -313,6 +359,13 @@ public class PlayerController : CharecterBehaviour
             rb2D.linearVelocity = jVel;
             audioManager.PlaySfx(audioManager.jumpSound);
             PlayerFX.Jump(jSpeed > 6); // FX: take-off puffs (a super jump adds its dust ring and spark trail)
+        }
+        else if (CanAirJump() && Input.GetButtonDown("Jump")) // SKILLS: Double Jump
+        {
+            airJumpUsed = true;
+            rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, GetJSpeedDefault * AirJumpStrength);
+            if (audioManager != null) audioManager.PlaySfxOneShotPitched(audioManager.jumpSound, 1.25f, 0.9f);
+            PlayerFX.DoubleJump();
         }
 
         // ANIM: play the super-jump animation whenever a super jump actually happens (coyote jumps included)

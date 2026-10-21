@@ -21,6 +21,13 @@ using UnityEngine;
 ///     dash looks like stage 4 however the combo was built
 /// Stage colours (one set for both actions): 1 yellow, 2 orange, 3 hot pink, 4 violet, 5 rainbow (cycles every colour).
 /// Everything is small (one or two art pixels) and short-lived so Harvey and nearby enemies stay readable.
+///
+/// DRAGONCOMBO (2026-10-20): riding the dragon used to hide the whole combo. PlayerController hides Harvey's sprite
+/// while he rides, and everything here was drawn on that sprite: SpriteAura only draws its outline round an enabled
+/// sprite, and the swirl and sparks stopped while it was hidden. Now the combo follows whichever sprite is showing
+/// (Retarget): the dragon's while he rides, Harvey's otherwise. The outline, flare, last-second blink and the rainbow
+/// stage move across on mount and dismount (the old sprite's outline is cleared), and the swirl widens to the
+/// dragon's size. Stage, window and colours are unchanged.
 /// </summary>
 [DisallowMultipleComponent]
 public class StompCombo : MonoBehaviour
@@ -44,10 +51,13 @@ public class StompCombo : MonoBehaviour
     private float lastStomp = -10f, lastDash = -10f;
     private float flareUntil;
     private float moteTimer, sparkTimer;
-    private SpriteRenderer sprite;
+    private SpriteRenderer sprite;    // DRAGONCOMBO: the sprite the combo is drawn on (Harvey's, or the dragon's while he rides)
     private SpriteAura aura;
     private SpriteFX fx;
     private Rigidbody2D body;
+    private SpriteRenderer harveySprite; // DRAGONCOMBO:
+    private PlayerController player;     // DRAGONCOMBO:
+    private float harveyHalfWidth = 0.5f; // DRAGONCOMBO: the swirl is sized for this; a bigger sprite widens it
 
     /// <summary>Current combo stage: 0 = no combo, 1..MaxStage+ (stages above MaxStage look like MaxStage).</summary>
     public static int Stage => instance != null ? instance.stage : 0;
@@ -92,10 +102,42 @@ public class StompCombo : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        sprite = GetComponent<SpriteRenderer>();
+        sprite = harveySprite = GetComponent<SpriteRenderer>();
+        player = GetComponent<PlayerController>();
         body = GetComponent<Rigidbody2D>();
         aura = SpriteAura.On(sprite);
         fx = SpriteFX.On(sprite);
+    }
+
+    // DRAGONCOMBO: draw on the sprite that is on screen. Called every frame and before every hit.
+    private void Retarget()
+    {
+        SpriteRenderer target = harveySprite;
+        if (harveySprite != null && harveySprite.enabled) harveyHalfWidth = Mathf.Max(0.2f, harveySprite.bounds.extents.x);
+        else if (player != null)
+        {
+            SpriteRenderer dragon = player.DragonSprite;
+            if (dragon != null && dragon.enabled) target = dragon;
+        }
+        if (target == sprite || target == null) return;
+        if (aura != null) aura.Clear(AuraKey); // the outline leaves the sprite that is going away
+        sprite = target;
+        aura = SpriteAura.On(target);
+        fx = SpriteFX.On(target);
+        if (stage > 0) ShowAura(Mathf.Min(stage, MaxStage), Time.time - last); // and shows on the new one this frame
+    }
+
+    // the swirl's size for the sprite it circles: 1 on Harvey, wider on the dragon
+    private float SwirlScale => sprite == harveySprite || sprite == null ? 1f : Mathf.Clamp(sprite.bounds.extents.x / harveyHalfWidth, 1f, 2.4f);
+
+    private void ClearAuras() // DRAGONCOMBO: both sprites, so no stale outline waits on the dragon for the next ride
+    {
+        if (aura != null) aura.Clear(AuraKey);
+        SpriteAura own = harveySprite != null ? harveySprite.GetComponent<SpriteAura>() : null;
+        if (own != null && own != aura) own.Clear(AuraKey);
+        SpriteRenderer dragon = player != null ? player.DragonSprite : null;
+        SpriteAura onDragon = dragon != null ? dragon.GetComponent<SpriteAura>() : null;
+        if (onDragon != null && onDragon != aura) onDragon.Clear(AuraKey);
     }
 
     private void OnDestroy()
@@ -106,7 +148,7 @@ public class StompCombo : MonoBehaviour
     private void OnDisable() // dying or respawning ends the combo
     {
         stage = 0;
-        if (aura != null) aura.Clear(AuraKey);
+        ClearAuras(); // DRAGONCOMBO:
     }
 
     /// <summary>A successful stomp on an enemy at 'enemyPosition'. Continues (or starts) the combo and plays its stage.</summary>
@@ -130,11 +172,12 @@ public class StompCombo : MonoBehaviour
     {
         if (instance == null) return;
         instance.stage = 0;
-        instance.aura?.Clear(AuraKey);
+        instance.ClearAuras(); // DRAGONCOMBO: (was aura?.Clear, which Unity's fake null can slip past)
     }
 
     private void Advance(bool dash, Vector3 enemyPosition)
     {
+        Retarget(); // DRAGONCOMBO: a hit from the dragon's back plays on the dragon
         bool chained = stage > 0 && Time.time - last <= comboWindow;
         stage = chained ? stage + 1 : 1;
         last = Time.time;
@@ -143,6 +186,7 @@ public class StompCombo : MonoBehaviour
 
     private void Update()
     {
+        Retarget(); // DRAGONCOMBO:
         if (stage == 0) return;
         float since = Time.time - last;
         if (since > comboWindow)
@@ -160,7 +204,7 @@ public class StompCombo : MonoBehaviour
     {
         Color[] set = ColoursOf(stage);
         stage = 0;
-        aura.Clear(AuraKey);
+        ClearAuras(); // DRAGONCOMBO:
         if (sprite != null && sprite.enabled)
             PixelFX.Burst(Centre, 8, 0.6f, 1.4f, set, 0.3f, 0.5f, 1, PixelShape.Square, PixelMotion.Drift, true, PixelLayer.Front, 90f, 360f, 0.35f);
     }
@@ -184,7 +228,7 @@ public class StompCombo : MonoBehaviour
     // ---------------------------------------------------------------- the swirl (all window long)
     private void Swirl(int s, float since)
     {
-        if (sprite != null && !sprite.enabled) return; // riding the dragon: Harvey's sprite is hidden
+        if (sprite != null && !sprite.enabled) return; // a hidden sprite (DRAGONCOMBO: the dragon's shows while he rides)
         Color[] set = ColoursOf(s);
         float fade = Mathf.Lerp(0.5f, 1f, Mathf.Clamp01((comboWindow - since) / Mathf.Max(0.01f, warnTime)));
         Vector3 centre = Centre;
@@ -195,7 +239,8 @@ public class StompCombo : MonoBehaviour
             moteTimer = 0.03f;
             int motes = s + 1;
             float speed = 5f + s;                    // radians per second
-            float rx = 0.66f + 0.07f * s, ry = 0.42f + 0.05f * s;
+            float k = SwirlScale; // DRAGONCOMBO: wider round the dragon
+            float rx = (0.66f + 0.07f * s) * k, ry = (0.42f + 0.05f * s) * k;
             for (int i = 0; i < motes; i++)
             {
                 float a = Time.time * speed + i * Mathf.PI * 2f / motes;

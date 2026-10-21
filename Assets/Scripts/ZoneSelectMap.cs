@@ -110,6 +110,8 @@ public class ZoneSelectMap : MonoBehaviour
 
         current = PickStartNode();
         player.position = nodes[current].transform.position;
+        ZoneMapCamera follow = Camera.main != null ? Camera.main.GetComponent<ZoneMapCamera>() : null; // WORLDMAP:
+        if (follow != null) follow.SnapNow();
         ShowNode(current);
         PlayZoneMusic(current, 0f); // ZONEMUSIC: straight in with this zone's track
         if (coinsText != null)
@@ -352,16 +354,38 @@ public class ZoneSelectMap : MonoBehaviour
         foreach (TMP_Text t in new[] { zoneText, levelText })
             if (t != null) width = Mathf.Max(width, t.GetPreferredValues(t.text).x);
         label.sizeDelta = new Vector2(width + 14f, label.sizeDelta.y);
+        labelNode = i;
+        PlaceLabel();
+        label.gameObject.SetActive(true);
+        StartCoroutine(PopLabel());
+    }
 
+    // WORLDMAP: the camera eases after Harvey, so the label is re-placed every frame to stay over its node
+    private int labelNode = -1;
+
+    private void LateUpdate()
+    {
+        if (label != null && label.gameObject.activeSelf) PlaceLabel();
+    }
+
+    // float the label above the node, kept inside the screen
+    private void PlaceLabel()
+    {
+        if (labelNode < 0 || labelNode >= nodes.Length) return;
         var parent = (RectTransform)label.parent;
-        Vector2 screen = Camera.main.WorldToScreenPoint(node.transform.position + Vector3.up * labelHeight);
+        Vector2 screen = Camera.main.WorldToScreenPoint(nodes[labelNode].transform.position + Vector3.up * labelHeight);
         RectTransformUtility.ScreenPointToLocalPointInRectangle(parent, screen, null, out Vector2 local);
         float halfRoom = parent.rect.width / 2f - label.sizeDelta.x / 2f - 4f;
         local.x = Mathf.Clamp(local.x, -halfRoom, halfRoom);
-        local.y = Mathf.Min(local.y, parent.rect.height / 2f - label.sizeDelta.y - 4f); // the label's pivot is its bottom edge
+        // WORLDMAP: no room above a node near the top of the screen (under the coins plate): hang the label below it
+        float top = parent.rect.height / 2f - label.sizeDelta.y - 22f; // the label's pivot is its bottom edge
+        if (local.y > top)
+        {
+            Vector2 under = Camera.main.WorldToScreenPoint(nodes[labelNode].transform.position - Vector3.up * labelHeight * 0.6f);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(parent, under, null, out Vector2 below);
+            local.y = below.y - label.sizeDelta.y;
+        }
         label.anchoredPosition = local;
-        label.gameObject.SetActive(true);
-        StartCoroutine(PopLabel());
     }
 
     private IEnumerator PopLabel()

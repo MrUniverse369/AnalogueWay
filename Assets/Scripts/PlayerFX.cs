@@ -104,6 +104,16 @@ public class PlayerFX : MonoBehaviour
         if (super) TalismanFX.SuperJumpLaunch(feet);
     }
 
+    /// <summary>SKILLS: the Double Jump: a flat ring of cloud puffs kicked off under Harvey's feet.</summary>
+    public static void DoubleJump()
+    {
+        PlayerFX p = Instance;
+        if (p == null) return;
+        Vector3 feet = p.Feet;
+        PixelFX.Ring(feet, 10, 2.2f, new[] { PixelFX.Cream, PixelFX.Hex("d5ebff"), PixelFX.Yellow }, 0.22f, 1, PixelShape.Square, true, PixelLayer.Front, 0.35f, 0.15f);
+        PixelFX.Burst(feet, 5, 0.6f, 1.4f, new[] { PixelFX.Cream, PixelFX.Hex("d5ebff") }, 0.2f, 0.32f, 1, PixelShape.Square, PixelMotion.Float, false, PixelLayer.Front, 270f, 120f);
+    }
+
     private void LateUpdate()
     {
         UpdateFlicker();

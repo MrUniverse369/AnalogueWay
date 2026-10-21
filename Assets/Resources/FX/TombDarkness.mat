@@ -30,6 +30,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _EdgeWidth: 1.2
+    - _OuterAlpha: 0.74
+    - _OuterWidth: 2.5
     - _PixelsPerUnit: 16
     m_Colors:
     - _DarkColor: {r: 0.1, g: 0.08, b: 0.14, a: 0.55}

@@ -44,7 +44,7 @@ public class playerBodyDetectionArea : MonoBehaviour
             && !StompEnemy.StompingOnto(other)) // STOMPTIE: a stomp landing in the same step wins
         {
             animatorRef.SetTrigger("isHurt");
-            pushBackCounter = pushBackLenght;
+            if (!GhostEnemy.Is(other)) pushBackCounter = pushBackLenght; // GHOST: ghosts hurt but don't push, Harvey goes through
         }
 
         if (other.gameObject.CompareTag("WorldOneSwitch"))
@@ -86,6 +86,6 @@ public class playerBodyDetectionArea : MonoBehaviour
     private static bool IsDyingEnemy(Collider2D other)
     {
         EnemyController enemy = other.GetComponent<EnemyController>();
-        return enemy != null && enemy.IsDying;
+        return enemy != null && (enemy.IsDying || enemy.JustHit); // TOUGHNESS: or just stomped and still standing
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// <summary>
 /// MENUS: gives the in-level pause menu its own look, the same in every level. UI: in the HNL UI style (MenuUI): a
 /// plain panel with a PAUSED title, a status row (coins, lives, the equipped talismans), one evenly spaced column of
-/// text buttons (Resume, Talismans, Bag, Map, Main Menu, Quit) with the paw beside the selected one, and a hint.
+/// text buttons (Resume, Talismans, Bag, Skills, Map, Main Menu, Quit) with the paw beside the selected one, and a hint.
 /// MAP: in a save file (not Arcade) there is also a MAP button. It asks first, then leaves the level for the Zone Select.
 /// The level's own buttons are kept (their OnClick still calls MenueControl), only restyled and re-laid out, so
 /// the scenes need no edits. HarveyMenus applies it at level start. Art comes from Resources/HNLCatalog.
@@ -22,17 +22,17 @@ public class PauseMenuStyle : MonoBehaviour
     private TMP_Text coinsText, livesText;
     private Image[] talismanIcons;
 
-    /// <summary>Restyles the pause panel and adds the Talismans and Bag buttons (which call the given actions).</summary>
-    public static void Apply(GameObject pausePanel, UnityAction openTalismans, UnityAction openBag)
+    /// <summary>Restyles the pause panel and adds the Talismans, Bag and (SKILLS:) Skills buttons (which call the given actions).</summary>
+    public static void Apply(GameObject pausePanel, UnityAction openTalismans, UnityAction openBag, UnityAction openSkills = null)
     {
         var cat = Inventory.Catalog;
         if (pausePanel == null || cat == null || cat.pauseFrame == null || cat.menuButton == null) return;
         var canvas = pausePanel.GetComponentInParent<Canvas>(true);
         var style = (canvas != null ? canvas.gameObject : pausePanel).AddComponent<PauseMenuStyle>();
-        style.Build(pausePanel, openTalismans, openBag);
+        style.Build(pausePanel, openTalismans, openBag, openSkills);
     }
 
-    private void Build(GameObject pausePanel, UnityAction openTalismans, UnityAction openBag)
+    private void Build(GameObject pausePanel, UnityAction openTalismans, UnityAction openBag, UnityAction openSkills)
     {
         panel = pausePanel;
         var cat = Inventory.Catalog;
@@ -70,6 +70,7 @@ public class PauseMenuStyle : MonoBehaviour
         {
             entries.Add((AddButton(template, "Talismans", openTalismans), "TALISMANS"));
             entries.Add((AddButton(template, "Bag", openBag), "BAG"));
+            if (openSkills != null) entries.Add((AddButton(template, "Skills", openSkills), "SKILLS")); // SKILLS:
         }
         if (!GameSession.IsArcade && GameSession.BuildIndexOf(ZoneSelectMap.SceneName) >= 0) // MAP: a save file has a map to go back to
         {

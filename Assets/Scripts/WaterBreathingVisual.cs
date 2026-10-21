@@ -109,7 +109,7 @@ public class WaterBreathingVisual : MonoBehaviour
             Talisman t = m.TalismanIn(i);
             if (t == null || !m.IsSlotActive(i) || (t.Traits & TalismanTrait.WaterBreathing) == 0) continue;
             timeLeft = m.TimeLeft(i);
-            duration = t.Duration;
+            duration = SkillTree.DurationOf(t); // SKILLS: Lasting Charms
             return true;
         }
         return true;

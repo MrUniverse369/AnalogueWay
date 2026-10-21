@@ -200,7 +200,7 @@ public class PowerUpManager : MonoBehaviour
             slot.timeLeft -= dt;
             // CHI: a running talisman spends chi at its own rate and ends the moment the last unit is gone
             bool chiLeft = slot.talisman.ChiPerSecond <= 0f || Chi.IsFree // CHIFREE: free at the final combo stage,
-                           || Chi.Spend(slot.talisman.ChiPerSecond * Chi.CostScale * dt); // cheaper up the ladder
+                           || Chi.Spend(slot.talisman.ChiPerSecond * Chi.CostScale * SkillTree.TalismanChiScale * dt); // cheaper up the ladder // SKILLS: Chi Focus
             if (slot.timeLeft <= 0f || !chiLeft) End(index);
             else slot.talisman.OnTick(context, dt); // MENUS: Feather Fall, Coin Magnet
         }
@@ -242,7 +242,7 @@ public class PowerUpManager : MonoBehaviour
             DenyFeedback();
             return;
         }
-        float upfront = talisman.ChiOnActivate * Chi.CostScale; // HEAL: a one-off cost (cheaper up the combo ladder, free at the top)
+        float upfront = talisman.ChiOnActivate * Chi.CostScale * SkillTree.TalismanChiScale; // SKILLS: Chi Focus // HEAL: a one-off cost (cheaper up the combo ladder, free at the top)
         if (upfront > 0f && PlayerController.chi < upfront - 0.01f)
         {
             DenyFeedback();
@@ -251,7 +251,7 @@ public class PowerUpManager : MonoBehaviour
         if (upfront > 0f) Chi.Spend(upfront);
 
         slot.isActive = true;
-        slot.timeLeft = talisman.Duration;
+        slot.timeLeft = SkillTree.DurationOf(talisman); // SKILLS: Lasting Charms (and Dash Power for Spirit Dash)
 
         PlayActivationFeedback(talisman);
         talisman.OnActivated(context);
@@ -267,7 +267,7 @@ public class PowerUpManager : MonoBehaviour
 
         slot.isActive = false;
         slot.timeLeft = 0f;
-        slot.cooldownLeft = talisman.Cooldown;
+        slot.cooldownLeft = talisman.Cooldown * SkillTree.CooldownScale; // SKILLS: Quick Recharge
 
         talisman.OnDeactivated(context);
         if (talisman.HasAnimatorBool && context.Animator != null)

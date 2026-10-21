@@ -11,6 +11,9 @@ using UnityEngine.UI;
 /// ZONEMAP: rebuilds Assets/Scenes/ZoneSelect.unity from Tools/Art/zone_map_layout.txt (written by
 /// Tools/Art/zone_map.py together with the map art), so the nodes and the walkable paths always match the picture.
 /// Edit the Nodes table below to rename levels or point a node at a different scene.
+/// WORLDMAP (2026-10-20): the map is four screens in world order (Meadow, Tomb, Dunes, Japan) and ZoneMapCamera
+/// follows Harvey across it; each village comes straight after its zone's first act (the node order is the layout's,
+/// which matches Build Settings).
 /// </summary>
 public static class ZoneSelectSceneBuilder
 {
@@ -30,27 +33,28 @@ public static class ZoneSelectSceneBuilder
             { "Z1A3", ("Z1A3Tomb", "The Old Tomb", "Act 3", ZoneNodeKind.Level, Tomb, "Blue") },
             { "Z1A4", ("Z1A4Tomb", "The Old Tomb", "Act 4", ZoneNodeKind.Level, Tomb, "Blue") },
             { "Z1A5", ("Z1A5Tomb", "The Old Tomb", "Act 5", ZoneNodeKind.Level, Tomb, "Blue") },
-            { "Z1Village", ("Z1TombVillage", "The Old Tomb", "Act 6: Lantern Camp", ZoneNodeKind.Village, Tomb, null) }, // VILLAGES:
+            { "Z1A6", ("Z1A6Tomb", "The Old Tomb", "Act 6", ZoneNodeKind.Level, Tomb, "Blue") }, // WORLDMAP:
+            { "Z1Village", ("Z1TombVillage", "The Old Tomb", "Lantern Camp", ZoneNodeKind.Village, Tomb, null) }, // VILLAGES:
             { "Z1Boss", ("Z1BossTomb", "The Old Tomb", "Boss: The Grave Warden", ZoneNodeKind.Boss, Tomb, null) },
             { "Z2A1", ("Z2A1Sandy", "Sandy Dunes", "Act 1", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2A2", ("Z2A2Sandy", "Sandy Dunes", "Act 2", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2A3", ("Z2A3Sandy", "Sandy Dunes", "Act 3", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2A4", ("Z2A4Sandy", "Sandy Dunes", "Act 4", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2A5", ("Z2A5Sandy", "Sandy Dunes", "Act 5", ZoneNodeKind.Level, Sand, "Gold") },
-            { "Z2Village", ("Z2SandyVillage", "Sandy Dunes", "Act 6: Oasis Bazaar", ZoneNodeKind.Village, Sand, null) }, // VILLAGES:
+            { "Z2Village", ("Z2SandyVillage", "Sandy Dunes", "Oasis Bazaar", ZoneNodeKind.Village, Sand, null) }, // VILLAGES:
             { "Z2Boss", ("Z2BossSandy", "Sandy Dunes", "Boss: The Sandscale Scarab", ZoneNodeKind.Boss, Sand, null) },
             { "Z3A1", ("Z3A1Japan", "Sunlit Shrine Road", "Act 1", ZoneNodeKind.Level, Snow, "Red") },
             { "Z3A2", ("Z3A2Japan", "Sunlit Shrine Road", "Act 2", ZoneNodeKind.Level, Snow, "Red") },
-            { "Z3A3", ("Z3A3Japan", "Sunlit Shrine Road", "Act 3", ZoneNodeKind.Level, Snow, "Red") },
-            { "Z3A4", ("Z3A4Japan", "Sunlit Shrine Road", "Act 4", ZoneNodeKind.Level, Snow, "Red") },
-            { "Village", ("Z3JapanVillage", "Snow Temple Pass", "Act 5: Mountain Village", ZoneNodeKind.Village, Snow, null) },
+            { "Z3A3", ("Z3A3Japan", "Snow Temple Pass", "Act 3", ZoneNodeKind.Level, Snow, "Red") }, // WORLDMAP: past the torii
+            { "Z3A4", ("Z3A4Japan", "Snow Temple Pass", "Act 4", ZoneNodeKind.Level, Snow, "Red") },
+            { "Village", ("Z3JapanVillage", "Sunlit Shrine Road", "Mountain Village", ZoneNodeKind.Village, Snow, null) }, // WORLDMAP: after act 1
             { "Boss", ("Z3BossBattle", "Snow Temple Pass", "Boss: The Yokai Warrior", ZoneNodeKind.Boss, Snow, null) },
             { "Z4A1", ("Z4A6GrassGreen", "Grassy Meadow", "Act 1", ZoneNodeKind.Level, Grass, "Green") },
             { "Z4A2", ("Z4A7GrassGreen", "Grassy Meadow", "Act 2", ZoneNodeKind.Level, Grass, "Green") },
             { "Z4A3", ("Z4A8GrassGreen", "Grassy Meadow", "Act 3", ZoneNodeKind.Level, Grass, "Green") },
             { "Z4A4", ("Z4A9GrassGreen", "Grassy Meadow", "Act 4", ZoneNodeKind.Level, Grass, "Green") },
             { "Z4A5", ("Z4A10GrassGreen", "Grassy Meadow", "Act 5", ZoneNodeKind.Level, Grass, "Green") },
-            { "Z4Village", ("Z4GrassVillage", "Grassy Meadow", "Act 6: Meadowbrook", ZoneNodeKind.Village, Grass, null) }, // VILLAGES:
+            { "Z4Village", ("Z4GrassVillage", "Grassy Meadow", "Meadowbrook", ZoneNodeKind.Village, Grass, null) }, // VILLAGES:
             { "Z4Boss", ("Z4BossGrass", "Grassy Meadow", "Boss: King Mossback", ZoneNodeKind.Boss, Grass, null) },
             { "Win", ("Win", "Journey's End", "Home at Last", ZoneNodeKind.Goal, Grass, null) },
         };
@@ -82,7 +86,7 @@ public static class ZoneSelectSceneBuilder
         camGo.transform.position = new Vector3(0, 0, -10);
         camGo.AddComponent<AudioListener>();
 
-        SpriteObject("Map", S("ZoneMap"), Vector3.zero, 0, null);
+        var mapSprite = SpriteObject("Map", S("ZoneMap"), Vector3.zero, 0, null).GetComponent<SpriteRenderer>();
         var root = new GameObject("ZoneSelect");
         var ctrl = root.AddComponent<ZoneSelectMap>();
 
@@ -125,6 +129,14 @@ public static class ZoneSelectSceneBuilder
         body.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         body.transform.localPosition = new Vector3(0, -idle[0].bounds.min.y * 0.5f - 0.25f, 0);
 
+        // WORLDMAP: the camera follows Harvey across the four screens, inside the map
+        var follow = camGo.AddComponent<ZoneMapCamera>();
+        var followSo = new SerializedObject(follow);
+        followSo.FindProperty("target").objectReferenceValue = player;
+        followSo.FindProperty("map").objectReferenceValue = mapSprite;
+        followSo.ApplyModifiedPropertiesWithoutUndo();
+        camGo.transform.position = new Vector3(player.position.x, player.position.y, -10);
+
         // torii Harvey walks through: above Harvey (order 5), so the beams pass over him between the pillars
         var gates = new List<Transform>();
         var gatesRoot = new GameObject("Gates").transform;
@@ -134,7 +146,8 @@ public static class ZoneSelectSceneBuilder
         var cloudsRoot = new GameObject("Clouds").transform;
         cloudsRoot.SetParent(root.transform);
         var clouds = new List<Transform>();
-        foreach (var (name, pos) in new[] { ("Cloud_A", new Vector3(-3f, 3.9f, 0)), ("Cloud_B", new Vector3(6.5f, -3.4f, 0)), ("Cloud_A", new Vector3(-10f, -1.2f, 0)) })
+        foreach (var (name, pos) in new[] { ("Cloud_A", new Vector3(-13f, 9.4f, 0)), ("Cloud_B", new Vector3(-3.5f, 2.1f, 0)), ("Cloud_A", new Vector3(8f, 7.6f, 0)),
+                                                ("Cloud_B", new Vector3(15f, -2.4f, 0)), ("Cloud_A", new Vector3(-17f, -6.6f, 0)), ("Cloud_B", new Vector3(4f, -9.4f, 0)) }) // WORLDMAP: spread over the four screens
         {
             var cloud = SpriteObject("Cloud", S(name), pos, 8, cloudsRoot);
             cloud.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.85f);
@@ -188,6 +201,7 @@ public static class ZoneSelectSceneBuilder
         SetArray("idleFrames", idle);
         SetArray("runFrames", run);
         SetArray("clouds", clouds.ToArray());
+        so.FindProperty("cloudWrapX").floatValue = 23f; // WORLDMAP: clouds drift across the whole map
         SetArray("gates", gates.ToArray());
         Set("cursor", cursor);
         Set("openIcon", S("Node_Open_Gold"));
@@ -220,7 +234,7 @@ public static class ZoneSelectSceneBuilder
         ("Japan (Shrine Road + Snow Temple Pass)", new[] { "Z3" }, "Assets/Music/JapanZoneSelectSoundTrack.wav"),
         // WINTERMUSIC: past the torii (Snow Temple Pass). Later entries win, so this overrides the Japan track there.
         // PLACEHOLDER: SnowTemple_Modern until the real winter track is made; swap the path and re-run the menu below.
-        ("Japan winter side (Snow Temple Pass) - PLACEHOLDER", new[] { "Z3JapanVillage", "Z3Boss" }, "Assets/Music/SnowTemple_Modern.wav"),
+        ("Japan winter side (Snow Temple Pass) - PLACEHOLDER", new[] { "Z3A3", "Z3A4", "Z3Boss" }, "Assets/Music/SnowTemple_Modern.wav"), // WORLDMAP: the snow side is acts 3-4 and the boss now
         ("Grassy Meadow + Journey's End", new[] { "Z4", "Win" }, "Assets/Music/GrassZoneSelectSoundtrack.wav"),
     };
 

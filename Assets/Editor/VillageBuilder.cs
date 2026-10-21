@@ -7,13 +7,14 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// VILLAGES (2026-10-20): builds a village for the Tomb, Sandy and Meadow zones, like the Japan mountain village:
-///   Z1TombVillage  "Lantern Camp"   after Z1A5Tomb        Z2SandyVillage "Oasis Bazaar"  after Z2A5Sandy
-///   Z4GrassVillage "Meadowbrook"    after Z4A10GrassGreen
+///   Z1TombVillage  "Lantern Camp"   after Z1A1Tomb        Z2SandyVillage "Oasis Bazaar"  after Z2A1Sandy
+///   Z4GrassVillage "Meadowbrook"    after Z4A6GrassGreen
 /// Each starts from the zone's first act (DraftLevelBuilder.BuildFlatTown: Harvey, camera, HUD, background and the
 /// zone's own tiles on a flat street), then gets the zone's buildings (Tools/Art/village_art.py), the village shop
 /// counter, five villagers with the zone's dialogue file (Assets/Dialogue) and an exit at the far end that carries on
-/// to the zone boss (GameSession.FinishLevel). The villager and shop-counter objects are copied from Z3JapanVillage.
-/// The scenes go into Build Settings straight after the zone's last act, so the play order is act 5, village, boss.
+/// to the zone's second act (GameSession.FinishLevel). The villager and shop-counter objects are copied from Z3JapanVillage.
+/// The scenes go into Build Settings straight after the zone's first act, so the play order is act 1, village, act 2
+/// (WORLDORDER 2026-10-20; it was act 5, village, boss).
 /// Add them to the zone select with Tools/Art/zone_map.py and Tools/HNL/Rebuild Zone Select Scene.
 /// Safe to re-run (scenes are rebuilt and keep their GUIDs; build entries are only added once).
 /// </summary>
@@ -36,21 +37,21 @@ public static class VillageBuilder
     {
         new Spec
         {
-            scene = "Z1TombVillage", baseScene = "Z1A1Tomb", after = "Z1A5Tomb", refillBackdrop = true,
+            scene = "Z1TombVillage", baseScene = "Z1A1Tomb", after = "Z1A1Tomb", refillBackdrop = true,
             background = new Color32(0x1b, 0x20, 0x30, 255),
             shopName = "Camp Stores", dialogue = "TombVillage", buildings = new[] { "TombTent", "TombHut", "TombTent" },
             villagers = new[] { ("Professor Bastet", "prof"), ("Tom", "digger"), ("Sefu", "villager"), ("Ana", "villager"), ("Old Kafele", "villager") },
         },
         new Spec
         {
-            scene = "Z2SandyVillage", baseScene = "Z2A1Sandy", after = "Z2A5Sandy", refillBackdrop = false,
+            scene = "Z2SandyVillage", baseScene = "Z2A1Sandy", after = "Z2A1Sandy", refillBackdrop = false,
             background = new Color32(0x0e, 0xb0, 0xfe, 255),
             shopName = "Oasis Bazaar", dialogue = "SandyVillage", buildings = new[] { "SandyStall", "SandyHouse", "SandyHouse" },
             villagers = new[] { ("Amun", "amun"), ("Nefi", "nefi"), ("Tarik", "villager"), ("Safiya", "villager"), ("Old Djed", "villager") },
         },
         new Spec
         {
-            scene = "Z4GrassVillage", baseScene = "Z4A6GrassGreen", after = "Z4A10GrassGreen", refillBackdrop = false,
+            scene = "Z4GrassVillage", baseScene = "Z4A6GrassGreen", after = "Z4A6GrassGreen", refillBackdrop = false,
             background = new Color32(0x0e, 0xb0, 0xfe, 255),
             shopName = "Meadowbrook Store", dialogue = "MeadowVillage", buildings = new[] { "MeadowCottage", "MeadowBarn", "MeadowCottage" },
             villagers = new[] { ("Farmer Clover", "clover"), ("Old Willow", "willow"), ("Pip", "villager"), ("Bramble", "villager"), ("Daisy", "villager") },
@@ -193,7 +194,7 @@ public static class VillageBuilder
         }
     }
 
-    // each village goes straight after its zone's last act, so FinishLevel's "next scene" runs act 5 -> village -> boss
+    // each village goes straight after its zone's first act, so FinishLevel's "next scene" runs act 1 -> village -> act 2
     private static string AddToBuildSettings()
     {
         var list = EditorBuildSettings.scenes.ToList();

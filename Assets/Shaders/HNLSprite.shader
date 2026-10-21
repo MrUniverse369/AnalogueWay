@@ -17,6 +17,8 @@
 //   _HNL_CLOUDS  pixel clouds scrolling inside the sprite (parallax skies)
 //   _HNL_HAZE    heat shimmer near a horizon line (Egypt backgrounds)
 //   _HNL_PATTERN a slowly scrolling pattern of paw prints and twinkling stars (the title screen backdrop)
+//   _HNL_GHOST   translucent, gently shimmering body with a pixel purple halo; green pixels (eyes, flames) stay solid
+//                (the Tomb's purple ghoul)
 Shader "AnalogueWay/HNLSprite"
 {
     Properties
@@ -78,6 +80,14 @@ Shader "AnalogueWay/HNLSprite"
         _PatternCell ("Pattern cell (art pixels)", Vector) = (32, 24, 0, 0)
         _PatternSpeed ("Pattern scroll (art pixels/s)", Vector) = (4, -3, 0, 0)
         _PatternMinY ("Pattern only above local y", Float) = -100
+
+        [Header(Ghost)]
+        [Toggle(_HNL_GHOST)] _UseGhost ("Ghost", Float) = 0
+        _GhostAlpha ("Body opacity", Range(0, 1)) = 0.6
+        _GhostPulse ("Opacity shimmer (+/-)", Range(0, 0.5)) = 0.12
+        _GhostSpeed ("Shimmer speed", Float) = 2.2
+        _GhostGlow ("Halo colour (a = strength)", Color) = (0.68, 0.42, 0.95, 0.4)
+        _GhostKeep ("Keep pixels this much greener than red/blue solid", Range(0, 0.5)) = 0.08
     }
 
     SubShader
@@ -99,6 +109,7 @@ Shader "AnalogueWay/HNLSprite"
             #pragma shader_feature_local _HNL_CLOUDS
             #pragma shader_feature_local _HNL_HAZE
             #pragma shader_feature_local _HNL_PATTERN
+            #pragma shader_feature_local _HNL_GHOST
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/Core2D.hlsl"
 
@@ -162,6 +173,11 @@ Shader "AnalogueWay/HNLSprite"
                 float4 _PatternCell;
                 float4 _PatternSpeed;
                 float _PatternMinY;
+                float _GhostAlpha;
+                float _GhostPulse;
+                float _GhostSpeed;
+                half4 _GhostGlow;
+                float _GhostKeep;
             CBUFFER_END
 
             float Hash21(float2 p)
@@ -323,6 +339,30 @@ Shader "AnalogueWay/HNLSprite"
             #endif
 
                 c.rgb = lerp(c.rgb, _FlashColor.rgb, _FlashColor.a);
+
+            #if defined(_HNL_GHOST)
+                {
+                    // each ghoul shimmers on its own beat (phase from its position), never fully fading out
+                    float phase = UNITY_MATRIX_M._m03 * 0.9 + UNITY_MATRIX_M._m13 * 0.6;
+                    float shimmer = saturate(_GhostAlpha + _GhostPulse * (0.7 * sin(t * _GhostSpeed + phase) + 0.3 * sin(t * _GhostSpeed * 2.3 + phase * 1.7)));
+                    bool keep = tex.g - max(tex.r, tex.b) > _GhostKeep; // the green eyes and flames
+                    if (tex.a > 0.5)
+                    {
+                        if (!keep && _FlashColor.a < 0.5) c.a *= shimmer;
+                    }
+                    else
+                    {
+                        // halo: empty pixels next to the body (1 px all round, 2 px straight out) get a faint purple
+                        float2 tx = _MainTex_TexelSize.xy;
+                        half n1 = max(max(SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv + float2(tx.x, 0)).a, SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv - float2(tx.x, 0)).a),
+                                      max(SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv + float2(0, tx.y)).a, SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv - float2(0, tx.y)).a));
+                        half n2 = max(max(SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv + float2(tx.x * 2, 0)).a, SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv - float2(tx.x * 2, 0)).a),
+                                      max(SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv + float2(0, tx.y * 2)).a, SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv - float2(0, tx.y * 2)).a));
+                        half halo = n1 > 0.5 ? 1.0 : (n2 > 0.5 ? 0.45 : 0.0);
+                        c = half4(_GhostGlow.rgb, _GhostGlow.a * halo * (0.75 + 0.25 * sin(t * _GhostSpeed * 0.8 + phase)) * i.color.a);
+                    }
+                }
+            #endif
 
                 // dither: ordered for flickers, random pixels for dissolves
                 float threshold = lerp(Bayer4(artPx + float2(_DitherShift, _DitherShift * 2.0)), Hash21(artPx + 3.7), _DitherNoise);

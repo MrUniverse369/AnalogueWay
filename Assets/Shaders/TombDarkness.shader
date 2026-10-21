@@ -2,6 +2,8 @@
 // TombDarkness.cs: the view is shaded toward the HNL dark purple, except inside light circles around Harvey and
 // any torches or checkpoints. Circle edges are ordered-dither in whole art pixels, so the light reads as pixel
 // art rather than a smooth gradient. Up to 8 lights: _Lights[i] = (world x, world y, radius, strength).
+// TOMBDARK (2026-10-20): beyond the lights the darkness deepens from _DarkColor.a to _OuterAlpha over _OuterWidth,
+// so the tomb reads darker and the light stands out more. Inside the light circles nothing changes.
 Shader "AnalogueWay/TombDarkness"
 {
     Properties
@@ -9,6 +11,8 @@ Shader "AnalogueWay/TombDarkness"
         [PerRendererData] _MainTex ("Sprite", 2D) = "white" {}
         _DarkColor ("Darkness (a = strength)", Color) = (0.1, 0.08, 0.14, 0.55)
         _EdgeWidth ("Soft edge (units)", Float) = 1.2
+        _OuterAlpha ("Darkness away from the lights", Range(0, 1)) = 0.55
+        _OuterWidth ("Deepening distance past the light edge (units)", Float) = 2.5
         _PixelsPerUnit ("Art pixels per unit", Float) = 16
     }
 
@@ -42,6 +46,8 @@ Shader "AnalogueWay/TombDarkness"
                 half4 _DarkColor;
                 float _EdgeWidth;
                 float _PixelsPerUnit;
+                float _OuterAlpha;
+                float _OuterWidth;
             CBUFFER_END
 
             float4 _Lights[8];
@@ -67,15 +73,20 @@ Shader "AnalogueWay/TombDarkness"
                 float2 px = floor(i.positionWS.xy * _PixelsPerUnit);
                 float2 p = (px + 0.5) / _PixelsPerUnit;
                 float lit = 0;
+                float near = 0; // TOMBDARK: 1 at a light's edge, 0 once _OuterWidth past it
                 for (int k = 0; k < _LightCount; k++)
                 {
                     float4 L = _Lights[k];
                     float d = length(p - L.xy);
                     lit = max(lit, saturate((L.z - d) / max(_EdgeWidth, 0.01)) * L.w);
+                    near = max(near, saturate((L.z + _OuterWidth - d) / max(_OuterWidth, 0.01)));
                 }
                 // dithered steps instead of a smooth fade: 0, 1/3, 2/3 or full light
                 float steps = floor(lit * 3.0 + Bayer4(px)) / 3.0;
                 float a = _DarkColor.a * (1.0 - saturate(steps));
+                // TOMBDARK: only where no light reaches at all, deepen in the same dithered thirds
+                float far = floor((1.0 - near) * 3.0 + Bayer4(px + 2.0)) / 3.0;
+                if (steps <= 0.0) a = lerp(_DarkColor.a, max(_OuterAlpha, _DarkColor.a), saturate(far));
                 return half4(_DarkColor.rgb, a);
             }
             ENDHLSL
