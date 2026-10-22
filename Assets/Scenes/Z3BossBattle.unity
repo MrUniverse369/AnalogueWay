@@ -3653,6 +3653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -62743,6 +62747,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -62861,6 +62869,8 @@ MonoBehaviour:
   openingColor: {r: 0.55, g: 1, b: 1, a: 1}
   hitColor: {r: 1, g: 1, b: 1, a: 1}
   debugLog: 0
+  chestsFastTime: 40
+  chestsSlowTime: 120
 --- !u!50 &1220829348
 Rigidbody2D:
   serializedVersion: 5
@@ -63949,6 +63959,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -65226,6 +65240,8 @@ MonoBehaviour:
   - {fileID: 1537281552}
   - {fileID: 1772305480}
   revealOnDefeat: {fileID: 562924809}
+  chestsFastTime: 35
+  chestsSlowTime: 110
   maxLives: 3
   stages:
   - name: Charging Blade
@@ -65286,6 +65302,7 @@ MonoBehaviour:
   hurtGrace: 1
   knockbackTime: 0.35
   counterKnockback: 0.6
+  recoveryGrace: 0.5
   openingColor: {r: 0.55, g: 1, b: 1, a: 1}
   hitColor: {r: 1, g: 1, b: 1, a: 1}
   afterimageTint: {r: 1, g: 0.42, b: 0.45, a: 1}
@@ -95262,6 +95279,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

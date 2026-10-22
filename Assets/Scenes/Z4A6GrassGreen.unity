@@ -705,6 +705,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1882,6 +1886,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20250,6 +20258,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21115,6 +21127,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22980,6 +22996,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23218,6 +23238,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23548,6 +23572,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23880,6 +23908,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24281,6 +24313,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25475,6 +25511,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26309,6 +26349,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30468,6 +30512,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31736,6 +31784,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -44413,6 +44465,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -45288,6 +45344,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -45586,6 +45646,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46471,6 +46535,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46935,6 +47003,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -47015,6 +47087,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -47567,6 +47643,10 @@ PrefabInstance:
     - target: {fileID: 394160351929318919, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
       propertyPath: m_Name
       value: Spikes (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2418179274881510000, guid: 24732959e661144ae89588ed0684a3fb, type: 3}
+      propertyPath: popOutAndRetract
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

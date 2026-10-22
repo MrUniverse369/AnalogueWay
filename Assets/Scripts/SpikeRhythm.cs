@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -55,6 +56,8 @@ public class SpikeRhythm : MonoBehaviour
         public SpriteRenderer sr;
         public float lastU;
         public float depth;
+        public SpikeTrap trap;      // TOGGLE: unticked = static
+        public bool colOn, srOn;    // TOGGLE: authored states a static spike keeps
     }
 
     private State[] states;
@@ -64,24 +67,79 @@ public class SpikeRhythm : MonoBehaviour
     /// <summary>True while the spike at this index is out far enough to hurt (used by tests and tools).</summary>
     public bool IsDangerous(int i) => states != null && states[i].col != null && states[i].col.enabled;
 
+    private static readonly List<SpikeRhythm> active = new List<SpikeRhythm>(); // TOGGLE: for SpikeTrap.Join
+
+    private void OnEnable() => active.Add(this);
+    private void OnDisable() => active.Remove(this);
+
     private void Awake()
     {
+        if (spikes == null) spikes = new Spike[0]; // TOGGLE: made at runtime by Drive
         states = new State[spikes.Length];
-        for (int i = 0; i < spikes.Length; i++)
-        {
-            Transform t = spikes[i].spike;
-            if (t == null) continue;
-            states[i] = new State
-            {
-                basePos = t.position,
-                up = t.up,
-                col = t.GetComponent<Collider2D>(),
-                sr = t.GetComponent<SpriteRenderer>(),
-                lastU = LocalTime(i),
-                depth = spikes[i].depth > 0f ? spikes[i].depth : retractDepth
-            };
-        }
+        for (int i = 0; i < spikes.Length; i++) states[i] = MakeState(i);
         Apply();
+    }
+
+    private State MakeState(int i)
+    {
+        Transform t = spikes[i].spike;
+        if (t == null) return null;
+        var s = new State
+        {
+            basePos = t.position,
+            up = t.up,
+            col = t.GetComponent<Collider2D>(),
+            sr = t.GetComponent<SpriteRenderer>(),
+            lastU = LocalTime(i),
+            depth = spikes[i].depth > 0f ? spikes[i].depth : retractDepth,
+            trap = t.GetComponent<SpikeTrap>()
+        };
+        s.colOn = s.col != null && s.col.enabled;
+        s.srOn = s.sr != null && s.sr.enabled;
+        return s;
+    }
+
+    /// <summary>
+    /// TOGGLE: puts a ticked spike that no controller lists yet (one dragged into a level by hand) on the scene's
+    /// beat. It takes the phase of a driven spike right beside it on the same surface (so it pops with that run), or
+    /// its own phase. A scene with no SpikeRhythm gets one, using the spike's sounds.
+    /// </summary>
+    public static void Drive(SpikeTrap trap)
+    {
+        Transform t = trap.transform;
+        foreach (SpikeRhythm r in active)
+            if (System.Array.Exists(r.spikes, s => s != null && s.spike == t)) return;
+
+        SpikeRhythm rhythm = active.Count > 0 ? active[0] : null;
+        if (rhythm == null)
+        {
+            rhythm = new GameObject("SpikeRhythm").AddComponent<SpikeRhythm>();
+            rhythm.extendSound = trap.ExtendSound;
+            rhythm.retractSound = trap.RetractSound;
+        }
+
+        SpriteRenderer sr = t.GetComponent<SpriteRenderer>();
+        float depth = sr != null && sr.sprite != null ? Mathf.Round(sr.sprite.bounds.size.y * t.lossyScale.y / Px) * Px : 0f;
+        var spike = new Spike { spike = t, phase = rhythm.NeighbourPhase(t, trap.Phase), depth = depth };
+        System.Array.Resize(ref rhythm.spikes, rhythm.spikes.Length + 1);
+        System.Array.Resize(ref rhythm.states, rhythm.states.Length + 1);
+        int i = rhythm.spikes.Length - 1;
+        rhythm.spikes[i] = spike;
+        rhythm.states[i] = rhythm.MakeState(i);
+    }
+
+    // phase of the nearest driven spike facing the same way on the same surface within a run gap, else fallback
+    private float NeighbourPhase(Transform t, float fallback)
+    {
+        float best = 1.3f;
+        foreach (Spike s in spikes)
+        {
+            if (s == null || s.spike == null || Vector2.Dot(s.spike.up, t.up) < 0.9f) continue;
+            Vector2 d = s.spike.position - t.position;
+            float along = Mathf.Abs(Vector2.Dot(d, t.right)), across = Mathf.Abs(Vector2.Dot(d, t.up));
+            if (across < 0.3f && along < best) { best = along; fallback = s.phase; }
+        }
+        return fallback;
     }
 
     private void Update()
@@ -103,8 +161,17 @@ public class SpikeRhythm : MonoBehaviour
             State s = states[i];
             if (s == null) continue;
             float u = LocalTime(i);
-            float ext = Extension(u, out float rattle);
             Transform t = spikes[i].spike;
+            if (s.trap != null && !s.trap.PopOutAndRetract)
+            {
+                // TOGGLE: static spike: fully out as placed, collider and renderer as authored, no sound or dust
+                t.position = s.basePos;
+                if (s.col != null) s.col.enabled = s.colOn;
+                if (s.sr != null) s.sr.enabled = s.srOn;
+                s.lastU = u; // re-ticking in Play mode picks the beat up without a false pop
+                continue;
+            }
+            float ext = Extension(u, out float rattle);
             Vector3 offset = -s.up * Mathf.Round((1f - ext) * s.depth / Px) * Px;
             t.position = s.basePos + offset + t.right * rattle; // SPIKES: sideways to the spike, so wall spikes shake along the wall
             if (s.col != null) s.col.enabled = ext >= 0.5f;

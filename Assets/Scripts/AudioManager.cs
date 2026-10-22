@@ -38,6 +38,7 @@ public class AudioManager : MonoBehaviour
    public AudioClip CloudBounceSound => cloudBounceSound != null ? cloudBounceSound : bounceSound; // SFX:
    public AudioClip SamuraiSlashSound => samuraiSlashSound != null ? samuraiSlashSound : enemyDashDefeatSound; // SLASH:
    public AudioClip ChestTrapSound => chestTrapSound != null ? chestTrapSound : BossSlamSound; // CHEST:
+   public UnityEngine.Audio.AudioMixerGroup SfxGroup => sfx != null ? sfx.outputAudioMixerGroup : null; // BOULDER: for sounds that need their own looping source
 
     // MIX: one place to balance everything. 1 = the clip as recorded.
     // Defaults were measured so each sound sits at a set level against the music at musicVolume 0.35:
