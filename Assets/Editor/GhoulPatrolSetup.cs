@@ -11,20 +11,20 @@ using UnityEngine;
 ///      slice merged them. Centre pivot: the body bobs 0-4 px above the frame bottom (2 on average), which puts it on
 ///      the same line as the old still's centre pivot, so the ghoul stays over its collider
 ///   2. GhoulPatrol.anim: the 8 frames looping at 10 fps
-///   3. Ghoul.controller, a copy of the Japan yokai's Enemy.controller (which the yokai still use, so it is left alone)
+///   3. Ghoul.controller, a copy of the Japan yokai's YokaiTwo.controller (left alone)
 ///      with GhoulPatrol in its walk state, and Any State -> death no longer waiting for exit time 1, which with a
 ///      0.8 s loop would let a stomped ghoul keep flying for up to a loop
 ///   4. Ghoul.prefab's Enemy uses Ghoul.controller and shows the first frame (every flying ghoul: Z1A1, Z1A2, Z1A6)
 /// </summary>
 public static class GhoulPatrolSetup
 {
-    private const string Dir = "Assets/Sprites/Enemies/TempleTiles/";
+    private const string Dir = "Assets/Sprites/Enemies/Tomb/Ghoul/";
     private const string Sheet = Dir + "GhoulPatrolAnim.png";
-    private const string AnimDir = Dir + "GhoulAnim";
+    private const string AnimDir = "Assets/Sprites/Enemies/Tomb/Ghoul"; // the clip and controller sit next to the sheet
     private const string ClipPath = AnimDir + "/GhoulPatrol.anim";
     private const string ControllerPath = AnimDir + "/Ghoul.controller";
-    private const string SourceController = "Assets/Sprites/Enemies/JapanEnemies/YokaiTwoAnim/Enemy.controller";
-    private const string PrefabPath = "Assets/Prefabs/Enemy/Ghoul.prefab";
+    private const string SourceController = "Assets/Sprites/Enemies/Japan/YokaiWarrior/YokaiTwo.controller";
+    private const string PrefabPath = "Assets/Prefabs/Enemy/Tomb/Ghoul.prefab";
     private const string WalkState = "WalkAnim";
     private const int FrameW = 25, FrameH = 28;
     private const float Fps = 10f;
@@ -66,7 +66,6 @@ public static class GhoulPatrolSetup
             .OrderBy(s => int.Parse(s.name.Substring(s.name.LastIndexOf('_') + 1))).ToArray();
 
         // 2. the looping clip
-        if (!AssetDatabase.IsValidFolder(AnimDir)) AssetDatabase.CreateFolder(Dir.TrimEnd('/'), "GhoulAnim");
         var clip = AssetDatabase.LoadAssetAtPath<AnimationClip>(ClipPath);
         if (clip == null)
         {

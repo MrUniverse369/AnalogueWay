@@ -1,6 +1,6 @@
 """BLOCK (2026-10-19): the samurai monkey's block stance, for when he stops Harvey's Spirit Dash.
 
-  Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim_Block.png   the stance frame
+  Assets/Sprites/Enemies/Japan/SamuraiMonkey/JSEAnim_Block.png   the stance frame
   Tools/Art/samurai_block_layout.txt                               per frame: x y w h pivotX (pixels)
 
 The stance is the monkey's braced draw stance, the first frame of his sword attack (JSEAnim_SwordAttack.png frame 1:
@@ -20,7 +20,7 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from zone_map import read_png_rgba, write_png  # noqa: E402
 
-DIR = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim"
+DIR = "Assets/Sprites/Enemies/Japan/SamuraiMonkey"
 SRC = os.path.join(DIR, "JSEAnim_SwordAttack.png")
 SRC_LAYOUT = "Tools/Art/samurai_slash_layout.txt"
 OUT = os.path.join(DIR, "JSEAnim_Block.png")

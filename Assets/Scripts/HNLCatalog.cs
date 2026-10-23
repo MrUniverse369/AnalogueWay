@@ -51,6 +51,10 @@ public class HNLCatalog : ScriptableObject
     [Header("World")]
     [Tooltip("BOSSCHEST: the treasure chest prefab that drops into a boss arena when the boss is beaten.")]
     public GameObject treasureChest;
+    [Tooltip("MARKER: the off-screen enemy pointer every level gets (Tools/UI/stomp_marker.py), pointing right.")]
+    public Sprite enemyMarkerStraight;
+    [Tooltip("MARKER: the same pointer, pointing up and to the right.")]
+    public Sprite enemyMarkerDiagonal;
 
     [Header("Sounds")]
     public AudioClip moveSound;

@@ -1,7 +1,7 @@
 """Turns the samurai monkey's sword-attack sheet (SamuraiSwoardattack.jpg: 8 frames, 4x2, upscaled pixel art on a
 white background with a "Luma AI" watermark) into a game-ready sprite sheet next to the walk cycle:
 
-  Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim_SwordAttack.png   8 frames, transparent, at the walk's scale
+  Assets/Sprites/Enemies/Japan/SamuraiMonkey/JSEAnim_SwordAttack.png   8 frames, transparent, at the walk's scale
   Tools/Art/samurai_slash_layout.txt                                     per frame: x y w h pivotX (pixels)
 
 What it does:
@@ -30,7 +30,7 @@ from collections import Counter, deque
 sys.path.insert(0, os.path.dirname(__file__))
 from zone_map import write_png  # noqa: E402
 
-DIR = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim"
+DIR = "Assets/Sprites/Enemies/Japan/SamuraiMonkey"
 SRC = os.path.join(DIR, "SamuraiSwoardattack.jpg")
 WALK = os.path.join(DIR, "JSEAnim.png")
 OUT = os.path.join(DIR, "JSEAnim_SwordAttack.png")

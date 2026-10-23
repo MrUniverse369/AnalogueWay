@@ -19,11 +19,11 @@ using UnityEngine;
 [InitializeOnLoad]
 public static class SamuraiBlockSetup
 {
-    private const string Dir = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim/";
+    private const string Dir = "Assets/Sprites/Enemies/Japan/SamuraiMonkey/";
     private const string Sheet = Dir + "JSEAnim_Block.png";
     private const string ClipPath = Dir + "Block.anim";
     private const string ControllerPath = Dir + "BounceEnemy.controller";
-    private const string PrefabPath = "Assets/Prefabs/Enemy/MonkieSamurai.prefab";
+    private const string PrefabPath = "Assets/Prefabs/Enemy/Japan/MonkieSamurai.prefab";
     private const string LayoutPath = "Tools/Art/samurai_block_layout.txt";
     private const float OldKnockback = 0.2f, Knockback = 0.35f;
     private const int FootDepth = 22; // the samurai sheets' feet-below-the-transform depth (SpriteGrounding)

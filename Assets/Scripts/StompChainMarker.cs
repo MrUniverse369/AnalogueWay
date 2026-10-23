@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// MARKER (2026-10-19): a pixel pointer at the edge of the screen that points at the next enemy of a stomp chain while
@@ -12,10 +14,17 @@ using UnityEngine;
 /// The pointer is two pixel sprites (straight and diagonal, from Tools/UI/stomp_marker.py) turned in 90 degree steps,
 /// so it stays crisp in all eight directions. It nudges one art pixel toward the target, like the menu's paw.
 /// The stomp itself is untouched (StompEnemy / EnemyController).
+///
+/// MARKER (2026-10-22): every level now gets one in "all enemies" mode, set up automatically when a level loads (art
+/// from HNLCatalog), so no scene needs editing. While Harvey is in the air, it points at the nearest live enemy ahead
+/// of him that is under or over the screen (inside the view's left and right edges, so it is the bounce that took the
+/// enemy out of view, not just distance). A level's own chain marker (Z3A2's ghost row) wins while it shows.
 /// </summary>
 [DefaultExecutionOrder(200)] // after CameraController's LateUpdate has moved the camera this frame
 public class StompChainMarker : MonoBehaviour
 {
+    [Tooltip("MARKER: point at any enemy in the level instead of a chain (every level gets one of these by itself).")]
+    [SerializeField] private bool allEnemies;
     [Tooltip("The enemies of the chain (any order).")]
     [SerializeField] private EnemyController[] chain;
     [Tooltip("Pointer art that points right.")]
@@ -38,6 +47,36 @@ public class StompChainMarker : MonoBehaviour
     private Camera cam;
     private SpriteRenderer pointer;
     private float minX, maxX;
+    private EnemyController[] everyEnemy = new EnemyController[0]; // MARKER: all-enemies mode, refreshed now and then
+    private float refreshAt;
+    private const float RefreshEvery = 0.5f;                        // enemies come and go with respawns
+    private static readonly List<StompChainMarker> chainMarkers = new List<StompChainMarker>();
+
+    // MARKER: one all-enemies marker in every level ("Z..." scene with a player), like ZoneAtmosphere
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    private static void Init()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (mode != LoadSceneMode.Single || !scene.name.StartsWith("Z") || scene.name == ZoneSelectMap.SceneName) return;
+        if (FindFirstObjectByType<PlayerController>() == null) return;
+        HNLCatalog catalog = Inventory.Catalog;
+        if (catalog == null || catalog.enemyMarkerStraight == null || catalog.enemyMarkerDiagonal == null) return;
+        var go = new GameObject("EnemyMarker");
+        go.SetActive(false); // fill the fields in before Awake
+        SceneManager.MoveGameObjectToScene(go, scene);
+        var marker = go.AddComponent<StompChainMarker>();
+        marker.allEnemies = true;
+        marker.chain = new EnemyController[0];
+        marker.straightArrow = catalog.enemyMarkerStraight;
+        marker.diagonalArrow = catalog.enemyMarkerDiagonal;
+        go.SetActive(true);
+    }
 
     /// <summary>The enemy the pointer is aiming at this frame (null when hidden). Tests read this.</summary>
     public EnemyController ShownTarget { get; private set; }
@@ -48,12 +87,14 @@ public class StompChainMarker : MonoBehaviour
     {
         minX = float.MaxValue;
         maxX = float.MinValue;
+        if (chain == null) chain = new EnemyController[0];
         foreach (EnemyController e in chain)
         {
             if (e == null) continue;
             minX = Mathf.Min(minX, e.transform.position.x);
             maxX = Mathf.Max(maxX, e.transform.position.x);
         }
+        if (!allEnemies) chainMarkers.Add(this);
 
         var go = new GameObject("StompPointer");
         go.transform.SetParent(transform, false);
@@ -65,9 +106,14 @@ public class StompChainMarker : MonoBehaviour
         pointer.enabled = false;
     }
 
+    private void OnDestroy()
+    {
+        chainMarkers.Remove(this);
+    }
+
     private void LateUpdate()
     {
-        ActiveTarget = FindTarget();
+        ActiveTarget = allEnemies ? FindAnyTarget() : FindTarget();
         if (ActiveTarget == null || cam == null || InView(ActiveTarget))
         {
             Hide();
@@ -93,6 +139,38 @@ public class StompChainMarker : MonoBehaviour
             float ahead = (BoundsOf(e).center.x - px) * facing;
             if (ahead < -behindTolerance || ahead >= bestAhead) continue;
             bestAhead = ahead;
+            best = e;
+        }
+        return best;
+    }
+
+    // MARKER: all-enemies mode: the nearest live enemy ahead of airborne Harvey that is above or below the view
+    private EnemyController FindAnyTarget()
+    {
+        if (cam == null) cam = Camera.main;
+        if (player == null) player = FindFirstObjectByType<PlayerController>();
+        if (cam == null || player == null || !player.isActiveAndEnabled || player.GetIsGrounded) return null;
+        foreach (StompChainMarker m in chainMarkers)
+            if (m != null && m.isActiveAndEnabled && m.ShownTarget != null) return null; // the level's own chain marker is showing
+        if (Time.time >= refreshAt)
+        {
+            refreshAt = Time.time + RefreshEvery;
+            everyEnemy = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
+        }
+        Rect view = View(visibleInset);
+        float px = player.transform.position.x;
+        float facing = Mathf.Sign(player.transform.localScale.x);
+        EnemyController best = null;
+        float bestGap = float.MaxValue;
+        foreach (EnemyController e in everyEnemy)
+        {
+            if (e == null || !e.gameObject.activeInHierarchy || e.IsDying) continue;
+            Bounds b = BoundsOf(e);
+            if (b.max.x <= view.xMin || b.min.x >= view.xMax) continue; // off to the side: not what the bounce hid
+            if ((b.center.x - px) * facing < -behindTolerance) continue;
+            float gap = Mathf.Abs(b.center.x - px);
+            if (gap >= bestGap) continue;
+            bestGap = gap;
             best = e;
         }
         return best;

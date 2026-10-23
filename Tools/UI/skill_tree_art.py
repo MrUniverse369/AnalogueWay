@@ -21,6 +21,7 @@ OUTLINE = hexc("333941")
 PAL = {
     "c": CREAM, "y": YELLOW, "O": hexc("f2a65e"), "p": hexc("ff6b97"), "a": hexc("5fcde4"), "A": hexc("66ffe3"),
     "b": hexc("4da6ff"), "l": hexc("d5ebff"), "g": hexc("99e550"), "G": hexc("6abe30"), "d": hexc("a59bd0"),
+    "v": hexc("b48cff"),  # COMBOLOCK: the combo's violet stage
     "*": YELLOW,  # sparks: no outline
 }
 NO_OUTLINE = {"*"}
@@ -165,6 +166,23 @@ SKYLEAP = pad([
 ])
 
 
+# COMBOLOCK: Combo Mastery: four rising bars in the combo's stage colours (yellow, orange, pink, violet)
+COMBO = pad([
+    "................",
+    "............*..*",
+    "..............*.",
+    "............vv..",
+    "............vv..",
+    ".........pp.vv..",
+    ".........pp.vv..",
+    "......OO.pp.vv..",
+    "......OO.pp.vv..",
+    "...yy.OO.pp.vv..",
+    "...yy.OO.pp.vv..",
+    "...yy.OO.pp.vv..",
+])
+
+
 def recharge():
     """A circular arrow: a green ring with a gap at the top right and an arrowhead."""
     rows = [["."] * 16 for _ in range(16)]
@@ -197,6 +215,7 @@ def main():
     os.makedirs(SKILLS_DIR, exist_ok=True)
     icons = {
         "Skill_Stomp": STOMP, "Skill_Dash": DASH, "Skill_Jump": JUMP, "Skill_DoubleJump": DOUBLE,
+        "Skill_Combo": COMBO,
         "Skill_ChiFocus": CHI, "Skill_Lasting": LASTING, "Skill_Recharge": recharge(), "Skill_SkyLeap": SKYLEAP,
     }
     for name, rows in icons.items():

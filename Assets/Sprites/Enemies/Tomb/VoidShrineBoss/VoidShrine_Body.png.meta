@@ -1,0 +1,1217 @@
+fileFormatVersion: 2
+guid: 8e1e898dd227c4e15afba87e53142779
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6515858995583823975
+    second: VoidShrine_Body_0
+  - first:
+      213: 1703321519494113155
+    second: VoidShrine_Body_1
+  - first:
+      213: -2125790597626261100
+    second: VoidShrine_Body_2
+  - first:
+      213: 5588662920220320805
+    second: VoidShrine_Body_3
+  - first:
+      213: -8112502948404884954
+    second: VoidShrine_Body_4
+  - first:
+      213: -6822888760027012373
+    second: VoidShrine_Body_5
+  - first:
+      213: -2014585849125348246
+    second: VoidShrine_Body_6
+  - first:
+      213: 2189372820626951962
+    second: VoidShrine_Body_7
+  - first:
+      213: -8624739925352523271
+    second: VoidShrine_Body_8
+  - first:
+      213: -704222482558369188
+    second: VoidShrine_Body_9
+  - first:
+      213: -235016194008280297
+    second: VoidShrine_Body_10
+  - first:
+      213: -1346303690511596610
+    second: VoidShrine_Body_11
+  - first:
+      213: -1487564330036431937
+    second: VoidShrine_Body_12
+  - first:
+      213: -781710487547899669
+    second: VoidShrine_Body_13
+  - first:
+      213: -6998694860056357822
+    second: VoidShrine_Body_14
+  - first:
+      213: 2306585383209790189
+    second: VoidShrine_Body_15
+  - first:
+      213: 6430222309030091494
+    second: VoidShrine_Body_16
+  - first:
+      213: -8029894464526057506
+    second: VoidShrine_Body_17
+  - first:
+      213: -2821107079067671451
+    second: VoidShrine_Body_18
+  - first:
+      213: 6902847727785210995
+    second: VoidShrine_Body_19
+  - first:
+      213: -3416314930199287442
+    second: VoidShrine_Body_20
+  - first:
+      213: 1754977937138755450
+    second: VoidShrine_Body_21
+  - first:
+      213: 6884384510895697712
+    second: VoidShrine_Body_22
+  - first:
+      213: -4956017480992544221
+    second: VoidShrine_Body_23
+  - first:
+      213: 1242088469790010653
+    second: VoidShrine_Body_24
+  - first:
+      213: 7494729680708025660
+    second: VoidShrine_Body_25
+  - first:
+      213: -8899143477518352693
+    second: VoidShrine_Body_26
+  - first:
+      213: -4650678231920205982
+    second: VoidShrine_Body_27
+  - first:
+      213: -6215953106924408815
+    second: VoidShrine_Body_28
+  - first:
+      213: -852647660766516601
+    second: VoidShrine_Body_29
+  - first:
+      213: -2552749393477089488
+    second: VoidShrine_Body_30
+  - first:
+      213: 9054915501517267398
+    second: VoidShrine_Body_31
+  - first:
+      213: -8800291757879108443
+    second: VoidShrine_Body_32
+  - first:
+      213: 623374171229728711
+    second: VoidShrine_Body_33
+  - first:
+      213: 7784836692905390795
+    second: VoidShrine_Body_34
+  - first:
+      213: 6586815111933541787
+    second: VoidShrine_Body_35
+  - first:
+      213: 4801016844998367228
+    second: VoidShrine_Body_36
+  - first:
+      213: -4375871548827213291
+    second: VoidShrine_Body_37
+  - first:
+      213: -8894352125824405588
+    second: VoidShrine_Body_38
+  - first:
+      213: -4371287006672440299
+    second: VoidShrine_Body_39
+  - first:
+      213: -4709825673223091061
+    second: VoidShrine_Body_40
+  - first:
+      213: -2050599443663865456
+    second: VoidShrine_idle_0
+  - first:
+      213: 8920472426816205374
+    second: VoidShrine_idle_1
+  - first:
+      213: 19354365080993594
+    second: VoidShrine_idle_2
+  - first:
+      213: 8271989107257630200
+    second: VoidShrine_idle_3
+  - first:
+      213: -8450786769188370846
+    second: VoidShrine_idle_4
+  - first:
+      213: 4429347630131928853
+    second: VoidShrine_idle_5
+  - first:
+      213: 6922831763501589794
+    second: VoidShrine_idle_6
+  - first:
+      213: -8674356569681479082
+    second: VoidShrine_idle_7
+  - first:
+      213: -388442583313185031
+    second: VoidShrine_float_0
+  - first:
+      213: 7604822448037167321
+    second: VoidShrine_float_1
+  - first:
+      213: 406570874477313358
+    second: VoidShrine_float_2
+  - first:
+      213: -8508720080146164858
+    second: VoidShrine_float_3
+  - first:
+      213: -8079050181248213408
+    second: VoidShrine_float_4
+  - first:
+      213: -76316926633793105
+    second: VoidShrine_float_5
+  - first:
+      213: -3995276363916119752
+    second: VoidShrine_float_6
+  - first:
+      213: 8930208623225673604
+    second: VoidShrine_float_7
+  - first:
+      213: -3041414051378733407
+    second: VoidShrine_swipe_0
+  - first:
+      213: -7334799110975230762
+    second: VoidShrine_swipe_1
+  - first:
+      213: -1849682096887021707
+    second: VoidShrine_swipe_2
+  - first:
+      213: -2309697552360138431
+    second: VoidShrine_swipe_3
+  - first:
+      213: 4997584747111676972
+    second: VoidShrine_swipe_4
+  - first:
+      213: 1839539456208373224
+    second: VoidShrine_swipe_5
+  - first:
+      213: 4833325206893564891
+    second: VoidShrine_swipe_6
+  - first:
+      213: -1866915120496403944
+    second: VoidShrine_swipe_7
+  - first:
+      213: 241826351688313286
+    second: VoidShrine_cast_0
+  - first:
+      213: 6073292325405265444
+    second: VoidShrine_cast_1
+  - first:
+      213: 4355075107441722758
+    second: VoidShrine_cast_2
+  - first:
+      213: -132126115854200355
+    second: VoidShrine_cast_3
+  - first:
+      213: -1014408062789819189
+    second: VoidShrine_cast_4
+  - first:
+      213: 149171248632246945
+    second: VoidShrine_cast_5
+  - first:
+      213: 8649219867741223324
+    second: VoidShrine_summon_0
+  - first:
+      213: -4120410014924305566
+    second: VoidShrine_summon_1
+  - first:
+      213: 5318272702110831568
+    second: VoidShrine_hurt_0
+  - first:
+      213: 3518932431393864643
+    second: VoidShrine_hurt_1
+  - first:
+      213: 252233174295644776
+    second: VoidShrine_hurt_2
+  - first:
+      213: -3795921854166044656
+    second: VoidShrine_hurt_3
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: VoidShrine_idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 290
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0993dc7abaeca83e0800000000000000
+      internalID: -2050599443663865456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_idle_1
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 290
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e32fb05d862ebcb70800000000000000
+      internalID: 8920472426816205374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_idle_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 290
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3f718741b2c44000800000000000000
+      internalID: 19354365080993594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_idle_3
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 290
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fdddf324420cc270800000000000000
+      internalID: 8271989107257630200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_idle_4
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 290
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 266c4f52536c8ba80800000000000000
+      internalID: -8450786769188370846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_idle_5
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 290
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51f5bb0b334387d30800000000000000
+      internalID: 4429347630131928853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_idle_6
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 290
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 225ad476fc6d21060800000000000000
+      internalID: 6922831763501589794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_idle_7
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 290
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65a3f0998ae7e9780800000000000000
+      internalID: -8674356569681479082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_float_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 232
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f68bfd4789fb9af0800000000000000
+      internalID: -388442583313185031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_float_1
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 232
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d00c2379b1c98960800000000000000
+      internalID: 7604822448037167321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_float_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 232
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4d7d356e0e64a500800000000000000
+      internalID: 406570874477313358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_float_3
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 232
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68397a11b24fae980800000000000000
+      internalID: -8508720080146164858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_float_4
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 232
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06e15203aa271ef80800000000000000
+      internalID: -8079050181248213408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_float_5
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 232
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa9a4a9d82ed0fef0800000000000000
+      internalID: -76316926633793105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_float_6
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 232
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 831f34d905ded88c0800000000000000
+      internalID: -3995276363916119752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_float_7
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 232
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4871f75bd697eeb70800000000000000
+      internalID: 8930208623225673604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_swipe_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 174
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ae50bcc80abac5d0800000000000000
+      internalID: -3041414051378733407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_swipe_1
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 174
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dc687be11f853a90800000000000000
+      internalID: -7334799110975230762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_swipe_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 174
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57f36a3deeb9456e0800000000000000
+      internalID: -1849682096887021707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_swipe_3
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 174
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1491cfc305e42ffd0800000000000000
+      internalID: -2309697552360138431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_swipe_4
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 174
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2c708269dcfa5540800000000000000
+      internalID: 4997584747111676972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_swipe_5
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 174
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e58d9d936b578910800000000000000
+      internalID: 1839539456208373224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_swipe_6
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 174
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd315d8eaab631340800000000000000
+      internalID: 4833325206893564891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_swipe_7
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 174
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81a9109d6926716e0800000000000000
+      internalID: -1866915120496403944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_cast_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 116
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c9e5bd19c32b5300800000000000000
+      internalID: 241826351688313286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_cast_1
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 116
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42e03e8313ba84450800000000000000
+      internalID: 6073292325405265444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_cast_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 116
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 685c53d6cb5507c30800000000000000
+      internalID: 4355075107441722758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_cast_3
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 116
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd155f66ff79a2ef0800000000000000
+      internalID: -132126115854200355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_cast_4
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 116
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc4ee10dd391ce1f0800000000000000
+      internalID: -1014408062789819189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_cast_5
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 116
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a23d65d576f11200800000000000000
+      internalID: 149171248632246945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_summon_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 58
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9977f8e4a3380870800000000000000
+      internalID: 8649219867741223324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_summon_1
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 58
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26b897b1cec51d6c0800000000000000
+      internalID: -4120410014924305566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_hurt_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d319fb58dc4ec940800000000000000
+      internalID: 5318272702110831568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_hurt_1
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 0
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cb35d9f662c5d030800000000000000
+      internalID: 3518932431393864643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_hurt_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 0
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86a06725cbc108300800000000000000
+      internalID: 252233174295644776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_hurt_3
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 0
+        width: 74
+        height: 58
+      alignment: 9
+      pivot: {x: 0.6351351, y: 0.7413793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0107a4f6f2d225bc0800000000000000
+      internalID: -3795921854166044656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      VoidShrine_Body_0: -6515858995583823975
+      VoidShrine_Body_1: 1703321519494113155
+      VoidShrine_Body_10: -235016194008280297
+      VoidShrine_Body_11: -1346303690511596610
+      VoidShrine_Body_12: -1487564330036431937
+      VoidShrine_Body_13: -781710487547899669
+      VoidShrine_Body_14: -6998694860056357822
+      VoidShrine_Body_15: 2306585383209790189
+      VoidShrine_Body_16: 6430222309030091494
+      VoidShrine_Body_17: -8029894464526057506
+      VoidShrine_Body_18: -2821107079067671451
+      VoidShrine_Body_19: 6902847727785210995
+      VoidShrine_Body_2: -2125790597626261100
+      VoidShrine_Body_20: -3416314930199287442
+      VoidShrine_Body_21: 1754977937138755450
+      VoidShrine_Body_22: 6884384510895697712
+      VoidShrine_Body_23: -4956017480992544221
+      VoidShrine_Body_24: 1242088469790010653
+      VoidShrine_Body_25: 7494729680708025660
+      VoidShrine_Body_26: -8899143477518352693
+      VoidShrine_Body_27: -4650678231920205982
+      VoidShrine_Body_28: -6215953106924408815
+      VoidShrine_Body_29: -852647660766516601
+      VoidShrine_Body_3: 5588662920220320805
+      VoidShrine_Body_30: -2552749393477089488
+      VoidShrine_Body_31: 9054915501517267398
+      VoidShrine_Body_32: -8800291757879108443
+      VoidShrine_Body_33: 623374171229728711
+      VoidShrine_Body_34: 7784836692905390795
+      VoidShrine_Body_35: 6586815111933541787
+      VoidShrine_Body_36: 4801016844998367228
+      VoidShrine_Body_37: -4375871548827213291
+      VoidShrine_Body_38: -8894352125824405588
+      VoidShrine_Body_39: -4371287006672440299
+      VoidShrine_Body_4: -8112502948404884954
+      VoidShrine_Body_40: -4709825673223091061
+      VoidShrine_Body_5: -6822888760027012373
+      VoidShrine_Body_6: -2014585849125348246
+      VoidShrine_Body_7: 2189372820626951962
+      VoidShrine_Body_8: -8624739925352523271
+      VoidShrine_Body_9: -704222482558369188
+      VoidShrine_cast_0: 241826351688313286
+      VoidShrine_cast_1: 6073292325405265444
+      VoidShrine_cast_2: 4355075107441722758
+      VoidShrine_cast_3: -132126115854200355
+      VoidShrine_cast_4: -1014408062789819189
+      VoidShrine_cast_5: 149171248632246945
+      VoidShrine_float_0: -388442583313185031
+      VoidShrine_float_1: 7604822448037167321
+      VoidShrine_float_2: 406570874477313358
+      VoidShrine_float_3: -8508720080146164858
+      VoidShrine_float_4: -8079050181248213408
+      VoidShrine_float_5: -76316926633793105
+      VoidShrine_float_6: -3995276363916119752
+      VoidShrine_float_7: 8930208623225673604
+      VoidShrine_hurt_0: 5318272702110831568
+      VoidShrine_hurt_1: 3518932431393864643
+      VoidShrine_hurt_2: 252233174295644776
+      VoidShrine_hurt_3: -3795921854166044656
+      VoidShrine_idle_0: -2050599443663865456
+      VoidShrine_idle_1: 8920472426816205374
+      VoidShrine_idle_2: 19354365080993594
+      VoidShrine_idle_3: 8271989107257630200
+      VoidShrine_idle_4: -8450786769188370846
+      VoidShrine_idle_5: 4429347630131928853
+      VoidShrine_idle_6: 6922831763501589794
+      VoidShrine_idle_7: -8674356569681479082
+      VoidShrine_summon_0: 8649219867741223324
+      VoidShrine_summon_1: -4120410014924305566
+      VoidShrine_swipe_0: -3041414051378733407
+      VoidShrine_swipe_1: -7334799110975230762
+      VoidShrine_swipe_2: -1849682096887021707
+      VoidShrine_swipe_3: -2309697552360138431
+      VoidShrine_swipe_4: 4997584747111676972
+      VoidShrine_swipe_5: 1839539456208373224
+      VoidShrine_swipe_6: 4833325206893564891
+      VoidShrine_swipe_7: -1866915120496403944
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -21,6 +21,14 @@ public class TombDarkness : MonoBehaviour
     private readonly List<Transform> lamps = new List<Transform>();
     private readonly Vector4[] lights = new Vector4[MaxLights];
 
+    // VOIDSHRINE: lights that move or come and go (the Void Shrine boss glows with its own spirit fire), by radius
+    private static readonly Dictionary<Transform, float> carried = new Dictionary<Transform, float>();
+
+    /// <summary>VOIDSHRINE: lights the darkness round t (radius in units) until Unlight(t).</summary>
+    public static void Light(Transform t, float radius) => carried[t] = radius;
+
+    public static void Unlight(Transform t) => carried.Remove(t);
+
     private void Start()
     {
         cam = Camera.main;
@@ -60,6 +68,12 @@ public class TombDarkness : MonoBehaviour
         float flicker = 1f + 0.03f * Mathf.Sin(Time.time * 7f) + 0.02f * Mathf.Sin(Time.time * 13.3f);
         if (PlayerFX.Instance != null && PlayerFX.Instance.isActiveAndEnabled)
             lights[n++] = new Vector4(PlayerFX.Instance.transform.position.x, PlayerFX.Instance.transform.position.y, harveyRadius * flicker, 1f);
+        foreach (KeyValuePair<Transform, float> l in carried) // VOIDSHRINE:
+        {
+            if (n >= MaxLights) break;
+            if (l.Key == null || !l.Key.gameObject.activeInHierarchy) continue;
+            lights[n++] = new Vector4(l.Key.position.x, l.Key.position.y, l.Value * flicker, 0.9f);
+        }
         foreach (Transform t in lamps)
         {
             if (n >= MaxLights) break;

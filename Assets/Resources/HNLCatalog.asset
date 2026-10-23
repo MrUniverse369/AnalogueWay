@@ -92,6 +92,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2f58bde3c513d41208f8518b1d77f738, type: 3}
   - {fileID: 21300000, guid: ce01d423c28284bb2938e7be71ed66df, type: 3}
   treasureChest: {fileID: 4323260080445868873, guid: 0598ce0fd52174950865545606499e1d, type: 3}
+  enemyMarkerStraight: {fileID: 21300000, guid: f7c371c71a44b4df78ecacb6fdc82931, type: 3}
+  enemyMarkerDiagonal: {fileID: 21300000, guid: 650f3ff567f694c368c60641b804f007, type: 3}
   moveSound: {fileID: 8300000, guid: 0728e59b325cc43ffb90cbf74b4f71e9, type: 3}
   selectSound: {fileID: 8300000, guid: db026b38afe1240c59c554f5dd7632d6, type: 3}
   backSound: {fileID: 8300000, guid: 2fa6b18c083d04a2abcbd5fcf2ff2800, type: 3}

@@ -1,4 +1,4 @@
-"""Turns the Japan boss art the user supplied (Assets/Sprites/Enemies/JapanEnemies/JapanBoss) into a game-ready sheet for
+"""Turns the Japan boss art the user supplied (Assets/Sprites/Enemies/Japan/SamuraiBoss) into a game-ready sheet for
 the samurai boss fight (SAMURAIBOSS, 2026-10-19).
 
   in:  SamuraiBossRightSize.png             the standing idle (64x74, opaque grey background, resampled colours)
@@ -34,7 +34,7 @@ from collections import Counter
 sys.path.insert(0, os.path.dirname(__file__))
 from zone_map import read_png_rgba, write_png  # noqa: E402
 
-DIR = "Assets/Sprites/Enemies/JapanEnemies/JapanBoss"
+DIR = "Assets/Sprites/Enemies/Japan/SamuraiBoss"
 IDLE = os.path.join(DIR, "SamuraiBossRightSize.png")
 SLASH = os.path.join(DIR, "SamuraiBossRightSizeSlashAnim.png")
 OUT_SHEET = os.path.join(DIR, "SamuraiBoss_Sheet.png")

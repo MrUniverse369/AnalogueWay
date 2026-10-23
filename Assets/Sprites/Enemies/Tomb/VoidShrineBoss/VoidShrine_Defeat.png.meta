@@ -1,0 +1,309 @@
+fileFormatVersion: 2
+guid: 2626def35aef147e8982ad4fb8def4d0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4884734885420940225
+    second: VoidShrine_Defeat_0
+  - first:
+      213: 1613803844129681162
+    second: VoidShrine_Defeat_1
+  - first:
+      213: -1330269446750890813
+    second: VoidShrine_Defeat_2
+  - first:
+      213: 2832120889937230645
+    second: VoidShrine_Defeat_3
+  - first:
+      213: -4734439333883416122
+    second: VoidShrine_Defeat_4
+  - first:
+      213: -6140199918828101389
+    second: VoidShrine_Defeat_5
+  - first:
+      213: -7840098761746531923
+    second: VoidShrine_Defeat_6
+  - first:
+      213: 2492714475624491628
+    second: VoidShrine_Defeat_7
+  - first:
+      213: 4908601487691044066
+    second: VoidShrine_Defeat_8
+  - first:
+      213: -3830255693466203087
+    second: VoidShrine_defeat_0
+  - first:
+      213: -8969369102234062366
+    second: VoidShrine_defeat_1
+  - first:
+      213: -8658833134495370423
+    second: VoidShrine_defeat_2
+  - first:
+      213: 4591655008812805295
+    second: VoidShrine_defeat_3
+  - first:
+      213: 6282477924988679599
+    second: VoidShrine_defeat_4
+  - first:
+      213: -7337999254474552736
+    second: VoidShrine_defeat_5
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: VoidShrine_defeat_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 78
+        height: 45
+      alignment: 9
+      pivot: {x: 0.4871795, y: 0.044444446}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13c87088db238dac0800000000000000
+      internalID: -3830255693466203087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_defeat_1
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 0
+        width: 78
+        height: 45
+      alignment: 9
+      pivot: {x: 0.4871795, y: 0.044444446}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e179f1c256668380800000000000000
+      internalID: -8969369102234062366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_defeat_2
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 0
+        width: 78
+        height: 45
+      alignment: 9
+      pivot: {x: 0.4871795, y: 0.044444446}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94375010425a5d780800000000000000
+      internalID: -8658833134495370423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_defeat_3
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 0
+        width: 78
+        height: 45
+      alignment: 9
+      pivot: {x: 0.4871795, y: 0.044444446}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fac2e6327e5d8bf30800000000000000
+      internalID: 4591655008812805295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_defeat_4
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 0
+        width: 78
+        height: 45
+      alignment: 9
+      pivot: {x: 0.4871795, y: 0.044444446}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa5fe240368df2750800000000000000
+      internalID: 6282477924988679599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VoidShrine_defeat_5
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 0
+        width: 78
+        height: 45
+      alignment: 9
+      pivot: {x: 0.4871795, y: 0.044444446}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06a86f27e803a2a90800000000000000
+      internalID: -7337999254474552736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      VoidShrine_Defeat_0: -4884734885420940225
+      VoidShrine_Defeat_1: 1613803844129681162
+      VoidShrine_Defeat_2: -1330269446750890813
+      VoidShrine_Defeat_3: 2832120889937230645
+      VoidShrine_Defeat_4: -4734439333883416122
+      VoidShrine_Defeat_5: -6140199918828101389
+      VoidShrine_Defeat_6: -7840098761746531923
+      VoidShrine_Defeat_7: 2492714475624491628
+      VoidShrine_Defeat_8: 4908601487691044066
+      VoidShrine_defeat_0: -3830255693466203087
+      VoidShrine_defeat_1: -8969369102234062366
+      VoidShrine_defeat_2: -8658833134495370423
+      VoidShrine_defeat_3: 4591655008812805295
+      VoidShrine_defeat_4: 6282477924988679599
+      VoidShrine_defeat_5: -7337999254474552736
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

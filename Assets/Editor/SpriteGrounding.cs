@@ -24,10 +24,10 @@ public static class SpriteGrounding
 
     private static readonly Sheet[] Sheets =
     {
-        new Sheet { path = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim.png", footDepth = 22 },             // walk
-        new Sheet { path = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim_SwordAttack.png", footDepth = 22 }, // slash
-        new Sheet { path = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim_Sword.png", footDepth = 22 },       // sword draw
-        new Sheet { path = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim_Block.png", footDepth = 22 },       // BLOCK: block stance
+        new Sheet { path = "Assets/Sprites/Enemies/Japan/SamuraiMonkey/JSEAnim.png", footDepth = 22 },             // walk
+        new Sheet { path = "Assets/Sprites/Enemies/Japan/SamuraiMonkey/JSEAnim_SwordAttack.png", footDepth = 22 }, // slash
+        new Sheet { path = "Assets/Sprites/Enemies/Japan/SamuraiMonkey/JSEAnim_Sword.png", footDepth = 22 },       // sword draw
+        new Sheet { path = "Assets/Sprites/Enemies/Japan/SamuraiMonkey/JSEAnim_Block.png", footDepth = 22 },       // BLOCK: block stance
     };
 
     [MenuItem("Tools/HNL/Ground Sprite Frames")]

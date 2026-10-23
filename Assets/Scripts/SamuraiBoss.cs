@@ -23,7 +23,7 @@ using UnityEngine;
 /// Each stage is faster, with shorter tells and openings. Same rules as the other bosses (YokaiBoss): hurt only during
 /// an opening (attacking him at any other time hurts Harvey), lives through HurtPlayer with the usual knockback and
 /// flash, the combo counts his hits, a reset when Harvey respawns, and the treasure that ends the level on defeat.
-/// Art: Assets/Sprites/Enemies/JapanEnemies/JapanBoss/SamuraiBoss_* (Tools/Art/samurai_boss.py, from the user's sheets).
+/// Art: Assets/Sprites/Enemies/Japan/SamuraiBoss/SamuraiBoss_* (Tools/Art/samurai_boss.py, from the user's sheets).
 /// Scene setup: Tools/HNL/Set Up Samurai Boss (Assets/Editor/SamuraiBossSetup.cs).
 /// </summary>
 public class SamuraiBoss : MonoBehaviour, IBossAttacker

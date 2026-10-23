@@ -11,16 +11,16 @@ using UnityEngine;
 ///      point, no compression) and sliced into its 12 frames of 46x35, centre pivot (same height as the old sprite and
 ///      the body sits on the frame's centre, so the octopus stays over its collider)
 ///   2. OctoGhoulWalk.anim: the 12 frames looping at 10 fps
-///   3. the octopus's Enemy.controller: a new OctoGhoulWalk state becomes the default (the octopus always patrols,
+///   3. the octopus's MrOctopus.controller: a new OctoGhoulWalk state becomes the default (the octopus always patrols,
 ///      the old one-frame OctoGhoulIdle state is kept), and Any State -> OctoGhoulDeathAnim no longer waits for exit
 ///      time 0.75, which with a 1.2 s walk loop would let a stomped octopus keep walking for up to a second
 /// </summary>
 public static class MrOctopusSetup
 {
-    private const string Dir = "Assets/Sprites/Enemies/TempleTiles/OctoGhoul/";
+    private const string Dir = "Assets/Sprites/Enemies/Tomb/MrOctopus/";
     private const string Sheet = Dir + "MrOctopus.png";
-    private const string ClipPath = Dir + "OctoGhoulAnim/OctoGhoulWalk.anim";
-    private const string ControllerPath = Dir + "OctoGhoulAnim/Enemy.controller";
+    private const string ClipPath = Dir + "OctoGhoulWalk.anim";
+    private const string ControllerPath = Dir + "MrOctopus.controller";
     private const string WalkState = "OctoGhoulWalk";
     private const string DeathState = "OctoGhoulDeathAnim";
     private const int FrameW = 46, FrameH = 35;

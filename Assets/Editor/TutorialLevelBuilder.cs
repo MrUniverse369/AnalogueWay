@@ -175,7 +175,7 @@ public static class TutorialLevelBuilder
             this.controller = controller;
             sortingLayer = harvey.sortingLayerID;
             sortingOrder = harvey.sortingOrder;
-            enemyTemplate = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemy/EnemyHolder.prefab");
+            enemyTemplate = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemy/Egypt/EnemyHolder.prefab");
 
             // the boxes share one static body and a merged outline, so Harvey never catches on the seams between them
             boxRoot = Root("WhiteBoxes").transform;

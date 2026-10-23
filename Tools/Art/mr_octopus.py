@@ -1,7 +1,7 @@
 """Cleans the MrOctopus sheet (the Tomb's witch-hat octopus enemy walking, 12 frames of 46x35) into its patrol loop.
 
   in:  Tools/Art/source/MrOctopus_original.png   the sheet as delivered (kept untouched)
-  out: Assets/Sprites/Enemies/TempleTiles/OctoGhoul/MrOctopus.png   cleaned, same 552x35 layout
+  out: Assets/Sprites/Enemies/Tomb/MrOctopus/MrOctopus.png   cleaned, same 552x35 layout
 
 Same clean-up as dragon_ride.py (watermark in the last frame, one palette, loose specks). The frames already stand on
 the same line, so they are not moved. The editor side is Tools/HNL/Set Up Mr Octopus (Assets/Editor/MrOctopusSetup.cs).
@@ -16,7 +16,7 @@ from zone_map import read_png_rgba, write_png  # noqa: E402
 from dragon_ride import clean  # noqa: E402
 
 SRC = "Tools/Art/source/MrOctopus_original.png"
-OUT = "Assets/Sprites/Enemies/TempleTiles/OctoGhoul/MrOctopus.png"
+OUT = "Assets/Sprites/Enemies/Tomb/MrOctopus/MrOctopus.png"
 FW = 46
 
 

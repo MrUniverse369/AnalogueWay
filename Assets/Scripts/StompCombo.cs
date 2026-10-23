@@ -22,6 +22,10 @@ using UnityEngine;
 /// Stage colours (one set for both actions): 1 yellow, 2 orange, 3 hot pink, 4 violet, 5 rainbow (cycles every colour).
 /// Everything is small (one or two art pixels) and short-lived so Harvey and nearby enemies stay readable.
 ///
+/// COMBOLOCK (2026-10-22): stages above stage 1 are learned on the skill tree (Combo Mastery I-IV, see SkillTree).
+/// Hits past the learned cap keep the combo alive at the cap (the window restarts and the hit plays that stage's
+/// effects) instead of climbing. Once stage 5 is learned it counts up without limit as before.
+///
 /// DRAGONCOMBO (2026-10-20): riding the dragon used to hide the whole combo. PlayerController hides Harvey's sprite
 /// while he rides, and everything here was drawn on that sprite: SpriteAura only draws its outline round an enabled
 /// sprite, and the swirl and sparks stopped while it was hidden. Now the combo follows whichever sprite is showing
@@ -179,7 +183,9 @@ public class StompCombo : MonoBehaviour
     {
         Retarget(); // DRAGONCOMBO: a hit from the dragon's back plays on the dragon
         bool chained = stage > 0 && Time.time - last <= comboWindow;
-        stage = chained ? stage + 1 : 1;
+        int next = chained ? stage + 1 : 1;
+        int cap = SkillTree.ComboStageCap; // COMBOLOCK: the stages learned on the skill tree
+        stage = cap >= MaxStage ? next : Mathf.Min(next, Mathf.Max(1, cap));
         last = Time.time;
         Play(dash, Mathf.Min(stage, MaxStage), enemyPosition);
     }

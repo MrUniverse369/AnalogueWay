@@ -18,11 +18,11 @@ using UnityEngine;
 [InitializeOnLoad]
 public static class SamuraiSlashSetup
 {
-    private const string Dir = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim/";
+    private const string Dir = "Assets/Sprites/Enemies/Japan/SamuraiMonkey/";
     private const string Sheet = Dir + "JSEAnim_SwordAttack.png";
     private const string ClipPath = Dir + "Slash.anim";
     private const string ControllerPath = Dir + "BounceEnemy.controller";
-    private const string PrefabPath = "Assets/Prefabs/Enemy/MonkieSamurai.prefab";
+    private const string PrefabPath = "Assets/Prefabs/Enemy/Japan/MonkieSamurai.prefab";
     private const string SoundPath = "Assets/Sound/ElevenLabs/Enemy/HNL_SamuraiSlash.wav";
     private const string AudioPrefabPath = "Assets/Prefabs/AudioManager.prefab";
     private const string LayoutPath = "Tools/Art/samurai_slash_layout.txt";

@@ -37,17 +37,24 @@ public sealed class SkillDef
 ///   Jump Power I-III   jumps 5% faster a level       Sky Leap I-II        Super Jump launches 6% / 12% harder
 ///                      (10% / 21% / 32% higher)
 ///   Double Jump        a second jump in mid-air
+///   Combo Mastery I-IV the stomp/dash combo can climb to stage 2 / 3 / 4 / 5 (COMBOLOCK)
 /// Enemies take more stomps zone by zone (EnemyController.ZoneToughness: 1 in the Tomb, 2 in the Dunes, 3 on the
 /// Shrine Road, 4 in the Meadow), so with Stomp Power III every normal enemy falls to one stomp again. Bosses keep
-/// their own health. Jump Power stops below the Super Jump's launch speed (PlayerController treats a jump over 6 as
+/// their own health.
+/// COMBOLOCK (2026-10-22): the combo's stages and effects are locked behind Combo Mastery. With no levels the combo
+/// stays at stage 1 (yellow outline, two motes, small hit burst); each level opens the next stage and everything that
+/// stage brings (StompCombo has the list), including its chi discount (Chi.StageCost), so level IV gives the rainbow
+/// stage and free chi skills. The 5 s window is the same at every level. Stage 1 stays free so players see the combo
+/// exists before they can grow it. Jump Power stops below the Super Jump's launch speed (PlayerController treats a jump over 6 as
 /// a super jump), so ledges built for the Super Jump still need it. The tutorial ignores skills (it teaches the basics).
 /// </summary>
 public static class SkillTree
 {
     public const string StompPower = "StompPower", DashPower = "DashPower", JumpPower = "JumpPower", DoubleJump = "DoubleJump";
+    public const string ComboMastery = "ComboMastery"; // COMBOLOCK:
     public const string ChiFocus = "ChiFocus", LastingCharms = "LastingCharms", QuickRecharge = "QuickRecharge", SkyLeap = "SkyLeap";
 
-    // the costs climb with each level's power; the whole tree is 83 crystals (a gem chest holds about 5-6)
+    // the costs climb with each level's power; the whole tree is 107 crystals (a gem chest holds about 5-6)
     public static readonly SkillDef[] All =
     {
         new SkillDef(StompPower, "STOMP POWER", "Skill_Stomp", SkillBranch.Natural, new[] { 2, 4, 7 },
@@ -62,6 +69,10 @@ public static class SkillTree
         new SkillDef(DoubleJump, "DOUBLE JUMP", "Skill_DoubleJump", SkillBranch.Natural, new[] { 8 },
             new[] { "JUMP AGAIN IN MID-AIR" },
             "PRESS JUMP IN THE AIR FOR A SECOND JUMP. NOT WHILE SWIMMING.", JumpPower, 2, true),
+        new SkillDef(ComboMastery, "COMBO MASTERY", "Skill_Combo", SkillBranch.Natural, new[] { 3, 5, 7, 9 }, // COMBOLOCK:
+            new[] { "COMBOS REACH STAGE 2 (ORANGE)", "COMBOS REACH STAGE 3 (PINK)", "COMBOS REACH STAGE 4 (VIOLET)",
+                    "COMBOS REACH STAGE 5 (RAINBOW): FREE CHI" },
+            "CHAIN STOMPS AND DASH DEFEATS INTO BIGGER COMBOS. EACH LEVEL OPENS THE NEXT STAGE.", DashPower),
 
         new SkillDef(ChiFocus, "CHI FOCUS", "Skill_ChiFocus", SkillBranch.Talisman, new[] { 3, 6 },
             new[] { "TALISMANS USE 15% LESS CHI", "TALISMANS USE 30% LESS CHI" },
@@ -98,6 +109,8 @@ public static class SkillTree
     public static float TalismanDurationScale => 1f + 0.15f * Level(LastingCharms);
     public static float CooldownScale => 1f - 0.2f * Level(QuickRecharge);
     public static float SuperJumpScale => 1f + 0.06f * Level(SkyLeap);
+    /// <summary>COMBOLOCK: the highest combo stage that can be reached (1 with no Combo Mastery, MaxStage at level IV).</summary>
+    public static int ComboStageCap => 1 + Level(ComboMastery);
 
     /// <summary>How long a talisman runs with the skills learned (Spirit Dash also gets Dash Power).</summary>
     public static float DurationOf(Talisman t)

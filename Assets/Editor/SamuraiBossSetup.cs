@@ -16,7 +16,7 @@ using UnityEngine;
 /// </summary>
 public static class SamuraiBossSetup
 {
-    private const string Dir = "Assets/Sprites/Enemies/JapanEnemies/JapanBoss/";
+    private const string Dir = "Assets/Sprites/Enemies/Japan/SamuraiBoss/";
     private const string Sheet = Dir + "SamuraiBoss_Sheet.png";
     private const string Wave = Dir + "SamuraiBoss_SlashWave.png";
     private const string Blade = Dir + "SamuraiBoss_Kunai.png";

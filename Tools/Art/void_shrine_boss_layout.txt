@@ -1,0 +1,10 @@
+body 74 58 47 43
+row idle 8
+row float 8
+row swipe 8
+row cast 6
+row summon 2
+row hurt 4
+defeat 78 45 38 2 6
+pillar 66 55 32 2 5
+orb 14 13

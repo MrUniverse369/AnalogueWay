@@ -1,4 +1,4 @@
-"""Renders the samurai monkey's sword-draw frames into Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim_Sword.png.
+"""Renders the samurai monkey's sword-draw frames into Assets/Sprites/Enemies/Japan/SamuraiMonkey/JSEAnim_Sword.png.
 
 The monkey (JSEAnim.png, five 33x46 walk frames, facing right, katana worn hilt-forward at the hip) keeps walking
 while he draws: each frame reuses a walk frame for the body and legs, and adds the hand, hilt and blade:
@@ -22,8 +22,8 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from zone_map import read_png_rgba, write_png, hexc  # noqa: E402
 
-SRC = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim.png"
-OUT = "Assets/Sprites/Enemies/JapanEnemies/JSEAnim/JSEAnim_Sword.png"
+SRC = "Assets/Sprites/Enemies/Japan/SamuraiMonkey/JSEAnim.png"
+OUT = "Assets/Sprites/Enemies/Japan/SamuraiMonkey/JSEAnim_Sword.png"
 FW, FH, PAD = 33, 46, 8
 W = FW + PAD * 2
 

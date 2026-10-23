@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 /// <summary>
 /// SKILLS (2026-10-20): the Skill Tree menu (pause menu > SKILLS). Two small trees side by side, Natural Abilities
-/// and Talisman Skills, each a root skill that opens two more, with one deeper skill under them. Each node is a round
+/// and Talisman Skills, each a root skill that opens two more, with deeper skills under them (COMBOLOCK: Combo Mastery
+/// sits under Dash Power, beside Double Jump). Each node is a round
 /// plate with the skill's icon and a pip per level (yellow = learned). Lines between nodes turn yellow once the skill
 /// they lead to is learned; a skill that can't be learned yet is dimmed. The note on the right says what the skill
 /// under the cursor does now and next, and what the next level costs or still needs. Cross/Enter learns it, paid in
@@ -52,6 +53,7 @@ public class SkillTreeView : MenuView
         Place(SkillTree.DashPower, 0, -Spread, ChildY);
         Place(SkillTree.JumpPower, 0, Spread, ChildY);
         Place(SkillTree.DoubleJump, 0, Spread, GrandY);
+        Place(SkillTree.ComboMastery, 0, -Spread, GrandY); // COMBOLOCK:
         Place(SkillTree.ChiFocus, 1, 0f, RootY);
         Place(SkillTree.LastingCharms, 1, -Spread, ChildY);
         Place(SkillTree.QuickRecharge, 1, Spread, ChildY);
