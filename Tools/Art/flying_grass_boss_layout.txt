@@ -1,0 +1,19 @@
+cell 65 39
+pivot 35 0
+row idle 0 4
+row fly 1 6
+row slash 2 9
+row leaf 3 8
+row beam 4 8
+row boulder 5 8
+row hurt 6 8
+fx leaf 0 0 11 9
+fx crescent 12 0 19 18
+fx orb 32 0 12 9
+fx beam 45 0 51 21
+fx boulder 97 0 16 17
+hand 11.41 14.8
+boulder 7.57 25.29
+stand 35
+lie 22
+robe 18

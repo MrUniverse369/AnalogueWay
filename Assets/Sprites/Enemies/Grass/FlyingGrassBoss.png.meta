@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: f10958d4202d242ff920336561cdff84
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1390797391709200075
+    second: FlyingGrassBoss_0
+  - first:
+      213: 8599570687233792087
+    second: FlyingGrassBoss_1
+  - first:
+      213: -342178182068588868
+    second: FlyingGrassBoss_2
+  - first:
+      213: -2042682417763397215
+    second: FlyingGrassBoss_3
+  - first:
+      213: -5011687592981877144
+    second: FlyingGrassBoss_4
+  - first:
+      213: 3323565708766288887
+    second: FlyingGrassBoss_5
+  - first:
+      213: -2078899830094074864
+    second: FlyingGrassBoss_6
+  - first:
+      213: -5719377170561101782
+    second: FlyingGrassBoss_7
+  - first:
+      213: -5444035514246126984
+    second: FlyingGrassBoss_8
+  - first:
+      213: -722341346777138725
+    second: FlyingGrassBoss_9
+  - first:
+      213: -5356766772099713362
+    second: FlyingGrassBoss_10
+  - first:
+      213: 828685062749617584
+    second: FlyingGrassBoss_11
+  - first:
+      213: 8205658891662572409
+    second: FlyingGrassBoss_12
+  - first:
+      213: 898043882645372051
+    second: FlyingGrassBoss_13
+  - first:
+      213: -6839538313712454814
+    second: FlyingGrassBoss_14
+  - first:
+      213: -7505159704375142491
+    second: FlyingGrassBoss_15
+  - first:
+      213: -4464593574107195652
+    second: FlyingGrassBoss_16
+  - first:
+      213: -6026240078405284431
+    second: FlyingGrassBoss_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FlyingGrassBoss_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 543
+        width: 1233
+        height: 472
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcedd57ebda1d4310800000000000000
+      internalID: 1390797391709200075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_1
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 835
+        width: 193
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7589e614affc75770800000000000000
+      internalID: 8599570687233792087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_2
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 649
+        width: 143
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbea9ef91c6504bf0800000000000000
+      internalID: -342178182068588868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_3
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 639
+        width: 156
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a1d644e92fe6a3e0800000000000000
+      internalID: -2042682417763397215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_4
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 251
+        width: 1269
+        height: 391
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86e251fefa8e27ab0800000000000000
+      internalID: -5011687592981877144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_5
+      rect:
+        serializedVersion: 2
+        x: 1304
+        y: 389
+        width: 213
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fb1fa2376daf1e20800000000000000
+      internalID: 3323565708766288887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_6
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 123
+        width: 277
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01c6f977e934623e0800000000000000
+      internalID: -2078899830094074864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_7
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 253
+        width: 192
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a201a3414c0b0a0b0800000000000000
+      internalID: -5719377170561101782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_8
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 125
+        width: 149
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 872afb42b86e274b0800000000000000
+      internalID: -5444035514246126984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_9
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 103
+        width: 999
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd975ca4f5ab9f5f0800000000000000
+      internalID: -722341346777138725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_10
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 155
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea6716c8001f8a5b0800000000000000
+      internalID: -5356766772099713362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_11
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 15
+        width: 150
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bdfcdb8ca4108b00800000000000000
+      internalID: 828685062749617584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_12
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 13
+        width: 377
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97bb299594b50e170800000000000000
+      internalID: 8205658891662572409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_13
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 0
+        width: 431
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39c3ac9372e767c00800000000000000
+      internalID: 898043882645372051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_14
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 22
+        width: 234
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 263be7f14241511a0800000000000000
+      internalID: -6839538313712454814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_15
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 20
+        width: 83
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a7d42e430158d790800000000000000
+      internalID: -7505159704375142491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_16
+      rect:
+        serializedVersion: 2
+        x: 1324
+        y: 24
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf659dc7cc39a02c0800000000000000
+      internalID: -4464593574107195652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlyingGrassBoss_17
+      rect:
+        serializedVersion: 2
+        x: 1370
+        y: 17
+        width: 122
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bd4e6bb39e7e5ca0800000000000000
+      internalID: -6026240078405284431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FlyingGrassBoss_0: 1390797391709200075
+      FlyingGrassBoss_1: 8599570687233792087
+      FlyingGrassBoss_10: -5356766772099713362
+      FlyingGrassBoss_11: 828685062749617584
+      FlyingGrassBoss_12: 8205658891662572409
+      FlyingGrassBoss_13: 898043882645372051
+      FlyingGrassBoss_14: -6839538313712454814
+      FlyingGrassBoss_15: -7505159704375142491
+      FlyingGrassBoss_16: -4464593574107195652
+      FlyingGrassBoss_17: -6026240078405284431
+      FlyingGrassBoss_2: -342178182068588868
+      FlyingGrassBoss_3: -2042682417763397215
+      FlyingGrassBoss_4: -5011687592981877144
+      FlyingGrassBoss_5: 3323565708766288887
+      FlyingGrassBoss_6: -2078899830094074864
+      FlyingGrassBoss_7: -5719377170561101782
+      FlyingGrassBoss_8: -5444035514246126984
+      FlyingGrassBoss_9: -722341346777138725
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

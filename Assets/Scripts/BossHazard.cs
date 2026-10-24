@@ -7,7 +7,8 @@ public interface IBossAttacker
 }
 
 /// <summary>
-/// BOSS: a shockwave, falling rock, projectile or ground spike spawned by YokaiBoss. It shakes in place for its
+/// BOSS: a shockwave, falling rock, projectile or ground spike spawned by YokaiBoss (KINGMOSS: also wind crescents,
+/// the spirit beam and a thrown boulder that arcs under gravity). It shakes in place for its
 /// hang time (the warning), then moves in a straight line and hurts the player on touch.
 /// FX: while it hangs it pulses with an orange warning glow; a spike bursting up sprays dirt, and a rock
 /// hitting the floor puffs dust.
@@ -24,6 +25,8 @@ public class BossHazard : MonoBehaviour
     private Vector3 hangPos;
     private float lifeLeft = float.PositiveInfinity; // BOSSES: spikes only live a moment after bursting out
     private SpriteFX fx; // FX:
+    private float gravity; // KINGMOSS: a thrown boulder arcs; 0 = a straight line, as before
+    private Color[] landColours; // KINGMOSS: pebbles thrown up where it lands (null = the usual dust only)
 
     public void Launch(IBossAttacker boss, Vector2 vel, float hangTime, float floor, float leftX, float rightX, float lifetime = float.PositiveInfinity)
     {
@@ -39,6 +42,14 @@ public class BossHazard : MonoBehaviour
         if (sr != null) fx = SpriteFX.On(sr);
     }
 
+    /// <summary>KINGMOSS: pulls the hazard down at 'g' units/s² after its warning (a thrown boulder), and bursts it
+    /// into pebbles of these colours where it lands. Call after Launch.</summary>
+    public void SetGravity(float g, Color[] landing = null)
+    {
+        gravity = g;
+        landColours = landing;
+    }
+
     private void Update()
     {
         if (hangLeft > 0f)
@@ -49,11 +60,16 @@ public class BossHazard : MonoBehaviour
             if (hangLeft <= 0f) Released(); // FX:
             return;
         }
+        velocity.y -= gravity * Time.deltaTime; // KINGMOSS:
         transform.position += (Vector3)(velocity * Time.deltaTime);
         lifeLeft -= Time.deltaTime; // BOSSES:
         Vector3 p = transform.position;
         if (p.y <= floorY && velocity.y < 0f) // FX: a rock lands
+        {
             PixelFX.Burst(new Vector3(p.x, floorY, 0f), 8, 1f, 2.6f, PixelFX.ZoneDust(), 0.3f, 0.5f, 1, PixelShape.Square, PixelMotion.Float, false, PixelLayer.Front, 90f, 160f, 0.2f);
+            if (landColours != null) // KINGMOSS: the boulder breaks into pebbles
+                PixelFX.Burst(new Vector3(p.x, floorY + 0.1f, 0f), 14, 2.5f, 5.5f, landColours, 0.5f, 0.8f, 2, PixelShape.Square, PixelMotion.Fall, false, PixelLayer.Front, 90f, 130f, 0.3f);
+        }
         if (p.y <= floorY || p.x < minX || p.x > maxX || lifeLeft <= 0f) Destroy(gameObject);
     }
 

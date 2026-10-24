@@ -38,6 +38,22 @@ public class CameraController : MonoBehaviour
         return new Vector3(Mathf.Round(o.x * 16f) / 16f, Mathf.Round(o.y * 16f) / 16f, 0f); // whole art pixels
     }
 
+    // RESPAWNHOLD (2026-10-23): after a respawn the camera glides back to Harvey in a set time (eased in and out)
+    // instead of the slow follow, so the respawn wait stays short; the normal follow takes over where it ends.
+    private float returnStart = -1f, returnTime = 1f;
+    private Vector3 returnFrom;
+
+    /// <summary>RESPAWNHOLD: true while the camera is gliding back to Harvey after a respawn.</summary>
+    public bool Returning => returnStart >= 0f;
+
+    /// <summary>RESPAWNHOLD: glide from here onto Harvey in 'seconds' (following him if he moves meanwhile).</summary>
+    public void ReturnToPlayer(float seconds)
+    {
+        returnFrom = transform.position - shakeOffset;
+        returnStart = Time.time;
+        returnTime = Mathf.Max(0.05f, seconds);
+    }
+
     public float SetyAxisOffset
     {
         set { yAxisOffset = value; }
@@ -69,6 +85,13 @@ public class CameraController : MonoBehaviour
     private void FollowPlayer()
     {
         targetPos = TargetPosition();
+        if (Returning) // RESPAWNHOLD:
+        {
+            float t = (Time.time - returnStart) / returnTime;
+            if (t >= 1f) returnStart = -1f;
+            transform.position = t >= 1f ? targetPos : Vector3.Lerp(returnFrom, targetPos, Mathf.SmoothStep(0f, 1f, t));
+            return;
+        }
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * Smoothing);
     }
 
@@ -85,6 +108,7 @@ public class CameraController : MonoBehaviour
     public void SnapToPlayer()
     {
         if (pObj == null) return;
+        returnStart = -1f; // RESPAWNHOLD: a snap ends a glide
         shakeOffset = Vector3.zero; // CHEST:
         transform.position = TargetPosition();
     }

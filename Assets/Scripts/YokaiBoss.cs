@@ -7,11 +7,14 @@ using UnityEngine;
 /// each stage faster and meaner. The boss can only be hurt (stomp or dash) while it is slumped during an
 /// opening. Attacking it at any other time hurts the player instead, so the player has to wait for the opening.
 /// Each zone's boss is this component with its own art, hazards and move patterns (set per stage).
+/// KINGMOSS (2026-10-23): a boss with a bodyAnimator (King Mossback) plays animation states for his moves instead of
+/// squashing one sprite, and has three more moves drawn on his sheet: WindSlash, SpiritBeam and BoulderThrow.
+/// Without an animator every boss works exactly as before.
 /// </summary>
 public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard's owner is now an interface
 {
     // BOSSES: new moves are appended so existing serialized patterns keep their meaning
-    public enum Move { Charge, LeapSlam, RockRain, Opening, Teleport, Burrow, Volley, GroundSpikes }
+    public enum Move { Charge, LeapSlam, RockRain, Opening, Teleport, Burrow, Volley, GroundSpikes, WindSlash, SpiritBeam, BoulderThrow } // KINGMOSS: the last three
 
     [System.Serializable]
     private class Stage
@@ -30,6 +33,12 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         public int volley = 3;
         [Tooltip("Spikes per GroundSpikes (BOSSES:). The first one is always under the player.")]
         public int spikes = 3;
+        [Tooltip("KINGMOSS: crescents per WindSlash, alternating low (jump) and high (stay down).")]
+        public int slashes = 1;
+        [Tooltip("KINGMOSS: beams per SpiritBeam.")]
+        public int beams = 1;
+        [Tooltip("KINGMOSS: boulders per BoulderThrow (each lands where the player was when it was lifted).")]
+        public int boulders = 1;
         public Move[] pattern = { Move.Charge, Move.Opening };
     }
 
@@ -89,6 +98,37 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     [Tooltip("Log hits, contacts and damage to the Console while tuning the fight.")]
     [SerializeField] private bool debugLog;
 
+    [Header("Animated body (KINGMOSS:)")]
+    [Tooltip("Plays the body's animations (states Idle, Fly, Cast, Leaf, Slash, BeamCharge, BeamFire, BoulderLift, " +
+             "BoulderThrow, Collapse, Rise). Empty: the single sprite squashed into poses, as before.")]
+    [SerializeField] private Animator bodyAnimator;
+    [Tooltip("How high the animated body hovers over the floor (he lies on the floor while slumped).")]
+    [SerializeField] private float hoverHeight = 0.2f;
+    [SerializeField] private BossHazard crescentTemplate;
+    [Tooltip("Root: the collider; children Tail, Body (a tiled sprite) and Head, laid out along +x from the hand.")]
+    [SerializeField] private BossHazard beamTemplate;
+    [SerializeField] private BossHazard boulderTemplate;
+    [Tooltip("Where his hand is, from his feet, facing the way he attacks (x forward, y up).")]
+    [SerializeField] private Vector2 handOffset = new Vector2(1.2f, 1.1f);
+    [Tooltip("Where the lifted boulder sits, from his feet (x forward, y up).")]
+    [SerializeField] private Vector2 boulderHold = new Vector2(0.3f, 2.8f);
+    [Tooltip("Animation frames before the leaf, the crescent and the boulder leave his hand.")]
+    [SerializeField] private int leafReleaseFrame = 3;
+    [SerializeField] private int slashReleaseFrame = 3;
+    [SerializeField] private float crescentSpeed = 7.5f;
+    [SerializeField] private float crescentLowHeight = 0.5f;
+    [SerializeField] private float crescentHighHeight = 1.75f;
+    [Tooltip("The beam's centre over the floor: low enough that standing gets hit, a jump clears it.")]
+    [SerializeField] private float beamHeight = 1.1f;
+    [SerializeField] private float beamThickness = 0.45f;
+    [Tooltip("The orb charges and sparks mark the beam's path for this long before it fires.")]
+    [SerializeField] private float beamWarnTime = 0.7f;
+    [SerializeField] private float beamLife = 0.45f;
+    [Tooltip("The landing spot is marked for this long (a share of the stage's telegraph time) before the throw.")]
+    [SerializeField] private float boulderWarnShare = 0.8f;
+    [SerializeField] private float boulderFlightTime = 0.85f;
+    [SerializeField] private float boulderGravity = 18f;
+
     [Header("Victory chests (BOSSCHEST:)")]
     [Tooltip("Beat the boss within this many seconds on the level timer for the most chests (6).")]
     [SerializeField] private float chestsFastTime = 40f; // a perfect run takes about 23-28 s (measured 2026-10-19)
@@ -109,6 +149,7 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     private Vector3 bodyBaseScale;
     private Coroutine fight;
     private readonly List<GameObject> hazards = new List<GameObject>();
+    private readonly Dictionary<string, AnimationClip> clips = new Dictionary<string, AnimationClip>(); // KINGMOSS: by state
 
     private AudioManager audioManager;
     private PlayerController player;
@@ -134,6 +175,12 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         if (rockTemplate != null) rockTemplate.gameObject.SetActive(false);
         if (projectileTemplate != null) projectileTemplate.gameObject.SetActive(false); // BOSSES:
         if (spikeTemplate != null) spikeTemplate.gameObject.SetActive(false); // BOSSES:
+        if (crescentTemplate != null) crescentTemplate.gameObject.SetActive(false); // KINGMOSS:
+        if (beamTemplate != null) beamTemplate.gameObject.SetActive(false);
+        if (boulderTemplate != null) boulderTemplate.gameObject.SetActive(false);
+        if (Animated) // KINGMOSS: each state's clip is named "<Boss>_<State>"
+            foreach (AnimationClip c in bodyAnimator.runtimeAnimatorController.animationClips)
+                clips[c.name.Substring(c.name.LastIndexOf('_') + 1)] = c;
         LevelManager.Respawned += OnRespawned; // BOSSCHEST: was ResetFight
         TreasureNeedsAction(); // BOSSCHEST:
         ResetFight();
@@ -173,6 +220,7 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         hurtbox.enabled = true;
         Face(-1f);
         SetPose(standingHeight);
+        Anim(IdleState); // KINGMOSS:
         ShowStage(); // FX: stage palette, no flash, fully solid (also undoes a Teleport dissolve)
         UpdatePips();
         if (revealOnDefeat != null) revealOnDefeat.SetActive(false);
@@ -206,6 +254,9 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
             case Move.Burrow: return Burrow(s); // BOSSES:
             case Move.Volley: return Volley(s); // BOSSES:
             case Move.GroundSpikes: return GroundSpikes(s); // BOSSES:
+            case Move.WindSlash: return WindSlash(s); // KINGMOSS:
+            case Move.SpiritBeam: return SpiritBeam(s);
+            case Move.BoulderThrow: return BoulderThrow(s);
             default: return Opening(s);
         }
     }
@@ -217,6 +268,7 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         Face(PlayerX - transform.position.x);
         yield return Telegraph(s.telegraphTime, s.tint);
         SetPose(chargingHeight);
+        Anim("Fly"); // KINGMOSS:
         float targetX = facing > 0 ? rightLimit.position.x : leftLimit.position.x;
         while (Mathf.Abs(transform.position.x - targetX) > 0.01f)
         {
@@ -228,6 +280,7 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         Play(audioManager != null ? audioManager.BossSlamSound : null);
         SlamDebris(); // FX:
         SetPose(standingHeight);
+        Anim(IdleState); // KINGMOSS:
         yield return Shake(0.25f, 0.15f);
     }
 
@@ -241,6 +294,7 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
 
         float fromX = transform.position.x;
         float toX = Mathf.Clamp(PlayerX, leftLimit.position.x, rightLimit.position.x);
+        Anim("Fly"); // KINGMOSS: he glides through the leap
         for (float t = 0f; t < 1f; t += Time.deltaTime / leapTime)
         {
             float x = Mathf.Lerp(fromX, toX, t);
@@ -249,6 +303,7 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
             yield return null;
         }
         transform.position = new Vector3(toX, GroundY, startPos.z);
+        Anim(IdleState); // KINGMOSS:
         Play(audioManager != null ? audioManager.BossSlamSound : null);
         SlamDebris(); // FX:
         if (s.slamShockwaves)
@@ -342,18 +397,28 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         for (int i = 0; i < s.volley; i++)
         {
             Face(PlayerX - transform.position.x);
+            if (Animated) // KINGMOSS: each shot is a leaf thrown on the throw's release frame (same 0.57 s per shot)
+            {
+                Anim("Leaf");
+                yield return Frames("Leaf", leafReleaseFrame);
+                SpawnProjectile(facing, i % 2 == 0 ? projectileLowHeight : projectileHighHeight);
+                yield return new WaitForSeconds(Mathf.Max(0.45f, AnimLength("Leaf") - FrameTime("Leaf") * leafReleaseFrame));
+                continue;
+            }
             SpawnProjectile(facing, i % 2 == 0 ? projectileLowHeight : projectileHighHeight);
             SetPose(standingHeight * 0.85f);
             yield return new WaitForSeconds(0.12f);
             SetPose(standingHeight);
             yield return new WaitForSeconds(0.45f);
         }
+        Anim(IdleState); // KINGMOSS:
     }
 
     // BOSSES: spikes shake at floor level (the warning) and then burst upward; the first one targets the player.
     private IEnumerator GroundSpikes(Stage s)
     {
         yield return Telegraph(s.telegraphTime * 0.6f, s.tint);
+        Anim("Cast"); // KINGMOSS: no root row on the sheet: he raises his arm and calls them up
         for (int i = 0; i < s.spikes; i++)
         {
             float x = i == 0 ? PlayerX : Random.Range(leftLimit.position.x, rightLimit.position.x);
@@ -361,6 +426,85 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
             yield return new WaitForSeconds(0.25f);
         }
         yield return new WaitForSeconds(spikeWarnTime + spikeLife);
+        Anim(IdleState); // KINGMOSS:
+    }
+
+    // KINGMOSS: a crescent of wind flung on the slash's release frame, skimming the floor (jump) or at head height
+    // (stay down); more than one alternates the two
+    private IEnumerator WindSlash(Stage s)
+    {
+        Face(PlayerX - transform.position.x);
+        yield return Telegraph(s.telegraphTime * 0.5f, s.tint);
+        for (int i = 0; i < Mathf.Max(1, s.slashes); i++)
+        {
+            Face(PlayerX - transform.position.x);
+            Anim("Slash");
+            yield return Frames("Slash", slashReleaseFrame);
+            SpawnCrescent(facing, i % 2 == 0 ? crescentLowHeight : crescentHighHeight);
+            Play(audioManager != null ? audioManager.SamuraiSlashSound : null);
+            yield return new WaitForSeconds(Mathf.Max(0.3f, AnimLength("Slash") - FrameTime("Slash") * slashReleaseFrame));
+        }
+        Anim(IdleState);
+    }
+
+    // KINGMOSS: he settles onto the floor and the orb charges at his hand while sparks run along the beam's path (the
+    // warning), then the beam fires across the arena from the orb for a moment, through a standing player: jump it
+    private IEnumerator SpiritBeam(Stage s)
+    {
+        if (Animated) body.localPosition = Vector3.zero; // he settles onto the floor to fire, so the beam runs low
+        for (int i = 0; i < Mathf.Max(1, s.beams); i++)
+        {
+            Face(PlayerX - transform.position.x);
+            Anim("BeamCharge");
+            float fromX = transform.position.x + facing * handOffset.x;
+            float toX = facing > 0 ? rightLimit.position.x + 1f : leftLimit.position.x - 1f;
+            float y = GroundY + beamHeight;
+            for (float t = 0f; t < beamWarnTime; t += Time.deltaTime)
+            {
+                Fx.HoldFlash(new Color(0.4f, 0.75f, 1f, 0.45f * Mathf.PingPong(t * 6f, 1f)));
+                if (Random.value < 0.6f)
+                    PixelFX.Emit(new Vector3(Mathf.Lerp(fromX, toX, Random.value), y + Random.Range(-0.08f, 0.08f), 0f), Vector2.zero,
+                        PixelFX.Pick(BeamColours), Random.Range(0.15f, 0.3f), 1, PixelShape.Square, PixelMotion.Float, true, PixelLayer.Front);
+                yield return null;
+            }
+            Fx.HoldFlash(Color.clear);
+            Anim("BeamFire");
+            SpawnBeam(facing, fromX, toX, y);
+            Play(audioManager != null ? (audioManager.dragonSummonSound != null ? audioManager.dragonSummonSound : audioManager.powerUpSound) : null);
+            yield return new WaitForSeconds(Mathf.Max(beamLife, AnimLength("BeamFire")));
+            Anim(IdleState);
+            if (i + 1 < s.beams) yield return new WaitForSeconds(0.35f);
+        }
+        SetPose(standingHeight); // back up to his hover
+    }
+
+    // KINGMOSS: he lifts a boulder overhead while the floor puffs where it will land (where the player was), then
+    // throws it in an arc; it bursts into pebbles on the floor
+    private IEnumerator BoulderThrow(Stage s)
+    {
+        for (int i = 0; i < Mathf.Max(1, s.boulders); i++)
+        {
+            Face(PlayerX - transform.position.x);
+            float targetX = Mathf.Clamp(PlayerX, leftLimit.position.x, rightLimit.position.x);
+            Anim("BoulderLift");
+            float warn = s.telegraphTime * boulderWarnShare;
+            for (float t = 0f, puff = 0f; t < warn; t += Time.deltaTime, puff -= Time.deltaTime)
+            {
+                Fx.HoldFlash(new Color(1f, 0.25f, 0.2f, 0.5f * Mathf.PingPong(t * 6f, 1f)));
+                if (puff <= 0f)
+                {
+                    puff = 0.12f; // the landing spot: dust kicking up off the floor
+                    PixelFX.Burst(new Vector3(targetX, GroundY + 0.05f, 0f), 3, 0.8f, 1.8f, PixelFX.ZoneDust(), 0.25f, 0.4f, 1, PixelShape.Square, PixelMotion.Float, false, PixelLayer.Front, 90f, 50f, 0.35f);
+                }
+                yield return null;
+            }
+            Fx.HoldFlash(Color.clear);
+            Anim("BoulderThrow");
+            SpawnBoulder(targetX);
+            yield return new WaitForSeconds(Mathf.Max(boulderFlightTime, AnimLength("BoulderThrow")));
+            Play(audioManager != null ? audioManager.BossSlamSound : null);
+            Anim(IdleState);
+        }
     }
 
     // FX: a pixel dissolve (random pixels drop out / come back) with spirit wisps, instead of an alpha fade
@@ -381,6 +525,7 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         vulnerable = true;
         Log("opening");
         SetPose(slumpedHeight);
+        Anim("Collapse"); // KINGMOSS: he drops out of the air and lies flat
         for (float t = 0f; t < s.openingTime && vulnerable; t += Time.deltaTime)
         {
             Fx.HoldFlash(Mathf.Repeat(t * 8f, 1f) < 0.5f ? WithAlpha(openingColor, 0.7f) : Color.clear); // FX: a real cyan flash
@@ -388,7 +533,17 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         }
         vulnerable = false;
         ShowStage(); // FX:
+        yield return GetUp(); // KINGMOSS:
         SetPose(standingHeight);
+    }
+
+    // KINGMOSS: the animated body climbs back into the air (nothing to wait for on a single sprite)
+    private IEnumerator GetUp()
+    {
+        if (!Animated) yield break;
+        Anim("Rise");
+        yield return new WaitForSeconds(AnimLength("Rise"));
+        Anim(IdleState);
     }
 
     // ---------------------------------------------------------------- getting hit
@@ -396,6 +551,7 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     private IEnumerator StageChange()
     {
         yield return Blink(0.5f, hitColor);
+        yield return GetUp(); // KINGMOSS:
         SetPose(standingHeight);
         transform.position = new Vector3(transform.position.x, GroundY, startPos.z);
         yield return Telegraph(1f, CurrentStage.tint); // roar into the next stage
@@ -577,6 +733,64 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         hazards.Add(h.gameObject);
     }
 
+    // KINGMOSS:
+    private void SpawnCrescent(float dir, float height)
+    {
+        if (crescentTemplate == null) return;
+        BossHazard h = Instantiate(crescentTemplate, new Vector3(transform.position.x + dir * handOffset.x, GroundY + height, 0f), Quaternion.identity);
+        h.gameObject.SetActive(true);
+        Vector3 sc = h.transform.localScale; // the art flies left (its curve leads)
+        h.transform.localScale = new Vector3(Mathf.Abs(sc.x) * -dir, sc.y, sc.z);
+        h.Launch(this, new Vector2(dir * crescentSpeed, 0f), 0f, float.NegativeInfinity, leftLimit.position.x - 1f, rightLimit.position.x + 1f);
+        hazards.Add(h.gameObject);
+    }
+
+    // KINGMOSS: the beam from his hand to past the wall: Tail at the hand, the tiled Body, the Head at the far end
+    private void SpawnBeam(float dir, float fromX, float toX, float y)
+    {
+        if (beamTemplate == null) return;
+        float length = Mathf.Abs(toX - fromX);
+        BossHazard h = Instantiate(beamTemplate, new Vector3(fromX, y, 0f), Quaternion.identity);
+        h.gameObject.SetActive(true);
+        Transform root = h.transform;
+        root.localScale = new Vector3(dir, 1f, 1f); // the art points right
+        var box = h.GetComponent<BoxCollider2D>();
+        box.size = new Vector2(length, beamThickness);
+        box.offset = new Vector2(length * 0.5f, 0f);
+        Transform tail = root.Find("Tail"), body = root.Find("Body"), head = root.Find("Head");
+        float tailW = Width(tail), headW = Width(head);
+        if (tail != null) tail.localPosition = Vector3.zero;
+        if (head != null) head.localPosition = new Vector3(Mathf.Max(tailW, length - headW), 0f, 0f);
+        if (body != null)
+        {
+            body.localPosition = new Vector3(tailW, 0f, 0f);
+            var sr = body.GetComponent<SpriteRenderer>();
+            sr.size = new Vector2(Mathf.Max(0f, length - tailW - headW) / Mathf.Max(0.01f, body.localScale.x), sr.size.y);
+        }
+        h.Launch(this, Vector2.zero, 0f, float.NegativeInfinity, float.NegativeInfinity, float.PositiveInfinity, beamLife);
+        hazards.Add(h.gameObject);
+    }
+
+    private static float Width(Transform t)
+    {
+        SpriteRenderer sr = t != null ? t.GetComponent<SpriteRenderer>() : null;
+        return sr != null && sr.sprite != null ? sr.sprite.bounds.size.x * Mathf.Abs(t.localScale.x) : 0f;
+    }
+
+    // KINGMOSS: thrown from over his head to land on targetX after boulderFlightTime
+    private void SpawnBoulder(float targetX)
+    {
+        if (boulderTemplate == null) return;
+        Vector3 from = new Vector3(transform.position.x + facing * boulderHold.x, GroundY + boulderHold.y, 0f);
+        float landY = GroundY + 0.55f, t = Mathf.Max(0.2f, boulderFlightTime);
+        var v = new Vector2((targetX - from.x) / t, (landY - from.y + 0.5f * boulderGravity * t * t) / t);
+        BossHazard h = Instantiate(boulderTemplate, from, Quaternion.identity);
+        h.gameObject.SetActive(true);
+        h.Launch(this, v, 0f, landY - 0.01f, leftLimit.position.x - 2f, rightLimit.position.x + 2f);
+        h.SetGravity(boulderGravity, PebbleColours);
+        hazards.Add(h.gameObject);
+    }
+
     private void ClearHazards()
     {
         foreach (GameObject h in hazards)
@@ -588,6 +802,14 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
 
     private void SetPose(float height)
     {
+        if (Animated) // KINGMOSS: the frames draw the pose; only the hurtbox changes (he lies on the floor when slumped)
+        {
+            body.localScale = FacedScale(1f);
+            body.localPosition = new Vector3(0f, height < standingHeight * 0.6f ? 0f : hoverHeight, 0f);
+            hurtbox.size = new Vector2(hurtboxWidth, height);
+            hurtbox.offset = new Vector2(0f, height * 0.5f);
+            return;
+        }
         float squash = Mathf.Clamp(height / standingHeight, 0.2f, 1.5f);
         body.localScale = FacedScale(squash);
         body.localPosition = new Vector3(0f, spriteHeight * bodyBaseScale.y * squash * 0.5f, 0f);
@@ -651,6 +873,8 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     private SpriteFX Fx => fx != null ? fx : (fx = SpriteFX.On(bodySprite));
 
     private static readonly Color[] WispColours = { new Color(0.72f, 0.96f, 1f), new Color(0.79f, 0.72f, 1f), new Color(1f, 1f, 0.92f) };
+    private static readonly Color[] BeamColours = { new Color(0.37f, 0.69f, 1f), new Color(0.67f, 0.87f, 1f), Color.white }; // KINGMOSS:
+    private static readonly Color[] PebbleColours = { new Color(0.48f, 0.33f, 0.22f), new Color(0.35f, 0.24f, 0.17f), new Color(0.42f, 0.6f, 0.25f) };
     private static readonly Color[] RockColours = { new Color(0.6f, 0.56f, 0.5f), new Color(0.46f, 0.41f, 0.38f), new Color(0.8f, 0.74f, 0.6f) };
 
     // FX: stage colours are a palette swap (each brightness level onto the stage's own ramp) instead of multiplying
@@ -661,7 +885,8 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         bodySprite.color = Color.white;
         Fx.HoldFlash(Color.clear);
         Fx.SetDither(0f);
-        bool own = tint.r > 0.97f && tint.g > 0.97f && tint.b > 0.97f;
+        // KINGMOSS: a drawn sheet keeps its own colours (the three-tone swap washes the detail out); the pips show the stage
+        bool own = Animated || (tint.r > 0.97f && tint.g > 0.97f && tint.b > 0.97f);
         Color dark = Color.Lerp(tint * 0.3f, new Color(0.2f, 0.16f, 0.32f), 0.45f);
         Color light = Color.Lerp(tint, Color.white, 0.6f);
         Fx.SetPalette(dark, tint, light, own ? 0f : 0.9f);
@@ -702,6 +927,23 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         for (int i = 0; i < lifePips.Length; i++)
             if (lifePips[i] != null) lifePips[i].enabled = i < lives;
     }
+
+    // ---------------------------------------------------------------- KINGMOSS: animation
+    private const string IdleState = "Idle";
+    private bool Animated => bodyAnimator != null && bodyAnimator.runtimeAnimatorController != null;
+
+    private void Anim(string state)
+    {
+        if (Animated) bodyAnimator.Play(state, 0, 0f);
+    }
+
+    // one frame of a state's clip (0.1 s when there is no clip, so the single-sprite bosses keep a sensible beat)
+    private float FrameTime(string state) =>
+        clips.TryGetValue(state, out AnimationClip c) && c.frameRate > 0f ? 1f / c.frameRate : 0.1f;
+
+    private float AnimLength(string state) => clips.TryGetValue(state, out AnimationClip c) ? c.length : 0.5f;
+
+    private WaitForSeconds Frames(string state, int frames) => new WaitForSeconds(FrameTime(state) * frames);
 
     private void Play(AudioClip clip)
     {

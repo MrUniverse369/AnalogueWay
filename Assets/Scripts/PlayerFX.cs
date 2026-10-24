@@ -7,6 +7,9 @@ using UnityEngine;
 ///   Movement: landing dust scaled by the height fallen, small puffs synced to footsteps and jump take-off
 ///             puffs, all in the zone's ground colours.
 ///   Stun:     STUN: stars circling his head while he is dazed (PlayerController.IsStunned).
+///   Respawn:  RESPAWNHOLD: while the respawn holds him (PlayerController.RespawnHeld) he fades in from a shimmering
+///             pixel dither with spirit motes rising round him and the prompt reads RESPAWNING; when control comes
+///             back he flashes, a ring of light kicks out from his feet and the prompt says GO! for a moment.
 /// Also adds the combo (StompCombo, shared by stomps and dash defeats) and the talisman effects (TalismanFX).
 /// </summary>
 [DisallowMultipleComponent]
@@ -119,6 +122,56 @@ public class PlayerFX : MonoBehaviour
         UpdateFlicker();
         UpdateLanding();
         UpdateDaze(); // STUN:
+        UpdateRespawn(); // RESPAWNHOLD: after the flicker, so it owns the dither while he is held
+    }
+
+    // ---------------------------------------------------------------- RESPAWNHOLD
+    private static readonly Color[] SpiritColours = { PixelFX.Cream, PixelFX.Hex("d5ebff"), PixelFX.Hex("99e550") };
+    [Header("Respawn")]
+    [Tooltip("How see-through Harvey starts when he reappears (pixel dither), fading to solid as the camera gets back.")]
+    [SerializeField] private float respawnStartDither = 0.65f;
+    [SerializeField] private float goPromptTime = 0.6f;
+    private bool wasHeld;
+    private float goUntil, moteTimer;
+
+    /// <summary>RESPAWNHOLD: Harvey has just reappeared at the checkpoint (LevelManager): a ring and a column of light.</summary>
+    public static void RespawnArrive()
+    {
+        PlayerFX p = Instance;
+        if (p == null || !p.isActiveAndEnabled) return;
+        Vector3 feet = p.Feet;
+        PixelFX.Ring(feet + Vector3.up * 0.1f, 14, 2.4f, SpiritColours, 0.35f, 1, PixelShape.Square, true, PixelLayer.Front, 0.4f, 0.2f);
+        PixelFX.Burst(feet + Vector3.up * 0.5f, 12, 1f, 3f, SpiritColours, 0.5f, 0.9f, 1, PixelShape.Square, PixelMotion.Float, true, PixelLayer.Front, 90f, 25f, 0.25f);
+        p.fx.SetDither(p.respawnStartDither, 0f);
+    }
+
+    private void UpdateRespawn()
+    {
+        bool held = player != null && player.RespawnHeld;
+        if (held)
+        {
+            float p = player.RespawnProgress;
+            fx.SetDither(Mathf.Lerp(respawnStartDither, 0f, p), (int)(Time.time * 10f) % 2); // a slow shimmer while he forms
+            moteTimer -= Time.deltaTime;
+            if (moteTimer <= 0f && sprite != null)
+            {
+                moteTimer = 0.06f;
+                Bounds b = sprite.bounds;
+                PixelFX.Emit(new Vector3(Random.Range(b.min.x, b.max.x), Random.Range(b.min.y, b.center.y), 0f), new Vector2(0f, Random.Range(0.8f, 1.6f)),
+                    PixelFX.Pick(SpiritColours), Random.Range(0.35f, 0.6f), 1, PixelShape.Square, PixelMotion.Float, true);
+            }
+            HarveyMenus.Prompt(this, "RESPAWNING" + new string('.', 1 + (int)(Time.time * 3f) % 3));
+        }
+        else if (wasHeld) // control is back
+        {
+            fx.SetDither(0f);
+            fx.Flash(hitFlash, 0.15f);
+            Vector3 feet = Feet;
+            PixelFX.Ring(feet + Vector3.up * 0.05f, 12, 3f, SpiritColours, 0.25f, 1, PixelShape.Square, true, PixelLayer.Front, 0.3f, 0.15f);
+            goUntil = Time.time + goPromptTime;
+        }
+        if (!held && Time.time < goUntil) HarveyMenus.Prompt(this, "GO!");
+        wasHeld = held;
     }
 
     // STUN (2026-10-19): while a samurai's block has Harvey dazed, little stars circle his head

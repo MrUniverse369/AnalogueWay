@@ -62,7 +62,7 @@ public class QuickItemHUD : MonoBehaviour
         bump = Mathf.Max(0f, bump - Time.unscaledDeltaTime * 4f);
         plate.localScale = Vector3.one * (1f + 0.15f * bump);
 
-        if (Pressed()) Use(item, n);
+        if (Pressed() && !player.NoControl) Use(item, n); // RESPAWNHOLD: not while the respawn holds him
     }
 
     // QUICKRING: the badge hugs its label (hidden when there is nothing to say)

@@ -69,6 +69,39 @@ public class PlayerController : CharecterBehaviour
     /// <summary>STUN: daze Harvey for 'seconds' (a longer stun already running is kept).</summary>
     public void Stun(float seconds) => stunnedUntil = Mathf.Max(stunnedUntil, Time.time + seconds);
 
+    // RESPAWNHOLD (2026-10-23): from the moment he dies until the camera has glided back and settled on him after the
+    // respawn (LevelManager.RespawnCo), Harvey takes no input: no running, jumping, dragon, talismans or quick item.
+    // Gravity still sets him down on the checkpoint. Afterwards a direction still held from the wait is ignored until
+    // it is let go, so he doesn't set off by himself the moment control comes back.
+    private bool respawnHold;
+    private bool waitForNeutral;
+    private float arrivedAt = -1f, arriveTime = 1f;
+
+    /// <summary>RESPAWNHOLD: true while the respawn holds Harvey still.</summary>
+    public bool RespawnHeld => respawnHold;
+
+    /// <summary>RESPAWNHOLD: Harvey has reappeared at the checkpoint; the camera is back in about 'seconds'.</summary>
+    public void RespawnArrived(float seconds)
+    {
+        arrivedAt = Time.time;
+        arriveTime = Mathf.Max(0.1f, seconds);
+    }
+
+    /// <summary>RESPAWNHOLD: how far through the wait he is since reappearing (0 just back, 1 the camera is on him).</summary>
+    public float RespawnProgress => !respawnHold ? 1f : arrivedAt < 0f ? 0f : Mathf.Clamp01((Time.time - arrivedAt) / arriveTime);
+
+    /// <summary>STUN / RESPAWNHOLD: Harvey can't act (dazed, or held by a respawn). Everything he does checks this.</summary>
+    public bool NoControl => IsStunned || respawnHold;
+
+    /// <summary>RESPAWNHOLD: hold Harvey still (LevelManager, on death) or hand control back (once the camera is on him).</summary>
+    public void HoldForRespawn(bool hold)
+    {
+        respawnHold = hold;
+        waitForNeutral = !hold;
+        if (hold) arrivedAt = -1f;
+        if (hold && pBDARef != null) pBDARef.pushBackCounter = 0f; // a knockback from the fatal hit doesn't carry him off after the respawn
+    }
+
     private void Awake()
     {
         audioManager = AudioManager.Instance; // PERF:
@@ -105,7 +138,7 @@ public class PlayerController : CharecterBehaviour
 
     void MountActive()
     {
-        if (!canSummonDragon || IsStunned) return; // DRAGON: switched off in levels like boss battles // STUN: or while dazed
+        if (!canSummonDragon || NoControl) return; // DRAGON: switched off in levels like boss battles // STUN: or while dazed // RESPAWNHOLD: or respawning
         mountActive = true;
     }
 
@@ -268,7 +301,9 @@ public class PlayerController : CharecterBehaviour
     }
     public override void CharMovement()
     {
-        dir = IsStunned ? 0f : Input.GetAxisRaw("Horizontal"); // STUN: dazed: he stands where the knockback left him
+        float raw = Input.GetAxisRaw("Horizontal");
+        if (waitForNeutral && Mathf.Abs(raw) < 0.01f) waitForNeutral = false; // RESPAWNHOLD: let go once, then he runs again
+        dir = NoControl || waitForNeutral ? 0f : raw; // STUN: dazed: he stands where the knockback left him // RESPAWNHOLD:
         vel = new Vector2(speed * dir, rb2D.linearVelocity.y);
         Flip(dir);
 
@@ -335,7 +370,7 @@ public class PlayerController : CharecterBehaviour
     // one mid-air jump: after leaving the ground (and its coyote time), not while swimming, dazed or knocked back
     private bool CanAirJump()
     {
-        if (!SkillTree.HasDoubleJump || airJumpUsed || isGrounded || coyoteTimeCounter > 0 || IsStunned) return false;
+        if (!SkillTree.HasDoubleJump || airJumpUsed || isGrounded || coyoteTimeCounter > 0 || NoControl) return false;
         PlayerWater water = PlayerWater.Instance;
         return water == null || !water.BodyInWater;
     }
@@ -353,7 +388,7 @@ public class PlayerController : CharecterBehaviour
         if (isGrounded) airJumpUsed = false; // SKILLS: Double Jump comes back on landing
 
         bool jumpedThisFrame = false; // ANIM:
-        if (coyoteTimeCounter > 0 && Input.GetButtonDown("Jump") && !IsStunned) // STUN: no jumping while dazed
+        if (coyoteTimeCounter > 0 && Input.GetButtonDown("Jump") && !NoControl) // STUN: no jumping while dazed // RESPAWNHOLD: or respawning
         {
             jumpedThisFrame = true; // ANIM:
             rb2D.linearVelocity = jVel;

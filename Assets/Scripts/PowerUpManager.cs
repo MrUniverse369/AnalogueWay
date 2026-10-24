@@ -139,6 +139,7 @@ public class PowerUpManager : MonoBehaviour
         // Expire first, then read input, so a held key re-triggers in the same frame
         // with no one-frame gap in the effect.
         for (int i = 0; i < slots.Length; i++) Tick(slots[i], dt, i);
+        Chi.Flow(dt); // CHIFLOW: the Chi Flow skill refills chi during a 3+ hit combo
 
         // PAUSE: menu presses (Cross is also "submit") must not queue a talisman for when the game resumes
         if (MenueControl.isGamePaused)
@@ -234,7 +235,7 @@ public class PowerUpManager : MonoBehaviour
         Talisman talisman = slot.talisman;
 
         if (slot.isActive || slot.cooldownLeft > 0f) return;
-        if (player.IsStunned) return; // STUN: dazed by a samurai's block: no dashing (or any talisman) until it wears off
+        if (player.NoControl) return; // STUN: dazed by a samurai's block: no dashing (or any talisman) until it wears off // RESPAWNHOLD: or respawning
         if (oneAtATime && IsAnyActive()) return;
         if (!talisman.IsAllowedInScene(sceneName) || !talisman.CanActivate(context)) return;
         if (talisman.ChiPerSecond > 0f && Chi.IsEmpty && !Chi.IsFree) // CHI: all nine units spent: nothing starts until chi is restored // CHIFREE: unless at the final combo stage

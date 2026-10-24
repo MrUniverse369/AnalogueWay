@@ -37,7 +37,8 @@ public sealed class SkillDef
 ///   Jump Power I-III   jumps 5% faster a level       Sky Leap I-II        Super Jump launches 6% / 12% harder
 ///                      (10% / 21% / 32% higher)
 ///   Double Jump        a second jump in mid-air
-///   Combo Mastery I-IV the stomp/dash combo can climb to stage 2 / 3 / 4 / 5 (COMBOLOCK)
+///   Combo Mastery I-IV the stomp/dash combo can climb   Chi Flow I-III     during a 3+ hit combo chi comes back:
+///                      to stage 2 / 3 / 4 / 5 (COMBOLOCK)                    a unit every 5 / 3 / 2 s (CHIFLOW)
 /// Enemies take more stomps zone by zone (EnemyController.ZoneToughness: 1 in the Tomb, 2 in the Dunes, 3 on the
 /// Shrine Road, 4 in the Meadow), so with Stomp Power III every normal enemy falls to one stomp again. Bosses keep
 /// their own health.
@@ -53,8 +54,9 @@ public static class SkillTree
     public const string StompPower = "StompPower", DashPower = "DashPower", JumpPower = "JumpPower", DoubleJump = "DoubleJump";
     public const string ComboMastery = "ComboMastery"; // COMBOLOCK:
     public const string ChiFocus = "ChiFocus", LastingCharms = "LastingCharms", QuickRecharge = "QuickRecharge", SkyLeap = "SkyLeap";
+    public const string ChiFlow = "ChiFlow"; // CHIFLOW:
 
-    // the costs climb with each level's power; the whole tree is 107 crystals (a gem chest holds about 5-6)
+    // the costs climb with each level's power; the whole tree is 123 crystals (a gem chest holds about 5-6)
     public static readonly SkillDef[] All =
     {
         new SkillDef(StompPower, "STOMP POWER", "Skill_Stomp", SkillBranch.Natural, new[] { 2, 4, 7 },
@@ -86,6 +88,10 @@ public static class SkillTree
         new SkillDef(SkyLeap, "SKY LEAP", "Skill_SkyLeap", SkillBranch.Talisman, new[] { 4, 8 },
             new[] { "SUPER JUMP 6% STRONGER", "SUPER JUMP 12% STRONGER" },
             "THE SUPER JUMP TALISMAN LAUNCHES HARVEY EVEN HIGHER.", LastingCharms, 1, true),
+        new SkillDef(ChiFlow, "CHI FLOW", "Skill_ChiFlow", SkillBranch.Talisman, new[] { 3, 5, 8 }, // CHIFLOW:
+            new[] { "A CHI UNIT EVERY 5 S IN A 3+ COMBO", "A CHI UNIT EVERY 3 S IN A 3+ COMBO",
+                    "A CHI UNIT EVERY 2 S IN A 3+ COMBO" },
+            "WHILE A COMBO OF 3 OR MORE HITS LASTS, CHI FLOWS BACK INTO THE METER.", QuickRecharge),
     };
 
     // ---------------------------------------------------------------- levels
@@ -111,6 +117,9 @@ public static class SkillTree
     public static float SuperJumpScale => 1f + 0.06f * Level(SkyLeap);
     /// <summary>COMBOLOCK: the highest combo stage that can be reached (1 with no Combo Mastery, MaxStage at level IV).</summary>
     public static int ComboStageCap => 1 + Level(ComboMastery);
+    /// <summary>CHIFLOW: chi restored per second during a 3+ hit combo (Chi.Flow): a unit (10) every 5 / 3 / 2 s.</summary>
+    public static float ChiFlowPerSecond => ChiFlowRates[Mathf.Clamp(Level(ChiFlow), 0, ChiFlowRates.Length - 1)];
+    private static readonly float[] ChiFlowRates = { 0f, Chi.PerUnit / 5f, Chi.PerUnit / 3f, Chi.PerUnit / 2f };
 
     /// <summary>How long a talisman runs with the skills learned (Spirit Dash also gets Dash Power).</summary>
     public static float DurationOf(Talisman t)

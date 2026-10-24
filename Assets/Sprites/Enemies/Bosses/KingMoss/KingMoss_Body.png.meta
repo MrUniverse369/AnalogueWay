@@ -1,0 +1,1647 @@
+fileFormatVersion: 2
+guid: 6c262b9e9110c4cbba25e2f92fe2a921
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5207885302371696557
+    second: KingMoss_Body_0
+  - first:
+      213: 8982970747525088396
+    second: KingMoss_Body_1
+  - first:
+      213: -1322970600214467164
+    second: KingMoss_Body_2
+  - first:
+      213: 8467707717355113886
+    second: KingMoss_Body_3
+  - first:
+      213: -8660087102829394054
+    second: KingMoss_Body_4
+  - first:
+      213: -5923254068541544269
+    second: KingMoss_Body_5
+  - first:
+      213: 3289934468936618613
+    second: KingMoss_Body_6
+  - first:
+      213: 44102307479963590
+    second: KingMoss_Body_7
+  - first:
+      213: -4329212043226397788
+    second: KingMoss_Body_8
+  - first:
+      213: -9062779494524745386
+    second: KingMoss_Body_9
+  - first:
+      213: 8744274517259805083
+    second: KingMoss_Body_10
+  - first:
+      213: 1642103883560922449
+    second: KingMoss_Body_11
+  - first:
+      213: -6799741627535173939
+    second: KingMoss_Body_12
+  - first:
+      213: 4581051612986774472
+    second: KingMoss_Body_13
+  - first:
+      213: 8493326129901745831
+    second: KingMoss_Body_14
+  - first:
+      213: -8071722781581845328
+    second: KingMoss_Body_15
+  - first:
+      213: -873797545629797761
+    second: KingMoss_Body_16
+  - first:
+      213: -2249695995583614363
+    second: KingMoss_Body_17
+  - first:
+      213: -7844148407849945827
+    second: KingMoss_Body_18
+  - first:
+      213: 1731029585633279985
+    second: KingMoss_Body_19
+  - first:
+      213: -4272602649093918751
+    second: KingMoss_Body_20
+  - first:
+      213: -4763012240742180580
+    second: KingMoss_Body_21
+  - first:
+      213: -3819938437255051640
+    second: KingMoss_Body_22
+  - first:
+      213: 3749535079517493554
+    second: KingMoss_Body_23
+  - first:
+      213: -3471212923067171664
+    second: KingMoss_Body_24
+  - first:
+      213: 7932619249296547160
+    second: KingMoss_Body_25
+  - first:
+      213: -3419662041758763601
+    second: KingMoss_Body_26
+  - first:
+      213: -1682824887834328376
+    second: KingMoss_Body_27
+  - first:
+      213: 2701527808844962319
+    second: KingMoss_Body_28
+  - first:
+      213: -527255097271265034
+    second: KingMoss_Body_29
+  - first:
+      213: -1447189344613534
+    second: KingMoss_Body_30
+  - first:
+      213: -1338663759578536693
+    second: KingMoss_Body_31
+  - first:
+      213: -8938124642600477074
+    second: KingMoss_Body_32
+  - first:
+      213: 7983007356322457100
+    second: KingMoss_Body_33
+  - first:
+      213: -7482673368239614573
+    second: KingMoss_Body_34
+  - first:
+      213: 637162430757514834
+    second: KingMoss_Body_35
+  - first:
+      213: -1915424313044843303
+    second: KingMoss_Body_36
+  - first:
+      213: -3096289620739726167
+    second: KingMoss_Body_37
+  - first:
+      213: 17365365798284929
+    second: KingMoss_Body_38
+  - first:
+      213: 6716844945677352712
+    second: KingMoss_Body_39
+  - first:
+      213: 3120365176109745281
+    second: KingMoss_Body_40
+  - first:
+      213: 5960767440483187470
+    second: KingMoss_Body_41
+  - first:
+      213: 6046577091809362540
+    second: KingMoss_Body_42
+  - first:
+      213: 495304983356959125
+    second: KingMoss_Body_43
+  - first:
+      213: -3986683958817283796
+    second: KingMoss_Body_44
+  - first:
+      213: 2642079026359006984
+    second: KingMoss_Body_45
+  - first:
+      213: 9142952757797237229
+    second: KingMoss_Body_46
+  - first:
+      213: -3139711087971993349
+    second: KingMoss_Body_47
+  - first:
+      213: -4575786492892946190
+    second: KingMoss_Body_48
+  - first:
+      213: 640611910388461430
+    second: KingMoss_Body_49
+  - first:
+      213: -2768485534040230737
+    second: KingMoss_Body_50
+  - first:
+      213: 5858365688720082314
+    second: KingMoss_idle_0
+  - first:
+      213: 6835752933589155287
+    second: KingMoss_idle_1
+  - first:
+      213: -3199602472144550891
+    second: KingMoss_idle_2
+  - first:
+      213: 2968574229649632647
+    second: KingMoss_idle_3
+  - first:
+      213: 7544395585188863963
+    second: KingMoss_fly_0
+  - first:
+      213: -4039683627087961365
+    second: KingMoss_fly_1
+  - first:
+      213: 4851499359833446923
+    second: KingMoss_fly_2
+  - first:
+      213: -334499618371685487
+    second: KingMoss_fly_3
+  - first:
+      213: 1476173411087505487
+    second: KingMoss_fly_4
+  - first:
+      213: -1001103448417558206
+    second: KingMoss_fly_5
+  - first:
+      213: 4777118840246164318
+    second: KingMoss_slash_0
+  - first:
+      213: -7391666043040834416
+    second: KingMoss_slash_1
+  - first:
+      213: 2639231469012513609
+    second: KingMoss_slash_2
+  - first:
+      213: 772352368762547380
+    second: KingMoss_slash_3
+  - first:
+      213: -6675779598523139528
+    second: KingMoss_slash_4
+  - first:
+      213: -1892048295634892771
+    second: KingMoss_slash_5
+  - first:
+      213: -6589515791053142184
+    second: KingMoss_slash_6
+  - first:
+      213: -276712320159722684
+    second: KingMoss_slash_7
+  - first:
+      213: -4972819182069762192
+    second: KingMoss_slash_8
+  - first:
+      213: -2392194636826051714
+    second: KingMoss_leaf_0
+  - first:
+      213: -8573019652103149715
+    second: KingMoss_leaf_1
+  - first:
+      213: 8064961700785455617
+    second: KingMoss_leaf_2
+  - first:
+      213: 4231249001819416519
+    second: KingMoss_leaf_3
+  - first:
+      213: 6031673363814324983
+    second: KingMoss_leaf_4
+  - first:
+      213: -1757302797181272836
+    second: KingMoss_leaf_5
+  - first:
+      213: -5339215289036862086
+    second: KingMoss_leaf_6
+  - first:
+      213: -6612604818035015132
+    second: KingMoss_leaf_7
+  - first:
+      213: -8416757583057272953
+    second: KingMoss_beam_0
+  - first:
+      213: -1137179650497336117
+    second: KingMoss_beam_1
+  - first:
+      213: -2096395386454491452
+    second: KingMoss_beam_2
+  - first:
+      213: 8759373014061728299
+    second: KingMoss_beam_3
+  - first:
+      213: 3697481072352856508
+    second: KingMoss_beam_4
+  - first:
+      213: -2556713905716866714
+    second: KingMoss_beam_5
+  - first:
+      213: 5266564017179246423
+    second: KingMoss_beam_6
+  - first:
+      213: -6073608150168767111
+    second: KingMoss_beam_7
+  - first:
+      213: 4350129454660724078
+    second: KingMoss_boulder_0
+  - first:
+      213: 160320826545830515
+    second: KingMoss_boulder_1
+  - first:
+      213: 5910891693131672743
+    second: KingMoss_boulder_2
+  - first:
+      213: -158532423615525272
+    second: KingMoss_boulder_3
+  - first:
+      213: 1524155793751806823
+    second: KingMoss_boulder_4
+  - first:
+      213: 4530479730242999760
+    second: KingMoss_boulder_5
+  - first:
+      213: 3272606032622619302
+    second: KingMoss_boulder_6
+  - first:
+      213: 7810156280695992957
+    second: KingMoss_boulder_7
+  - first:
+      213: 5937759843265118399
+    second: KingMoss_hurt_0
+  - first:
+      213: 6385243244165049835
+    second: KingMoss_hurt_1
+  - first:
+      213: -3156962461124348605
+    second: KingMoss_hurt_2
+  - first:
+      213: -2535903523041017832
+    second: KingMoss_hurt_3
+  - first:
+      213: -4666051309971169770
+    second: KingMoss_hurt_4
+  - first:
+      213: 6875730014826163702
+    second: KingMoss_hurt_5
+  - first:
+      213: -1255441355226337093
+    second: KingMoss_hurt_6
+  - first:
+      213: -2555971477229780987
+    second: KingMoss_hurt_7
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: KingMoss_idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 234
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a854f701e881d4150800000000000000
+      internalID: 5858365688720082314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_idle_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 234
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dd7ae263197dde50800000000000000
+      internalID: 6835752933589155287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_idle_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 234
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 514cc59f08ab893d0800000000000000
+      internalID: -3199602472144550891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_idle_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 234
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78d25af988e723920800000000000000
+      internalID: 2968574229649632647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_fly_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 195
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdf153410d313b860800000000000000
+      internalID: 7544395585188863963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_fly_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 195
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be2e572f42920f7c0800000000000000
+      internalID: -4039683627087961365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_fly_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 195
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0a58e2a6fcf35340800000000000000
+      internalID: 4851499359833446923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_fly_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 195
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 193b37d8e5e9b5bf0800000000000000
+      internalID: -334499618371685487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_fly_4
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 195
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f485fb275eb6c7410800000000000000
+      internalID: 1476173411087505487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_fly_5
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 195
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24127adb7bd5b12f0800000000000000
+      internalID: -1001103448417558206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_slash_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 156
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5bd2b2664cbb4240800000000000000
+      internalID: 4777118840246164318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_slash_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 156
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09cdb3685e68b6990800000000000000
+      internalID: -7391666043040834416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_slash_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 156
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 943f58ea90f60a420800000000000000
+      internalID: 2639231469012513609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_slash_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 156
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bce5852362f7ba00800000000000000
+      internalID: 772352368762547380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_slash_4
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 156
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83a7a3f23ddda53a0800000000000000
+      internalID: -6675779598523139528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_slash_5
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 156
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d188cc089181eb5e0800000000000000
+      internalID: -1892048295634892771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_slash_6
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 156
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85743700d465d84a0800000000000000
+      internalID: -6589515791053142184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_slash_7
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 156
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 443d7e36c9be82cf0800000000000000
+      internalID: -276712320159722684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_slash_8
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 156
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 077bb701d4ffcfab0800000000000000
+      internalID: -4972819182069762192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_leaf_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 117
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7b7366f6a73dced0800000000000000
+      internalID: -2392194636826051714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_leaf_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 117
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d67e2f75c04860980800000000000000
+      internalID: -8573019652103149715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_leaf_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 117
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1028276dfef7cef60800000000000000
+      internalID: 8064961700785455617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_leaf_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 117
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c72cad8c8a68ba30800000000000000
+      internalID: 4231249001819416519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_leaf_4
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 117
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fa965b97fec4b350800000000000000
+      internalID: 6031673363814324983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_leaf_5
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 117
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfcb533aa6ecc97e0800000000000000
+      internalID: -1757302797181272836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_leaf_6
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 117
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7d8f95abfb47e5b0800000000000000
+      internalID: -5339215289036862086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_leaf_7
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 117
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4228cfcf3fe4b34a0800000000000000
+      internalID: -6612604818035015132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_beam_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 78
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78fbb45729ba13b80800000000000000
+      internalID: -8416757583057272953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_beam_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 78
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bccad46022de730f0800000000000000
+      internalID: -1137179650497336117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_beam_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 78
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cebc91d08b18e2e0800000000000000
+      internalID: -2096395386454491452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_beam_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 78
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b22ca4ed85b8f8970800000000000000
+      internalID: 8759373014061728299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_beam_4
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 78
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb98259f177105330800000000000000
+      internalID: 3697481072352856508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_beam_5
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 78
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 661d171bf3ab48cd0800000000000000
+      internalID: -2556713905716866714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_beam_6
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 78
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75fb2d6f118961940800000000000000
+      internalID: 5266564017179246423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_beam_7
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 78
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 975f548119536bba0800000000000000
+      internalID: -6073608150168767111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_boulder_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 39
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e652408e0b3ce5c30800000000000000
+      internalID: 4350129454660724078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_boulder_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 39
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37a7c5c31f2993200800000000000000
+      internalID: 160320826545830515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_boulder_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 39
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7acabea7da4b70250800000000000000
+      internalID: 5910891693131672743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_boulder_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 39
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86ec305c997cccdf0800000000000000
+      internalID: -158532423615525272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_boulder_4
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 39
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7631eec7e93e62510800000000000000
+      internalID: 1524155793751806823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_boulder_5
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 39
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d5dd37af4f7fde30800000000000000
+      internalID: 4530479730242999760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_boulder_6
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 39
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6aa854009d1aa6d20800000000000000
+      internalID: 3272606032622619302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_boulder_7
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 39
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d72bb2fd1cf336c60800000000000000
+      internalID: 7810156280695992957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_hurt_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb0856b2e19276250800000000000000
+      internalID: 5937759843265118399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_hurt_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 0
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bedabec66e0fc9850800000000000000
+      internalID: 6385243244165049835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_hurt_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 0
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 345b07f2e573034d0800000000000000
+      internalID: -3156962461124348605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_hurt_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 0
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8108a7c7e29aeccd0800000000000000
+      internalID: -2535903523041017832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_hurt_4
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 0
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61e1c6d2e0bde3fb0800000000000000
+      internalID: -4666051309971169770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_hurt_5
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 0
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fd6431f4008b6f50800000000000000
+      internalID: 6875730014826163702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_hurt_6
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 0
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb036613db6c39ee0800000000000000
+      internalID: -1255441355226337093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KingMoss_hurt_7
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 0
+        width: 65
+        height: 39
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50040bbcb7d578cd0800000000000000
+      internalID: -2555971477229780987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      KingMoss_Body_0: 5207885302371696557
+      KingMoss_Body_1: 8982970747525088396
+      KingMoss_Body_10: 8744274517259805083
+      KingMoss_Body_11: 1642103883560922449
+      KingMoss_Body_12: -6799741627535173939
+      KingMoss_Body_13: 4581051612986774472
+      KingMoss_Body_14: 8493326129901745831
+      KingMoss_Body_15: -8071722781581845328
+      KingMoss_Body_16: -873797545629797761
+      KingMoss_Body_17: -2249695995583614363
+      KingMoss_Body_18: -7844148407849945827
+      KingMoss_Body_19: 1731029585633279985
+      KingMoss_Body_2: -1322970600214467164
+      KingMoss_Body_20: -4272602649093918751
+      KingMoss_Body_21: -4763012240742180580
+      KingMoss_Body_22: -3819938437255051640
+      KingMoss_Body_23: 3749535079517493554
+      KingMoss_Body_24: -3471212923067171664
+      KingMoss_Body_25: 7932619249296547160
+      KingMoss_Body_26: -3419662041758763601
+      KingMoss_Body_27: -1682824887834328376
+      KingMoss_Body_28: 2701527808844962319
+      KingMoss_Body_29: -527255097271265034
+      KingMoss_Body_3: 8467707717355113886
+      KingMoss_Body_30: -1447189344613534
+      KingMoss_Body_31: -1338663759578536693
+      KingMoss_Body_32: -8938124642600477074
+      KingMoss_Body_33: 7983007356322457100
+      KingMoss_Body_34: -7482673368239614573
+      KingMoss_Body_35: 637162430757514834
+      KingMoss_Body_36: -1915424313044843303
+      KingMoss_Body_37: -3096289620739726167
+      KingMoss_Body_38: 17365365798284929
+      KingMoss_Body_39: 6716844945677352712
+      KingMoss_Body_4: -8660087102829394054
+      KingMoss_Body_40: 3120365176109745281
+      KingMoss_Body_41: 5960767440483187470
+      KingMoss_Body_42: 6046577091809362540
+      KingMoss_Body_43: 495304983356959125
+      KingMoss_Body_44: -3986683958817283796
+      KingMoss_Body_45: 2642079026359006984
+      KingMoss_Body_46: 9142952757797237229
+      KingMoss_Body_47: -3139711087971993349
+      KingMoss_Body_48: -4575786492892946190
+      KingMoss_Body_49: 640611910388461430
+      KingMoss_Body_5: -5923254068541544269
+      KingMoss_Body_50: -2768485534040230737
+      KingMoss_Body_6: 3289934468936618613
+      KingMoss_Body_7: 44102307479963590
+      KingMoss_Body_8: -4329212043226397788
+      KingMoss_Body_9: -9062779494524745386
+      KingMoss_beam_0: -8416757583057272953
+      KingMoss_beam_1: -1137179650497336117
+      KingMoss_beam_2: -2096395386454491452
+      KingMoss_beam_3: 8759373014061728299
+      KingMoss_beam_4: 3697481072352856508
+      KingMoss_beam_5: -2556713905716866714
+      KingMoss_beam_6: 5266564017179246423
+      KingMoss_beam_7: -6073608150168767111
+      KingMoss_boulder_0: 4350129454660724078
+      KingMoss_boulder_1: 160320826545830515
+      KingMoss_boulder_2: 5910891693131672743
+      KingMoss_boulder_3: -158532423615525272
+      KingMoss_boulder_4: 1524155793751806823
+      KingMoss_boulder_5: 4530479730242999760
+      KingMoss_boulder_6: 3272606032622619302
+      KingMoss_boulder_7: 7810156280695992957
+      KingMoss_fly_0: 7544395585188863963
+      KingMoss_fly_1: -4039683627087961365
+      KingMoss_fly_2: 4851499359833446923
+      KingMoss_fly_3: -334499618371685487
+      KingMoss_fly_4: 1476173411087505487
+      KingMoss_fly_5: -1001103448417558206
+      KingMoss_hurt_0: 5937759843265118399
+      KingMoss_hurt_1: 6385243244165049835
+      KingMoss_hurt_2: -3156962461124348605
+      KingMoss_hurt_3: -2535903523041017832
+      KingMoss_hurt_4: -4666051309971169770
+      KingMoss_hurt_5: 6875730014826163702
+      KingMoss_hurt_6: -1255441355226337093
+      KingMoss_hurt_7: -2555971477229780987
+      KingMoss_idle_0: 5858365688720082314
+      KingMoss_idle_1: 6835752933589155287
+      KingMoss_idle_2: -3199602472144550891
+      KingMoss_idle_3: 2968574229649632647
+      KingMoss_leaf_0: -2392194636826051714
+      KingMoss_leaf_1: -8573019652103149715
+      KingMoss_leaf_2: 8064961700785455617
+      KingMoss_leaf_3: 4231249001819416519
+      KingMoss_leaf_4: 6031673363814324983
+      KingMoss_leaf_5: -1757302797181272836
+      KingMoss_leaf_6: -5339215289036862086
+      KingMoss_leaf_7: -6612604818035015132
+      KingMoss_slash_0: 4777118840246164318
+      KingMoss_slash_1: -7391666043040834416
+      KingMoss_slash_2: 2639231469012513609
+      KingMoss_slash_3: 772352368762547380
+      KingMoss_slash_4: -6675779598523139528
+      KingMoss_slash_5: -1892048295634892771
+      KingMoss_slash_6: -6589515791053142184
+      KingMoss_slash_7: -276712320159722684
+      KingMoss_slash_8: -4972819182069762192
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

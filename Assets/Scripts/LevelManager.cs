@@ -108,8 +108,25 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    // RESPAWNHOLD (2026-10-23): Harvey gets his controls back only once the follow camera is back on him: its timed
+    // glide (CameraController.ReturnToPlayer) has finished and CameraController.IsOnPlayer (the check LevelLoader
+    // uses) holds for SettledFrames frames, within SettledDistance. The glide is timed so the whole wait, from the
+    // death to control back, stays inside MaxRespawnHold; at that point the camera is snapped onto him if it still
+    // isn't there. A switched-off follow camera (the boss arenas' fixed view) has nothing to wait for. A death during
+    // the wait starts a new respawn, and only the newest one hands control back. PlayerFX shows the wait.
+    private const float SettledDistance = 0.25f; // four art pixels
+    private const int SettledFrames = 2;
+    private const float MaxRespawnHold = 3f;     // death to control back, at most
+    private const float SettleSlack = 0.2f;      // kept for the settle check after the glide
+    private const float MinGlide = 0.4f, MaxGlide = 1.2f;
+    private int respawnRun;
+    private CameraController followCamera;
+
     public IEnumerator RespawnCo()
     {
+        int run = ++respawnRun; // RESPAWNHOLD:
+        float deadline = Time.time + MaxRespawnHold;
+        if (pScriptRef != null) pScriptRef.HoldForRespawn(true); // RESPAWNHOLD: no input from the moment he dies
         if (PowerUpManager.Instance != null) PowerUpManager.Instance.ResetAll(); // POWERUP: replaces speedBoostPowerUp = false below
         audioManager.PlaySfx(audioManager.gameOverSound);
         ScreenGrade.GreyPulse(); // FX: a brief greyscale pulse on game over
@@ -121,6 +138,11 @@ public class LevelManager : MonoBehaviour
         pScriptRef.transform.position = GameSession.IsArcade && arcadeSafePoint.HasValue ? arcadeSafePoint.Value : ReSpawnPos.transform.position;
         groundedFor = 0f;
         pScriptRef.gameObject.SetActive(true);
+        // RESPAWNHOLD: the camera glides back in whatever is left of the wait
+        float glide = Mathf.Clamp(deadline - Time.time - SettleSlack, MinGlide, MaxGlide);
+        if (FollowCamera != null && FollowCamera.isActiveAndEnabled) FollowCamera.ReturnToPlayer(glide);
+        pScriptRef.RespawnArrived(glide);
+        PlayerFX.RespawnArrive();
         if (gameOverScreen != null) gameOverScreen.SetActive(false);
         HurtPlayer.pLivesCount = 3;
         PlayerController.chi = 90;
@@ -133,6 +155,34 @@ public class LevelManager : MonoBehaviour
         }
         changeWorld.RequestRefresh(); // PERF: the loop above re-enables objects from both worlds; let changeWorld correct them
         Respawned?.Invoke(); // BOSS:
+        yield return CameraSettled(deadline, run); // RESPAWNHOLD:
+        if (run == respawnRun) pScriptRef.HoldForRespawn(false);
+    }
+
+    // RESPAWNHOLD: until the follow camera is back on Harvey (or there is no following camera, or time is up)
+    private IEnumerator CameraSettled(float deadline, int run)
+    {
+        int steady = 0;
+        while (Time.time < deadline) // game time: a pause doesn't use the wait up
+        {
+            if (run != respawnRun) yield break; // a newer respawn has taken over
+            CameraController cam = FollowCamera;
+            if (cam == null || !cam.isActiveAndEnabled) yield break;
+            steady = !cam.Returning && cam.IsOnPlayer(SettledDistance) ? steady + 1 : 0;
+            if (steady >= SettledFrames) yield break;
+            yield return null;
+        }
+        CameraController late = FollowCamera;
+        if (run == respawnRun && late != null && late.isActiveAndEnabled) late.SnapToPlayer(); // never hand control back with him off screen
+    }
+
+    private CameraController FollowCamera
+    {
+        get
+        {
+            if (followCamera == null && Camera.main != null) followCamera = Camera.main.GetComponent<CameraController>();
+            return followCamera;
+        }
     }
 
 }

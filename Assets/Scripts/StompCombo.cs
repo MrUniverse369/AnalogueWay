@@ -51,7 +51,8 @@ public class StompCombo : MonoBehaviour
     private static StompCombo instance;
 
     private int stage;
-    private float last = -10f;                     // the last hit of either kind: the window counts from here
+    private int hits; // CHIFLOW: hits in the chain (the stage stops at Combo Mastery's cap, this doesn't)
+    private float last = -10f;                    // the last hit of either kind: the window counts from here
     private float lastStomp = -10f, lastDash = -10f;
     private float flareUntil;
     private float moteTimer, sparkTimer;
@@ -74,6 +75,8 @@ public class StompCombo : MonoBehaviour
     public static float LastDashTime => instance != null ? instance.lastDash : -1f;
     /// <summary>CHIFREE: true while a combo is alive (a stage reached and its window not yet run out).</summary>
     public static bool IsActive => Stage > 0 && TimeLeft > 0f;
+    /// <summary>CHIFLOW: stomps and dash defeats chained in the live combo (0 with no combo), whatever stage it shows.</summary>
+    public static int Count => IsActive ? instance.hits : 0;
     /// <summary>COMBO: seconds of the window left (0 with no combo).</summary>
     public static float TimeLeft => instance != null && instance.stage > 0 ? Mathf.Max(0f, instance.comboWindow - (Time.time - instance.last)) : 0f;
 
@@ -184,6 +187,7 @@ public class StompCombo : MonoBehaviour
         Retarget(); // DRAGONCOMBO: a hit from the dragon's back plays on the dragon
         bool chained = stage > 0 && Time.time - last <= comboWindow;
         int next = chained ? stage + 1 : 1;
+        hits = chained ? hits + 1 : 1; // CHIFLOW:
         int cap = SkillTree.ComboStageCap; // COMBOLOCK: the stages learned on the skill tree
         stage = cap >= MaxStage ? next : Mathf.Min(next, Mathf.Max(1, cap));
         last = Time.time;

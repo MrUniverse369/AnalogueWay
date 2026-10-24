@@ -1,0 +1,1755 @@
+fileFormatVersion: 2
+guid: 619cdebbd0c2b4ef78b444a22993f270
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6556937041220522274
+    second: Forest Spirit Fox Run Cycle (1)_0
+  - first:
+      213: 2511294436626514337
+    second: Forest Spirit Fox Run Cycle (1)_1
+  - first:
+      213: 3481029814599716409
+    second: Forest Spirit Fox Run Cycle (1)_2
+  - first:
+      213: 4477586248671097431
+    second: Forest Spirit Fox Run Cycle (1)_3
+  - first:
+      213: -6486340218513589098
+    second: Forest Spirit Fox Run Cycle (1)_4
+  - first:
+      213: -5580678134836959769
+    second: Forest Spirit Fox Run Cycle (1)_5
+  - first:
+      213: 2635044543413374819
+    second: Forest Spirit Fox Run Cycle (1)_6
+  - first:
+      213: -3203620739042357062
+    second: Forest Spirit Fox Run Cycle (1)_7
+  - first:
+      213: 4795541650023508037
+    second: Forest Spirit Fox Run Cycle (1)_8
+  - first:
+      213: -2193705108518527806
+    second: Forest Spirit Fox Run Cycle (1)_9
+  - first:
+      213: 4472025155353179710
+    second: Forest Spirit Fox Run Cycle (1)_10
+  - first:
+      213: 8596911761398612145
+    second: Forest Spirit Fox Run Cycle (1)_11
+  - first:
+      213: 3562993094253629687
+    second: Forest Spirit Fox Run Cycle (1)_12
+  - first:
+      213: -4865257282112050459
+    second: Forest Spirit Fox Run Cycle (1)_13
+  - first:
+      213: 3565338287371695132
+    second: Forest Spirit Fox Run Cycle (1)_14
+  - first:
+      213: -2861610051785180771
+    second: Forest Spirit Fox Run Cycle (1)_15
+  - first:
+      213: 3586169980494116607
+    second: Forest Spirit Fox Run Cycle (1)_16
+  - first:
+      213: -4568870027054940002
+    second: Forest Spirit Fox Run Cycle (1)_17
+  - first:
+      213: 2599078078951975987
+    second: Forest Spirit Fox Run Cycle (1)_18
+  - first:
+      213: 3660424805899640168
+    second: Forest Spirit Fox Run Cycle (1)_19
+  - first:
+      213: -2520088246111684963
+    second: Forest Spirit Fox Run Cycle (1)_20
+  - first:
+      213: -4870807862583514562
+    second: Forest Spirit Fox Run Cycle (1)_21
+  - first:
+      213: 6412040083471168433
+    second: Forest Spirit Fox Run Cycle (1)_22
+  - first:
+      213: 4347987580804062758
+    second: Forest Spirit Fox Run Cycle (1)_23
+  - first:
+      213: -6479969886986004567
+    second: Forest Spirit Fox Run Cycle (1)_24
+  - first:
+      213: 4593863065617598883
+    second: Forest Spirit Fox Run Cycle (1)_25
+  - first:
+      213: -843915185989275914
+    second: Forest Spirit Fox Run Cycle (1)_26
+  - first:
+      213: 4055662103976922083
+    second: Forest Spirit Fox Run Cycle (1)_27
+  - first:
+      213: -4176653629960777716
+    second: Forest Spirit Fox Run Cycle (1)_28
+  - first:
+      213: -8840152216895480458
+    second: Forest Spirit Fox Run Cycle (1)_29
+  - first:
+      213: -2193111993174376514
+    second: Forest Spirit Fox Run Cycle (1)_30
+  - first:
+      213: 5614218996991337968
+    second: Forest Spirit Fox Run Cycle (1)_31
+  - first:
+      213: 6000657404217221796
+    second: Forest Spirit Fox Run Cycle (1)_32
+  - first:
+      213: 1325626978082184592
+    second: Forest Spirit Fox Run Cycle (1)_33
+  - first:
+      213: 3665272309920421020
+    second: Forest Spirit Fox Run Cycle (1)_34
+  - first:
+      213: -1275964851154991597
+    second: Forest Spirit Fox Run Cycle (1)_35
+  - first:
+      213: 3418247906365843572
+    second: Forest Spirit Fox Run Cycle (1)_36
+  - first:
+      213: -490114295737610074
+    second: Forest Spirit Fox Run Cycle (1)_37
+  - first:
+      213: 902379807879838246
+    second: Forest Spirit Fox Run Cycle (1)_38
+  - first:
+      213: -682635215921608952
+    second: Forest Spirit Fox Run Cycle (1)_39
+  - first:
+      213: -6105502195957089182
+    second: Forest Spirit Fox Run Cycle (1)_40
+  - first:
+      213: 3176115517769240160
+    second: Forest Spirit Fox Run Cycle (1)_41
+  - first:
+      213: -8445138933125585950
+    second: Forest Spirit Fox Run Cycle (1)_42
+  - first:
+      213: 4538964372376512010
+    second: Forest Spirit Fox Run Cycle (1)_43
+  - first:
+      213: -8136458533850866291
+    second: Forest Spirit Fox Run Cycle (1)_44
+  - first:
+      213: -8723747490261068418
+    second: Forest Spirit Fox Run Cycle (1)_45
+  - first:
+      213: -7744521405397145578
+    second: Forest Spirit Fox Run Cycle (1)_46
+  - first:
+      213: 7247405111431369574
+    second: Forest Spirit Fox Run Cycle (1)_47
+  - first:
+      213: 4471428151771482419
+    second: Forest Spirit Fox Run Cycle (1)_48
+  - first:
+      213: 7675305342904621665
+    second: Forest Spirit Fox Run Cycle (1)_49
+  - first:
+      213: -2206784818861343366
+    second: Forest Spirit Fox Run Cycle (1)_50
+  - first:
+      213: -638296025401122399
+    second: Forest Spirit Fox Run Cycle (1)_51
+  - first:
+      213: -1553010579963951032
+    second: Forest Spirit Fox Run Cycle (1)_52
+  - first:
+      213: 1688621770243706030
+    second: Forest Spirit Fox Run Cycle (1)_53
+  - first:
+      213: 6880193831285462012
+    second: Forest Spirit Fox Run Cycle (1)_54
+  - first:
+      213: 6347040724205637149
+    second: Forest Spirit Fox Run Cycle (1)_55
+  - first:
+      213: 996417090130927109
+    second: Forest Spirit Fox Run Cycle (1)_56
+  - first:
+      213: -981079943567391101
+    second: Forest Spirit Fox Run Cycle (1)_57
+  - first:
+      213: 2076056327744284787
+    second: Forest Spirit Fox Run Cycle (1)_58
+  - first:
+      213: -6553254333988514486
+    second: Forest Spirit Fox Run Cycle (1)_59
+  - first:
+      213: 9215197726353627497
+    second: Forest Spirit Fox Run Cycle (1)_60
+  - first:
+      213: 7208390612029194901
+    second: Forest Spirit Fox Run Cycle (1)_61
+  - first:
+      213: -4788582380102422871
+    second: Forest Spirit Fox Run Cycle (1)_62
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_0
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 547
+        width: 84
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ede237b40841105a0800000000000000
+      internalID: -6556937041220522274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_1
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 498
+        width: 202
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a1c9851cf8e9d220800000000000000
+      internalID: 2511294436626514337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_2
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 612
+        width: 77
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93e82cf4c2a1f4030800000000000000
+      internalID: 3481029814599716409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_3
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 612
+        width: 139
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 752f63b48f4932e30800000000000000
+      internalID: 4477586248671097431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_4
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 547
+        width: 74
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69cfa27ffe3ebf5a0800000000000000
+      internalID: -6486340218513589098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_5
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 501
+        width: 110
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e5e047ddc27d82b0800000000000000
+      internalID: -5580678134836959769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_6
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 503
+        width: 67
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36f4c791d0f819420800000000000000
+      internalID: 2635044543413374819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_7
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 565
+        width: 57
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab05e4e49e37a83d0800000000000000
+      internalID: -3203620739042357062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_8
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 616
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 548ed3b09bf2d8240800000000000000
+      internalID: 4795541650023508037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_9
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 596
+        width: 12
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cc1bc893d46e81e0800000000000000
+      internalID: -2193705108518527806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_10
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 527
+        width: 57
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e36ff6b5f23df0e30800000000000000
+      internalID: 4472025155353179710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_11
+      rect:
+        serializedVersion: 2
+        x: 1269
+        y: 501
+        width: 219
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b0ca87d2bd5e4770800000000000000
+      internalID: 8596911761398612145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_12
+      rect:
+        serializedVersion: 2
+        x: 1510
+        y: 517
+        width: 178
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f05828775b427130800000000000000
+      internalID: 3562993094253629687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_13
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 491
+        width: 166
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ea24d677422b7cb0800000000000000
+      internalID: -4865257282112050459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_14
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 521
+        width: 151
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c14b3ea4840aa7130800000000000000
+      internalID: 3565338287371695132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_15
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 601
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9938a1c1d48948d0800000000000000
+      internalID: -2861610051785180771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_16
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 530
+        width: 18
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff6758fc892a4c130800000000000000
+      internalID: 3586169980494116607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_17
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 493
+        width: 43
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e900674daec1890c0800000000000000
+      internalID: -4568870027054940002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_18
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 550
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33cef670eb7c11420800000000000000
+      internalID: 2599078078951975987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_19
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 493
+        width: 100
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86d1daa97f07cc230800000000000000
+      internalID: 3660424805899640168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_20
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 567
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9630e79719d60dd0800000000000000
+      internalID: -2520088246111684963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_21
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 515
+        width: 28
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3aa78d3e0a676cb0800000000000000
+      internalID: -4870807862583514562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_22
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 563
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b37dd4cb742cf850800000000000000
+      internalID: 6412040083471168433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_23
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 533
+        width: 83
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62ed2a90ba7275c30800000000000000
+      internalID: 4347987580804062758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_24
+      rect:
+        serializedVersion: 2
+        x: 1651
+        y: 553
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a798fa58b58216a0800000000000000
+      internalID: -6479969886986004567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_25
+      rect:
+        serializedVersion: 2
+        x: 1919
+        y: 531
+        width: 133
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a98cec6e1ea0cf30800000000000000
+      internalID: 4593863065617598883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_26
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 517
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fe2d8e0c9fc944f0800000000000000
+      internalID: -843915185989275914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 47
+        width: 513
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ebce8c123b984830800000000000000
+      internalID: 4055662103976922083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_28
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 495
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c00975407ab8906c0800000000000000
+      internalID: -4176653629960777716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_29
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 23
+        width: 840
+        height: 472
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67d10975568715580800000000000000
+      internalID: -8840152216895480458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_30
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 492
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebf313603408091e0800000000000000
+      internalID: -2193111993174376514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_31
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 178
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f52beeae66b9ed40800000000000000
+      internalID: 5614218996991337968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_32
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 146
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a26f25cd1e964350800000000000000
+      internalID: 6000657404217221796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_33
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 144
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09d534d86b2956210800000000000000
+      internalID: 1325626978082184592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_34
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 146
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c94d1e51fb9add230800000000000000
+      internalID: 3665272309920421020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_35
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 178
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 316c50d6abcda4ee0800000000000000
+      internalID: -1275964851154991597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_36
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 162
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 478a8253c5e007f20800000000000000
+      internalID: 3418247906365843572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_37
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 142
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a0183f05a3c239f0800000000000000
+      internalID: -490114295737610074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_38
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 152
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62ab92d77a5e58c00800000000000000
+      internalID: 902379807879838246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_39
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 145
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80702db43eac686f0800000000000000
+      internalID: -682635215921608952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_40
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 179
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26c3c92e916e44ba0800000000000000
+      internalID: -6105502195957089182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_41
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 174
+        width: 31
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06ecd325c34d31c20800000000000000
+      internalID: 3176115517769240160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_42
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 144
+        width: 17
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e36a3472e6dcca80800000000000000
+      internalID: -8445138933125585950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_43
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 160
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a06e7a75c04adfe30800000000000000
+      internalID: 4538964372376512010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_44
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 154
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8d9f10821e751f80800000000000000
+      internalID: -8136458533850866291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_45
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 162
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7598c4c0e50fe680800000000000000
+      internalID: -8723747490261068418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_46
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 160
+        width: 25
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 618e4e360dee58490800000000000000
+      internalID: -7744521405397145578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_47
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 158
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 663973aec84f39460800000000000000
+      internalID: 7247405111431369574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_48
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 175
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3394501a634bd0e30800000000000000
+      internalID: 4471428151771482419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_49
+      rect:
+        serializedVersion: 2
+        x: 1251
+        y: 168
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16adc7a3b89248a60800000000000000
+      internalID: 7675305342904621665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_50
+      rect:
+        serializedVersion: 2
+        x: 1253
+        y: 194
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7d7b0836ecef51e0800000000000000
+      internalID: -2206784818861343366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_51
+      rect:
+        serializedVersion: 2
+        x: 1275
+        y: 144
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a12c6095215427f0800000000000000
+      internalID: -638296025401122399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_52
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 166
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84843d01b19927ae0800000000000000
+      internalID: -1553010579963951032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_53
+      rect:
+        serializedVersion: 2
+        x: 1339
+        y: 55
+        width: 734
+        height: 424
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eac0e57ad803f6710800000000000000
+      internalID: 1688621770243706030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_54
+      rect:
+        serializedVersion: 2
+        x: 1390
+        y: 192
+        width: 11
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf39a9336db5b7f50800000000000000
+      internalID: 6880193831285462012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_55
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 194
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1e073d19e7351850800000000000000
+      internalID: 6347040724205637149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_56
+      rect:
+        serializedVersion: 2
+        x: 1436
+        y: 154
+        width: 9
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50ed161701cf3dd00800000000000000
+      internalID: 996417090130927109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_57
+      rect:
+        serializedVersion: 2
+        x: 1478
+        y: 176
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 386c7634df08262f0800000000000000
+      internalID: -981079943567391101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_58
+      rect:
+        serializedVersion: 2
+        x: 1508
+        y: 152
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37866ec0b32afcc10800000000000000
+      internalID: 2076056327744284787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_59
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 174
+        width: 9
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4553d367e92e05a0800000000000000
+      internalID: -6553254333988514486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_60
+      rect:
+        serializedVersion: 2
+        x: 1723
+        y: 148
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9699b460285f2ef70800000000000000
+      internalID: 9215197726353627497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_61
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 160
+        width: 13
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 592c248e119590460800000000000000
+      internalID: 7208390612029194901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Forest Spirit Fox Run Cycle (1)_62
+      rect:
+        serializedVersion: 2
+        x: 1862
+        y: 162
+        width: 9
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9aeec4042b98b8db0800000000000000
+      internalID: -4788582380102422871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Forest Spirit Fox Run Cycle (1)_0: -6556937041220522274
+      Forest Spirit Fox Run Cycle (1)_1: 2511294436626514337
+      Forest Spirit Fox Run Cycle (1)_10: 4472025155353179710
+      Forest Spirit Fox Run Cycle (1)_11: 8596911761398612145
+      Forest Spirit Fox Run Cycle (1)_12: 3562993094253629687
+      Forest Spirit Fox Run Cycle (1)_13: -4865257282112050459
+      Forest Spirit Fox Run Cycle (1)_14: 3565338287371695132
+      Forest Spirit Fox Run Cycle (1)_15: -2861610051785180771
+      Forest Spirit Fox Run Cycle (1)_16: 3586169980494116607
+      Forest Spirit Fox Run Cycle (1)_17: -4568870027054940002
+      Forest Spirit Fox Run Cycle (1)_18: 2599078078951975987
+      Forest Spirit Fox Run Cycle (1)_19: 3660424805899640168
+      Forest Spirit Fox Run Cycle (1)_2: 3481029814599716409
+      Forest Spirit Fox Run Cycle (1)_20: -2520088246111684963
+      Forest Spirit Fox Run Cycle (1)_21: -4870807862583514562
+      Forest Spirit Fox Run Cycle (1)_22: 6412040083471168433
+      Forest Spirit Fox Run Cycle (1)_23: 4347987580804062758
+      Forest Spirit Fox Run Cycle (1)_24: -6479969886986004567
+      Forest Spirit Fox Run Cycle (1)_25: 4593863065617598883
+      Forest Spirit Fox Run Cycle (1)_26: -843915185989275914
+      Forest Spirit Fox Run Cycle (1)_27: 4055662103976922083
+      Forest Spirit Fox Run Cycle (1)_28: -4176653629960777716
+      Forest Spirit Fox Run Cycle (1)_29: -8840152216895480458
+      Forest Spirit Fox Run Cycle (1)_3: 4477586248671097431
+      Forest Spirit Fox Run Cycle (1)_30: -2193111993174376514
+      Forest Spirit Fox Run Cycle (1)_31: 5614218996991337968
+      Forest Spirit Fox Run Cycle (1)_32: 6000657404217221796
+      Forest Spirit Fox Run Cycle (1)_33: 1325626978082184592
+      Forest Spirit Fox Run Cycle (1)_34: 3665272309920421020
+      Forest Spirit Fox Run Cycle (1)_35: -1275964851154991597
+      Forest Spirit Fox Run Cycle (1)_36: 3418247906365843572
+      Forest Spirit Fox Run Cycle (1)_37: -490114295737610074
+      Forest Spirit Fox Run Cycle (1)_38: 902379807879838246
+      Forest Spirit Fox Run Cycle (1)_39: -682635215921608952
+      Forest Spirit Fox Run Cycle (1)_4: -6486340218513589098
+      Forest Spirit Fox Run Cycle (1)_40: -6105502195957089182
+      Forest Spirit Fox Run Cycle (1)_41: 3176115517769240160
+      Forest Spirit Fox Run Cycle (1)_42: -8445138933125585950
+      Forest Spirit Fox Run Cycle (1)_43: 4538964372376512010
+      Forest Spirit Fox Run Cycle (1)_44: -8136458533850866291
+      Forest Spirit Fox Run Cycle (1)_45: -8723747490261068418
+      Forest Spirit Fox Run Cycle (1)_46: -7744521405397145578
+      Forest Spirit Fox Run Cycle (1)_47: 7247405111431369574
+      Forest Spirit Fox Run Cycle (1)_48: 4471428151771482419
+      Forest Spirit Fox Run Cycle (1)_49: 7675305342904621665
+      Forest Spirit Fox Run Cycle (1)_5: -5580678134836959769
+      Forest Spirit Fox Run Cycle (1)_50: -2206784818861343366
+      Forest Spirit Fox Run Cycle (1)_51: -638296025401122399
+      Forest Spirit Fox Run Cycle (1)_52: -1553010579963951032
+      Forest Spirit Fox Run Cycle (1)_53: 1688621770243706030
+      Forest Spirit Fox Run Cycle (1)_54: 6880193831285462012
+      Forest Spirit Fox Run Cycle (1)_55: 6347040724205637149
+      Forest Spirit Fox Run Cycle (1)_56: 996417090130927109
+      Forest Spirit Fox Run Cycle (1)_57: -981079943567391101
+      Forest Spirit Fox Run Cycle (1)_58: 2076056327744284787
+      Forest Spirit Fox Run Cycle (1)_59: -6553254333988514486
+      Forest Spirit Fox Run Cycle (1)_6: 2635044543413374819
+      Forest Spirit Fox Run Cycle (1)_60: 9215197726353627497
+      Forest Spirit Fox Run Cycle (1)_61: 7208390612029194901
+      Forest Spirit Fox Run Cycle (1)_62: -4788582380102422871
+      Forest Spirit Fox Run Cycle (1)_7: -3203620739042357062
+      Forest Spirit Fox Run Cycle (1)_8: 4795541650023508037
+      Forest Spirit Fox Run Cycle (1)_9: -2193705108518527806
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

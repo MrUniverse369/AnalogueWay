@@ -1,0 +1,4095 @@
+fileFormatVersion: 2
+guid: 088ba0a42fba8405c89bc801f5f7fed9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7447268448126320449
+    second: Grassenemynonboss_0
+  - first:
+      213: 8536640775533620729
+    second: Grassenemynonboss_1
+  - first:
+      213: -5440228154754108947
+    second: Grassenemynonboss_2
+  - first:
+      213: 8964938675147928684
+    second: Grassenemynonboss_3
+  - first:
+      213: 7307700223573825089
+    second: Grassenemynonboss_4
+  - first:
+      213: 1336926386787558361
+    second: Grassenemynonboss_5
+  - first:
+      213: -868830240429901794
+    second: Grassenemynonboss_6
+  - first:
+      213: 4782614750829727607
+    second: Grassenemynonboss_7
+  - first:
+      213: -2277053012305811149
+    second: Grassenemynonboss_8
+  - first:
+      213: -8559612359149197153
+    second: Grassenemynonboss_9
+  - first:
+      213: 1600276461936642069
+    second: Grassenemynonboss_10
+  - first:
+      213: 1790160627714828458
+    second: Grassenemynonboss_11
+  - first:
+      213: -3928973965066071063
+    second: Grassenemynonboss_12
+  - first:
+      213: 1915731445422951000
+    second: Grassenemynonboss_13
+  - first:
+      213: -9173260052124599676
+    second: Grassenemynonboss_14
+  - first:
+      213: 8075423887527838276
+    second: Grassenemynonboss_15
+  - first:
+      213: 9173411855149957309
+    second: Grassenemynonboss_16
+  - first:
+      213: 5436844549912470329
+    second: Grassenemynonboss_17
+  - first:
+      213: -4435869790714269075
+    second: Grassenemynonboss_18
+  - first:
+      213: 8093225317886991720
+    second: Grassenemynonboss_19
+  - first:
+      213: 2700877604196280765
+    second: Grassenemynonboss_20
+  - first:
+      213: -3986959759947520673
+    second: Grassenemynonboss_21
+  - first:
+      213: 7752841740176340156
+    second: Grassenemynonboss_22
+  - first:
+      213: 8467511895981377277
+    second: Grassenemynonboss_23
+  - first:
+      213: -4261028264577049784
+    second: Grassenemynonboss_24
+  - first:
+      213: -217283827370847234
+    second: Grassenemynonboss_25
+  - first:
+      213: -4203558218926017159
+    second: Grassenemynonboss_26
+  - first:
+      213: 2591736593967319911
+    second: Grassenemynonboss_27
+  - first:
+      213: 4820401593466108898
+    second: Grassenemynonboss_28
+  - first:
+      213: 7324074324186887351
+    second: Grassenemynonboss_29
+  - first:
+      213: 343835511056502249
+    second: Grassenemynonboss_30
+  - first:
+      213: -5848348394843648499
+    second: Grassenemynonboss_31
+  - first:
+      213: -8827581833462853770
+    second: Grassenemynonboss_32
+  - first:
+      213: -1976145346830664795
+    second: Grassenemynonboss_33
+  - first:
+      213: -7188475004513107883
+    second: Grassenemynonboss_34
+  - first:
+      213: -6621997387259203328
+    second: Grassenemynonboss_35
+  - first:
+      213: -1419088808002682406
+    second: Grassenemynonboss_36
+  - first:
+      213: -8744396571052848018
+    second: Grassenemynonboss_37
+  - first:
+      213: -1212458952020517543
+    second: Grassenemynonboss_38
+  - first:
+      213: 1502006271127024206
+    second: Grassenemynonboss_39
+  - first:
+      213: -1070706719139639777
+    second: Grassenemynonboss_40
+  - first:
+      213: 6302501766175625055
+    second: Grassenemynonboss_41
+  - first:
+      213: -4745616290224939624
+    second: Grassenemynonboss_42
+  - first:
+      213: 5279478590026365897
+    second: Grassenemynonboss_43
+  - first:
+      213: -5524291333165337055
+    second: Grassenemynonboss_44
+  - first:
+      213: -4463981094546907333
+    second: Grassenemynonboss_45
+  - first:
+      213: 8747358823196667490
+    second: Grassenemynonboss_46
+  - first:
+      213: -2542635149227282202
+    second: Grassenemynonboss_47
+  - first:
+      213: -8020188406671673725
+    second: Grassenemynonboss_48
+  - first:
+      213: 4130465729930568452
+    second: Grassenemynonboss_49
+  - first:
+      213: 6455178009798123199
+    second: Grassenemynonboss_50
+  - first:
+      213: 186138257263364287
+    second: Grassenemynonboss_51
+  - first:
+      213: -4160781734586303237
+    second: Grassenemynonboss_52
+  - first:
+      213: -1274277406073928590
+    second: Grassenemynonboss_53
+  - first:
+      213: 7598828691121360038
+    second: Grassenemynonboss_54
+  - first:
+      213: -2362353379439041823
+    second: Grassenemynonboss_55
+  - first:
+      213: -5031639426398583261
+    second: Grassenemynonboss_56
+  - first:
+      213: -4872521756261000219
+    second: Grassenemynonboss_57
+  - first:
+      213: 5996699427410783660
+    second: Grassenemynonboss_58
+  - first:
+      213: -8984720594628503869
+    second: Grassenemynonboss_59
+  - first:
+      213: -4758558407717473500
+    second: Grassenemynonboss_60
+  - first:
+      213: 8978792106018828992
+    second: Grassenemynonboss_61
+  - first:
+      213: -2492554405364420098
+    second: Grassenemynonboss_62
+  - first:
+      213: 4974269913038962510
+    second: Grassenemynonboss_63
+  - first:
+      213: -2205091485153286086
+    second: Grassenemynonboss_64
+  - first:
+      213: 142523436126368465
+    second: Grassenemynonboss_65
+  - first:
+      213: -5949830234273691327
+    second: Grassenemynonboss_66
+  - first:
+      213: 7676821575102354926
+    second: Grassenemynonboss_67
+  - first:
+      213: 8785859843369689224
+    second: Grassenemynonboss_68
+  - first:
+      213: -5271667248262501621
+    second: Grassenemynonboss_69
+  - first:
+      213: -2503574737763872136
+    second: Grassenemynonboss_70
+  - first:
+      213: 2598964715313120030
+    second: Grassenemynonboss_71
+  - first:
+      213: -7238785944137341897
+    second: Grassenemynonboss_72
+  - first:
+      213: 2515590961305983666
+    second: Grassenemynonboss_73
+  - first:
+      213: -3119288256858297826
+    second: Grassenemynonboss_74
+  - first:
+      213: 2506278981792935008
+    second: Grassenemynonboss_75
+  - first:
+      213: 8183001950151975088
+    second: Grassenemynonboss_76
+  - first:
+      213: -5536400880060340939
+    second: Grassenemynonboss_77
+  - first:
+      213: -7558292796943495802
+    second: Grassenemynonboss_78
+  - first:
+      213: -4086181717216876902
+    second: Grassenemynonboss_79
+  - first:
+      213: -2176830553537226487
+    second: Grassenemynonboss_80
+  - first:
+      213: 3000341410808619170
+    second: Grassenemynonboss_81
+  - first:
+      213: 8040949361234773817
+    second: Grassenemynonboss_82
+  - first:
+      213: -2301011315499507962
+    second: Grassenemynonboss_83
+  - first:
+      213: -2215200987136912612
+    second: Grassenemynonboss_84
+  - first:
+      213: -9036169849793279492
+    second: Grassenemynonboss_85
+  - first:
+      213: -5023821397328194660
+    second: Grassenemynonboss_86
+  - first:
+      213: 3994013661212180228
+    second: Grassenemynonboss_87
+  - first:
+      213: -3844044960070853999
+    second: Grassenemynonboss_88
+  - first:
+      213: -1586480165583908836
+    second: Grassenemynonboss_89
+  - first:
+      213: -6377754966693576545
+    second: Grassenemynonboss_90
+  - first:
+      213: -4462758379166043009
+    second: Grassenemynonboss_91
+  - first:
+      213: 199717975347892827
+    second: Grassenemynonboss_92
+  - first:
+      213: 1700970720580728335
+    second: Grassenemynonboss_93
+  - first:
+      213: -183589250802027042
+    second: Grassenemynonboss_94
+  - first:
+      213: -3580471292927194619
+    second: Grassenemynonboss_95
+  - first:
+      213: 6047711873608240489
+    second: Grassenemynonboss_96
+  - first:
+      213: 5626122193330392290
+    second: Grassenemynonboss_97
+  - first:
+      213: -5492178966902178304
+    second: Grassenemynonboss_98
+  - first:
+      213: 5062625222127080260
+    second: Grassenemynonboss_99
+  - first:
+      213: -555000204745133204
+    second: Grassenemynonboss_100
+  - first:
+      213: 6396085474700476567
+    second: Grassenemynonboss_101
+  - first:
+      213: -3756496598334399702
+    second: Grassenemynonboss_102
+  - first:
+      213: -5172354043346341722
+    second: Grassenemynonboss_103
+  - first:
+      213: -6208671997106514528
+    second: Grassenemynonboss_104
+  - first:
+      213: -4804942448983737876
+    second: Grassenemynonboss_105
+  - first:
+      213: 3672463909896338966
+    second: Grassenemynonboss_106
+  - first:
+      213: 8508340418914551890
+    second: Grassenemynonboss_107
+  - first:
+      213: -2935979094508735203
+    second: Grassenemynonboss_108
+  - first:
+      213: 9000383315292250756
+    second: Grassenemynonboss_109
+  - first:
+      213: 433855490590323530
+    second: Grassenemynonboss_110
+  - first:
+      213: -5346112561042340171
+    second: Grassenemynonboss_111
+  - first:
+      213: -8901492531231528555
+    second: Grassenemynonboss_112
+  - first:
+      213: 6406579492555792199
+    second: Grassenemynonboss_113
+  - first:
+      213: -1771642898204756899
+    second: Grassenemynonboss_114
+  - first:
+      213: 2936467172281083191
+    second: Grassenemynonboss_115
+  - first:
+      213: 3019080795267315551
+    second: Grassenemynonboss_116
+  - first:
+      213: 8682183402720648283
+    second: Grassenemynonboss_117
+  - first:
+      213: -8386278186608489830
+    second: Grassenemynonboss_118
+  - first:
+      213: 2319623751514746495
+    second: Grassenemynonboss_119
+  - first:
+      213: 7195897957995901240
+    second: Grassenemynonboss_120
+  - first:
+      213: -5305233862554601320
+    second: Grassenemynonboss_121
+  - first:
+      213: -8138467076218253817
+    second: Grassenemynonboss_122
+  - first:
+      213: 7012972334634578705
+    second: Grassenemynonboss_123
+  - first:
+      213: 5975279000340224162
+    second: Grassenemynonboss_124
+  - first:
+      213: -6703851279189872304
+    second: Grassenemynonboss_125
+  - first:
+      213: -8315627135100316810
+    second: Grassenemynonboss_126
+  - first:
+      213: -1157903686825615936
+    second: Grassenemynonboss_127
+  - first:
+      213: -4761605972009348589
+    second: Grassenemynonboss_128
+  - first:
+      213: -8085503616376057667
+    second: Grassenemynonboss_129
+  - first:
+      213: -5482861696111458580
+    second: Grassenemynonboss_130
+  - first:
+      213: -988224202212870372
+    second: Grassenemynonboss_131
+  - first:
+      213: -6335535859697766341
+    second: Grassenemynonboss_132
+  - first:
+      213: 5576493065926077727
+    second: Grassenemynonboss_133
+  - first:
+      213: -7788634912288615993
+    second: Grassenemynonboss_134
+  - first:
+      213: -9145856975746005869
+    second: Grassenemynonboss_135
+  - first:
+      213: 4389747545373038162
+    second: Grassenemynonboss_136
+  - first:
+      213: -609658580709898069
+    second: Grassenemynonboss_137
+  - first:
+      213: -153343060158990366
+    second: Grassenemynonboss_138
+  - first:
+      213: 6866078998735769251
+    second: Grassenemynonboss_139
+  - first:
+      213: 4812935210931888441
+    second: Grassenemynonboss_140
+  - first:
+      213: -7687752594427156865
+    second: Grassenemynonboss_141
+  - first:
+      213: 5129975265184286071
+    second: Grassenemynonboss_142
+  - first:
+      213: 4345067660495813541
+    second: Grassenemynonboss_143
+  - first:
+      213: 7186503357322807261
+    second: Grassenemynonboss_144
+  - first:
+      213: -4343731188153534322
+    second: Grassenemynonboss_145
+  - first:
+      213: -627778772664504580
+    second: Grassenemynonboss_146
+  - first:
+      213: -7932881487384995825
+    second: Grassenemynonboss_147
+  - first:
+      213: 4163263264209730539
+    second: Grassenemynonboss_148
+  - first:
+      213: 6502267380636468147
+    second: Grassenemynonboss_149
+  - first:
+      213: 2641939165879429413
+    second: Grassenemynonboss_150
+  - first:
+      213: -5672828733456815899
+    second: Grassenemynonboss_151
+  - first:
+      213: -1197022034968074410
+    second: Grassenemynonboss_152
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Grassenemynonboss_0
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 616
+        width: 103
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb0c472cdccf5a890800000000000000
+      internalID: -7447268448126320449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_1
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 687
+        width: 36
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fdebc86e8d387670800000000000000
+      internalID: 8536640775533620729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_2
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 586
+        width: 174
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de17dca115d6084b0800000000000000
+      internalID: -5440228154754108947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_3
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 642
+        width: 39
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c647a5d0a3cd96c70800000000000000
+      internalID: 8964938675147928684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_4
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 665
+        width: 44
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 146192fa2aa2a6560800000000000000
+      internalID: 7307700223573825089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_5
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 570
+        width: 125
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d3a1572777bd8210800000000000000
+      internalID: 1336926386787558361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_6
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 687
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e18fe05ef7b41f3f0800000000000000
+      internalID: -868830240429901794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_7
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 671
+        width: 66
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77fcfb8c6c24f5240800000000000000
+      internalID: 4782614750829727607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_8
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 681
+        width: 27
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33967c289584660e0800000000000000
+      internalID: -2277053012305811149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_9
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 687
+        width: 27
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f986eddf8e5263980800000000000000
+      internalID: -8559612359149197153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_10
+      rect:
+        serializedVersion: 2
+        x: 929
+        y: 642
+        width: 41
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5180728a6f2553610800000000000000
+      internalID: 1600276461936642069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_11
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 600
+        width: 58
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa825d13b9de7d810800000000000000
+      internalID: 1790160627714828458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_12
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 659
+        width: 43
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e39a70defa7979c0800000000000000
+      internalID: -3928973965066071063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_13
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 655
+        width: 55
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85a0b71899b069a10800000000000000
+      internalID: 1915731445422951000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_14
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 289
+        width: 293
+        height: 426
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48af4d8a59802b080800000000000000
+      internalID: -9173260052124599676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_15
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 691
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4420dc28d3ba11070800000000000000
+      internalID: 8075423887527838276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_16
+      rect:
+        serializedVersion: 2
+        x: 1221
+        y: 683
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db0029cba718e4f70800000000000000
+      internalID: 9173411855149957309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_17
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 681
+        width: 16
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9332d80005d837b40800000000000000
+      internalID: 5436844549912470329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_18
+      rect:
+        serializedVersion: 2
+        x: 1277
+        y: 689
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d62f6967def9072c0800000000000000
+      internalID: -4435869790714269075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_19
+      rect:
+        serializedVersion: 2
+        x: 1358
+        y: 699
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86d1adffb89e05070800000000000000
+      internalID: 8093225317886991720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_20
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 564
+        width: 118
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db96de30fd17b7520800000000000000
+      internalID: 2700877604196280765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_21
+      rect:
+        serializedVersion: 2
+        x: 1524
+        y: 691
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f552d8ed8397ba8c0800000000000000
+      internalID: -3986959759947520673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_22
+      rect:
+        serializedVersion: 2
+        x: 1546
+        y: 675
+        width: 38
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb438038c70a79b60800000000000000
+      internalID: 7752841740176340156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_23
+      rect:
+        serializedVersion: 2
+        x: 1613
+        y: 646
+        width: 65
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df64d53e435a28570800000000000000
+      internalID: 8467511895981377277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_24
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 645
+        width: 62
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84b5cf78e59cdd4c0800000000000000
+      internalID: -4261028264577049784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_25
+      rect:
+        serializedVersion: 2
+        x: 1727
+        y: 686
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef39f1e928d0cfcf0800000000000000
+      internalID: -217283827370847234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_26
+      rect:
+        serializedVersion: 2
+        x: 1735
+        y: 661
+        width: 80
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 975bd304216f9a5c0800000000000000
+      internalID: -4203558218926017159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_27
+      rect:
+        serializedVersion: 2
+        x: 1832
+        y: 632
+        width: 104
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76b8dca53b2b7f320800000000000000
+      internalID: 2591736593967319911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_28
+      rect:
+        serializedVersion: 2
+        x: 1937
+        y: 659
+        width: 47
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2eb364da5b185e240800000000000000
+      internalID: 4820401593466108898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_29
+      rect:
+        serializedVersion: 2
+        x: 1975
+        y: 681
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b4f7b11bc654a560800000000000000
+      internalID: 7324074324186887351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_30
+      rect:
+        serializedVersion: 2
+        x: 1985
+        y: 678
+        width: 9
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ed00b9539c85c400800000000000000
+      internalID: 343835511056502249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_31
+      rect:
+        serializedVersion: 2
+        x: 1991
+        y: 685
+        width: 13
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0e4e9aee1e76dea0800000000000000
+      internalID: -5848348394843648499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_32
+      rect:
+        serializedVersion: 2
+        x: 2021
+        y: 671
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67f41cec7112e7580800000000000000
+      internalID: -8827581833462853770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_33
+      rect:
+        serializedVersion: 2
+        x: 2087
+        y: 673
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5abfd91f6425394e0800000000000000
+      internalID: -1976145346830664795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_34
+      rect:
+        serializedVersion: 2
+        x: 2114
+        y: 665
+        width: 13
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 550c83fc1186d3c90800000000000000
+      internalID: -7188475004513107883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_35
+      rect:
+        serializedVersion: 2
+        x: 2126
+        y: 674
+        width: 15
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 001b9dc0670f914a0800000000000000
+      internalID: -6621997387259203328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_36
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 667
+        width: 34
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad1844e6f326e4ce0800000000000000
+      internalID: -1419088808002682406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_37
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 665
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6c404ff5a9a5a680800000000000000
+      internalID: -8744396571052848018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_38
+      rect:
+        serializedVersion: 2
+        x: 897
+        y: 644
+        width: 21
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95d131cc10b7c2fe0800000000000000
+      internalID: -1212458952020517543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_39
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 645
+        width: 9
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e427fe0eeb238d410800000000000000
+      internalID: 1502006271127024206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_40
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 673
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1ece0b69e51421f0800000000000000
+      internalID: -1070706719139639777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_41
+      rect:
+        serializedVersion: 2
+        x: 1538
+        y: 659
+        width: 18
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5f8b29d6fbf67750800000000000000
+      internalID: 6302501766175625055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_42
+      rect:
+        serializedVersion: 2
+        x: 1673
+        y: 660
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89dd5dc902f242eb0800000000000000
+      internalID: -4745616290224939624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_43
+      rect:
+        serializedVersion: 2
+        x: 2122
+        y: 642
+        width: 35
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cb3dc54ec9744940800000000000000
+      internalID: 5279478590026365897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_44
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 642
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12639ea2d46c553b0800000000000000
+      internalID: -5524291333165337055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_45
+      rect:
+        serializedVersion: 2
+        x: 915
+        y: 641
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3fd87f78d0cc02c0800000000000000
+      internalID: -4463981094546907333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_46
+      rect:
+        serializedVersion: 2
+        x: 1416
+        y: 630
+        width: 31
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26e2483118cd46970800000000000000
+      internalID: 8747358823196667490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_47
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 638
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e0b2e0adceb6bcd0800000000000000
+      internalID: -2542635149227282202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_48
+      rect:
+        serializedVersion: 2
+        x: 1655
+        y: 628
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 386f0ac032192b090800000000000000
+      internalID: -8020188406671673725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_49
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 590
+        width: 66
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 403af6d72bc525930800000000000000
+      internalID: 4130465729930568452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_50
+      rect:
+        serializedVersion: 2
+        x: 1701
+        y: 647
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbe1eebe236659950800000000000000
+      internalID: 6455178009798123199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_51
+      rect:
+        serializedVersion: 2
+        x: 1919
+        y: 611
+        width: 61
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb80b4f32cb459200800000000000000
+      internalID: 186138257263364287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_52
+      rect:
+        serializedVersion: 2
+        x: 2067
+        y: 643
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfcbc02ae0fe146c0800000000000000
+      internalID: -4160781734586303237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_53
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 630
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27448a9537bd05ee0800000000000000
+      internalID: -1274277406073928590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_54
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 626
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6acc55b2f66747960800000000000000
+      internalID: 7598828691121360038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_55
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 291
+        width: 255
+        height: 343
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e2a7902e1c373fd0800000000000000
+      internalID: -2362353379439041823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_56
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 289
+        width: 298
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32689a7b9960c2ab0800000000000000
+      internalID: -5031639426398583261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_57
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 577
+        width: 33
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5eb53b54743516cb0800000000000000
+      internalID: -4872521756261000219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_58
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 625
+        width: 9
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cadab9b7b5e883350800000000000000
+      internalID: 5996699427410783660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_59
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 293
+        width: 212
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c61807e83cdf4380800000000000000
+      internalID: -8984720594628503869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_60
+      rect:
+        serializedVersion: 2
+        x: 1416
+        y: 246
+        width: 268
+        height: 388
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4233d01175436fdb0800000000000000
+      internalID: -4758558407717473500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_61
+      rect:
+        serializedVersion: 2
+        x: 1671
+        y: 268
+        width: 229
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c2755749d31b9c70800000000000000
+      internalID: 8978792106018828992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_62
+      rect:
+        serializedVersion: 2
+        x: 1673
+        y: 626
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef13be479faa86dd0800000000000000
+      internalID: -2492554405364420098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_63
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 634
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4fb99f8128280540800000000000000
+      internalID: 4974269913038962510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_64
+      rect:
+        serializedVersion: 2
+        x: 1906
+        y: 272
+        width: 251
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3823323af0f561e0800000000000000
+      internalID: -2205091485153286086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_65
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 552
+        width: 40
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d2fa7e5f485af100800000000000000
+      internalID: 142523436126368465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_66
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 576
+        width: 34
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 149cc3cece4fd6da0800000000000000
+      internalID: -5949830234273691327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_67
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 592
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee5d70c8c8c898a60800000000000000
+      internalID: 7676821575102354926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_68
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 303
+        width: 226
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8806b626af4ade970800000000000000
+      internalID: 8785859843369689224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_69
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 615
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0ba045719647d6b0800000000000000
+      internalID: -5271667248262501621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_70
+      rect:
+        serializedVersion: 2
+        x: 1914
+        y: 618
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87251fe5a04814dd0800000000000000
+      internalID: -2503574737763872136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_71
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 593
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e13430083a0611420800000000000000
+      internalID: 2598964715313120030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_72
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 574
+        width: 45
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7346a9a598aaa8b90800000000000000
+      internalID: -7238785944137341897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_73
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 586
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ba93d0b6ac29e220800000000000000
+      internalID: 2515590961305983666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_74
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 602
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1ae9e96bdf06b4d0800000000000000
+      internalID: -3119288256858297826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_75
+      rect:
+        serializedVersion: 2
+        x: 1910
+        y: 582
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06cabc1847718c220800000000000000
+      internalID: 2506278981792935008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_76
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 577
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b023231becdf8170800000000000000
+      internalID: 8183001950151975088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_77
+      rect:
+        serializedVersion: 2
+        x: 1432
+        y: 578
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 535e7d19bb0ca23b0800000000000000
+      internalID: -5536400880060340939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_78
+      rect:
+        serializedVersion: 2
+        x: 2140
+        y: 586
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68d0ac92fbc8b1790800000000000000
+      internalID: -7558292796943495802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_79
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 516
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a96a791b067fa47c0800000000000000
+      internalID: -4086181717216876902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_80
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 538
+        width: 44
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 909523815285ac1e0800000000000000
+      internalID: -2176830553537226487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_81
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 431
+        width: 149
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a0642cdd9a53a920800000000000000
+      internalID: 3000341410808619170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_82
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 506
+        width: 20
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9378d4d57d0379f60800000000000000
+      internalID: 8040949361234773817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_83
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 465
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60f5f7b566a2110e0800000000000000
+      internalID: -2301011315499507962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_84
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 452
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c131c9750760241e0800000000000000
+      internalID: -2215200987136912612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_85
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 446
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf90af4b563199280800000000000000
+      internalID: -9036169849793279492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_86
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 446
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c931f357e0dc74ab0800000000000000
+      internalID: -5023821397328194660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_87
+      rect:
+        serializedVersion: 2
+        x: 1906
+        y: 449
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40ffb9083469d6730800000000000000
+      internalID: 3994013661212180228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_88
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 435
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19a9856b97537aac0800000000000000
+      internalID: -3844044960070853999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_89
+      rect:
+        serializedVersion: 2
+        x: 1898
+        y: 433
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c101b27e1b0bbf9e0800000000000000
+      internalID: -1586480165583908836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 289
+        width: 118
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f900fb906a9ad77a0800000000000000
+      internalID: -6377754966693576545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_91
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 341
+        width: 25
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f74f86b16e81112c0800000000000000
+      internalID: -4462758379166043009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_92
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 340
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b521fdfb07a85c200800000000000000
+      internalID: 199717975347892827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_93
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 335
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f06fd85bbdf0b9710800000000000000
+      internalID: 1700970720580728335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_94
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 359
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed57d519c82c37df0800000000000000
+      internalID: -183589250802027042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_95
+      rect:
+        serializedVersion: 2
+        x: 2057
+        y: 339
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50a4798445c9f4ec0800000000000000
+      internalID: -3580471292927194619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_96
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 321
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96dc45a28e9cde350800000000000000
+      internalID: 6047711873608240489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_97
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 313
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ec466c8350041e40800000000000000
+      internalID: 5626122193330392290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_98
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 289
+        width: 29
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00e7ce2145cd7c3b0800000000000000
+      internalID: -5492178966902178304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_99
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 313
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44351db01de024640800000000000000
+      internalID: 5062625222127080260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_100
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 321
+        width: 18
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c63b5e9114e3c48f0800000000000000
+      internalID: -555000204745133204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_101
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 307
+        width: 20
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 790ce80f9d573c850800000000000000
+      internalID: 6396085474700476567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_102
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 256
+        width: 78
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2b90502f3e3edbc0800000000000000
+      internalID: -3756496598334399702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_103
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 297
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a039c1e66b1838b0800000000000000
+      internalID: -5172354043346341722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_104
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 305
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a51d8da6bd56d9a0800000000000000
+      internalID: -6208671997106514528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_105
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 305
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce9f022ec4a615db0800000000000000
+      internalID: -4804942448983737876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_106
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 307
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61e30dfe77637f230800000000000000
+      internalID: 3672463909896338966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_107
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 295
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25800892882b31670800000000000000
+      internalID: 8508340418914551890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_108
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 305
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1575dba19e4147d0800000000000000
+      internalID: -2935979094508735203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_109
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 305
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 482e85e60f8c7ec70800000000000000
+      internalID: 9000383315292250756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_110
+      rect:
+        serializedVersion: 2
+        x: 1526
+        y: 296
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a433d70254d550600800000000000000
+      internalID: 433855490590323530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_111
+      rect:
+        serializedVersion: 2
+        x: 1532
+        y: 305
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b641dd53facec5b0800000000000000
+      internalID: -5346112561042340171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_112
+      rect:
+        serializedVersion: 2
+        x: 1750
+        y: 297
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 599e62974bb877480800000000000000
+      internalID: -8901492531231528555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_113
+      rect:
+        serializedVersion: 2
+        x: 1199
+        y: 260
+        width: 27
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74f171fda1eb8e850800000000000000
+      internalID: 6406579492555792199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_114
+      rect:
+        serializedVersion: 2
+        x: 1930
+        y: 23
+        width: 225
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5479afab2cd967e0800000000000000
+      internalID: -1771642898204756899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_115
+      rect:
+        serializedVersion: 2
+        x: 2083
+        y: 295
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 735e86ac55d60c820800000000000000
+      internalID: 2936467172281083191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_116
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 278
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f57bc1eccfde5e920800000000000000
+      internalID: 3019080795267315551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_117
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 244
+        width: 21
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5cd4f9fdcf4d7870800000000000000
+      internalID: 8682183402720648283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_118
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 31
+        width: 246
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9a0893fb64fd9b80800000000000000
+      internalID: -8386278186608489830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_119
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 31
+        width: 438
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7e68991385f03020800000000000000
+      internalID: 2319623751514746495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_120
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 0
+        width: 548
+        height: 283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 831fd4a3117fcd360800000000000000
+      internalID: 7195897957995901240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_121
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 280
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8983f0c09e50066b0800000000000000
+      internalID: -5305233862554601320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_122
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 270
+        width: 25
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70e8cc9405b5e0f80800000000000000
+      internalID: -8138467076218253817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_123
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 283
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11339899e25135160800000000000000
+      internalID: 7012972334634578705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_124
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 267
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a85129a7947ce250800000000000000
+      internalID: 5975279000340224162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_125
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 214
+        width: 57
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 051f6d4b7c227f2a0800000000000000
+      internalID: -6703851279189872304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_126
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 244
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6731fbfbd25f89c80800000000000000
+      internalID: -8315627135100316810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_127
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 248
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cdd4ae4bbc4eefe0800000000000000
+      internalID: -1157903686825615936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_128
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 236
+        width: 19
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3121106b8906bedb0800000000000000
+      internalID: -4761605972009348589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_129
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 214
+        width: 21
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db0d4cbbc458acf80800000000000000
+      internalID: -8085503616376057667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_130
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 211
+        width: 49
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce64eaa3656f8e3b0800000000000000
+      internalID: -5482861696111458580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_131
+      rect:
+        serializedVersion: 2
+        x: 1647
+        y: 0
+        width: 281
+        height: 268
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1778ace25f1942f0800000000000000
+      internalID: -988224202212870372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_132
+      rect:
+        serializedVersion: 2
+        x: 1673
+        y: 266
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3037f4e3b7a318a0800000000000000
+      internalID: -6335535859697766341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_133
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 264
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1de3fed5eea36d40800000000000000
+      internalID: 5576493065926077727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_134
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 254
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c1d4df20d539e390800000000000000
+      internalID: -7788634912288615993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_135
+      rect:
+        serializedVersion: 2
+        x: 1929
+        y: 244
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39481229983631180800000000000000
+      internalID: -9145856975746005869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_136
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 232
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2565a9772248bec30800000000000000
+      internalID: 4389747545373038162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_137
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 212
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba8848e30ce0a87f0800000000000000
+      internalID: -609658580709898069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_138
+      rect:
+        serializedVersion: 2
+        x: 1357
+        y: 0
+        width: 291
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e7b37a9c473fddf0800000000000000
+      internalID: -153343060158990366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_139
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 34
+        width: 196
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ae4a67a876394f50800000000000000
+      internalID: 6866078998735769251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_140
+      rect:
+        serializedVersion: 2
+        x: 1631
+        y: 107
+        width: 21
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 931a096031bfac240800000000000000
+      internalID: 4812935210931888441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_141
+      rect:
+        serializedVersion: 2
+        x: 1647
+        y: 136
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f76e4103fbd9f4590800000000000000
+      internalID: -7687752594427156865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_142
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 95
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77589dbe255513740800000000000000
+      internalID: 5129975265184286071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_143
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 95
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5abf3ec1408cc4c30800000000000000
+      internalID: 4345067660495813541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_144
+      rect:
+        serializedVersion: 2
+        x: 1910
+        y: 85
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd7c06e4ab69bb360800000000000000
+      internalID: 7186503357322807261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_145
+      rect:
+        serializedVersion: 2
+        x: 1925
+        y: 99
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e88b25a9f77f7b3c0800000000000000
+      internalID: -4343731188153534322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_146
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 37
+        width: 7
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfe2dc9488ea947f0800000000000000
+      internalID: -627778772664504580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_147
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 39
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f081523415eb8e190800000000000000
+      internalID: -7932881487384995825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_148
+      rect:
+        serializedVersion: 2
+        x: 1906
+        y: 47
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beb77a181e1e6c930800000000000000
+      internalID: 4163263264209730539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_149
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 19
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b342717bb1bc3a50800000000000000
+      internalID: 6502267380636468147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_150
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 13
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5296f6c7cad0aa420800000000000000
+      internalID: 2641939165879429413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_151
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 14
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e86da6a2501641b0800000000000000
+      internalID: -5672828733456815899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grassenemynonboss_152
+      rect:
+        serializedVersion: 2
+        x: 1207
+        y: 9
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 657a9612dc2536fe0800000000000000
+      internalID: -1197022034968074410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Grassenemynonboss_0: -7447268448126320449
+      Grassenemynonboss_1: 8536640775533620729
+      Grassenemynonboss_10: 1600276461936642069
+      Grassenemynonboss_100: -555000204745133204
+      Grassenemynonboss_101: 6396085474700476567
+      Grassenemynonboss_102: -3756496598334399702
+      Grassenemynonboss_103: -5172354043346341722
+      Grassenemynonboss_104: -6208671997106514528
+      Grassenemynonboss_105: -4804942448983737876
+      Grassenemynonboss_106: 3672463909896338966
+      Grassenemynonboss_107: 8508340418914551890
+      Grassenemynonboss_108: -2935979094508735203
+      Grassenemynonboss_109: 9000383315292250756
+      Grassenemynonboss_11: 1790160627714828458
+      Grassenemynonboss_110: 433855490590323530
+      Grassenemynonboss_111: -5346112561042340171
+      Grassenemynonboss_112: -8901492531231528555
+      Grassenemynonboss_113: 6406579492555792199
+      Grassenemynonboss_114: -1771642898204756899
+      Grassenemynonboss_115: 2936467172281083191
+      Grassenemynonboss_116: 3019080795267315551
+      Grassenemynonboss_117: 8682183402720648283
+      Grassenemynonboss_118: -8386278186608489830
+      Grassenemynonboss_119: 2319623751514746495
+      Grassenemynonboss_12: -3928973965066071063
+      Grassenemynonboss_120: 7195897957995901240
+      Grassenemynonboss_121: -5305233862554601320
+      Grassenemynonboss_122: -8138467076218253817
+      Grassenemynonboss_123: 7012972334634578705
+      Grassenemynonboss_124: 5975279000340224162
+      Grassenemynonboss_125: -6703851279189872304
+      Grassenemynonboss_126: -8315627135100316810
+      Grassenemynonboss_127: -1157903686825615936
+      Grassenemynonboss_128: -4761605972009348589
+      Grassenemynonboss_129: -8085503616376057667
+      Grassenemynonboss_13: 1915731445422951000
+      Grassenemynonboss_130: -5482861696111458580
+      Grassenemynonboss_131: -988224202212870372
+      Grassenemynonboss_132: -6335535859697766341
+      Grassenemynonboss_133: 5576493065926077727
+      Grassenemynonboss_134: -7788634912288615993
+      Grassenemynonboss_135: -9145856975746005869
+      Grassenemynonboss_136: 4389747545373038162
+      Grassenemynonboss_137: -609658580709898069
+      Grassenemynonboss_138: -153343060158990366
+      Grassenemynonboss_139: 6866078998735769251
+      Grassenemynonboss_14: -9173260052124599676
+      Grassenemynonboss_140: 4812935210931888441
+      Grassenemynonboss_141: -7687752594427156865
+      Grassenemynonboss_142: 5129975265184286071
+      Grassenemynonboss_143: 4345067660495813541
+      Grassenemynonboss_144: 7186503357322807261
+      Grassenemynonboss_145: -4343731188153534322
+      Grassenemynonboss_146: -627778772664504580
+      Grassenemynonboss_147: -7932881487384995825
+      Grassenemynonboss_148: 4163263264209730539
+      Grassenemynonboss_149: 6502267380636468147
+      Grassenemynonboss_15: 8075423887527838276
+      Grassenemynonboss_150: 2641939165879429413
+      Grassenemynonboss_151: -5672828733456815899
+      Grassenemynonboss_152: -1197022034968074410
+      Grassenemynonboss_16: 9173411855149957309
+      Grassenemynonboss_17: 5436844549912470329
+      Grassenemynonboss_18: -4435869790714269075
+      Grassenemynonboss_19: 8093225317886991720
+      Grassenemynonboss_2: -5440228154754108947
+      Grassenemynonboss_20: 2700877604196280765
+      Grassenemynonboss_21: -3986959759947520673
+      Grassenemynonboss_22: 7752841740176340156
+      Grassenemynonboss_23: 8467511895981377277
+      Grassenemynonboss_24: -4261028264577049784
+      Grassenemynonboss_25: -217283827370847234
+      Grassenemynonboss_26: -4203558218926017159
+      Grassenemynonboss_27: 2591736593967319911
+      Grassenemynonboss_28: 4820401593466108898
+      Grassenemynonboss_29: 7324074324186887351
+      Grassenemynonboss_3: 8964938675147928684
+      Grassenemynonboss_30: 343835511056502249
+      Grassenemynonboss_31: -5848348394843648499
+      Grassenemynonboss_32: -8827581833462853770
+      Grassenemynonboss_33: -1976145346830664795
+      Grassenemynonboss_34: -7188475004513107883
+      Grassenemynonboss_35: -6621997387259203328
+      Grassenemynonboss_36: -1419088808002682406
+      Grassenemynonboss_37: -8744396571052848018
+      Grassenemynonboss_38: -1212458952020517543
+      Grassenemynonboss_39: 1502006271127024206
+      Grassenemynonboss_4: 7307700223573825089
+      Grassenemynonboss_40: -1070706719139639777
+      Grassenemynonboss_41: 6302501766175625055
+      Grassenemynonboss_42: -4745616290224939624
+      Grassenemynonboss_43: 5279478590026365897
+      Grassenemynonboss_44: -5524291333165337055
+      Grassenemynonboss_45: -4463981094546907333
+      Grassenemynonboss_46: 8747358823196667490
+      Grassenemynonboss_47: -2542635149227282202
+      Grassenemynonboss_48: -8020188406671673725
+      Grassenemynonboss_49: 4130465729930568452
+      Grassenemynonboss_5: 1336926386787558361
+      Grassenemynonboss_50: 6455178009798123199
+      Grassenemynonboss_51: 186138257263364287
+      Grassenemynonboss_52: -4160781734586303237
+      Grassenemynonboss_53: -1274277406073928590
+      Grassenemynonboss_54: 7598828691121360038
+      Grassenemynonboss_55: -2362353379439041823
+      Grassenemynonboss_56: -5031639426398583261
+      Grassenemynonboss_57: -4872521756261000219
+      Grassenemynonboss_58: 5996699427410783660
+      Grassenemynonboss_59: -8984720594628503869
+      Grassenemynonboss_6: -868830240429901794
+      Grassenemynonboss_60: -4758558407717473500
+      Grassenemynonboss_61: 8978792106018828992
+      Grassenemynonboss_62: -2492554405364420098
+      Grassenemynonboss_63: 4974269913038962510
+      Grassenemynonboss_64: -2205091485153286086
+      Grassenemynonboss_65: 142523436126368465
+      Grassenemynonboss_66: -5949830234273691327
+      Grassenemynonboss_67: 7676821575102354926
+      Grassenemynonboss_68: 8785859843369689224
+      Grassenemynonboss_69: -5271667248262501621
+      Grassenemynonboss_7: 4782614750829727607
+      Grassenemynonboss_70: -2503574737763872136
+      Grassenemynonboss_71: 2598964715313120030
+      Grassenemynonboss_72: -7238785944137341897
+      Grassenemynonboss_73: 2515590961305983666
+      Grassenemynonboss_74: -3119288256858297826
+      Grassenemynonboss_75: 2506278981792935008
+      Grassenemynonboss_76: 8183001950151975088
+      Grassenemynonboss_77: -5536400880060340939
+      Grassenemynonboss_78: -7558292796943495802
+      Grassenemynonboss_79: -4086181717216876902
+      Grassenemynonboss_8: -2277053012305811149
+      Grassenemynonboss_80: -2176830553537226487
+      Grassenemynonboss_81: 3000341410808619170
+      Grassenemynonboss_82: 8040949361234773817
+      Grassenemynonboss_83: -2301011315499507962
+      Grassenemynonboss_84: -2215200987136912612
+      Grassenemynonboss_85: -9036169849793279492
+      Grassenemynonboss_86: -5023821397328194660
+      Grassenemynonboss_87: 3994013661212180228
+      Grassenemynonboss_88: -3844044960070853999
+      Grassenemynonboss_89: -1586480165583908836
+      Grassenemynonboss_9: -8559612359149197153
+      Grassenemynonboss_90: -6377754966693576545
+      Grassenemynonboss_91: -4462758379166043009
+      Grassenemynonboss_92: 199717975347892827
+      Grassenemynonboss_93: 1700970720580728335
+      Grassenemynonboss_94: -183589250802027042
+      Grassenemynonboss_95: -3580471292927194619
+      Grassenemynonboss_96: 6047711873608240489
+      Grassenemynonboss_97: 5626122193330392290
+      Grassenemynonboss_98: -5492178966902178304
+      Grassenemynonboss_99: 5062625222127080260
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

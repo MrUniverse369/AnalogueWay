@@ -183,6 +183,23 @@ COMBO = pad([
 ])
 
 
+# CHIFLOW: Chi Flow: a chi drop beside three rising combo bars (yellow, orange, pink)
+CHIFLOW = pad([
+    "................",
+    "....c........*..",
+    "...cAa......*.*.",
+    "..cAAaa.........",
+    "..AAAaab.....pp.",
+    "..AAAabb.....pp.",
+    "...AAbb......pp.",
+    "....bb....OO.pp.",
+    "..........OO.pp.",
+    ".......yy.OO.pp.",
+    ".......yy.OO.pp.",
+    ".......yy.OO.pp.",
+])
+
+
 def recharge():
     """A circular arrow: a green ring with a gap at the top right and an arrowhead."""
     rows = [["."] * 16 for _ in range(16)]
@@ -217,6 +234,7 @@ def main():
         "Skill_Stomp": STOMP, "Skill_Dash": DASH, "Skill_Jump": JUMP, "Skill_DoubleJump": DOUBLE,
         "Skill_Combo": COMBO,
         "Skill_ChiFocus": CHI, "Skill_Lasting": LASTING, "Skill_Recharge": recharge(), "Skill_SkyLeap": SKYLEAP,
+        "Skill_ChiFlow": CHIFLOW,  # CHIFLOW:
     }
     for name, rows in icons.items():
         c = icon(rows)

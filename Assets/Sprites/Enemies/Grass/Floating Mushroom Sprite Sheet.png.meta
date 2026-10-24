@@ -1,0 +1,871 @@
+fileFormatVersion: 2
+guid: 97c4b0ed84c6744aea11dca21f984940
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4813676592108554000
+    second: Floating Mushroom Sprite Sheet_0
+  - first:
+      213: -8423546199685144404
+    second: Floating Mushroom Sprite Sheet_1
+  - first:
+      213: -1725704742229449453
+    second: Floating Mushroom Sprite Sheet_2
+  - first:
+      213: -5634173041353352648
+    second: Floating Mushroom Sprite Sheet_3
+  - first:
+      213: 6250554113399403300
+    second: Floating Mushroom Sprite Sheet_4
+  - first:
+      213: 2759718030113707605
+    second: Floating Mushroom Sprite Sheet_5
+  - first:
+      213: -6349190941600823129
+    second: Floating Mushroom Sprite Sheet_6
+  - first:
+      213: -8013450409774004911
+    second: Floating Mushroom Sprite Sheet_7
+  - first:
+      213: 888094169583313595
+    second: Floating Mushroom Sprite Sheet_8
+  - first:
+      213: -2944673808184677823
+    second: Floating Mushroom Sprite Sheet_9
+  - first:
+      213: 1248480099651736046
+    second: Floating Mushroom Sprite Sheet_10
+  - first:
+      213: -8606813941032071285
+    second: Floating Mushroom Sprite Sheet_11
+  - first:
+      213: 307618155627317524
+    second: Floating Mushroom Sprite Sheet_12
+  - first:
+      213: 1963976666932882155
+    second: Floating Mushroom Sprite Sheet_13
+  - first:
+      213: 7055133343428974965
+    second: Floating Mushroom Sprite Sheet_14
+  - first:
+      213: 9100377536137081820
+    second: Floating Mushroom Sprite Sheet_15
+  - first:
+      213: 2551167520149210369
+    second: Floating Mushroom Sprite Sheet_16
+  - first:
+      213: -7687953204874372859
+    second: Floating Mushroom Sprite Sheet_17
+  - first:
+      213: -9019899788255269299
+    second: Floating Mushroom Sprite Sheet_18
+  - first:
+      213: 1423114990650449395
+    second: Floating Mushroom Sprite Sheet_19
+  - first:
+      213: -243062142791722948
+    second: Floating Mushroom Sprite Sheet_20
+  - first:
+      213: 6575042121222435411
+    second: Floating Mushroom Sprite Sheet_21
+  - first:
+      213: 8211870895406619634
+    second: Floating Mushroom Sprite Sheet_22
+  - first:
+      213: -2908142484179152641
+    second: Floating Mushroom Sprite Sheet_23
+  - first:
+      213: 8987738529813259813
+    second: Floating Mushroom Sprite Sheet_24
+  - first:
+      213: -8490161343417778499
+    second: Floating Mushroom Sprite Sheet_25
+  - first:
+      213: 5107085756856791302
+    second: Floating Mushroom Sprite Sheet_26
+  - first:
+      213: 3928571520095530295
+    second: Floating Mushroom Sprite Sheet_27
+  - first:
+      213: -3165043188916843
+    second: Floating Mushroom Sprite Sheet_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 583
+        width: 235
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f8b1c7b4a2623db0800000000000000
+      internalID: -4813676592108554000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 655
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca0ecaa7c5d891b80800000000000000
+      internalID: -8423546199685144404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 633
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 315e43c1ea01d08e0800000000000000
+      internalID: -1725704742229449453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 593
+        width: 103
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83a1d0358756fc1b0800000000000000
+      internalID: -5634173041353352648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 657
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 423378a69dd6eb650800000000000000
+      internalID: 6250554113399403300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 687
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5561b214dec7c4620800000000000000
+      internalID: 2759718030113707605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 627
+        width: 123
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a841c26a7423e7a0800000000000000
+      internalID: -6349190941600823129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 619
+        width: 78
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15546343f418ac090800000000000000
+      internalID: -8013450409774004911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 641
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb2eb1121f4235c00800000000000000
+      internalID: 888094169583313595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 685
+        y: 640
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14a61c3e5ca6227d0800000000000000
+      internalID: -2944673808184677823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 599
+        width: 37
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee1d2e0390e735110800000000000000
+      internalID: 1248480099651736046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 645
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8f47ec42547e8880800000000000000
+      internalID: -8606813941032071285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 641
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41980ac2511e44400800000000000000
+      internalID: 307618155627317524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 623
+        width: 169
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beaa0bb7f52714b10800000000000000
+      internalID: 1963976666932882155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 663
+        width: 68
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 579191a656ed8e160800000000000000
+      internalID: 7055133343428974965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 665
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd3356b37290b4e70800000000000000
+      internalID: 9100377536137081820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 1067
+        y: 679
+        width: 31
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1050209c751976320800000000000000
+      internalID: 2551167520149210369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 657
+        width: 63
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50913adea47ee4590800000000000000
+      internalID: -7687953204874372859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 1186
+        y: 143
+        width: 658
+        height: 575
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4e6c6b9ee0e2d280800000000000000
+      internalID: -9019899788255269299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 89
+        width: 642
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fdd0444b8befb310800000000000000
+      internalID: 1423114990650449395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 567
+        width: 32
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c38dd88d44870acf0800000000000000
+      internalID: -243062142791722948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 225
+        width: 318
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 352b1b229fd3f3b50800000000000000
+      internalID: 6575042121222435411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 133
+        width: 30
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fb941e221d66f170800000000000000
+      internalID: 8211870895406619634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 191
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff0974291d334a7d0800000000000000
+      internalID: -2908142484179152641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 175
+        width: 9
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5266c93e29cdabc70800000000000000
+      internalID: 8987738529813259813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 137
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbe74dfad33ec2a80800000000000000
+      internalID: -8490161343417778499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 244
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 601f7e6ff6300e640800000000000000
+      internalID: 5107085756856791302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 55
+        width: 620
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73da20aabf6158630800000000000000
+      internalID: 3928571520095530295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Floating Mushroom Sprite Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 207
+        width: 18
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59d9605f861c4fff0800000000000000
+      internalID: -3165043188916843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Floating Mushroom Sprite Sheet_0: -4813676592108554000
+      Floating Mushroom Sprite Sheet_1: -8423546199685144404
+      Floating Mushroom Sprite Sheet_10: 1248480099651736046
+      Floating Mushroom Sprite Sheet_11: -8606813941032071285
+      Floating Mushroom Sprite Sheet_12: 307618155627317524
+      Floating Mushroom Sprite Sheet_13: 1963976666932882155
+      Floating Mushroom Sprite Sheet_14: 7055133343428974965
+      Floating Mushroom Sprite Sheet_15: 9100377536137081820
+      Floating Mushroom Sprite Sheet_16: 2551167520149210369
+      Floating Mushroom Sprite Sheet_17: -7687953204874372859
+      Floating Mushroom Sprite Sheet_18: -9019899788255269299
+      Floating Mushroom Sprite Sheet_19: 1423114990650449395
+      Floating Mushroom Sprite Sheet_2: -1725704742229449453
+      Floating Mushroom Sprite Sheet_20: -243062142791722948
+      Floating Mushroom Sprite Sheet_21: 6575042121222435411
+      Floating Mushroom Sprite Sheet_22: 8211870895406619634
+      Floating Mushroom Sprite Sheet_23: -2908142484179152641
+      Floating Mushroom Sprite Sheet_24: 8987738529813259813
+      Floating Mushroom Sprite Sheet_25: -8490161343417778499
+      Floating Mushroom Sprite Sheet_26: 5107085756856791302
+      Floating Mushroom Sprite Sheet_27: 3928571520095530295
+      Floating Mushroom Sprite Sheet_28: -3165043188916843
+      Floating Mushroom Sprite Sheet_3: -5634173041353352648
+      Floating Mushroom Sprite Sheet_4: 6250554113399403300
+      Floating Mushroom Sprite Sheet_5: 2759718030113707605
+      Floating Mushroom Sprite Sheet_6: -6349190941600823129
+      Floating Mushroom Sprite Sheet_7: -8013450409774004911
+      Floating Mushroom Sprite Sheet_8: 888094169583313595
+      Floating Mushroom Sprite Sheet_9: -2944673808184677823
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

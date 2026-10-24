@@ -64,12 +64,16 @@ public class NextLevel : MonoBehaviour
 
         audioManager.PlaySfx(audioManager.winSound);
         StartCoroutine(Celebrate()); // FX: confetti and a coin shower (unscaled: the game is frozen)
-        levelComplete.gameObject.SetActive(true);
-        levelComplete.GetComponent<LevelComplete>().GetSetFinalTimerText.text = timerScriptRef.timerText.text;
-        levelComplete.GetComponent<LevelComplete>().GetCoinsCountText.text =
-            "Coins: " + CollectableCollisiondetector.coinCollected.ToString();
-        levelComplete.GetComponent<LevelComplete>().GetCompleteScoreText.text =
-            "Score: " + (CollectableCollisiondetector.coinCollected * 1.5f);
+        // GRASSFIX: a missing panel used to throw here with the game frozen, so the level never finished
+        LevelComplete panel = levelComplete != null ? levelComplete.GetComponent<LevelComplete>() : null;
+        if (panel == null) Debug.LogWarning($"NextLevel: '{name}' has no LevelComplete panel assigned; finishing without it.", this);
+        else
+        {
+            levelComplete.gameObject.SetActive(true);
+            if (timerScriptRef != null && panel.GetSetFinalTimerText != null) panel.GetSetFinalTimerText.text = timerScriptRef.timerText.text;
+            if (panel.GetCoinsCountText != null) panel.GetCoinsCountText.text = "Coins: " + CollectableCollisiondetector.coinCollected.ToString();
+            if (panel.GetCompleteScoreText != null) panel.GetCompleteScoreText.text = "Score: " + (CollectableCollisiondetector.coinCollected * 1.5f);
+        }
 
         yield return new WaitForSecondsRealtime(5);
         GameSession.FinishLevel(); // FLOW: back to the Zone Select with the next level unlocked (was straight into it)
@@ -77,7 +81,7 @@ public class NextLevel : MonoBehaviour
 
         Time.timeScale = 1;
 
-        levelComplete.gameObject.SetActive(false);
+        if (levelComplete != null) levelComplete.gameObject.SetActive(false);
 
     }
 

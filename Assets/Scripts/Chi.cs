@@ -56,6 +56,20 @@ public static class Chi
         }
     }
 
+    /// <summary>CHIFLOW (2026-10-23): combo hits needed before the Chi Flow skill starts restoring chi.</summary>
+    public const int FlowComboHits = 3;
+
+    /// <summary>CHIFLOW: true while chi is flowing back (Chi Flow learned, a combo of 3+ hits alive, the meter not full).</summary>
+    public static bool IsFlowing =>
+        SkillTree.ChiFlowPerSecond > 0f && StompCombo.Count >= FlowComboHits && PlayerController.chi < GameSession.StartingChi;
+
+    /// <summary>CHIFLOW: restores chi for this frame while IsFlowing, never above full. PowerUpManager calls it once a frame.</summary>
+    public static void Flow(float dt)
+    {
+        if (!IsFlowing) return;
+        PlayerController.chi = Mathf.Min(GameSession.StartingChi, PlayerController.chi + SkillTree.ChiFlowPerSecond * dt);
+    }
+
     /// <summary>Spends chi (never below 0). Returns false once nothing is left.</summary>
     public static bool Spend(float amount)
     {
