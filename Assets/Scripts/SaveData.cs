@@ -36,6 +36,13 @@ public class SaveData
     // from cashing gems in. Older saves leave both empty: no skills learned.
     public ItemStack[] skills;
     public int crystalBalance;
+
+    // RANKS (2026-10-24): the best rank earned in each level (id = scene name, count = (int)Grade, 5 = S). Older
+    // saves leave it empty: no ranks yet.
+    public ItemStack[] levelGrades;
+    // L2CYCLE (2026-10-24): the talisman the Talisman Holder put in slot 1, which L2 cycles away from and back to
+    // (Inventory.QuickHome). Older saves leave it empty and use what is in slot 1.
+    public string quickHome;
 }
 
 /// <summary>MENUS: a saved stack of one item.</summary>

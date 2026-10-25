@@ -46,6 +46,7 @@ public class HurtPlayer : MonoBehaviour
             if (PlayerController.playerInviInvincible == false)
             {
                 pLivesCount -= 1;
+                LevelGrade.NoteHit(); // RANKS: a hit taken counts against the level's rank
                 PlayerFX.Hurt(transform.position); // FX: cream hit flash, sparks, then the dithered flicker
             }
             // SFX: hurt sound only when a life was really lost and some remain; spikes/kill planes go straight to the game-over sound

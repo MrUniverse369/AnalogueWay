@@ -33,6 +33,7 @@ public class NextLevel : MonoBehaviour
     void Start()
     {
         pIsTouchingTreasure = false;
+        LevelGrade.Begin(); // RANKS: this attempt at the level starts now
     }
 
     // Update is called once per frame
@@ -66,13 +67,21 @@ public class NextLevel : MonoBehaviour
         StartCoroutine(Celebrate()); // FX: confetti and a coin shower (unscaled: the game is frozen)
         // GRASSFIX: a missing panel used to throw here with the game frozen, so the level never finished
         LevelComplete panel = levelComplete != null ? levelComplete.GetComponent<LevelComplete>() : null;
+        // RANKS (2026-10-24): the run is graded (and its rank kept if it's the level's best) before the save below;
+        // the rank is the result on the card now (the old score, coins x 1.5, is gone)
+        GradeResult result = LevelGrade.Finish(timerScriptRef != null ? timerScriptRef.Elapsed : Time.timeSinceLevelLoad, transform.position);
         if (panel == null) Debug.LogWarning($"NextLevel: '{name}' has no LevelComplete panel assigned; finishing without it.", this);
         else
         {
             levelComplete.gameObject.SetActive(true);
-            if (timerScriptRef != null && panel.GetSetFinalTimerText != null) panel.GetSetFinalTimerText.text = timerScriptRef.timerText.text;
-            if (panel.GetCoinsCountText != null) panel.GetCoinsCountText.text = "Coins: " + CollectableCollisiondetector.coinCollected.ToString();
-            if (panel.GetCompleteScoreText != null) panel.GetCompleteScoreText.text = "Score: " + (CollectableCollisiondetector.coinCollected * 1.5f);
+            LevelGradeView view = levelComplete.GetComponentInChildren<LevelGradeView>(true);
+            if (view != null) view.Show(result);
+            else // a card LevelUIStyle didn't restyle: the rank goes where the score was
+            {
+                if (timerScriptRef != null && panel.GetSetFinalTimerText != null) panel.GetSetFinalTimerText.text = timerScriptRef.timerText.text;
+                if (panel.GetCoinsCountText != null) panel.GetCoinsCountText.text = "Coins: " + result.coins + "/" + result.totalCoins;
+                if (panel.GetCompleteScoreText != null) panel.GetCompleteScoreText.text = "Rank: " + result.grade;
+            }
         }
 
         yield return new WaitForSecondsRealtime(5);

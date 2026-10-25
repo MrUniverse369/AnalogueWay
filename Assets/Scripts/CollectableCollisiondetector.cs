@@ -29,6 +29,7 @@ public class CollectableCollisiondetector : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerDetectionArea"))
         {
             coinCollected = coinCollected + 1;
+            LevelGrade.NoteCoin(this); // RANKS: once per coin (a respawn can put coins back)
             audioManager.PlayCoin(); // SFX: overlapping one-shots (rapid pickups no longer cut each other off)
             SparklePop(transform.position); // FX:
             gameObject.SetActive(false);

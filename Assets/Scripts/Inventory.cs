@@ -25,6 +25,7 @@ public static class Inventory
     private static readonly List<string> itemOrder = new List<string>(); // pick-up order, so new things go last
     private static readonly HashSet<string> claimed = new HashSet<string>();
     private static string quickItem; // QUICKITEM:
+    private static string quickHome; // L2CYCLE: the talisman the Talisman Holder put in slot 1 (see QuickHome)
     private static readonly Dictionary<string, int> skillLevels = new Dictionary<string, int>(); // SKILLS:
     private static int crystalBalance; // SKILLS:
 
@@ -72,6 +73,7 @@ public static class Inventory
                 equipped[i] = t.name;
             }
         }
+        quickHome = equipped[0]; // L2CYCLE:
         RaiseAll();
     }
 
@@ -91,6 +93,7 @@ public static class Inventory
         {
             if (equipped[i] != null) continue;
             equipped[i] = talisman.name;
+            if (i == 0) quickHome = talisman.name; // L2CYCLE: a talisman given straight into slot 1 is its home
             LoadoutChanged?.Invoke();
             break;
         }
@@ -139,7 +142,47 @@ public static class Inventory
         if (from == slot) return;
         if (from >= 0) equipped[from] = equipped[slot];
         equipped[slot] = id;
+        quickHome = equipped[0]; // L2CYCLE: the Talisman Holder sets slot 1's home
         RaiseAll();
+    }
+
+    // ---------------------------------------------------------------- L2CYCLE: slot 1 quick cycling
+    /// <summary>
+    /// L2CYCLE (2026-10-24): slot 1's home: the talisman the Talisman Holder (or the starting loadout, or an unlock
+    /// into an empty slot 1) put there. It is the red gem on the HUD. L2 swaps slot 1 through the owned talismans
+    /// that aren't in slots 2 and 3 and comes back round to it; cycling never changes it. null = slot 1 left empty.
+    /// </summary>
+    public static Talisman QuickHome
+    {
+        get
+        {
+            EnsureInit();
+            return Catalog != null ? Catalog.TalismanById(quickHome) : null;
+        }
+    }
+
+    /// <summary>
+    /// L2CYCLE: puts the next talisman of the cycle in slot 1: the home first, then every owned talisman not equipped
+    /// in slots 2 or 3, in Talisman Holder order, then round to the home again. Locked talismans are never in it, and
+    /// one already in another slot is skipped, so none is ever equipped twice. Returns false when there is nothing
+    /// else to cycle to (slot 1 stays as it is).
+    /// </summary>
+    public static bool CycleFirstSlot()
+    {
+        EnsureInit();
+        if (Catalog == null || Catalog.talismans == null) return false;
+        var cycle = new List<string>();
+        bool HeldElsewhere(string id) => Array.IndexOf(equipped, id, 1) >= 1;
+        if (quickHome == null || (owned.Contains(quickHome) && !HeldElsewhere(quickHome))) cycle.Add(quickHome); // null: an empty slot 1 is its home
+        foreach (Talisman t in Catalog.talismans)
+            if (t != null && t.name != quickHome && owned.Contains(t.name) && !HeldElsewhere(t.name)) cycle.Add(t.name);
+        if (cycle.Count == 0) return false;
+        int at = cycle.IndexOf(equipped[0]); // -1 (something not in the cycle): start from the home
+        string next = cycle[(at + 1) % cycle.Count];
+        if (next == equipped[0]) return false;
+        equipped[0] = next;
+        RaiseAll(); // PowerUpManager re-equips slot 1 (ending the old talisman if it was running); autosaved
+        return true;
     }
 
     /// <summary>Swaps two slots (either may be empty).</summary>
@@ -148,6 +191,7 @@ public static class Inventory
         EnsureInit();
         if ((uint)a >= SlotCount || (uint)b >= SlotCount || a == b) return;
         (equipped[a], equipped[b]) = (equipped[b], equipped[a]);
+        quickHome = equipped[0]; // L2CYCLE:
         RaiseAll();
     }
 
@@ -274,6 +318,7 @@ public static class Inventory
         data.items = stacks.ToArray();
         data.claimed = new List<string>(claimed).ToArray();
         data.quickItem = quickItem ?? ""; // QUICKITEM:
+        data.quickHome = quickHome ?? ""; // L2CYCLE:
         var skills = new List<ItemStack>(); // SKILLS:
         foreach (KeyValuePair<string, int> pair in skillLevels) skills.Add(new ItemStack { id = pair.Key, count = pair.Value });
         data.skills = skills.ToArray();
@@ -315,6 +360,7 @@ public static class Inventory
                 if (s != null && !string.IsNullOrEmpty(s.id) && s.count > 0) skillLevels[s.id] = s.count;
         crystalBalance = Mathf.Max(0, data.crystalBalance);
         quickItem = !string.IsNullOrEmpty(data.quickItem) && (Catalog == null || Catalog.ItemById(data.quickItem) != null) ? data.quickItem : null; // QUICKITEM: older saves have none
+        quickHome = !string.IsNullOrEmpty(data.quickHome) && owned.Contains(data.quickHome) ? data.quickHome : equipped[0]; // L2CYCLE: older saves: slot 1's talisman
         RaiseAll();
     }
 

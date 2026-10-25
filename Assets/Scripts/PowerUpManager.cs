@@ -47,6 +47,9 @@ public class PowerUpManager : MonoBehaviour
 
     public int SlotCount => slots.Length;
 
+    /// <summary>L2CYCLE: false while a fixed loadout (the tutorial's) replaces the Talisman Holder's.</summary>
+    public static bool UsesHolderLoadout => loadoutOverride == null && Inventory.HasCatalog;
+
     public bool IsSlotActive(int slotIndex) =>
         (uint)slotIndex < (uint)slots.Length && slots[slotIndex].isActive;
 
@@ -202,7 +205,7 @@ public class PowerUpManager : MonoBehaviour
             // CHI: a running talisman spends chi at its own rate and ends the moment the last unit is gone
             bool chiLeft = slot.talisman.ChiPerSecond <= 0f || Chi.IsFree // CHIFREE: free at the final combo stage,
                            || Chi.Spend(slot.talisman.ChiPerSecond * Chi.CostScale * SkillTree.TalismanChiScale * dt); // cheaper up the ladder // SKILLS: Chi Focus
-            if (slot.timeLeft <= 0f || !chiLeft) End(index);
+            if (slot.timeLeft <= 0f || !chiLeft || !slot.talisman.KeepRunning(context)) End(index); // FOXMOUNT: or got off the fox
             else slot.talisman.OnTick(context, dt); // MENUS: Feather Fall, Coin Magnet
         }
         else if (slot.cooldownLeft > 0f)
@@ -234,9 +237,14 @@ public class PowerUpManager : MonoBehaviour
         Slot slot = slots[index];
         Talisman talisman = slot.talisman;
 
+        if (slot.isActive && talisman.EndsOnPress) // FOXMOUNT: the mount's button again: get off
+        {
+            End(index);
+            return;
+        }
         if (slot.isActive || slot.cooldownLeft > 0f) return;
         if (player.NoControl) return; // STUN: dazed by a samurai's block: no dashing (or any talisman) until it wears off // RESPAWNHOLD: or respawning
-        if (oneAtATime && IsAnyActive()) return;
+        if (oneAtATime && !talisman.RunsAlongside && IsAnyActive()) return; // FOXMOUNT: the mount neither waits nor blocks
         if (!talisman.IsAllowedInScene(sceneName) || !talisman.CanActivate(context)) return;
         if (talisman.ChiPerSecond > 0f && Chi.IsEmpty && !Chi.IsFree) // CHI: all nine units spent: nothing starts until chi is restored // CHIFREE: unless at the final combo stage
         {
@@ -303,7 +311,7 @@ public class PowerUpManager : MonoBehaviour
     private bool IsAnyActive()
     {
         foreach (Slot slot in slots)
-            if (slot.isActive) return true;
+            if (slot.isActive && !slot.talisman.RunsAlongside) return true; // FOXMOUNT: riding doesn't block the others
         return false;
     }
 

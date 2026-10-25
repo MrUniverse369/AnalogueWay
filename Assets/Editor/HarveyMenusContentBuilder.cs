@@ -129,6 +129,11 @@ public static class HarveyMenusContentBuilder
         EditorUtility.SetDirty(t);
     }
 
+    // FOXMOUNT (2026-10-24): the Mount Talisman, in Feather Fall's place (FoxRideSetup switches the asset over)
+    internal const string MountDescription =
+        "Summons the Spirit Fox. Harvey rides it, running faster and leaping higher, until chi or time runs out. Press again (or R2) to get off.";
+    internal const float MountDuration = 45f, MountCooldown = 3f, MountChiPerSecond = 3f;
+
     /// <summary>The six talismans in Holder order. The first three are the starting loadout (Z, X, C).</summary>
     private static Talisman[] BuildTalismans(List<string> log)
     {
@@ -136,7 +141,7 @@ public static class HarveyMenusContentBuilder
         var dash = TalismanAsset<SpeedBoostTalisman>("Talisman_SpeedBoost");
         var jump = TalismanAsset<SuperJumpTalisman>("alisman_SuperJump");
         var stone = TalismanAsset<HealingTalisman>("Talisman_Plain"); // the old placeholder, then Stone Skin, now the Healing Stone (HEAL)
-        var feather = TalismanAsset<FeatherFallTalisman>("Talisman_FeatherFall");
+        var feather = TalismanAsset<MountTalisman>("Talisman_FeatherFall"); // FOXMOUNT: Feather Fall's asset is the Mount Talisman now (saves keep its id)
         var magnet = TalismanAsset<CoinMagnetTalisman>("Talisman_CoinMagnet");
 
         Describe(water, "Water Breathing", "WaterBreathing",
@@ -148,9 +153,8 @@ public static class HarveyMenusContentBuilder
         Describe(stone, "Healing Stone", "HealingStone",
             "A warm temple stone that turns chi into health. Spends 6 chi to fill Harvey's health bar, then shields him from every enemy attack for 7 seconds.",
             "Defeat the Grave Warden in the Old Tomb.", 7f, 4f, (int)TalismanTrait.HealShield); // HEAL: SHIELD
-        Describe(feather, "Feather Fall", "FeatherFall",
-            "Drift down as light as a feather for 6 seconds. Great for long drops and wide gaps.",
-            "Defeat the Sandscale Scarab in the Sandy Dunes.", 6f, 4f, 0);
+        Describe(feather, "Mount Talisman", "SpiritFoxMount", MountDescription,
+            "Defeat the Sandscale Scarab in the Sandy Dunes.", MountDuration, MountCooldown, 0); // FOXMOUNT:
         Describe(magnet, "Coin Magnet", "CoinMagnet",
             "For 8 seconds every coin nearby flies straight to Harvey.",
             "Defeat the Yokai Warrior at the Snow Temple.", 8f, 6f, 0);

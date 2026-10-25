@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6472242d12404d738a2aab55bbae9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toughness: 0
+  toughness: 2
   bounceSpeed: 5
   mTRef: {fileID: 0}
   animator: {fileID: 0}

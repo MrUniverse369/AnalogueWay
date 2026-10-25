@@ -9,20 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ccfc1646bb2a4ce9980957adc18afda, type: 3}
+  m_Script: {fileID: 11500000, guid: 887de323574f44dd2af3ed593d9cc31a, type: 3}
   m_Name: Talisman_FeatherFall
-  m_EditorClassIdentifier: Assembly-CSharp::FeatherFallTalisman
-  displayName: Feather Fall
-  icon: {fileID: 21300000, guid: 36eee96a1f200441d82d5752dbd845e5, type: 3}
-  description: Drift down as light as a feather for 6 seconds. Great for long drops
-    and wide gaps.
+  m_EditorClassIdentifier: Assembly-CSharp::MountTalisman
+  displayName: Mount Talisman
+  icon: {fileID: 21300000, guid: 56e1dcfee08484ef79133930c055795d, type: 3}
+  description: Summons the Spirit Fox. Harvey rides it, running faster and leaping
+    higher, until chi or time runs out. Press again (or R2) to get off.
   unlockHint: Defeat the Sandscale Scarab in the Sandy Dunes.
-  duration: 6
-  cooldown: 4
+  duration: 45
+  cooldown: 3
   retriggerWhileHeld: 0
-  chiPerSecond: 2
+  chiPerSecond: 3
   traits: 0
   blockedScenes: []
   animatorBool: 
   activationSound: {fileID: 8300000, guid: b43b4f8c6c4dd434aa741bfa7994b89d, type: 3}
-  maxFallSpeed: 1.6
+  speedScale: 1.6
+  jumpScale: 1.15

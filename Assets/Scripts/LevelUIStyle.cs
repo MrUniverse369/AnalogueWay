@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// same way PauseMenuStyle does the pause menu, so no scene or prefab needs editing (and per-scene overrides can't
 /// undo it):
 ///   the timer          a small plate in the top-right corner, 6 px from the edges like the Zone Select plates
-///   level complete     a standard panel with a STAGE CLEARED title and the time, coins and score centred under it
+///   level complete     a standard panel with a STAGE CLEARED title, the run's numbers and its rank (RANKS: LevelGradeView)
 ///   game over          GAME OVER as a big Yellow title with a rule, over a dark INK overlay
 ///   any other text     switched to the game's font, so there's one typeface everywhere
 /// Everything sits on the same 320x180 pixel grid and font as the menus. HarveyMenus applies it in every level.
@@ -112,25 +112,28 @@ public static class LevelUIStyle
             shade.color = Overlay;
         }
 
-        RectTransform card = MenuUI.Image("Card", host, Vector2.zero, new Vector2(168, 84), cat.pauseFrame, true).rectTransform;
+        // RANKS (2026-10-24): a wider card: the run's numbers on the left, the rank on a plate on the right
+        RectTransform card = MenuUI.Image("Card", host, Vector2.zero, new Vector2(208, 104), cat.pauseFrame, true).rectTransform;
         card.gameObject.AddComponent<LevelUIMarker>();
         card.SetAsFirstSibling();
-        // the old title text is replaced by the standard title; the three stat lines are kept (NextLevel writes them)
+        // the old title text is replaced by the standard title; the time and coins lines are kept (NextLevel writes
+        // them) and the score line is gone: the rank is the result now
         foreach (TMP_Text t in host.GetComponentsInChildren<TMP_Text>(true))
-            if (t != lc.GetSetFinalTimerText && t != lc.GetCoinsCountText && t != lc.GetCompleteScoreText) t.gameObject.SetActive(false);
-        MenuUI.Title(card, 29, 140, "STAGE CLEARED");
-        TMP_Text[] stats = { lc.GetSetFinalTimerText, lc.GetCoinsCountText, lc.GetCompleteScoreText };
+            if (t != lc.GetSetFinalTimerText && t != lc.GetCoinsCountText) t.gameObject.SetActive(false);
+        MenuUI.Title(card, 39, 180, "STAGE CLEARED");
+        TMP_Text[] stats = { lc.GetSetFinalTimerText, lc.GetCoinsCountText };
         for (int i = 0; i < stats.Length; i++)
         {
             if (stats[i] == null) continue;
             RectTransform rt = stats[i].rectTransform;
             rt.SetParent(card, false);
             rt.anchorMin = rt.anchorMax = rt.pivot = new Vector2(0.5f, 0.5f);
-            rt.sizeDelta = new Vector2(140, 9);
-            rt.anchoredPosition = new Vector2(0, 8 - 13 * i);
+            rt.sizeDelta = new Vector2(104, 9);
+            rt.anchoredPosition = new Vector2(-44, 20 - 10 * i);
             rt.localScale = Vector3.one;
-            Font(stats[i], cat, MenuUI.BodySize, MenuUI.Cream, TextAlignmentOptions.Center);
+            Font(stats[i], cat, MenuUI.BodySize, MenuUI.Cream, TextAlignmentOptions.Left);
         }
+        LevelGradeView.Build(card, lc); // RANKS: the other stat lines and the rank plate
     }
 
     // ---------------------------------------------------------------- game over

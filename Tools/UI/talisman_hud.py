@@ -4,6 +4,14 @@ The placeholder is three gems in a row (red, green, blue) for the talisman slots
 For each slot this writes TalismanUI_Active<N>.png: that gem glows (lighter shading plus a
 sparkle) and the other two are greyed out. The placeholder itself stays the "all ready" sprite.
 
+L2CYCLE (2026-10-24): `python3 Tools/UI/talisman_hud.py gems` writes the first gem (slot 1, the red one) recoloured
+for each talisman, so the HUD can show which talisman L2 has put in slot 1:
+  Assets/Resources/UI/HudGems/<talisman asset>.png          6x6, the gem as on the "all ready" strip
+  Assets/Resources/UI/HudGems/<talisman asset>_Active.png   6x6, lit as on TalismanUI_Active1 (lighter, sparkle)
+The red gem's four faces (light, mid, dark, darkest) are mapped onto each talisman's own two colours (its Holder gem's,
+Tools/UI/menus_art.py), the two dark faces mixed toward the UI's DEEP purple the way the red ones are. Outlines stay.
+Import them as point-filtered, uncompressed sprites (TalismanHUD loads them from Resources).
+
 Pure Python (no Pillow). Run from the project root:  python3 Tools/UI/talisman_hud.py
 """
 import os
@@ -95,6 +103,51 @@ def render(src_pixels, width, height, active):
     return out
 
 
+# L2CYCLE: talisman asset name -> (light, mid) face colours, from each talisman's gem in Tools/UI/menus_art.py
+SLOT_GEMS = {
+    "Talisman_SpeedBoost": ("eb564b", "b0305c"),      # Spirit Dash: the red gem itself
+    "Talisman_WaterBreathing": ("4da6ff", "4b5bab"),
+    "alisman_SuperJump": ("8fde5d", "3ca370"),
+    "Talisman_Plain": ("ff6b97", "b0305c"),           # the Healing Stone
+    "Talisman_CoinMagnet": ("ffe478", "ce812c"),
+    "Talisman_FeatherFall": ("f2a65e", "c45c28"),     # the Mount Talisman (Feather Fall's asset)
+}
+RED_FACES = {(0xEB, 0x56, 0x4B): 0, (0xB0, 0x30, 0x5C): 1, (0x73, 0x27, 0x5C): 2, (0x42, 0x24, 0x45): 3}
+DEEP = (0x2A, 0x23, 0x46)
+GEMS_DIR = "Assets/Resources/UI/HudGems"
+
+
+def hexrgb(h):
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def mix(a, b, k):
+    return tuple(int(round(a[i] * (1 - k) + b[i] * k)) for i in range(3))
+
+
+def slot_gems():
+    width, height, pixels = read_png(SRC)
+    x0, x1 = GEM_COLUMNS[0]
+    os.makedirs(GEMS_DIR, exist_ok=True)
+    for name, (light, mid) in SLOT_GEMS.items():
+        l, m = hexrgb(light), hexrgb(mid)
+        ramp = [l, m, mix(m, DEEP, 0.45), mix(m, DEEP, 0.75)]
+        gem = []
+        for y in range(height):
+            row = []
+            for x in range(x0, x1):
+                r, g, b, a = pixels[y][x]
+                face = RED_FACES.get((r, g, b))
+                row.append(ramp[face] + (a,) if a and face is not None else (r, g, b, a))
+            gem.append(row)
+        write_png(os.path.join(GEMS_DIR, name + ".png"), x1 - x0, height, gem)
+        lit = [[(lighten(px[:3], 0.35) + (px[3],)) if px[3] and px[:3] not in (OUTLINE_DARK, OUTLINE_LIGHT) else px for px in row] for row in gem]
+        if lit[1][1][3]:
+            lit[1][1] = (255, 255, 255, 255)  # the sparkle, as on the active strip
+        write_png(os.path.join(GEMS_DIR, name + "_Active.png"), x1 - x0, height, lit)
+    print("wrote", len(SLOT_GEMS) * 2, "gems to", GEMS_DIR)
+
+
 def main():
     width, height, pixels = read_png(SRC)
     for slot in range(len(GEM_COLUMNS)):
@@ -104,4 +157,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    if sys.argv[1:] == ["gems"]:
+        slot_gems()  # L2CYCLE:
+    else:
+        main()

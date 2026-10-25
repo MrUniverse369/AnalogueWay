@@ -188,6 +188,7 @@ public class StompCombo : MonoBehaviour
         bool chained = stage > 0 && Time.time - last <= comboWindow;
         int next = chained ? stage + 1 : 1;
         hits = chained ? hits + 1 : 1; // CHIFLOW:
+        LevelGrade.NoteCombo(hits); // RANKS: the level's best chain
         int cap = SkillTree.ComboStageCap; // COMBOLOCK: the stages learned on the skill tree
         stage = cap >= MaxStage ? next : Mathf.Min(next, Mathf.Max(1, cap));
         last = Time.time;

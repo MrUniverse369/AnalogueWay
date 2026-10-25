@@ -179,6 +179,7 @@ public static class GameSession
         HurtPlayer.oopsCount = 0;
         changeWorld.lWorld = false;
         Inventory.ResetToNewGame(); // MENUS:
+        LevelGrade.Clear(); // RANKS:
     }
 
     public static SaveData Capture(string sceneName)
@@ -195,6 +196,7 @@ public static class GameSession
             furthestScene = furthestScene, // ZONEMAP:
         };
         Inventory.Capture(data); // MENUS: talismans and the bag
+        LevelGrade.Capture(data); // RANKS: the best rank per level
         return data;
     }
 
@@ -268,6 +270,7 @@ public static class GameSession
         HurtPlayer.oopsCount = data.deaths;
         changeWorld.lWorld = data.inLivingWorld;
         Inventory.Apply(data); // MENUS:
+        LevelGrade.Apply(data); // RANKS:
     }
 
     /// <summary>Save current progress against the active scene (used by checkpoints).</summary>

@@ -27,6 +27,7 @@ public class OptionsMenu : MonoBehaviour
         { "STOMP", "LAND ON AN ENEMY", "LAND ON AN ENEMY" },
         { "SUMMON DRAGON", "-", "R1  (AGAIN TO DISMOUNT)" },
         { "QUICK ITEM", "Q", "L1" },
+        { "NEXT TALISMAN 1", "V", "L2" }, // L2CYCLE: cycles talisman slot 1 through the unequipped ones
         { "SHOP / ENTER", "UP / W / E", "D-PAD UP" },
         { "HARVEY'S BAG", "TAB", "CREATE" },
         { "PAUSE", "ESC", "OPTIONS" },
@@ -97,7 +98,7 @@ public class OptionsMenu : MonoBehaviour
         MenuUI.Text("HeadKeys", controlsCard, new Vector2(colKeys + 34, y), new Vector2(68, 7), 5, MenuUI.Muted, TextAlignmentOptions.Left, "KEYBOARD");
         MenuUI.Text("HeadPad", controlsCard, new Vector2(colPad + 40, y), new Vector2(80, 7), 5, MenuUI.Muted, TextAlignmentOptions.Left, "PS5 CONTROLLER");
         y -= 10f;
-        for (int i = 0; i < Controls.GetLength(0); i++, y -= 8.5f) // leaves room for BACK under the last row
+        for (int i = 0; i < Controls.GetLength(0); i++, y -= 8f) // leaves room for BACK under the last row (QUICKSELECT: 8, was 8.5, for the extra row)
         {
             MenuUI.Text("Action" + i, controlsCard, new Vector2(colAction + 33, y), new Vector2(66, 7), 5, MenuUI.Cream, TextAlignmentOptions.Left, Controls[i, 0]); // UI: Cream table, Muted headers
             MenuUI.Text("Keys" + i, controlsCard, new Vector2(colKeys + 34, y), new Vector2(68, 7), 5, MenuUI.Cream, TextAlignmentOptions.Left, Controls[i, 1]);

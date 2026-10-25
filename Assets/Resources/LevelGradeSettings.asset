@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 798deaa6b4bd148d1a0be0dccdef592f, type: 3}
+  m_Name: LevelGradeSettings
+  m_EditorClassIdentifier: Assembly-CSharp::LevelGradeSettings
+  survivalWeight: 30
+  timeWeight: 25
+  enemyWeight: 20
+  coinWeight: 15
+  comboWeight: 10
+  hitPenalty: 6
+  deathPenalty: 15
+  parSpeed: 2.5
+  parBase: 20
+  bossParBonus: 90
+  parFailFactor: 2
+  parOverrides: []
+  comboTarget: 4
+  sMinimum: 90
+  aMinimum: 75
+  bMinimum: 60
+  cMinimum: 40
+  sNeedsNoDeaths: 1

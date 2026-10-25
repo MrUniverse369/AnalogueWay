@@ -39,8 +39,8 @@ public sealed class SkillDef
 ///   Double Jump        a second jump in mid-air
 ///   Combo Mastery I-IV the stomp/dash combo can climb   Chi Flow I-III     during a 3+ hit combo chi comes back:
 ///                      to stage 2 / 3 / 4 / 5 (COMBOLOCK)                    a unit every 5 / 3 / 2 s (CHIFLOW)
-/// Enemies take more stomps zone by zone (EnemyController.ZoneToughness: 1 in the Tomb, 2 in the Dunes, 3 on the
-/// Shrine Road, 4 in the Meadow), so with Stomp Power III every normal enemy falls to one stomp again. Bosses keep
+/// Enemies take more stomps zone by zone (EnemyController.ZoneToughness, REBALANCE: 1 in the Grass, 2 in the Tomb and
+/// the Dunes, 3 in Japan; the Japan guard 4), so with Stomp Power III every normal enemy falls to one stomp again. Bosses keep
 /// their own health.
 /// COMBOLOCK (2026-10-22): the combo's stages and effects are locked behind Combo Mastery. With no levels the combo
 /// stays at stage 1 (yellow outline, two motes, small hit burst); each level opens the next stage and everything that

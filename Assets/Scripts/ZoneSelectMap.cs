@@ -98,15 +98,19 @@ public class ZoneSelectMap : MonoBehaviour
         int furthest = unlockAll ? int.MaxValue : GameSession.FurthestBuildIndex;
         open = new bool[nodes.Length];
         bool[] clearedNodes = new bool[nodes.Length]; // FX:
+        // RANKS: each level's best rank, read from the save file (FinishLevel saves before the map opens)
+        ranks = SaveSystem.TryLoad(out SaveData saved) ? LevelGrade.Read(saved) : new System.Collections.Generic.Dictionary<string, Grade>();
+        bool[] sRank = new bool[nodes.Length];
         for (int i = 0; i < nodes.Length; i++)
         {
             int index = GameSession.BuildIndexOf(nodes[i].sceneName);
             open[i] = index > 0 && index <= furthest;
             bool cleared = index > 0 && index < furthest;
             clearedNodes[i] = cleared;
-            StyleNode(nodes[i], open[i], cleared);
+            sRank[i] = open[i] && RankOf(nodes[i]) == Grade.S;
+            StyleNode(nodes[i], open[i], cleared || sRank[i]);
         }
-        gameObject.AddComponent<ZoneMapFX>().Init(nodes, open, clearedNodes, player); // FX: greyscale locks, gem shine, marching path, dust
+        gameObject.AddComponent<ZoneMapFX>().Init(nodes, open, clearedNodes, player, sRank); // FX: greyscale locks, gem shine, marching path, dust // RANKS: S glow
 
         current = PickStartNode();
         player.position = nodes[current].transform.position;
@@ -123,6 +127,11 @@ public class ZoneSelectMap : MonoBehaviour
         }
         StartCoroutine(FadeTo(0f, () => busy = false));
     }
+
+    private System.Collections.Generic.Dictionary<string, Grade> ranks; // RANKS:
+
+    private Grade RankOf(ZoneMapNode node) =>
+        ranks != null && node != null && !string.IsNullOrEmpty(node.sceneName) && ranks.TryGetValue(node.sceneName, out Grade g) ? g : Grade.None;
 
     private void StyleNode(ZoneMapNode node, bool isOpen, bool cleared)
     {
@@ -346,6 +355,9 @@ public class ZoneSelectMap : MonoBehaviour
         {
             levelText.text = node.levelName.ToUpperInvariant();
             levelText.color = MenuUI.Cream; // UI: the HNL UI text colours (was tinted per zone)
+            Grade rank = RankOf(node); // RANKS: the best rank after the name, S in the accent Yellow
+            if (rank != Grade.None)
+                levelText.text += "  <color=#" + ColorUtility.ToHtmlStringRGB(LevelGrade.ColourOf(rank)) + ">RANK " + rank + "</color>";
         }
         if (label == null) return;
 

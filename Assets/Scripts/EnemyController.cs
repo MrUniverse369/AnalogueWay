@@ -2,11 +2,13 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     // TOUGHNESS (2026-10-20): enemies take more hits zone by zone. A stomp does SkillTree.StompDamage (1, up to 4 with
-    // Stomp Power) and a Spirit Dash hit SkillTree.DashDamage (2, up to 5 with Dash Power). Unupgraded, a Tomb enemy
-    // falls to one stomp, a Dunes enemy to two, a Shrine Road enemy to three and a Meadow enemy to four. A stomp that
+    // Stomp Power) and a Spirit Dash hit SkillTree.DashDamage (2, up to 5 with Dash Power). A stomp that
     // doesn't finish an enemy still bounces Harvey (StompEnemy) and still builds the combo; the enemy flashes and
     // shows its health pips, and for a moment (HitGrace) it can't hurt him, so the bounce off it is safe.
-    [Tooltip("TOUGHNESS: hits (at 1 damage) this enemy takes. 0 = its zone's default: Z1 1, Z2 2, Z3 3, Z4 4.")]
+    // REBALANCE (2026-10-24): the default follows the play order (Grass, Tomb, Dunes, Japan; the scene files keep their
+    // old Z numbers), not the Z digit, which made the first zone the toughest. Unupgraded: Grass 1 stomp, Tomb 2,
+    // Dunes 2, Japan 3. A few heavier enemies set `toughness` on their prefab (Grass walker 2, Japan guard 4).
+    [Tooltip("TOUGHNESS: hits (at 1 damage) this enemy takes. 0 = its zone's default: Grass 1, Tomb 2, Dunes 2, Japan 3.")]
     [SerializeField, Min(0)] private int toughness;
     private const float HitGrace = 0.3f;
     private int health, maxHealth;
@@ -16,11 +18,27 @@ public class EnemyController : MonoBehaviour
     /// <summary>TOUGHNESS: true for a moment after a hit that didn't defeat it: it can't hurt or knock Harvey back.</summary>
     public bool JustHit => Time.time < graceUntil;
 
-    /// <summary>TOUGHNESS: hits an unupgraded stomp needs in a scene (Z1A1Tomb = 1 ... Z4 = 4; other scenes 1).</summary>
+    /// <summary>TOUGHNESS: hits an unupgraded stomp needs in a scene (REBALANCE: by world in play order; other scenes 1).</summary>
     public static int ZoneToughness(string sceneName)
     {
         if (GameSession.IsTutorial || string.IsNullOrEmpty(sceneName) || sceneName.Length < 2 || sceneName[0] != 'Z' || !char.IsDigit(sceneName[1])) return 1;
-        return Mathf.Clamp(sceneName[1] - '0', 1, 4);
+        return WorldToughness[WorldOf(sceneName)];
+    }
+
+    // REBALANCE: index = world in play order (0 = not a zone)
+    private static readonly int[] WorldToughness = { 1, 1, 2, 2, 3 };
+
+    /// <summary>REBALANCE: the world a Z scene belongs to in play order: Z4 Grass 1, Z1 Tomb 2, Z2 Dunes 3, Z3 Japan 4.</summary>
+    public static int WorldOf(string sceneName)
+    {
+        switch (sceneName[1])
+        {
+            case '4': return 1;
+            case '1': return 2;
+            case '2': return 3;
+            case '3': return 4;
+            default: return 0;
+        }
     }
 
     private void OnEnable() // a respawn brings enemies back at full health
@@ -152,6 +170,7 @@ public class EnemyController : MonoBehaviour
     // DEATH: remember which state we were in, so we can tell when the death state takes over
     private void BeginDeath()
     {
+        LevelGrade.NoteKill(this); // RANKS: a defeat (once per enemy, however often a respawn brings it back)
         // FX: the shared hit flash (as on Harvey and the bosses) for a moment before the smoke plays
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         if (sr != null) SpriteFX.On(sr).Flash(Color.white, 0.12f);

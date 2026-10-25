@@ -8,6 +8,10 @@ using UnityEngine.UI;
 /// Sprites are made by Tools/UI/talisman_hud.py.
 /// FX: each gem also gets a radial fill: a dark wedge sweeping away while the talisman cools down, and a faint
 /// cream wedge showing how much of an active talisman's time is left (Resources/FX/Shapes/GemMask, built in code).
+/// L2CYCLE (2026-10-24): the first gem is slot 1, which L2 cycles. While slot 1 holds its home talisman (the one the
+/// Talisman Holder put there) the red gem shows as drawn; when L2 has swapped another talisman in, that talisman's own
+/// gem is drawn over it (Resources/UI/HudGems, Tools/UI/talisman_hud.py gems): its colours, lit while it runs, greyed
+/// with the strip while another slot runs, with a little pop as it changes.
 /// </summary>
 public class TalismanHUD : MonoBehaviour
 {
@@ -33,7 +37,64 @@ public class TalismanHUD : MonoBehaviour
         icon = GetComponent<Image>();
     }
 
-    private void Start() => BuildRadials();
+    private void Start()
+    {
+        BuildSlotGem(); // L2CYCLE: under the cooldown wedges
+        BuildRadials();
+    }
+
+    // ---------------------------------------------------------------- L2CYCLE: slot 1's gem
+    private Image slotGem;
+    private Talisman shownInSlot1;
+    private float gemPop;
+    private readonly System.Collections.Generic.Dictionary<string, Sprite> gemSprites = new System.Collections.Generic.Dictionary<string, Sprite>();
+
+    private void BuildSlotGem()
+    {
+        if (icon == null) return;
+        RectTransform strip = icon.rectTransform;
+        Rect r = strip.rect;
+        float px = r.width / StripWidth, py = r.height / StripHeight;
+        var go = new GameObject("Slot1Gem", typeof(RectTransform));
+        var rt = (RectTransform)go.transform;
+        rt.SetParent(strip, false);
+        rt.anchorMin = rt.anchorMax = new Vector2(0f, 0f);
+        rt.pivot = new Vector2(0.5f, 0.5f); // pops about its middle
+        rt.anchoredPosition = new Vector2(GemSize * px / 2f, GemSize * py / 2f);
+        rt.sizeDelta = new Vector2(GemSize * px, GemSize * py);
+        slotGem = go.AddComponent<Image>();
+        slotGem.raycastTarget = false;
+        slotGem.enabled = false;
+    }
+
+    private Sprite GemSprite(Talisman t, bool lit)
+    {
+        string key = t.name + (lit ? "_Active" : "");
+        if (!gemSprites.TryGetValue(key, out Sprite s)) gemSprites[key] = s = Resources.Load<Sprite>("UI/HudGems/" + key);
+        return s;
+    }
+
+    private void UpdateSlotGem()
+    {
+        if (slotGem == null) return;
+        PowerUpManager manager = PowerUpManager.Instance;
+        Talisman inSlot = manager != null && manager.SlotCount > 0 ? manager.TalismanIn(0) : null;
+        bool swapped = inSlot != null && PowerUpManager.UsesHolderLoadout && inSlot != Inventory.QuickHome;
+        if (inSlot != shownInSlot1)
+        {
+            if (shownInSlot1 != null || swapped) gemPop = 1f; // not on the level's first frame
+            shownInSlot1 = inSlot;
+        }
+        // the strip shows gem 1 lit (its active sprite), as drawn (ready), or greyed (another slot is running)
+        bool lit = activeSprites.Length > 0 && icon.sprite == activeSprites[0];
+        Sprite s = swapped && (lit || icon.sprite == readySprite) ? GemSprite(inSlot, lit) : null;
+        slotGem.enabled = s != null;
+        if (s == null) return;
+        slotGem.sprite = s;
+        slotGem.color = icon.color; // dims with the strip when chi runs out
+        gemPop = Mathf.Max(0f, gemPop - Time.unscaledDeltaTime * 5f);
+        slotGem.rectTransform.localScale = Vector3.one * (1f + 0.35f * gemPop);
+    }
 
     private void BuildRadials()
     {
@@ -71,6 +132,7 @@ public class TalismanHUD : MonoBehaviour
         if (icon == null) return;
         icon.sprite = CurrentSprite();
         icon.color = Chi.IsEmpty && !Chi.IsFree ? NoChiTint : Color.white; // CHIFREE: usable at the final combo stage // CHI: no chi left: the gems dim until it is restored
+        UpdateSlotGem(); // L2CYCLE:
         UpdateRadials();
     }
 

@@ -33,6 +33,10 @@ public class PlayerController : CharecterBehaviour
     [SerializeField] private GameObject dragon;
     [Tooltip("Untick in levels where the dragon mount isn't allowed (boss battles).")]
     [SerializeField] private bool canSummonDragon = true; // DRAGON:
+    [Tooltip("FOXMOUNT: HarveyFoxMount, Harvey riding the Spirit Fox (Tools/HNL/Set Up Fox Ride). The Mount Talisman summons it.")]
+    [SerializeField] private GameObject foxMount;
+    [Tooltip("FOXMOUNT: untick in levels where the Spirit Fox can't be ridden.")]
+    [SerializeField] private bool canRideFox = true;
     [SerializeField] private GameObject stompBox;
     [SerializeField] private float turningscale;
     [SerializeField] private bool normalizedVerticalVelocity;
@@ -140,6 +144,7 @@ public class PlayerController : CharecterBehaviour
     {
         if (!canSummonDragon || NoControl) return; // DRAGON: switched off in levels like boss battles // STUN: or while dazed // RESPAWNHOLD: or respawning
         mountActive = true;
+        foxActive = false; // FOXMOUNT: one mount at a time: the dragon sends the fox away (the Mount Talisman ends)
     }
 
     // R1BUTTON: R1 summons the dragon, and R1 again sends it away. Ignored while a menu has the game paused (R1 also
@@ -154,21 +159,56 @@ public class PlayerController : CharecterBehaviour
     /// <summary>R1BUTTON: true while Harvey rides the dragon.</summary>
     public bool IsMounted => mountActive;
 
-    /// <summary>COMBO: the dragon's sprite while it is out (Harvey's own sprite is hidden then), else null.</summary>
+    /// <summary>
+    /// COMBO: the mount's sprite while one is out (Harvey's own sprite is hidden then): the dragon's, or the Spirit
+    /// Fox's (FOXMOUNT), else null.
+    /// </summary>
     public SpriteRenderer DragonSprite
     {
         get
         {
-            if (dragon == null || !dragon.activeInHierarchy) return null;
-            if (dragonSprite == null) dragonSprite = dragon.GetComponent<SpriteRenderer>();
-            return dragonSprite;
+            if (dragon != null && dragon.activeInHierarchy)
+            {
+                if (dragonSprite == null) dragonSprite = dragon.GetComponent<SpriteRenderer>();
+                return dragonSprite;
+            }
+            if (foxMount != null && foxMount.activeInHierarchy)
+            {
+                if (foxSprite == null) foxSprite = foxMount.GetComponent<SpriteRenderer>();
+                return foxSprite;
+            }
+            return null;
         }
     }
-    private SpriteRenderer dragonSprite;
+    private SpriteRenderer dragonSprite, foxSprite;
 
     void UnMountActive()
     {
         mountActive = false;
+        foxActive = false; // FOXMOUNT: R2 gets off the fox too
+    }
+
+    // ---------------------------------------------------------------- FOXMOUNT
+    private bool foxActive;
+    private float foxSpeedScale = 1f, foxJumpScale = 1f;
+
+    /// <summary>FOXMOUNT: true while Harvey rides the Spirit Fox.</summary>
+    public bool IsRidingFox => foxActive;
+
+    /// <summary>FOXMOUNT: the fox can be summoned here and now (the Mount Talisman asks before it starts).</summary>
+    public bool CanRideFox => canRideFox && foxMount != null && !NoControl;
+
+    /// <summary>
+    /// FOXMOUNT: the Mount Talisman puts Harvey on the Spirit Fox (on) or takes him off. On the fox he runs and jumps
+    /// as usual, 'speedScale' and 'jumpScale' times faster and higher. Getting on sends the dragon away.
+    /// </summary>
+    public void RideFox(bool on, float speedScale = 1f, float jumpScale = 1f)
+    {
+        if (on && !CanRideFox) return;
+        foxActive = on;
+        foxSpeedScale = on ? speedScale : 1f;
+        foxJumpScale = on ? jumpScale : 1f;
+        if (on) mountActive = false;
     }
 
     public float GetSpeedDefault
@@ -289,9 +329,12 @@ public class PlayerController : CharecterBehaviour
 
         if (mountActive != true)
         {
-            if (!spriteRendererObj.enabled) spriteRendererObj.enabled = true; // PERF: only when it actually changes
+            if (spriteRendererObj.enabled == foxActive) spriteRendererObj.enabled = !foxActive; // PERF: only when it actually changes // FOXMOUNT: hidden on the fox too
             if (dragon.activeSelf) dragon.SetActive(false);
         }
+
+        bool foxShown = foxActive && !mountActive; // FOXMOUNT: the fox carries Harvey (the ride art has him on it)
+        if (foxMount != null && foxMount.activeSelf != foxShown) foxMount.SetActive(foxShown);
 
     }
     public void PushBackPlayer()
@@ -304,7 +347,9 @@ public class PlayerController : CharecterBehaviour
         float raw = Input.GetAxisRaw("Horizontal");
         if (waitForNeutral && Mathf.Abs(raw) < 0.01f) waitForNeutral = false; // RESPAWNHOLD: let go once, then he runs again
         dir = NoControl || waitForNeutral ? 0f : raw; // STUN: dazed: he stands where the knockback left him // RESPAWNHOLD:
-        vel = new Vector2(speed * dir, rb2D.linearVelocity.y);
+        // FOXMOUNT: the fox runs faster than Harvey; a Spirit Dash on it keeps its own speed (not both stacked)
+        float runSpeed = foxActive ? Mathf.Max(speed, speedDefault * foxSpeedScale) : speed;
+        vel = new Vector2(runSpeed * dir, rb2D.linearVelocity.y);
         Flip(dir);
 
         rb2D.linearVelocity = vel;
@@ -378,7 +423,7 @@ public class PlayerController : CharecterBehaviour
     public override void CharJump()
     {
         jDir = Input.GetAxisRaw("Jump");
-        jVel = new Vector2(rb2D.linearVelocity.x, jDir * jSpeed);
+        jVel = new Vector2(rb2D.linearVelocity.x, jDir * jSpeed * (foxActive ? foxJumpScale : 1f)); // FOXMOUNT: and leaps higher
         isGrounded = Physics2D.OverlapCircle(pFeet.position, pFeetRadius, isPFeetOnGround);
         if (isGrounded)
         {

@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 8058152867273722410}
   - component: {fileID: 4230008196018022517}
   - component: {fileID: 4451359393222987328}
+  - component: {fileID: 6792236723247214336}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -246,17 +247,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.3438, y: -0.15619999}
+  m_Offset: {x: 0.2188, y: -0.3438}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.4375, y: 1.375}
+    pivot: {x: 0.5, y: 0.6875}
+    oldSize: {x: 1.8125, y: 1}
     newSize: {x: 0.25, y: 0.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.625, y: 0.4375}
+  m_Size: {x: 1.25, y: 0.3125}
   m_EdgeRadius: 0
 --- !u!114 &7209193314479574751
 MonoBehaviour:
@@ -330,3 +331,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6792236723247214336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6950776698854395735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11b2f75cef8d491c96610c65235c7fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpiritFoxCharge
+  sightRange: 5.5
+  levelTolerance: 1.1
+  solidMask:
+    serializedVersion: 2
+    m_Bits: 64
+  turnGrace: 0.35
+  cooldown: 2
+  telegraphTime: 0.55
+  chargeSpeed: 7.5
+  overshoot: 0.8
+  maxChargeDistance: 7
+  chargeAnimSpeed: 2
+  recoverTime: 0.6

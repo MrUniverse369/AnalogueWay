@@ -124,12 +124,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 39
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 29
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -146,12 +146,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_1
       rect:
         serializedVersion: 2
-        x: 39
+        x: 30
         y: 0
-        width: 39
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 29
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -168,12 +168,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_2
       rect:
         serializedVersion: 2
-        x: 78
+        x: 59
         y: 0
-        width: 39
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 29
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -190,12 +190,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_3
       rect:
         serializedVersion: 2
-        x: 117
+        x: 88
         y: 0
-        width: 39
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 29
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -209,59 +209,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ForestSpiritFoxRun_4
-      rect:
-        serializedVersion: 2
-        x: 156
-        y: 0
-        width: 39
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c338ebaa908a46bf0800000000000000
-      internalID: -331955713045789892
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ForestSpiritFoxRun_5
-      rect:
-        serializedVersion: 2
-        x: 195
-        y: 0
-        width: 39
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fc133c38029b04900800000000000000
-      internalID: 666736294151533007
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: ForestSpiritFoxRun_6
       rect:
         serializedVersion: 2
-        x: 234
+        x: 176
         y: 0
-        width: 39
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 29
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -278,12 +234,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_7
       rect:
         serializedVersion: 2
-        x: 273
+        x: 205
         y: 0
-        width: 39
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 29
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -296,11 +252,55 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: ForestSpiritFoxRun_4
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 0
+        width: 29
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8d7fe0c9839f4c8690eea8024d9387f
+      internalID: -331955713045789892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestSpiritFoxRun_5
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 0
+        width: 29
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc133c38029b04900800000000000000
+      internalID: 666736294151533007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 827d3a13c298d4a94808637ba5c45d56
     internalID: 0
     vertices: []
     indices: 

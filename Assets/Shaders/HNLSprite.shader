@@ -210,11 +210,10 @@ Shader "AnalogueWay/HNLSprite"
                 UNITY_SETUP_INSTANCE_ID(v);
                 SetUpSpriteInstanceProperties();
                 float3 pos = UnityFlipSprite(v.positionOS, unity_SpriteProps.xy);
-            #if defined(_HNL_FLUFF)
                 // springy squash about the sprite's pivot: wider and flatter when pressed, taller on the rebound
+                // (bounce clouds; MUSHROOM/FOXCHARGE: the bounce mushroom and the fox's crouch too; 0 = untouched)
                 pos.x *= 1.0 + _Squash;
                 pos.y *= 1.0 - _Squash;
-            #endif
                 o.positionOS = pos;
                 o.positionWS = TransformObjectToWorld(pos);
                 o.positionCS = TransformWorldToHClip(o.positionWS);

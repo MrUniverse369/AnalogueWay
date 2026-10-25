@@ -8,8 +8,15 @@ using UnityEngine;
 ///   Stone Skin      grey stone overlay on Harvey (HNLSprite _Stone)
 ///   Spirit Dash     3-4 fading tinted afterimages and speed-streak particles (COMBO: while a combo is alive they
 ///                   take the combo stage's colours, come thicker the higher the stage, and sparkle from stage 3)
-///   Super Jump      a dust ring at launch and a short upward spark trail
-///   Feather Fall    feathers drifting off Harvey while he falls
+///   Super Jump      a dust ring at launch and a short upward spark trail. JUMPTIERS (2026-10-24): the look grows
+///                   with Sky Leap (SkillTree, saved with the Bag), read at every activation and launch:
+///                     Spring (no Sky Leap)  sunny yellow glow, dust ring, yellow spark trail (the original look)
+///                     Gale   (Sky Leap I)   sky-blue glow, a second wind ring, sideways gust streaks, a cool sky
+///                                           tint on Harvey while he rises, cream/blue trail with wind streaks
+///                     Comet  (Sky Leap II)  gold glow with a solid gold rim while rising, a gold-tinted Harvey,
+///                                           a star burst and a column of streaks at launch, a longer star trail
+///                   The tint and rim end as soon as he stops rising (or when the trail runs out).
+///   Feather Fall   feathers drifting off Harvey while he falls
 ///   Coin Magnet     spark streaks flying from nearby coins to Harvey, and a pulse ring
 ///   Water Breathing keeps its own outline and helmet (WaterBreathingVisual); only the activation ring is added
 ///   Healing Stone   HEAL: a pink-red healing aura, soft crosses rising off Harvey, and a flash and ring of hearts'
@@ -20,7 +27,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class TalismanFX : MonoBehaviour
 {
-    private enum Kind { Other, StoneSkin, SpiritDash, SuperJump, FeatherFall, CoinMagnet, Water, Heal }
+    private enum Kind { Other, StoneSkin, SpiritDash, SuperJump, FeatherFall, CoinMagnet, Water, Heal, Mount }
 
     private static TalismanFX instance;
 
@@ -40,7 +47,16 @@ public class TalismanFX : MonoBehaviour
     private static readonly Color StoneGrey = PixelFX.Hex("98b2b1");
     private static readonly Color DashCyan = PixelFX.Hex("5fcde4");
     private static readonly Color JumpYellow = PixelFX.Hex("ffe478");
+    // JUMPTIERS: Gale (Sky Leap I) sky colours, Comet (Sky Leap II) gold
+    private static readonly Color GaleBlue = PixelFX.Hex("5fcde4");
+    private static readonly Color CometGold = PixelFX.Hex("f0bd29");
+    private static readonly Color[] SpringSparks = { JumpYellow, PixelFX.Cream, PixelFX.Orange };
+    private static readonly Color[] GaleSparks = { GaleBlue, PixelFX.Hex("d5ebff"), PixelFX.Cream };
+    private static readonly Color[] CometSparks = { CometGold, JumpYellow, PixelFX.Cream, PixelFX.Hex("b7f5ff") };
+    private float riseLeft; // JUMPTIERS: how long the rising tint may last (ends early when he stops rising)
+    private int riseTier, shownJumpTier = -1;
     private static readonly Color FeatherCream = PixelFX.Hex("ffffeb");
+    private static readonly Color FoxRusset = PixelFX.Hex("f2a65e"); // FOXMOUNT:
     private static readonly Color MagnetGold = PixelFX.Hex("f2a65e");
     private static readonly Color WaterAqua = PixelFX.Hex("8fd3ff");
     // HEAL: health colours (the Spirit Peach's pinks and the HUD red), cream for the highlights
@@ -73,6 +89,7 @@ public class TalismanFX : MonoBehaviour
         active.Clear();
         if (aura != null) aura.Clear("talisman");
         if (fx != null) fx.SetStone(0f);
+        EndRise(); // JUMPTIERS:
     }
 
     private void Subscribe()
@@ -99,6 +116,7 @@ public class TalismanFX : MonoBehaviour
         if (t is SpeedBoostTalisman) return Kind.SpiritDash;
         if (t is SuperJumpTalisman) return Kind.SuperJump;
         if (t is FeatherFallTalisman) return Kind.FeatherFall;
+        if (t is MountTalisman) return Kind.Mount; // FOXMOUNT:
         if (t is CoinMagnetTalisman) return Kind.CoinMagnet;
         if (t is HealingTalisman) return Kind.Heal; // HEAL:
         if ((t.Traits & TalismanTrait.WaterBreathing) != 0) return Kind.Water;
@@ -112,8 +130,9 @@ public class TalismanFX : MonoBehaviour
         {
             case Kind.StoneSkin: return StoneGrey;
             case Kind.SpiritDash: return DashCyan;
-            case Kind.SuperJump: return JumpYellow;
+            case Kind.SuperJump: return JumpTier == 2 ? CometGold : JumpTier == 1 ? GaleBlue : JumpYellow; // JUMPTIERS:
             case Kind.FeatherFall: return FeatherCream;
+            case Kind.Mount: return FoxRusset; // FOXMOUNT:
             case Kind.CoinMagnet: return MagnetGold;
             case Kind.Water: return WaterAqua;
             case Kind.Heal: return HealPink;
@@ -130,8 +149,9 @@ public class TalismanFX : MonoBehaviour
         Vector3 centre = transform.position;
         PixelFX.Ring(centre, 16, 3.6f, new[] { c, light }, 0.3f, 1, PixelShape.Square, true);
         PixelFX.Ring(centre, 8, 1.8f, new[] { light }, 0.3f, 1, PixelShape.Cross, true);
-        if (k != Kind.Water) aura.Set("talisman", WithAlpha(c, 0.75f), 2, 5f, 0);
+        if (k != Kind.Water && k != Kind.Mount) aura.Set("talisman", WithAlpha(c, 0.75f), 2, 5f, 0); // FOXMOUNT: Harvey is hidden on the fox (FoxMountController has its own)
         if (k == Kind.StoneSkin) fx.SetStone(0.85f);
+        if (k == Kind.SuperJump) shownJumpTier = JumpTier; // JUMPTIERS:
         if (k == Kind.CoinMagnet) pulseTimer = 0f;
         if (k == Kind.Heal) // HEAL: a soft upward bloom of crosses
         {
@@ -147,16 +167,68 @@ public class TalismanFX : MonoBehaviour
     {
         Kind k = KindOf(t);
         active.Remove(k);
-        if (active.Count == 0 || k != Kind.Water) aura.Clear("talisman");
+        if (k != Kind.Mount && (active.Count == 0 || k != Kind.Water)) aura.Clear("talisman"); // FOXMOUNT: getting off leaves a dash's glow alone
         if (k == Kind.StoneSkin) fx.SetStone(0f);
+        if (k == Kind.SuperJump) EndRise(); // JUMPTIERS:
     }
+
+    /// <summary>JUMPTIERS: the Super Jump's look: 0 Spring, 1 Gale (Sky Leap I), 2 Comet (Sky Leap II).</summary>
+    public static int JumpTier => Mathf.Clamp(SkillTree.Level(SkillTree.SkyLeap), 0, 2);
 
     /// <summary>Called by PlayerFX when a super jump launches: a dust ring at the feet and a spark trail.</summary>
     public static void SuperJumpLaunch(Vector3 feet)
     {
-        PixelFX.Ring(feet + Vector3.up * 0.05f, 18, 3.4f, PixelFX.ZoneDust(), 0.32f, 1, PixelShape.Square, false, PixelLayer.Front, 0.22f);
-        PixelFX.Ring(feet + Vector3.up * 0.05f, 10, 2f, new[] { JumpYellow, PixelFX.Cream }, 0.25f, 1, PixelShape.Square, true, PixelLayer.Front, 0.22f);
-        if (instance != null) instance.trailLeft = 0.45f;
+        int tier = JumpTier; // JUMPTIERS:
+        Vector3 at = feet + Vector3.up * 0.05f;
+        PixelFX.Ring(at, 18, 3.4f, PixelFX.ZoneDust(), 0.32f, 1, PixelShape.Square, false, PixelLayer.Front, 0.22f);
+        PixelFX.Ring(at, 10, 2f, new[] { JumpYellow, PixelFX.Cream }, 0.25f, 1, PixelShape.Square, true, PixelLayer.Front, 0.22f);
+        if (tier >= 1) // Gale: a wider wind ring and gusts blowing out sideways
+        {
+            PixelFX.Ring(at, 14, 4.6f, GaleSparks, 0.28f, 1, PixelShape.Square, true, PixelLayer.Front, 0.3f, 0.2f);
+            for (int side = -1; side <= 1; side += 2)
+                for (int i = 0; i < 3; i++)
+                    PixelFX.Emit(at + new Vector3(side * 0.2f, Random.Range(0.05f, 0.35f), 0f), new Vector2(side * Random.Range(6f, 9f), Random.Range(0.3f, 1.2f)),
+                        PixelFX.Pick(GaleSparks), Random.Range(0.1f, 0.16f), 1, PixelShape.Streak, PixelMotion.Straight, true);
+        }
+        if (tier >= 2) // Comet: a burst of stars thrown upward and a column of streaks
+        {
+            PixelFX.Burst(at + Vector3.up * 0.3f, 8, 2f, 4f, CometSparks, 0.3f, 0.5f, 1, PixelShape.Star, PixelMotion.Float, true, PixelLayer.Front, 90f, 110f);
+            for (int i = 0; i < 5; i++)
+                PixelFX.Emit(at + new Vector3(Random.Range(-0.25f, 0.25f), Random.Range(0f, 0.4f), 0f), new Vector2(0f, Random.Range(9f, 13f)),
+                    PixelFX.Pick(CometSparks), Random.Range(0.1f, 0.16f), 1, PixelShape.Streak, PixelMotion.Straight, true);
+        }
+        if (instance != null) instance.BeginRise(tier);
+    }
+
+    // JUMPTIERS: the trail, plus (Gale, Comet) a tint on Harvey and (Comet) a gold rim while he rises
+    private void BeginRise(int tier)
+    {
+        trailLeft = tier == 2 ? 0.7f : tier == 1 ? 0.55f : 0.45f;
+        riseTier = tier;
+        riseLeft = tier > 0 ? 1.2f : 0f;
+        if (tier == 1) fx.Flash(new Color(0.84f, 0.92f, 1f, 0.6f), 0.12f);
+        if (tier == 2)
+        {
+            fx.Flash(new Color(1f, 0.95f, 0.7f, 0.75f), 0.16f);
+            aura.Set("superjump", CometGold, 1, 9f, 2, 0f, 0.2f, true);
+        }
+    }
+
+    private void UpdateRise(float dt)
+    {
+        if (riseLeft <= 0f) return;
+        riseLeft -= dt;
+        if (riseLeft <= 0f || body == null || body.linearVelocity.y <= 0f) { EndRise(); return; }
+        float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * 18f);
+        if (riseTier == 2) fx.SetPalette(PixelFX.Orange, CometGold, PixelFX.Cream, 0.35f + 0.1f * pulse);
+        else fx.SetPalette(PixelFX.Purple, GaleBlue, PixelFX.Hex("d5ebff"), 0.22f);
+    }
+
+    private void EndRise()
+    {
+        riseLeft = 0f;
+        if (fx != null) fx.SetPalette(Color.black, Color.grey, Color.white, 0f);
+        if (aura != null) aura.Clear("superjump");
     }
 
     private void Update()
@@ -166,7 +238,13 @@ public class TalismanFX : MonoBehaviour
         // tinted spirit cyan (COMBO: or the combo's stage colour, however the combo was built)
         trail.Tint = Color.Lerp(StompCombo.StageColour(0, DashCyan), Color.white, 0.25f);
         if (trailLeft > 0f) SparkTrail(dt);
+        UpdateRise(dt); // JUMPTIERS:
         if (active.Count == 0) return;
+        if (active.Contains(Kind.SuperJump) && shownJumpTier != JumpTier) // JUMPTIERS: Sky Leap learned while it runs
+        {
+            shownJumpTier = JumpTier;
+            aura.Set("talisman", WithAlpha(ColourOf(Kind.SuperJump), 0.75f), 2, 5f, 0);
+        }
 
         timer -= dt;
         bool tick = timer <= 0f;
@@ -259,8 +337,15 @@ public class TalismanFX : MonoBehaviour
         trailLeft -= dt;
         if (Random.value > 0.6f) return;
         Vector3 feet = PlayerFX.Instance != null ? PlayerFX.Instance.Feet : transform.position;
+        Color[] sparks = riseTier == 2 ? CometSparks : riseTier == 1 ? GaleSparks : SpringSparks; // JUMPTIERS:
         PixelFX.Emit(feet + new Vector3(Random.Range(-0.15f, 0.15f), 0f, 0f), new Vector2(Random.Range(-0.4f, 0.4f), Random.Range(-1.5f, -0.5f)),
-            PixelFX.Pick(new[] { JumpYellow, PixelFX.Cream, PixelFX.Orange }), Random.Range(0.18f, 0.3f), 1, PixelShape.Square, PixelMotion.Float, true);
+            PixelFX.Pick(sparks), Random.Range(0.18f, 0.3f), 1, PixelShape.Square, PixelMotion.Float, true);
+        if (riseTier == 1 && Random.value < 0.3f) // Gale: thin wind streaks rushing past
+            PixelFX.Emit(feet + new Vector3(Random.Range(-0.35f, 0.35f), Random.Range(0.2f, 0.9f), 0f), new Vector2(0f, -Random.Range(6f, 9f)),
+                PixelFX.Pick(GaleSparks), Random.Range(0.08f, 0.12f), 1, PixelShape.Streak, PixelMotion.Straight, true);
+        if (riseTier == 2 && Random.value < 0.4f) // Comet: stars shed behind him
+            PixelFX.Emit(feet + new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(0f, 0.5f), 0f), new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-1f, -0.2f)),
+                PixelFX.Pick(CometSparks), Random.Range(0.3f, 0.45f), 1, PixelShape.Star, PixelMotion.Float, true);
     }
 
     // ---------------------------------------------------------------- Feather Fall

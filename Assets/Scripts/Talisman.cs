@@ -95,4 +95,13 @@ public class Talisman : ScriptableObject
 
     /// <summary>Called every frame while active, for effects that need continuous work (pulling coins, slowing a fall).</summary>
     public virtual void OnTick(PowerUpContext ctx, float dt) { }
+
+    /// <summary>FOXMOUNT: false ends the talisman early (the mount ends when Harvey gets off some other way).</summary>
+    public virtual bool KeepRunning(PowerUpContext ctx) => true;
+
+    /// <summary>FOXMOUNT: pressing its button again while active ends it (the mount: press again to get off).</summary>
+    public virtual bool EndsOnPress => false;
+
+    /// <summary>FOXMOUNT: runs alongside other talismans: it neither waits for nor blocks them (PowerUpManager oneAtATime).</summary>
+    public virtual bool RunsAlongside => false;
 }

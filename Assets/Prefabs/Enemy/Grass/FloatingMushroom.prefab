@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 7191787061343251232}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.49, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -127,13 +127,12 @@ GameObject:
   - component: {fileID: 7413140767199902333}
   - component: {fileID: 201002555504673406}
   - component: {fileID: 4570959022052680641}
-  - component: {fileID: 7682914481532584860}
   - component: {fileID: 1884220046324559752}
-  - component: {fileID: 4090482160452076541}
   - component: {fileID: 8042378115031290397}
+  - component: {fileID: 2950860403047524440}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,20 +257,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.9375, y: 0.5625}
   m_EdgeRadius: 0
---- !u!114 &7682914481532584860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8945726352398035575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa856492bd8674f0aa9051b1b04ccfc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerRef: {fileID: 0}
-  pRespawnPos: {fileID: 0}
 --- !u!114 &1884220046324559752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,24 +275,6 @@ MonoBehaviour:
   startRb: {fileID: 0}
   fallingObj: {fileID: 0}
   activeCardManScriptRef: {fileID: 0}
---- !u!114 &4090482160452076541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8945726352398035575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6472242d12404d738a2aab55bbae9d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toughness: 0
-  bounceSpeed: 15
-  mTRef: {fileID: 0}
-  animator: {fileID: 0}
-  enemyDeathAnimActivate: 0
-  animCounter: 0
 --- !u!95 &8042378115031290397
 Animator:
   serializedVersion: 7
@@ -330,3 +297,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2950860403047524440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8945726352398035575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef0c35dd083344fdb3c1d0a49e944b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MushroomBounce
+  bounceSpeed: 15
+  squashAmount: 0.25
+  springFrequency: 22
+  springDamping: 7
+  rebounceDelay: 0.15

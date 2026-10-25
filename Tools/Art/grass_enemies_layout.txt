@@ -1,6 +1,6 @@
 FloatingMushroomFloat 6 41 44
 box FloatingMushroomFloat 0.0000 0.7188 1.9375 0.5625
 ForestSpiritFoxRun 8 39 22
-box ForestSpiritFoxRun 0.3438 -0.1562 1.6250 0.4375
+box ForestSpiritFoxRun 0.2188 -0.3438 1.2500 0.3125
 GrassenemynonbossWalk 8 23 28
 box GrassenemynonbossWalk -0.0312 0.0938 0.7500 1.4375

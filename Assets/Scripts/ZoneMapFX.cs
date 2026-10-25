@@ -8,6 +8,11 @@ using UnityEngine;
 ///   the path       a dashed line marching along the open part of the route (the path corners in each node's
 ///                  bendsToNext), one art pixel per dash
 ///   Harvey         dust puffs at his feet while he walks the path
+///   S-rank gems    RANKS (2026-10-24): a level cleared with an S (its best rank in the save) gets more than the
+///                  cleared shine: the sweep turns gold and comes round more often (its own copy of the shine
+///                  material), a soft pulsing gold rim glows round the gem (SpriteAura, the same glow the talismans
+///                  use), and now and then a gold star or mote rises off it. Only that gem changes; the label names
+///                  the rank (ZoneSelectMap).
 /// </summary>
 public class ZoneMapFX : MonoBehaviour
 {
@@ -21,11 +26,18 @@ public class ZoneMapFX : MonoBehaviour
     private Vector3 lastPuff;
     private readonly List<Transform> clearedNodes = new List<Transform>();
     private float sparkleTimer;
+    private readonly List<Transform> sRankNodes = new List<Transform>(); // RANKS:
+    private float goldTimer;
+    private Material goldShine;
+
+    // RANKS: the S glow, in the map's own golds (HUD yellow and the coin gold), kept soft so the gem still reads
+    private static readonly Color GoldRim = new Color(0.941f, 0.741f, 0.161f, 1f); // f0bd29, the coin gold: reads on green and cream
+    private static readonly Color[] Gold = { PixelFX.Hex("ffe478"), PixelFX.Hex("f0bd29"), PixelFX.Hex("ffffeb") };
 
     private static readonly Color DashColour = new Color(0.95f, 0.65f, 0.37f, 1f); // HUD orange: reads on the map's cream path
     private static readonly Color[] Puff = { PixelFX.Hex("e1d089"), PixelFX.Hex("ffffeb"), PixelFX.Hex("e3ba66") };
 
-    public void Init(ZoneMapNode[] nodes, bool[] open, bool[] cleared, Transform harvey)
+    public void Init(ZoneMapNode[] nodes, bool[] open, bool[] cleared, Transform harvey, bool[] sRank = null)
     {
         player = harvey;
         lastPuff = harvey != null ? harvey.position : Vector3.zero;
@@ -39,6 +51,13 @@ public class ZoneMapFX : MonoBehaviour
             sortLayer = n.icon.sortingLayerID;
             sortOrder = n.icon.sortingOrder;
             if (!open[i]) SpriteFX.On(n.icon).SetGrey(1f);
+            else if (sRank != null && sRank[i]) // RANKS:
+            {
+                if (shine != null) n.icon.sharedMaterial = GoldShine(shine);
+                // a solid gold edge (an additive one washes out to pale green over the bright pad) and a soft halo
+                SpriteAura.On(n.icon).Set("srank", GoldRim, 2, 1.6f, 0, 0f, 0.2f, true, 0.35f);
+                sRankNodes.Add(n.transform);
+            }
             else if (cleared[i])
             {
                 if (shine != null) n.icon.sharedMaterial = shine;
@@ -84,6 +103,41 @@ public class ZoneMapFX : MonoBehaviour
         MarchDashes();
         WalkDust();
         Sparkles();
+        GoldSparkles(); // RANKS:
+    }
+
+    // RANKS: the cleared shine, but gold, a little wider and round more often (one copy shared by every S gem)
+    private Material GoldShine(Material shine)
+    {
+        if (goldShine == null)
+        {
+            goldShine = new Material(shine) { name = "HNLSprite_ShineGold" };
+            goldShine.SetColor("_ShineColor", new Color(1f, 0.894f, 0.471f, 0.9f));
+            goldShine.SetFloat("_ShineWidth", 3f);
+            goldShine.SetFloat("_ShineSpacing", 4f);
+            goldShine.SetFloat("_ShineSpeed", 2.5f);
+        }
+        return goldShine;
+    }
+
+    // RANKS: a gold star or a rising mote off one of the S gems every so often (gentler than a burst)
+    private void GoldSparkles()
+    {
+        if (sRankNodes.Count == 0) return;
+        goldTimer -= Time.unscaledDeltaTime;
+        if (goldTimer > 0f) return;
+        goldTimer = Random.Range(0.18f, 0.4f) * Mathf.Max(1f, 3f / sRankNodes.Count);
+        Transform n = sRankNodes[Random.Range(0, sRankNodes.Count)];
+        if (n == null) return;
+        bool star = Random.value < 0.45f;
+        Vector3 at = n.position + new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.25f, 0.35f), 0f);
+        PixelFX.Emit(at, new Vector2(0f, star ? 0.1f : Random.Range(0.25f, 0.45f)), PixelFX.Pick(Gold), Random.Range(0.4f, 0.75f), 1,
+            star ? PixelShape.Star : PixelShape.Square, PixelMotion.Float, true, PixelLayer.Front, true);
+    }
+
+    private void OnDestroy()
+    {
+        if (goldShine != null) Destroy(goldShine);
     }
 
     private void MarchDashes()

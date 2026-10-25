@@ -306,6 +306,9 @@ TALISMANS = {
     "CoinMagnet": ((hexc("f2a65e"), hexc("ffe478"), hexc("ce812c"), hexc("ffe478")), ["#.#", "#.#", "###"]),
     # HEAL (2026-10-20): the Stone talisman as a healing stone: health pinks with a cream heart
     "HealingStone": ((hexc("ff6b97"), hexc("ffd2dc"), hexc("b0305c"), hexc("eb564b")), ["#.#", "###", "###", ".#."]),
+    # FOXMOUNT (2026-10-24): the Mount Talisman (it took Feather Fall's place): the Spirit Fox's russet and leaf green
+    # with a cream fox head
+    "SpiritFoxMount": ((hexc("c45c28"), hexc("f2a65e"), hexc("3d6e70"), hexc("3ca370")), ["#...#", "##.##", "#####", ".###.", "..#.."]),
 }
 
 
@@ -566,6 +569,14 @@ def food_icons_only():
     print("wrote", len(FOOD_ITEMS), "food icons and Talisman_HealingStone.png")
 
 
+def mount_icon_only():
+    """FOXMOUNT: writes just the Mount Talisman's gem (no other art is touched)."""
+    os.makedirs(OUT, exist_ok=True)
+    cols, symbol = TALISMANS["SpiritFoxMount"]
+    save(gem_icon(*cols, symbol=symbol), "Talisman_SpiritFoxMount.png")
+    print("wrote Talisman_SpiritFoxMount.png")
+
+
 def shop_stall():
     """A little village stall for the shop counter (in-level sprite, 40x36, feet on the bottom row)."""
     W, H = 40, 36
@@ -710,5 +721,7 @@ if __name__ == "__main__":
         gem_icons_only()  # CHEST:
     elif sys.argv[1:] == ["food"]:
         food_icons_only()  # SHOPFOOD:
+    elif sys.argv[1:] == ["mount"]:
+        mount_icon_only()  # FOXMOUNT:
     else:
         main()
