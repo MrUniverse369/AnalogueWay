@@ -165,6 +165,20 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// SUMMON: ends a talisman if it is running and clears its cooldown (switching the summoned mount sends the old one
+    /// away, and the new one can be called straight after).
+    /// </summary>
+    public void EndAndReady(Talisman talisman)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].talisman != talisman) continue;
+            if (slots[i].isActive) End(i);
+            slots[i].cooldownLeft = 0f;
+        }
+    }
+
     /// <summary>CLASH: ends every active talisman that grants the trait (a samurai clash stops the Spirit Dash).</summary>
     public void EndTrait(TalismanTrait trait)
     {
@@ -201,7 +215,7 @@ public class PowerUpManager : MonoBehaviour
 
         if (slot.isActive)
         {
-            slot.timeLeft -= dt;
+            if (!slot.talisman.Untimed) slot.timeLeft -= dt; // SUMMON: the dragon has no time limit
             // CHI: a running talisman spends chi at its own rate and ends the moment the last unit is gone
             bool chiLeft = slot.talisman.ChiPerSecond <= 0f || Chi.IsFree // CHIFREE: free at the final combo stage,
                            || Chi.Spend(slot.talisman.ChiPerSecond * Chi.CostScale * SkillTree.TalismanChiScale * dt); // cheaper up the ladder // SKILLS: Chi Focus

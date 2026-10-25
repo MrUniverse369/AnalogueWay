@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::YokaiBoss
   body: {fileID: 7579410176070662639}
   bodySprite: {fileID: 1327680827718485886}
-  spriteFacesRight: 0
+  spriteFacesRight: 1
   hurtbox: {fileID: 2542659717444415945}
   leftLimit: {fileID: 0}
   rightLimit: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
     slashes: 1
     beams: 1
     boulders: 1
-    pattern: 01000000080000000100000003000000
+    pattern: 000000000b00000003000000
   - name: Thorny
     tint: {r: 0.9, g: 1, b: 0.85, a: 1}
     chargeSpeed: 7.5
@@ -165,7 +165,7 @@ MonoBehaviour:
     slashes: 2
     beams: 1
     boulders: 1
-    pattern: 070000000a000000010000000800000003000000
+    pattern: 00000000090000000b00000003000000
   - name: Overgrown
     tint: {r: 0.8, g: 1, b: 0.7, a: 1}
     chargeSpeed: 9
@@ -177,12 +177,12 @@ MonoBehaviour:
     volley: 3
     spikes: 5
     slashes: 2
-    beams: 1
+    beams: 2
     boulders: 2
-    pattern: 0700000009000000060000000a0000000100000003000000
+    pattern: 09000000000000000b0000000900000003000000
   startDelay: 1.5
-  hurtboxWidth: 1.97
-  standingHeight: 2.62
+  hurtboxWidth: 2.5
+  standingHeight: 1.75
   chargingHeight: 0.8
   slumpedHeight: 1
   leapHeight: 4
@@ -208,24 +208,32 @@ MonoBehaviour:
   hitColor: {r: 1, g: 1, b: 1, a: 1}
   debugLog: 0
   bodyAnimator: {fileID: 4411108307997704874}
-  hoverHeight: 0.2
+  hoverHeight: 0
   crescentTemplate: {fileID: 0}
   beamTemplate: {fileID: 0}
   boulderTemplate: {fileID: 0}
-  handOffset: {x: 0.89140624, y: 1.15625}
+  handOffset: {x: 1.69, y: 1}
   boulderHold: {x: 0.5914063, y: 2.1757812}
   leafReleaseFrame: 3
   slashReleaseFrame: 3
   crescentSpeed: 7.5
   crescentLowHeight: 0.5
   crescentHighHeight: 1.75
-  beamHeight: 0.96
+  beamHeight: 1
   beamThickness: 0.45
   beamWarnTime: 0.7
   beamLife: 0.45
   boulderWarnShare: 0.8
   boulderFlightTime: 0.85
   boulderGravity: 18
+  beamGlowOffset: {x: 1.35, y: 1.25}
+  rushDistance: 3.5
+  rushSpeedScale: 1.1
+  rushStopDistance: 2.45
+  rearHoldShare: 0.6
+  stompImpactFrame: 0
+  stompReach: 1.25
+  limitInset: 0.98
   chestsFastTime: 48
   chestsSlowTime: 120
 --- !u!1 &1878543344573937810
@@ -528,8 +536,8 @@ Transform:
   m_GameObject: {fileID: 7423976543036646165}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8995549338719368763}
@@ -583,7 +591,7 @@ SpriteRenderer:
   m_SortingLayer: 15
   m_SortingOrder: -1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5858365688720082314, guid: 6c262b9e9110c4cbba25e2f92fe2a921, type: 3}
+  m_Sprite: {fileID: -3890403807249182603, guid: 4a32cebd6ada84dc98f02de553a99690, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -603,7 +611,7 @@ Animator:
   m_GameObject: {fileID: 7423976543036646165}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d0ce14fb44e1642dea41bdd14bf08086, type: 2}
+  m_Controller: {fileID: 9100000, guid: 83ea158b345ec4fe9aa8373e3316bc44, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -12,6 +13,8 @@ using UnityEngine.UI;
 /// Talisman Holder put there) the red gem shows as drawn; when L2 has swapped another talisman in, that talisman's own
 /// gem is drawn over it (Resources/UI/HudGems, Tools/UI/talisman_hud.py gems): its colours, lit while it runs, greyed
 /// with the strip while another slot runs, with a little pop as it changes.
+/// SUMMON (2026-10-25): a gem whose slot is empty, or whose talisman is blocked in this level (Water Breathing in the
+/// first level, so only the Spirit Dash shows usable there), is covered by a full dark wedge, matching PowerUpManager.
 /// </summary>
 public class TalismanHUD : MonoBehaviour
 {
@@ -30,7 +33,9 @@ public class TalismanHUD : MonoBehaviour
     private const int StripWidth = 21, StripHeight = 6, GemSize = 6, GemStep = 7;
     private static readonly Color CooldownColour = new Color(0.2f, 0.22f, 0.25f, 0.75f);
     private static readonly Color ActiveColour = new Color(1f, 1f, 0.92f, 0.4f);
+    private static readonly Color UnusableColour = new Color(0.08f, 0.09f, 0.12f, 0.8f); // SUMMON: empty or blocked here
     private Image[] radials;
+    private string sceneName; // SUMMON:
 
     private void Reset()
     {
@@ -39,6 +44,7 @@ public class TalismanHUD : MonoBehaviour
 
     private void Start()
     {
+        sceneName = SceneManager.GetActiveScene().name; // SUMMON: the same scene name PowerUpManager checks
         BuildSlotGem(); // L2CYCLE: under the cooldown wedges
         BuildRadials();
     }
@@ -145,7 +151,12 @@ public class TalismanHUD : MonoBehaviour
             Image img = radials[i];
             Talisman t = manager != null && i < manager.SlotCount ? manager.TalismanIn(i) : null;
             float fill = 0f;
-            if (t != null && manager.IsSlotActive(i) && SkillTree.DurationOf(t) > 0f) // SKILLS: the learned duration
+            if (manager != null && (t == null || !t.IsAllowedInScene(sceneName))) // SUMMON: nothing usable in this slot here
+            {
+                img.color = UnusableColour;
+                fill = 1f;
+            }
+            else if (t != null && manager.IsSlotActive(i) && SkillTree.DurationOf(t) > 0f) // SKILLS: the learned duration
             {
                 img.color = ActiveColour;
                 fill = manager.TimeLeft(i) / SkillTree.DurationOf(t);

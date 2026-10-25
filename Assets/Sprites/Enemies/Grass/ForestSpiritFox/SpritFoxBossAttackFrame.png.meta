@@ -1,0 +1,793 @@
+fileFormatVersion: 2
+guid: 904b3cea9dca74737993551da86143c4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6490604125924971309
+    second: SpritFoxBossAttackFrame_0
+  - first:
+      213: 5261354490459415301
+    second: SpritFoxBossAttackFrame_1
+  - first:
+      213: 2292035862394248671
+    second: SpritFoxBossAttackFrame_2
+  - first:
+      213: 3311649358355491597
+    second: SpritFoxBossAttackFrame_3
+  - first:
+      213: -6409815510654615685
+    second: SpritFoxBossAttackFrame_4
+  - first:
+      213: -1399647770706733107
+    second: SpritFoxBossAttackFrame_5
+  - first:
+      213: 6979427744730222856
+    second: SpritFoxBossAttackFrame_6
+  - first:
+      213: -8630640624844087379
+    second: SpritFoxBossAttackFrame_7
+  - first:
+      213: -54493499258215918
+    second: SpritFoxBossAttackFrame_8
+  - first:
+      213: -7055344747930674402
+    second: SpritFoxBossAttackFrame_9
+  - first:
+      213: -837916385662128171
+    second: SpritFoxBossAttackFrame_10
+  - first:
+      213: -2212706283787132242
+    second: SpritFoxBossAttackFrame_11
+  - first:
+      213: 6293394095123896691
+    second: SpritFoxBossAttackFrame_12
+  - first:
+      213: 4611400265537740629
+    second: SpritFoxBossAttackFrame_13
+  - first:
+      213: 6929113978740558003
+    second: SpritFoxBossAttackFrame_14
+  - first:
+      213: 8316031864710396578
+    second: SpritFoxBossAttackFrame_15
+  - first:
+      213: 5525949585862409013
+    second: SpritFoxBossAttackFrame_16
+  - first:
+      213: 7968053976252165129
+    second: SpritFoxBossAttackFrame_17
+  - first:
+      213: 4924442714145328583
+    second: SpritFoxBossAttackFrame_18
+  - first:
+      213: 4391266540278671225
+    second: SpritFoxBossAttackFrame_19
+  - first:
+      213: -4331050297182022661
+    second: SpritFoxBossAttackFrame_20
+  - first:
+      213: 1276110709505511080
+    second: SpritFoxBossAttackFrame_21
+  - first:
+      213: -2890457276517368033
+    second: SpritFoxBossAttackFrame_22
+  - first:
+      213: -8433786877685766778
+    second: SpritFoxBossAttackFrame_23
+  - first:
+      213: 6388143351055078956
+    second: SpritFoxBossAttackFrame_24
+  - first:
+      213: -1329071750454867402
+    second: SpritFoxBossAttackFrame_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 311
+        width: 2172
+        height: 393
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dcae88afedbce5a0800000000000000
+      internalID: -6490604125924971309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 671
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5036d318806140940800000000000000
+      internalID: 5261354490459415301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_2
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 375
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdd177e1972fecf10800000000000000
+      internalID: 2292035862394248671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_3
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 359
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0bed69ab8755fd20800000000000000
+      internalID: 3311649358355491597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_4
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 347
+        width: 10
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7f74a3f0c2cb07a0800000000000000
+      internalID: -6409815510654615685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_5
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 335
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc79b58a4c3739ce0800000000000000
+      internalID: -1399647770706733107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_6
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 332
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80196242e88ebd060800000000000000
+      internalID: 6979427744730222856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_7
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 329
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dafdc1c241ec93880800000000000000
+      internalID: -8630640624844087379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_8
+      rect:
+        serializedVersion: 2
+        x: 1659
+        y: 325
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 212652e73766e3ff0800000000000000
+      internalID: -54493499258215918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_9
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 321
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1b9ca32551661e90800000000000000
+      internalID: -7055344747930674402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2172
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5df21299c7f1f54f0800000000000000
+      internalID: -837916385662128171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_11
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 14
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea2e79abb53ea41e0800000000000000
+      internalID: -2212706283787132242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_12
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 35
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 379966fe590a65750800000000000000
+      internalID: 6293394095123896691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_13
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 21
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55fd488fb1cfeff30800000000000000
+      internalID: 4611400265537740629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_14
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 19
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b8460f9378292060800000000000000
+      internalID: 6929113978740558003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_15
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 25
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2aa74e4bbea786370800000000000000
+      internalID: 8316031864710396578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_16
+      rect:
+        serializedVersion: 2
+        x: 1348
+        y: 55
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53bbb00eedd10bc40800000000000000
+      internalID: 5525949585862409013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_17
+      rect:
+        serializedVersion: 2
+        x: 1454
+        y: 19
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90c26a5ffd6349e60800000000000000
+      internalID: 7968053976252165129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_18
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 15
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cd8465ce82275440800000000000000
+      internalID: 4924442714145328583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_19
+      rect:
+        serializedVersion: 2
+        x: 1480
+        y: 13
+        width: 7
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9776e5707a9e0fc30800000000000000
+      internalID: 4391266540278671225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_20
+      rect:
+        serializedVersion: 2
+        x: 1588
+        y: 19
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf39d1c93b405e3c0800000000000000
+      internalID: -4331050297182022661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_21
+      rect:
+        serializedVersion: 2
+        x: 1647
+        y: 57
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8aec52edde7a5b110800000000000000
+      internalID: 1276110709505511080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_22
+      rect:
+        serializedVersion: 2
+        x: 1695
+        y: 23
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1f3dbadb6803e7d0800000000000000
+      internalID: -2890457276517368033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_23
+      rect:
+        serializedVersion: 2
+        x: 2023
+        y: 51
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6856034d48b25fa80800000000000000
+      internalID: -8433786877685766778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_24
+      rect:
+        serializedVersion: 2
+        x: 2027
+        y: 19
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2659ed288e37a850800000000000000
+      internalID: 6388143351055078956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpritFoxBossAttackFrame_25
+      rect:
+        serializedVersion: 2
+        x: 2033
+        y: 51
+        width: 7
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63a8121e8403e8de0800000000000000
+      internalID: -1329071750454867402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      SpritFoxBossAttackFrame_0: -6490604125924971309
+      SpritFoxBossAttackFrame_1: 5261354490459415301
+      SpritFoxBossAttackFrame_10: -837916385662128171
+      SpritFoxBossAttackFrame_11: -2212706283787132242
+      SpritFoxBossAttackFrame_12: 6293394095123896691
+      SpritFoxBossAttackFrame_13: 4611400265537740629
+      SpritFoxBossAttackFrame_14: 6929113978740558003
+      SpritFoxBossAttackFrame_15: 8316031864710396578
+      SpritFoxBossAttackFrame_16: 5525949585862409013
+      SpritFoxBossAttackFrame_17: 7968053976252165129
+      SpritFoxBossAttackFrame_18: 4924442714145328583
+      SpritFoxBossAttackFrame_19: 4391266540278671225
+      SpritFoxBossAttackFrame_2: 2292035862394248671
+      SpritFoxBossAttackFrame_20: -4331050297182022661
+      SpritFoxBossAttackFrame_21: 1276110709505511080
+      SpritFoxBossAttackFrame_22: -2890457276517368033
+      SpritFoxBossAttackFrame_23: -8433786877685766778
+      SpritFoxBossAttackFrame_24: 6388143351055078956
+      SpritFoxBossAttackFrame_25: -1329071750454867402
+      SpritFoxBossAttackFrame_3: 3311649358355491597
+      SpritFoxBossAttackFrame_4: -6409815510654615685
+      SpritFoxBossAttackFrame_5: -1399647770706733107
+      SpritFoxBossAttackFrame_6: 6979427744730222856
+      SpritFoxBossAttackFrame_7: -8630640624844087379
+      SpritFoxBossAttackFrame_8: -54493499258215918
+      SpritFoxBossAttackFrame_9: -7055344747930674402
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

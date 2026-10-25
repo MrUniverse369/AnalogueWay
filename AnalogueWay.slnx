@@ -1,6 +1,6 @@
 ﻿<Solution>
   <Project Path="Assembly-CSharp.csproj" />
-  <Project Path="SimpleInput.Runtime.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="SimpleInput.Runtime.csproj" />
   <Project Path="SimpleInput.Editor.csproj" />
 </Solution>

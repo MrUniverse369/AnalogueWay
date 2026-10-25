@@ -1,0 +1,14 @@
+cell 109 50
+pivot 78 2
+row idle 0 6
+row charge 1 7
+row beam 2 7
+stand 35
+crouch 37
+rear 47
+antler 27 26
+glowlow 14
+nose 30 9.8
+stance 40
+length 109
+period 6.4

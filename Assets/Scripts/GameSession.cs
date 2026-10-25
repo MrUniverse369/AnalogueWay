@@ -55,6 +55,25 @@ public static class GameSession
     private static bool restoring; // SAVEFIX: Apply/NewGame are rewriting progress; their Inventory events aren't new finds
 
     /// <summary>
+    /// SAVEAUDIT (2026-10-25): a level started straight away (Play pressed on a level scene in the editor) used to run
+    /// on a fresh new-game state: no skills, only the starting talismans, an empty Bag. Checkpoints, the shop and
+    /// finishing the level still saved, so that fresh state was written over the active save file (keeping only its
+    /// furthest level, which Capture reads back from the file). That is why skills, upgrades and talismans kept
+    /// vanishing. Now such a level first loads the active save file, exactly as Continue would, and plays it as a
+    /// session; with no save file it stays unsaved (SaveProgress writes nothing without a session).
+    /// </summary>
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void AdoptSaveForDirectPlay()
+    {
+        if (SessionActive || IsArcade) return;
+        string scene = SceneManager.GetActiveScene().name;
+        if (!IsLevelScene(scene) || !SaveSystem.TryLoad(out SaveData data)) return;
+        Apply(data);
+        SessionActive = true;
+        Debug.Log($"GameSession: '{scene}' was started directly, so save file {SaveSystem.SlotNumber(SaveSystem.ActiveSlot)} was loaded first (skills, talismans, Bag, coins).");
+    }
+
+    /// <summary>
     /// SAVEFIX: saves the active save file now, if a level of it is being played (not the menus, the map, arcade or
     /// the tutorial). Called whenever the Bag or talismans change, when a level is left from the pause menu, and on
     /// quitting.
@@ -276,10 +295,14 @@ public static class GameSession
     /// <summary>Save current progress against the active scene (used by checkpoints).</summary>
     public static void SaveProgress() => SaveProgress(SceneManager.GetActiveScene().name);
 
-    /// <summary>Save current progress against a given scene (used when leaving a level). Does nothing in arcade mode.</summary>
+    /// <summary>
+    /// Save current progress against a given scene (used when leaving a level). Does nothing in arcade mode, and
+    /// SAVEAUDIT: nothing unless a save file is being played (its progress is what is in memory), so a run that never
+    /// loaded the file can't write a new-game state over it.
+    /// </summary>
     public static void SaveProgress(string sceneName)
     {
-        if (IsArcade) return; // ARCADE: never saved
+        if (IsArcade || !SessionActive) return; // ARCADE: never saved // SAVEAUDIT:
         SaveSystem.Save(Capture(sceneName));
     }
 

@@ -131,15 +131,14 @@ public static class HarveyMenusContentBuilder
 
     // FOXMOUNT (2026-10-24): the Mount Talisman, in Feather Fall's place (FoxRideSetup switches the asset over)
     internal const string MountDescription =
-        "Summons the Spirit Fox. Harvey rides it, running faster and leaping higher, until chi or time runs out. Press again (or R2) to get off.";
+        "Summons the mount assigned to it (R1 switches): the Spirit Fox, faster running and higher leaps until chi or time runs out, or the dragon, flight until chi runs out. Press again (or R2) to get off.";
     internal const float MountDuration = 45f, MountCooldown = 3f, MountChiPerSecond = 3f;
 
-    /// <summary>The six talismans in Holder order. The first three are the starting loadout (Z, X, C).</summary>
+    /// <summary>The four talismans in Holder order. The first two are the starting loadout (Z, X).</summary>
     private static Talisman[] BuildTalismans(List<string> log)
     {
         var water = TalismanAsset<Talisman>("Talisman_WaterBreathing");
         var dash = TalismanAsset<SpeedBoostTalisman>("Talisman_SpeedBoost");
-        var jump = TalismanAsset<SuperJumpTalisman>("alisman_SuperJump");
         var stone = TalismanAsset<HealingTalisman>("Talisman_Plain"); // the old placeholder, then Stone Skin, now the Healing Stone (HEAL)
         var feather = TalismanAsset<MountTalisman>("Talisman_FeatherFall"); // FOXMOUNT: Feather Fall's asset is the Mount Talisman now (saves keep its id)
         var magnet = TalismanAsset<CoinMagnetTalisman>("Talisman_CoinMagnet");
@@ -148,18 +147,16 @@ public static class HarveyMenusContentBuilder
             "Breathe underwater for 10 seconds. Harvey glows aqua and wears a bubble helmet.", null);
         Describe(dash, "Spirit Dash", "SpeedBoost",
             "Hold to dash along the ground. Enemies in the way are knocked out and can't hurt Harvey.", null);
-        Describe(jump, "Super Jump", "SuperJump",
-            "Hold for a much higher jump, to reach ledges far overhead.", null);
         Describe(stone, "Healing Stone", "HealingStone",
             "A warm temple stone that turns chi into health. Spends 6 chi to fill Harvey's health bar, then shields him from every enemy attack for 7 seconds.",
             "Defeat the Grave Warden in the Old Tomb.", 7f, 4f, (int)TalismanTrait.HealShield); // HEAL: SHIELD
-        Describe(feather, "Mount Talisman", "SpiritFoxMount", MountDescription,
+        Describe(feather, "Summoning Talisman", "SpiritFoxMount", MountDescription, // SUMMON:
             "Defeat the Sandscale Scarab in the Sandy Dunes.", MountDuration, MountCooldown, 0); // FOXMOUNT:
         Describe(magnet, "Coin Magnet", "CoinMagnet",
             "For 8 seconds every coin nearby flies straight to Harvey.",
             "Defeat the Yokai Warrior at the Snow Temple.", 8f, 6f, 0);
         log.Add("Talismans described: 6 (the Healing Stone reuses Talisman_Plain)");
-        return new Talisman[] { water, dash, jump, stone, feather, magnet };
+        return new Talisman[] { water, dash, stone, feather }; // JUMPSKILLS: the Super Jump is a skill-tree upgrade now // COINPULL: the Coin Magnet is out for now (the rainbow combo pulls coins; its asset stays for a replacement)
     }
 
     // ---------------------------------------------------------------- items
@@ -287,7 +284,7 @@ public static class HarveyMenusContentBuilder
             AssetDatabase.CreateAsset(cat, CatalogPath);
         }
         cat.talismans = talismans;
-        cat.startingLoadout = new[] { talismans[0], talismans[1], talismans[2] }; // matches PowerUpManager.prefab: Z, X, C
+        cat.startingLoadout = new[] { talismans[0], talismans[1] }; // matches PowerUpManager.prefab: Z, X (C starts empty) // JUMPSKILLS:
         cat.items = ItemSpecs.Select(s => items[s.file]).ToArray();
         cat.villageStock = VillageStock.Select(f => items[f]).ToArray(); // SHOPFOOD:
         cat.font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Fonts/PerfectDOSVGA437 SDF.asset");

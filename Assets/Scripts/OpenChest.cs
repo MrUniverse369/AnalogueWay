@@ -4,7 +4,7 @@ using System.Text;
 using UnityEngine;
 
 /// <summary>CHEST: what a treasure chest holds. Random rolls for a trap first, then picks a reward by weight.</summary>
-public enum ChestContents { Random, Coins, Health, Chi, Gems, Trap }
+public enum ChestContents { Random, Coins, Health, Chi, Gems, Trap, Restore } // CHALLENGE: Restore appended (saved values keep their meaning)
 
 /// <summary>
 /// A treasure chest. CHEST: Harvey opens it himself: standing next to it on the ground shows "UP / E: OPEN CHEST"
@@ -169,6 +169,7 @@ public class OpenChest : MonoBehaviour
             case ChestContents.Health: Run(PopPeach()); break;
             case ChestContents.Chi: Run(PopChiCrystals()); break;
             case ChestContents.Gems: Run(PopGems()); break;
+            case ChestContents.Restore: Run(PopPeach()); Run(PopChiCrystals()); break; // CHALLENGE: health and chi, never a trap (only Random rolls traps)
             default: Run(BurstCoins(Random.Range(Mathf.Min(coinCount, coinCountMax), Mathf.Max(coinCount, coinCountMax) + 1))); break; // COINS:
         }
     }

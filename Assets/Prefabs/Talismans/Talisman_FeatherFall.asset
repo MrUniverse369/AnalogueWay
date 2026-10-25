@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 887de323574f44dd2af3ed593d9cc31a, type: 3}
   m_Name: Talisman_FeatherFall
   m_EditorClassIdentifier: Assembly-CSharp::MountTalisman
-  displayName: Mount Talisman
+  displayName: Summoning Talisman
   icon: {fileID: 21300000, guid: 56e1dcfee08484ef79133930c055795d, type: 3}
-  description: Summons the Spirit Fox. Harvey rides it, running faster and leaping
-    higher, until chi or time runs out. Press again (or R2) to get off.
+  description: 'Summons the mount assigned to it (R1 switches): the Spirit Fox, faster running and higher leaps until chi or time runs out, or the dragon, flight until chi runs out. Press again (or R2) to get off.'
   unlockHint: Defeat the Sandscale Scarab in the Sandy Dunes.
   duration: 45
   cooldown: 3

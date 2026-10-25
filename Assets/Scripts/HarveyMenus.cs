@@ -291,6 +291,33 @@ public class HarveyMenus : MonoBehaviour
         if (toast.gameObject.activeSelf && Time.unscaledTime > toastUntil) NextToast();
     }
 
+    // ---------------------------------------------------------------- CHALLENGE: a standing banner ("ROUND 2/5")
+    private RectTransform banner;
+    private TMP_Text bannerTitle, bannerLine;
+
+    /// <summary>CHALLENGE (2026-10-25): a plate under the toasts that stays until changed; an empty title hides it.</summary>
+    public static void Banner(string title, string line = "")
+    {
+        if (instance == null || instance.canvasRoot == null || Inventory.Catalog == null) return;
+        if (instance.banner == null) instance.BuildBanner();
+        bool show = !string.IsNullOrEmpty(title);
+        instance.banner.gameObject.SetActive(show);
+        if (!show) return;
+        instance.bannerTitle.text = title;
+        instance.bannerLine.text = line ?? "";
+    }
+
+    private void BuildBanner()
+    {
+        banner = MenuUI.Rect("Banner", canvasRoot, Vector2.zero, new Vector2(96, 20));
+        banner.anchorMin = banner.anchorMax = banner.pivot = new Vector2(0.5f, 1f);
+        banner.anchoredPosition = new Vector2(0, -32); // under the toast
+        MenuUI.Image(banner, Inventory.Catalog.frame, true);
+        bannerTitle = MenuUI.Text("Title", banner, new Vector2(0, 3.5f), new Vector2(88, 8), 5, MenuUI.Yellow, TextAlignmentOptions.Center, "");
+        bannerLine = MenuUI.Text("Line", banner, new Vector2(0, -4.5f), new Vector2(88, 8), 5, MenuUI.Cream, TextAlignmentOptions.Center, "");
+        banner.gameObject.SetActive(false);
+    }
+
     // ---------------------------------------------------------------- prompt ("UP / E: SHOP")
     /// <summary>Shows a small prompt above the HUD this frame (call every frame while it should show).</summary>
     public static void Prompt(Object owner, string text)

@@ -13,13 +13,12 @@ public sealed class SkillDef
     public readonly string description;
     public readonly string requires;    // a skill that must be learned first (null = a root)
     public readonly int requiresLevel;
-    public readonly bool needsSuperJump; // the Super Jump talisman must be owned
 
     public SkillDef(string id, string name, string icon, SkillBranch branch, int[] costs, string[] levelText, string description,
-        string requires = null, int requiresLevel = 1, bool needsSuperJump = false)
+        string requires = null, int requiresLevel = 1)
     {
         this.id = id; this.name = name; this.icon = icon; this.branch = branch; this.costs = costs; this.levelText = levelText;
-        this.description = description; this.requires = requires; this.requiresLevel = requiresLevel; this.needsSuperJump = needsSuperJump;
+        this.description = description; this.requires = requires; this.requiresLevel = requiresLevel;
     }
 
     public int MaxLevel => costs.Length;
@@ -34,8 +33,10 @@ public sealed class SkillDef
 ///   Stomp Power I-III  stomps deal 2 / 3 / 4         Chi Focus I-II       talismans use 15% / 30% less chi
 ///   Dash Power I-III   Spirit Dash deals 3 / 4 / 5   Lasting Charms I-II  talismans last 15% / 30% longer
 ///                      and lasts 12% longer a level  Quick Recharge I-II  cooldowns 20% / 40% shorter
-///   Jump Power I-III   jumps 5% faster a level       Sky Leap I-II        Super Jump launches 6% / 12% harder
-///                      (10% / 21% / 32% higher)
+///   Jump Power I-III   the Super Jump (tap jump      Sky Leap I-II        Super Jumps launch 6% / 12% harder,
+///                      twice): take-off x1.25 / 1.5                       with the Gale / Comet take-off (JUMPSKILLS)
+///                      / 1.65 (56% / 125% / 172% higher). JUMPBOOST: II clears the Grass boss (fox). SUPERTAP: one
+///                      press is always the normal jump; Jump Power and Sky Leap only power the double-tap Super Jump
 ///   Double Jump        a second jump in mid-air
 ///   Combo Mastery I-IV the stomp/dash combo can climb   Chi Flow I-III     during a 3+ hit combo chi comes back:
 ///                      to stage 2 / 3 / 4 / 5 (COMBOLOCK)                    a unit every 5 / 3 / 2 s (CHIFLOW)
@@ -46,8 +47,12 @@ public sealed class SkillDef
 /// stays at stage 1 (yellow outline, two motes, small hit burst); each level opens the next stage and everything that
 /// stage brings (StompCombo has the list), including its chi discount (Chi.StageCost), so level IV gives the rainbow
 /// stage and free chi skills. The 5 s window is the same at every level. Stage 1 stays free so players see the combo
-/// exists before they can grow it. Jump Power stops below the Super Jump's launch speed (PlayerController treats a jump over 6 as
-/// a super jump), so ledges built for the Super Jump still need it. The tutorial ignores skills (it teaches the basics).
+/// exists before they can grow it.
+/// JUMPSKILLS (2026-10-25): the Super Jump talisman is gone; one jump button. SUPERTAP: one press is the normal jump at
+/// every level; tapping jump twice quickly is the Super Jump, which Jump Power unlocks (I) and raises, and Sky Leap
+/// raises further (PlayerController shows it with the super jump take-off: animation, dust ring, Gale / Comet trails by
+/// Sky Leap level). Ledges built for the old Super Jump (about 2.6 tiles) need Jump Power II or III. The tutorial
+/// ignores bought skills; it lends Jump Power III and Double Jump so its ledge step can be climbed (TutorialLevel).
 /// </summary>
 public static class SkillTree
 {
@@ -66,11 +71,11 @@ public static class SkillTree
             new[] { "DASH DEALS 3, LASTS 12% LONGER", "DASH DEALS 4, LASTS 24% LONGER", "DASH DEALS 5, LASTS 36% LONGER" },
             "A STRONGER, LONGER SPIRIT DASH.", StompPower),
         new SkillDef(JumpPower, "JUMP POWER", "Skill_Jump", SkillBranch.Natural, new[] { 2, 4, 6 },
-            new[] { "JUMPS 10% HIGHER", "JUMPS 21% HIGHER", "JUMPS 32% HIGHER" },
-            "STRONGER LEGS FOR TALL STEPS AND HIGH LEDGES.", StompPower),
+            new[] { "SUPER JUMP: 56% HIGHER", "SUPER JUMP: 125% HIGHER", "SUPER JUMP: 172% HIGHER" }, // JUMPBOOST: height goes with the square of JumpPowerScales
+            "TAP JUMP TWICE, QUICKLY, FOR A SUPER JUMP. EACH LEVEL LAUNCHES HIGHER.", StompPower), // SUPERTAP:
         new SkillDef(DoubleJump, "DOUBLE JUMP", "Skill_DoubleJump", SkillBranch.Natural, new[] { 8 },
             new[] { "JUMP AGAIN IN MID-AIR" },
-            "PRESS JUMP IN THE AIR FOR A SECOND JUMP. NOT WHILE SWIMMING.", JumpPower, 2, true),
+            "PRESS JUMP IN THE AIR FOR A SECOND JUMP. NOT WHILE SWIMMING.", JumpPower, 2), // JUMPSKILLS: no talisman needed
         new SkillDef(ComboMastery, "COMBO MASTERY", "Skill_Combo", SkillBranch.Natural, new[] { 3, 5, 7, 9 }, // COMBOLOCK:
             new[] { "COMBOS REACH STAGE 2 (ORANGE)", "COMBOS REACH STAGE 3 (PINK)", "COMBOS REACH STAGE 4 (VIOLET)",
                     "COMBOS REACH STAGE 5 (RAINBOW): FREE CHI" },
@@ -86,8 +91,8 @@ public static class SkillTree
             new[] { "COOLDOWNS 20% SHORTER", "COOLDOWNS 40% SHORTER" },
             "TALISMANS ARE READY AGAIN SOONER.", ChiFocus),
         new SkillDef(SkyLeap, "SKY LEAP", "Skill_SkyLeap", SkillBranch.Talisman, new[] { 4, 8 },
-            new[] { "SUPER JUMP 6% STRONGER", "SUPER JUMP 12% STRONGER" },
-            "THE SUPER JUMP TALISMAN LAUNCHES HARVEY EVEN HIGHER.", LastingCharms, 1, true),
+            new[] { "SUPER JUMPS 6% HIGHER (GALE)", "SUPER JUMPS 12% HIGHER (COMET)" }, // JUMPSKILLS: not a talisman // SUPERTAP: the double-tap jump
+            "SPIRIT WIND UNDER HARVEY'S FEET. SUPER JUMPS LAUNCH EVEN HIGHER.", LastingCharms),
         new SkillDef(ChiFlow, "CHI FLOW", "Skill_ChiFlow", SkillBranch.Talisman, new[] { 3, 5, 8 }, // CHIFLOW:
             new[] { "A CHI UNIT EVERY 5 S IN A 3+ COMBO", "A CHI UNIT EVERY 3 S IN A 3+ COMBO",
                     "A CHI UNIT EVERY 2 S IN A 3+ COMBO" },
@@ -102,18 +107,33 @@ public static class SkillTree
     }
 
     /// <summary>The level of a skill in play (0 in the tutorial, which teaches the basics).</summary>
-    public static int Level(string id) => GameSession.IsTutorial ? 0 : Inventory.SkillLevel(id);
+    public static int Level(string id) => GameSession.IsTutorial ? TutorialLevel(id) : Inventory.SkillLevel(id);
+
+    // JUMPSKILLS: the tutorial's ledge step was built for the Super Jump; it lends Jump Power III and Double Jump instead
+    private static int TutorialLevel(string id) => id == JumpPower ? 3 : id == DoubleJump ? 1 : 0;
 
     // ---------------------------------------------------------------- effects (read by the game)
     public static int StompDamage => 1 + Level(StompPower);
     public static int DashDamage => 2 + Level(DashPower);
     public static float DashDurationScale => 1f + 0.12f * Level(DashPower);
-    /// <summary>On jump speed. Level III gives 5 x 1.15 = 5.75, under the 6 that marks a super jump.</summary>
-    public static float JumpScale => 1f + 0.05f * Level(JumpPower);
+    /// <summary>The Super Jump's take-off speed, times the normal jump's: Jump Power times Sky Leap (SUPERTAP).</summary>
+    public static float JumpScale => JumpPowerScales[Mathf.Clamp(Level(JumpPower), 0, JumpPowerScales.Length - 1)] * SuperJumpScale;
+
+    /// <summary>
+    /// JUMPBOOST (2026-10-25): the Super Jump's take-off speed per Jump Power level (0 = no Super Jump). Height goes
+    /// with the square: x1.56, x2.25, x2.72 of the normal jump (1.16 units at speed 5, gravity 1.1). Level II peaks at
+    /// 2.6, over the whole Grass boss (fox: hurtbox 1.75 high and 2.5 wide, antler tips 2.19), with about 4 units of
+    /// run under it; level III is about where the old Super Jump talisman went (8.1). SUPERTAP: the normal jump stays
+    /// at speed 5 whatever is learned.
+    /// </summary>
+    public static readonly float[] JumpPowerScales = { 1f, 1.25f, 1.5f, 1.65f };
     public static bool HasDoubleJump => Level(DoubleJump) > 0;
+    /// <summary>SUPERTAP: tapping jump twice gives the Super Jump (Jump Power I and up).</summary>
+    public static bool HasSuperJump => Level(JumpPower) > 0;
     public static float TalismanChiScale => 1f - 0.15f * Level(ChiFocus);
     public static float TalismanDurationScale => 1f + 0.15f * Level(LastingCharms);
     public static float CooldownScale => 1f - 0.2f * Level(QuickRecharge);
+    /// <summary>JUMPSKILLS: Sky Leap's part of JumpScale (the name is from the Super Jump talisman it used to boost).</summary>
     public static float SuperJumpScale => 1f + 0.06f * Level(SkyLeap);
     /// <summary>COMBOLOCK: the highest combo stage that can be reached (1 with no Combo Mastery, MaxStage at level IV).</summary>
     public static int ComboStageCap => 1 + Level(ComboMastery);
@@ -173,7 +193,7 @@ public static class SkillTree
     }
 
     public static bool RequirementsMet(SkillDef d) =>
-        (d.requires == null || Inventory.SkillLevel(d.requires) >= d.requiresLevel) && (!d.needsSuperJump || OwnsSuperJump);
+        d.requires == null || Inventory.SkillLevel(d.requires) >= d.requiresLevel;
 
     public static State StateOf(SkillDef d)
     {
@@ -188,7 +208,6 @@ public static class SkillTree
         var parts = new System.Collections.Generic.List<string>();
         if (d.requires != null && Inventory.SkillLevel(d.requires) < d.requiresLevel)
             parts.Add(Def(d.requires).name + " " + Numeral(d.requiresLevel));
-        if (d.needsSuperJump && !OwnsSuperJump) parts.Add("THE SUPER JUMP TALISMAN");
         return parts.Count == 0 ? "" : "NEEDS " + string.Join(" + ", parts);
     }
 
@@ -220,18 +239,6 @@ public static class SkillTree
             while (balance < cost && Inventory.Count(gem) > 0 && Inventory.Remove(gem)) balance += g.value;
         }
         Inventory.CrystalBalance = balance - cost;
-    }
-
-    private static bool OwnsSuperJump
-    {
-        get
-        {
-            HNLCatalog cat = Inventory.Catalog;
-            if (cat == null || cat.talismans == null) return false;
-            foreach (Talisman t in cat.talismans)
-                if (t is SuperJumpTalisman && Inventory.Owns(t)) return true;
-            return false;
-        }
     }
 
     public static string Numeral(int level) => level <= 1 ? "I" : level == 2 ? "II" : level == 3 ? "III" : level.ToString();

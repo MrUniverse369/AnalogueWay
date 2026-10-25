@@ -15,14 +15,11 @@ MonoBehaviour:
   talismans:
   - {fileID: 11400000, guid: 3e168233ebdfd42ff97ad737cfd876c9, type: 2}
   - {fileID: 11400000, guid: ecb01effa4b78459f8dc9dc4f994df7f, type: 2}
-  - {fileID: 11400000, guid: 80bf95a927ad249a796417eb479baf4d, type: 2}
   - {fileID: 11400000, guid: 1aac3c739622546a0b673ed8899e23df, type: 2}
   - {fileID: 11400000, guid: 58e55503245224eebbcf5624eded72a8, type: 2}
-  - {fileID: 11400000, guid: 11a02f3062d38437e95a1d830c77c021, type: 2}
   startingLoadout:
   - {fileID: 11400000, guid: 3e168233ebdfd42ff97ad737cfd876c9, type: 2}
   - {fileID: 11400000, guid: ecb01effa4b78459f8dc9dc4f994df7f, type: 2}
-  - {fileID: 11400000, guid: 80bf95a927ad249a796417eb479baf4d, type: 2}
   items:
   - {fileID: 11400000, guid: 8eac2b21eed87453d89f2003c0a8c5d4, type: 2}
   - {fileID: 11400000, guid: 3479614a34a9c4e7888685f3baa92b92, type: 2}

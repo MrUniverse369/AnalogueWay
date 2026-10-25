@@ -4030,8 +4030,8 @@ MonoBehaviour:
     keyboard: JUMP ON THE BOXES TO STOMP THEM
     controller: TRIANGLE TO JUMP, LAND ON TOP
   - title: SUPER JUMP
-    keyboard: 'HOLD C, THEN SPACE: CLIMB THE LEDGES'
-    controller: CIRCLE, THEN TRIANGLE
+    keyboard: 'TAP SPACE TWICE, QUICKLY: CLIMB THE LEDGES'
+    controller: TAP TRIANGLE TWICE, QUICKLY
   - title: DASH
     keyboard: HOLD X TO DASH THROUGH THE BOXES
     controller: CROSS TO DASH

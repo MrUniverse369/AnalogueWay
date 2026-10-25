@@ -50,6 +50,6 @@ MonoBehaviour:
     keyboardKey: 122
   - talisman: {fileID: 11400000, guid: ecb01effa4b78459f8dc9dc4f994df7f, type: 2}
     keyboardKey: 120
-  - talisman: {fileID: 11400000, guid: 80bf95a927ad249a796417eb479baf4d, type: 2}
+  - talisman: {fileID: 0}
     keyboardKey: 99
   oneAtATime: 1

@@ -1,0 +1,721 @@
+fileFormatVersion: 2
+guid: 4a32cebd6ada84dc98f02de553a99690
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1993817766295066074
+    second: ForestFoxBoss_Body_0
+  - first:
+      213: -841647031085462826
+    second: ForestFoxBoss_Body_1
+  - first:
+      213: 257680161313127469
+    second: ForestFoxBoss_Body_2
+  - first:
+      213: -8756099693837764800
+    second: ForestFoxBoss_Body_3
+  - first:
+      213: -7851322511664220114
+    second: ForestFoxBoss_Body_4
+  - first:
+      213: 4221498383397858071
+    second: ForestFoxBoss_Body_5
+  - first:
+      213: 5994048693087394848
+    second: ForestFoxBoss_Body_6
+  - first:
+      213: 8379448157347172072
+    second: ForestFoxBoss_Body_7
+  - first:
+      213: -4542107388223342624
+    second: ForestFoxBoss_Body_8
+  - first:
+      213: 7061604006507438777
+    second: ForestFoxBoss_Body_9
+  - first:
+      213: 7309764153929372504
+    second: ForestFoxBoss_Body_10
+  - first:
+      213: -4642889559417354153
+    second: ForestFoxBoss_Body_11
+  - first:
+      213: -1259096636856822495
+    second: ForestFoxBoss_Body_12
+  - first:
+      213: 6476569406635056498
+    second: ForestFoxBoss_Body_13
+  - first:
+      213: -4971243306686757582
+    second: ForestFoxBoss_Body_14
+  - first:
+      213: -43649224112677009
+    second: ForestFoxBoss_Body_15
+  - first:
+      213: 2753992231056923640
+    second: ForestFoxBoss_Body_16
+  - first:
+      213: -7177704022047548713
+    second: ForestFoxBoss_Body_17
+  - first:
+      213: 2319993631219456563
+    second: ForestFoxBoss_Body_18
+  - first:
+      213: 7516549979375812622
+    second: ForestFoxBoss_Body_19
+  - first:
+      213: -3227993025675806506
+    second: ForestFoxBoss_Body_20
+  - first:
+      213: -3890403807249182603
+    second: ForestFoxBoss_idle_0
+  - first:
+      213: -1000895567295161912
+    second: ForestFoxBoss_idle_1
+  - first:
+      213: -7979335719211590977
+    second: ForestFoxBoss_idle_2
+  - first:
+      213: 207580579493551028
+    second: ForestFoxBoss_idle_3
+  - first:
+      213: -6648218135799197927
+    second: ForestFoxBoss_idle_4
+  - first:
+      213: -5248548238465265991
+    second: ForestFoxBoss_idle_5
+  - first:
+      213: 8984023885965048004
+    second: ForestFoxBoss_charge_0
+  - first:
+      213: 6260789636981913689
+    second: ForestFoxBoss_charge_1
+  - first:
+      213: -11098788631239407
+    second: ForestFoxBoss_charge_2
+  - first:
+      213: -4554988671229906344
+    second: ForestFoxBoss_charge_3
+  - first:
+      213: -248959036646358614
+    second: ForestFoxBoss_charge_4
+  - first:
+      213: -4570155590909035057
+    second: ForestFoxBoss_charge_5
+  - first:
+      213: 3119932703195939032
+    second: ForestFoxBoss_charge_6
+  - first:
+      213: 1744754613443297096
+    second: ForestFoxBoss_beam_0
+  - first:
+      213: -814205103569181425
+    second: ForestFoxBoss_beam_1
+  - first:
+      213: 9134748068047622537
+    second: ForestFoxBoss_beam_2
+  - first:
+      213: 5537523079351837045
+    second: ForestFoxBoss_beam_3
+  - first:
+      213: -5878239135628483742
+    second: ForestFoxBoss_beam_4
+  - first:
+      213: -51518071945769019
+    second: ForestFoxBoss_beam_5
+  - first:
+      213: 6105456731600207263
+    second: ForestFoxBoss_beam_6
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ForestFoxBoss_idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 570d51c7952820ac0800000000000000
+      internalID: -3890403807249182603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_idle_1
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 100
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c9db16d8ca1c12f0800000000000000
+      internalID: -1000895567295161912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_idle_2
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 100
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fba9ec09074b34190800000000000000
+      internalID: -7979335719211590977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_idle_3
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 100
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bb9bfeef6971e200800000000000000
+      internalID: 207580579493551028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_idle_4
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 100
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91f016a44d8ccb3a0800000000000000
+      internalID: -6648218135799197927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_idle_5
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 100
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9be86c36f296927b0800000000000000
+      internalID: -5248548238465265991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_charge_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 50
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c83298ff1aadac70800000000000000
+      internalID: 8984023885965048004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_charge_1
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 50
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 958f0c5f00bc2e650800000000000000
+      internalID: 6260789636981913689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_charge_2
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 50
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 115a236e5b198dff0800000000000000
+      internalID: -11098788631239407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_charge_3
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 50
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 852b967dfed69c0c0800000000000000
+      internalID: -4554988671229906344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_charge_4
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 50
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa1021143158b8cf0800000000000000
+      internalID: -248959036646358614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_charge_5
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 50
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcdf99b24bb8390c0800000000000000
+      internalID: -4570155590909035057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_charge_6
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 50
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d04e11734a3c4b20800000000000000
+      internalID: 3119932703195939032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_beam_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84ff28aa31d963810800000000000000
+      internalID: 1744754613443297096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_beam_1
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f05e27ba5cc53b4f0800000000000000
+      internalID: -814205103569181425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_beam_2
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9811aac48f425ce70800000000000000
+      internalID: 9134748068047622537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_beam_3
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5712b40d6eb39dc40800000000000000
+      internalID: 5537523079351837045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_beam_4
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 263a01086ac4c6ea0800000000000000
+      internalID: -5878239135628483742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_beam_5
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cfc8262698f84ff0800000000000000
+      internalID: -51518071945769019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_beam_6
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9d3c8e9c80fab450800000000000000
+      internalID: 6105456731600207263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ForestFoxBoss_Body_0: -1993817766295066074
+      ForestFoxBoss_Body_1: -841647031085462826
+      ForestFoxBoss_Body_10: 7309764153929372504
+      ForestFoxBoss_Body_11: -4642889559417354153
+      ForestFoxBoss_Body_12: -1259096636856822495
+      ForestFoxBoss_Body_13: 6476569406635056498
+      ForestFoxBoss_Body_14: -4971243306686757582
+      ForestFoxBoss_Body_15: -43649224112677009
+      ForestFoxBoss_Body_16: 2753992231056923640
+      ForestFoxBoss_Body_17: -7177704022047548713
+      ForestFoxBoss_Body_18: 2319993631219456563
+      ForestFoxBoss_Body_19: 7516549979375812622
+      ForestFoxBoss_Body_2: 257680161313127469
+      ForestFoxBoss_Body_20: -3227993025675806506
+      ForestFoxBoss_Body_3: -8756099693837764800
+      ForestFoxBoss_Body_4: -7851322511664220114
+      ForestFoxBoss_Body_5: 4221498383397858071
+      ForestFoxBoss_Body_6: 5994048693087394848
+      ForestFoxBoss_Body_7: 8379448157347172072
+      ForestFoxBoss_Body_8: -4542107388223342624
+      ForestFoxBoss_Body_9: 7061604006507438777
+      ForestFoxBoss_beam_0: 1744754613443297096
+      ForestFoxBoss_beam_1: -814205103569181425
+      ForestFoxBoss_beam_2: 9134748068047622537
+      ForestFoxBoss_beam_3: 5537523079351837045
+      ForestFoxBoss_beam_4: -5878239135628483742
+      ForestFoxBoss_beam_5: -51518071945769019
+      ForestFoxBoss_beam_6: 6105456731600207263
+      ForestFoxBoss_charge_0: 8984023885965048004
+      ForestFoxBoss_charge_1: 6260789636981913689
+      ForestFoxBoss_charge_2: -11098788631239407
+      ForestFoxBoss_charge_3: -4554988671229906344
+      ForestFoxBoss_charge_4: -248959036646358614
+      ForestFoxBoss_charge_5: -4570155590909035057
+      ForestFoxBoss_charge_6: 3119932703195939032
+      ForestFoxBoss_idle_0: -3890403807249182603
+      ForestFoxBoss_idle_1: -1000895567295161912
+      ForestFoxBoss_idle_2: -7979335719211590977
+      ForestFoxBoss_idle_3: 207580579493551028
+      ForestFoxBoss_idle_4: -6648218135799197927
+      ForestFoxBoss_idle_5: -5248548238465265991
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,9 +1,10 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// MENUS: pulls nearby coins to Harvey while active. Coins are still collected the normal way, by touching the
 /// player's detection area (CollectableCollisiondetector), so nothing about counting coins changes.
+/// COINPULL (2026-10-25): out of the catalog for now (the rainbow combo stage pulls coins instead, StompCombo); the
+/// pull itself is CoinAttractor, shared with that, so a replacement talisman can reuse it.
 /// </summary>
 [CreateAssetMenu(menuName = "Talismans/Coin Magnet", fileName = "CoinMagnetTalisman")]
 public class CoinMagnetTalisman : Talisman
@@ -14,36 +15,15 @@ public class CoinMagnetTalisman : Talisman
     [Tooltip("How often the scene is searched for coins (chests can burst new ones out).")]
     [SerializeField, Min(0.05f)] private float rescanInterval = 0.25f;
 
-    [System.NonSerialized] private readonly List<Transform> coins = new List<Transform>();
-    [System.NonSerialized] private float rescanTimer;
+    [System.NonSerialized] private CoinAttractor pull; // COINPULL:
 
     public override void OnActivated(PowerUpContext ctx)
     {
-        rescanTimer = 0f;
-        coins.Clear();
+        pull = new CoinAttractor { radius = radius, pullSpeed = pullSpeed, rescanInterval = rescanInterval };
+        pull.Begin();
     }
 
-    public override void OnTick(PowerUpContext ctx, float dt)
-    {
-        rescanTimer -= dt;
-        if (rescanTimer <= 0f)
-        {
-            rescanTimer = rescanInterval;
-            coins.Clear();
-            foreach (GameObject coin in GameObject.FindGameObjectsWithTag("Coin"))
-                if (coin.GetComponent<CoinBurstArc>() == null) coins.Add(coin.transform); // not while flying out of a chest
-        }
+    public override void OnTick(PowerUpContext ctx, float dt) => pull?.Tick(ctx.Player.transform.position, dt);
 
-        Vector3 target = ctx.Player.transform.position;
-        foreach (Transform coin in coins)
-        {
-            if (coin == null || !coin.gameObject.activeInHierarchy) continue;
-            float distance = Vector2.Distance(coin.position, target);
-            if (distance > radius || distance < 0.01f) continue;
-            float speed = pullSpeed * (1.5f - distance / radius);
-            coin.position = Vector3.MoveTowards(coin.position, new Vector3(target.x, target.y, coin.position.z), speed * dt);
-        }
-    }
-
-    public override void OnDeactivated(PowerUpContext ctx) => coins.Clear();
+    public override void OnDeactivated(PowerUpContext ctx) => pull?.End();
 }

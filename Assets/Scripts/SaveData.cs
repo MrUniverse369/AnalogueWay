@@ -43,6 +43,9 @@ public class SaveData
     // L2CYCLE (2026-10-24): the talisman the Talisman Holder put in slot 1, which L2 cycles away from and back to
     // (Inventory.QuickHome). Older saves leave it empty and use what is in slot 1.
     public string quickHome;
+    // SUMMON (2026-10-25): the mount the Summoning Talisman calls (SummonMount name: "SpiritFox" or "Dragon"). Older
+    // saves leave it empty: the Spirit Fox, as the Mount Talisman always did.
+    public string summonMount;
 }
 
 /// <summary>MENUS: a saved stack of one item.</summary>

@@ -50,6 +50,15 @@ public class StompCombo : MonoBehaviour
 
     private static StompCombo instance;
 
+    /// <summary>COINPULL / RAINBOWMUSIC (2026-10-25): the rainbow stage (MaxStage) started (true) or ended (false).</summary>
+    public static event System.Action<bool> RainbowChanged;
+    /// <summary>COINPULL: true while the combo is at the rainbow stage and its window hasn't run out.</summary>
+    public static bool IsRainbow => instance != null && instance.rainbow;
+
+    private bool rainbow;
+    // COINPULL: the rainbow stage pulls coins like the Coin Magnet did (same radius and speed as its asset)
+    private readonly CoinAttractor coinPull = new CoinAttractor { radius = 4.5f, pullSpeed = 7f, rescanInterval = 0.25f };
+
     private int stage;
     private int hits; // CHIFLOW: hits in the chain (the stage stops at Combo Mastery's cap, this doesn't)
     private float last = -10f;                    // the last hit of either kind: the window counts from here
@@ -150,12 +159,24 @@ public class StompCombo : MonoBehaviour
     private void OnDestroy()
     {
         if (instance == this) instance = null;
+        SetRainbow(false); // COINPULL: a level unloading mid-rainbow puts the music back
     }
 
     private void OnDisable() // dying or respawning ends the combo
     {
         stage = 0;
         ClearAuras(); // DRAGONCOMBO:
+        SetRainbow(false); // COINPULL:
+    }
+
+    // COINPULL / RAINBOWMUSIC: start or stop the rainbow stage's coin pull and tell the music (AudioManager), once per change
+    private void SetRainbow(bool on)
+    {
+        if (rainbow == on) return;
+        rainbow = on;
+        if (on) coinPull.Begin();
+        else coinPull.End();
+        RainbowChanged?.Invoke(on);
     }
 
     /// <summary>A successful stomp on an enemy at 'enemyPosition'. Continues (or starts) the combo and plays its stage.</summary>
@@ -180,6 +201,7 @@ public class StompCombo : MonoBehaviour
         if (instance == null) return;
         instance.stage = 0;
         instance.ClearAuras(); // DRAGONCOMBO: (was aura?.Clear, which Unity's fake null can slip past)
+        instance.SetRainbow(false); // COINPULL:
     }
 
     private void Advance(bool dash, Vector3 enemyPosition)
@@ -193,6 +215,7 @@ public class StompCombo : MonoBehaviour
         stage = cap >= MaxStage ? next : Mathf.Min(next, Mathf.Max(1, cap));
         last = Time.time;
         Play(dash, Mathf.Min(stage, MaxStage), enemyPosition);
+        SetRainbow(stage >= MaxStage); // COINPULL: from the hit that reaches it
     }
 
     private void Update()
@@ -208,6 +231,7 @@ public class StompCombo : MonoBehaviour
         int s = Mathf.Min(stage, MaxStage);
         ShowAura(s, since);
         Swirl(s, since);
+        if (rainbow) coinPull.Tick(transform.position, Time.deltaTime); // COINPULL:
     }
 
     // the window ran out: the next hit starts again at stage 1. A small fizzle so the end is noticed too.
@@ -216,6 +240,7 @@ public class StompCombo : MonoBehaviour
         Color[] set = ColoursOf(stage);
         stage = 0;
         ClearAuras(); // DRAGONCOMBO:
+        SetRainbow(false); // COINPULL:
         if (sprite != null && sprite.enabled)
             PixelFX.Burst(Centre, 8, 0.6f, 1.4f, set, 0.3f, 0.5f, 1, PixelShape.Square, PixelMotion.Drift, true, PixelLayer.Front, 90f, 360f, 0.35f);
     }

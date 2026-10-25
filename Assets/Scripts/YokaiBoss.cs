@@ -10,11 +10,16 @@ using UnityEngine;
 /// KINGMOSS (2026-10-23): a boss with a bodyAnimator (King Mossback) plays animation states for his moves instead of
 /// squashing one sprite, and has three more moves drawn on his sheet: WindSlash, SpiritBeam and BoulderThrow.
 /// Without an animator every boss works exactly as before.
+/// FOXBOSS (2026-10-25): the Grass boss is now the Forest Spirit Fox (MotherBoss, Tools/HNL/Set Up Forest Fox Boss). A
+/// boss whose controller has Brace / Charge / Recover states crouches before a Charge, runs it with its own run cycle
+/// and recovers after; the new RushStomp sprints a short way at the player, rears up and slams its front paws down,
+/// sending a shockwave each way along the floor. SpiritBeam is unchanged; beamGlowOffset adds sparks at the antlers
+/// while it charges. Bosses without those states play exactly as before.
 /// </summary>
 public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard's owner is now an interface
 {
     // BOSSES: new moves are appended so existing serialized patterns keep their meaning
-    public enum Move { Charge, LeapSlam, RockRain, Opening, Teleport, Burrow, Volley, GroundSpikes, WindSlash, SpiritBeam, BoulderThrow } // KINGMOSS: the last three
+    public enum Move { Charge, LeapSlam, RockRain, Opening, Teleport, Burrow, Volley, GroundSpikes, WindSlash, SpiritBeam, BoulderThrow, RushStomp } // KINGMOSS: WindSlash to BoulderThrow // FOXBOSS: RushStomp
 
     [System.Serializable]
     private class Stage
@@ -128,6 +133,25 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     [SerializeField] private float boulderWarnShare = 0.8f;
     [SerializeField] private float boulderFlightTime = 0.85f;
     [SerializeField] private float boulderGravity = 18f;
+    [Tooltip("FOXBOSS: sparks gather here while the beam charges (the fox's glowing antlers), from his feet facing the " +
+             "way he fires. Zero: none.")]
+    [SerializeField] private Vector2 beamGlowOffset;
+
+    [Header("Rush and stomp (FOXBOSS:)")]
+    [Tooltip("How far the sprint goes at most before he rears up.")]
+    [SerializeField] private float rushDistance = 3.5f;
+    [Tooltip("The sprint's speed, times the stage's charge speed.")]
+    [SerializeField] private float rushSpeedScale = 1.1f;
+    [Tooltip("He stops sprinting this close to the player (and rears up there).")]
+    [SerializeField] private float rushStopDistance = 2.4f;
+    [Tooltip("Extra time held reared up (the warning), as a share of the stage's telegraph time.")]
+    [SerializeField] private float rearHoldShare = 0.6f;
+    [Tooltip("Frames of the Stomp state before the paws hit the floor (the shockwave starts then).")]
+    [SerializeField] private int stompImpactFrame = 0;
+    [Tooltip("How far ahead of him the front paws land: the shockwaves start there.")]
+    [SerializeField] private float stompReach = 1.25f;
+    [Tooltip("FOXBOSS: Charge and RushStomp stop this far inside the arena limits, so a long body doesn't run into the walls.")]
+    [SerializeField] private float limitInset;
 
     [Header("Victory chests (BOSSCHEST:)")]
     [Tooltip("Beat the boss within this many seconds on the level timer for the most chests (6).")]
@@ -257,6 +281,7 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
             case Move.WindSlash: return WindSlash(s); // KINGMOSS:
             case Move.SpiritBeam: return SpiritBeam(s);
             case Move.BoulderThrow: return BoulderThrow(s);
+            case Move.RushStomp: return RushStomp(s); // FOXBOSS:
             default: return Opening(s);
         }
     }
@@ -266,10 +291,11 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     private IEnumerator Charge(Stage s)
     {
         Face(PlayerX - transform.position.x);
+        if (HasState("Brace")) Anim("Brace"); // FOXBOSS: he crouches low and braces through the warning
         yield return Telegraph(s.telegraphTime, s.tint);
         SetPose(chargingHeight);
-        Anim("Fly"); // KINGMOSS:
-        float targetX = facing > 0 ? rightLimit.position.x : leftLimit.position.x;
+        Anim(HasState("Charge") ? "Charge" : "Fly"); // KINGMOSS: // FOXBOSS: his own run
+        float targetX = facing > 0 ? RightX : LeftX;
         while (Mathf.Abs(transform.position.x - targetX) > 0.01f)
         {
             Vector3 p = transform.position;
@@ -280,6 +306,14 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         Play(audioManager != null ? audioManager.BossSlamSound : null);
         SlamDebris(); // FX:
         SetPose(standingHeight);
+        if (HasState("Recover")) // FOXBOSS: skids to a stop, crouched, then stands
+        {
+            Anim("Recover");
+            yield return Shake(0.25f, 0.15f);
+            yield return new WaitForSeconds(Mathf.Max(0f, AnimLength("Recover") - 0.25f));
+            Anim(IdleState);
+            yield break;
+        }
         Anim(IdleState); // KINGMOSS:
         yield return Shake(0.25f, 0.15f);
     }
@@ -465,6 +499,9 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
                 if (Random.value < 0.6f)
                     PixelFX.Emit(new Vector3(Mathf.Lerp(fromX, toX, Random.value), y + Random.Range(-0.08f, 0.08f), 0f), Vector2.zero,
                         PixelFX.Pick(BeamColours), Random.Range(0.15f, 0.3f), 1, PixelShape.Square, PixelMotion.Float, true, PixelLayer.Front);
+                if (beamGlowOffset != Vector2.zero && Random.value < 0.5f) // FOXBOSS: spirit energy gathering in the antlers
+                    PixelFX.Emit(new Vector3(transform.position.x + facing * beamGlowOffset.x + Random.Range(-0.35f, 0.35f), GroundY + beamGlowOffset.y + Random.Range(-0.3f, 0.3f), 0f),
+                        new Vector2(0f, Random.Range(0.2f, 0.6f)), PixelFX.Pick(BeamColours), Random.Range(0.2f, 0.4f), 1, PixelShape.Square, PixelMotion.Float, true, PixelLayer.Front);
                 yield return null;
             }
             Fx.HoldFlash(Color.clear);
@@ -505,6 +542,39 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
             Play(audioManager != null ? audioManager.BossSlamSound : null);
             Anim(IdleState);
         }
+    }
+
+    // FOXBOSS: a short sprint at the player (low: it can be jumped), stopping short of him; he rears up (the warning)
+    // and slams his front paws down, and a shockwave runs each way along the floor from where they land (jump it)
+    private IEnumerator RushStomp(Stage s)
+    {
+        Face(PlayerX - transform.position.x);
+        SetPose(chargingHeight);
+        Anim(HasState("Charge") ? "Charge" : "Fly");
+        float goal = Mathf.Clamp(transform.position.x + facing * rushDistance, LeftX, RightX);
+        while (Mathf.Abs(transform.position.x - goal) > 0.01f)
+        {
+            float toPlayer = PlayerX - transform.position.x;
+            if (Mathf.Sign(toPlayer) == facing && Mathf.Abs(toPlayer) <= rushStopDistance) break; // close enough to stomp
+            Vector3 p = transform.position;
+            p.x = Mathf.MoveTowards(p.x, goal, s.chargeSpeed * rushSpeedScale * Time.deltaTime);
+            transform.position = p;
+            yield return null;
+        }
+        SetPose(standingHeight);
+        Anim(HasState("Rear") ? "Rear" : IdleState);
+        yield return Telegraph(AnimLength("Rear") + s.telegraphTime * rearHoldShare, s.tint);
+        Anim(HasState("Stomp") ? "Stomp" : IdleState);
+        if (stompImpactFrame > 0) yield return Frames("Stomp", stompImpactFrame);
+        // the paws hit the floor: one pair of shockwaves per stomp
+        float impactX = transform.position.x + facing * stompReach;
+        Play(audioManager != null ? audioManager.BossSlamSound : null);
+        SlamDebris(impactX);
+        SpawnShockwave(-1f, impactX);
+        SpawnShockwave(1f, impactX);
+        yield return Shake(0.3f, 0.2f);
+        yield return new WaitForSeconds(Mathf.Max(0f, AnimLength("Stomp") - FrameTime("Stomp") * stompImpactFrame - 0.3f));
+        Anim(IdleState);
     }
 
     // FX: a pixel dissolve (random pixels drop out / come back) with spirit wisps, instead of an alpha fade
@@ -693,10 +763,13 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
 
     // ---------------------------------------------------------------- hazards
 
-    private void SpawnShockwave(float dir)
+    private void SpawnShockwave(float dir) => SpawnShockwave(dir, transform.position.x + dir * hurtboxWidth * 0.5f);
+
+    // FOXBOSS: from any point on the floor (the stomp's paws)
+    private void SpawnShockwave(float dir, float x)
     {
         if (shockwaveTemplate == null) return;
-        BossHazard h = Instantiate(shockwaveTemplate, new Vector3(transform.position.x + dir * hurtboxWidth * 0.5f, GroundY, 0f), Quaternion.identity);
+        BossHazard h = Instantiate(shockwaveTemplate, new Vector3(x, GroundY, 0f), Quaternion.identity);
         h.gameObject.SetActive(true);
         h.Launch(this, new Vector2(dir * shockwaveSpeed, 0f), 0f, float.NegativeInfinity, leftLimit.position.x - 0.5f, rightLimit.position.x + 0.5f); // gone at the walls
         hazards.Add(h.gameObject);
@@ -901,9 +974,11 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     }
 
     // FX: rock chips and dust thrown up where the boss lands
-    private void SlamDebris()
+    private void SlamDebris() => SlamDebris(transform.position.x);
+
+    private void SlamDebris(float x) // FOXBOSS: at the stomp's paws
     {
-        Vector3 feet = new Vector3(transform.position.x, GroundY, 0f);
+        Vector3 feet = new Vector3(x, GroundY, 0f);
         PixelFX.Burst(feet, 10, 2.5f, 5f, RockColours, 0.5f, 0.8f, 2, PixelShape.Square, PixelMotion.Fall, false, PixelLayer.Front, 90f, 120f, 0.3f);
         PixelFX.Ring(feet + Vector3.up * 0.1f, 16, 3.2f, PixelFX.ZoneDust(), 0.35f, 1, PixelShape.Square, false, PixelLayer.Front, 0.2f, 0.4f);
     }
@@ -931,6 +1006,13 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     // ---------------------------------------------------------------- KINGMOSS: animation
     private const string IdleState = "Idle";
     private bool Animated => bodyAnimator != null && bodyAnimator.runtimeAnimatorController != null;
+
+    // FOXBOSS: the boss's controller has this state (a clip named "<Boss>_<state>")
+    private bool HasState(string state) => clips.ContainsKey(state);
+
+    // FOXBOSS: where a Charge or RushStomp may run to
+    private float LeftX => leftLimit.position.x + limitInset;
+    private float RightX => rightLimit.position.x - limitInset;
 
     private void Anim(string state)
     {

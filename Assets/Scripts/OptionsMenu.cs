@@ -20,12 +20,12 @@ public class OptionsMenu : MonoBehaviour
     private static readonly string[,] Controls =
     {
         { "MOVE", "ARROWS / A D", "LEFT STICK" },
-        { "JUMP", "SPACE", "TRIANGLE" },
+        { "JUMP", "SPACE  (TWICE: SUPER)", "TRIANGLE  (TWICE: SUPER)" }, // SUPERTAP:
         { "TALISMAN 1", "Z", "SQUARE" },
         { "TALISMAN 2", "X", "CROSS" },
         { "TALISMAN 3", "C", "CIRCLE" },
         { "STOMP", "LAND ON AN ENEMY", "LAND ON AN ENEMY" },
-        { "SUMMON DRAGON", "-", "R1  (AGAIN TO DISMOUNT)" },
+        { "SWITCH MOUNT", "-", "R1  (SUMMONING TALISMAN)" }, // SUMMON: the talisman's button summons; R2 dismounts
         { "QUICK ITEM", "Q", "L1" },
         { "NEXT TALISMAN 1", "V", "L2" }, // L2CYCLE: cycles talisman slot 1 through the unequipped ones
         { "SHOP / ENTER", "UP / W / E", "D-PAD UP" },

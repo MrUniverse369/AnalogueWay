@@ -28,6 +28,7 @@ public static class Inventory
     private static string quickHome; // L2CYCLE: the talisman the Talisman Holder put in slot 1 (see QuickHome)
     private static readonly Dictionary<string, int> skillLevels = new Dictionary<string, int>(); // SKILLS:
     private static int crystalBalance; // SKILLS:
+    private static SummonMount summonMount; // SUMMON:
 
     public static HNLCatalog Catalog
     {
@@ -62,6 +63,7 @@ public static class Inventory
         quickItem = null; // QUICKITEM:
         skillLevels.Clear(); // SKILLS:
         crystalBalance = 0;
+        summonMount = SummonMount.SpiritFox; // SUMMON:
         for (int i = 0; i < SlotCount; i++) equipped[i] = null;
         if (Catalog != null && Catalog.startingLoadout != null)
         {
@@ -84,11 +86,15 @@ public static class Inventory
         return talisman != null && owned.Contains(talisman.name);
     }
 
-    /// <summary>Gives Harvey a talisman. Returns true if it is new. It goes into a free slot if there is one.</summary>
+    /// <summary>
+    /// Gives Harvey a talisman. Returns true if it is new. It goes into a free slot if there is one. COINPULL: a
+    /// talisman taken out of the catalog (the Coin Magnet, for now) can't be given: it would fill a slot with nothing.
+    /// </summary>
     public static bool Unlock(Talisman talisman)
     {
         EnsureInit();
-        if (talisman == null || !owned.Add(talisman.name)) return false;
+        if (talisman == null || (Catalog != null && Catalog.TalismanById(talisman.name) == null)) return false; // COINPULL:
+        if (!owned.Add(talisman.name)) return false;
         for (int i = 0; i < SlotCount; i++)
         {
             if (equipped[i] != null) continue;
@@ -292,6 +298,20 @@ public static class Inventory
         set { EnsureInit(); crystalBalance = Mathf.Max(0, value); }
     }
 
+    // ---------------------------------------------------------------- SUMMON: the Summoning Talisman's mount
+    /// <summary>SUMMON: the mount the Summoning Talisman calls (R1 switches it). Saved, so it carries between levels.</summary>
+    public static SummonMount SummonMount
+    {
+        get { EnsureInit(); return summonMount; }
+        set
+        {
+            EnsureInit();
+            if (summonMount == value) return;
+            summonMount = value;
+            Changed?.Invoke(); // GameSession autosaves; the HUD redraws
+        }
+    }
+
     // ---------------------------------------------------------------- one-time rewards
     /// <summary>Marks a one-time reward (a chest's bonus item, say) as taken. Returns false if it already was.</summary>
     public static bool Claim(string key)
@@ -323,6 +343,7 @@ public static class Inventory
         foreach (KeyValuePair<string, int> pair in skillLevels) skills.Add(new ItemStack { id = pair.Key, count = pair.Value });
         data.skills = skills.ToArray();
         data.crystalBalance = crystalBalance;
+        data.summonMount = summonMount.ToString(); // SUMMON:
     }
 
     /// <summary>Restores a save. Saves from before the Talisman Holder (no talisman data) get the new-game loadout.</summary>
@@ -359,6 +380,7 @@ public static class Inventory
             foreach (ItemStack s in data.skills)
                 if (s != null && !string.IsNullOrEmpty(s.id) && s.count > 0) skillLevels[s.id] = s.count;
         crystalBalance = Mathf.Max(0, data.crystalBalance);
+        summonMount = Enum.TryParse(data.summonMount, out SummonMount m) ? m : SummonMount.SpiritFox; // SUMMON: older saves: the fox
         quickItem = !string.IsNullOrEmpty(data.quickItem) && (Catalog == null || Catalog.ItemById(data.quickItem) != null) ? data.quickItem : null; // QUICKITEM: older saves have none
         quickHome = !string.IsNullOrEmpty(data.quickHome) && owned.Contains(data.quickHome) ? data.quickHome : equipped[0]; // L2CYCLE: older saves: slot 1's talisman
         RaiseAll();

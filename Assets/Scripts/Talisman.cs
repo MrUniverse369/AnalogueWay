@@ -73,7 +73,7 @@ public class Talisman : ScriptableObject
     public float Duration => duration;
     public float Cooldown => cooldown;
     public bool RetriggerWhileHeld => retriggerWhileHeld;
-    public float ChiPerSecond => chiPerSecond; // CHI:
+    public virtual float ChiPerSecond => chiPerSecond; // CHI: // SUMMON: virtual (the dragon spends its own chi)
     public TalismanTrait Traits => traits;
     public string AnimatorBool => animatorBool;
     public bool HasAnimatorBool => !string.IsNullOrEmpty(animatorBool);
@@ -104,4 +104,7 @@ public class Talisman : ScriptableObject
 
     /// <summary>FOXMOUNT: runs alongside other talismans: it neither waits for nor blocks them (PowerUpManager oneAtATime).</summary>
     public virtual bool RunsAlongside => false;
+
+    /// <summary>SUMMON: no time limit: it runs until KeepRunning says stop (the dragon flies until chi runs out).</summary>
+    public virtual bool Untimed => false;
 }

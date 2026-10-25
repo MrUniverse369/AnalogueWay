@@ -34,7 +34,7 @@ public static class TutorialLevelBuilder
         new TutorialGuide.Step { title = "MOVE", keyboard = "WALK RIGHT: ARROW KEYS OR A / D", controller = "LEFT STICK" },
         new TutorialGuide.Step { title = "JUMP", keyboard = "PRESS SPACE TO JUMP UP AND OVER THE GAP", controller = "TRIANGLE TO JUMP" },
         new TutorialGuide.Step { title = "STOMP", keyboard = "JUMP ON THE BOXES TO STOMP THEM", controller = "TRIANGLE TO JUMP, LAND ON TOP" },
-        new TutorialGuide.Step { title = "SUPER JUMP", keyboard = "HOLD C, THEN SPACE: CLIMB THE LEDGES", controller = "CIRCLE, THEN TRIANGLE" },
+        new TutorialGuide.Step { title = "SUPER JUMP", keyboard = "TAP SPACE TWICE, QUICKLY: CLIMB THE LEDGES", controller = "TAP TRIANGLE TWICE, QUICKLY" }, // SUPERTAP:
         new TutorialGuide.Step { title = "DASH", keyboard = "HOLD X TO DASH THROUGH THE BOXES", controller = "CROSS TO DASH" },
         new TutorialGuide.Step { title = "ALL TOGETHER", keyboard = "JUMP, STOMP, SUPER JUMP AND DASH TO THE END", controller = "EVERYTHING YOU'VE LEARNED" },
     };
@@ -103,7 +103,6 @@ public static class TutorialLevelBuilder
         for (int i = 0; i < level.goals.Count; i++) goals.GetArrayElementAtIndex(i).objectReferenceValue = level.goals[i];
         var cat = AssetDatabase.LoadAssetAtPath<HNLCatalog>("Assets/Resources/HNLCatalog.asset");
         gso.FindProperty("dash").objectReferenceValue = cat.TalismanById("Talisman_SpeedBoost");
-        gso.FindProperty("superJump").objectReferenceValue = cat.TalismanById("alisman_SuperJump");
         gso.ApplyModifiedPropertiesWithoutUndo();
 
         // the enemies' box sprite, set last: set while the enemies were being made it didn't stick (they kept the template's)

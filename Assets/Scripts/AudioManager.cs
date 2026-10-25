@@ -8,6 +8,11 @@ public class AudioManager : MonoBehaviour
    [Tooltip("WORLDMUSIC: in a level with tori gates (changeWorld), the music for the winter spirit world (changeWorld.lWorld false); " +
             "Background Music plays in the living world. Empty = Background Music everywhere. Set to a PLACEHOLDER track for now.")]
    public AudioClip spiritWorldMusic;
+   [Tooltip("RAINBOWMUSIC: plays (looping) while the combo is at its rainbow stage, then the level's track comes back where " +
+            "it left off. Empty = the level's music carries on.")]
+   public AudioClip rainbowMusic;
+   [Tooltip("RAINBOWMUSIC: crossfade into and out of the rainbow track (seconds).")]
+   public float rainbowFadeIn = 0.4f, rainbowFadeOut = 0.8f;
    public AudioClip coinSound;
    public AudioClip winSound;
    public AudioClip jumpSound;
@@ -148,8 +153,36 @@ public class AudioManager : MonoBehaviour
         return hasWorlds == true && !AnalogueWay.changeWorld.lWorld ? spiritWorldMusic : backgroundMusic;
     }
 
+    private void OnEnable() => StompCombo.RainbowChanged += OnRainbow; // RAINBOWMUSIC:
+
+    private void OnDisable() => StompCombo.RainbowChanged -= OnRainbow;
+
+    // RAINBOWMUSIC (2026-10-25): the rainbow stage's own track. The event fires once per start and end (never every
+    // frame), so the track plays through a whole rainbow stage without restarting; after it the level's track resumes
+    // at the point it was left.
+    private AudioClip resumeClip;
+    private float resumeTime;
+
+    private void OnRainbow(bool on)
+    {
+        if (rainbowMusic == null || music == null) return;
+        if (on)
+        {
+            if (music.clip == rainbowMusic && music.isPlaying) return;
+            resumeClip = music.clip;
+            resumeTime = music.time;
+            PlayMusic(rainbowMusic, rainbowFadeIn);
+            return;
+        }
+        if (music.clip != rainbowMusic) return;
+        AudioClip back = resumeClip != null ? resumeClip : WorldTrack();
+        PlayMusic(back, rainbowFadeOut);
+        if (back == resumeClip && back != null && back.length > 0f) music.time = resumeTime % back.length;
+    }
+
     private void Update()
     {
+        if (rainbowMusic != null && music != null && music.clip == rainbowMusic) return; // RAINBOWMUSIC: a world change waits for the rainbow to end
         if (spiritWorldMusic == null || shownWorld == AnalogueWay.changeWorld.lWorld) return;
         shownWorld = AnalogueWay.changeWorld.lWorld;
         PlayMusic(WorldTrack(), 1.2f);

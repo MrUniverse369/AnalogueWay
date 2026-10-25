@@ -8,8 +8,10 @@ using UnityEngine.UI;
 /// the screen shows one step at a time (move, jump, stomp, super jump, dash, then all of them together) with the
 /// keyboard and controller buttons; when the step's TutorialGoals are done it says so, and the next step appears.
 /// After the last step the tutorial ends and the main menu comes back.
-/// The level uses the real Harvey, enemies and talisman code. Only the Spirit Dash (X / Cross) and Super Jump (C /
-/// Circle) are equipped, chi never runs out (the chi meter isn't part of the lesson), and nothing is ever saved.
+/// The level uses the real Harvey, enemies and talisman code. Only the Spirit Dash (X / Cross) is equipped (JUMPSKILLS:
+/// the Super Jump talisman is gone; SkillTree lends the tutorial Jump Power III, so tapping jump twice super jumps the
+/// ledges, and Double Jump), chi
+/// never runs out (the chi meter isn't part of the lesson), and nothing is ever saved.
 /// </summary>
 public class TutorialGuide : MonoBehaviour
 {
@@ -26,9 +28,8 @@ public class TutorialGuide : MonoBehaviour
     [SerializeField] private Step[] steps = new Step[0];
     [Tooltip("Every goal in the level (each says which step it belongs to).")]
     [SerializeField] private TutorialGoal[] goals = new TutorialGoal[0];
-    [Tooltip("The only talismans in the tutorial, in their usual slots (X and C).")]
+    [Tooltip("The only talisman in the tutorial, in its usual slot (X).")]
     [SerializeField] private Talisman dash;
-    [SerializeField] private Talisman superJump;
     [Tooltip("How long \"NICE!\" shows before the next step.")]
     [SerializeField] private float stepPause = 1.1f;
     [Tooltip("How long the closing message shows before the main menu.")]
@@ -49,7 +50,7 @@ public class TutorialGuide : MonoBehaviour
     private void Awake()
     {
         if (!GameSession.IsTutorial) GameSession.BeginTutorialInPlace(); // played straight from the editor: still never saved
-        PowerUpManager.SetLoadoutOverride(new[] { null, dash, superJump });
+        PowerUpManager.SetLoadoutOverride(new[] { null, dash, null }); // JUMPSKILLS: no Super Jump talisman
     }
 
     private void Start()
