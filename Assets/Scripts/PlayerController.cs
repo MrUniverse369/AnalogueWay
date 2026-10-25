@@ -13,6 +13,10 @@ public class PlayerController : CharecterBehaviour
     private Rigidbody2D rb2D;
     private SpriteRenderer spriteRendererObj;
     public static bool playerInviInvincible;
+    /// <summary>TRAILER: scripted stick input for capture bots (NaN = read the real axes, the normal case).</summary>
+    public static float BotX = float.NaN, BotY = float.NaN;
+    private static float AxisX => float.IsNaN(BotX) ? Input.GetAxisRaw("Horizontal") : BotX;
+    private static float AxisY => float.IsNaN(BotY) ? Input.GetAxisRaw("Vertical") : BotY;
     PlayerControls pControls;
     private bool mountActive;
     [SerializeField] private float speed;
@@ -355,7 +359,7 @@ public class PlayerController : CharecterBehaviour
     }
     public override void CharMovement()
     {
-        float raw = Input.GetAxisRaw("Horizontal");
+        float raw = AxisX; // TRAILER:
         if (waitForNeutral && Mathf.Abs(raw) < 0.01f) waitForNeutral = false; // RESPAWNHOLD: let go once, then he runs again
         dir = NoControl || waitForNeutral ? 0f : raw; // STUN: dazed: he stands where the knockback left him // RESPAWNHOLD:
         // FOXMOUNT: the fox runs faster than Harvey; a Spirit Dash on it keeps its own speed (not both stacked)
@@ -399,8 +403,8 @@ public class PlayerController : CharecterBehaviour
 
     private void Fly()
     {
-        yDir = Input.GetAxisRaw("Vertical");
-        dir = Input.GetAxisRaw("Horizontal");
+        yDir = AxisY; // TRAILER:
+        dir = AxisX;
         flightVel = new Vector2(speed * dir, speed * yDir);
         Flip(dir);
 

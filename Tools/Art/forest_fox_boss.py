@@ -37,6 +37,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from zone_map import read_png_rgba, write_png  # noqa: E402
 from grass_enemies import lum, phase, build_palette, snap, drop_specks, lit, CLEAR  # noqa: E402
 import grass_enemies  # noqa: E402
+import pixel_clean  # noqa: E402  CLEANUP (2026-10-25)
 
 DIR = "Assets/Sprites/Enemies/Grass/ForestSpiritFox/"
 OUT = DIR + "ForestFoxBoss_Body.png"
@@ -211,6 +212,10 @@ def main():
                 for x, c in enumerate(row):
                     if c[3]:
                         sheet[r * FH + up + (y - b)][f * FW + back + (x - a)] = c
+    # CLEANUP (2026-10-25): tidy the downsample's lumps on the silhouettes (stair doubles, 1-px bumps and dents;
+    # pixel_clean.py says what it leaves alone), then the measurements below see the cleaned frames
+    sheet, fixes = pixel_clean.clean(sheet)
+    print(f"pixel_clean: {len(fixes)} fixes")
     write_png(OUT, FW * cols, FH * len(sheet_rows), sheet)
 
     # measurements, in game pixels from the pivot (x forward, y up)

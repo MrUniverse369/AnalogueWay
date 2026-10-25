@@ -22,6 +22,13 @@ using UnityEngine;
 /// Assets/Editor/SamuraiBlockSetup.cs) for the whole slide and hold, never a walk frame, and stuns Harvey for stunTime
 /// (1 s: no running, jumping, dashing or talismans, PlayerController.Stun), so he can't keep dashing into it.
 /// AFTERIMAGE: the dash leaves fading red afterimages (AfterimageTrail, the same effect as Harvey's Spirit Dash).
+/// DASHCLASH (2026-10-25): the one exception to the block. If Harvey's Spirit Dash meets the monkey head-on while the
+/// monkey is itself dashing (the slash's dash frames and the moment the blade stays live after them), the two dashes
+/// cancel each other out: neither is hurt, knocked back or stunned, Harvey's dash just ends (its cooldown starts as
+/// usual) and he stops where he is, and the monkey stops dead in its block stance, holds it for dashClashHold and
+/// patrols again (its usual cooldown). The battle card (ClashCard: the backdrop goes black and 「戦い」 flashes up)
+/// plays from that confirmed clash only; it never decides anything. The wind-up, the recovery and the patrol block
+/// as before, and a dash into its back or from above still defeats it.
 /// </summary>
 [RequireComponent(typeof(Animator))]
 public class SamuraiSlash : MonoBehaviour
@@ -66,6 +73,18 @@ public class SamuraiSlash : MonoBehaviour
     [Tooltip("Empty = the slash sound, pitched up.")]
     [SerializeField] private AudioClip clashSound;
 
+    [Header("Dash clash (DASHCLASH: both dashes cancel)")]
+    [Tooltip("DASHCLASH: Harvey's Spirit Dash meeting the monkey's own dash head-on cancels both: nobody is hurt, knocked " +
+             "back or stunned. The monkey holds its block stance this long, then patrols again (its usual cooldown).")]
+    [SerializeField] private float dashClashHold = 0.7f;
+    [Tooltip("DASHCLASH: for this long after the clash the monkey's body can't hurt Harvey: it is the same contact, and " +
+             "clearly longer than the hold (its patrol walks about 4 units a second, the clash leaves them 2 apart), so " +
+             "the monkey walking off again doesn't bump him as it goes. Harvey is free the whole time; standing in its " +
+             "path after this is on him, as with any enemy.")]
+    [SerializeField] private float dashClashGrace = 1.5f;
+    [Tooltip("DASHCLASH: show the battle card (the backdrop goes black and 「戦い」 flashes up).")]
+    [SerializeField] private bool dashClashCard = true;
+
     [Header("Afterimages during the dash")]
     [SerializeField] private float afterimageInterval = 0.035f;
     [SerializeField] private Color afterimageTint = new Color(1f, 0.55f, 0.55f, 1f);
@@ -82,6 +101,8 @@ public class SamuraiSlash : MonoBehaviour
     private bool clashable; // CLASH: during the wind-up and while the blade is live
     private static float clashGraceUntil = -1f;
     private AfterimageTrail trail; // AFTERIMAGE:
+    private bool dashing; // DASHCLASH: the monkey's dash frames, and the moment the blade stays live after them
+    private static float lastDashClash = -1f; // DASHCLASH: one clash per contact, whichever check sees it first
 
     /// <summary>CLASH: just after a clash; Harvey's knockback isn't a hurt (no flicker, no hurt animation, no life lost).</summary>
     public static bool ClashProtected => Time.time < clashGraceUntil;
@@ -113,6 +134,7 @@ public class SamuraiSlash : MonoBehaviour
         if (attack != null) StopCoroutine(attack);
         attack = null;
         clashable = false;
+        dashing = false; // DASHCLASH:
         anim.speed = 1f; // CLASH: a stagger freezes the frame
         if (patrol != null) patrol.enabled = true;
     }
@@ -184,6 +206,7 @@ public class SamuraiSlash : MonoBehaviour
         Vector3 feet = new Vector3(sprite.bounds.center.x, sprite.bounds.min.y, 0f);
         PixelFX.Burst(feet, 6, 1.2f, 2.4f, PixelFX.ZoneDust(), 0.25f, 0.4f, 1, PixelShape.Square, PixelMotion.Float, false, PixelLayer.Front, dir > 0 ? 160f : 20f, 40f);
         trail.Spawn(); // AFTERIMAGE: one where the dash starts
+        dashing = true; // DASHCLASH: from here until the blade stops being live, a head-on Spirit Dash cancels both dashes
         float nextImage = afterimageInterval;
         for (float t = 0f; t < dashTime; t += Time.deltaTime)
         {
@@ -215,6 +238,7 @@ public class SamuraiSlash : MonoBehaviour
             TryHit();
             yield return null;
         }
+        dashing = false; // DASHCLASH:
         clashable = false; // CLASH: the blade is no longer live (a dash from the front is still blocked, see TryClash)
         yield return Wait(recover - 0.08f);
         Finish();
@@ -232,6 +256,7 @@ public class SamuraiSlash : MonoBehaviour
     private void Finish()
     {
         clashable = false;
+        dashing = false; // DASHCLASH:
         anim.speed = 1f;
         if (enemy == null || !enemy.IsDying) anim.Play(WalkState, 0, 0f);
         if (patrol != null) patrol.enabled = true;
@@ -249,7 +274,8 @@ public class SamuraiSlash : MonoBehaviour
     public bool TryClash()
     {
         if (!DashInSight()) return false;
-        Clash();
+        if (dashing && HeadOn()) DashClash(); // DASHCLASH: both dashing, head-on: the dashes cancel out
+        else Clash();
         return true;
     }
 
@@ -262,9 +288,13 @@ public class SamuraiSlash : MonoBehaviour
         Bounds body = sprite.bounds;
         body.center = new Vector3(body.center.x, body.center.y, 0f);
         if (!Reach().Intersects(his) && !body.Intersects(his)) return false;
-        Clash();
+        if (dashing && HeadOn()) DashClash(); // DASHCLASH:
+        else Clash();
         return true;
     }
+
+    // DASHCLASH: Harvey is moving at the monkey's face (so not standing in front of it, and not coming from behind)
+    private bool HeadOn() => playerRb != null && -playerRb.linearVelocity.x * Facing > 0.5f;
 
     // BLOCK: Spirit Dash on and Harvey in the monkey's line of sight
     private bool DashInSight()
@@ -335,6 +365,65 @@ public class SamuraiSlash : MonoBehaviour
         }
 
         attack = StartCoroutine(Recoil());
+    }
+
+    // ---------------------------------------------------------------- DASHCLASH
+    // DASHCLASH: Harvey's Spirit Dash and the monkey's dash meet head-on: both end, nobody is hurt, knocked back or
+    // stunned. Decided here, in the dash frames, before any of the effects; the battle card is only shown from it.
+    private void DashClash()
+    {
+        if (Time.time - lastDashClash < 0.25f) return; // the frame check and the trigger can both see one contact
+        lastDashClash = Time.time;
+        clashable = false;
+        dashing = false;
+        hitThisAttack = true; // the blade takes no life from this attack
+        if (attack != null) StopCoroutine(attack);
+        if (patrol != null) patrol.enabled = false;
+        clashGraceUntil = Time.time + dashClashGrace; // ClashProtected: the touching bodies are the same contact, not a hit
+
+        // Harvey: the dash ends (its cooldown starts as after any dash) and he stops where he is. No life (the
+        // bodies' triggers run after us this step and see him invincible; PlayerController clears that next frame),
+        // no knockback, no stun.
+        if (PowerUpManager.Instance != null) PowerUpManager.Instance.EndTrait(TalismanTrait.DefeatsEnemiesOnContact);
+        PlayerController.playerInviInvincible = true;
+        if (playerBody != null) playerBody.pushBackCounter = 0f;
+        if (playerRb != null) playerRb.linearVelocity = new Vector2(0f, Mathf.Min(playerRb.linearVelocity.y, 0f));
+
+        // the monkey: its dash stops dead in the block stance (held for dashClashHold, then the patrol and cooldown)
+        blockStance = anim.HasState(0, BlockState);
+        anim.speed = 1f;
+        if (blockStance)
+        {
+            anim.Play(BlockState, 0, 0f);
+            anim.Update(0f);
+        }
+
+        // the clang, bigger than a block's: both flash white, sparks fly from where the blades met
+        Vector3 mid = (sprite.bounds.center + player.transform.position) * 0.5f;
+        mid.z = 0f;
+        PixelFX.Ring(mid, 18, 5f, new[] { PixelFX.Cream, PixelFX.Yellow, PixelFX.Hex("ff6b97") }, 0.25f, 1, PixelShape.Square, true, PixelLayer.Front, 1f, 0f);
+        PixelFX.Burst(mid, 14, 3f, 6.5f, new[] { PixelFX.Cream, PixelFX.Yellow }, 0.18f, 0.35f, 1, PixelShape.Star, PixelMotion.Float, true);
+        PixelFX.Burst(mid, 8, 5f, 8f, new[] { PixelFX.Cream, PixelFX.Hex("5fcde4") }, 0.08f, 0.14f, 1, PixelShape.Streak, PixelMotion.Straight, true);
+        SpriteFX.On(sprite).Flash(Color.white, 0.15f);
+        SpriteRenderer his = player.GetComponent<SpriteRenderer>();
+        if (his != null) SpriteFX.On(his).Flash(Color.white, 0.15f);
+        AudioManager audio = AudioManager.Instance;
+        if (audio != null)
+        {
+            if (clashSound != null) audio.PlaySfxOneShot(clashSound);
+            else audio.PlaySfxOneShotPitched(audio.SamuraiSlashSound, 1.6f);
+        }
+        if (dashClashCard) ClashCard.Show();
+
+        attack = StartCoroutine(DashClashHold());
+    }
+
+    // DASHCLASH: the block stance held where the dashes met, then back to the patrol
+    private IEnumerator DashClashHold()
+    {
+        if (!blockStance) anim.speed = 0f; // no Block state (an older controller): freeze the frame instead
+        yield return Wait(dashClashHold);
+        if (attack != null) Finish(); // Wait already finished it if the monkey was stomped meanwhile
     }
 
     // CLASH: slides back along the patrol path in its block stance, holds it, then back to the patrol

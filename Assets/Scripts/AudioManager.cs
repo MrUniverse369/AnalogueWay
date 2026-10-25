@@ -44,6 +44,9 @@ public class AudioManager : MonoBehaviour
    public AudioClip SamuraiSlashSound => samuraiSlashSound != null ? samuraiSlashSound : enemyDashDefeatSound; // SLASH:
    public AudioClip ChestTrapSound => chestTrapSound != null ? chestTrapSound : BossSlamSound; // CHEST:
    public UnityEngine.Audio.AudioMixerGroup SfxGroup => sfx != null ? sfx.outputAudioMixerGroup : null; // BOULDER: for sounds that need their own looping source
+   /// <summary>TRAILER: every sound effect as it starts (clip, final volume, pitch, and true for PlaySfx, whose next
+   /// sound cuts this one off), for capture tools.</summary>
+   public static System.Action<AudioClip, float, float, bool> OneShotPlayed;
 
     // MIX: one place to balance everything. 1 = the clip as recorded.
     // Defaults were measured so each sound sits at a set level against the music at musicVolume 0.35:
@@ -130,6 +133,7 @@ public class AudioManager : MonoBehaviour
         coinVoice = (coinVoice + 1) % coinVoices.Length;
         v.pitch = Mathf.Pow(2f, CoinSteps[coinStep] / 12f);
         v.PlayOneShot(coinSound, sfxBaseVolume * coinVolume);
+        OneShotPlayed?.Invoke(coinSound, v.volume * sfxBaseVolume * coinVolume, v.pitch, false); // TRAILER:
     }
 
     // Start is called before the first frame update
@@ -243,12 +247,15 @@ public class AudioManager : MonoBehaviour
         sfx.volume = sfxBaseVolume * VolumeFor(sound); // MIX:
         sfx.clip = sound;
         sfx.Play();
+        if (sound != null) OneShotPlayed?.Invoke(sound, sfx.volume, sfx.pitch, true); // TRAILER:
     }
 
     // SFX: plays on top of other sounds instead of replacing them (PlaySfx swaps the clip and restarts)
     public void PlaySfxOneShot(AudioClip sound, float volume = 1f)
     {
-        if (sound != null) oneShots.PlayOneShot(sound, sfxBaseVolume * volume * VolumeFor(sound)); // MIX:
+        if (sound == null) return;
+        oneShots.PlayOneShot(sound, sfxBaseVolume * volume * VolumeFor(sound)); // MIX:
+        OneShotPlayed?.Invoke(sound, oneShots.volume * sfxBaseVolume * volume * VolumeFor(sound), oneShots.pitch, false); // TRAILER:
     }
 
     // CLASH: a one-shot at another pitch (its own voice, so the shared one-shots keep pitch 1)
@@ -258,6 +265,7 @@ public class AudioManager : MonoBehaviour
         if (sound == null || pitchedShots == null) return;
         pitchedShots.pitch = pitch;
         pitchedShots.PlayOneShot(sound, sfxBaseVolume * volume * VolumeFor(sound));
+        OneShotPlayed?.Invoke(sound, pitchedShots.volume * sfxBaseVolume * volume * VolumeFor(sound), pitch, false); // TRAILER:
     }
 
     // MIX: the volume for a clip based on which slot it is in (clips in no slot, like talisman sounds, play at 1)

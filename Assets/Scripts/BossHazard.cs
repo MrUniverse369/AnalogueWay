@@ -27,10 +27,21 @@ public class BossHazard : MonoBehaviour
     private SpriteFX fx; // FX:
     private float gravity; // KINGMOSS: a thrown boulder arcs; 0 = a straight line, as before
     private Color[] landColours; // KINGMOSS: pebbles thrown up where it lands (null = the usual dust only)
+    private bool impacted; // SPIRITBLAST: the impact effect plays once per hazard
+
+    /// <summary>SPIRITBLAST: called once, where this hazard first touches the player (effects only; the hurt is the owner's).</summary>
+    public System.Action<Vector3> Impact;
+
+    /// <summary>SPIRITBLAST: seconds it still lives (infinite unless Launch gave a lifetime).</summary>
+    public float LifeLeft => lifeLeft;
+
+    /// <summary>SPIRITBLAST: the lifetime Launch gave it.</summary>
+    public float Lifetime { get; private set; } = float.PositiveInfinity;
 
     public void Launch(IBossAttacker boss, Vector2 vel, float hangTime, float floor, float leftX, float rightX, float lifetime = float.PositiveInfinity)
     {
         lifeLeft = lifetime; // BOSSES:
+        Lifetime = lifetime; // SPIRITBLAST:
         owner = boss;
         velocity = vel;
         hangLeft = hangTime;
@@ -83,6 +94,10 @@ public class BossHazard : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (owner != null && other.CompareTag("PlayerDetectionArea")) owner.DamagePlayer(transform.position);
+        if (owner == null || !other.CompareTag("PlayerDetectionArea")) return;
+        owner.DamagePlayer(transform.position);
+        if (impacted) return; // SPIRITBLAST: the effect once per hazard, however long the contact lasts
+        impacted = true;
+        Impact?.Invoke(other.bounds.center);
     }
 }

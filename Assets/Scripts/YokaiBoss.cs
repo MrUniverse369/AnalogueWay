@@ -137,6 +137,21 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
              "way he fires. Zero: none.")]
     [SerializeField] private Vector2 beamGlowOffset;
 
+    [Header("Spirit Blast (SPIRITBLAST:)")]
+    [Tooltip("SPIRITBLAST: recolours the beam template onto this ramp by brightness (dark, mid, light: the Spirit Fox's " +
+             "greens) and dresses it with motes, a core shimmer, an impact burst and a fade-out (SpiritBlastFX). Empty: " +
+             "the template's own colours (King Moss's blue beam), as before.")]
+    [SerializeField] private Color[] blastPalette;
+    [Tooltip("SPIRITBLAST: the motes and sparks of the charge-up, the beam and its impact. Empty: the blue beam sparks.")]
+    [SerializeField] private Color[] blastColours;
+    [Tooltip("SPIRITBLAST: the glow gathering at the antler tips while the beam charges (alpha = how strong; 0: the old " +
+             "blue body flash and sparks instead).")]
+    [SerializeField] private Color antlerGlow = new Color(0f, 0f, 0f, 0f);
+    [Tooltip("SPIRITBLAST: motes drawn into the antler tips per second at full charge.")]
+    [SerializeField] private float chargeMoteRate = 50f;
+    [Tooltip("SPIRITBLAST: glowing motes drifting off the beam per second while it fires.")]
+    [SerializeField] private float beamMoteRate = 70f;
+
     [Header("Rush and stomp (FOXBOSS:)")]
     [Tooltip("How far the sprint goes at most before he rears up.")]
     [SerializeField] private float rushDistance = 3.5f;
@@ -493,19 +508,35 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
             float fromX = transform.position.x + facing * handOffset.x;
             float toX = facing > 0 ? rightLimit.position.x + 1f : leftLimit.position.x - 1f;
             float y = GroundY + beamHeight;
+            Color[] sparks = BlastSparks; // SPIRITBLAST:
+            bool blast = antlerGlow.a > 0f && beamGlowOffset != Vector2.zero; // SPIRITBLAST: the fox's charge-up
+            float gathered = 0f;
             for (float t = 0f; t < beamWarnTime; t += Time.deltaTime)
             {
-                Fx.HoldFlash(new Color(0.4f, 0.75f, 1f, 0.45f * Mathf.PingPong(t * 6f, 1f)));
+                float charge = t / beamWarnTime;
+                if (blast)
+                {
+                    // SPIRITBLAST: the energy builds at the antlers; the body only catches a faint tint of it near the end
+                    Fx.HoldFlash(new Color(antlerGlow.r, antlerGlow.g, antlerGlow.b, 0.12f * charge * charge * (0.7f + 0.3f * Mathf.PingPong(t * 8f, 1f))));
+                    ChargeMotes(ref gathered, charge, sparks);
+                }
+                else Fx.HoldFlash(new Color(0.4f, 0.75f, 1f, 0.45f * Mathf.PingPong(t * 6f, 1f)));
                 if (Random.value < 0.6f)
                     PixelFX.Emit(new Vector3(Mathf.Lerp(fromX, toX, Random.value), y + Random.Range(-0.08f, 0.08f), 0f), Vector2.zero,
-                        PixelFX.Pick(BeamColours), Random.Range(0.15f, 0.3f), 1, PixelShape.Square, PixelMotion.Float, true, PixelLayer.Front);
-                if (beamGlowOffset != Vector2.zero && Random.value < 0.5f) // FOXBOSS: spirit energy gathering in the antlers
+                        PixelFX.Pick(sparks), Random.Range(0.15f, 0.3f), 1, PixelShape.Square, PixelMotion.Float, true, PixelLayer.Front);
+                if (!blast && beamGlowOffset != Vector2.zero && Random.value < 0.5f) // FOXBOSS: spirit energy gathering in the antlers
                     PixelFX.Emit(new Vector3(transform.position.x + facing * beamGlowOffset.x + Random.Range(-0.35f, 0.35f), GroundY + beamGlowOffset.y + Random.Range(-0.3f, 0.3f), 0f),
                         new Vector2(0f, Random.Range(0.2f, 0.6f)), PixelFX.Pick(BeamColours), Random.Range(0.2f, 0.4f), 1, PixelShape.Square, PixelMotion.Float, true, PixelLayer.Front);
                 yield return null;
             }
             Fx.HoldFlash(Color.clear);
             Anim("BeamFire");
+            if (blast) // SPIRITBLAST: the gathered energy lets go: a ring at the antlers and sparks thrown the way it fires
+            {
+                Vector3 tip = AntlerTip;
+                PixelFX.Ring(tip, 12, 4f, sparks, 0.22f, 1, PixelShape.Square, true);
+                PixelFX.Burst(new Vector3(fromX, y, 0f), 10, 3f, 7f, sparks, 0.15f, 0.3f, 1, PixelShape.Star, PixelMotion.Float, true, PixelLayer.Front, facing > 0 ? 0f : 180f, 70f);
+            }
             SpawnBeam(facing, fromX, toX, y);
             Play(audioManager != null ? (audioManager.dragonSummonSound != null ? audioManager.dragonSummonSound : audioManager.powerUpSound) : null);
             yield return new WaitForSeconds(Mathf.Max(beamLife, AnimLength("BeamFire")));
@@ -841,6 +872,8 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
             sr.size = new Vector2(Mathf.Max(0f, length - tailW - headW) / Mathf.Max(0.01f, body.localScale.x), sr.size.y);
         }
         h.Launch(this, Vector2.zero, 0f, float.NegativeInfinity, float.NegativeInfinity, float.PositiveInfinity, beamLife);
+        if (blastPalette != null && blastPalette.Length >= 3) // SPIRITBLAST: the Spirit Fox's green blast on the same hazard
+            SpiritBlastFX.Dress(h, blastPalette[0], blastPalette[1], blastPalette[2], BlastSparks, beamMoteRate, length, dir);
         hazards.Add(h.gameObject);
     }
 
@@ -944,6 +977,50 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     // ---------------------------------------------------------------- FX
     private SpriteFX fx;
     private SpriteFX Fx => fx != null ? fx : (fx = SpriteFX.On(bodySprite));
+
+    // ---------------------------------------------------------------- SPIRITBLAST
+    private Color[] BlastSparks => blastColours != null && blastColours.Length > 0 ? blastColours : BeamColours;
+
+    // where the lit antlers are now: read off the frame he shows (the head rears back while he charges, so a fixed
+    // point would sit in front of his chest), or beamGlowOffset from his feet the way he faces when the sheet can't
+    // be read or the frame has no lit pixels
+    private Vector3 AntlerTip => SpiritBlastFX.TryLitPoint(bodySprite, out Vector3 lit)
+        ? new Vector3(lit.x, lit.y, 0f)
+        : new Vector3(transform.position.x + facing * beamGlowOffset.x, GroundY + beamGlowOffset.y, 0f);
+
+    // SPIRITBLAST: spirit energy gathering in the antlers while the beam charges, building with 'charge' (0..1): motes
+    // drawn in from around the head to the tips, a shimmer of glowing blocks at the tips, and a soft halo there that
+    // grows as the charge builds (re-emitted every frame for a moment, so nothing lingers). All at the head: the
+    // body itself only catches a faint tint (SpiritBeam).
+    private void ChargeMotes(ref float gathered, float charge, Color[] palette)
+    {
+        Vector3 tip = AntlerTip;
+        gathered += chargeMoteRate * (0.2f + 0.8f * charge) * Time.deltaTime;
+        while (gathered >= 1f)
+        {
+            gathered -= 1f;
+            if (Random.value < 0.55f)
+            {
+                // drawn in: starts out around the antlers and flies straight to the tips (its life is the way there)
+                Vector2 off = Random.insideUnitCircle.normalized * Random.Range(0.6f, 1.1f + 0.5f * charge);
+                float speed = Random.Range(2.5f, 4f);
+                PixelFX.Emit(tip + (Vector3)off, -off.normalized * speed, PixelFX.Pick(palette), off.magnitude / speed, 1, PixelShape.Square, PixelMotion.Straight, true);
+            }
+            else
+            {
+                // the shimmer at the tips, bigger blocks as the charge builds
+                Vector3 p = tip + (Vector3)(Random.insideUnitCircle * (0.15f + 0.25f * charge));
+                PixelFX.Emit(p, new Vector2(0f, Random.Range(0.2f, 0.8f)), PixelFX.Pick(palette), Random.Range(0.12f, 0.25f),
+                    Random.value < charge ? 2 : 1, PixelShape.Square, PixelMotion.Float, true);
+            }
+        }
+        if (charge > 0.3f)
+        {
+            Color halo = antlerGlow;
+            halo.a = antlerGlow.a * (0.3f + 0.7f * charge);
+            PixelFX.Emit(tip, Vector2.zero, halo, 0.05f, 3 + Mathf.RoundToInt(2f * charge), PixelShape.Square, PixelMotion.Float, true);
+        }
+    }
 
     private static readonly Color[] WispColours = { new Color(0.72f, 0.96f, 1f), new Color(0.79f, 0.72f, 1f), new Color(1f, 1f, 0.92f) };
     private static readonly Color[] BeamColours = { new Color(0.37f, 0.69f, 1f), new Color(0.67f, 0.87f, 1f), Color.white }; // KINGMOSS:

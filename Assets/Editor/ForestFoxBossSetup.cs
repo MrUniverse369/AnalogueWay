@@ -89,6 +89,7 @@ public static class ForestFoxBossSetup
         ti.filterMode = FilterMode.Point;
         ti.mipmapEnabled = false;
         ti.textureCompression = TextureImporterCompression.Uncompressed;
+        ti.isReadable = true; // SPIRITBLAST: SpiritBlastFX.TryLitPoint reads the lit antlers off each frame (458 KB, once)
         ti.alphaIsTransparency = true;
 #pragma warning disable 618 // still the simplest way to slice from code
         ti.spritesheet = metas.ToArray();
@@ -194,6 +195,14 @@ public static class ForestFoxBossSetup
             so.FindProperty("stages.Array.data[0].beams").intValue = 1;
             so.FindProperty("stages.Array.data[1].beams").intValue = 1;
             so.FindProperty("stages.Array.data[2].beams").intValue = 2;
+
+            // SPIRITBLAST: the beam (King Moss's beam art recoloured by brightness), its sparks and the antler glow in
+            // the fox's greens: the grass palette's 37946e / 6abe30 / 99e550 with a pale core
+            SetColours(so, "blastPalette", new[] { Hex("37946e"), Hex("6abe30"), Hex("eefcd0") });
+            SetColours(so, "blastColours", new[] { Hex("99e550"), Hex("6abe30"), Hex("ffffeb"), Hex("d5ffb0") });
+            so.FindProperty("antlerGlow").colorValue = new Color(0.6f, 0.9f, 0.31f, 0.35f);
+            so.FindProperty("chargeMoteRate").floatValue = 50f;
+            so.FindProperty("beamMoteRate").floatValue = 70f;
             so.ApplyModifiedPropertiesWithoutUndo();
 
             PrefabUtility.SaveAsPrefabAsset(root, PrefabPath);
@@ -206,6 +215,16 @@ public static class ForestFoxBossSetup
     }
 
     private static float Round(float v) => Mathf.Round(v * 100f) / 100f;
+
+    // SPIRITBLAST:
+    private static Color Hex(string hex) => ColorUtility.TryParseHtmlString("#" + hex, out Color c) ? c : Color.magenta;
+
+    private static void SetColours(SerializedObject so, string field, Color[] colours)
+    {
+        SerializedProperty p = so.FindProperty(field);
+        p.arraySize = colours.Length;
+        for (int i = 0; i < colours.Length; i++) p.GetArrayElementAtIndex(i).colorValue = colours[i];
+    }
 
     private static void SetPattern(SerializedObject so, int stage, YokaiBoss.Move[] moves)
     {

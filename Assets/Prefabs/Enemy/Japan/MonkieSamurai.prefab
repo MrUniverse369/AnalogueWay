@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6472242d12404d738a2aab55bbae9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toughness: 0
   bounceSpeed: 9
   mTRef: {fileID: 0}
   animator: {fileID: 0}
@@ -241,6 +242,9 @@ MonoBehaviour:
   clashKnockback: 0.35
   stunTime: 1
   clashSound: {fileID: 0}
+  dashClashHold: 0.7
+  dashClashGrace: 1.5
+  dashClashCard: 1
   afterimageInterval: 0.035
   afterimageTint: {r: 1, g: 0.55, b: 0.55, a: 1}
 --- !u!1 &5775275322291475926

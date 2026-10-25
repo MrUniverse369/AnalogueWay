@@ -38,7 +38,7 @@ public class HurtPlayer : MonoBehaviour
 
         // DEATH: an enemy that is already dying (playing its smoke animation) can no longer hurt the player
         if (other.CompareTag("PlayerDetectionArea") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity) && (ownEnemy == null || !ownEnemy.IsDying)
-            // HEAL: (SHIELD: the Healing Stone's shield is handled above, for hazards too) && !SamuraiSlash.ClashProtected // CLASH: not straight after a samurai clash // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
+            && !SamuraiSlash.ClashProtected // CLASH: not straight after a samurai clash (DASHCLASH: this test had slipped into the HEAL comment) // HEAL: (SHIELD: the Healing Stone's shield is handled above, for hazards too) // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
             && (ownEnemy == null || !StompEnemy.StompingOnto(OwnCollider)) // STOMPTIE: a stomp landing in the same step wins
             && (ownEnemy == null || !ownEnemy.JustHit)) // TOUGHNESS: not straight after a stomp that didn't finish it
         {
