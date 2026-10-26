@@ -32,7 +32,7 @@ public class HNLClashTest : MonoBehaviour
     {
         Directory.CreateDirectory(OutDir);
         HNLTrailerTake.UseMemorySaves();
-        StartCoroutine(Mode == "beam" ? Beam() : Clash());
+        StartCoroutine(Mode == "beam" ? Beam() : Mode == "boss" ? Boss() : Clash());
     }
 
     private void Note(string s)
@@ -287,7 +287,8 @@ public class HNLClashTest : MonoBehaviour
                     foreach (SpriteRenderer sr in b.GetComponentsInChildren<SpriteRenderer>())
                         Note($"   {sr.name}: enabled={sr.enabled} visible={sr.isVisible} sprite={(sr.sprite != null ? sr.sprite.name : "none")} color={sr.color} mat={(sr.sharedMaterial != null ? sr.sharedMaterial.shader.name : "none")} layer={sr.sortingLayerName}/{sr.sortingOrder} bounds={sr.bounds:0.00} drawMode={sr.drawMode} size={sr.size}");
                 }
-                if (charged && !fired && Time.time - chargeAt > 0.4f && !shotTaken[side, 0]) { shotTaken[side, 0] = true; Shot($"charge_side{side}"); }
+                if (charged && !fired && Time.time - chargeAt > 0.25f && !shotTaken[side, 0]) { shotTaken[side, 0] = true; Shot($"charge_side{side}"); }
+                if (charged && !fired && Time.time - chargeAt > 0.62f && !shotTaken[side, 3]) { shotTaken[side, 3] = true; Shot($"orb_side{side}"); }
                 if (fired && Time.time - fireAt > 0.08f && !shotTaken[side, 1]) { shotTaken[side, 1] = true; Shot($"fire_side{side}"); }
                 if (fired && Time.time - fireAt > 0.3f && !shotTaken[side, 2]) { shotTaken[side, 2] = true; Shot($"beam_side{side}"); }
                 if (fired && Time.time - fireAt > 1.0f) break;
@@ -303,8 +304,113 @@ public class HNLClashTest : MonoBehaviour
         Finish();
     }
 
-    private readonly bool[,] shotTaken = new bool[2, 3];
+    private readonly bool[,] shotTaken = new bool[2, 4];
     private readonly bool[] dumped = new bool[2];
+
+    // ---------------------------------------------------------------- the samurai boss (DASHCLASH)
+    // Z3BossBattle: Harvey stands mid-arena; each round waits for the boss's dash slash and dashes into it when he is
+    // within reach (expects the card, no life lost, no knockback, the boss attacking again afterwards); then two
+    // controls: standing in the dash's path (a life), and dashing into him while he charges (the counter, a life).
+    private IEnumerator Boss()
+    {
+        float until = Time.time + 8f;
+        PlayerController pc = null;
+        SamuraiBoss boss = null;
+        while (Time.time < until && (pc == null || boss == null))
+        {
+            pc = Player;
+            boss = FindFirstObjectByType<SamuraiBoss>();
+            yield return null;
+        }
+        if (pc == null || boss == null) { Note("FAIL: no player or boss"); Finish(); yield break; }
+        Talisman dash = DashTalisman();
+        Inventory.Unlock(dash);
+        PowerUpManager.Instance.Equip(0, dash);
+        const BindingFlags Any = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+        Transform leftLimit = (Transform)typeof(SamuraiBoss).GetField("leftLimit", Any).GetValue(boss);
+        Transform rightLimit = (Transform)typeof(SamuraiBoss).GetField("rightLimit", Any).GetValue(boss);
+        float mid = (leftLimit.position.x + rightLimit.position.x) * 0.5f;
+        float floor = boss.transform.position.y;
+        float floorDelta = pc.transform.position.y - pc.FeetPosition.y;
+        Note($"boss at {boss.transform.position:0.0}, arena {leftLimit.position.x:0.0}..{rightLimit.position.x:0.0}, stage {boss.StageIndex}");
+
+        for (int round = 0; round < 3; round++)
+        {
+            Place(pc, mid, floor + floorDelta + 0.05f);
+            PlayerController.BotX = 0f;
+            float t0 = Time.time;
+            while (Time.time - t0 < 14f && !boss.Dashing) yield return null;
+            if (!boss.Dashing) { Note($"round {round}: FAIL he never dashed"); continue; }
+            HurtPlayer.pLivesCount = GameSession.StartingLives;
+            int lives = HurtPlayer.pLivesCount;
+            float dashAt = Time.time;
+            while (boss.Dashing && Mathf.Abs(boss.transform.position.x - pc.transform.position.x) > 4.5f) yield return null;
+            float toward = Mathf.Sign(boss.transform.position.x - pc.transform.position.x);
+            PowerUpManager.Instance.SendMessage("TryActivate", (object)0);
+            PlayerController.BotX = toward;
+            bool card = false, knock = false, dashSeen = false;
+            float cardAt = -1f;
+            for (float t = 0f; t < 1.6f; t += Time.deltaTime)
+            {
+                if (PowerUpManager.Has(TalismanTrait.DefeatsEnemiesOnContact)) dashSeen = true;
+                if (ClashCard.Showing && !card)
+                {
+                    card = true; cardAt = Time.time - dashAt;
+                    Note($"round {round}: CLASH at +{cardAt:0.00} after his dash began, harvey={pc.transform.position:0.00} boss={boss.transform.position:0.00}");
+                }
+                if (card && !knock && Time.time - dashAt < cardAt + 0.4f && pc.GetComponentInChildren<playerBodyDetectionArea>().pushBackCounter > 0f) knock = true;
+                if (card && shots < 3 && Time.time - dashAt > cardAt + 0.02f * (shots + 1)) Shot($"bossclash{round}");
+                yield return null;
+            }
+            PlayerController.BotX = 0f;
+            Place(pc, mid, floor + floorDelta + 0.05f); // out of his way while we wait for his next attack
+            bool resumed = false;
+            float waitFrom = Time.time;
+            while (Time.time - waitFrom < 10f && !resumed)
+            {
+                if (boss.Charging || boss.Dashing) resumed = true;
+                yield return null;
+            }
+            Note($"round {round}: dash={dashSeen} card={card} lives {lives}->{HurtPlayer.pLivesCount} knockback={knock} stun={pc.IsStunned} bossVulnerable={boss.Vulnerable} resumedIn={(resumed ? (Time.time - waitFrom).ToString("0.0") : "never")} lives(boss)={boss.Lives}");
+            Note($"round {round}: {(card && HurtPlayer.pLivesCount == lives && !knock && resumed ? "PASS" : "FAIL")}");
+            HurtPlayer.pLivesCount = GameSession.StartingLives;
+        }
+
+        // control 1: standing in the dash's path, no dash of his own: the blade cuts as before
+        {
+            Place(pc, mid, floor + floorDelta + 0.05f);
+            PlayerController.BotX = 0f;
+            float t0 = Time.time;
+            while (Time.time - t0 < 14f && !boss.Dashing) yield return null;
+            HurtPlayer.pLivesCount = GameSession.StartingLives;
+            int lives = HurtPlayer.pLivesCount;
+            bool card = false;
+            for (float t = 0f; t < 1.5f; t += Time.deltaTime) { if (ClashCard.Showing) card = true; yield return null; }
+            Note($"control blade: card={card} lives {lives}->{HurtPlayer.pLivesCount} -> {(!card && HurtPlayer.pLivesCount == lives - 1 ? "PASS" : "FAIL")}");
+        }
+        // control 2: a Spirit Dash into him while he charges: the counter, as before (no card)
+        {
+            Place(pc, mid, floor + floorDelta + 0.05f);
+            PlayerController.BotX = 0f;
+            float t0 = Time.time;
+            while (Time.time - t0 < 14f && !boss.Charging) yield return null;
+            HurtPlayer.pLivesCount = GameSession.StartingLives;
+            int lives = HurtPlayer.pLivesCount;
+            PowerUpManager.Instance.SendMessage("TryActivate", (object)0);
+            PlayerController.BotX = Mathf.Sign(boss.transform.position.x - pc.transform.position.x);
+            bool card = false, knock = false;
+            for (float t = 0f; t < 1.5f; t += Time.deltaTime)
+            {
+                if (ClashCard.Showing) card = true;
+                if (pc.GetComponentInChildren<playerBodyDetectionArea>().pushBackCounter > 0f) knock = true;
+                yield return null;
+            }
+            PlayerController.BotX = 0f;
+            Note($"control counter: card={card} knockback={knock} lives {lives}->{HurtPlayer.pLivesCount} -> {(!card && knock && HurtPlayer.pLivesCount == lives - 1 ? "PASS" : "FAIL")}");
+        }
+        Note($"timeScale={Time.timeScale} invincible={PlayerController.playerInviInvincible}");
+        Finish();
+    }
 
     private void Finish()
     {

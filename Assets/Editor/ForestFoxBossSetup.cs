@@ -38,13 +38,24 @@ public static class ForestFoxBossSetup
         ("Brace", "charge", new[] { 0, 1 }, 6f, false),               // the charge's warning: down low, braced
         ("Charge", "charge", new[] { 2, 3, 4, 5, 6 }, 12f, true),     // the burst and the low run (Charge, RushStomp's sprint)
         ("Recover", "charge", new[] { 1, 0 }, 8f, false),             // skids to a stop, crouched, and stands
-        ("BeamCharge", "beam", new[] { 1, 2, 3 }, 5f, false),         // snarl, antlers lit, rears its head back
-        ("BeamFire", "beam", new[] { 5, 5, 5, 5, 6 }, 10f, false),    // the roar with the antlers blazing, then stands
+        // BLAST (2026-10-25): BeamCharge and BeamFire mix rows now, see Mixed below
         ("Rear", "beam", new[] { 2, 3 }, 6f, false),                  // RushStomp: rears up
         ("Stomp", "beam", new[] { 4, 4, 4, 6 }, 8f, false),           // the front paws slam down (frame 0), then stands
         ("Collapse", "charge", new[] { 0, 1 }, 8f, false),            // an opening: slumped low, panting
         ("Rise", "charge", new[] { 1, 0 }, 8f, false),
     };
+
+    // BLAST (2026-10-25): states drawn from more than one row of the sheet: the user's blast sheet (row "blast": 0
+    // neutral, 1-3 the orb growing at the mouth, 4-7 the beam from the open mouth, the band itself cut away) joins the
+    // older rearing frames. The charge rears back as before, then the orb builds; the fire plays the four blast frames
+    // (the hazard draws the beam) and he stands.
+    private static readonly (string state, (string row, int frame)[] frames, float fps, bool loop)[] Mixed =
+    {
+        ("BeamCharge", new[] { ("beam", 1), ("beam", 2), ("beam", 3), ("blast", 1), ("blast", 2), ("blast", 3) }, 8.6f, false), // 0.70 s = beamWarnTime
+        ("BeamFire", new[] { ("blast", 4), ("blast", 5), ("blast", 6), ("blast", 7), ("beam", 6) }, 10f, false),
+    };
+
+    private const string FxSheet = Dir + "ForestFoxBoss_FX.png"; // BLAST: the beam's Tail (burst), Body (tile) and Head (taper)
 
     [MenuItem("Tools/HNL/Set Up Forest Fox Boss")]
     public static void Run()
@@ -56,8 +67,44 @@ public static class ForestFoxBossSetup
         }
         string[] lines = File.ReadAllLines(Layout);
         Dictionary<string, Sprite[]> rows = ImportBody(lines);
+        Dictionary<string, Sprite> fx = ImportFx(lines); // BLAST:
         AnimatorController ctrl = BuildAnimation(rows);
-        BuildBoss(lines, rows, ctrl);
+        BuildBoss(lines, rows, fx, ctrl);
+    }
+
+    // BLAST: the beam sprites, sliced as forest_fox_blast.pieces laid them out ("fx name x y w h pivotY")
+    private static Dictionary<string, Sprite> ImportFx(string[] lines)
+    {
+        var result = new Dictionary<string, Sprite>();
+        if (!File.Exists(FxSheet)) return result;
+        var metas = new List<SpriteMetaData>();
+        foreach (string[] f in lines.Where(l => l.StartsWith("fx ")).Select(l => l.Split(' ')))
+            metas.Add(new SpriteMetaData
+            {
+                name = "ForestFoxBoss_Beam" + char.ToUpper(f[1][0]) + f[1].Substring(1),
+                rect = new Rect(float.Parse(f[2]), float.Parse(f[3]), float.Parse(f[4]), float.Parse(f[5])),
+                alignment = (int)SpriteAlignment.Custom,
+                pivot = new Vector2(0f, float.Parse(f[6])), // the left edge, on the band's centre line
+            });
+        var ti = (TextureImporter)AssetImporter.GetAtPath(FxSheet);
+        ti.textureType = TextureImporterType.Sprite;
+        ti.spriteImportMode = SpriteImportMode.Multiple;
+        ti.spritePixelsPerUnit = Ppu;
+        ti.filterMode = FilterMode.Point;
+        ti.mipmapEnabled = false;
+        ti.textureCompression = TextureImporterCompression.Uncompressed;
+        ti.alphaIsTransparency = true;
+        ti.wrapMode = TextureWrapMode.Clamp;
+        var settings = new TextureImporterSettings();
+        ti.ReadTextureSettings(settings);
+        settings.spriteMeshType = SpriteMeshType.FullRect; // the Body is drawn Tiled: tiling needs full-rect sprites
+        ti.SetTextureSettings(settings);
+#pragma warning disable 618
+        ti.spritesheet = metas.ToArray();
+#pragma warning restore 618
+        ti.SaveAndReimport();
+        foreach (Sprite s in AssetDatabase.LoadAllAssetsAtPath(FxSheet).OfType<Sprite>()) result[s.name] = s;
+        return result;
     }
 
     private static float[] Nums(string[] lines, string key) =>
@@ -109,9 +156,10 @@ public static class ForestFoxBossSetup
                    ?? AnimatorController.CreateAnimatorControllerAtPath(ControllerPath);
         AnimatorStateMachine sm = ctrl.layers[0].stateMachine;
         int n = 0;
-        foreach (var st in States)
+        var all = States.Select(s => (s.state, frames: s.frames.Select(i => (row: s.row, frame: i)).ToArray(), s.fps, s.loop)).Concat(Mixed); // BLAST:
+        foreach (var st in all)
         {
-            Sprite[] frames = st.frames.Select(i => rows[st.row][i]).ToArray();
+            Sprite[] frames = st.frames.Select(f => rows[f.row][f.frame]).ToArray();
             string path = AnimDir + "ForestFoxBoss_" + st.state + ".anim";
             var clip = AssetDatabase.LoadAssetAtPath<AnimationClip>(path);
             if (clip == null)
@@ -146,7 +194,7 @@ public static class ForestFoxBossSetup
 
     // ---------------------------------------------------------------- 3. the boss prefab
 
-    private static void BuildBoss(string[] lines, Dictionary<string, Sprite[]> rows, AnimatorController ctrl)
+    private static void BuildBoss(string[] lines, Dictionary<string, Sprite[]> rows, Dictionary<string, Sprite> fx, AnimatorController ctrl)
     {
         GameObject root = PrefabUtility.LoadPrefabContents(PrefabPath);
         try
@@ -196,10 +244,23 @@ public static class ForestFoxBossSetup
             so.FindProperty("stages.Array.data[1].beams").intValue = 1;
             so.FindProperty("stages.Array.data[2].beams").intValue = 2;
 
-            // SPIRITBLAST: the beam (King Moss's beam art recoloured by brightness), its sparks and the antler glow in
-            // the fox's greens: the grass palette's 37946e / 6abe30 / 99e550 with a pale core
-            SetColours(so, "blastPalette", new[] { Hex("37946e"), Hex("6abe30"), Hex("eefcd0") });
+            // SPIRITBLAST: the sparks and the antler glow in the fox's greens
             SetColours(so, "blastColours", new[] { Hex("99e550"), Hex("6abe30"), Hex("ffffeb"), Hex("d5ffb0") });
+            // BLAST (2026-10-25): the beam is the user's own art now (ForestFoxBoss_FX: burst, tile, taper), drawn at
+            // one art pixel per game pixel from his open mouth; no recolouring of King Moss's beam any more
+            so.FindProperty("blastPalette").arraySize = 0;
+            SetSprites(so, "blastTailFrames", fx, "ForestFoxBoss_BeamTail");
+            SetSprites(so, "blastBodyFrames", fx, "ForestFoxBoss_BeamBody");
+            SetSprites(so, "blastHeadFrames", fx, "ForestFoxBoss_BeamHead");
+            so.FindProperty("blastFps").floatValue = 10f;
+            so.FindProperty("blastFlowFps").floatValue = 20f;
+            if (lines.Any(l => l.StartsWith("mouth ")))
+            {
+                // the sheet fires from his open mouth (20 px ahead of the pivot, 15.9 up: the beam's height, 1.0,
+                // to a sixth of a pixel), so the beam starts there; its height and collider stay as they were
+                float[] mouth = Nums(lines, "mouth");
+                so.FindProperty("handOffset").vector2Value = new Vector2(Round(mouth[0] * u), BeamHeight);
+            }
             so.FindProperty("antlerGlow").colorValue = new Color(0.6f, 0.9f, 0.31f, 0.35f);
             so.FindProperty("chargeMoteRate").floatValue = 50f;
             so.FindProperty("beamMoteRate").floatValue = 70f;
@@ -224,6 +285,16 @@ public static class ForestFoxBossSetup
         SerializedProperty p = so.FindProperty(field);
         p.arraySize = colours.Length;
         for (int i = 0; i < colours.Length; i++) p.GetArrayElementAtIndex(i).colorValue = colours[i];
+    }
+
+    // BLAST: prefix0, prefix1, ... in order, as far as they go
+    private static void SetSprites(SerializedObject so, string field, Dictionary<string, Sprite> sprites, string prefix)
+    {
+        var frames = new List<Sprite>();
+        while (sprites.TryGetValue(prefix + frames.Count, out Sprite s)) frames.Add(s);
+        SerializedProperty p = so.FindProperty(field);
+        p.arraySize = frames.Count;
+        for (int i = 0; i < frames.Count; i++) p.GetArrayElementAtIndex(i).objectReferenceValue = frames[i];
     }
 
     private static void SetPattern(SerializedObject so, int stage, YokaiBoss.Move[] moves)

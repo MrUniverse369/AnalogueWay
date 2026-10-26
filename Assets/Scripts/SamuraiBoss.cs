@@ -117,6 +117,15 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
     [Tooltip("Log hits, contacts and damage to the Console while tuning the fight.")]
     [SerializeField] private bool debugLog;
 
+    [Header("Dash clash (DASHCLASH:)")]
+    [Tooltip("DASHCLASH (2026-10-25): Harvey's Spirit Dash meeting his charging dash slash head-on cancels both: nobody " +
+             "is hurt or knocked back, he stops where he is and holds his guard this long before fighting on (his usual " +
+             "grace keeps his blade and body from hurting Harvey meanwhile). Only the dash slash's dash: the teleport " +
+             "slash, the waves and the blade rain are untouched, and so is the counter during his charge.")]
+    [SerializeField] private float dashClashGuard = 0.7f;
+    [Tooltip("DASHCLASH: show the battle card (the backdrop goes black and 「戦い」 flashes up).")]
+    [SerializeField] private bool dashClashCard = true;
+
     private static readonly int IsHurtParam = Animator.StringToHash("isHurt");
     private static readonly Color[] Crimson = { PixelFX.Hex("eb564b"), PixelFX.Hex("ff6b97"), PixelFX.Hex("ffd2dc") };
     private static readonly Color[] Glint = { PixelFX.Cream, PixelFX.Yellow, PixelFX.Hex("ffd2dc") };
@@ -126,6 +135,7 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
     private int lives;
     private int stage;
     private bool vulnerable, invulnerable, defeated, charging, dashing;
+    private bool clashable, clashed; // DASHCLASH: the dash slash's dash is on; it was cancelled by a clash
     private float facing = -1f;
     private float lastHurtTime = -99f;
     private float recoverUntil = -99f;
@@ -306,8 +316,17 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
         // the dash: the whole width of the arena, cutting low
         float target = dir > 0f ? RightX : LeftX;
         bool hit = false;
+        clashable = true; // DASHCLASH: this dash, and only this one, can be met by a Spirit Dash
+        clashed = false;
         yield return Cut(target, s.dashSpeed, () => hit = true);
+        clashable = false;
 
+        if (clashed)
+        {
+            // DASHCLASH: stopped dead where the dashes met: his guard, then he fights on (no opening, no skid)
+            yield return Guard();
+            yield break;
+        }
         if (hit)
         {
             // he connected: skid to a stop, no opening
@@ -350,6 +369,11 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
             if (Random.value < 0.7f)
                 PixelFX.Emit(transform.position + new Vector3(-dir * 0.4f, Random.Range(0.15f, bladeBandHeight + 0.6f), 0f), new Vector2(-dir * Random.Range(6f, 10f), 0f),
                     PixelFX.Pick(Crimson), 0.12f, 1, PixelShape.Streak, PixelMotion.Straight, true);
+            if (clashable && !hitOnce && HeadOnDash(dir) && BladeTouches(fromX, transform.position.x, dir))
+            {
+                DashClash(); // DASHCLASH: decided before the blade's own hit, in the same frame it would have landed
+                break;
+            }
             if (!hitOnce && BladeTouches(fromX, transform.position.x, dir))
             {
                 hitOnce = true;
@@ -360,6 +384,39 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
         }
         dashing = false;
         hurtbox.enabled = true;
+    }
+
+    // ---------------------------------------------------------------- DASHCLASH
+    // DASHCLASH (2026-10-25): Harvey is Spirit Dashing at him (coming his way, not standing in the blade's path and not
+    // running from it); he dashes in 'dir'
+    private bool HeadOnDash(float dir) =>
+        PowerUpManager.Has(TalismanTrait.DefeatsEnemiesOnContact) && playerRb != null && playerRb.linearVelocity.x * dir < -0.5f;
+
+    // DASHCLASH: his dash slash and Harvey's Spirit Dash meet head-on: both end, nobody is hurt or knocked back. Decided
+    // here, in the dash, before any effect; the card is only shown from it. His own grace does the rest: lastHurtTime
+    // (blade, body and projectiles can't hurt Harvey for hurtGrace) and recoverUntil (no body contact while he guards).
+    private void DashClash()
+    {
+        clashed = true;
+        lastHurtTime = Time.time;
+        recoverUntil = Time.time + dashClashGuard + 0.3f;
+        if (PowerUpManager.Instance != null) PowerUpManager.Instance.EndTrait(TalismanTrait.DefeatsEnemiesOnContact); // the dash ends, its cooldown starts
+        PlayerController.playerInviInvincible = true; // nothing takes a life this step; PlayerController clears it next frame
+        if (playerBody != null) playerBody.pushBackCounter = 0f;
+        if (playerRb != null) playerRb.linearVelocity = new Vector2(0f, Mathf.Min(playerRb.linearVelocity.y, 0f));
+        Log("dash clash");
+        Vector3 mid = (transform.position + Vector3.up * 0.8f + (player != null ? player.transform.position : transform.position)) * 0.5f;
+        ClashCard.Clang(mid, bodySprite, player != null ? player.GetComponent<SpriteRenderer>() : null, null);
+        if (dashClashCard) ClashCard.Show();
+    }
+
+    // DASHCLASH: crouched with his hand on the hilt for dashClashGuard, then back to his feet and the fight
+    private IEnumerator Guard()
+    {
+        SetPose(Pose.Ready);
+        yield return new WaitForSeconds(dashClashGuard);
+        SetPose(Pose.Idle);
+        yield return Idle(0.35f);
     }
 
     // the blade's band, swept from fromX to toX this frame, against Harvey's body

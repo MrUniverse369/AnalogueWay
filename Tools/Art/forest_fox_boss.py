@@ -38,6 +38,7 @@ from zone_map import read_png_rgba, write_png  # noqa: E402
 from grass_enemies import lum, phase, build_palette, snap, drop_specks, lit, CLEAR  # noqa: E402
 import grass_enemies  # noqa: E402
 import pixel_clean  # noqa: E402  CLEANUP (2026-10-25)
+import forest_fox_blast  # noqa: E402  BLAST (2026-10-25)
 
 DIR = "Assets/Sprites/Enemies/Grass/ForestSpiritFox/"
 OUT = DIR + "ForestFoxBoss_Body.png"
@@ -55,7 +56,11 @@ ROWS = [
     ("idle", "SpritFoxBossAttackFrame.png", 60, 345, 6),
     ("charge", "SpritFoxBossAttackFrame.png", 400, 680, 7),
     ("beam", "SpritFoxBossBeamAttackFrame.png", 170, 470, 7),
+    # BLAST (2026-10-25): the blast sheet (on white; forest_fox_blast.py keys it and cuts the beams away):
+    # 4 charge frames (the orb grows at the mouth) and 4 firing frames (the beam band itself becomes the hazard's art)
+    ("blast", "Spirit Fox Boss Spirit Beam Animation.png", 240, 445, 8),
 ]
+FX = DIR + "ForestFoxBoss_FX.png"  # BLAST: the beam strip cut from the last firing frame (burst, band, leaves)
 
 
 def shapes(px, w, y0, y1):
@@ -131,7 +136,7 @@ def frames_of(px, w, y0, y1, expect):
     return [(g, g | e) for g, e in zip(groups, extras)]
 
 
-def cut(px, own, everything, p):
+def cut(px, own, everything, p, origin=None):
     """Resamples one frame (its fox and its dust, nothing of the frames beside it) and says which game pixels are
     the fox: the same grid as grass_enemies.resample, with each cell's samples also voting fox or dust."""
     xs = [x for x, _ in everything]
@@ -143,6 +148,8 @@ def cut(px, own, everything, p):
     ex = [sum(abs(L[y][x] - L[y][x - 1]) for y in range(h)) if x else 0 for x in range(w)]
     ey = [sum(abs(L[y][x] - L[y - 1][x]) for x in range(w)) if y else 0 for y in range(h)]
     ox, oy = phase(ex, p) - p, phase(ey, p) - p
+    if origin is not None:  # BLAST: where game pixel (0, 0) starts in the source, to line pieces up by the band
+        origin.extend([x0 + ox, y0 + oy])
     gw, gh = int((w - ox) / p) + 1, int((h - oy) / p) + 1
     grid, fox = [], []
     for gy in range(gh):
@@ -166,9 +173,16 @@ def cut(px, own, everything, p):
 
 
 def main():
-    grass_enemies.PALETTE = 40  # the fox, its antlers and leaves, the glow and the dust
+    grass_enemies.PALETTE = 48  # the fox, its antlers and leaves, the glow and the dust (BLAST: and the beam)
     found = []
+    strip, band_rows, feet_src, blast_src, blast_p, bursts = None, None, None, None, None, []
     for name, src, y0, y1, expect in ROWS:
+        if name == "blast":  # BLAST: white keyed out, the beams cut away, the last beam kept as the strip
+            w, h, px, raw = forest_fox_blast.load(DIR + src)
+            fr, strip, band_rows, feet_src, bursts = forest_fox_blast.frames(px, raw, w, y0, y1, expect, shapes, MAIN)
+            blast_src = raw  # the strip is cut from the sheet as it is (its white core and all)
+            found.append((name, px, fr))
+            continue
         w, h, px = read_png_rgba(DIR + src)
         found.append((name, px, frames_of(px, w, y0, y1, expect)))
 
@@ -177,12 +191,31 @@ def main():
         return areas[len(areas) // 2]
     base = median_area(found[0][2])
     rows = []
+    strip_grid, strip_centre, burst_grids = None, 0.0, []
     for name, px, frames in found:
         p = PERIOD * (median_area(frames) / base) ** 0.5
         rows.append((name, [cut(px, own, every, p) for own, every in frames]))
         print(f"{name}: {len(frames)} frames, {p:.2f} source px per game px")
+        if name == "blast":
+            # BLAST: the beam at the same scale as the fox, and the muzzle burst of each firing frame; the band's centre
+            # line (in each grid's rows) is what lines the pieces up
+            centre_src = (band_rows[0] + band_rows[1] + 1) / 2
+            origin = []
+            strip_grid, _ = cut(blast_src, strip, strip, p, origin)
+            strip_centre = (centre_src - origin[1]) / p
+            for burst in bursts:
+                origin = []
+                grid, _ = cut(blast_src, burst, burst, p, origin)
+                burst_grids.append((grid, (centre_src - origin[1]) / p))
+            blast_p = p
 
-    palette = build_palette([g for _, fr in rows for g, _ in fr])
+    palette = build_palette([g for _, fr in rows for g, _ in fr] + ([strip_grid] if strip_grid else []) + [g for g, _ in burst_grids])
+    fx_layout = []
+    if strip_grid:  # BLAST: the beam strip and the bursts -> the hazard's sprites (see forest_fox_blast.pieces)
+        snapped = snap([strip_grid] + [g for g, _ in burst_grids], palette)
+        for g in snapped:
+            drop_specks(g, SMALLEST)
+        fx_layout = forest_fox_blast.pieces(snapped[0], strip_centre, list(zip(snapped[1:], [c for _, c in burst_grids])), FX)
     sheet_rows = []
     for name, fr in rows:
         grids = snap([g for g, _ in fr], palette)
@@ -248,6 +281,14 @@ def main():
         f"length {back + front + 1}",
         f"period {PERIOD}",
     ]
+    if blast_p:  # BLAST: where the beam leaves his mouth (game px from the pivot, x forward, y up) and the FX sprites
+        blast_row = [n for n, _ in sheet_rows].index("blast")
+        neutral = frame(blast_row, 0)
+        _, feet_row, _ = sheet_rows[blast_row][1][0]
+        nose_dx = max(x for x, _ in lit(neutral)) - back
+        mouth_up = (feet_src - (band_rows[0] + band_rows[1]) / 2) / blast_p
+        layout.append(f"mouth {nose_dx} {mouth_up:.1f}")
+        layout.extend(fx_layout)
     with open(LAYOUT, "w") as fo:
         fo.write("\n".join(layout) + "\n")
     print(f"{OUT}: cells {FW}x{FH}, {len(palette)} colours; " + "; ".join(layout[3:]))

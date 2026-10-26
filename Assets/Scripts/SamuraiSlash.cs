@@ -398,21 +398,8 @@ public class SamuraiSlash : MonoBehaviour
             anim.Update(0f);
         }
 
-        // the clang, bigger than a block's: both flash white, sparks fly from where the blades met
-        Vector3 mid = (sprite.bounds.center + player.transform.position) * 0.5f;
-        mid.z = 0f;
-        PixelFX.Ring(mid, 18, 5f, new[] { PixelFX.Cream, PixelFX.Yellow, PixelFX.Hex("ff6b97") }, 0.25f, 1, PixelShape.Square, true, PixelLayer.Front, 1f, 0f);
-        PixelFX.Burst(mid, 14, 3f, 6.5f, new[] { PixelFX.Cream, PixelFX.Yellow }, 0.18f, 0.35f, 1, PixelShape.Star, PixelMotion.Float, true);
-        PixelFX.Burst(mid, 8, 5f, 8f, new[] { PixelFX.Cream, PixelFX.Hex("5fcde4") }, 0.08f, 0.14f, 1, PixelShape.Streak, PixelMotion.Straight, true);
-        SpriteFX.On(sprite).Flash(Color.white, 0.15f);
-        SpriteRenderer his = player.GetComponent<SpriteRenderer>();
-        if (his != null) SpriteFX.On(his).Flash(Color.white, 0.15f);
-        AudioManager audio = AudioManager.Instance;
-        if (audio != null)
-        {
-            if (clashSound != null) audio.PlaySfxOneShot(clashSound);
-            else audio.PlaySfxOneShotPitched(audio.SamuraiSlashSound, 1.6f);
-        }
+        // the clang, bigger than a block's: both flash white, sparks fly from where the blades met (shared with the boss)
+        ClashCard.Clang((sprite.bounds.center + player.transform.position) * 0.5f, sprite, player.GetComponent<SpriteRenderer>(), clashSound);
         if (dashClashCard) ClashCard.Show();
 
         attack = StartCoroutine(DashClashHold());

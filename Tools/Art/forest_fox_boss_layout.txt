@@ -3,12 +3,27 @@ pivot 78 2
 row idle 0 6
 row charge 1 7
 row beam 2 7
+row blast 3 8
 stand 35
 crouch 37
 rear 47
 antler 27 26
-glowlow 14
+glowlow 20
 nose 30 9.8
 stance 40
 length 109
 period 6.4
+mouth 20 15.9
+fx tail0 0 0 10 38 0.4737
+fx tail1 11 0 10 38 0.4737
+fx tail2 22 0 10 38 0.4737
+fx tail3 33 0 10 38 0.4737
+fx body0 44 0 16 38 0.4737
+fx body1 61 0 16 38 0.4737
+fx body2 78 0 16 38 0.4737
+fx body3 95 0 16 38 0.4737
+fx head0 112 0 8 38 0.4737
+fx head1 121 0 8 38 0.4737
+fx head2 130 0 8 38 0.4737
+fx head3 139 0 8 38 0.4737
+band 14

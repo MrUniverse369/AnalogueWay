@@ -125,6 +125,30 @@ TextureImporter:
   - first:
       213: 6105456731600207263
     second: ForestFoxBoss_beam_6
+  - first:
+      213: 4170032034606937507
+    second: ForestFoxBoss_blast_0
+  - first:
+      213: 6472598591102145194
+    second: ForestFoxBoss_blast_1
+  - first:
+      213: -2416853890457815219
+    second: ForestFoxBoss_blast_2
+  - first:
+      213: 3268183487939105233
+    second: ForestFoxBoss_blast_3
+  - first:
+      213: 4058023613982721001
+    second: ForestFoxBoss_blast_4
+  - first:
+      213: -4526908364211629409
+    second: ForestFoxBoss_blast_5
+  - first:
+      213: 1178804617431660909
+    second: ForestFoxBoss_blast_6
+  - first:
+      213: -1521703203339041391
+    second: ForestFoxBoss_blast_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -224,7 +248,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 100
+        y: 150
         width: 109
         height: 50
       alignment: 9
@@ -246,7 +270,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 109
-        y: 100
+        y: 150
         width: 109
         height: 50
       alignment: 9
@@ -268,7 +292,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 218
-        y: 100
+        y: 150
         width: 109
         height: 50
       alignment: 9
@@ -290,7 +314,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 327
-        y: 100
+        y: 150
         width: 109
         height: 50
       alignment: 9
@@ -312,7 +336,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 436
-        y: 100
+        y: 150
         width: 109
         height: 50
       alignment: 9
@@ -334,7 +358,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 545
-        y: 100
+        y: 150
         width: 109
         height: 50
       alignment: 9
@@ -356,7 +380,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 50
+        y: 100
         width: 109
         height: 50
       alignment: 9
@@ -378,7 +402,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 109
-        y: 50
+        y: 100
         width: 109
         height: 50
       alignment: 9
@@ -400,7 +424,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 218
-        y: 50
+        y: 100
         width: 109
         height: 50
       alignment: 9
@@ -422,7 +446,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 327
-        y: 50
+        y: 100
         width: 109
         height: 50
       alignment: 9
@@ -444,7 +468,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 436
-        y: 50
+        y: 100
         width: 109
         height: 50
       alignment: 9
@@ -466,7 +490,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 545
-        y: 50
+        y: 100
         width: 109
         height: 50
       alignment: 9
@@ -488,7 +512,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 654
-        y: 50
+        y: 100
         width: 109
         height: 50
       alignment: 9
@@ -510,7 +534,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 50
         width: 109
         height: 50
       alignment: 9
@@ -532,7 +556,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 109
-        y: 0
+        y: 50
         width: 109
         height: 50
       alignment: 9
@@ -554,7 +578,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 218
-        y: 0
+        y: 50
         width: 109
         height: 50
       alignment: 9
@@ -576,7 +600,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 327
-        y: 0
+        y: 50
         width: 109
         height: 50
       alignment: 9
@@ -598,7 +622,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 436
-        y: 0
+        y: 50
         width: 109
         height: 50
       alignment: 9
@@ -620,7 +644,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 545
-        y: 0
+        y: 50
         width: 109
         height: 50
       alignment: 9
@@ -642,7 +666,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 654
-        y: 0
+        y: 50
         width: 109
         height: 50
       alignment: 9
@@ -655,6 +679,182 @@ TextureImporter:
       bones: []
       spriteID: f9d3c8e9c80fab450800000000000000
       internalID: 6105456731600207263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_blast_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a5febcaa0eeed930800000000000000
+      internalID: 4170032034606937507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_blast_1
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa25654102a43d950800000000000000
+      internalID: 6472598591102145194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_blast_2
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d47bd31113c957ed0800000000000000
+      internalID: -2416853890457815219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_blast_3
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d15863119bea5d20800000000000000
+      internalID: 3268183487939105233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_blast_4
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e346910afef05830800000000000000
+      internalID: 4058023613982721001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_blast_5
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f92db6cc3d03d21c0800000000000000
+      internalID: -4526908364211629409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_blast_6
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d69ba91dd84fb5010800000000000000
+      internalID: 1178804617431660909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ForestFoxBoss_blast_7
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 0
+        width: 109
+        height: 50
+      alignment: 9
+      pivot: {x: 0.7155963, y: 0.04}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1950767bff2d1eae0800000000000000
+      internalID: -1521703203339041391
       vertices: []
       indices: 
       edges: []
@@ -701,6 +901,14 @@ TextureImporter:
       ForestFoxBoss_beam_4: -5878239135628483742
       ForestFoxBoss_beam_5: -51518071945769019
       ForestFoxBoss_beam_6: 6105456731600207263
+      ForestFoxBoss_blast_0: 4170032034606937507
+      ForestFoxBoss_blast_1: 6472598591102145194
+      ForestFoxBoss_blast_2: -2416853890457815219
+      ForestFoxBoss_blast_3: 3268183487939105233
+      ForestFoxBoss_blast_4: 4058023613982721001
+      ForestFoxBoss_blast_5: -4526908364211629409
+      ForestFoxBoss_blast_6: 1178804617431660909
+      ForestFoxBoss_blast_7: -1521703203339041391
       ForestFoxBoss_charge_0: 8984023885965048004
       ForestFoxBoss_charge_1: 6260789636981913689
       ForestFoxBoss_charge_2: -11098788631239407

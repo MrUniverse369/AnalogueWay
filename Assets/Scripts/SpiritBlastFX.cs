@@ -78,9 +78,44 @@ public class SpiritBlastFX : MonoBehaviour
     private float dir;
     private float due;
 
-    /// <summary>Dress a freshly launched beam: palette (dark, mid, light), mote colours, motes per second, its length
-    /// and direction (+1 right).</summary>
-    public static SpiritBlastFX Dress(BossHazard beam, Color dark, Color mid, Color light, Color[] moteColours, float motesPerSecond, float beamLength, float direction)
+    // BLAST: the fox's own beam art, animated: the burst plays through once (then holds), the band and its tip flow
+    private SpriteRenderer tailR, bodyR, headR;
+    private Sprite[] tails, bodies, heads;
+    private float burstFps, flowFps, age;
+
+    /// <summary>BLAST: animate the beam's parts: the tail's frames once through at framesPerSecond (holding the last),
+    /// the body's and head's frames looped at flowPerSecond. A missing renderer or empty frames leaves that part still.</summary>
+    public void Animate(SpriteRenderer tail, Sprite[] tailFrames, SpriteRenderer body, Sprite[] bodyFrames,
+        SpriteRenderer head, Sprite[] headFrames, float framesPerSecond, float flowPerSecond)
+    {
+        tailR = tail;
+        bodyR = body;
+        headR = head;
+        tails = tailFrames;
+        bodies = bodyFrames;
+        heads = headFrames;
+        burstFps = framesPerSecond;
+        flowFps = flowPerSecond;
+    }
+
+    private static void Show(SpriteRenderer r, Sprite[] frames, int index, bool loop)
+    {
+        if (r == null || frames == null || frames.Length == 0) return;
+        Sprite s = frames[loop ? index % frames.Length : Mathf.Min(index, frames.Length - 1)];
+        if (s == null || r.sprite == s) return;
+        if (r.drawMode == SpriteDrawMode.Simple) r.sprite = s;
+        else
+        {
+            Vector2 size = r.size; // a tiled part keeps the length SpawnBeam gave it
+            r.sprite = s;
+            r.size = size;
+        }
+    }
+
+    /// <summary>Dress a freshly launched beam: an optional palette (dark, mid, light) to recolour borrowed art onto
+    /// (null when the beam is the fox's own art, BLAST), mote colours, motes per second, its length and direction
+    /// (+1 right).</summary>
+    public static SpiritBlastFX Dress(BossHazard beam, Color[] palette, Color[] moteColours, float motesPerSecond, float beamLength, float direction)
     {
         var fx = beam.gameObject.AddComponent<SpiritBlastFX>();
         fx.hazard = beam;
@@ -89,13 +124,23 @@ public class SpiritBlastFX : MonoBehaviour
         fx.rate = motesPerSecond;
         fx.length = beamLength;
         fx.dir = direction;
-        foreach (SpriteRenderer sr in fx.parts) SpriteFX.On(sr).SetPalette(dark, mid, light, 1f);
+        foreach (SpriteRenderer sr in fx.parts)
+        {
+            SpriteFX on = SpriteFX.On(sr); // the HNLSprite material either way: the fade below goes through its colour
+            if (palette != null && palette.Length >= 3) on.SetPalette(palette[0], palette[1], palette[2], 1f);
+        }
         beam.Impact = fx.OnImpact;
         return fx;
     }
 
     private void Update()
     {
+        age += Time.deltaTime; // BLAST:
+        Show(tailR, tails, Mathf.FloorToInt(age * burstFps), false);
+        int flow = Mathf.FloorToInt(age * flowFps);
+        Show(bodyR, bodies, flow, true);
+        Show(headR, heads, flow, true);
+
         float fade = Mathf.Clamp01(hazard.LifeLeft / Mathf.Max(0.01f, hazard.Lifetime * FadeShare));
         if (fade < 1f)
             foreach (SpriteRenderer sr in parts)
@@ -115,10 +160,11 @@ public class SpiritBlastFX : MonoBehaviour
             Vector3 at = origin + new Vector3(dir * along, Random.Range(-0.12f, 0.12f), 0f);
             if (Random.value < 0.7f)
             {
-                // a mote drifting off the beam, up or down
+                // a mote drifting off the beam, up or down; now and then a leaf shard, as the sheet draws them (BLAST)
                 float up = Random.value < 0.5f ? 1f : -1f;
+                bool leaf = Random.value < 0.25f;
                 PixelFX.Emit(at, new Vector2(dir * Random.Range(-0.3f, 0.6f), up * Random.Range(0.6f, 1.6f)), PixelFX.Pick(motes),
-                    Random.Range(0.18f, 0.35f), 1, PixelShape.Square, PixelMotion.Float, true);
+                    Random.Range(0.18f, 0.35f), 1, leaf ? PixelShape.Leaf : PixelShape.Square, leaf ? PixelMotion.Drift : PixelMotion.Float, !leaf);
             }
             else
             {

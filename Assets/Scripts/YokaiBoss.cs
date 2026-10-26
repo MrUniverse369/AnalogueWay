@@ -151,6 +151,17 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     [SerializeField] private float chargeMoteRate = 50f;
     [Tooltip("SPIRITBLAST: glowing motes drifting off the beam per second while it fires.")]
     [SerializeField] private float beamMoteRate = 70f;
+    [Tooltip("BLAST (2026-10-25): the beam drawn with the Spirit Fox's own art instead of the template's sprites, at one " +
+             "art pixel per game pixel, all pivoted on the band's centre line: the muzzle burst of each firing frame at " +
+             "the mouth (Tail, played through), the band tile repeated along the beam (Body, cycled so it flows away " +
+             "from the mouth) and its tapering far end (Head, cycled with it). Empty: the template's sprites.")]
+    [SerializeField] private Sprite[] blastTailFrames;
+    [SerializeField] private Sprite[] blastBodyFrames;
+    [SerializeField] private Sprite[] blastHeadFrames;
+    [Tooltip("BLAST: the muzzle burst's frames per second (the sheet's firing frames, at BeamFire's pace).")]
+    [SerializeField] private float blastFps = 10f;
+    [Tooltip("BLAST: Body/Head frames per second; each moves the band a few art pixels away from his mouth.")]
+    [SerializeField] private float blastFlowFps = 20f;
 
     [Header("Rush and stomp (FOXBOSS:)")]
     [Tooltip("How far the sprint goes at most before he rears up.")]
@@ -862,6 +873,17 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         box.size = new Vector2(length, beamThickness);
         box.offset = new Vector2(length * 0.5f, 0f);
         Transform tail = root.Find("Tail"), body = root.Find("Body"), head = root.Find("Head");
+        bool ownArt = blastBodyFrames != null && blastBodyFrames.Length > 0; // BLAST: the fox's beam art, one art pixel per game pixel
+        if (ownArt)
+        {
+            // the template scales its tiled body (3.4 x 1.9 on King Moss's 11x6 tile: the stretched look); the fox's
+            // pieces are drawn as they are, so every part goes back to scale 1 and the tile repeats in its own size
+            foreach (Transform part in new[] { tail, body, head })
+                if (part != null) part.localScale = Vector3.one;
+            Swap(tail, First(blastTailFrames));
+            Swap(body, First(blastBodyFrames));
+            Swap(head, First(blastHeadFrames));
+        }
         float tailW = Width(tail), headW = Width(head);
         if (tail != null) tail.localPosition = Vector3.zero;
         if (head != null) head.localPosition = new Vector3(Mathf.Max(tailW, length - headW), 0f, 0f);
@@ -869,13 +891,31 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         {
             body.localPosition = new Vector3(tailW, 0f, 0f);
             var sr = body.GetComponent<SpriteRenderer>();
-            sr.size = new Vector2(Mathf.Max(0f, length - tailW - headW) / Mathf.Max(0.01f, body.localScale.x), sr.size.y);
+            float tileH = ownArt && sr.sprite != null ? sr.sprite.bounds.size.y : sr.size.y; // BLAST: the tile's own height
+            sr.drawMode = SpriteDrawMode.Tiled;
+            sr.size = new Vector2(Mathf.Max(0f, length - tailW - headW) / Mathf.Max(0.01f, body.localScale.x), tileH);
         }
         h.Launch(this, Vector2.zero, 0f, float.NegativeInfinity, float.NegativeInfinity, float.PositiveInfinity, beamLife);
-        if (blastPalette != null && blastPalette.Length >= 3) // SPIRITBLAST: the Spirit Fox's green blast on the same hazard
-            SpiritBlastFX.Dress(h, blastPalette[0], blastPalette[1], blastPalette[2], BlastSparks, beamMoteRate, length, dir);
+        bool recolour = !ownArt && blastPalette != null && blastPalette.Length >= 3; // SPIRITBLAST: King Moss's art onto the greens
+        if (ownArt || recolour) // SPIRITBLAST: the Spirit Fox's blast dressing on the same hazard
+        {
+            SpiritBlastFX blast = SpiritBlastFX.Dress(h, recolour ? blastPalette : null, BlastSparks, beamMoteRate, length, dir);
+            if (ownArt) // BLAST: the burst plays through, the band flows
+                blast.Animate(Renderer(tail), blastTailFrames, Renderer(body), blastBodyFrames, Renderer(head), blastHeadFrames, blastFps, blastFlowFps);
+        }
         hazards.Add(h.gameObject);
     }
+
+    // BLAST: a template part takes the fox's sprite (the template's own stays when there is none for it)
+    private static void Swap(Transform part, Sprite sprite)
+    {
+        SpriteRenderer sr = Renderer(part);
+        if (sr != null && sprite != null) sr.sprite = sprite;
+    }
+
+    private static SpriteRenderer Renderer(Transform part) => part != null ? part.GetComponent<SpriteRenderer>() : null;
+
+    private static Sprite First(Sprite[] frames) => frames != null && frames.Length > 0 ? frames[0] : null;
 
     private static float Width(Transform t)
     {
@@ -989,9 +1029,9 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
         : new Vector3(transform.position.x + facing * beamGlowOffset.x, GroundY + beamGlowOffset.y, 0f);
 
     // SPIRITBLAST: spirit energy gathering in the antlers while the beam charges, building with 'charge' (0..1): motes
-    // drawn in from around the head to the tips, a shimmer of glowing blocks at the tips, and a soft halo there that
-    // grows as the charge builds (re-emitted every frame for a moment, so nothing lingers). All at the head: the
-    // body itself only catches a faint tint (SpiritBeam).
+    // drawn in from around the head to the tips and a shimmer of glowing blocks there. All at the head: the body
+    // itself only catches a faint tint (SpiritBeam). BLAST: the glow itself is the sheet's (the lit antlers, then the
+    // orb at the mouth); an additive halo on top of the drawn orb only burnt it to a white block, so there is none.
     private void ChargeMotes(ref float gathered, float charge, Color[] palette)
     {
         Vector3 tip = AntlerTip;
@@ -1013,12 +1053,6 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
                 PixelFX.Emit(p, new Vector2(0f, Random.Range(0.2f, 0.8f)), PixelFX.Pick(palette), Random.Range(0.12f, 0.25f),
                     Random.value < charge ? 2 : 1, PixelShape.Square, PixelMotion.Float, true);
             }
-        }
-        if (charge > 0.3f)
-        {
-            Color halo = antlerGlow;
-            halo.a = antlerGlow.a * (0.3f + 0.7f * charge);
-            PixelFX.Emit(tip, Vector2.zero, halo, 0.05f, 3 + Mathf.RoundToInt(2f * charge), PixelShape.Square, PixelMotion.Float, true);
         }
     }
 

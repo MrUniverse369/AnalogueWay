@@ -212,7 +212,7 @@ MonoBehaviour:
   crescentTemplate: {fileID: 0}
   beamTemplate: {fileID: 0}
   boulderTemplate: {fileID: 0}
-  handOffset: {x: 1.69, y: 1}
+  handOffset: {x: 1.25, y: 1}
   boulderHold: {x: 0.5914063, y: 2.1757812}
   leafReleaseFrame: 3
   slashReleaseFrame: 3
@@ -226,11 +226,8 @@ MonoBehaviour:
   boulderWarnShare: 0.8
   boulderFlightTime: 0.85
   boulderGravity: 18
-  beamGlowOffset: {x: 1.35, y: 1.25}
-  blastPalette:
-  - {r: 0.21568628, g: 0.5803922, b: 0.43137255, a: 1}
-  - {r: 0.41568628, g: 0.74509805, b: 0.1882353, a: 1}
-  - {r: 0.93333334, g: 0.9882353, b: 0.8156863, a: 1}
+  beamGlowOffset: {x: 1.35, y: 1.44}
+  blastPalette: []
   blastColours:
   - {r: 0.6, g: 0.8980392, b: 0.3137255, a: 1}
   - {r: 0.41568628, g: 0.74509805, b: 0.1882353, a: 1}
@@ -239,6 +236,23 @@ MonoBehaviour:
   antlerGlow: {r: 0.6, g: 0.9, b: 0.31, a: 0.35}
   chargeMoteRate: 50
   beamMoteRate: 70
+  blastTailFrames:
+  - {fileID: -7986676647369965445, guid: c6ba06c7d963749e0bcbc92cfc48af0f, type: 3}
+  - {fileID: 5163495208189765181, guid: c6ba06c7d963749e0bcbc92cfc48af0f, type: 3}
+  - {fileID: -9137518894521827713, guid: c6ba06c7d963749e0bcbc92cfc48af0f, type: 3}
+  - {fileID: -4636257104808101484, guid: c6ba06c7d963749e0bcbc92cfc48af0f, type: 3}
+  blastBodyFrames:
+  - {fileID: 2897715589628758235, guid: c6ba06c7d963749e0bcbc92cfc48af0f, type: 3}
+  - {fileID: 4799897068598324237, guid: c6ba06c7d963749e0bcbc92cfc48af0f, type: 3}
+  - {fileID: -7514474400852500857, guid: c6ba06c7d963749e0bcbc92cfc48af0f, type: 3}
+  - {fileID: -5661170292897057966, guid: c6ba06c7d963749e0bcbc92cfc48af0f, type: 3}
+  blastHeadFrames:
+  - {fileID: 2364352222791973885, guid: c6ba06c7d963749e0bcbc92cfc48af0f, type: 3}
+  - {fileID: 2017531381100154517, guid: c6ba06c7d963749e0bcbc92cfc48af0f, type: 3}
+  - {fileID: -327135848034313621, guid: c6ba06c7d963749e0bcbc92cfc48af0f, type: 3}
+  - {fileID: 2413352917262503489, guid: c6ba06c7d963749e0bcbc92cfc48af0f, type: 3}
+  blastFps: 10
+  blastFlowFps: 20
   rushDistance: 3.5
   rushSpeedScale: 1.1
   rushStopDistance: 2.45
