@@ -77,9 +77,10 @@ public class ZoneAtmosphere : MonoBehaviour
             else if (n.Contains("sky"))
             {
                 r.sharedMaterial = sky;
-                Bounds lb = r.sprite.bounds; // local: clouds in the upper part of the sky only
+                Vector3 size = r.bounds.size; // world units, so scaled box skies get clouds at the right pixel size
                 r.GetPropertyBlock(block);
-                block.SetVector("_CloudBand", new Vector4(lb.center.y, lb.max.y - 0.3f, 0, 0));
+                block.SetVector("_CloudArea", new Vector4(size.x, size.y, 0, 0));
+                block.SetVector("_CloudBand", new Vector4(size.y * 0.3f, size.y - 0.3f, 0, 0)); // up from the sprite's bottom
                 r.SetPropertyBlock(block);
             }
             else if (zone == Zone.Green && (layer == "Tree" || layer == "TreeFront" || layer == "Bush" || n.Contains("tree") || n.Contains("bush")))
