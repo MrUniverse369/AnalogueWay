@@ -27,3 +27,9 @@ Two things it is not for:
   in a line if it is a close call.
 - A recap of the session. The doc describes the game in the present tense; the breakdown written for the user is a
   separate thing and does not belong in it.
+
+## End every task with a commit message
+
+Every reply that completes a request ends with a ready-to-paste commit message for the work, written by the
+**commit-message** skill. It comes last: after the deliverables, the breakdown and the design-doc line. When
+nothing in the repository changed, say so in one line instead. Write the message; never commit or push unless asked.

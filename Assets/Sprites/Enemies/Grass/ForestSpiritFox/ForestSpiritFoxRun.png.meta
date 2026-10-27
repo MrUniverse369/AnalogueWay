@@ -124,12 +124,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 29
+        width: 30
         height: 16
       alignment: 9
-      pivot: {x: 0.5, y: 0.6875}
+      pivot: {x: 0.51666665, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -146,12 +146,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_1
       rect:
         serializedVersion: 2
-        x: 30
+        x: 32
         y: 0
-        width: 29
+        width: 30
         height: 16
       alignment: 9
-      pivot: {x: 0.5, y: 0.6875}
+      pivot: {x: 0.51666665, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -168,12 +168,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_2
       rect:
         serializedVersion: 2
-        x: 59
+        x: 64
         y: 0
-        width: 29
+        width: 30
         height: 16
       alignment: 9
-      pivot: {x: 0.5, y: 0.6875}
+      pivot: {x: 0.51666665, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -190,12 +190,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_3
       rect:
         serializedVersion: 2
-        x: 88
+        x: 96
         y: 0
-        width: 29
+        width: 30
         height: 16
       alignment: 9
-      pivot: {x: 0.5, y: 0.6875}
+      pivot: {x: 0.51666665, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -212,12 +212,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_6
       rect:
         serializedVersion: 2
-        x: 176
+        x: 192
         y: 0
-        width: 29
+        width: 30
         height: 16
       alignment: 9
-      pivot: {x: 0.5, y: 0.6875}
+      pivot: {x: 0.51666665, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -234,12 +234,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_7
       rect:
         serializedVersion: 2
-        x: 205
+        x: 224
         y: 0
-        width: 29
+        width: 30
         height: 16
       alignment: 9
-      pivot: {x: 0.5, y: 0.6875}
+      pivot: {x: 0.51666665, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -256,12 +256,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_4
       rect:
         serializedVersion: 2
-        x: 118
+        x: 128
         y: 0
-        width: 29
+        width: 30
         height: 16
       alignment: 9
-      pivot: {x: 0.5, y: 0.6875}
+      pivot: {x: 0.51666665, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -278,12 +278,12 @@ TextureImporter:
       name: ForestSpiritFoxRun_5
       rect:
         serializedVersion: 2
-        x: 147
+        x: 160
         y: 0
-        width: 29
+        width: 30
         height: 16
       alignment: 9
-      pivot: {x: 0.5, y: 0.6875}
+      pivot: {x: 0.51666665, y: 0.6875}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
