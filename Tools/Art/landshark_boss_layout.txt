@@ -1,0 +1,14 @@
+# written by Tools/Art/landshark_boss.py - cell w h, pivot x y (pixels from the cell's bottom-left)
+body 106 129 58 40
+mound 52 14 26 1 3
+row idle 4
+row run 4
+row bite 4
+row roar 2
+row dive 2
+row swim 4
+row torpedo 2
+row breach 2
+row gulp 2
+row hurt 2
+row beached 2

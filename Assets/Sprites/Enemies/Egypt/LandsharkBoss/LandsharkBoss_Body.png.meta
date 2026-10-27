@@ -1,0 +1,1017 @@
+fileFormatVersion: 2
+guid: 85e7839bdfc5f4535a0a7358514c2ec8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9024752221797714184
+    second: LandsharkBoss_Body_0
+  - first:
+      213: -5772517418814467313
+    second: LandsharkBoss_Body_1
+  - first:
+      213: 9072952527287883121
+    second: LandsharkBoss_Body_2
+  - first:
+      213: -3494565377457816960
+    second: LandsharkBoss_Body_3
+  - first:
+      213: -6001039487744744109
+    second: LandsharkBoss_Body_4
+  - first:
+      213: -1907147927009758531
+    second: LandsharkBoss_Body_5
+  - first:
+      213: -21525554948377397
+    second: LandsharkBoss_Body_6
+  - first:
+      213: 7388849759646141011
+    second: LandsharkBoss_Body_7
+  - first:
+      213: -4208160312099020991
+    second: LandsharkBoss_Body_8
+  - first:
+      213: 100862153356275901
+    second: LandsharkBoss_Body_9
+  - first:
+      213: 1031925795447295587
+    second: LandsharkBoss_Body_10
+  - first:
+      213: -8476986986422100605
+    second: LandsharkBoss_Body_11
+  - first:
+      213: 409530539434495417
+    second: LandsharkBoss_Body_12
+  - first:
+      213: -2687906665425104636
+    second: LandsharkBoss_Body_13
+  - first:
+      213: -8960627267850211121
+    second: LandsharkBoss_Body_14
+  - first:
+      213: -834146024444380717
+    second: LandsharkBoss_Body_15
+  - first:
+      213: 1461593346804349942
+    second: LandsharkBoss_Body_16
+  - first:
+      213: 1011437222029302092
+    second: LandsharkBoss_Body_17
+  - first:
+      213: 1766886713882615284
+    second: LandsharkBoss_Body_18
+  - first:
+      213: -7173861866963045346
+    second: LandsharkBoss_Body_19
+  - first:
+      213: 4675496750543164454
+    second: LandsharkBoss_Body_20
+  - first:
+      213: -7901255388282190297
+    second: LandsharkBoss_Body_21
+  - first:
+      213: 4704704824817402239
+    second: LandsharkBoss_Body_22
+  - first:
+      213: 6437044966146584986
+    second: LandsharkBoss_Body_23
+  - first:
+      213: 6184384210099235889
+    second: LandsharkBoss_Body_24
+  - first:
+      213: -5134662407588415498
+    second: LandsharkBoss_Body_25
+  - first:
+      213: 4354746213153546304
+    second: LandsharkBoss_Body_26
+  - first:
+      213: 1883054689829137491
+    second: LandsharkBoss_Body_27
+  - first:
+      213: -8813983640060292289
+    second: LandsharkBoss_Body_28
+  - first:
+      213: 3304474161353334140
+    second: LandsharkBoss_Body_29
+  - first:
+      213: -4824157961565308900
+    second: Landshark_idle_0
+  - first:
+      213: -261782768951662901
+    second: Landshark_idle_1
+  - first:
+      213: -7674237645423645725
+    second: Landshark_idle_2
+  - first:
+      213: -4938364776122480596
+    second: Landshark_idle_3
+  - first:
+      213: 4530992086317626652
+    second: Landshark_run_0
+  - first:
+      213: -486495491172564263
+    second: Landshark_run_1
+  - first:
+      213: 8085809919851229224
+    second: Landshark_run_2
+  - first:
+      213: -1326110379059652322
+    second: Landshark_run_3
+  - first:
+      213: 4252365753807035988
+    second: Landshark_bite_0
+  - first:
+      213: 766698187112321587
+    second: Landshark_bite_1
+  - first:
+      213: -6534917944259004189
+    second: Landshark_bite_2
+  - first:
+      213: 8098457978155754643
+    second: Landshark_bite_3
+  - first:
+      213: 1308408040998294243
+    second: Landshark_roar_0
+  - first:
+      213: -6679374100792397991
+    second: Landshark_roar_1
+  - first:
+      213: -6846005697360980106
+    second: Landshark_dive_0
+  - first:
+      213: 217561573837423718
+    second: Landshark_dive_1
+  - first:
+      213: -3782545396632893661
+    second: Landshark_swim_0
+  - first:
+      213: -133210480549324923
+    second: Landshark_swim_1
+  - first:
+      213: 2689874698422818237
+    second: Landshark_swim_2
+  - first:
+      213: -4259732346776577113
+    second: Landshark_swim_3
+  - first:
+      213: -4699377543730397574
+    second: Landshark_torpedo_0
+  - first:
+      213: 6675608788592402351
+    second: Landshark_torpedo_1
+  - first:
+      213: 1752700523969872194
+    second: Landshark_breach_0
+  - first:
+      213: -7581773887344404670
+    second: Landshark_breach_1
+  - first:
+      213: -2087183025958292371
+    second: Landshark_gulp_0
+  - first:
+      213: -5520616057424786454
+    second: Landshark_gulp_1
+  - first:
+      213: 1056679891899150093
+    second: Landshark_hurt_0
+  - first:
+      213: 6340671265097304853
+    second: Landshark_hurt_1
+  - first:
+      213: -228744677208959629
+    second: Landshark_beached_0
+  - first:
+      213: -9213338369981672499
+    second: Landshark_beached_1
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Landshark_idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1290
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c18f688b4e52d0db0800000000000000
+      internalID: -4824157961565308900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_idle_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 1290
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc6615865f5fd5cf0800000000000000
+      internalID: -261782768951662901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_idle_2
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 1290
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ebe7967581af7590800000000000000
+      internalID: -7674237645423645725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_idle_3
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 1290
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c280be39667677bb0800000000000000
+      internalID: -4938364776122480596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_run_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1161
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c157119db4151ee30800000000000000
+      internalID: 4530992086317626652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_run_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 1161
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d284d7adee9f39f0800000000000000
+      internalID: -486495491172564263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_run_2
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 1161
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 820ff0a1841963070800000000000000
+      internalID: 8085809919851229224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_run_3
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 1161
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e19d033e2a5b89de0800000000000000
+      internalID: -1326110379059652322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_bite_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1032
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45e54b28f10730b30800000000000000
+      internalID: 4252365753807035988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_bite_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 1032
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33214c460fbd3aa00800000000000000
+      internalID: 766698187112321587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_bite_2
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 1032
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e8bd10d0ce4f45a0800000000000000
+      internalID: -6534917944259004189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_bite_3
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 1032
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 394e668af90836070800000000000000
+      internalID: 8098457978155754643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_roar_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 903
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e2d7f85e26682210800000000000000
+      internalID: 1308408040998294243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_roar_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 903
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95f2358e4a81e43a0800000000000000
+      internalID: -6679374100792397991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_dive_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 774
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6779f76071a1ef0a0800000000000000
+      internalID: -6846005697360980106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_dive_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 774
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 664ca55491fe40300800000000000000
+      internalID: 217561573837423718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_swim_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 645
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32748e6a003b18bc0800000000000000
+      internalID: -3782545396632893661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_swim_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 645
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5879f7216cdb62ef0800000000000000
+      internalID: -133210480549324923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_swim_2
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 645
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db59dc169ca545520800000000000000
+      internalID: 2689874698422818237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_swim_3
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 645
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ab1428eff362e4c0800000000000000
+      internalID: -4259732346776577113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_torpedo_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 516
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7e7088b50578ceb0800000000000000
+      internalID: -4699377543730397574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_torpedo_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 516
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: faf968703d684ac50800000000000000
+      internalID: 6675608788592402351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_breach_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 387
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2418dd027d7d25810800000000000000
+      internalID: 1752700523969872194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_breach_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 387
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2471185c1d028c690800000000000000
+      internalID: -7581773887344404670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_gulp_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 258
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d64f784a816d803e0800000000000000
+      internalID: -2087183025958292371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_gulp_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 258
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aebc0ebf1f4d263b0800000000000000
+      internalID: -5520616057424786454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_hurt_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 129
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0f62fd53c41aae00800000000000000
+      internalID: 1056679891899150093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_hurt_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 129
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51bc6a9dbe69ef750800000000000000
+      internalID: 6340671265097304853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_beached_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 375d2b29de553dcf0800000000000000
+      internalID: -228744677208959629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Landshark_beached_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 0
+        width: 106
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5471698, y: 0.31007752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc314cd1195a32080800000000000000
+      internalID: -9213338369981672499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      LandsharkBoss_Body_0: -9024752221797714184
+      LandsharkBoss_Body_1: -5772517418814467313
+      LandsharkBoss_Body_10: 1031925795447295587
+      LandsharkBoss_Body_11: -8476986986422100605
+      LandsharkBoss_Body_12: 409530539434495417
+      LandsharkBoss_Body_13: -2687906665425104636
+      LandsharkBoss_Body_14: -8960627267850211121
+      LandsharkBoss_Body_15: -834146024444380717
+      LandsharkBoss_Body_16: 1461593346804349942
+      LandsharkBoss_Body_17: 1011437222029302092
+      LandsharkBoss_Body_18: 1766886713882615284
+      LandsharkBoss_Body_19: -7173861866963045346
+      LandsharkBoss_Body_2: 9072952527287883121
+      LandsharkBoss_Body_20: 4675496750543164454
+      LandsharkBoss_Body_21: -7901255388282190297
+      LandsharkBoss_Body_22: 4704704824817402239
+      LandsharkBoss_Body_23: 6437044966146584986
+      LandsharkBoss_Body_24: 6184384210099235889
+      LandsharkBoss_Body_25: -5134662407588415498
+      LandsharkBoss_Body_26: 4354746213153546304
+      LandsharkBoss_Body_27: 1883054689829137491
+      LandsharkBoss_Body_28: -8813983640060292289
+      LandsharkBoss_Body_29: 3304474161353334140
+      LandsharkBoss_Body_3: -3494565377457816960
+      LandsharkBoss_Body_4: -6001039487744744109
+      LandsharkBoss_Body_5: -1907147927009758531
+      LandsharkBoss_Body_6: -21525554948377397
+      LandsharkBoss_Body_7: 7388849759646141011
+      LandsharkBoss_Body_8: -4208160312099020991
+      LandsharkBoss_Body_9: 100862153356275901
+      Landshark_beached_0: -228744677208959629
+      Landshark_beached_1: -9213338369981672499
+      Landshark_bite_0: 4252365753807035988
+      Landshark_bite_1: 766698187112321587
+      Landshark_bite_2: -6534917944259004189
+      Landshark_bite_3: 8098457978155754643
+      Landshark_breach_0: 1752700523969872194
+      Landshark_breach_1: -7581773887344404670
+      Landshark_dive_0: -6846005697360980106
+      Landshark_dive_1: 217561573837423718
+      Landshark_gulp_0: -2087183025958292371
+      Landshark_gulp_1: -5520616057424786454
+      Landshark_hurt_0: 1056679891899150093
+      Landshark_hurt_1: 6340671265097304853
+      Landshark_idle_0: -4824157961565308900
+      Landshark_idle_1: -261782768951662901
+      Landshark_idle_2: -7674237645423645725
+      Landshark_idle_3: -4938364776122480596
+      Landshark_roar_0: 1308408040998294243
+      Landshark_roar_1: -6679374100792397991
+      Landshark_run_0: 4530992086317626652
+      Landshark_run_1: -486495491172564263
+      Landshark_run_2: 8085809919851229224
+      Landshark_run_3: -1326110379059652322
+      Landshark_swim_0: -3782545396632893661
+      Landshark_swim_1: -133210480549324923
+      Landshark_swim_2: 2689874698422818237
+      Landshark_swim_3: -4259732346776577113
+      Landshark_torpedo_0: -4699377543730397574
+      Landshark_torpedo_1: 6675608788592402351
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

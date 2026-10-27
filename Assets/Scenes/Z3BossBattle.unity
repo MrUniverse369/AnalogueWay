@@ -494,6 +494,97 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1847091980}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &37010099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 37010101}
+  - component: {fileID: 37010100}
+  m_Layer: 0
+  m_Name: Pip5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &37010100
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37010099}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: -1958704211
+  m_SortingLayer: 15
+  m_SortingOrder: 3
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 0.9, g: 0.15, b: 0.2, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.2, y: 0.2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+--- !u!4 &37010101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37010099}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1181848160}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &60412093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -617,7 +708,7 @@ Transform:
   m_GameObject: {fileID: 81032676}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1.75, y: 1.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2009,6 +2100,97 @@ Transform:
   - {fileID: 88514369}
   m_Father: {fileID: 923377218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &252139924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 252139925}
+  - component: {fileID: 252139926}
+  m_Layer: 0
+  m_Name: Pip4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &252139925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252139924}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1181848160}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &252139926
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252139924}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: -1958704211
+  m_SortingLayer: 15
+  m_SortingOrder: 3
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 0.9, g: 0.15, b: 0.2, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.2, y: 0.2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
 --- !u!1 &320081783
 GameObject:
   m_ObjectHideFlags: 0
@@ -62632,6 +62814,8 @@ Transform:
   - {fileID: 81032677}
   - {fileID: 1537281551}
   - {fileID: 1772305481}
+  - {fileID: 252139925}
+  - {fileID: 37010101}
   m_Father: {fileID: 1445103781}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1187730841
@@ -62819,6 +63003,9 @@ MonoBehaviour:
     rocks: 0
     volley: 3
     spikes: 3
+    slashes: 1
+    beams: 1
+    boulders: 1
     pattern: 0000000003000000
   - name: Stage 2 - Enraged
     tint: {r: 1, g: 0.72, b: 0.45, a: 1}
@@ -62830,6 +63017,9 @@ MonoBehaviour:
     rocks: 0
     volley: 3
     spikes: 3
+    slashes: 1
+    beams: 1
+    boulders: 1
     pattern: 00000000010000000100000003000000
   - name: Stage 3 - Desperate
     tint: {r: 1, g: 0.45, b: 0.45, a: 1}
@@ -62841,6 +63031,9 @@ MonoBehaviour:
     rocks: 6
     volley: 3
     spikes: 3
+    slashes: 1
+    beams: 1
+    boulders: 1
     pattern: 000000000200000001000000000000000100000003000000
   startDelay: 1.5
   hurtboxWidth: 1.2
@@ -62869,6 +63062,43 @@ MonoBehaviour:
   openingColor: {r: 0.55, g: 1, b: 1, a: 1}
   hitColor: {r: 1, g: 1, b: 1, a: 1}
   debugLog: 0
+  bodyAnimator: {fileID: 0}
+  hoverHeight: 0.2
+  crescentTemplate: {fileID: 0}
+  beamTemplate: {fileID: 0}
+  boulderTemplate: {fileID: 0}
+  handOffset: {x: 1.2, y: 1.1}
+  boulderHold: {x: 0.3, y: 2.8}
+  leafReleaseFrame: 3
+  slashReleaseFrame: 3
+  crescentSpeed: 7.5
+  crescentLowHeight: 0.5
+  crescentHighHeight: 1.75
+  beamHeight: 1.1
+  beamThickness: 0.45
+  beamWarnTime: 0.7
+  beamLife: 0.45
+  boulderWarnShare: 0.8
+  boulderFlightTime: 0.85
+  boulderGravity: 18
+  beamGlowOffset: {x: 0, y: 0}
+  blastPalette: []
+  blastColours: []
+  antlerGlow: {r: 0, g: 0, b: 0, a: 0}
+  chargeMoteRate: 50
+  beamMoteRate: 70
+  blastTailFrames: []
+  blastBodyFrames: []
+  blastHeadFrames: []
+  blastFps: 10
+  blastFlowFps: 20
+  rushDistance: 3.5
+  rushSpeedScale: 1.1
+  rushStopDistance: 2.4
+  rearHoldShare: 0.6
+  stompImpactFrame: 0
+  stompReach: 1.25
+  limitInset: 0
   chestsFastTime: 40
   chestsSlowTime: 120
 --- !u!50 &1220829348
@@ -65239,10 +65469,13 @@ MonoBehaviour:
   - {fileID: 81032678}
   - {fileID: 1537281552}
   - {fileID: 1772305480}
+  - {fileID: 252139926}
+  - {fileID: 37010100}
   revealOnDefeat: {fileID: 562924809}
-  chestsFastTime: 35
-  chestsSlowTime: 110
-  maxLives: 3
+  chestsFastTime: 50
+  chestsSlowTime: 150
+  maxLives: 5
+  stageAt: 050000000400000002000000
   stages:
   - name: Charging Blade
     aura: {r: 1, g: 0.3, b: 0.3, a: 0}
@@ -65269,7 +65502,7 @@ MonoBehaviour:
     waveSpeed: 7
     blades: 5
     bladeWarn: 0.85
-    pattern: 020000000100000000000000
+    pattern: 02000000010000000400000000000000
   - name: Storm of Blades
     aura: {r: 0.85, g: 0.2, b: 0.45, a: 0.7}
     chargeTime: 0.95
@@ -65282,7 +65515,7 @@ MonoBehaviour:
     waveSpeed: 8
     blades: 6
     bladeWarn: 0.75
-    pattern: 0300000001000000020000000300000000000000
+    pattern: 030000000100000004000000020000000300000000000000
   startDelay: 1.5
   hurtboxWidth: 0.9
   standingHeight: 1.7
@@ -65307,6 +65540,20 @@ MonoBehaviour:
   hitColor: {r: 1, g: 1, b: 1, a: 1}
   afterimageTint: {r: 1, g: 0.42, b: 0.45, a: 1}
   debugLog: 0
+  dashClashGuard: 0.7
+  dashClashCard: 1
+  regen:
+    enabled: 1
+    fromStage: 1
+    amount: 1
+    duration:
+    - 3.4
+    - 3
+    maxAttempts: 2
+    cooldown: 20
+    minMissing: 1
+  meditateDistance: 3.5
+  stillShare: 0.6
 --- !u!61 &1445103779
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -93738,7 +93985,7 @@ Transform:
   m_GameObject: {fileID: 1537281550}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.5, y: 0, z: 0}
   m_LocalScale: {x: 1.75, y: 1.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -95762,7 +96009,7 @@ Transform:
   m_GameObject: {fileID: 1772305479}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.75, y: 1.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

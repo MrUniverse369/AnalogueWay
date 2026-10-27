@@ -11,6 +11,14 @@ in its own context, the `level-designer` agent runs the same skill.
 The main production board is the HNL dashboard (http://localhost:4321, `~/GitFiles/HNLDashboard`), not the
 Trello board. Read the Trello board for context; write to it only when asked.
 
+## Testing goes through the playtest skill
+
+Any request to playtest, QA, smoke-test, benchmark, regression-test or verify a fix runs the **playtest** skill (or the
+`playtester` agent for a session in its own context). The QA registry in the dashboard (`~/GitFiles/HNLDashboard`,
+`node qa/cli.mjs`, QA & Playtests tab) is the record of what has been tested: read it first, write every result to it,
+and never claim a level was played when it was only inspected. When a task adds a scene, script or mechanic, add it to
+`Tools/QA/catalogue.mjs` so it gets tests.
+
 ## Keep the design doc current
 
 When a task has changed the game — a mechanic, level, enemy, boss, talisman, skill, art, audio, UI, editor tool,

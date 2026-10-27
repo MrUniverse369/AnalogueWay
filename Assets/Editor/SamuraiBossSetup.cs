@@ -13,6 +13,8 @@ using UnityEngine;
 ///      the other zones' arenas) and builds Sumaria's rig in its place: the boss (hurtbox, body sprite, the old boss's
 ///      life pips), his projectile templates and the danger line, wired to the arena's limits and the boss treasure,
 ///      with the three stages' tuning
+/// BOSSBALANCE (2026-10-27): the stage tuning, his five lives and his meditation (BossRegen) are in ApplyBalance, which
+/// Tools/HNL/Apply Sumaria Balance also writes onto the Sumaria already in Z3BossBattle without rebuilding him.
 /// </summary>
 public static class SamuraiBossSetup
 {
@@ -151,7 +153,7 @@ public static class SamuraiBossSetup
             GameObject pipsCopy = Object.Instantiate(oldPips.gameObject, boss.transform);
             pipsCopy.name = "LifePips";
             pipsCopy.transform.localPosition = new Vector3(0f, 2.25f, 0f);
-            pips = pipsCopy.GetComponentsInChildren<SpriteRenderer>(true).OrderBy(p => p.transform.localPosition.x).ToArray();
+            pips = BossPips.Ensure(pipsCopy.transform, Lives); // BOSSBALANCE: five
         }
 
         // projectile templates (children, switched off; SamuraiBoss copies them)
@@ -213,18 +215,7 @@ public static class SamuraiBossSetup
         so.FindProperty("revealOnDefeat").objectReferenceValue = treasure;
         so.FindProperty("bladeBandHeight").floatValue = BladeBand;
 
-        // the three stages: each faster, with shorter tells and openings, and more attacks
-        var stages = so.FindProperty("stages");
-        stages.arraySize = 3;
-        SetStage(stages.GetArrayElementAtIndex(0), "Charging Blade", new Color(1f, 0.3f, 0.3f, 0f),
-            1.35f, 18f, 2.8f, 1.0f, 0.6f, 1.0f, 3, 6.5f, 5, 0.9f, SamuraiBoss.Attack.DashSlash);
-        SetStage(stages.GetArrayElementAtIndex(1), "Phantom Steps", new Color(1f, 0.35f, 0.4f, 0.5f),
-            1.1f, 20f, 2.3f, 0.8f, 0.5f, 0.85f, 3, 7f, 5, 0.85f,
-            SamuraiBoss.Attack.SlashWaves, SamuraiBoss.Attack.TeleportSlash, SamuraiBoss.Attack.DashSlash);
-        SetStage(stages.GetArrayElementAtIndex(2), "Storm of Blades", new Color(0.85f, 0.2f, 0.45f, 0.7f),
-            0.95f, 22f, 1.9f, 0.65f, 0.42f, 0.7f, 4, 8f, 6, 0.75f,
-            SamuraiBoss.Attack.BladeRain, SamuraiBoss.Attack.TeleportSlash, SamuraiBoss.Attack.SlashWaves,
-            SamuraiBoss.Attack.BladeRain, SamuraiBoss.Attack.DashSlash);
+        ApplyBalance(so);
         so.ApplyModifiedPropertiesWithoutUndo();
 
         oldBoss.SetActive(false); // kept as DraftLevelBuilder's template
@@ -253,6 +244,74 @@ public static class SamuraiBossSetup
         sr.sortingOrder = 2;
         go.SetActive(false);
         return hazard;
+    }
+
+    // ---------------------------------------------------------------- BOSSBALANCE (2026-10-27)
+
+    private const int Lives = 5;
+
+    /// <summary>Writes Sumaria's balance onto the one in Z3BossBattle (lives, stages, meditation, chests, five pips).</summary>
+    [MenuItem("Tools/HNL/Apply Sumaria Balance")]
+    public static void ApplyBalanceInScene()
+    {
+        var scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Additive);
+        SamuraiBoss sb = scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<SamuraiBoss>(true)).FirstOrDefault();
+        if (sb == null)
+        {
+            Debug.LogWarning("SamuraiBossSetup: no SamuraiBoss in Z3BossBattle; run Tools/HNL/Set Up Samurai Boss.");
+            return;
+        }
+        var so = new SerializedObject(sb);
+        SpriteRenderer[] pips = BossPips.Ensure(sb.transform.Find("LifePips"), Lives);
+        var pipsProp = so.FindProperty("lifePips");
+        pipsProp.arraySize = pips.Length;
+        for (int i = 0; i < pips.Length; i++) pipsProp.GetArrayElementAtIndex(i).objectReferenceValue = pips[i];
+        ApplyBalance(so);
+        so.ApplyModifiedPropertiesWithoutUndo();
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+        Debug.Log($"SamuraiBossSetup: Sumaria's balance applied in {ScenePath} ({pips.Length} pips).");
+        if (EditorSceneManager.sceneCount > 1) EditorSceneManager.CloseScene(scene, true);
+    }
+
+    /// <summary>Sumaria's numbers (Tools/QA/boss_balance.md has the reasoning). Stage tuning is unchanged from 2026-10-19;
+    /// what's new is five lives over the three stages, Meditate in stages 2 and 3, and the chest times for the longer fight.</summary>
+    public static void ApplyBalance(SerializedObject so)
+    {
+        so.FindProperty("maxLives").intValue = Lives;
+        var stageAt = so.FindProperty("stageAt");
+        stageAt.arraySize = 3;
+        stageAt.GetArrayElementAtIndex(0).intValue = 5;
+        stageAt.GetArrayElementAtIndex(1).intValue = 4;
+        stageAt.GetArrayElementAtIndex(2).intValue = 2;
+        so.FindProperty("chestsFastTime").floatValue = 50f;
+        so.FindProperty("chestsSlowTime").floatValue = 150f;
+        so.FindProperty("meditateDistance").floatValue = 3.5f;
+        so.FindProperty("stillShare").floatValue = 0.6f;
+        var regen = so.FindProperty("regen");
+        regen.FindPropertyRelative("enabled").boolValue = true;
+        regen.FindPropertyRelative("fromStage").intValue = 1;
+        regen.FindPropertyRelative("amount").intValue = 1;
+        var duration = regen.FindPropertyRelative("duration");
+        duration.arraySize = 2;
+        duration.GetArrayElementAtIndex(0).floatValue = 3.4f;
+        duration.GetArrayElementAtIndex(1).floatValue = 3f;
+        regen.FindPropertyRelative("maxAttempts").intValue = 2;
+        regen.FindPropertyRelative("cooldown").floatValue = 20f;
+        regen.FindPropertyRelative("minMissing").intValue = 1;
+
+        // the three stages: each faster, with shorter tells and openings, and more attacks
+        var stages = so.FindProperty("stages");
+        stages.arraySize = 3;
+        SetStage(stages.GetArrayElementAtIndex(0), "Charging Blade", new Color(1f, 0.3f, 0.3f, 0f),
+            1.35f, 18f, 2.8f, 1.0f, 0.6f, 1.0f, 3, 6.5f, 5, 0.9f, SamuraiBoss.Attack.DashSlash);
+        SetStage(stages.GetArrayElementAtIndex(1), "Phantom Steps", new Color(1f, 0.35f, 0.4f, 0.5f),
+            1.1f, 20f, 2.3f, 0.8f, 0.5f, 0.85f, 3, 7f, 5, 0.85f,
+            SamuraiBoss.Attack.SlashWaves, SamuraiBoss.Attack.TeleportSlash, SamuraiBoss.Attack.Meditate, SamuraiBoss.Attack.DashSlash);
+        SetStage(stages.GetArrayElementAtIndex(2), "Storm of Blades", new Color(0.85f, 0.2f, 0.45f, 0.7f),
+            0.95f, 22f, 1.9f, 0.65f, 0.42f, 0.7f, 4, 8f, 6, 0.75f,
+            SamuraiBoss.Attack.BladeRain, SamuraiBoss.Attack.TeleportSlash, SamuraiBoss.Attack.Meditate, SamuraiBoss.Attack.SlashWaves,
+            SamuraiBoss.Attack.BladeRain, SamuraiBoss.Attack.DashSlash);
     }
 
     private static void SetStage(SerializedProperty s, string name, Color aura, float charge, float dashSpeed, float daze,

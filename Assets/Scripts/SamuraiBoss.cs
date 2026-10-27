@@ -20,6 +20,14 @@ using UnityEngine;
 /// Stage 3  everything above, plus
 ///          Blade rain: blades fall onto Harvey's position, each marked on the floor before it drops, so standing still
 ///          is never safe.
+/// Meditate (BOSSREGEN, 2026-10-27; stage 2 on, two tries a fight) Mokuso: he leaps back from Harvey, kneels with his
+///          blade sheathed and closes his eyes; cherry petals spiral in to him, a bell chimes, and the pip he will win
+///          back blinks. While his eyes are closed (the first 60%) he is open: a stomp or dash breaks his focus and
+///          counts as a hit. Then his eyes snap open (a red glint, a ring of the blade): zanshin, and from then on an
+///          attack is countered like one during his charge. If he finishes he wins one life back (never past his max)
+///          and rises straight into a dash slash.
+/// Lives (BOSSREGEN): five, over three stages by lives left (stageAt: 5 Charging Blade, 4-3 Phantom Steps, 2-1 Storm
+///          of Blades). Stages never go back down after a heal.
 /// Each stage is faster, with shorter tells and openings. Same rules as the other bosses (YokaiBoss): hurt only during
 /// an opening (attacking him at any other time hurts Harvey), lives through HurtPlayer with the usual knockback and
 /// flash, the combo counts his hits, a reset when Harvey respawns, and the treasure that ends the level on defeat.
@@ -28,7 +36,7 @@ using UnityEngine;
 /// </summary>
 public class SamuraiBoss : MonoBehaviour, IBossAttacker
 {
-    public enum Attack { DashSlash, TeleportSlash, SlashWaves, BladeRain }
+    public enum Attack { DashSlash, TeleportSlash, SlashWaves, BladeRain, Meditate } // BOSSREGEN: Meditate appended
     private enum Pose { Idle, Ready, Raised, Slash, Follow, Kneel }
 
     [System.Serializable]
@@ -81,6 +89,8 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
 
     [Header("Fight")]
     [SerializeField] private int maxLives = 3;
+    [Tooltip("BOSSREGEN: lives at or below which each stage starts, highest first. Empty: one stage per life lost.")]
+    [SerializeField] private int[] stageAt = new int[0];
     [SerializeField] private Stage[] stages;
     [SerializeField] private float startDelay = 1.5f;
     [SerializeField] private float hurtboxWidth = 0.9f;
@@ -126,16 +136,26 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
     [Tooltip("DASHCLASH: show the battle card (the backdrop goes black and 「戦い」 flashes up).")]
     [SerializeField] private bool dashClashCard = true;
 
+    [Header("Meditation (BOSSREGEN:)")]
+    [Tooltip("BOSSREGEN: Mokuso, his heal (a Meditate move in a stage pattern). Off: Meditate is skipped.")]
+    [SerializeField] private BossRegen regen = new BossRegen { enabled = false, duration = new[] { 3.4f, 3f } };
+    [Tooltip("How far from Harvey he leaps back to kneel (close enough to reach in time).")]
+    [SerializeField] private float meditateDistance = 3.5f;
+    [Tooltip("The share of the meditation his eyes stay closed (open to a hit); after it, zanshin: attacks are countered.")]
+    [SerializeField, Range(0.2f, 0.9f)] private float stillShare = 0.6f;
+
     private static readonly int IsHurtParam = Animator.StringToHash("isHurt");
     private static readonly Color[] Crimson = { PixelFX.Hex("eb564b"), PixelFX.Hex("ff6b97"), PixelFX.Hex("ffd2dc") };
     private static readonly Color[] Glint = { PixelFX.Cream, PixelFX.Yellow, PixelFX.Hex("ffd2dc") };
     private static readonly Color[] Stones = { PixelFX.Hex("98b2b1"), PixelFX.Hex("769099"), PixelFX.Hex("b9d2ca") };
     private static readonly Color[] Wisps = { PixelFX.Hex("ff6b97"), PixelFX.Hex("eb564b"), PixelFX.Hex("ffd2dc") };
+    private static readonly Color[] Blossom = { PixelFX.Hex("ffd2dc"), PixelFX.Hex("ff9fb8"), PixelFX.Cream }; // BOSSREGEN:
 
     private int lives;
     private int stage;
     private bool vulnerable, invulnerable, defeated, charging, dashing;
     private bool clashable, clashed; // DASHCLASH: the dash slash's dash is on; it was cancelled by a clash
+    private bool meditating, guarded; // BOSSREGEN: kneeling in Mokuso; his eyes are open (zanshin)
     private float facing = -1f;
     private float lastHurtTime = -99f;
     private float recoverUntil = -99f;
@@ -166,6 +186,10 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
     public bool Defeated => defeated;
     public bool Charging => charging;
     public bool Dashing => dashing;
+    public bool Meditating => meditating; // BOSSREGEN:
+    public bool Guarded => guarded;
+    public int MaxLives => maxLives;
+    public BossRegen Regen => regen;
 
     private void Start()
     {
@@ -219,6 +243,9 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
         lives = maxLives;
         stage = 0;
         vulnerable = invulnerable = defeated = charging = dashing = false;
+        meditating = guarded = false; // BOSSREGEN:
+        regen.Reset();
+        aura.Clear("focus");
         transform.position = startPos;
         body.gameObject.SetActive(true);
         hurtbox.enabled = true;
@@ -239,12 +266,16 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
         while (!defeated)
         {
             Stage s = CurrentStage;
-            foreach (Attack attack in s.pattern)
+            bool ran = false;
+            foreach (Attack attack in qaPattern != null && qaPattern.Length > 0 ? qaPattern : s.pattern)
             {
+                if (attack == Attack.Meditate && !regen.CanStart(stage, lives, maxLives, defeated)) continue; // BOSSREGEN: nothing to win back, or no tries left
+                ran = true;
                 Log("attack " + attack);
                 yield return Run(attack, s);
                 yield return Idle(s.pauseBetweenAttacks);
             }
+            if (!ran) yield return null; // BOSSREGEN: every move was a heal it couldn't take: wait a frame, never spin
         }
     }
 
@@ -255,6 +286,7 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
             case Attack.TeleportSlash: return TeleportSlash(s);
             case Attack.SlashWaves: return SlashWaves(s);
             case Attack.BladeRain: return BladeRain(s);
+            case Attack.Meditate: return Meditate(s); // BOSSREGEN:
             default: return DashSlash(s);
         }
     }
@@ -598,6 +630,73 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
         yield return new WaitForSeconds(s.bladeWarn + bladeDropHeight / bladeFallSpeed - 0.3f);
     }
 
+    // ---------------------------------------------------------------- BOSSREGEN: Mokuso, his meditation
+
+    private IEnumerator Meditate(Stage s)
+    {
+        if (!regen.CanStart(stage, lives, maxLives, defeated)) yield break;
+        // a leap back from Harvey, close enough that he can still get there
+        float away = Mathf.Sign(transform.position.x - PlayerX + 0.01f);
+        float x = Mathf.Clamp(PlayerX + away * meditateDistance, LeftX + 0.5f, RightX - 0.5f);
+        if (Mathf.Abs(x - PlayerX) < 2f) x = Mathf.Clamp(PlayerX - away * meditateDistance, LeftX + 0.5f, RightX - 0.5f);
+        yield return Leap(x);
+        Face(PlayerX - x);
+        regen.Begin();
+        meditating = true;
+        guarded = false;
+        Log("meditating");
+        SetPose(Pose.Kneel); // blade sheathed, down on one knee, eyes closed
+        SetHeight(kneelingHeight);
+        float time = regen.DurationFor(stage);
+        float chime = 0f;
+        for (float t = 0f; t < time && meditating; t += Time.deltaTime)
+        {
+            float k = t / time;
+            regen.Advance(k);
+            regen.ShowPips(lifePips, lives);
+            if (!guarded && k >= stillShare)
+            {
+                // zanshin: his eyes snap open, a red glint and the ring of the blade: too late to strike now
+                guarded = true;
+                Play(audioManager != null ? audioManager.SamuraiSlashSound : null, 1.8f);
+                PixelFX.Burst(HiltPosition() + Vector3.up * 0.4f, 8, 1.5f, 3f, Crimson, 0.15f, 0.3f, 1, PixelShape.Star, PixelMotion.Float, true);
+                fx.Flash(new Color(1f, 0.3f, 0.3f, 0.8f), 0.12f);
+            }
+            aura.Set("focus", guarded ? new Color(1f, 0.25f, 0.3f, 0.75f) : new Color(1f, 0.85f, 0.9f, 0.35f + 0.35f * k), guarded ? 2 : 1,
+                guarded ? 10f : 2f + 3f * k, 10);
+            // cherry petals drawn in to him on a slow spiral (red once he is on guard)
+            if (Random.value < 0.45f)
+            {
+                float a = Random.value * Mathf.PI * 2f, r = Random.Range(1.4f, 2.6f);
+                Vector3 centre = transform.position + Vector3.up * 0.8f;
+                Vector3 from = centre + new Vector3(Mathf.Cos(a) * r, Mathf.Sin(a) * r * 0.6f, 0f);
+                Vector2 v = (Vector2)(centre - from) * 1.2f + new Vector2(-Mathf.Sin(a), Mathf.Cos(a)) * 0.8f;
+                PixelFX.Emit(from, v, PixelFX.Pick(guarded ? Crimson : Blossom), 0.8f, 1, PixelShape.Petal, PixelMotion.Drift, guarded);
+            }
+            chime -= Time.deltaTime;
+            if (chime <= 0f)
+            {
+                // a temple bell, quicker as it nears the end
+                chime = Mathf.Lerp(0.9f, 0.5f, k);
+                Play(audioManager != null ? (audioManager.worldSwitchToSpiritSound != null ? audioManager.worldSwitchToSpiritSound : audioManager.powerUpSound) : null, 1.6f + 0.3f * k);
+            }
+            body.localPosition = Vector3.zero;
+            yield return null;
+        }
+        if (!meditating) yield break; // his focus was broken: TryHit took over
+        // whole again: a life back, and he rises straight into a dash slash
+        lives = regen.Complete(lives, maxLives);
+        meditating = guarded = false;
+        aura.Clear("focus");
+        UpdatePips();
+        Log("meditation complete");
+        Play(audioManager != null ? audioManager.powerUpSound : null, 1.1f);
+        PixelFX.Burst(transform.position + Vector3.up * 0.9f, 18, 2f, 4.5f, Blossom, 0.5f, 0.9f, 1, PixelShape.Petal, PixelMotion.Drift, false);
+        PixelFX.Ring(transform.position + Vector3.up * 0.9f, 20, 4f, Crimson, 0.35f, 1, PixelShape.Square, true);
+        SetHeight(standingHeight);
+        yield return DashSlash(s);
+    }
+
     // ---------------------------------------------------------------- moving about
 
     // a backward leap to x, in the raised pose, landing in a puff of dust
@@ -647,10 +746,19 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
         Log((isStomp ? "stomp" : "dash") + " attempt");
         if (defeated || invulnerable) return;
         if (isStomp && !PlayerController.StompsAllowed) return; // only deliberate stomps count
-        if (charging)
+        if (charging || (meditating && guarded)) // BOSSREGEN: zanshin is met like a charge
         {
             Counter();
             return;
+        }
+        if (meditating)
+        {
+            // BOSSREGEN: struck with his eyes closed: his focus breaks, the heal is lost, and the blow lands
+            meditating = false;
+            regen.Cancel();
+            aura.Clear("focus");
+            Log("meditation broken");
+            vulnerable = true;
         }
         if (!vulnerable)
         {
@@ -678,7 +786,7 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
         if (lives <= 0) StartCoroutine(Defeat());
         else
         {
-            stage = maxLives - lives;
+            stage = Mathf.Max(stage, BossStages.ForLives(lives, maxLives, stageAt)); // BOSSREGEN: a heal never takes him back a stage
             StartCoroutine(StageChange());
         }
     }
@@ -717,6 +825,9 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
     private IEnumerator Defeat()
     {
         defeated = true;
+        meditating = guarded = false; // BOSSREGEN:
+        regen.Cancel();
+        aura.Clear("focus");
         float fightTime = BossChests.FightTime(); // BOSSCHEST: the clock stops at the winning hit
         ClearHazards();
         hurtbox.enabled = false;
@@ -773,7 +884,8 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
     private void Contact()
     {
         if (defeated || vulnerable || invulnerable || dashing || Time.time < recoverUntil) return;
-        if (charging)
+        if (meditating && !guarded) return; // BOSSREGEN: kneeling still: brushing past him doesn't hurt
+        if (charging || meditating)
         {
             Counter();
             return;
@@ -867,6 +979,24 @@ public class SamuraiBoss : MonoBehaviour, IBossAttacker
         foreach (GameObject h in hazards)
             if (h != null) Destroy(h);
         hazards.Clear();
+    }
+
+    // ---------------------------------------------------------------- QA (2026-10-27)
+    [System.NonSerialized] private Attack[] qaPattern;
+
+    /// <summary>QA: restarts the fight with 'toLives' lives (his stage follows) and, when 'only' is given, loops just
+    /// those attacks instead of the stage's pattern. For the Playtest agent's boss driver (QABossDriver); the game never
+    /// calls it.</summary>
+    public void QAJump(int toLives, Attack[] only)
+    {
+        ResetFight();
+        StopAllCoroutines();
+        lives = Mathf.Clamp(toLives, 1, maxLives);
+        stage = BossStages.ForLives(lives, maxLives, stageAt);
+        qaPattern = only;
+        UpdatePips();
+        ShowStage();
+        fight = StartCoroutine(Fight(0.5f));
     }
 
     // ---------------------------------------------------------------- visuals
