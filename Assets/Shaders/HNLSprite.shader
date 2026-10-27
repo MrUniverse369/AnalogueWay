@@ -14,9 +14,10 @@
 //   _HNL_SHINE   diagonal glint sweeping across opaque pixels (coins, chests, spikes, traps)
 //   _HNL_SWAY    wind sway of the top of the sprite, snapped to whole art pixels (trees, bushes)
 //   _HNL_FLUFF   soft cream rim on top, cool shade underneath, breathing puffs and a springy squash (bounce clouds)
-//   _HNL_CLOUDS  pixel clouds drifting inside the sprite (parallax skies): designed lobe silhouettes (SDF circles on a
-//                flat base, four archetypes) with flat highlight / base / shadow / underside tones; ZoneAtmosphere sets
-//                _CloudArea and _CloudBand per sky
+//   _HNL_CLOUDS  pixel clouds drifting inside the sprite (parallax skies): a library of designed cloud silhouettes
+//                (Tools/Art/sky_clouds.py -> Resources/FX/SkyCloudAtlas.png + SkyCloudLibrary.hlsl) laid out in rows,
+//                with a bubbling edge, distance haze and an optional sun rim; ZoneAtmosphere sets _CloudArea and
+//                _CloudBand per sky
 //   _HNL_HAZE    heat shimmer near a horizon line (Egypt backgrounds)
 //   _HNL_PATTERN a slowly scrolling pattern of paw prints and twinkling stars (the title screen backdrop)
 //   _HNL_GHOST   translucent, gently shimmering body with a pixel purple halo; green pixels (eyes, flames) stay solid
@@ -62,22 +63,20 @@ Shader "AnalogueWay/HNLSprite"
 
         [Header(Sky clouds)]
         [Toggle(_HNL_CLOUDS)] _UseClouds ("Scrolling clouds", Float) = 0
-        _CloudColor ("Base", Color) = (0.835, 0.922, 1, 1)
-        _CloudLight ("Highlight", Color) = (0.969, 0.988, 1, 1)
-        _CloudShadeColor ("Shadow", Color) = (0.682, 0.804, 0.953, 1)
-        _CloudDeep ("Underside accent (a = strength)", Color) = (0.58, 0.714, 0.918, 1)
-        _CloudShading ("Shading amount", Range(0, 1)) = 0.6
-        _CloudScale ("Cloud size", Range(0.5, 2)) = 1
-        _CloudStretch ("Width, height", Vector) = (1, 1, 0, 0)
-        [IntRange] _CloudType ("Archetype (-1 mixed, 0 wide, 1 round, 2 tall, 3 small)", Range(-1, 3)) = -1
-        _CloudSeed ("Shape seed", Float) = 0
-        _CloudLobe ("Primary lobe scale", Range(0.7, 1.3)) = 1
-        _CloudLobeVar ("Secondary lobe variation", Range(0, 1)) = 0.5
-        _CloudIrregular ("Shape irregularity", Range(0, 1)) = 0.3
-        _CloudCover ("Cloud cover (share of slots)", Range(0, 1)) = 0.5
-        _CloudCell ("Slot per cloud (art pixels w, h)", Vector) = (120, 58, 0, 0)
+        [NoScaleOffset] _CloudAtlas ("Cloud library (Tools/Art/sky_clouds.py)", 2D) = "black" {}
+        _CloudColor ("Body", Color) = (0.855, 0.929, 0.988, 1)
+        _CloudShadeColor ("Shade (back masses, seams)", Color) = (0.831, 0.871, 0.984, 1)
+        _CloudRim ("Sun rim on top edges (a = strength)", Color) = (1, 1, 1, 0)
+        _CloudHaze ("Distance haze on the far (lower) rows", Range(0, 0.8)) = 0.3
+        [IntRange] _CloudType ("Kind (-1 mixed, 0 wide, 1 tall, 2 medium, 3 small)", Range(-1, 3)) = -1
+        _CloudSeed ("Layout seed", Float) = 0
+        _CloudCover ("Cloud cover (share of slots)", Range(0, 1)) = 0.65
+        _CloudGap ("Gap before each cloud (art pixels: min, max)", Vector) = (24, 150, 0, 0)
+        _CloudRow ("Row height (art pixels, 56+)", Float) = 64
+        _CloudSpan ("Layout span (art pixels, 300+; no cloud crosses one)", Float) = 480
+        [IntRange] _CloudPixel ("Pixel size", Range(1, 3)) = 1
         _CloudSpeed ("Drift speed (units/s)", Float) = 0.15
-        _CloudBreathe ("Breathing (art pixels)", Range(0, 1.5)) = 0
+        _CloudBoil ("Edge boil (frame steps/s, 0 = still)", Range(0, 3)) = 0.5
         _CloudBand ("Band (units up from the sprite's bottom: min, max)", Vector) = (0, 100, 0, 0)
         _CloudArea ("Sprite world size (set by ZoneAtmosphere)", Vector) = (0, 0, 0, 0)
 
@@ -174,21 +173,18 @@ Shader "AnalogueWay/HNLSprite"
                 half4 _FluffShade;
                 float _Squash;
                 half4 _CloudColor;
-                half4 _CloudLight;
                 half4 _CloudShadeColor;
-                half4 _CloudDeep;
-                float _CloudShading;
-                float _CloudScale;
-                float4 _CloudStretch;
+                half4 _CloudRim;
+                float _CloudHaze;
                 float _CloudType;
                 float _CloudSeed;
-                float _CloudLobe;
-                float _CloudLobeVar;
-                float _CloudIrregular;
-                float _CloudSpeed;
                 float _CloudCover;
-                float4 _CloudCell;
-                float _CloudBreathe;
+                float4 _CloudGap;
+                float _CloudRow;
+                float _CloudSpan;
+                float _CloudPixel;
+                float _CloudSpeed;
+                float _CloudBoil;
                 float4 _CloudBand;
                 float4 _CloudArea;
                 float _HazeY;
@@ -231,93 +227,105 @@ Shader "AnalogueWay/HNLSprite"
             }
 
         #if defined(_HNL_CLOUDS)
-            // Sky clouds are designed shapes, not thresholded noise: four archetypes, each a flat-bottomed base capsule
-            // under five round lobes (art pixels, origin at the bottom centre, biggest lobe first; r = 0 = unused slot).
-            // Noise only nudges the outline by about a pixel. 0 wide and low, 1 rounded, 2 tall with a tower, 3 small.
-            static const float2 kCloudBase[4] = { float2(25, 7), float2(15, 7), float2(14, 7), float2(8, 5) }; // half-length, radius
-            static const float2 kCloudSize[4] = { float2(70, 27), float2(58, 31), float2(56, 38), float2(32, 18) }; // width, height
-            static const float3 kCloudLobes[20] =
-            {
-                float3(-5, 14, 11), float3(-18, 11, 8), float3(9, 13, 9), float3(21, 10, 6), float3(-29, 7, 5),
-                float3(2, 17, 12), float3(-11, 12, 8), float3(15, 12, 8), float3(-21, 8, 5), float3(24, 7, 4),
-                float3(-2, 17, 12), float3(5, 27, 9), float3(-14, 11, 8), float3(14, 12, 8), float3(-23, 7, 4),
-                float3(-3, 9, 7), float3(7, 8, 5), float3(-11, 6, 4), float3(0, 0, 0), float3(0, 0, 0)
-            };
+            // Sky clouds are designed pixel art, not shader noise: Tools/Art/sky_clouds.py draws each silhouette (back
+            // masses in the shade tone, front masses and a flat slab in the body tone, cauliflower edges) and bakes the
+            // library into _CloudAtlas: R/G/B = the tone in boil frame 0/1/2 (0 sky, 1/3 body, 2/3 shade).
+            // This only places, drifts and colours them.
+            #include "SkyCloudLibrary.hlsl"
+            TEXTURE2D(_CloudAtlas);
+            SAMPLER(sampler_CloudAtlas);
 
-            float CloudBody(float2 q, float2 bse, float3 lobes[5])
+            // a cloud for one slot, no taller than the room left in the band; near rows favour the banks and towers,
+            // far rows the medium and small clouds
+            int SkyCloudPick(float2 id, float depth, float room)
             {
-                float d = length(float2(max(abs(q.x) - bse.x, 0.0), q.y - bse.y)) - bse.y;
-                [unroll] for (int k = 0; k < 5; k++) d = min(d, length(q - lobes[k].xy) - lobes[k].z);
-                return max(d, -q.y); // flat underside
+                int kind = (int)_CloudType;
+                if (kind < 0)
+                {
+                    float4 w = lerp(float4(0.35, 0.25, 0.28, 0.12), float4(0.15, 0.03, 0.42, 0.4), depth);
+                    float k = Hash21(id + 8.3) * dot(w, 1.0);
+                    kind = k < w.x ? 0 : k < w.x + w.y ? 1 : k < w.x + w.y + w.z ? 2 : 3;
+                }
+                int pick = kSkyKindStart[kind] + min((int)(Hash21(id) * kSkyKindCount[kind]), kSkyKindCount[kind] - 1);
+                [loop] for (int j = 0; j < SKY_CLOUD_COUNT; j++)
+                {
+                    int c = (int)((uint)(pick + j) % (uint)SKY_CLOUD_COUNT); // too tall: the next one in the library that fits
+                    if (kSkyCloudRect[c].w <= room) return c;
+                }
+                return -1;
             }
 
-            // Which tone an art pixel gets: 0 sky, 1 shadow, 2 base, 3 highlight, 4 underside accent.
-            // p = pixel centre in art pixels from the sprite's bottom-left corner.
-            int CloudShade(float2 p, float t)
+            int SkyCloudTone(float4 rect, float2 l, int frame)
             {
-                // the band is cut into rows of slots; each slot holds at most one cloud that fits inside it
-                float ppu = _PixelsPerUnit;
-                float2 stretch = max(_CloudStretch.xy, 0.25);
-                float2 cell = max(_CloudCell.xy, 8.0) * _CloudScale * stretch;
-                float2 band = _CloudBand.xy * ppu;
-                float row = floor((p.y - band.x) / cell.y);
-                if (p.y < band.x || row >= floor((band.y - band.x) / cell.y)) return 0;
+                if (l.y >= rect.w) return 0;
+                float3 d = SAMPLE_TEXTURE2D_LOD(_CloudAtlas, sampler_CloudAtlas, (rect.xy + l + 0.5) / kSkyCloudAtlasSize, 0).rgb;
+                return (int)round((frame == 0 ? d.r : frame == 1 ? d.g : d.b) * 3.0);
+            }
 
-                // every row drifts at its own pace and repeats once per sprite width, so tiled parallax skies meet seamlessly
-                float hr = Hash21(float2(row + 0.31, _CloudSeed + 5.7));
+            // Tone of cloud pixel (x, y) from one row: 0 sky, 1 body, 2 shade, 3 body on a top edge (sun rim).
+            // Each row is a fixed sequence (gap, cloud, gap, cloud...) inside spans that tile the sky's width, so no
+            // two clouds overlap, none crosses a span edge, and tiled parallax skies meet seamlessly.
+            int SkyCloudRow(float x, float y, float row, float rowH, float bandH, float depth, float period, float t)
+            {
+                float rh = Hash21(float2(row + 0.31, _CloudSeed + 5.7));
+                float speed = _CloudSpeed * (1.0 - 0.45 * depth) * (0.85 + 0.3 * rh); // far rows drift slower
+                x += floor(t * speed * _PixelsPerUnit / max(_CloudPixel, 1.0)) + floor(rh * period); // whole-pixel drift
+                x -= floor(x / period) * period;
+                float spans = max(1.0, round(period / max(_CloudSpan, 300.0)));
+                float spanW = period / spans;
+                float span = floor(x / spanW);
+                float u = x - span * spanW;
+
+                float cursor = 0;
+                [loop] for (int i = 0; i < 16; i++)
+                {
+                    float2 id = float2(span * 17.0 + i + 0.37, row * 7.1 + _CloudSeed);
+                    cursor += floor(lerp(_CloudGap.x, _CloudGap.y, Hash21(id + 3.3)));
+                    if (cursor > u) return 0;
+                    float y0 = row * rowH + floor(Hash21(id + 4.1) * rowH * 0.5);
+                    int c = SkyCloudPick(id, depth, bandH - y0);
+                    if (c < 0) return 0;
+                    float4 rect = kSkyCloudRect[c];
+                    if (cursor + rect.z > spanW) return 0; // the span's tail stays clear sky
+                    if (u < cursor + rect.z)
+                    {
+                        float2 l = float2(u - cursor, y - y0);
+                        if (Hash21(id + 0.5) > _CloudCover || l.y < 0) return 0;
+                        if (Hash21(id + 6.6) > 0.5) l.x = rect.z - 1 - l.x; // mirrored
+                        int step = (int)fmod(floor(t * _CloudBoil + Hash21(id + 9.7) * 4.0), 4.0); // boil: 0 1 2 1
+                        int frame = step == 3 ? 1 : step;
+                        int tone = SkyCloudTone(rect, l, frame);
+                        if (tone == 1 && _CloudRim.a > 0 && SkyCloudTone(rect, l + float2(0, 1), frame) == 0) tone = 3;
+                        return tone;
+                    }
+                    cursor += rect.z;
+                }
+                return 0;
+            }
+
+            // p = whole cloud pixels from the sprite's bottom-left corner; depth = 1 on the farthest (lowest) row
+            int SkyCloudShade(float2 p, float t, out float depth)
+            {
+                float ppu = _PixelsPerUnit / max(_CloudPixel, 1.0);
+                float2 band = floor(_CloudBand.xy * ppu);
+                float y = p.y - band.x;
+                float bandH = band.y - band.x;
                 float period = _CloudArea.x > 0 ? _CloudArea.x * ppu : 100000.0;
-                float slots = max(1.0, round(period / (cell.x * (0.85 + 0.3 * hr))));
-                float cw = period / slots;
-                float u = p.x + floor(t * _CloudSpeed * (0.7 + 0.6 * hr) * ppu) + floor(hr * period); // whole-pixel drift
-                u -= floor(u / period) * period;
-                float col = floor(u / cw);
-                float2 id = float2(col + 0.37, row * 7.1 + _CloudSeed);
-                if (Hash21(id + 0.5) > _CloudCover) return 0;
+                float rowH = max(_CloudRow, 56.0); // so a cloud (up to 82 tall, raised up to half a row) reaches at most one row up
+                float rows = max(1.0, floor(bandH / rowH));
+                float row = min(floor(y / rowH), rows - 1.0);
+                depth = 0;
+                if (y < 0 || y >= bandH) return 0;
 
-                // this slot's cloud: archetype, size, place in the slot, mirror and lobe variation
-                float h = Hash21(id);
-                int type = _CloudType >= 0 ? (int)_CloudType : (h < 0.3 ? 0 : h < 0.6 ? 1 : h < 0.75 ? 2 : 3);
-                float2 size = kCloudSize[type] * _CloudLobe * stretch;
-                float s = min(_CloudScale * (0.75 + 0.4 * Hash21(id + 1.3)),min(cw * 0.92 / size.x, cell.y * 0.96 / size.y));
-                float2 slack = float2(cw, cell.y) - size * s;
-                float2 origin = float2(col * cw + size.x * s * 0.5 + slack.x * Hash21(id + 2.9), row * cell.y + slack.y * Hash21(id + 4.1));
-                float2 q = (float2(u, p.y - band.x) - origin) / (s * stretch);
-                float flip = Hash21(id + 6.6) > 0.5 ? -1.0 : 1.0; // mirror the layout, never the light
-
-                float3 lobes[5];
-                int k;
-                [unroll] for (k = 0; k < 5; k++)
+                // the pixel's own row is nearer, so it is drawn over a cloud reaching up from the row below
+                [unroll] for (int k = 0; k < 2; k++)
                 {
-                    float3 L = kCloudLobes[type * 5 + k];
-                    float vary = (k == 0 ? 0.15 : 0.35) * _CloudLobeVar;
-                    float r = L.z * _CloudLobe * (1.0 + (Hash21(id + k * 7.13) - 0.5) * 2.0 * vary) + _CloudBreathe * sin(t * 0.8 + k * 1.9 + h * 6.28);
-                    float x = (L.x + (Hash21(id + k * 3.7 + 9.2) - 0.5) * 4.0 * _CloudLobeVar) * flip;
-                    lobes[k] = L.z > 0 ? float3(x, L.y * _CloudLobe, r) : float3(0, 0, -1);
+                    float r = row - k;
+                    depth = rows > 1.0 ? 1.0 - max(r, 0.0) / (rows - 1.0) : 0.0;
+                    int tone = r >= 0 ? SkyCloudRow(p.x, y, r, rowH, bandH, depth, period, t) : 0;
+                    if (tone > 0) return tone;
                 }
-                float2 bse = kCloudBase[type];
-                float wob = (ValueNoise(float2(q.x / 9.0, q.y / 7.0) + h * 31.0) - 0.5) * _CloudIrregular * 4.0;
-                if (CloudBody(q, bse, lobes) + wob > 0) return 0;
-
-                // shadow: whatever the lobes, lifted toward the light, no longer cover (a scalloped belly)
-                float ks = 0.2 + 0.55 * _CloudShading;
-                float lit = 1e5;
-                [unroll] for (k = 0; k < 5; k++) lit = min(lit, length(q - lobes[k].xy - float2(-0.3, 1.0) * ks * lobes[k].z) - lobes[k].z);
-                if (lit > 0) return CloudBody(q - float2(0, 1.5), bse, lobes) + wob > 0 ? 4 : 1;
-
-                // highlight: a cap on the upper left of each lobe, unless a taller lobe in front covers it (with a
-                // margin, so no one-pixel slivers are left along its edge); lobes too small for a readable cap get none
-                float kh = 0.25 + 0.5 * _CloudShading;
-                float margin = 1.5 / s;
-                [unroll] for (k = 0; k < 5; k++)
-                {
-                    float3 L = lobes[k];
-                    if (L.z * s < 5.0 || length(q - L.xy) >= L.z || length(q - L.xy - float2(-0.3, 0.55) * L.z) > L.z * (0.35 + 0.45 * kh)) continue;
-                    bool hidden = false;
-                    [unroll] for (int j = 0; j < 5; j++)
-                        hidden = hidden || (j != k && length(q - lobes[j].xy) < lobes[j].z + margin && lobes[j].y + lobes[j].z > L.y + L.z);
-                    if (!hidden) return 3;
-                }
-                return 2;
+                return 0;
             }
         #endif
 
@@ -386,14 +394,18 @@ Shader "AnalogueWay/HNLSprite"
 
             #if defined(_HNL_CLOUDS)
                 {
-                    // whole art pixels from the sprite's corner (uv x its world size): right for scaled box skies and for
+                    // whole cloud pixels from the sprite's corner (uv x its world size): right for scaled box skies and for
                     // batched sprites, and the clouds ride with the parallax layer exactly like its own texels
-                    float2 cp = (_CloudArea.x > 0 ? floor(i.uv * _CloudArea.xy * _PixelsPerUnit) : floor(i.positionOS.xy * _PixelsPerUnit)) + 0.5;
-                    int shade = tex.a > 0.5 ? CloudShade(cp, t) : 0;
-                    if (shade == 1) c.rgb = _CloudShadeColor.rgb;
-                    else if (shade == 2) c.rgb = _CloudColor.rgb;
-                    else if (shade == 3) c.rgb = _CloudLight.rgb;
-                    else if (shade == 4) c.rgb = lerp(_CloudShadeColor.rgb, _CloudDeep.rgb, _CloudDeep.a);
+                    float ppu = _PixelsPerUnit / max(_CloudPixel, 1.0);
+                    float2 cp = _CloudArea.x > 0 ? floor(i.uv * _CloudArea.xy * ppu) : floor(i.positionOS.xy * ppu);
+                    float depth;
+                    int shade = tex.a > 0.5 ? SkyCloudShade(cp, t, depth) : 0;
+                    if (shade > 0)
+                    {
+                        half3 cloud = shade == 2 ? _CloudShadeColor.rgb : _CloudColor.rgb;
+                        if (shade == 3) cloud = lerp(cloud, _CloudRim.rgb, _CloudRim.a);
+                        c.rgb = lerp(cloud, c.rgb, _CloudHaze * depth); // far clouds sink toward the sky behind them
+                    }
                 }
             #endif
 

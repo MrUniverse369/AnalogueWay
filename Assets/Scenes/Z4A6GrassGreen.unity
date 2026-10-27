@@ -23300,8 +23300,8 @@ Tilemap:
   - first: {x: 4, y: 24, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 5
-      m_TileSpriteIndex: 5
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -95563,13 +95563,13 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 648293b53ca0e4b22927c46cc5fa8d04, type: 2}
   - m_RefCount: 15
     m_Data: {fileID: 11400000, guid: 9b2927e99269545aa8d9c86107d16123, type: 2}
-  - m_RefCount: 186
+  - m_RefCount: 187
     m_Data: {fileID: 11400000, guid: 7f16c082738864e7292dd2d280eb2c68, type: 2}
   - m_RefCount: 146
     m_Data: {fileID: 11400000, guid: c23b13b9cdb614aeab65e75f50f4180f, type: 2}
   - m_RefCount: 396
     m_Data: {fileID: 11400000, guid: 2d7acce95581644edb1177b94222329d, type: 2}
-  - m_RefCount: 8155
+  - m_RefCount: 8154
     m_Data: {fileID: 11400000, guid: 837d09570647942fa81739837d027f26, type: 2}
   - m_RefCount: 16
     m_Data: {fileID: 11400000, guid: 73f0bc6e07b374ec3919c2e93deae499, type: 2}
@@ -95586,13 +95586,13 @@ Tilemap:
     m_Data: {fileID: -1198182330, guid: bfac19a0f19eb4308b0652b6cf727138, type: 3}
   - m_RefCount: 15
     m_Data: {fileID: -1753800831, guid: bfac19a0f19eb4308b0652b6cf727138, type: 3}
-  - m_RefCount: 186
+  - m_RefCount: 187
     m_Data: {fileID: -1999019882, guid: bfac19a0f19eb4308b0652b6cf727138, type: 3}
   - m_RefCount: 146
     m_Data: {fileID: -2014855087, guid: bfac19a0f19eb4308b0652b6cf727138, type: 3}
   - m_RefCount: 396
     m_Data: {fileID: -2060542687, guid: bfac19a0f19eb4308b0652b6cf727138, type: 3}
-  - m_RefCount: 8155
+  - m_RefCount: 8154
     m_Data: {fileID: 54051012, guid: bfac19a0f19eb4308b0652b6cf727138, type: 3}
   - m_RefCount: 16
     m_Data: {fileID: -1241832371, guid: bfac19a0f19eb4308b0652b6cf727138, type: 3}
@@ -104716,7 +104716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501500, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: orthographic size
-      value: 5.890625
+      value: 7.1041665
       objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501501, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: m_RootOrder
