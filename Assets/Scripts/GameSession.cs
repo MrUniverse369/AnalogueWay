@@ -89,9 +89,18 @@ public static class GameSession
         finally { autoSaving = false; }
     }
 
-    /// <summary>SAVEFIX: a playable level (or village): in Build Settings, and not the main menu, the map or the win screen.</summary>
+    /// <summary>
+    /// SAVEFIX: a playable level (or village): in Build Settings, and not the main menu, the map or the win screen.
+    /// GREYBOX (2026-10-26): nor a greybox prototype (a scene named Greybox_*). Pressing Play on a scene that isn't in
+    /// Build Settings gives it a build index for that session, which made a prototype count as a level of the save
+    /// file: it loaded the file and, on finishing, would have saved the prototype as the furthest level. Prototypes
+    /// play with a new-game state and are never saved.
+    /// </summary>
     public static bool IsLevelScene(string sceneName) =>
-        BuildIndexOf(sceneName) > 0 && sceneName != ZoneSelectMap.SceneName && sceneName != "Win";
+        BuildIndexOf(sceneName) > 0 && sceneName != ZoneSelectMap.SceneName && sceneName != "Win" && !IsPrototypeScene(sceneName);
+
+    /// <summary>GREYBOX: a greybox prototype scene (Greybox_*): playable from the editor, never saved, not on the map.</summary>
+    public static bool IsPrototypeScene(string sceneName) => !string.IsNullOrEmpty(sceneName) && sceneName.StartsWith("Greybox");
 
     // ---------------------------------------------------------------- SLOTS: save files
     /// <summary>SLOTS: make save file n (1 to SaveSystem.SlotCount) the one that is played and saved to.</summary>

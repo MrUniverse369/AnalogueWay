@@ -13,6 +13,9 @@ public class AudioManager : MonoBehaviour
    public AudioClip rainbowMusic;
    [Tooltip("RAINBOWMUSIC: crossfade into and out of the rainbow track (seconds).")]
    public float rainbowFadeIn = 0.4f, rainbowFadeOut = 0.8f;
+   [Tooltip("RAINBOWSTING (2026-10-27): a one-shot hit that plays once, the instant the combo reaches the rainbow stage, " +
+            "right as rainbowMusic starts crossfading in. Empty = no sting, just the crossfade.")]
+   public AudioClip rainbowSting;
    public AudioClip coinSound;
    public AudioClip winSound;
    public AudioClip jumpSound;
@@ -70,6 +73,7 @@ public class AudioManager : MonoBehaviour
     [Range(0f, 1f)] public float cloudBounceVolume = 1f; // MIX:
     [Range(0f, 1f)] public float chestTrapVolume = 1f; // MIX: CHEST: the trap bang and its fuse
     [Range(0f, 1f)] public float chestRattleVolume = 1f; // MIX: CHEST: keep it faint; it's a hint, not an alarm
+    [Range(0f, 1f)] public float rainbowStingVolume = 1f; // MIX: RAINBOWSTING:
 
     // PERF: one shared reference instead of every script searching the scene by tag.
     private static AudioManager instance;
@@ -172,6 +176,7 @@ public class AudioManager : MonoBehaviour
         if (rainbowMusic == null || music == null) return;
         if (on)
         {
+            PlaySfxOneShot(rainbowSting); // RAINBOWSTING: plays once per rainbow start, same as the crossfade below
             if (music.clip == rainbowMusic && music.isPlaying) return;
             resumeClip = music.clip;
             resumeTime = music.time;
@@ -287,6 +292,7 @@ public class AudioManager : MonoBehaviour
         if (sound == cloudBounceSound) return cloudBounceVolume;
         if (sound == chestTrapSound || sound == chestFuseSound) return chestTrapVolume; // CHEST:
         if (sound == chestRattleSound) return chestRattleVolume; // CHEST:
+        if (sound == rainbowSting) return rainbowStingVolume; // RAINBOWSTING:
         return 1f;
     }
 

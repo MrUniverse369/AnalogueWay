@@ -188,11 +188,13 @@ public class ChallengeArena : MonoBehaviour
     {
         GameObject holder = Instantiate(prefab, feet, Quaternion.identity, transform);
         Transform a = holder.transform.Find("PointA"), b = holder.transform.Find("PointB"), enemy = holder.transform.Find("Enemy");
-        float left = area.bounds.min.x + 0.8f, right = area.bounds.max.x - 0.8f;
+        SpriteRenderer sr = enemy != null ? enemy.GetComponent<SpriteRenderer>() : null;
+        // the patrol turns before the sprite's edge reaches the room's walls (wide foxes need more room than walkers)
+        float edge = Mathf.Max(0.8f, (sr != null ? sr.bounds.extents.x : 0f) + 0.3f);
+        float left = area.bounds.min.x + edge, right = area.bounds.max.x - edge;
         if (a != null) a.position = new Vector3(Mathf.Max(left, feet.x - patrolHalfWidth), a.position.y, a.position.z);
         if (b != null) b.position = new Vector3(Mathf.Min(right, feet.x + patrolHalfWidth), b.position.y, b.position.z);
         // stand the sprite on the floor (the patrol keeps the holder's height)
-        SpriteRenderer sr = enemy != null ? enemy.GetComponent<SpriteRenderer>() : null;
         if (sr != null) holder.transform.position += Vector3.up * (feet.y - sr.bounds.min.y);
         spawned.Add(holder);
         enemies.Add(enemy != null ? enemy.gameObject : holder);
@@ -241,6 +243,9 @@ public class ChallengeArena : MonoBehaviour
         GameObject prefab = Inventory.Catalog != null ? Inventory.Catalog.treasureChest : null;
         if (prefab == null || rewardSpot == null) return;
         GameObject chest = Instantiate(prefab, rewardSpot.position, Quaternion.identity);
+        // rewardSpot is floor height and the chest's pivot is its middle: stand its base on the floor (as BossChests does)
+        SpriteRenderer chestSprite = chest.GetComponent<SpriteRenderer>();
+        if (chestSprite != null) chest.transform.position += Vector3.up * (rewardSpot.position.y - chestSprite.bounds.min.y);
         OpenChest open = chest.GetComponentInChildren<OpenChest>();
         if (open != null)
         {

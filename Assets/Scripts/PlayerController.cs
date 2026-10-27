@@ -101,8 +101,14 @@ public class PlayerController : CharecterBehaviour
     /// <summary>RESPAWNHOLD: how far through the wait he is since reappearing (0 just back, 1 the camera is on him).</summary>
     public float RespawnProgress => !respawnHold ? 1f : arrivedAt < 0f ? 0f : Mathf.Clamp01((Time.time - arrivedAt) / arriveTime);
 
-    /// <summary>STUN / RESPAWNHOLD: Harvey can't act (dazed, or held by a respawn). Everything he does checks this.</summary>
-    public bool NoControl => IsStunned || respawnHold;
+    /// <summary>
+    /// INTRO (2026-10-26): a cutscene has Harvey (the plane crash that opens Grassy Green, PlaneCrashIntro): no input of
+    /// any kind, from anything that asks NoControl (talismans, the quick item, mounts), until it hands him back.
+    /// </summary>
+    public bool Cinematic { get; set; }
+
+    /// <summary>STUN / RESPAWNHOLD / INTRO: Harvey can't act (dazed, held by a respawn, or in a cutscene). Everything he does checks this.</summary>
+    public bool NoControl => IsStunned || respawnHold || Cinematic;
 
     /// <summary>RESPAWNHOLD: hold Harvey still (LevelManager, on death) or hand control back (once the camera is on him).</summary>
     public void HoldForRespawn(bool hold)

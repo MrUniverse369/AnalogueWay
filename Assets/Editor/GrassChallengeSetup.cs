@@ -6,13 +6,16 @@ using UnityEngine.Tilemaps;
 
 /// <summary>
 /// CHALLENGE (2026-10-25): Tools/HNL/Set Up Grass Challenge Arena. Builds the ChallengeArena in the first Grassy Green
-/// level's cave (Z4A6, the room around x -69..-44, y 52..64 that the user marked: the T-shaped island, the two little
-/// blocks over the sky windows, the step down from the upper floor). Safe to run again: it replaces its own object.
-///   room:   upper floor at y 57 (x -69..-59), a step down to the lower floor at y 52 (x -58..-45)
+/// level's cave (Z4A6). Safe to run again: it replaces its own object.
+///   room:   x -58..-44, y 52..63 (2026-10-26: the user shrank it; the old upper floor at x -69..-59 is rock now). One
+///           floor at y 52 with two 3-wide blocks above it (x -55..-53 and -49..-47, tops at y 57)
 ///   gate:   the room's two ways out, both at x -44: the upper tunnel (y 57-58) and the lower one (y 52-53), closed
 ///           with the rock of cell (-44, 59)
-///   spawns: two on the upper floor, three on the lower; the reward chest drops onto the lower floor
-///   rounds: Forest Spirit Foxes and Grass walkers, 2, 3, 4, 5 and 6 enemies
+///   spawns: five along the floor, at least 2 units from the walls. None on the blocks: the enemies have no gravity and
+///           keep their spawn height, so a patrol wider than a block would walk on air. The reward chest drops between
+///           the blocks
+///   rounds: Forest Spirit Foxes only, 2, 3, 4, 5 and 6 of them (FOXONLY 2026-10-27: the fox is Grassy Green's only
+///           regular enemy; the rounds used to mix in Grass walkers)
 /// </summary>
 public static class GrassChallengeSetup
 {
@@ -20,7 +23,7 @@ public static class GrassChallengeSetup
     private const string Name = "ChallengeArena";
     private static readonly Vector3Int[] GateCells = { new Vector3Int(-44, 57, 0), new Vector3Int(-44, 58, 0), new Vector3Int(-44, 52, 0), new Vector3Int(-44, 53, 0) };
     private static readonly Vector3Int GateTileFrom = new Vector3Int(-44, 59, 0);
-    private static readonly Vector2[] Spawns = { new Vector2(-66f, 57f), new Vector2(-62.5f, 57f), new Vector2(-55f, 52f), new Vector2(-51f, 52f), new Vector2(-47.5f, 52f) };
+    private static readonly Vector2[] Spawns = { new Vector2(-56f, 52f), new Vector2(-53.5f, 52f), new Vector2(-51f, 52f), new Vector2(-49f, 52f), new Vector2(-47f, 52f) };
 
     [MenuItem("Tools/HNL/Set Up Grass Challenge Arena")]
     public static void Run()
@@ -38,11 +41,11 @@ public static class GrassChallengeSetup
         foreach (GameObject old in scene.GetRootGameObjects().Where(g => g.name == Name).ToArray()) Object.DestroyImmediate(old);
         var root = new GameObject(Name);
         SceneManager_Move(root, scene);
-        root.transform.position = new Vector3(-57.5f, 58f, 0f);
+        root.transform.position = new Vector3(-52f, 57.5f, 0f);
 
         var area = root.AddComponent<BoxCollider2D>();
         area.isTrigger = true;
-        area.size = new Vector2(23f, 12f); // x -69..-46, y 52..64: the whole room, two cells short of the gate
+        area.size = new Vector2(12f, 11f); // x -58..-46, y 52..63: the whole room, two cells short of the gate
 
         Transform Child(string name, Vector2 at)
         {
@@ -67,15 +70,14 @@ public static class GrassChallengeSetup
         so.FindProperty("rewardSpot").objectReferenceValue = reward;
 
         SerializedProperty prefabs = so.FindProperty("enemyPrefabs");
-        prefabs.arraySize = 2;
+        prefabs.arraySize = 1;
         prefabs.GetArrayElementAtIndex(0).objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemy/Grass/ForestSpiritFox.prefab");
-        prefabs.GetArrayElementAtIndex(1).objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemy/Grass/Grassenemynonboss.prefab");
         SerializedProperty points = so.FindProperty("spawnPoints");
         points.arraySize = spawns.Length;
         for (int i = 0; i < spawns.Length; i++) points.GetArrayElementAtIndex(i).objectReferenceValue = spawns[i];
 
-        // foxes, walkers: 2, 3, 4, 5, 6 enemies
-        int[][] counts = { new[] { 2, 0 }, new[] { 2, 1 }, new[] { 2, 2 }, new[] { 3, 2 }, new[] { 3, 3 } };
+        // foxes: 2, 3, 4, 5, 6 enemies
+        int[][] counts = { new[] { 2 }, new[] { 3 }, new[] { 4 }, new[] { 5 }, new[] { 6 } };
         SerializedProperty rounds = so.FindProperty("rounds");
         rounds.arraySize = counts.Length;
         for (int r = 0; r < counts.Length; r++)

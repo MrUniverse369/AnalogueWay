@@ -104,6 +104,9 @@ public class CameraController : MonoBehaviour
         return target;
     }
 
+    /// <summary>INTRO: where the follow would put the camera right now (a cutscene glides onto it before handing over).</summary>
+    public Vector3 FollowTarget => TargetPosition();
+
     /// <summary>LOADING: jump straight onto Harvey (LevelLoader does this while the level is hidden), no glide.</summary>
     public void SnapToPlayer()
     {

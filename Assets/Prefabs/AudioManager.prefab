@@ -178,6 +178,11 @@ MonoBehaviour:
   music: {fileID: 6491143628084602272}
   sfx: {fileID: 6491143627039374132}
   backgroundMusic: {fileID: 8300000, guid: 90eae78e8ce85a849b5b0ca11b2de641, type: 3}
+  spiritWorldMusic: {fileID: 0}
+  rainbowMusic: {fileID: 8300000, guid: cb25519136a7f4fd7a986f8904c12477, type: 3}
+  rainbowFadeIn: 0.4
+  rainbowFadeOut: 0.8
+  rainbowSting: {fileID: 8300000, guid: 693169acac62d4fdd8f1865e77bc5341, type: 3}
   coinSound: {fileID: 8300000, guid: adad861fed7ff427f95c2f52cff777b3, type: 3}
   winSound: {fileID: 8300000, guid: a4319f57e3594404a9a720498b9f189b, type: 3}
   jumpSound: {fileID: 8300000, guid: 422d659f0e7094f1bb59c509e05ccba9, type: 3}
@@ -221,6 +226,7 @@ MonoBehaviour:
   cloudBounceVolume: 1
   chestTrapVolume: 1
   chestRattleVolume: 1
+  rainbowStingVolume: 1
 --- !u!1 &6491143628084602303
 GameObject:
   m_ObjectHideFlags: 0
