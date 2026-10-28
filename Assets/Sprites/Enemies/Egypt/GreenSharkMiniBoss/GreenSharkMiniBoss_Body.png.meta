@@ -1,0 +1,537 @@
+fileFormatVersion: 2
+guid: 0d6a34e1c07b74f91bee945f804bceb8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -207738175398534510
+    second: GreenSharkMiniBoss_Body_0
+  - first:
+      213: 4394693926539194491
+    second: GreenSharkMiniBoss_Body_1
+  - first:
+      213: -2534033217505483976
+    second: GreenSharkMiniBoss_Body_2
+  - first:
+      213: -2584577424178611586
+    second: GreenSharkMiniBoss_Body_3
+  - first:
+      213: 8091203330230312570
+    second: GreenSharkMiniBoss_Body_4
+  - first:
+      213: 6617815184816180502
+    second: GreenSharkMiniBoss_Body_5
+  - first:
+      213: 6978719359797615811
+    second: GreenSharkMiniBoss_Body_6
+  - first:
+      213: 69957013333277327
+    second: GreenSharkMiniBoss_Body_7
+  - first:
+      213: -4159145743201981422
+    second: GreenSharkMiniBoss_Body_8
+  - first:
+      213: 6903488892064578746
+    second: GreenSharkMiniBoss_Body_9
+  - first:
+      213: -7292586371465619939
+    second: GreenSharkMiniBoss_Body_10
+  - first:
+      213: -5913408763529859708
+    second: GreenSharkMiniBoss_Body_11
+  - first:
+      213: 8433551602641449128
+    second: GreenSharkMiniBoss_Body_12
+  - first:
+      213: 5088500073423329495
+    second: GreenSharkMiniBoss_Body_13
+  - first:
+      213: 2026631712470408229
+    second: Sandfin_swim_0
+  - first:
+      213: 3240175160907051152
+    second: Sandfin_swim_1
+  - first:
+      213: -6856602464342714749
+    second: Sandfin_swim_2
+  - first:
+      213: -4148670793218825751
+    second: Sandfin_swim_3
+  - first:
+      213: 3804736213523223659
+    second: Sandfin_swim_4
+  - first:
+      213: 2728067360343435440
+    second: Sandfin_swim_5
+  - first:
+      213: 1318440397651371291
+    second: Sandfin_attack_0
+  - first:
+      213: 7350145047286929933
+    second: Sandfin_attack_1
+  - first:
+      213: -165337690213508542
+    second: Sandfin_attack_2
+  - first:
+      213: -4097627488881602247
+    second: Sandfin_attack_3
+  - first:
+      213: 3048414529537802770
+    second: Sandfin_attack_4
+  - first:
+      213: -5358828913702663725
+    second: Sandfin_attack_5
+  - first:
+      213: -3121595782153709876
+    second: Sandfin_attack_6
+  - first:
+      213: -8288545761717995693
+    second: Sandfin_attack_7
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sandfin_swim_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 45
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52c17501eca002c10800000000000000
+      internalID: 2026631712470408229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_swim_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 45
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 090b8e3442a67fc20800000000000000
+      internalID: 3240175160907051152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_swim_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 45
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 386d8c2f26478d0a0800000000000000
+      internalID: -6856602464342714749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_swim_3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 45
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e16728e4e5fc66c0800000000000000
+      internalID: -4148670793218825751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_swim_4
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 45
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b64dd178d632dc430800000000000000
+      internalID: 3804736213523223659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_swim_5
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 45
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b8ab907fca0cd520800000000000000
+      internalID: 2728067360343435440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b15e8876e8a0c4210800000000000000
+      internalID: 1318440397651371291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_attack_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0a522f4af5f00660800000000000000
+      internalID: 7350145047286929933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_attack_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24a17da2f3a94bdf0800000000000000
+      internalID: -165337690213508542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_attack_3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 931165f428d4227c0800000000000000
+      internalID: -4097627488881602247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_attack_4
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2128d390dd42e4a20800000000000000
+      internalID: 3048414529537802770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_attack_5
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d909aace7d91a5b0800000000000000
+      internalID: -5358828913702663725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_attack_6
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc6de50dc2ddda4d0800000000000000
+      internalID: -3121595782153709876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sandfin_attack_7
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 0
+        width: 60
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51111114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 357ba385b8b29fc80800000000000000
+      internalID: -8288545761717995693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GreenSharkMiniBoss_Body_0: -207738175398534510
+      GreenSharkMiniBoss_Body_1: 4394693926539194491
+      GreenSharkMiniBoss_Body_10: -7292586371465619939
+      GreenSharkMiniBoss_Body_11: -5913408763529859708
+      GreenSharkMiniBoss_Body_12: 8433551602641449128
+      GreenSharkMiniBoss_Body_13: 5088500073423329495
+      GreenSharkMiniBoss_Body_2: -2534033217505483976
+      GreenSharkMiniBoss_Body_3: -2584577424178611586
+      GreenSharkMiniBoss_Body_4: 8091203330230312570
+      GreenSharkMiniBoss_Body_5: 6617815184816180502
+      GreenSharkMiniBoss_Body_6: 6978719359797615811
+      GreenSharkMiniBoss_Body_7: 69957013333277327
+      GreenSharkMiniBoss_Body_8: -4159145743201981422
+      GreenSharkMiniBoss_Body_9: 6903488892064578746
+      Sandfin_attack_0: 1318440397651371291
+      Sandfin_attack_1: 7350145047286929933
+      Sandfin_attack_2: -165337690213508542
+      Sandfin_attack_3: -4097627488881602247
+      Sandfin_attack_4: 3048414529537802770
+      Sandfin_attack_5: -5358828913702663725
+      Sandfin_attack_6: -3121595782153709876
+      Sandfin_attack_7: -8288545761717995693
+      Sandfin_swim_0: 2026631712470408229
+      Sandfin_swim_1: 3240175160907051152
+      Sandfin_swim_2: -6856602464342714749
+      Sandfin_swim_3: -4148670793218825751
+      Sandfin_swim_4: 3804736213523223659
+      Sandfin_swim_5: 2728067360343435440
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

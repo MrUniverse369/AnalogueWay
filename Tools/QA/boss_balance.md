@@ -84,6 +84,24 @@ Why these numbers:
   (`BossStages.ForLives` with a running maximum), so a heal never replays an easier stage.
 - **Chest times** grow with the fight. The scripted fights below (instant hits, every heal broken) set the floor.
 
+## The Sandy Dunes mini-boss (SANDFIN, 2026-10-28)
+
+Sandfin (Z2MiniBossSandy, between Act 3 and Act 4) sits between a Dunes act and the Landshark on purpose:
+
+| | Regular Sandshark | **Sandfin** (mini-boss) | Landshark |
+| --- | --- | --- | --- |
+| Hits to beat | 2 stomps | 3 lives | 4 lives (up to 6 with heals) |
+| Stages | 1 | 2 (Circling 3-2, Frenzy 1) | 3 |
+| Attacks | walks into Harvey | Leap, Lunge; Frenzy chains Lunge into Leap and leaps twice | Hunt, Charge, Bite Combo, Devour |
+| Openings | none (stomp it) | earned, 2.4 / 2.0 s, belly-up | earned, 2.6 / 2.1 / 1.8 s |
+| Main tells | none | mound 0.9 / 0.72 s; lunge wind-up 0.55 / 0.42 s | mound 0.9 / 0.75 / 0.65 s; lane 1.2 / 1.0 / 0.85 s |
+| Heal | none | none | Buried Regeneration |
+| Reward | none | 1-2 chests (BossChests most 2, fewest 1; 40 / 90 s), the exit | 3-6 chests, the Summoning Talisman |
+
+It deals one heart per hit like every boss. Its tells match the Landshark's first stage, so the player learns the
+mound and the surfaced lunge here before meeting them chained and faster at the end of the zone. Scripted floor:
+15.9 s with instant hits against the dodging bot (QA session S-20261027-233430-xmfu).
+
 ## Healing (BossRegen, one per boss, set in its Inspector)
 
 | | Landshark: Buried Regeneration | Sumaria: Mokuso |

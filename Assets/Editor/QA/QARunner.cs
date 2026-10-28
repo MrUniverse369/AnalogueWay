@@ -195,7 +195,7 @@ public static class QARunner
             Check("at least one checkpoint", Count("CheckPoint") > 0, Count("CheckPoint") + " CheckPoint");
             Check("a level exit", Count("NextLevel", "LevelComplete") > 0, Count("NextLevel") + " NextLevel, " + Count("LevelComplete") + " LevelComplete");
         }
-        if (kind == "boss") Check("a boss", Count("YokaiBoss", "SamuraiBoss", "VoidShrineBoss", "LandsharkBoss") > 0, Count("YokaiBoss") + " YokaiBoss, " + Count("SamuraiBoss") + " SamuraiBoss, " + Count("VoidShrineBoss") + " VoidShrineBoss, " + Count("LandsharkBoss") + " LandsharkBoss"); // LANDSHARK:
+        if (kind == "boss") Check("a boss", Count("YokaiBoss", "SamuraiBoss", "VoidShrineBoss", "LandsharkBoss", "SandfinMiniBoss") > 0, Count("YokaiBoss") + " YokaiBoss, " + Count("SamuraiBoss") + " SamuraiBoss, " + Count("VoidShrineBoss") + " VoidShrineBoss, " + Count("LandsharkBoss") + " LandsharkBoss, " + Count("SandfinMiniBoss") + " SandfinMiniBoss"); // LANDSHARK: // SANDFIN:
         if (kind == "village")
         {
             Check("villagers", Count("Villager") > 0, Count("Villager") + " Villager");

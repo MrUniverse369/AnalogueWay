@@ -11,7 +11,8 @@ using UnityEngine;
 /// reacts 0.3 s late at his run speed (4.5 u/s, moved along the floor) and jumps with his real jump; lives are topped
 /// up after every counted hit so one check can't end the run. Boss hits in openings are a Spirit Dash's hit
 /// (SendMessage TryHit false), the path the game itself takes.
-/// Suites: landshark-attacks (art + every attack against a standing Harvey and against the dodging bot),
+/// Suites: sandfin (SANDFIN 2026-10-28: the Dunes mini-boss's intro, attacks, reset, fight, reward and place in the zone),
+///         landshark-attacks (art + every attack against a standing Harvey and against the dodging bot),
 ///         landshark-fight (all three stages to defeat, Buried Regeneration: complete, interrupt, limit, death mid-heal,
 ///         no heal after defeat), samurai (five lives to defeat, Mokuso: complete, broken, zanshin counter, death mid-heal).
 /// Editor only (QAProbe calls it from its editor-only body).
@@ -51,6 +52,9 @@ public static class QABossDriver
             case "landshark-attacks": yield return LandsharkAttacks(); break;
             case "landshark-fight": yield return LandsharkFight(); break;
             case "samurai": yield return Samurai(); break;
+            case "sandfin": yield return Sandfin(); break; // SANDFIN (2026-10-28)
+            case "next-level": yield return NextLevelCheck(); break; // SANDFIN: where finishing this level goes
+            case "sandfin-diag": yield return SandfinDiag(); break;
             default: Add("suite", false, "unknown suite " + suite); break;
         }
         bool ok = checks.Count > 0 && checks.TrueForAll(c => c.ok);
@@ -352,6 +356,177 @@ public static class QABossDriver
         Add("no meditation after defeat", !can && !boss.Meditating, $"CanStart after defeat {can}");
     }
 
+    // ---------------------------------------------------------------- SANDFIN (2026-10-28): the Dunes mini-boss
+
+    private static IEnumerator Sandfin()
+    {
+        var boss = Object.FindAnyObjectByType<SandfinMiniBoss>();
+        if (boss == null) { Add("boss", false, "no SandfinMiniBoss in the scene"); yield break; }
+        Arena(boss.transform);
+        var body = boss.GetComponentInChildren<SpriteRenderer>();
+        var pips = GameObject.Find("SandfinPips");
+
+        // 1. the intro: the fin crosses, it breaches at the far wall, the pips come up; it never hurts Harvey
+        Place(-2.5f);
+        bool pipsBefore = pips != null && pips.GetComponentsInChildren<SpriteRenderer>().Length > 0 && pips.GetComponentsInChildren<SpriteRenderer>()[0].enabled;
+        float t0 = Time.time;
+        while (Time.time - t0 < 12f && !boss.IntroDone) { Watch(body); CountHits(); yield return null; }
+        int lit = 0;
+        if (pips != null) foreach (SpriteRenderer p in pips.GetComponentsInChildren<SpriteRenderer>()) if (p.enabled) lit++;
+        Add("intro plays and starts the fight", boss.IntroDone && !pipsBefore && lit == 3 && hits == 0,
+            $"intro done after {Time.time - t0:0.0} s; pips hidden before {!pipsBefore}, lit after {lit}/3; {hits} hits on Harvey during it");
+
+        // 2. each attack against Harvey standing still, then against the dodging bot
+        var attacks = new[] { SandfinMiniBoss.Attack.Leap, SandfinMiniBoss.Attack.Lunge, SandfinMiniBoss.Attack.LungeLeap };
+        int[] livesFor = { 3, 3, 1 };
+        for (int a = 0; a < attacks.Length; a++)
+        {
+            for (int pass = 0; pass < 2; pass++)
+            {
+                bool dodge = pass == 1;
+                Place(3f);
+                boss.QAJump(livesFor[a], new[] { attacks[a] });
+                hits = 0;
+                bool opened = false, started = false;
+                dodgeAt = -1f;
+                t0 = Time.time;
+                while (Time.time - t0 < 16f)
+                {
+                    Watch(body);
+                    if (boss.Doing == attacks[a].ToString()) started = true;
+                    if (boss.Vulnerable) { opened = true; break; }
+                    if (started && boss.Doing == "" && hits > 0 && !dodge) break;
+                    if (dodge) SandfinDodge(boss);
+                    CountHits();
+                    yield return null;
+                }
+                if (!dodge)
+                    Add($"{attacks[a]} hits a standing Harvey", hits > 0, $"{hits} hit(s) on a Harvey standing still at x=3; attack started {started}; touches {boss.Touches}, damage tries {boss.DamageTries}");
+                else
+                {
+                    Add($"{attacks[a]} can be dodged", hits == 0, $"{hits} hit(s) on the dodging bot (reacts {Reaction:0.0} s late, runs {RunSpeed} u/s)");
+                    Add($"{attacks[a]} miss leaves an opening", opened, opened ? $"belly-up {Time.time - t0:0.0} s after the attack began" : "no opening within 16 s");
+                }
+            }
+        }
+        var missing = new List<string>();
+        foreach (string anim in new[] { "swim", "attack" }) if (!spritesSeen.Contains(anim)) missing.Add(anim);
+        Add("animations render", missing.Count == 0, missing.Count == 0 ? "seen: " + string.Join(" ", spritesSeen) : "never shown: " + string.Join(" ", missing));
+
+        // 3. Harvey dies mid-fight: it resets to three lives, stage 1
+        boss.QAJump(1, new[] { SandfinMiniBoss.Attack.Leap });
+        yield return new WaitForSeconds(1f);
+        HurtPlayer.pLivesCount = 0;
+        LevelManager.Instance.Respawn();
+        yield return new WaitForSeconds(4f);
+        Add("death resets the fight", boss.Lives == 3 && boss.StageIndex == 0 && !boss.Defeated, $"after the respawn: lives {boss.Lives}, stage {boss.StageIndex}");
+        HurtPlayer.pLivesCount = 3;
+
+        // 4. the whole fight against the dodging bot (a Harvey who stands still is hit every time, so it never misses):
+        // both stages, to defeat, the reward and the exit
+        boss.QAJump(3, null);
+        Place(-1f);
+        hits = 0;
+        dodgeAt = -1f;
+        t0 = Time.time;
+        var stageSeq = new List<int> { boss.StageIndex };
+        var seen = new List<string>();
+        float vulnSince = -1f;
+        while (Time.time - t0 < 150f && !boss.Defeated)
+        {
+            if (boss.StageIndex != stageSeq[stageSeq.Count - 1]) stageSeq.Add(boss.StageIndex);
+            string d = boss.StageIndex + ":" + boss.Doing;
+            if (boss.Doing != "" && !seen.Contains(d)) seen.Add(d);
+            if (boss.Vulnerable) { if (vulnSince < 0f) { vulnSince = Time.time; Shot("sandfin-opening"); } if (Time.time - vulnSince > Reaction) { boss.SendMessage("TryHit", false); vulnSince = -1f; } }
+            else vulnSince = -1f;
+            SandfinDodge(boss);
+            CountHits();
+            yield return null;
+        }
+        float fightS = Time.time - t0;
+        int fightHits = hits;
+        yield return new WaitForSeconds(4f);
+        Shot("sandfin-defeat");
+        yield return null; // the shot is taken at the end of the frame: nothing else may change this one (the respawn below)
+        var treasure = GameObject.Find("BossTreasure");
+        int chests = Object.FindObjectsByType<OpenChest>(FindObjectsSortMode.None).Length;
+        bool talisman = treasure != null && treasure.GetComponent<TalismanUnlock>() != null;
+        int here = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+        string next = GameSession.SceneNameAt(here + 1), before = GameSession.SceneNameAt(here - 1);
+        Add("two stages in order", stageSeq.Count == 2 && stageSeq[0] == 0 && stageSeq[1] == 1, "stages " + string.Join(" -> ", stageSeq) + "; attacks seen " + string.Join(", ", seen));
+        Add("defeat, treasure and reward", boss.Defeated && treasure != null && treasure.activeInHierarchy && !talisman && chests >= 1 && chests <= 2,
+            $"defeated {boss.Defeated} after {fightS:0.0} s ({fightHits} hits on the dodging bot); treasure shown {(treasure != null && treasure.activeInHierarchy)}; talisman on it {talisman}; {chests} chest(s)");
+        Add("sits between Act 3 and Act 4", before == "Z2A3Sandy" && next == "Z2A4Sandy",
+            $"build index {here}: after {before}, before {next}");
+        LevelManager.Instance.Respawn();
+        yield return new WaitForSeconds(4f);
+        Add("stays beaten after a respawn", boss.Defeated, $"defeated {boss.Defeated}");
+    }
+
+    // SANDFIN: a player who reacts Reaction late at his run speed: off the sand mound (away from it, toward the roomier
+    // side when it is under him), away from a surfaced lunge
+    private static float dodgeAt = -1f, dodgeDir;
+
+    private static void SandfinDodge(SandfinMiniBoss boss)
+    {
+        float hx = pc.transform.position.x;
+        GameObject mound = FindClone("MoundTemplate");
+        if (mound != null)
+        {
+            if (dodgeAt < 0f) { dodgeAt = Time.time + Reaction; dodgeDir = Room(hx, mound.transform.position.x); Shot("sandfin-mound"); }
+            if (Time.time >= dodgeAt && Mathf.Abs(hx - mound.transform.position.x) < 3.2f) Step(dodgeDir);
+        }
+        else if (boss.Doing.StartsWith("Lunge") && boss.transform.position.y > floorY)
+        {
+            if (dodgeAt < 0f) dodgeAt = Time.time + Reaction;
+            if (Time.time >= dodgeAt && Mathf.Abs(hx - boss.transform.position.x) < 6f) Step(Mathf.Sign(hx - boss.transform.position.x + 0.01f));
+        }
+        else dodgeAt = -1f;
+    }
+
+    // SANDFIN: per-frame contact numbers for one lunge at a Harvey standing still (hurtbox on, bounds overlap, what a
+    // physics query finds there, whether Harvey's body is awake)
+    private static IEnumerator SandfinDiag()
+    {
+        var boss = Object.FindAnyObjectByType<SandfinMiniBoss>();
+        Arena(boss.transform);
+        var box = boss.GetComponent<BoxCollider2D>();
+        Collider2D harvey = null;
+        foreach (Collider2D c in pc.GetComponentsInChildren<Collider2D>()) if (c.name == "PlayerBodyDetectionArea") harvey = c;
+        Place(3f);
+        boss.QAJump(3, new[] { SandfinMiniBoss.Attack.Lunge });
+        int on = 0, overlap = 0, query = 0, awake = 0, frames = 0, queryAny = 0;
+        string sample = "";
+        float t0 = Time.time;
+        while (Time.time - t0 < 9f && !boss.Vulnerable)
+        {
+            frames++;
+            if (rb.IsAwake()) awake++;
+            if (box.enabled)
+            {
+                on++;
+                if (box.bounds.Intersects(harvey.bounds)) overlap++;
+                var found = Physics2D.OverlapBoxAll(box.bounds.center, box.bounds.size, 0f);
+                if (found.Length > 0) queryAny++;
+                foreach (var f in found) if (f == harvey) { query++; break; }
+                if (on % 40 == 1)
+                    sample += $"box {box.bounds.min}-{box.bounds.max} harvey {harvey.bounds.min}-{harvey.bounds.max} found [{string.Join(",", System.Array.ConvertAll(found, f => f.name))}] bossRb {boss.GetComponent<Rigidbody2D>().bodyType} awake {boss.GetComponent<Rigidbody2D>().IsAwake()} simulated {boss.GetComponent<Rigidbody2D>().simulated} doing {boss.Doing} bossPos {boss.transform.position} offset {box.offset} size {box.size} | ";
+            }
+            CountHits();
+            yield return null;
+        }
+        Add("diag", true, $"frames {frames}, harvey awake {awake}, box on {on}, overlap {overlap}, query finds harvey {query}, query finds anything {queryAny}, touches {boss.Touches}, hits {hits}; {sample}");
+    }
+
+    // SANDFIN: the scene GameSession.FinishLevel opens next (it saves and loads build index + 1), and the one before
+    private static IEnumerator NextLevelCheck()
+    {
+        yield return null;
+        var active = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        string next = GameSession.SceneNameAt(active.buildIndex + 1), before = GameSession.SceneNameAt(active.buildIndex - 1);
+        Add("finishing leads to", next != null, $"{active.name} (build index {active.buildIndex}): finishing opens {next}; the level before is {before}");
+    }
+
     // ---------------------------------------------------------------- Harvey
 
     private static void Arena(Transform boss)
@@ -361,7 +536,11 @@ public static class QABossDriver
         rightX = 10.2f;
         foreach (Transform t in Object.FindObjectsByType<Transform>(FindObjectsSortMode.None))
         {
-            if (t.name == "LeftLimit") leftX = t.position.x;
+            if (t.name == "LeftLimit")
+            {
+                leftX = t.position.x;
+                floorY = t.position.y; // SANDFIN: the limits sit on the floor; a boss's own transform may not (Sandfin's is its middle, under the sand)
+            }
             if (t.name == "RightLimit") rightX = t.position.x;
         }
         HurtPlayer.pLivesCount = 3;

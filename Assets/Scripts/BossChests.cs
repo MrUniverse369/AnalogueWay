@@ -30,17 +30,22 @@ public static class BossChests
     /// Chests earned for a win in 'seconds': Most at or under fastTime, Fewest at or past slowTime, and the counts in
     /// between in equal steps (with 40 and 120: six up to 0:40, five up to 1:20, four up to 2:00, then three).
     /// </summary>
-    public static int CountFor(float seconds, float fastTime, float slowTime)
+    public static int CountFor(float seconds, float fastTime, float slowTime) => CountFor(seconds, fastTime, slowTime, Most, Fewest);
+
+    /// <summary>SANDFIN (2026-10-28): the same, between a boss's own most and fewest (a mini-boss drops fewer).</summary>
+    public static int CountFor(float seconds, float fastTime, float slowTime, int most, int fewest)
     {
-        if (seconds <= fastTime) return Most;
-        if (seconds >= slowTime || slowTime <= fastTime) return Fewest;
+        if (seconds <= fastTime) return most;
+        if (seconds >= slowTime || slowTime <= fastTime || most <= fewest) return fewest;
         float k = (seconds - fastTime) / (slowTime - fastTime); // 0..1 between the two times
-        int steps = Most - Fewest - 1;                          // the counts strictly between Most and Fewest
-        return Most - 1 - Mathf.Min(steps - 1, Mathf.FloorToInt(k * steps));
+        int steps = most - fewest - 1;                          // the counts strictly between most and fewest
+        if (steps <= 0) return k < 0.5f ? most : fewest;        // only two counts: the first half earns the more
+        return most - 1 - Mathf.Min(steps - 1, Mathf.FloorToInt(k * steps));
     }
 
     /// <summary>Drops the chests between the boss's limits (leftX..rightX) onto the floor near groundY, clear of the treasure.</summary>
-    public static IEnumerator Drop(float seconds, float fastTime, float slowTime, float leftX, float rightX, float groundY, Vector3 treasureAt)
+    public static IEnumerator Drop(float seconds, float fastTime, float slowTime, float leftX, float rightX, float groundY, Vector3 treasureAt,
+        int most = Most, int fewest = Fewest) // SANDFIN: a mini-boss passes its own most and fewest
     {
         GameObject prefab = Inventory.Catalog != null ? Inventory.Catalog.treasureChest : null;
         if (prefab == null)
@@ -48,7 +53,7 @@ public static class BossChests
             Debug.LogWarning("BossChests: the HNL catalog has no treasureChest prefab, so no chests were dropped.");
             yield break;
         }
-        int count = CountFor(seconds, fastTime, slowTime);
+        int count = CountFor(seconds, fastTime, slowTime, most, fewest);
         yield return new WaitForSeconds(0.4f); // let the boss's last burst clear first
 
         List<ChestContents> contents = Contents(count);
@@ -66,7 +71,7 @@ public static class BossChests
             chest.SetContents(contents[i]);
             chest.DropIn(DropHeight, order[i] * DropGap);
         }
-        HarveyMenus.Toast(Inventory.Catalog.coin, "BOSS BEATEN IN " + Clock(seconds), count + " TREASURE CHESTS DROPPED!", 3.5f);
+        HarveyMenus.Toast(Inventory.Catalog.coin, "BOSS BEATEN IN " + Clock(seconds), count + (count == 1 ? " TREASURE CHEST DROPPED!" : " TREASURE CHESTS DROPPED!"), 3.5f);
     }
 
     // every reward type once (in a random order) before any repeats, so the chests differ

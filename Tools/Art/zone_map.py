@@ -36,22 +36,22 @@ NODES = {
     "Z1A1": (360, 300), "Z1Village": (406, 330), "Z1A2": (452, 330), "Z1A3": (498, 330), "Z1A4": (544, 318),
     "Z1A5": (590, 290), "Z1A6": (560, 250), "Z1Boss": (510, 230),
     # Sandy Dunes (top-right, x 320-640, y 0-180)
-    "Z2A1": (510, 150), "Z2Village": (560, 150), "Z2A2": (600, 116), "Z2A3": (560, 82), "Z2A4": (512, 60),
-    "Z2A5": (452, 60), "Z2Boss": (390, 132),
+    "Z2A1": (510, 150), "Z2Village": (560, 150), "Z2A2": (600, 116), "Z2A3": (560, 82), "Z2Mini": (512, 82),  # SANDFIN
+    "Z2A4": (512, 40), "Z2A5": (452, 40), "Z2Boss": (390, 132),
     # Japan (top-left, x 0-320, y 0-180): sunny foothills below SUN_EDGE_Y, the snowy peaks above, through the torii
     "Z3A1": (276, 132), "Village": (226, 150), "Z3A2": (176, 132), "Z3A3": (150, 66), "Z3A4": (96, 50), "Boss": (50, 40),
     "Win": (50, 150),
 }
 ORDER = ["Z4A1", "Z4Village", "Z4A2", "Z4A3", "Z4A4", "Z4A5", "Z4Boss",
          "Z1A1", "Z1Village", "Z1A2", "Z1A3", "Z1A4", "Z1A5", "Z1A6", "Z1Boss",
-         "Z2A1", "Z2Village", "Z2A2", "Z2A3", "Z2A4", "Z2A5", "Z2Boss",
+         "Z2A1", "Z2Village", "Z2A2", "Z2A3", "Z2Mini", "Z2A4", "Z2A5", "Z2Boss",
          "Z3A1", "Village", "Z3A2", "Z3A3", "Z3A4", "Boss", "Win"]
 BOSSES = {"Z4Boss", "Z1Boss", "Z2Boss", "Boss"}
 # Corners between consecutive nodes (ORDER[i] -> ORDER[i + 1]); they are rounded off when drawn.
 CORNERS = [
     [], [], [], [], [], [(270, 276)], [],                                   # Meadow, then on into the Tomb
     [(360, 330)], [], [], [(544, 330)], [(590, 318)], [(590, 250)], [(510, 250)], [],   # Tomb, then up into the Dunes
-    [], [(600, 150)], [(600, 82)], [(512, 82)], [], [(390, 60)], [],        # Dunes, then west into Japan
+    [], [(600, 150)], [(600, 82)], [], [], [], [(452, 62), (390, 62)], [],  # Dunes (SANDFIN: the mini-boss on the old bend), then west into Japan
     [(226, 132)], [(176, 150)], [(150, 132)], [(96, 66)], [(96, 40)], [],   # Japan: foothills, torii, peaks, home
 ]
 BEND_RADIUS = 7

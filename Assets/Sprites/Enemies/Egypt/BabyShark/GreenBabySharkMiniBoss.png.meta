@@ -1,0 +1,403 @@
+fileFormatVersion: 2
+guid: 4ae81e40fedbc42e9bdbdf6c7bc064d9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3405685497644716820
+    second: GreenBabySharkMiniBoss_0
+  - first:
+      213: 8629580227090054086
+    second: GreenBabySharkMiniBoss_1
+  - first:
+      213: -746241538946989709
+    second: GreenBabySharkMiniBoss_2
+  - first:
+      213: 1709986364714178952
+    second: GreenBabySharkMiniBoss_3
+  - first:
+      213: -3398617140438695851
+    second: GreenBabySharkMiniBoss_4
+  - first:
+      213: 3008112269356395308
+    second: GreenBabySharkMiniBoss_5
+  - first:
+      213: 1831706164456867030
+    second: GreenBabySharkMiniBoss_6
+  - first:
+      213: -5347087220397879843
+    second: GreenBabySharkMiniBoss_7
+  - first:
+      213: -4916683241422604367
+    second: GreenBabySharkMiniBoss_8
+  - first:
+      213: 8415745823689860760
+    second: GreenBabySharkMiniBoss_9
+  - first:
+      213: 2168333522980505408
+    second: GreenBabySharkMiniBoss_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GreenBabySharkMiniBoss_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 361
+        width: 405
+        height: 363
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41310df7aec634f20800000000000000
+      internalID: 3405685497644716820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenBabySharkMiniBoss_1
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 357
+        width: 683
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cbff6cbe7d62c770800000000000000
+      internalID: 8629580227090054086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenBabySharkMiniBoss_2
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 345
+        width: 328
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3718c6a2641d4a5f0800000000000000
+      internalID: -746241538946989709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenBabySharkMiniBoss_3
+      rect:
+        serializedVersion: 2
+        x: 1449
+        y: 359
+        width: 338
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 889dc8fe9871bb710800000000000000
+      internalID: 1709986364714178952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenBabySharkMiniBoss_4
+      rect:
+        serializedVersion: 2
+        x: 1794
+        y: 396
+        width: 344
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5500998a7bfa5d0d0800000000000000
+      internalID: -3398617140438695851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenBabySharkMiniBoss_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 31
+        width: 277
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2b6b7bdb26feb920800000000000000
+      internalID: 3008112269356395308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenBabySharkMiniBoss_6
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 31
+        width: 841
+        height: 299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d448514d078b6910800000000000000
+      internalID: 1831706164456867030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenBabySharkMiniBoss_7
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 79
+        width: 244
+        height: 245
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddd472dc0845bc5b0800000000000000
+      internalID: -5347087220397879843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenBabySharkMiniBoss_8
+      rect:
+        serializedVersion: 2
+        x: 1335
+        y: 23
+        width: 310
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b7b3e144ae64cbb0800000000000000
+      internalID: -4916683241422604367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenBabySharkMiniBoss_9
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 103
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 896e205fc3cbac470800000000000000
+      internalID: 8415745823689860760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenBabySharkMiniBoss_10
+      rect:
+        serializedVersion: 2
+        x: 1622
+        y: 79
+        width: 550
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04703dfc9d7771e10800000000000000
+      internalID: 2168333522980505408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GreenBabySharkMiniBoss_0: 3405685497644716820
+      GreenBabySharkMiniBoss_1: 8629580227090054086
+      GreenBabySharkMiniBoss_10: 2168333522980505408
+      GreenBabySharkMiniBoss_2: -746241538946989709
+      GreenBabySharkMiniBoss_3: 1709986364714178952
+      GreenBabySharkMiniBoss_4: -3398617140438695851
+      GreenBabySharkMiniBoss_5: 3008112269356395308
+      GreenBabySharkMiniBoss_6: 1831706164456867030
+      GreenBabySharkMiniBoss_7: -5347087220397879843
+      GreenBabySharkMiniBoss_8: -4916683241422604367
+      GreenBabySharkMiniBoss_9: 8415745823689860760
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

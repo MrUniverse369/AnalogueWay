@@ -1,0 +1,6 @@
+# written by Tools/Art/green_shark_miniboss.py - cell w h, pivot x y (pixels from the cell's bottom-left)
+body 60 45 30 23
+row swim 6
+row attack 8
+extent -28 28 -21 21
+period 5.5

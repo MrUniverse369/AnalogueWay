@@ -30,7 +30,7 @@ export function zoneOf(name) {
 
 /** act | boss | village | menu | tutorial | prototype | sandbox */
 export function kindOf(name) {
-  if (/^Z\dBoss/.test(name)) return "boss";
+  if (/^Z\d(Mini)?Boss/.test(name)) return "boss"; // SANDFIN: the Dunes mini-boss arena is a boss arena too
   if (/^Z\d.*Village$/.test(name)) return "village";
   if (/^Z\dA\d+/.test(name)) return "act";
   if (/^Tutorial_/.test(name)) return "tutorial";
@@ -127,7 +127,7 @@ export const SYSTEMS = [
   {
     id: "SYS-BOSSES", name: "Bosses",
     description: "The shared YokaiBoss stages, the Void Shrine, the Landshark, Sumaria, the Forest Spirit Fox, boss self-healing (BossRegen) and boss treasure.",
-    files: ["YokaiBoss", "SamuraiBoss", "VoidShrineBoss", "LandsharkBoss", "BossRegen", "BossHazard", "MoveJapanBoss", "JapanBossAttacks", "SpiritBlastFX", "BossChests", "LandsharkBossSetup", "BossPips"],
+    files: ["YokaiBoss", "SamuraiBoss", "VoidShrineBoss", "LandsharkBoss", "SandfinMiniBoss", "SandfinMiniBossSetup", "BossRegen", "BossHazard", "MoveJapanBoss", "JapanBossAttacks", "SpiritBlastFX", "BossChests", "LandsharkBossSetup", "BossPips"],
     paths: [],
   },
   {
@@ -234,7 +234,7 @@ export const LEVEL_TESTS = {
     },
   ],
   boss: [
-    { key: "STRUCT", title: "Scene structure check", kind: "structure", required: true, methods: ["editor-check", "play-human", "play-scripted"], systems: ["SYS-BOSSES", "SYS-RESPAWN"], description: "The arena has a player, a boss and a respawn point.", preconditions: "Unity editor open.", steps: ["Run QARunner.StructureReport(\"{scene}\")."], expected: "No missing scripts; a player; a boss component (YokaiBoss, SamuraiBoss, VoidShrineBoss or LandsharkBoss); a LevelManager with a respawn point." },
+    { key: "STRUCT", title: "Scene structure check", kind: "structure", required: true, methods: ["editor-check", "play-human", "play-scripted"], systems: ["SYS-BOSSES", "SYS-RESPAWN"], description: "The arena has a player, a boss and a respawn point.", preconditions: "Unity editor open.", steps: ["Run QARunner.StructureReport(\"{scene}\")."], expected: "No missing scripts; a player; a boss component (YokaiBoss, SamuraiBoss, VoidShrineBoss, LandsharkBoss or SandfinMiniBoss); a LevelManager with a respawn point." },
     { key: "SMOKE", title: "Loads into play cleanly", kind: "smoke", required: true, methods: ALL_PLAY, systems: ["SYS-LEVELFLOW", "SYS-BOSSES"], description: "Enter Play mode in the arena and let it run.", preconditions: "Save slots backed up.", steps: ["Open {scene}.", "Enter Play mode, wait 10 seconds.", "Stop."], expected: "Harvey and the boss spawn, the fight starts, no errors are logged." },
     { key: "BOSSFIGHT", title: "Boss fight to defeat", kind: "playthrough", required: true, methods: ALL_PLAY, systems: ["SYS-BOSSES", "SYS-COMBAT", "SYS-COLLECT"], description: "Fight the boss through every stage.", preconditions: "Play mode in the arena.", steps: ["Damage the boss through all of its stages.", "Watch each attack at least once.", "Collect the boss chests and take the treasure."], expected: "Every stage starts, every attack can be avoided, the boss is defeated, chests drop by speed of the win, and the treasure awards the zone's talisman and returns to the map." },
     { key: "RESPAWN", title: "Death and respawn in the arena", kind: "mechanic", required: true, methods: ALL_PLAY, systems: ["SYS-RESPAWN", "SYS-BOSSES"], description: "Lose all health to the boss.", preconditions: "Play mode in the arena.", steps: ["Take three hits.", "Wait for the respawn."], expected: "Harvey respawns in the arena; the boss fight resets or continues as designed; no softlock." },
@@ -291,10 +291,24 @@ export const MECHANIC_TESTS = [
     description: "Five lives over three stages (Charging Blade 5, Phantom Steps 4-3, Storm of Blades 2-1). Scripted: boss:samurai.",
     preconditions: "Play mode in Z3BossBattle.", steps: ["Hit him in every opening.", "Collect the treasure."],
     expected: "Stages 1, 2, 3 in order; defeat shows the treasure; no meditation after defeat." },
+  // SANDFIN (2026-10-28): the Dunes mini-boss between Act 3 and Act 4. Scripted: boss:sandfin.
+  { id: "TC-BOSS-SANDFIN-ATTACKS", title: "Sandfin attacks: hit, dodge, opening", systems: ["SYS-BOSSES", "SYS-COMBAT"], level: "Z2MiniBossSandy", methods: ALL_PLAY, required: true,
+    description: "The intro, and each of Sandfin's attacks (Leap, Lunge, Frenzy's Lunge-into-Leap) against a Harvey standing still and against one who dodges. Scripted: boss:sandfin.",
+    preconditions: "Play mode in Z2MiniBossSandy.",
+    steps: ["Watch the intro: the fin crosses, it breaches at the far wall, its pips appear.", "Stand still through each attack.", "Dodge each: run off the sand mound, back away from the lunge."],
+    expected: "The intro never hurts Harvey and ends with three pips; each attack hits a standing Harvey; each can be dodged; each miss leaves it belly-up (the opening); the swim and attack rows both show." },
+  { id: "TC-BOSS-SANDFIN-FIGHT", title: "Sandfin: two stages to defeat, reward and exit", systems: ["SYS-BOSSES", "SYS-COLLECT", "SYS-LEVELFLOW"], level: "Z2MiniBossSandy", methods: ALL_PLAY, required: true,
+    description: "Three lives over two stages (Circling 3-2, Frenzy 1). Scripted: boss:sandfin.",
+    preconditions: "Play mode in Z2MiniBossSandy.", steps: ["Dodge its attacks and hit it in every opening.", "Die once mid-fight and fight again.", "Watch the treasure and the chests appear; respawn once after the win."],
+    expected: "Stages 1 then 2; a death resets it to three lives; defeat shows the treasure (no talisman on it) and drops one or two chests; it stays beaten after a respawn. Where taking the treasure leads is TC-PROG-SANDFIN." },
+  { id: "TC-PROG-SANDFIN", title: "Sandfin sits mid-zone in the Dunes", systems: ["SYS-LEVELFLOW", "SYS-ZONEMAP", "SYS-SAVE"], level: "Z2MiniBossSandy", methods: ["editor-check", "play-human", "play-scripted"], required: true,
+    description: "The mini-boss level comes between Act 3 and Act 4 in Build Settings and on the Zone Select map, and the Landshark is still the zone's last level.",
+    preconditions: "Unity editor open.", steps: ["Read the Build Settings order.", "Read the Zone Select map's Dunes nodes and paths.", "Finish Z2A3 and check what opens."],
+    expected: "Z2A3Sandy, Z2MiniBossSandy, Z2A4Sandy in that order; Z2BossSandy last in the zone; the map has a Sandfin node between Act 3 and Act 4 with paths both ways; finishing Act 3 opens the mini-boss, finishing it opens Act 4." },
   { id: "TC-BOSS-BALANCE", title: "Boss difficulty rises with the zones", systems: ["SYS-BOSSES"], level: "Z2BossSandy", methods: ["editor-check", "code-review", "play-human", "play-scripted"], required: false,
     description: "The bosses in play order (Grass fox, Tomb Void Shrine, Egypt Landshark, Japan Sumaria) follow the curve in Tools/QA/boss_balance.md.",
     preconditions: "Unity editor open.", steps: ["Read each boss's lives, stage tuning and heal from its arena.", "Compare with Tools/QA/boss_balance.md."],
-    expected: "Lives 3, 3, 4, 5; only the Landshark and Sumaria heal; each later boss has more attacks per stage and no longer tells and openings than the one before it at the same stage, or the table says why." },
+    expected: "Lives 3, 3, 4, 5 (and the Dunes mini-boss 3, two stages, below the Landshark); only the Landshark and Sumaria heal; each later boss has more attacks per stage and no longer tells and openings than the one before it at the same stage, or the table says why." },
   { id: "TC-MOVE-RUNJUMP", title: "Run and normal jump", systems: ["SYS-MOVEMENT"], level: "Tutorial_BasicControls", methods: ALL_PLAY, required: true,
     description: "Walking speed and the normal jump height.", preconditions: "Play mode, no skills learned.",
     steps: ["Hold right for 2 seconds on flat ground.", "Press jump once from standing.", "Press jump once while running."],

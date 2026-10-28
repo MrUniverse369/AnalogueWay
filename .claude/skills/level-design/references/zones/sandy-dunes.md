@@ -44,8 +44,14 @@ authored Dunes levels were designed. Treat every structure line as **[ref]** obs
 | Sand Shark | Enemy/Egypt/BabySandShark | a fin moving through the ground | 2 |
 | Fish | Enemy/Egypt/EnemyHolder | water shafts; bounce stepping stones | 2 |
 
-Boss: the Sandscale Scarab (Z2BossSandy), reward Summoning Talisman. Authored density: 17 enemies in Z2A1, 44 in
-Z2A2 (the fish shaft and shark-filled water account for many). [ref]
+Bosses [built 2026-10-27/28, updated from the scenes]: the **Landshark** ends the zone (Z2BossSandy, LandsharkBoss;
+the old Sandscale Scarab is kept switched off there for ZoneContentBuilder), reward Summoning Talisman. **Sandfin**,
+a green-shark mini-boss, sits mid-zone in its own level, Z2MiniBossSandy, between Z2A3 and Z2A4 (record:
+`levels/z2minibosssandy.md`); its treasure only ends the level. Both swim through the arena floor: the Ground layer
+draws over their Player-layer sprites below the floor line. Authored density: 17 enemies in Z2A1, 44 in Z2A2 (the
+fish shaft and shark-filled water account for many). [ref]
+
+Zone order [built 2026-10-28]: Z2A1, Z2SandyVillage, Z2A2, Z2A3, Z2MiniBossSandy, Z2A4, Z2A5, Z2BossSandy.
 
 ## Rewards
 

@@ -39,10 +39,11 @@ public static class ZoneSelectSceneBuilder
             { "Z2A1", ("Z2A1Sandy", "Sandy Dunes", "Act 1", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2A2", ("Z2A2Sandy", "Sandy Dunes", "Act 2", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2A3", ("Z2A3Sandy", "Sandy Dunes", "Act 3", ZoneNodeKind.Level, Sand, "Gold") },
+            { "Z2Mini", ("Z2MiniBossSandy", "Sandy Dunes", "Mini-Boss: Sandfin", ZoneNodeKind.Boss, Sand, null) }, // SANDFIN: between Acts 3 and 4
             { "Z2A4", ("Z2A4Sandy", "Sandy Dunes", "Act 4", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2A5", ("Z2A5Sandy", "Sandy Dunes", "Act 5", ZoneNodeKind.Level, Sand, "Gold") },
             { "Z2Village", ("Z2SandyVillage", "Sandy Dunes", "Oasis Bazaar", ZoneNodeKind.Village, Sand, null) }, // VILLAGES:
-            { "Z2Boss", ("Z2BossSandy", "Sandy Dunes", "Boss: The Sandscale Scarab", ZoneNodeKind.Boss, Sand, null) },
+            { "Z2Boss", ("Z2BossSandy", "Sandy Dunes", "Boss: The Landshark", ZoneNodeKind.Boss, Sand, null) },
             { "Z3A1", ("Z3A1Japan", "Sunlit Shrine Road", "Act 1", ZoneNodeKind.Level, Snow, "Red") },
             { "Z3A2", ("Z3A2Japan", "Sunlit Shrine Road", "Act 2", ZoneNodeKind.Level, Snow, "Red") },
             { "Z3A3", ("Z3A3Japan", "Snow Temple Pass", "Act 3", ZoneNodeKind.Level, Snow, "Red") }, // WORLDMAP: past the torii
