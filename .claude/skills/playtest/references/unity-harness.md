@@ -105,6 +105,20 @@ only when all of these match. Use the same Game view size every time.
 - A RunCommand error can trip Error Pause in Play mode. Set `EditorApplication.isPaused = false` if a capture stalls.
 - Don't edit `.cs` files while a capture is in Play mode: the reload ends the session without a capture.
 
+## Drivers that exist
+
+| Action | Driver | Covers |
+| --- | --- | --- |
+| `respawn` | `QAProbe.Respawn` | forced death and respawn (judged by `qa probe-result` with `action:"respawn"`) |
+| `boss:<suite>` | `Assets/Scripts/QABossDriver.cs` | the boss suites named in its summary (sandfin, landshark-attacks, landshark-fight, samurai) |
+| `bounce:<suite>` | `Assets/Scripts/QABounceDriver.cs` (2026-10-28) | `jumpmushroom`: every Jump Mushroom in the scene (drops from 2, 6 and up to 20 tiles, standing and running hops, walking through, a jump from under the cap, one bounce per landing, the squash, a respawn drop and a Spirit Dash on the first one); `routes`: each pad in the driver's per-scene table hopped and steered to the ledge it serves, enemies off; `all`: both |
+
+`qa probe-result` judges only the capture (scene loaded, Harvey active, no errors), so a `boss:` or `bounce:` suite's
+checks go into a `qa result` (method `play-scripted`) that quotes them, with the capture JSON as evidence. A capture
+whose suite failed is still a valid SMOKE capture: record the two separately. Run a bounce suite with
+`QARunner.StartPlayCapture("<scene>", "<runId>", "<scene> idle at spawn", 2, 10, "bounce:all")`; a Z4A8 run takes
+about two minutes after the sample. Read the `[QABounce] PASS/FAIL` lines in Editor.log while it runs.
+
 ## Adding a scripted driver for a mechanic
 
 For a mechanic test that needs input (jump heights, Spirit Dash, stomp), write a small editor-only driver next to

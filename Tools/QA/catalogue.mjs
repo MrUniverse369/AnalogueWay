@@ -13,7 +13,7 @@
 // code-review (source read only). A test lists the methods that count for it; a code review never passes a test
 // that needs play.
 
-export const CATALOGUE_VERSION = "2026-10-27";
+export const CATALOGUE_VERSION = "2026-10-28";
 
 export const ZONES = {
   Z1: "Old Tomb",
@@ -54,9 +54,9 @@ export const SYSTEMS = [
   },
   {
     id: "SYS-BOUNCE", name: "Bounce pads, clouds and mushrooms",
-    description: "Jump boxes, bouncy clouds, floating and flying mushrooms.",
+    description: "Jump Mushrooms (Grassy Green's ground pads), jump boxes, bouncy clouds, floating and flying mushrooms.",
     files: ["JumpBox", "jumpBoxHori", "BouncyCloud", "MushroomBounce", "CloudPairParallax"],
-    paths: [],
+    paths: ["Assets/Prefabs/LevelMechanics/GrassyGreen/JumpMushroom.prefab"],
   },
   {
     id: "SYS-COMBAT", name: "Stomp, Spirit Dash and combo",
@@ -181,7 +181,7 @@ export const SYSTEMS = [
   {
     id: "SYS-DEVTOOLS", name: "Test and capture tools",
     description: "Trailer and test drivers; not shipped gameplay. Changes here only retest the tools themselves.",
-    files: ["HNLClashTest", "HNLDemoBot", "HNLTrailerPilot", "HNLTrailerTake", "QAProbe", "QABossDriver"],
+    files: ["HNLClashTest", "HNLDemoBot", "HNLTrailerPilot", "HNLTrailerTake", "QAProbe", "QABossDriver", "QABounceDriver"],
     paths: ["Assets/Editor/QA"],
   },
 ];
@@ -328,7 +328,30 @@ export const MECHANIC_TESTS = [
     steps: ["Stand on a moving platform for a full cycle.", "Jump from it.", "Land on a tile edge and on a slope."], expected: "No sliding off, no stuck jumps, no falling through; the landing animation plays once." },
   { id: "TC-BOUNCE-ALL", title: "Bounce pads, clouds and mushrooms", systems: ["SYS-BOUNCE"], level: "Z4A7GrassGreen", methods: ALL_PLAY, required: true,
     description: "Every bouncing object launches Harvey the same way each time.", preconditions: "Play mode next to each bounce object.",
-    steps: ["Land on a jump box, a bouncy cloud and a floating mushroom.", "Stomp a flying mushroom.", "Touch a flying mushroom's side."], expected: "Consistent bounce heights; the bounce cloud squashes; a flying mushroom's side hurts." },
+    steps: ["Land on a Jump Mushroom, a bouncy cloud and a floating mushroom.", "Stomp a flying mushroom.", "Touch a flying mushroom's side."], expected: "Consistent bounce heights; the bounce cloud squashes; a flying mushroom's side hurts." },
+  // JUMPMUSHROOM (2026-10-28): the Jump Mushroom (Prefabs/LevelMechanics/GrassyGreen/JumpMushroom) replaced Grassy
+  // Green's jump boxes. The mechanic test, then one check per level that each pad still gets Harvey where its box did.
+  { id: "TC-BOUNCE-JUMPMUSHROOM", title: "Jump Mushroom: land on the cap to bounce", systems: ["SYS-BOUNCE", "SYS-MOVEMENT"], level: "Z4A8GrassGreen", methods: ALL_PLAY, required: true,
+    description: "Harvey bounces only by landing on the cap: once per landing, at the mushroom's bounce speed, from any approach speed.",
+    preconditions: "Play mode next to a Jump Mushroom on open ground; no skills needed.",
+    steps: ["Hop onto the cap from standing, and from a run.", "Drop onto it from 2, 6 and 20 tiles up.", "Walk into its side and on through the stem.", "Stand in the stem and jump straight up.", "Start a Spirit Dash on the ground (it only starts there) and hop onto the cap at dash speed.", "Die and respawn above it, then hop on again."],
+    expected: "Every landing on the cap bounces once, rising (bounce speed)^2/21.6 above the cap top (bounce 15 = 10.4), or until his head meets the ceiling over it; walking into it or rising through it does nothing and never blocks or traps Harvey; the respawn drop does not bounce, the next hop does; the art stands on the floor with no gap and the cap squashes; no errors. Scripted: bounce:jumpmushroom." },
+  { id: "TC-BOUNCE-JUMPMUSHROOM-FEEL", title: "Jump Mushroom look, sound and feel", systems: ["SYS-BOUNCE", "SYS-RENDER", "SYS-AUDIO"], level: "Z4A8GrassGreen", methods: ["play-human"], required: false,
+    description: "What a script can't judge: how the pad reads and sounds in play.", preconditions: "Play mode in a level with Jump Mushrooms, the normal camera zoom.",
+    steps: ["Play past a few Jump Mushrooms.", "Bounce on one several times, from a hop and from a fall."],
+    expected: "It reads as a bounce pad against the forest backdrop; its root tips sit in the grass and the idle bob looks right on the ground; the cap squashes, spores puff and the bounce sound plays on every landing." },
+  { id: "TC-BOUNCE-JUMPMUSHROOM-Z4A7", title: "Z4A7 Jump Mushrooms reach their ledges", systems: ["SYS-BOUNCE"], level: "Z4A7GrassGreen", methods: ALL_PLAY, required: false,
+    description: "The pads that were jump boxes (JumpMushroomHolder) still lift Harvey to where the boxes did.", preconditions: "Play mode in Z4A7; base jump only.",
+    steps: ["Hop onto each Jump Mushroom.", "Steer to the ledge, shaft or corridor it serves."], expected: "Each one reaches its ledge; nothing above the new apex (about 0.3 higher than the box gave) hurts Harvey." },
+  { id: "TC-BOUNCE-JUMPMUSHROOM-Z4A8", title: "Z4A8 Jump Mushrooms reach their ledges", systems: ["SYS-BOUNCE"], level: "Z4A8GrassGreen", methods: ALL_PLAY, required: false,
+    description: "Six pads that were jump boxes: the wall climb at x 75 (18), the spike-dip pair at x 90 and 97 (10), the shafts at x 147, 156 (14.5) and 168 (25).", preconditions: "Play mode in Z4A8; base jump only.",
+    steps: ["Hop onto each Jump Mushroom.", "Steer to the ledge, shaft or corridor it serves."], expected: "Each one reaches its ledge; nothing above the new apex hurts Harvey." },
+  { id: "TC-BOUNCE-JUMPMUSHROOM-Z4A9", title: "Z4A9 Jump Mushroom reaches the upper corridor", systems: ["SYS-BOUNCE"], level: "Z4A9GrassGreen", methods: ALL_PLAY, required: false,
+    description: "The pad on the checkpoint pillar at x 50 (22) that was a jump box. The wide bounce floor and push-down ceiling above it are still jump boxes, on purpose.", preconditions: "Play mode in Z4A9; base jump only.",
+    steps: ["Cross the gap onto the pillar.", "Hop onto the Jump Mushroom.", "Rise through the hole in the ceiling into the corridor."], expected: "Harvey can land on the pillar first, then the bounce carries him into the upper corridor." },
+  { id: "TC-BOUNCE-JUMPMUSHROOM-Z4A10", title: "Z4A10 Jump Mushrooms reach their rooms", systems: ["SYS-BOUNCE"], level: "Z4A10GrassGreen", methods: ALL_PLAY, required: false,
+    description: "Two pads (14.5) that were jump boxes: the shaft at x 19 and the room at x 15. The wide bounce floor and its ceiling are still jump boxes, on purpose.", preconditions: "Play mode in Z4A10; base jump only.",
+    steps: ["Hop onto each Jump Mushroom.", "Steer into the room above it."], expected: "Each one reaches the room it serves; nothing above the new apex hurts Harvey." },
   { id: "TC-COMBAT-STOMP", title: "Stomp damage by zone", systems: ["SYS-COMBAT", "SYS-ENEMIES"], level: "Z1A1Tomb", methods: ALL_PLAY, required: true,
     description: "Stomps needed to defeat an enemy follow the zone's toughness.", preconditions: "No Stomp Power learned.",
     steps: ["Stomp a regular enemy until it is defeated in each zone."], expected: "Grassy Green 1 stomp, Tomb and Dunes 2, Japan 3; Harvey bounces on every stomp; landing beside an enemy is not a stomp." },

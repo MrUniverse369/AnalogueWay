@@ -55,7 +55,10 @@ at gap 2; 1.5 survived every early-jump test. [built]
 
 **Launchers** (rise of Harvey's feet above where they fire): flying bounce enemy (7) 2.3 · fox stomp (9) 3.8 ·
 bounce cloud 10 4.6 · cloud 12 6.7 · cloud 14 9.1 · floating mushroom (15) 10.4 · spring 18 15 · spring 20 18.5.
-A bounce enemy's or cloud's force is a serialized field; read it from the prefab or scene, never assume.
+In general a launch speed v lifts the feet v²/21.6. A bounce enemy's, cloud's or mushroom's force is a serialized
+field; read it from the prefab or scene, never assume. Mushrooms (floating, and Grassy Green's ground Jump Mushroom)
+fire only when the stomp box lands on the cap, so the player has to jump onto them; springs, clouds and jump boxes
+fire on any touch. [found 2026-10-28, in MushroomBounce and JumpBox]
 
 **What players own, by zone order** (Build Settings order is play order: Grass → Tomb → Dunes → Japan):
 - From the start: Spirit Dash and Water Breathing (HNLCatalog `startingLoadout`). Water Breathing is blocked in

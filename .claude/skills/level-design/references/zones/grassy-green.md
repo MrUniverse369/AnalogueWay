@@ -19,7 +19,7 @@ sky)"), the art-style memory. Tags as in `method.md`: [user] [ref] [built] [assu
 | --- | --- | --- | --- |
 | Size | 178 × 111, tall | 207 × 66, wide | 122 × 69, tall |
 | Shape | a vertical climb up mushroom chimneys | horizontal maze: 3-tall tunnels, shafts, a cloud section over a pit | five islands, four bridges, zig-zagging up |
-| Vertical travel | mushrooms (bounce 15–25) | springs 18–20, clouds 10–14 | clouds 10–14, mushroom 15, spring 18, steps |
+| Vertical travel | floating mushrooms (bounce 15) | Jump Mushrooms 12–20 (jump boxes until 2026-10-28), clouds 8–14 | clouds 10–14, floating mushroom 15, Jump Mushroom 18, steps |
 
 - **The authored levels predate the sky-island direction.** Z4A6 and Z4A7 are solid terrain masses with chimneys
   and tunnels. Use them for enemies, rewards, density and launcher numbers, not for the overall shape. [ref, user]
@@ -42,9 +42,19 @@ sky)"), the art-style memory. Tags as in `method.md`: [user] [ref] [built] [assu
 
 | Piece | Prefab | Numbers |
 | --- | --- | --- |
-| Bounce cloud | LevelMechanics/GrassyGreen/JumpCloud | force 10 / 12 / 14 → rise 4.6 / 6.7 / 9.1 |
-| Floating mushroom (scenery, not an enemy) | Enemy/Grass/FloatingMushroom (MushroomBounce) | bounce 15 → 10.4; Z4A6 uses up to 25 |
-| Spring | LevelMechanics/JumpBox | 18 → 15, 20 → 18.5 |
+| Bounce cloud | LevelMechanics/GrassyGreen/JumpCloud (also JumpBox instances named JumpBoxCloud in Z4A7) | force 10 / 12 / 14 → rise 4.6 / 6.7 / 9.1 |
+| Floating mushroom (scenery, not an enemy) | Enemy/Grass/FloatingMushroom (MushroomBounce) | bounce 15 → 10.4 (every Z4A6 mushroom is 15); hovers, drifts on MovingTiles unless its points are pinned |
+| Jump Mushroom (the ground pad) | LevelMechanics/GrassyGreen/JumpMushroom (MushroomBounce, catchFastLandings on) | bounce per instance: 10 → 4.6, 12 → 6.7, 14.5 → 9.7, 18 → 15, 20 → 18.5, 22 → 22.4, 25 → 29 above its cap; the cap top is 0.55 over the floor its root stands on |
+
+- **Grass pads are Jump Mushrooms, not jump boxes** [user 2026-10-28]. Harvey lands on the cap to bounce (a hop
+  from the floor reaches it); walking into it does nothing, and so does rising through it. Place the prefab's root
+  on the floor tile top (an integer y); the art tucks its root tips under the grass line. It is 0.74 wide, so in a
+  2-wide shaft or a 2-tall corridor it still leaves room to hop on. Keep the old box's force: launching from the cap
+  raises the apex 0.25–0.55 over what the box gave, so check ceiling hazards above it.
+- A pad over a pit with no floor is a Floating Mushroom held still (pointA = pointB = its position), cap top where the
+  pad's top was (Z4A7's pit, bounce 20) [user 2026-10-28].
+- JumpBox stays in Grass only as the Z4A7 bounce clouds and as the wide bounce floors with push-down ceilings (a
+  bounce corridor) in Z4A9 and Z4A10, which are a different mechanic and were left alone.
 | Falling ceiling tiles | Obstacles/FallingSandTileHolder (Z4A7 reuses the sand one) | — |
 | Spikes | Obstacles/Spikes, SpikeGroup (1) | **static** in Grass (Pop Out And Retract unticked) |
 | Challenge Arena | ChallengeArena (Z4A6 cave) | 5 rounds, restore chest |
@@ -71,8 +81,11 @@ reward. [ref]
 ## Density and rewards (authored levels)
 
 - Z4A6: 12 foxes, 11 mushrooms, 7 chests (4 gem chests at the start), ~483 coins in rows of 5–15 and 4×8 grids, one
-  checkpoint a third of the way, the Challenge Arena. Z4A7: 11 flying bounce enemies, 16 springs, ~327 coins
-  (columns at launches, 8×8 grids), 46 falling tiles, one checkpoint at 45%. [ref]
+  checkpoint a third of the way, the Challenge Arena. Z4A7: 11 flying bounce enemies, 7 Jump Mushrooms, 1 still
+  floating mushroom over the pit and 8 bounce clouds (16 jump boxes until 2026-10-28), ~327 coins (columns at
+  launches, 8×8 grids), 46 falling tiles, one checkpoint at 45%. [ref]
+- Jump Mushrooms elsewhere: Z4A8 6 (a wall climb, a pair either side of a spike dip, three shaft launchers, one up to
+  the treasure room), Z4A9 1 (on the checkpoint pillar), Z4A10 2. [ref 2026-10-28]
 - Z4A8 (draft, hand-edited): 15 foxes in two overlapping gauntlets (8 on the lower floor, 6 on the upper, ~20-wide
   patrols, speed 2). Z4A9 and Z4A10: one fox and one floating mushroom each. [ref 2026-10-27]
 - A ~125-wide sky-island level: 7 enemies (5 foxes, 2 flying bounce mushrooms), ~143 coins, 2 chests (gem chest on an early optional rock, random chest
@@ -86,7 +99,8 @@ reward. [ref]
   under them; void strips under every bridge **and** the island edges next to it, never where a launcher below
   could reach. [built]
 - Spikes static (`popOutAndRetract = false`) and set a little clear of their surface so white reads on white. [built]
-- Mushroom caps 0.5 above the floor they are jumped onto from; launchers 3.5–5.5 clear of the ledge they aim at. [built]
+- Floating mushroom caps 0.5 above the floor they are jumped onto from; a Jump Mushroom (`l.JumpMushroom(x, floorTop,
+  force)`) stands on its floor with its cap 0.55 up; launchers 3.5–5.5 clear of the ledge they aim at. [built]
 
 ## Do not carry this zone elsewhere
 
@@ -99,3 +113,5 @@ Grassy Green. Another zone gets them only if its own profile says so.
 - The rest of the 26 October restructure brief (after "Option 1 — Pillar jumps") never arrived. Were there bridge
   types or rules in it that this profile is missing?
 - Grass boss reward is undecided (design doc).
+- The bounce corridors in Z4A9 (x 21–49) and Z4A10 (x 20–30) are still yellow placeholder boxes: a wide bounce floor
+  with a push-down ceiling about 4 above it. Should they get art of their own (2026-10-28)?

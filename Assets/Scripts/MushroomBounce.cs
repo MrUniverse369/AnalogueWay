@@ -10,6 +10,10 @@ using UnityEngine;
 /// coming down on top of the cap, so walking into its side or jumping up through it does nothing.
 /// Lives on the mushroom's sprite object, next to its trigger collider (the cap). The float (MovingTiles on the
 /// parent, the bob in the animation) is untouched.
+/// JUMPMUSHROOM (2026-10-28): it also drives the Jump Mushroom (Prefabs/LevelMechanics/GrassyGreen/JumpMushroom), the
+/// mushroom that stands on the ground where Grassy Green had jump boxes. There it sits on the prefab root with the
+/// trigger and finds the art on a child, and catchFastLandings is on: the stomp box only overlaps the band LandsOnTop
+/// accepts for about 0.17 units of fall, so from about 8 units/s a landing could step straight past it.
 /// </summary>
 [DisallowMultipleComponent]
 public class MushroomBounce : MonoBehaviour
@@ -21,6 +25,8 @@ public class MushroomBounce : MonoBehaviour
     [SerializeField] private float springDamping = 7f;
     [Tooltip("Seconds before the same mushroom can bounce again (one bounce per landing).")]
     [SerializeField] private float rebounceDelay = 0.15f;
+    [Tooltip("Also count a fall that passed the cap's top within one physics step: a step earlier the stomp box was over the cap and wholly above it. On for the Jump Mushroom; off keeps the Floating Mushroom's original check.")]
+    [SerializeField] private bool catchFastLandings;
 
     private static readonly Color[] Spores = { PixelFX.Hex("ffffeb"), PixelFX.Hex("ff6b97"), PixelFX.Hex("99e550") };
 
@@ -34,7 +40,7 @@ public class MushroomBounce : MonoBehaviour
     private void Awake()
     {
         cap = GetComponent<Collider2D>();
-        sr = GetComponent<SpriteRenderer>();
+        sr = GetComponentInChildren<SpriteRenderer>(); // JUMPMUSHROOM: its own first (Floating Mushroom), else the art child
         if (sr != null)
         {
             fx = SpriteFX.On(sr);
@@ -55,12 +61,22 @@ public class MushroomBounce : MonoBehaviour
 
     private void TryBounce(Collider2D other)
     {
-        if (Time.time < nextBounce || !other.CompareTag("pStomp") || !StompEnemy.LandsOnTop(other, cap)) return;
+        if (Time.time < nextBounce || !other.CompareTag("pStomp")) return;
         Rigidbody2D body = other.attachedRigidbody != null ? other.attachedRigidbody : other.GetComponentInParent<Rigidbody2D>();
         if (body == null || body.linearVelocity.y > 0.5f) return; // rising through it: not a landing
+        if (!StompEnemy.LandsOnTop(other, cap) && !(catchFastLandings && CameDownOnto(other, body))) return;
         nextBounce = Time.time + rebounceDelay;
         body.linearVelocity = new Vector2(body.linearVelocity.x, bounceSpeed);
         Bounce(other.bounds.center);
+    }
+
+    // JUMPMUSHROOM: one physics step ago (this step's velocity taken back off it) the stomp box was over the cap and
+    // wholly above it, so this fall came down through the top, however fast
+    private bool CameDownOnto(Collider2D stompBox, Rigidbody2D body)
+    {
+        Vector2 step = body.linearVelocity * Time.fixedDeltaTime;
+        Bounds was = stompBox.bounds, top = cap.bounds;
+        return was.max.x - step.x > top.min.x && was.min.x - step.x < top.max.x && was.min.y - step.y >= top.max.y - 0.01f;
     }
 
     private void Bounce(Vector3 harvey)

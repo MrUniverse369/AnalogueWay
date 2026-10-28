@@ -41,7 +41,9 @@ copy them; anything that proved general has already been lifted into `method.md`
    island (two foxes, chi crystal); a cloud (14) up to a ridge back west, where two flying bounce enemies chain up to
    the optional coin block (4×4) and random chest. Checkpoint 2.
 6. **Bridge C**: a lone floating mushroom bounces Harvey up to a stepping stone.
-7. **Final Ascent**: a spike dip with a pillar, a fox, a spring (18) up the shaft to the final ledge (a fox).
+7. **Final Ascent**: a spike dip with a pillar, a fox, a Jump Mushroom (18) up the shaft to the final ledge (a fox).
+   It was a spring (JumpBox) until 2026-10-28, when every Grass jump box became a Jump Mushroom: the route now hops
+   onto its cap (jump at x −41.8; the model finishes with that jump anywhere from −40.9 to −43.0).
    Checkpoint 3.
 8. **Bridge D**: three pillars, gaps growing 1.5 → 2 → 2.5 → 3.
 9. **Summit**: the treasure on a dais, high above the start.

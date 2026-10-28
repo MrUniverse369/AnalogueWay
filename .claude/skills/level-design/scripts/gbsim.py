@@ -6,14 +6,16 @@ boxes and the launchers, not any one level.
 
 Numbers read from the project: gravity 9.81 x 1.1 (Physics2D x Player gravityScale), run 4.5 (speedDefault), jump 5
 (jSpeedDefault), coyote 0.25 s, no re-launch while rising for 0.3 s (RelaunchBlock), body 0.225 x 0.74 (feet 0.52
-below the pivot), feet circle r 0.1, stomp box 0.375 x 0.16 under the feet (on while falling faster than 0.5),
-cloud/spring = set vy on body entry, mushroom = vy 15 when the stomp box lands on the cap top, physics step 0.02 s.
+below the pivot), feet circle r 0.1, stomp box 0.345 x 0.16 hanging 0.05 to 0.21 under the feet (on while falling
+faster than 0.5; measured on Player.prefab 2026-10-28), cloud/spring = set vy on body entry, mushroom = its bounce
+speed when the stomp box lands on the cap top (a floating mushroom 15; a Jump Mushroom its own, and a fall that passed
+the cap's top within one step still lands), physics step 0.02 s.
 Re-check them with calibrate.py whenever PlayerController or Player.prefab changes.
 
 Not modelled: Super Jump, Double Jump, Spirit Dash, the mounts, water and swimming, enemy AI, the head-corner catch
 on a +1 step (Harvey's box body can stop dead when a jump starts ~0.2 from the face; Unity only).
 
-    Level()           describe a layout: box(), cloud(), spring(), mushroom(), spikes(), void(), fox(), coin_row()...
+    Level()           describe a layout: box(), cloud(), spring(), mushroom(), jump_mushroom(), spikes(), void(), fox()...
     Sim(level, x, y)  step(move, press) one physics step at a time
     run_route()       drive a Sim through a scripted route (see its docstring)
     check_voids()     kill strips a launcher, stomp or jump could carry Harvey's head into from below
@@ -29,7 +31,7 @@ DT = 0.02
 
 # body/feet/stomp boxes relative to the pivot, facing right (mirrored when facing left)
 BODY = (-0.1775, 0.0475, -0.52, 0.22)
-STOMP = (-0.2875, 0.0875, -0.605, -0.445)
+STOMP = (-0.2265, 0.1185, -0.7324, -0.5725)  # Player.prefab, measured 2026-10-28 (was -0.2875, 0.0875, -0.605, -0.445)
 FEET = (-0.053, -0.52, 0.1)
 
 
@@ -54,7 +56,7 @@ class Level:
     def __init__(self):
         self.solids = []      # (x0,x1,y0,y1,kind,name)
         self.launch = []      # cloud/spring triggers: (x0,x1,y0,y1,force,kind,name)
-        self.caps = []        # mushroom caps: (x0,x1,y0,y1,name)
+        self.caps = []        # mushroom caps: (x0,x1,y0,y1,name,bounce,catch fast landings)
         self.hazards = []     # spikes (instant death): (x0,x1,y0,y1,name)
         self.voids = []       # kill strips: (x0,x1,y0,y1,name)
         self.enemies = []     # (kind, x0, x1, y_holder, hit box rel, bounce)
@@ -73,7 +75,11 @@ class Level:
         self.launch.append((x - 0.75, x + 0.75, y - 0.2, y + 0.2, force, "spring", name))
 
     def mushroom(self, x, y, name="mushroom"):
-        self.caps.append((x - 0.31, x + 0.31, y + 0.14, y + 0.32, name))
+        self.caps.append((x - 0.31, x + 0.31, y + 0.14, y + 0.32, name, 15.0, False))
+
+    def jump_mushroom(self, x, floor, force, name="jump mushroom"):
+        # JUMPMUSHROOM (2026-10-28): stands on the floor; its trigger runs from 0.05 to 0.55 above it, 0.735 wide
+        self.caps.append((x - 0.3676, x + 0.3676, floor + 0.05, floor + 0.55, name, force, True))
 
     def spikes(self, x0, x1, floor, name="spikes"):
         self.hazards.append((x0 - 0.32, x1 + 0.33, floor + 0.14, floor + 0.39, name))
@@ -192,9 +198,16 @@ class Sim:
         if falling_before:
             sb = rel_box(STOMP, self.x, self.y, self.facing)
             for c in self.l.caps:
-                if overlap(sb, c) and (sb[2] + sb[3]) / 2 >= c[3] - 0.25 and self.vy <= 0.5 and self.t >= self.cap_cd.get(c[4], 0):
+                if not overlap(sb, c) or self.vy > 0.5 or self.t < self.cap_cd.get(c[4], 0):
+                    continue
+                lands = (sb[2] + sb[3]) / 2 >= c[3] - 0.25
+                if not lands and c[6]:
+                    # catchFastLandings: a step earlier the stomp box was over the cap and wholly above it
+                    pb = rel_box(STOMP, self.x - self.vx * DT, self.y - self.vy * DT, self.facing)
+                    lands = pb[1] > c[0] and pb[0] < c[1] and pb[2] >= c[3] - 0.01
+                if lands:
                     self.cap_cd[c[4]] = self.t + 0.15
-                    self.vy = 15.0
+                    self.vy = c[5]
         for h in self.l.hazards:
             if overlap(b, h):
                 self.dead = ("spikes", h[4], round(self.x, 2), round(self.y, 2), round(self.t, 2))
@@ -281,7 +294,8 @@ def launch_heads(level):
         top = tr[3]
         out.append((tr[6], tr[0] - RUN * f / G, tr[1] + RUN * f / G, tr[2], top + f * f / (2 * G) + 0.74))
     for c in level.caps:
-        out.append((c[4], c[0] - RUN * 15 / G, c[1] + RUN * 15 / G, c[3], c[3] + 15 * 15 / (2 * G) + 0.74))
+        f = c[5]
+        out.append((c[4], c[0] - RUN * f / G, c[1] + RUN * f / G, c[3], c[3] + f * f / (2 * G) + 0.74))
     for e in level.enemies:
         kind, x0, x1, yh, hb, bounce = e
         top = yh + hb[3]

@@ -25,10 +25,12 @@ using UnityEngine.SceneManagement;
 ///     two pillars, the fox island (two foxes, a chi crystal), a bounce cloud up to a ridge that runs back left over
 ///     all three, where two flying bounce enemies chain up to an optional coin block and chest, a checkpoint
 ///   6 Bridge C: a floating mushroom over the void bounces Harvey up to a stepping stone
-///   7 Final Ascent: a spike dip with a pillar, a fox, a spring up the shaft to the final ledge (checkpoint, fox)
+///   7 Final Ascent: a spike dip with a pillar, a fox, a Jump Mushroom up the shaft to the final ledge (checkpoint, fox)
 ///   8 Bridge D: three pillars with growing gaps   9 the Summit, the treasure on a dais.
 /// FOXONLY (2026-10-27): the Spirit Fox is Grassy Green's only regular enemy, so the two Grass walkers (the tier in 3,
 /// the final ledge in 7) are gone; the flying bounce enemies stay, as mushroom stepping stones.
+/// JUMPMUSHROOM (2026-10-28): Grassy Green's jump boxes became Jump Mushrooms, so the spring by the wall in 7 is one
+/// too (bounce 18, the same force): Harvey jumps onto its cap instead of walking into a pad.
 /// Islands are white, with stepped undersides that taper away (they read as floating landmasses), and a fall inside
 /// one lands on its lower tier: it costs height, not a life. Sky-bridge pieces are grey-blue and have nothing under
 /// them: invisible kill strips (copies of the scene's KillPlane, under "Voids") sit a few tiles below every bridge and
@@ -37,8 +39,8 @@ using UnityEngine.SceneManagement;
 /// plus the level's bounces: a +1 step never has a gap over 1.5. Geometry is grouped by section under Geometry.
 /// Geometry: 9-sliced boxes (Sprites/Tutorial/WhiteBox) on one static body with a merged collider on the Ground
 /// layer, drawn on the Ground sorting layer like the real tilemaps. Everything else is the game's own prefab with a
-/// GreyboxSkin drawing it as a coloured box the size of its collider: red = enemy (ForestSpiritFox, BounceEnemyHolder 1), yellow = coin, aqua = chi crystal, pink = bounce mushroom, pale blue = bounce cloud, orange =
-/// spring, gold = chest, a post = checkpoint (Sprites/Greybox, grey closed / yellow open), light yellow = the treasure.
+/// GreyboxSkin drawing it as a coloured box the size of its collider: red = enemy (ForestSpiritFox, BounceEnemyHolder 1), yellow = coin, aqua = chi crystal, pink = bounce mushroom (floating or standing), pale blue = bounce cloud,
+/// gold = chest, a post = checkpoint (Sprites/Greybox, grey closed / yellow open), light yellow = the treasure.
 /// Not in Build Settings and not on the map: open the scene and press Play. Safe to re-run (the scene keeps its GUID
 /// and is rebuilt from scratch).
 /// </summary>
@@ -52,7 +54,7 @@ public static class GreyboxLevelBuilder
     private const string BouncerPrefab = "Assets/Prefabs/Enemy/Grass/BounceEnemyHolder 1.prefab";
     private const string MushroomPrefab = "Assets/Prefabs/Enemy/Grass/FloatingMushroom.prefab";
     private const string CloudPrefab = "Assets/Prefabs/LevelMechanics/GrassyGreen/JumpCloud.prefab";
-    private const string SpringPrefab = "Assets/Prefabs/LevelMechanics/JumpBox.prefab";
+    private const string JumpMushroomPrefab = JumpMushroomSetup.PrefabPath;
     private const string SpikesPrefab = "Assets/Prefabs/Obstacles/Spikes.prefab";
     private const string CheckpointPrefab = "Assets/Prefabs/LevelMechanics/CheckPoint/CheckPoint.prefab";
     private const string ChestPrefab = "Assets/Prefabs/Treasure_Chest_One.prefab";
@@ -61,7 +63,7 @@ public static class GreyboxLevelBuilder
 
     private static readonly Color Background = new Color32(0x3b, 0x34, 0x68, 255); // the tutorial's plain backdrop
     private static readonly Color EnemyRed = Hex("eb564b"), CoinYellow = Hex("ffe478"), ChiAqua = Hex("66ffe3"), MushroomPink = Hex("ff6b97");
-    private static readonly Color CloudBlue = Hex("d5ebff"), SpringOrange = Hex("f2a65e"), ChestGold = Hex("ce812c"), TreasureLight = Hex("fff3b0");
+    private static readonly Color CloudBlue = Hex("d5ebff"), ChestGold = Hex("ce812c"), TreasureLight = Hex("fff3b0");
     private static readonly Color BridgeStone = Hex("98b2b1"); // SKYISLANDS: sky-bridge pillars and stepping stones (islands stay white)
 
     private static readonly string[] KeepRoots =
@@ -112,7 +114,7 @@ public static class GreyboxLevelBuilder
     // ---------------------------------------------------------------- the layout (1 unit = 1 tile; a box's 'top' is where feet stand)
     // SKYISLANDS: Harvey starts at the bottom and zig-zags up. A jump lifts him 1.1 and carries him 4 across (2.7 onto a
     // step a tile higher); the bounces lift him 2.3 (flying enemy), 4.6 (cloud 10), 6.7 (cloud 12), 9 (cloud 14), 10.4
-    // (mushroom) and 15 (spring 18). Every launch has room to steer towards the landing at once without bumping the
+    // (mushroom) and 15 (Jump Mushroom 18). Every launch has room to steer towards the landing at once without bumping the
     // ledge it is aiming for, and a wall or the next ledge catches a launch the wrong way.
     private static void Layout(Level l)
     {
@@ -237,8 +239,8 @@ public static class GreyboxLevelBuilder
         l.CoinArc(-10f, -16f, 41f, 2.5f, 5);
         l.Void(-27f, -5.5f, 31f, "BridgeC");
 
-        // 7 FINAL ASCENT: a spike dip crossed on a pillar, a fox with room, the spring by the wall (a coin column shows the
-        //   way) up the shaft to the final ledge: a checkpoint, then a fox before the last bridge
+        // 7 FINAL ASCENT: a spike dip crossed on a pillar, a fox with room, the Jump Mushroom by the wall (a coin column
+        //   shows the way) up the shaft to the final ledge: a checkpoint, then a fox before the last bridge
         l.Section("7_FinalAscent");
         l.Box(-26f, -20f, 41f, 38f, "Arrival");
         l.Box(-32f, -26f, 39f, 38f, "SpikeDip");
@@ -248,9 +250,9 @@ public static class GreyboxLevelBuilder
         l.Fox(-42f, -36f, 41f);
         l.Box(-48f, -46f, 58f, 38f, "WallLeft");
         l.Underside(-48f, -20f, 38f, "FinalAscent");
-        l.Spring(-44.5f, 41f, 18f);                       // apex about 56, three over the final ledge
+        l.JumpMushroom(-44.5f, 41f, 18f);                 // apex about 56.5, three over the final ledge
         l.CoinColumn(-44.5f, 43f, 51f, 7);
-        l.Box(-39f, -20f, 53f, 52f, "FinalLedge");        // starts 5.5 right of the spring
+        l.Box(-39f, -20f, 53f, 52f, "FinalLedge");        // starts 5.5 right of the mushroom
         l.Checkpoint(-37f, 53f);
         l.Fox(-35f, -30f, 53f);
         l.CoinRow(-33f, -31f, 55.3f, 3);
@@ -287,7 +289,7 @@ public static class GreyboxLevelBuilder
         private Transform section; // SKYISLANDS: the Geometry group the next boxes go in
         private readonly int groundLayer = LayerMask.NameToLayer("Ground");
         private readonly int groundSort = SortingLayer.NameToID("Ground");
-        private readonly GameObject fox, bouncer, mushroom, cloud, spring, spikes, checkpoint, chest, chi, coin, killPlane;
+        private readonly GameObject fox, bouncer, mushroom, cloud, jumpMushroom, spikes, checkpoint, chest, chi, coin, killPlane;
         public int boxes, enemies, coins, hazards, bounces, chests, checkpoints, sections, voids;
 
         public Level(Scene scene, PlayerController player)
@@ -303,7 +305,7 @@ public static class GreyboxLevelBuilder
             bouncer = AssetDatabase.LoadAssetAtPath<GameObject>(BouncerPrefab);
             mushroom = AssetDatabase.LoadAssetAtPath<GameObject>(MushroomPrefab);
             cloud = AssetDatabase.LoadAssetAtPath<GameObject>(CloudPrefab);
-            spring = AssetDatabase.LoadAssetAtPath<GameObject>(SpringPrefab);
+            jumpMushroom = AssetDatabase.LoadAssetAtPath<GameObject>(JumpMushroomPrefab);
             spikes = AssetDatabase.LoadAssetAtPath<GameObject>(SpikesPrefab);
             checkpoint = AssetDatabase.LoadAssetAtPath<GameObject>(CheckpointPrefab);
             chest = AssetDatabase.LoadAssetAtPath<GameObject>(ChestPrefab);
@@ -311,7 +313,7 @@ public static class GreyboxLevelBuilder
             coin = AssetDatabase.LoadAssetAtPath<GameObject>(CoinPrefab);
             killPlane = scene.GetRootGameObjects().FirstOrDefault(g => g.name == "KillPlane"); // the void strips are copies of it
             foreach (var (name, asset) in new[] { ("WhiteBox", (Object)white), ("Post_Closed", postClosed), ("Post_Open", postOpen), ("fox", fox),
-                         ("bouncer", bouncer), ("mushroom", mushroom), ("cloud", cloud), ("spring", spring), ("spikes", spikes), ("checkpoint", checkpoint), ("chest", chest), ("chi", chi), ("coin", coin),
+                         ("bouncer", bouncer), ("mushroom", mushroom), ("cloud", cloud), ("jump mushroom", jumpMushroom), ("spikes", spikes), ("checkpoint", checkpoint), ("chest", chest), ("chi", chi), ("coin", coin),
                          ("the base scene's KillPlane", killPlane) })
                 if (asset == null) throw new System.Exception("Greybox: missing asset " + name);
 
@@ -455,14 +457,22 @@ public static class GreyboxLevelBuilder
             Skin(go, CloudBlue);
         }
 
-        /// <summary>A spring pad lying on the floor at floorTop that launches Harvey up at 'force'.</summary>
-        public void Spring(float x, float floorTop, float force)
+        /// <summary>
+        /// JUMPMUSHROOM: a Jump Mushroom standing on the floor at floorTop that bounces Harvey up at 'force' when he
+        /// lands on its cap (0.55 above the floor): he jumps onto it, walking into it does nothing.
+        /// </summary>
+        public void JumpMushroom(float x, float floorTop, float force)
         {
-            GameObject go = Spawn(spring, mechanicRoot, $"Spring{bounces++}_x{x:0}");
-            go.transform.position = new Vector3(x, floorTop + 0.2f, 0f);
-            go.transform.localScale = new Vector3(1.5f, 0.4f, 1f);
-            SetJumpBox(go, force);
-            Skin(go, SpringOrange);
+            GameObject go = Spawn(jumpMushroom, mechanicRoot, $"JumpMushroom{bounces++}_x{x:0}");
+            go.transform.position = new Vector3(x, floorTop, 0f);
+            var so = new SerializedObject(go.GetComponent<MushroomBounce>());
+            so.FindProperty("bounceSpeed").floatValue = force;
+            so.ApplyModifiedPropertiesWithoutUndo();
+            // the trigger is on the root and the art on its child, so the box is the root's trigger in the art's units
+            var cap = go.GetComponent<BoxCollider2D>();
+            Transform art = go.GetComponentInChildren<SpriteRenderer>().transform;
+            Vector2 scale = art.localScale;
+            Skin(art.gameObject, MushroomPink, cap.size / scale, (cap.offset - (Vector2)art.localPosition) / scale, false);
         }
 
         private void SetJumpBox(GameObject go, float force)

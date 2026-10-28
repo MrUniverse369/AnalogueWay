@@ -1,7 +1,7 @@
 """Check a greybox layout offline before (and between) Unity runs.
 
 Reads the Layout() calls of a GreyboxLevelBuilder-style editor script (l.Box, l.Bridge, l.Underside, l.Cloud,
-l.Spring, l.Mushroom, l.Spikes, l.CeilingSpikes, l.Void, l.Fox, l.Walker, l.Bouncer, l.Coin*, l.Chest, l.Chi,
+l.Spring, l.Mushroom, l.JumpMushroom, l.Spikes, l.CeilingSpikes, l.Void, l.Fox, l.Walker, l.Bouncer, l.Coin*, l.Chest, l.Chi,
 l.Checkpoint, l.Treasure, l.Section) straight from the C#, so the layout is written once, in the builder. Arguments
 must be literal numbers; a call it cannot read is reported, never guessed.
 
@@ -101,6 +101,8 @@ def build(path):
             L.spring(a[0], a[1], a[2], f"spring{a[2]:.0f}@{a[0]:.0f},{a[1]:.0f}")
         elif kind == "Mushroom":
             L.mushroom(a[0], a[1], f"mushroom@{a[0]:.0f},{a[1]:.0f}")
+        elif kind == "JumpMushroom":
+            L.jump_mushroom(a[0], a[1], a[2], f"jumpmushroom{a[2]:.0f}@{a[0]:.0f},{a[1]:.0f}")
         elif kind == "Spikes":
             L.spikes(a[0], a[1], a[2])
         elif kind == "CeilingSpikes":
