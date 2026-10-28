@@ -19,7 +19,8 @@ using UnityEngine.SceneManagement;
 /// Actions: "respawn" forces a death through LevelManager.Respawn and checks that Harvey comes back at the respawn
 /// point with three lives and full chi, and gets control back within MaxRespawnS. "boss:&lt;suite&gt;" (2026-10-27) runs a
 /// scripted boss suite (QABossDriver) and writes its checks; "bounce:&lt;suite&gt;" (2026-10-28) a bounce suite
-/// (QABounceDriver: the Jump Mushroom and the pads' routes).
+/// (QABounceDriver: the Jump Mushroom and the pads' routes); "arena:all" (2026-10-28) the Challenge Arena's lifecycle
+/// (QAArenaDriver: entry, reset on a fall, every round, the win, its ways out).
 /// </summary>
 public class QAProbe : MonoBehaviour
 {
@@ -117,6 +118,7 @@ public class QAProbe : MonoBehaviour
         if (req.action == "respawn") { var box = new string[1]; yield return Respawn(box); actionJson = box[0]; }
         else if (req.action != null && req.action.StartsWith("boss:")) { var box = new string[1]; yield return QABossDriver.Run(req.action.Substring(5), box); actionJson = box[0]; } // BOSSQA: scripted boss suites
         else if (req.action != null && req.action.StartsWith("bounce:")) { var box = new string[1]; yield return QABounceDriver.Run(req.action.Substring(7), box); actionJson = box[0]; } // JUMPMUSHROOM: scripted bounce suites
+        else if (req.action != null && req.action.StartsWith("arena:")) { var box = new string[1]; yield return QAArenaDriver.Run(req.action.Substring(6), box); actionJson = box[0]; } // WAVEMUSHROOM: the Challenge Arena's lifecycle
 
         Write(gcRuns, sysMB, usedMB, resMB, actionJson);
         Application.logMessageReceivedThreaded -= OnLog;

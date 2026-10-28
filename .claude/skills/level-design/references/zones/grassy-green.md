@@ -17,7 +17,7 @@ sky)"), the art-style memory. Tags as in `method.md`: [user] [ref] [built] [assu
 
 | | Z4A6 (authored) | Z4A7 (authored) | Greybox Level 3 (prototype) |
 | --- | --- | --- | --- |
-| Size | 178 × 111, tall | 207 × 66, wide | 122 × 69, tall |
+| Size | 178 × 111, tall | 292 × 66, wide (207 × 66 before the 2026-10-28 east expansion) | 122 × 69, tall |
 | Shape | a vertical climb up mushroom chimneys | horizontal maze: 3-tall tunnels, shafts, a cloud section over a pit | five islands, four bridges, zig-zagging up |
 | Vertical travel | floating mushrooms (bounce 15) | Jump Mushrooms 12–20 (jump boxes until 2026-10-28), clouds 8–14 | clouds 10–14, floating mushroom 15, Jump Mushroom 18, steps |
 
@@ -57,7 +57,13 @@ sky)"), the art-style memory. Tags as in `method.md`: [user] [ref] [built] [assu
   bounce corridor) in Z4A9 and Z4A10, which are a different mechanic and were left alone.
 | Falling ceiling tiles | Obstacles/FallingSandTileHolder (Z4A7 reuses the sand one) | — |
 | Spikes | Obstacles/Spikes, SpikeGroup (1) | **static** in Grass (Pop Out And Retract unticked) |
-| Challenge Arena | ChallengeArena (Z4A6 cave) | 5 rounds, restore chest |
+| Challenge Arena | ChallengeArena (Z4A7 side chamber since 2026-10-28; removed from Z4A6 on 2026-10-28) | Z4A6: 5 rounds (2–6 foxes), gate tiles; Z4A7: 3 rounds (2/3/4), locked by hiding its Jump Mushroom (waysOut); restore chest |
+
+- **Mushroom Spirit chest game** [user 2026-10-28]: Prefabs/LevelMechanics/GrassyGreen/MushroomSpiritChestGame
+  (ChestShuffleGame). A friendly forest spirit (not an enemy, not a bounce pad) and three chests 4 apart on one flat
+  floor; it needs about 12 tiles of floor, 3+ tiles of headroom over the chests (they hop 1.3) and no enemy nearby.
+  Two correct picks of the two reward chests win gems and chi; the trap ends it. In Z4A6's cave and Z4A7's Spirit's
+  Glade. Place the prefab root on the floor under the middle chest.
 
 ## Enemies
 
@@ -81,9 +87,11 @@ reward. [ref]
 ## Density and rewards (authored levels)
 
 - Z4A6: 12 foxes, 11 mushrooms, 7 chests (4 gem chests at the start), ~483 coins in rows of 5–15 and 4×8 grids, one
-  checkpoint a third of the way, the Challenge Arena. Z4A7: 11 flying bounce enemies, 7 Jump Mushrooms, 1 still
-  floating mushroom over the pit and 8 bounce clouds (16 jump boxes until 2026-10-28), ~327 coins (columns at
-  launches, 8×8 grids), 46 falling tiles, one checkpoint at 45%. [ref]
+  checkpoint a third of the way, the Challenge Arena. Z4A7 (as edited by the user after 28 Oct's commit 7118bfb,
+  measured that day): 6 Spirit Foxes, 3 flying bounce enemies, 6 Jump Mushrooms, 1 still floating mushroom over the
+  pit, 6 bounce-cloud JumpBoxes, ~200 coins, 46 falling tiles, one checkpoint at 45%, and the Challenge Room in the
+  side chamber at x 63..96 (its chest in the pit). Before the edit: 11 flying bouncers, 7 Jump Mushrooms, 8 clouds,
+  ~327 coins. [ref]
 - Jump Mushrooms elsewhere: Z4A8 6 (a wall climb, a pair either side of a spike dip, three shaft launchers, one up to
   the treasure room), Z4A9 1 (on the checkpoint pillar), Z4A10 2. [ref 2026-10-28]
 - Z4A8 (draft, hand-edited): 15 foxes in two overlapping gauntlets (8 on the lower floor, 6 on the upper, ~20-wide

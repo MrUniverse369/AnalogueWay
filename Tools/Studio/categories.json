@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "verifiedAt": "2026-10-28",
+  "verifiedAgainst": "Assets/Scripts, Assets/Prefabs, Assets/Resources/HNLCatalog.asset, ProjectSettings (InputManager, EditorBuildSettings) and the 33 enabled build scenes, read on 2026-10-28",
+  "zones": [
+    { "id": "grassy", "name": "Grassy Green", "code": "Z4", "order": 1, "colour": "#59c08a" },
+    { "id": "tomb", "name": "Old Tomb", "code": "Z1", "order": 2, "colour": "#7a8bd0" },
+    { "id": "sandy", "name": "Sandy Dunes", "code": "Z2", "order": 3, "colour": "#e0a24f" },
+    { "id": "japan", "name": "Snow Temple (Japan)", "code": "Z3", "order": 4, "colour": "#9cc3ec" }
+  ],
+  "categories": [
+    { "id": "core", "name": "Core Mechanics", "order": 1, "blurb": "What every second of play is made of: moving, jumping, stomping, the Spirit Dash, chi, health and coins." },
+    { "id": "combat-traversal", "name": "Combat & Traversal", "order": 2, "blurb": "The combo, the extra jumps, bounce pads, water and the aids that keep a fight readable." },
+    { "id": "progression", "name": "Progression & Builds", "order": 3, "blurb": "Talismans, the skill tree, crystals, chests, shops, ranks, the zone map and save files." },
+    { "id": "encounters", "name": "Encounters & Environment", "order": 4, "blurb": "Bosses, enemy types, traps and hazards, and the zone-specific places they live in." },
+    { "id": "advanced", "name": "Advanced Mechanics", "order": 5, "blurb": "Deeper techniques and unlocks: higher combo stages, mounts, the dash clash, boss heals." },
+    { "id": "special", "name": "Optional & Special Modes", "order": 6, "blurb": "Moments and modes off the main line: the rainbow combo stage, the challenge rooms, the tutorial, dialogue, the opening cinematic." }
+  ],
+  "importance": {
+    "5": { "label": "Essential", "meaning": "Needed to finish levels; used throughout the game from the start." },
+    "4": { "label": "Central", "meaning": "Part of the main loop in most levels, or required by a whole zone or every boss." },
+    "3": { "label": "Supporting", "meaning": "Shapes how a level or build plays; levels can be finished without leaning on it." },
+    "2": { "label": "Situational", "meaning": "Limited to some levels, an unlock, or a particular encounter." },
+    "1": { "label": "Specialised", "meaning": "One place, one mode, or a flourish on top of another mechanic." }
+  },
+  "frequency": {
+    "constant": { "label": "Constant", "order": 1, "meaning": "Every few seconds of play." },
+    "very-frequent": { "label": "Very frequent", "order": 2, "meaning": "Many times in every level." },
+    "frequent": { "label": "Frequent", "order": 3, "meaning": "Several times in most levels." },
+    "regular": { "label": "Regular", "order": 4, "meaning": "Once or a few times in many levels, or throughout one zone." },
+    "occasional": { "label": "Occasional", "order": 5, "meaning": "A handful of places, or between levels." },
+    "rare": { "label": "Rare", "order": 6, "meaning": "Once per zone, per fight or per playthrough." }
+  },
+  "method": [
+    "Importance (1-5) and usage frequency are separate judgements. Importance asks how much finishing the game depends on the mechanic; frequency asks how often a player meets or uses it.",
+    "Importance is scored from four things read in the project: whether levels or bosses need it to be beaten, whether it is available from the first level or needs an unlock, how many levels, enemies and bosses build on it, and whether other systems (ranks, the combo, chi) depend on it.",
+    "Frequency is an informed estimate from the design and the level contents. The game has no player telemetry, so no figure here is measured from players and no percentages are given.",
+    "Scene presence is measured: for each mechanic the dashboard counts the enabled build scenes that reach its scripts (through placed prefabs, animators and materials), using the same dependency index as the QA tab. Mechanics added at runtime by code (the combo, the skill tree, the HUD) are not countable this way and say so.",
+    "Rank orders the whole catalogue from the most fundamental (1) to the most specialised. It follows importance first, then how early the mechanic is met, then frequency."
+  ]
+}

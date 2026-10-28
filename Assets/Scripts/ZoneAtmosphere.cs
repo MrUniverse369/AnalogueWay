@@ -10,8 +10,7 @@ using UnityEngine.SceneManagement;
 ///   Z2 Egypt    blowing sand wisps, and heat haze near the horizon on the far background layers
 ///   Z3 Japan    sakura petals; in the village also fireflies
 ///   Z4 Green    drifting leaves and pollen, and pixel-snapped wind sway on the tops of trees and bushes
-/// Every level: scrolling clouds inside the parallax skies, a glint sweeping over coins, chests, spikes and
-/// floating traps. Material swaps only touch sprites still on the default sprite material, and use the shared
+/// Every level: a glint sweeping over coins, chests, spikes and floating traps (the skies are left as painted). Material swaps only touch sprites still on the default sprite material, and use the shared
 /// HNLSprite variants in Resources/FX. Ambient particles spawn around the camera view only, at low rates.
 /// </summary>
 public class ZoneAtmosphere : MonoBehaviour
@@ -56,7 +55,6 @@ public class ZoneAtmosphere : MonoBehaviour
         Material shine = Resources.Load<Material>("FX/HNLSprite_Shine");
         Material glint = Resources.Load<Material>("FX/HNLSprite_Glint");
         Material sway = Resources.Load<Material>("FX/HNLSprite_Sway");
-        Material sky = Resources.Load<Material>("FX/HNLSprite_Sky");
         Material haze = Resources.Load<Material>("FX/HNLSprite_Haze");
         var block = new MaterialPropertyBlock();
 
@@ -76,12 +74,9 @@ public class ZoneAtmosphere : MonoBehaviour
             }
             else if (n.Contains("sky"))
             {
-                r.sharedMaterial = sky;
-                Vector3 size = r.bounds.size; // world units, so scaled box skies get clouds at the right pixel size
-                r.GetPropertyBlock(block);
-                block.SetVector("_CloudArea", new Vector4(size.x, size.y, 0, 0));
-                block.SetVector("_CloudBand", new Vector4(size.y * 0.3f, size.y - 0.3f, 0, 0)); // up from the sprite's bottom
-                r.SetPropertyBlock(block);
+                // NOSKYCLOUDS (2026-10-28): skies keep their own material, so the HNLSprite_Sky shader clouds
+                // (_HNL_CLOUDS) no longer appear; the hand-placed clouds are the only clouds. The branch stays so skies
+                // still skip the sway and haze swaps below.
             }
             else if (zone == Zone.Green && (layer == "Tree" || layer == "TreeFront" || layer == "Bush" || n.Contains("tree") || n.Contains("bush")))
             {

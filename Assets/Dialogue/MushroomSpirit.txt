@@ -1,0 +1,23 @@
+// Harvey's Nine Lives: the Mushroom Spirit's treasure-chest game (ChestShuffleGame, Z4A6 and Z4A7).
+// Format notes: see JapanVillage.txt and Assets/Scripts/DialogueScript.cs. Check with Tools/HNL/Check Dialogue Files.
+// The game plays these nodes in order: intro, then again after each correct pick that isn't the last, then win or loss.
+
+
+== intro
+Mushroom Spirit: Psst! A traveller with nine lives? Then you can spare one for a game.
+Three chests. Two hold treasure. One holds... a surprise.
+Watch closely while I mix them up, then pick a chest. Find treasure twice and it's all yours.
+Pick the surprise even once, and the game is over. No second tries!
+-> end
+
+== again
+Mushroom Spirit: Treasure! Sharp eyes. Once more, and this time I go faster.
+-> end
+
+== win
+Mushroom Spirit: Twice! I've been bested. Take it all, and come back when your eyes get duller.
+-> end
+
+== loss
+Mushroom Spirit: Ooh, that one goes bang. Game over, traveller. The forest keeps its treasure today.
+-> end

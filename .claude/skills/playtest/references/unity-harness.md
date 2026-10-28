@@ -113,6 +113,11 @@ only when all of these match. Use the same Game view size every time.
 | `boss:<suite>` | `Assets/Scripts/QABossDriver.cs` | the boss suites named in its summary (sandfin, landshark-attacks, landshark-fight, samurai) |
 | `bounce:<suite>` | `Assets/Scripts/QABounceDriver.cs` (2026-10-28) | `jumpmushroom`: every Jump Mushroom in the scene (drops from 2, 6 and up to 20 tiles, standing and running hops, walking through, a jump from under the cap, one bounce per landing, the squash, a respawn drop and a Spirit Dash on the first one); `routes`: each pad in the driver's per-scene table hopped and steered to the ledge it serves, enemies off; `all`: both |
 
+| `arena:all` | `Assets/Scripts/QAArenaDriver.cs` (2026-10-28) | a scene's ChallengeArena, walked into from the spot in its `Entry` table (Z4A6, Z4A7): fresh state, starts only on entry, ways out off in the same frame, a fall resets it (enemies gone, gate open, ways out back, respawn outside, level respawn restored), every round's count on the floor inside the room with nothing left over, ways out off in every frame it runs, the win (ways out back as they were, gate open, chest), and riding the way out (its `Exit` table). Enemies are defeated by script with Harvey shielded, so it never judges the fight's difficulty. It names any enemy the arena drops for leaving the room |
+
+QABounceDriver skips a pad that is a ChallengeArena's way out (standing by it starts the fight) and a route whose pad is
+no longer in the scene; both are listed as not run. A Z4A7 `arena:all` run takes about a minute, Z4A6 about two.
+
 `qa probe-result` judges only the capture (scene loaded, Harvey active, no errors), so a `boss:` or `bounce:` suite's
 checks go into a `qa result` (method `play-scripted`) that quotes them, with the capture JSON as evidence. A capture
 whose suite failed is still a valid SMOKE capture: record the two separately. Run a bounce suite with

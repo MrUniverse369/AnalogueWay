@@ -18,6 +18,8 @@ using UnityEngine.SceneManagement;
 ///         routes        each pad in the scene's table (Routes below): hop on and steer to the ledge, shaft or room it
 ///                       serves, with the enemies switched off (the check is the launch, not a fight).
 ///         all           both.
+/// WAVEMUSHROOM (2026-10-28): a pad that is a Challenge Arena's way out is skipped by both suites (listed as not
+/// run); QAArenaDriver ("arena:all") checks it hides, comes back and carries Harvey out.
 /// Editor only (QAProbe calls it from its editor-only body).
 /// </summary>
 public static class QABounceDriver
@@ -46,6 +48,7 @@ public static class QABounceDriver
     private static Rigidbody2D rb;
     private static float g;
     private static int groundMask;
+    private static readonly HashSet<string> arenaWays = new HashSet<string>(); // WAVEMUSHROOM: pads a ChallengeArena hides while it runs
 
     public static IEnumerator Run(string suite, string[] result)
     {
@@ -60,6 +63,7 @@ public static class QABounceDriver
         }
         g = -Physics2D.gravity.y * rb.gravityScale;
         groundMask = LayerMask.GetMask("Ground");
+        FindArenaWays();
         QuietEnemies();
         if (suite == "jumpmushroom" || suite == "all") yield return Mechanic();
         if (suite == "routes" || suite == "all") yield return RunRoutes();
@@ -108,6 +112,7 @@ public static class QABounceDriver
         foreach (MushroomBounce mb in Object.FindObjectsByType<MushroomBounce>(FindObjectsSortMode.None))
         {
             if (!mb.name.StartsWith("JumpMushroom")) continue; // the floating mushrooms keep their own (older) check
+            if (arenaWays.Contains(mb.name)) { skipped.Add($"{mb.name}: a Challenge Arena's way out (standing by it starts the fight); arena:all rides it after the win"); continue; }
             var cap = mb.GetComponent<BoxCollider2D>();
             pads.Add(new Pad { name = mb.name, bounce = mb, cap = cap, art = mb.GetComponentInChildren<SpriteRenderer>(), x = mb.transform.position.x,
                 capTop = cap.bounds.max.y, floorY = mb.transform.position.y, speed = mb.BounceSpeed });
@@ -333,7 +338,13 @@ public static class QABounceDriver
         string scene = SceneManager.GetActiveScene().name;
         Route[] routes = Routes(scene);
         if (routes.Length == 0) { skipped.Add("routes: no table for " + scene); yield break; }
-        foreach (Route r in routes) yield return RunRoute(r);
+        foreach (Route r in routes)
+        {
+            if (arenaWays.Contains(r.pad)) { skipped.Add($"route {r.pad}: a Challenge Arena's way out; arena:all rides it after the win"); continue; }
+            if (r.pad.Contains("Mushroom") && !System.Array.Exists(Object.FindObjectsByType<MushroomBounce>(FindObjectsSortMode.None), m => m.name == r.pad || (m.transform.parent != null && m.transform.parent.name == r.pad)))
+            { skipped.Add($"route {r.pad}: no such pad in the scene any more"); continue; } // the level was edited since the table
+            yield return RunRoute(r);
+        }
     }
 
     private static IEnumerator RunRoute(Route r)
@@ -396,6 +407,19 @@ public static class QABounceDriver
     }
 
     // ---------------------------------------------------------------- helpers
+
+    // WAVEMUSHROOM (2026-10-28): the pads a Challenge Arena lists as its ways out (Z4A7's JumpMushroom (3)). Starting a
+    // check beside one walks Harvey into the arena, which hides the pad: QAArenaDriver tests those instead
+    private static void FindArenaWays()
+    {
+        arenaWays.Clear();
+        foreach (ChallengeArena a in Object.FindObjectsByType<ChallengeArena>(FindObjectsSortMode.None))
+        {
+            UnityEditor.SerializedProperty ways = new UnityEditor.SerializedObject(a).FindProperty("waysOut");
+            for (int i = 0; ways != null && i < ways.arraySize; i++)
+                if (ways.GetArrayElementAtIndex(i).objectReferenceValue is GameObject go) arenaWays.Add(go.name);
+        }
+    }
 
     // watches Harvey step by step: the first bounce (his upward speed kicked to the bounce speed in one step, more than
     // a jump or gravity ever gives), whether he was still rising when it came, any extra bounce within 0.3 s of it, and

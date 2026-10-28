@@ -74,3 +74,8 @@ Through the Unity MCP tools (`Unity_RunCommand`, `Unity_GetConsoleLogs`, `Unity_
 - Pressing Play on a scene outside Build Settings gives it a temporary build index; that is why the `Greybox*`
   guard exists. A new prototype prefix needs the same guard.
 - Check free disk space (`df -h`) before long capture or build sessions; scene saves have failed on a full disk.
+- Editing tilemap cells from an editor script (`SetTile(null)`) does not rebuild a composite Ground collider before
+  the scene saves: toggle the TilemapCollider2D, call `ProcessTilemapChanges()` and `CompositeCollider2D.GenerateGeometry()`,
+  then save, and confirm with a raycast. Otherwise the old wall stays solid in Play (BUG-0007, 2026-10-28).
+- A brand-new `.cs` written while Unity is already compiling can be missed by the script list for good (it imports as
+  a MonoScript but never enters the compile). Write it again under a new file name, then refresh.

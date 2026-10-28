@@ -18,6 +18,11 @@ using UnityEngine.Tilemaps;
 ///     Crystals for chi). Its contents are set, not rolled, so it is never a trap. It happens once.
 ///   - Lose (Harvey's lives run out): the enemies vanish at once, the gate opens, and the level's own death and respawn
 ///     take one life and bring him back just outside the gate; the challenge is ready to try again.
+/// WAVEMUSHROOM (2026-10-28): a room can also be locked by taking its way out away (waysOut): Z4A7's side chamber
+/// (Tools/HNL/Set Up Z4A7 Challenge Room) has no gate cells; its only exit is a shaft too high to jump, reached from
+/// the Jump Mushroom under it. That mushroom is switched off whole (art, trigger, bounce) the moment the challenge
+/// begins and switched on again where the gate would open: when every round is won, or when a fall resets the
+/// challenge. Nothing else switches it, so it stays off between rounds and is never destroyed or duplicated.
 /// </summary>
 public class ChallengeArena : MonoBehaviour
 {
@@ -39,6 +44,8 @@ public class ChallengeArena : MonoBehaviour
     [SerializeField] private Vector3Int gateTileFrom;
     [Tooltip("Where Harvey comes back if he falls during the challenge: just outside the gate.")]
     [SerializeField] private Transform respawnOutside;
+    [Tooltip("WAVEMUSHROOM: objects that let Harvey leave the room (a bounce pad under its only exit). Off while the challenge runs; on again when it is won or reset.")]
+    [SerializeField] private GameObject[] waysOut;
 
     [Header("Enemies")]
     [SerializeField] private GameObject[] enemyPrefabs;
@@ -75,6 +82,9 @@ public class ChallengeArena : MonoBehaviour
     private static readonly Color[] Wisp = { new Color(0.72f, 0.96f, 1f), new Color(0.6f, 0.9f, 0.5f), new Color(1f, 1f, 0.92f) };
 
     public int RoundCount => rounds != null ? rounds.Length : 0;
+    public bool IsRunning => state == State.Running; // WAVEMUSHROOM: read by QAArenaDriver
+    public bool IsCleared => state == State.Won;
+    public int CurrentRound => round;
 
     private void Start()
     {
@@ -106,7 +116,9 @@ public class ChallengeArena : MonoBehaviour
     {
         if (rounds == null || rounds.Length == 0 || enemyPrefabs == null || enemyPrefabs.Length == 0) return;
         state = State.Running;
+        round = 0;
         Lock(true);
+        CloseWaysOut(true); // WAVEMUSHROOM:
         LevelManager lm = LevelManager.Instance;
         if (lm != null && respawnOutside != null)
         {
@@ -236,6 +248,7 @@ public class ChallengeArena : MonoBehaviour
         running = null;
         HarveyMenus.Banner(null);
         Lock(false);
+        CloseWaysOut(false); // WAVEMUSHROOM: only after the last round
         RestoreRespawn();
         AudioManager audio = AudioManager.Instance;
         if (audio != null) audio.PlaySfxOneShot(audio.BossDefeatSound != null ? audio.BossDefeatSound : audio.powerUpSound);
@@ -266,6 +279,7 @@ public class ChallengeArena : MonoBehaviour
         ClearSpawned();
         HarveyMenus.Banner(null);
         Lock(false);
+        CloseWaysOut(false); // WAVEMUSHROOM: reset with the challenge (he is already gone: the respawn has hidden him)
         // the respawn point stays outside the gate until the level's respawn has used it (OnRespawned)
         HarveyMenus.Toast(null, "CHALLENGE FAILED", "STEP BACK IN TO TRY AGAIN", 3f);
     }
@@ -299,6 +313,21 @@ public class ChallengeArena : MonoBehaviour
         }
         AudioManager audio = AudioManager.Instance;
         if (audio != null) audio.PlaySfxOneShot(audio.BossSlamSound);
+    }
+
+    // WAVEMUSHROOM: the ways out go and come back whole, in a puff of the spawn wisps
+    private void CloseWaysOut(bool closed)
+    {
+        if (waysOut == null) return;
+        foreach (GameObject w in waysOut)
+        {
+            if (w == null || w.activeSelf != closed) continue; // already as wanted
+            if (!closed) w.SetActive(true);
+            Renderer art = w.GetComponentInChildren<Renderer>();
+            PixelFX.Burst(art != null ? art.bounds.center : w.transform.position, 10, 1f, 2.5f, Wisp, 0.4f, 0.7f, 1,
+                PixelShape.Square, PixelMotion.Drift, true, PixelLayer.Front, 90f, 360f, 0.4f);
+            if (closed) w.SetActive(false);
+        }
     }
 
     private void OnDrawGizmosSelected()

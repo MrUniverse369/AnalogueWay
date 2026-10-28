@@ -45,3 +45,20 @@ All 5 rounds ran: 20 enemies. Every one landed with its feet at y 52.00 with no 
 x -57.7..-46.3 over 1.5 s of patrol and charge. The chest landed with its sprite at y 52.000..52.750 (feet on the
 floor), and the gate opened. Harvey was invincible and the enemies were removed by script, so the fight's
 difficulty was not play-tested.
+
+## Retested (2026-10-28, scripted `arena:all`, after the shared WAVEMUSHROOM change)
+
+37/37 checks passed: entry, a reset on a fall (respawn at (-40.50, 57.54), level respawn restored), all five rounds
+(20 foxes), gate open after the win, the chest at x -51 with its base at y 52. Open: BUG-0005. A fox that charges
+east reaches the gate column (x -44.8..-45.0, y 52.55) and the arena drops it as having left the room, so it
+vanishes without a defeat. That happened to 1 of 20 foxes in one run and 3 of 20 in the next. `waysOut` is empty
+here, so Z4A6 behaves as before.
+
+## Removed (2026-10-28, user brief)
+
+The Challenge Arena left Z4A6: its root object (trigger, spawns, reward spot, gate cells) was deleted by
+Tools/HNL/Chest Shuffle/Set Up (ChestShuffleSetup.PlaceInZ4A6), and TC-FLOW-ARENA retired. The cave itself (rock,
+blocks, the floating mushroom) is unchanged and now holds the Mushroom Spirit's chest shuffle game: the Spirit in the
+sky window between the blocks (x -52..-49), chests on the floor at x -54.5, -50.5, -46.5. BUG-0005 can no longer
+happen here. GrassChallengeSetup's Z4A6 menu item would rebuild the arena; don't run it unless the arena is wanted back.
+Tested in session S-20261028-212830-8qla (win, trap first, trap second, respawn mid-shuffle).
