@@ -54,6 +54,7 @@ public static class QAArenaDriver
         {
             case "Z4A7GrassGreen": start = new Vector2(73.5f, 14f); aimX = 77f; return true;   // the ledge left of the hole
             case "Z4A6GrassGreen": start = new Vector2(-40.5f, 57f); aimX = -51f; return true; // the upper tunnel, past the gate
+            case "Z4A8GrassGreen": start = new Vector2(0.9f, 10f); aimX = 5f; return true;     // ENCOUNTERS: the bowl's west wall top (the bounce up is QABounceDriver's route)
         }
         start = Vector2.zero; aimX = 0f;
         return false;
@@ -65,6 +66,7 @@ public static class QAArenaDriver
         switch (scene)
         {
             case "Z4A7GrassGreen": startX = 79.6f; floorY = 0f; capX = 77.17f; clearY = 14.3f; landY = 14f; minX = 78f; maxX = 90f; return true; // as QABounceDriver's JumpMushroom (3) route
+            case "Z4A8GrassGreen": startX = 14.6f; floorY = 7f; capX = 13.5f; clearY = 10.8f; landY = -2f; minX = 17f; maxX = 40f; return true; // ENCOUNTERS: over the bowl's east wall onto the start floor
         }
         startX = floorY = capX = clearY = landY = minX = maxX = 0f;
         return false;

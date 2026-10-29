@@ -1,0 +1,385 @@
+class	path	reason	bytes
+Uncertain	Assets/Sound/Coin.wav	name in code/tools	160864
+Uncertain	Assets/Sprites/Effects/Water/Bubble_0.png	name in code/tools	98
+Likely unused	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/SandyPallete/EgyptTileTwo_2.asset	orphan: nothing in the project references it, not in code/tools/settings; moved	780
+Likely unused	Assets/Sprites/MainChar/Hfinal/SuperJump/HarveyFDRsuperjump.png	orphan: nothing in the project references it, not in code/tools/settings; moved	1164
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-27.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	113028
+Uncertain	Assets/Sound/CH_Jump.wav	folder in code/tools	128968
+Uncertain	Assets/Sprites/enviroment art/Japan/BackgroundCover/BackgroundCoverCleanUp/backgroundcoversunnyjapan.prefab	a Tile Palette (an editor tool nothing references by design); left in place	9999
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_4.asset	no reference; old/test/copy name	779
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-29.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	163542
+Uncertain	Assets/Sprites/Enemies/Japan/SamuraiBoss/SamuraiBossRightSize.png	name in code/tools	25971
+Uncertain	Assets/Sprites/enviroment art/Japan/BackgroundCover/Backgroundcoverspirit/BackgroundSpiritWorldCoverTwo.prefab	a Tile Palette (an editor tool nothing references by design); left in place	7015
+Uncertain	Assets/Sound/RandomBox_Open.wav	folder in code/tools	353448
+Uncertain	Assets/Sprites/Enemies/Grass/ForestSpiritFox/SpritFoxBossAttackFrame.png	name in code/tools	13733
+Potentially obsolete	Assets/Sprites/Tileset/Japan/JapanWinter_0.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/JapanWinter.prefab	778
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-11.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	706314
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-23.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	415494
+Potentially obsolete	Assets/Sprites/Tileset/TempleVines/PallettePieces/Templeruinsgrassfinalforunity 1_2.asset	no reference; old/test/copy name	799
+Likely unused	Assets/Sprites/enviroment art/Japan/ToriGateAnimations/idleAnimforeground.anim	orphan: nothing in the project references it, not in code/tools/settings; moved	1306
+Uncertain	Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss.controller	name in code/tools	9964
+Uncertain	Assets/Sprites/enviroment art/Egypt/PalmTree/Wind.anim	name in code/tools	2216
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_0.asset	no reference; old/test/copy name	780
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TestBack/backtilesedit_8.asset	no reference; old/test/copy name	781
+Potentially obsolete	Assets/Sprites/Enemies/Tomb/ShadowFox/Unused/TempleGhoulTwoFinal.png	no reference; old/test/copy name	762
+Potentially obsolete	Assets/Sprites/Tileset/Japan/JapanWinter_6.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/JapanWinter.prefab	778
+Potentially obsolete	Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/tilset/JapanTileSetworldTwo_8.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/JapanWorldTwo.prefab	788
+Uncertain	Assets/Sprites/enviroment art/GreenZone/BackgroundTileSet/GreenZoneBackGroundTilePalette/GrassCover.prefab	name in code/tools	9349
+Uncertain	Assets/Sound/RandomBoxTap.wav	folder in code/tools	106216
+Uncertain	Assets/Sound/ElevenLabs/CoinSoundRef.opus	folder in code/tools	45599
+Uncertain	Assets/DefaultVolumeProfile.asset	folder in code/tools	20478
+Potentially obsolete	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/EgyptTilesOne_7.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptZone/EgyptZonePalette/EgyptZone.prefab	780
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_17.asset	no reference; old/test/copy name	778
+Potentially obsolete	Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTileSets/EgyptTilesThree_4.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTiles/SuperSandy.prefab	783
+Uncertain	Assets/Sprites/MainChar/MainCharTwo/Mounts/HarveyDragonMount.png	path in code/tools	2301
+Uncertain	Assets/Sprites/Enemies/Grass/Forest Spirit Fox Run Cycle (1).png	name in code/tools	8388
+Uncertain	Assets/Sound/ElevenLabs/World/HNL_Coin.wav	folder in code/tools	88244
+Potentially obsolete	Assets/Sprites/Enemies/Grass/CloudTroll/Unused/OldBounceEnemy.controller	no reference; old/test/copy name	2044
+Potentially obsolete	Assets/Sprites/Enemies/Grass/CloudTroll/DeathAnimBounce.anim	referenced only by an asset outside the build: Assets/Sprites/Enemies/Grass/CloudTroll/CloudTroll.controller	2065
+Potentially obsolete	Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTileSets/EgyptTilesThree_6.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTiles/SuperSandy.prefab	782
+Uncertain	Assets/Music/Packs/ArcadeGameBGM#3/Temple.wav	name in code/tools	25786516
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-19.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	92562
+Uncertain	Assets/Sprites/Enemies/Grass/ForestSpiritFox/Spirit Fox Boss Spirit Beam Animation.png	path in code/tools	1290383
+Uncertain	Assets/Sprites/MainChar/MainCharTwo/Animations/CharTwoAnimationsVerTwo/newCharTest.png	folder in code/tools	1507
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/HorizontalTiles/HorizontalTilesprefab/Horizontaltiles.prefab	no reference; old/test/copy name	10767
+Uncertain	Assets/Sprites/Enemies/Grass/CloudTroll/CloudTroll.controller	name in code/tools	3611
+Potentially obsolete	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/EgyptTilesOne_3.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptZone/EgyptZonePalette/EgyptZone.prefab	779
+Uncertain	Assets/Sprites/Effects/Water/Bubble_2.png	folder in code/tools	117
+Likely unused	Assets/Sprites/MainChar/MainCharTwo/Animations/CharTwoAnimationsVerOne/HarveyVerTwoRun.png	orphan: nothing in the project references it, not in code/tools/settings; moved	1355
+Uncertain	Assets/Sprites/Enemies/Japan/YokaiWarrior/Japansunnyenemy.png	folder in code/tools	1159
+Likely unused	Assets/Sound/Packs/Achievement & Bonus  Sound Pack/Result_#04.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	619028
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_2.asset	no reference; old/test/copy name	779
+Uncertain	Assets/Sound/Trap_03.wav	folder in code/tools	110728
+Likely unused	Assets/Sound/Packs/Achievement & Bonus  Sound Pack/Result_#01.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	530826
+Potentially obsolete	Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/tilset/JapanTileSetworldTwo_6.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/JapanWorldTwo.prefab	786
+Uncertain	Assets/Sprites/Enemies/Grass/FlyingGrassBoss.png	path in code/tools	2184714
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/FourEdges/FourEdges/TileFourEdges_14.asset	no reference; old/test/copy name	782
+Uncertain	Assets/Sprites/Void Shrine Boss Sprite Sheet.png	name in code/tools	1738353
+Uncertain	Assets/Sprites/Tileset/ZoneTwo/GreenZoneTest_1.asset	folder in code/tools	780
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-01.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	12318
+Likely unused	Assets/Sound/Packs/CasualGameSounds/Coin Sound.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	534192
+Uncertain	Assets/Prefabs/Enemy/Japan/JapanBoss.prefab	name in code/tools	8842
+Likely unused	Assets/Sound/Packs/Achievement & Bonus  Sound Pack/Result_#02.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	530828
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-16.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	52194
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-13.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	255990
+Uncertain	Assets/Sprites/Enemies/Japan/YokaiWarrior/YokaiTwo.controller	path in code/tools	3603
+Potentially obsolete	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/EgyptTilesOne_4.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptZone/EgyptZonePalette/EgyptZone.prefab	779
+Potentially obsolete	Assets/Sprites/Tileset/Japan/JapanWinter_8.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/JapanWinter.prefab	778
+Uncertain	Assets/Sprites/Tileset/GridColliderTiles/JapanTileSetworldThree_4_Grid.asset	folder in code/tools	794
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TestBack/backtilesedit_5.asset	no reference; old/test/copy name	780
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-06.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	416532
+Uncertain	Assets/Sprites/Tileset/GridColliderTiles/JapanTileSetworldTwo_1_Grid.asset	folder in code/tools	791
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_1.asset	no reference; old/test/copy name	780
+Uncertain	Assets/Sound/Btn_RandomBox.wav	folder in code/tools	95608
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/HorizontalTiles/HorizontalTilespieces/HorizontalTiles_6.asset	no reference; old/test/copy name	781
+Likely unused	Assets/Sprites/MainChar/MainCharTwo/Animations/Tanaka/TanakaIdle.png	orphan: nothing in the project references it, not in code/tools/settings; moved	1485
+Potentially obsolete	Assets/Sprites/Tileset/Japan/JapanWinter_2.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/JapanWinter.prefab	778
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_19.asset	no reference; old/test/copy name	780
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_33.asset	no reference; old/test/copy name	780
+Potentially obsolete	Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTileSets/EgyptTilesThree_3.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTiles/SuperSandy.prefab	783
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-30.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	136782
+Potentially obsolete	Assets/Sprites/enviroment art/TempleRuins/BackGroundCloundsTemple.png	no reference; old/test/copy name	1912
+Potentially obsolete	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/EgyptTilesOne_5.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptZone/EgyptZonePalette/EgyptZone.prefab	779
+Uncertain	Assets/Sprites/Enemies/Japan/SamuraiMonkey/SamuraiSwoardattack.jpg	name in code/tools	222864
+Likely unused	Assets/Sprites/TutorialGrahpics/Materials/TutorialSlideJump.mat	orphan: nothing in the project references it, not in code/tools/settings; moved	1093
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_39.asset	no reference; old/test/copy name	780
+Likely unused	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/SandyPallete/EgyptTileTwo_5.asset	orphan: nothing in the project references it, not in code/tools/settings; moved	779
+Uncertain	Assets/Sprites/UI/MainMenu/DustMote.png	name in code/tools	74
+Likely unused	Assets/Sprites/enviroment art/GreenZone/Materials/TreeOneFinalforgame.mat	orphan: nothing in the project references it, not in code/tools/settings; moved	1095
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_31.asset	no reference; old/test/copy name	780
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_28.asset	no reference; old/test/copy name	780
+Uncertain	Assets/Sound/ElevenLabs/Player/HNL_Hurt.wav	unreferenced but changed 2026-10-17 (recent work, may be pending use); left in place	61782
+Likely unused	Assets/Sprites/enviroment art/Japan/ToriGateAnimations/SpiritWorldGateAnim/FrontTorigate/ToriGateLivingWorldOff.anim	orphan: nothing in the project references it, not in code/tools/settings; moved	1719
+Likely unused	Assets/Sprites/MainChar/Animations/HcharRunAnimSheet.png	orphan: nothing in the project references it, not in code/tools/settings; moved	623
+Potentially obsolete	Assets/Sprites/Tileset/Japan/JapanWinter_5.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/JapanWinter.prefab	779
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_27.asset	no reference; old/test/copy name	780
+Uncertain	Assets/Sprites/Enemies/Japan/SamuraiBoss/SamuraiBossRightSizeSlashAnim.png	name in code/tools	19674
+Uncertain	Assets/Sprites/Enemies/Japan/YokaiWarrior/WalkAnim.anim	name in code/tools	1692
+Uncertain	Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTiles/SuperSandy.prefab	a Tile Palette (an editor tool nothing references by design); left in place	9345
+Likely unused	Assets/Sound/Packs/Achievement & Bonus  Sound Pack/QuizGame_Correct_#01.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	354426
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_18.asset	no reference; old/test/copy name	780
+Uncertain	Assets/Sprites/Enemies/Grass/Grassenemynonboss/GrassenemynonbossWalk.anim	name in code/tools	3176
+Likely unused	Assets/Sprites/enviroment art/Egypt/Materials/EGYPTSKY.mat	orphan: nothing in the project references it, not in code/tools/settings; moved	1084
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_9.asset	no reference; old/test/copy name	780
+Uncertain	Assets/Sprites/Tileset/EgyptZoneTwo/SuperSandyTwo/SuperSandyTwo.prefab	a Tile Palette (an editor tool nothing references by design); left in place	9346
+Uncertain	Assets/Sprites/Enemies/Bosses/Boss_KingMossback.png	name in code/tools	567
+Likely unused	Assets/Sprites/Instructions/Walk On AirZero.png	orphan: nothing in the project references it, not in code/tools/settings; moved	5668
+Potentially obsolete	Assets/Sprites/enviroment art/Japan/BackgroundCover/BackgroundCoverCleanUp/V2/SunnyBackGroundCoverV2_0.asset	referenced only by an asset outside the build: Assets/Sprites/enviroment art/Japan/BackgroundCover/BackgroundCoverCleanUp/V2/BackGroundCoverSunnyJapanV2.prefab	789
+Uncertain	Assets/Sound/IntroLogo_in.wav	folder in code/tools	203288
+Likely unused	Assets/Sprites/MainChar/MainCharTwo/Animations/CharTwoAnimationsVerOne/HarveyVerTwoIdle.png	orphan: nothing in the project references it, not in code/tools/settings; moved	917
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/HorizontalTiles/HorizontalTilespieces/HorizontalTiles_5.asset	no reference; old/test/copy name	783
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-12.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	507000
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_16.asset	no reference; old/test/copy name	781
+Potentially obsolete	Assets/Sprites/Tileset/TempleVines/TempleVines.prefab	no reference; old/test/copy name	9343
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-38.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	93090
+Uncertain	Assets/Prefabs/Enemy/Grass/BounceEnemyHolder.prefab	name in code/tools	9635
+Uncertain	Assets/Sound/Player/LivesDepleted.wav	name in code/tools	458684
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/FourEdges/FourEdges/TileFourEdges_6.asset	no reference; old/test/copy name	780
+Potentially obsolete	Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTileSets/EgyptTilesThree_7.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTiles/SuperSandy.prefab	782
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_25.asset	no reference; old/test/copy name	780
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_12.asset	no reference; old/test/copy name	781
+Uncertain	Assets/Sprites/UI/Menus/Talisman_StoneSkin.png	folder in code/tools	179
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_8.asset	no reference; old/test/copy name	779
+Potentially obsolete	Assets/Sprites/Tileset/Japan/JapanWinter_1.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/JapanWinter.prefab	778
+Uncertain	Assets/Sprites/Enemies/Egypt/LandsharkBoss/LandsharkBoss_Body_OldArt.png	folder in code/tools	22679
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-44.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	38418
+Uncertain	Assets/Sprites/Enemies/Grass/CloudTroll/walk.anim	name in code/tools	2056
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-47.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	68406
+Uncertain	Assets/Sprites/enviroment art/GreenZone/BackGroundCloudsTwoParrallax.png	name in code/tools	1106
+Likely unused	Assets/Sprites/enviroment art/Japan/JapanTileSetworldTwo.png	orphan: nothing in the project references it, not in code/tools/settings; moved	915
+Potentially obsolete	Assets/Sprites/Tileset/Japan/JapanWinter.png	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/JapanWinter_0.asset	1384
+Likely unused	Assets/Music/Packs/CasualGameBGM05/BGM_04.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	4837676
+Uncertain	Assets/Sound/Transition_in.wav	folder in code/tools	106216
+Uncertain	Assets/Sound/Player/Dash.wav	name in code/tools	74132
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-33.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	333334
+Potentially obsolete	Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/tilset/JapanTileSetworldTwo_0.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/JapanWorldTwo.prefab	787
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/FourEdges/FourEdges/TileFourEdges_4.asset	no reference; old/test/copy name	780
+Uncertain	Assets/Sprites/MainChar/MainCharTwo/Animations/CharTwoAnimationsVerTwo/19_FullChar_Finished.png	folder in code/tools	977
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-24.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	308580
+Uncertain	Assets/Sprites/Tileset/GridColliderTiles/JapanTileSetworldTwo_7_Grid.asset	folder in code/tools	792
+Uncertain	Assets/Sprites/Enemies/Grass/CloudTroll/CloudTroll.png	name in code/tools	1375
+Uncertain	Assets/Sprites/UI/MainMenu/Icon_ZoneSelect.png	name in code/tools	145
+Potentially obsolete	Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTileSets/EgyptTilesThree_8.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTiles/SuperSandy.prefab	782
+Potentially obsolete	Assets/Sprites/Tileset/TempleVines/PallettePieces/Templeruinsgrassfinalforunity 1_8.asset	no reference; old/test/copy name	798
+Uncertain	Assets/Sprites/Enemies/Bosses/Hazard_Seed.png	name in code/tools	123
+Potentially obsolete	Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/tilset/JapanTileSetworldTwo_2.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/JapanWorldTwo.prefab	788
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-04.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	270606
+Potentially obsolete	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/EgyptTilesOne_8.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptZone/EgyptZonePalette/EgyptZone.prefab	780
+Potentially obsolete	Assets/Sprites/TutorialGrahpics/TutorialSlideSuperJump.png	referenced only by an asset outside the build: Assets/Sprites/TutorialGrahpics/Materials/TutorialSlideSuperJump.mat	18978
+Potentially obsolete	Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTileSets/EgyptTilesThree_0.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTiles/SuperSandy.prefab	783
+Potentially obsolete	Assets/Sprites/Enemies/Bosses/KingMoss/Anim/KingMoss_Idle.anim	referenced only by an asset outside the build: Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss.controller	2396
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_21.asset	no reference; old/test/copy name	781
+Likely unused	Assets/Sprites/MainChar/MainCharTwo/Animations/Tanaka/CharTwoRunAnim.png	orphan: nothing in the project references it, not in code/tools/settings; moved	3630
+Uncertain	Assets/Sound/IntroLogo.wav	folder in code/tools	357952
+Uncertain	Assets/Sprites/Tileset/ZoneTwo/GreenZone.prefab	name in code/tools	6989
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_15.asset	no reference; old/test/copy name	780
+Uncertain	Assets/Sound/Packs/CasualGameSounds/Level complete.wav	name in code/tools	266382
+Potentially obsolete	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/EgyptTilesOne_6.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptZone/EgyptZonePalette/EgyptZone.prefab	780
+Likely unused	Assets/Sprites/MainChar/MainCharTwo/Animations/CharTwoAnimationsVerOne/HarveyVerTwoJump.png	orphan: nothing in the project references it, not in code/tools/settings; moved	908
+Uncertain	Assets/Sprites/UI/Menus/Talisman_FeatherFall.png	name in code/tools	177
+Uncertain	Assets/Sprites/Effects/Water/Bubble_3.png	folder in code/tools	108
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_26.asset	no reference; old/test/copy name	780
+Potentially obsolete	Assets/Sprites/enviroment art/placeholder/Box.asset	no reference; old/test/copy name	766
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_35.asset	no reference; old/test/copy name	781
+Uncertain	Assets/Sprites/MainChar/MainCharTwo/Mounts/DragonRide.png	name in code/tools	5905
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-14.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	68526
+Potentially obsolete	Assets/Sprites/Tileset/TempleVines/TempleVines/Templeruinsgrassfinalforunity 1.png	no reference; old/test/copy name	2854
+Uncertain	Assets/Sprites/ZoneMap/BannerFrame.png	folder in code/tools	129
+Likely unused	Assets/Sound/Packs/Achievement & Bonus  Sound Pack/Game_Level_up_#04.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	619028
+Uncertain	Assets/Sprites/Box.png	folder in code/tools	99
+Uncertain	Assets/Sound/Player/PlayerHurt.wav	name in code/tools	97064
+Uncertain	Assets/Sprites/Enemies/Egypt/BabySandShark/SandSharkFinalBoss.png	unreferenced but changed 2026-10-27 (recent work, may be pending use); left in place	2075362
+Uncertain	Assets/Sound/Player/Footstep_4.wav	unreferenced but changed 2026-10-16 (recent work, may be pending use); left in place	14156
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/HorizontalTiles/HorizontalTilespieces/HorizontalTiles_4.asset	no reference; old/test/copy name	783
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_36.asset	no reference; old/test/copy name	781
+Uncertain	Assets/Sprites/Tileset/ZoneTwo/GreenZoneTest.png	name in code/tools	252
+Uncertain	Assets/Sound/IntroLogo_out.wav	folder in code/tools	97120
+Likely unused	Assets/Music/Packs/CasualGameBGM05/BGM_03.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	2700936
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/FourEdges/FourEdges/TileFourEdges_12.asset	no reference; old/test/copy name	781
+Uncertain	Assets/URP/UniversalRenderPipelineGlobalSettings.asset	GUID in ProjectSettings	26038
+Likely unused	Assets/Music/Packs/CasualGameBGM05/BGM_01.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	12315972
+Uncertain	Assets/Sprites/MainChar/MainChar.png	name in code/tools	395
+Potentially obsolete	Assets/Sprites/Enemies/Bosses/KingMoss/Anim/KingMoss_BeamCharge.anim	referenced only by an asset outside the build: Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss.controller	2403
+Likely unused	Assets/Sound/Packs/Achievement & Bonus  Sound Pack/Result_#03.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	619028
+Uncertain	Assets/Sprites/Enemies/Grass/Grassenemynonboss/GrassenemynonbossWalk.png	path in code/tools	1984
+Potentially obsolete	Assets/Sprites/Tileset/TempleVines/PallettePieces/Templeruinsgrassfinalforunity 1_7.asset	no reference; old/test/copy name	796
+Uncertain	Assets/Prefabs/Enemy/Grass/CloudTrollHolder.prefab	name in code/tools	9648
+Potentially obsolete	Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/tilset/JapanTileSetworldTwo_1.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/JapanWorldTwo.prefab	786
+Uncertain	Assets/Sprites/MainChar/MainCharTwo/Animations/CharTwoAnimationsVerTwo/Damage.png	name in code/tools	1683
+Uncertain	Assets/Sprites/Tileset/ProductionLevel/BackGroundTiles/TempleBackGround/TempleBackgroundPrefab/Background.prefab	name in code/tools	5586
+Uncertain	Assets/Sprites/Tileset/EgyptZone/EgyptZonePalette/EgyptZone.prefab	a Tile Palette (an editor tool nothing references by design); left in place	9338
+Likely unused	Assets/Sound/Packs/Achievement & Bonus  Sound Pack/QuizGame_Incorrect_#01.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	354426
+Likely unused	Assets/Sprites/enviroment art/Japan/ToriGateAnimations/SpiritWorldGateAnim/FrontTorigate/TorigateLivingWorldFront.anim	orphan: nothing in the project references it, not in code/tools/settings; moved	1717
+Likely unused	Assets/Sprites/MainChar/Animations/HcharJumpAnimSheet.png	orphan: nothing in the project references it, not in code/tools/settings; moved	747
+Uncertain	Assets/Sound/RandomBox_Drop.wav	folder in code/tools	175988
+Uncertain	Assets/Sprites/Enemies/Grass/Grassenemynonboss.png	name in code/tools	979914
+Uncertain	Assets/Sound/Result.wav	name in code/tools	68836
+Uncertain	Assets/Sound/Player/Footstep_2.wav	unreferenced but changed 2026-10-16 (recent work, may be pending use); left in place	14156
+Likely unused	Assets/Sprites/enviroment art/Japan/Village/Charecters/Japanchargaurd.png	orphan: nothing in the project references it, not in code/tools/settings; moved	905
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-42.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	106314
+Potentially obsolete	Assets/Sprites/TutorialGrahpics/TutorialSlideJump.png	referenced only by an asset outside the build: Assets/Sprites/TutorialGrahpics/Materials/TutorialSlideJump.mat	14162
+Likely unused	Assets/Sprites/MainChar/MainCharTwo/Animations/Tanaka/TanakaFall.png	orphan: nothing in the project references it, not in code/tools/settings; moved	844
+Uncertain	Assets/Sprites/enviroment art/GreenZone/Bush .png	name in code/tools	215
+Likely unused	Assets/Sprites/MainChar/MainCharTwo/Animations/Tanaka/TanakaRise.png	orphan: nothing in the project references it, not in code/tools/settings; moved	642
+Uncertain	Assets/Sprites/Effects/Water/Bubble_1.png	folder in code/tools	108
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/FourEdges/FourEdges/FourCournersBottom/FrondBackGround/ForeGroundBackGround_5.asset	no reference; old/test/copy name	786
+Uncertain	Assets/Sprites/Enemies/Japan/SamuraiMonkey/SwordDraw.anim	folder in code/tools	3164
+Uncertain	Assets/Sprites/MainChar/MainCharTwo/Animations/CharTwoAnimationsVerTwo/RunPowerUpver2.png	folder in code/tools	4386
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-34.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	37180
+Potentially obsolete	Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTileSets/EgyptTilesThree_1.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTiles/SuperSandy.prefab	781
+Potentially obsolete	Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTileSets/EgyptTilesThree_2.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTiles/SuperSandy.prefab	782
+Uncertain	Assets/Sprites/Tileset/GridColliderTiles/JapanTileSetworldTwo_5_Grid.asset	folder in code/tools	793
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/FourCornerBottom/FourCornersBottom.prefab	no reference; old/test/copy name	8881
+Likely unused	Assets/Sound/Packs/Achievement & Bonus  Sound Pack/Game_Level_up_#02.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	619028
+Potentially obsolete	Assets/Sprites/Tileset/TempleVines/PallettePieces/Templeruinsgrassfinalforunity 1_0.asset	no reference; old/test/copy name	799
+Likely unused	Assets/Sprites/enviroment art/Japan/JapanCloudsOne.png	orphan: nothing in the project references it, not in code/tools/settings; moved	847
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-22.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	62562
+Uncertain	Assets/Sprites/Enemies/Japan/SamuraiMonkey/JSEAnim_Sword.png	path in code/tools	1927
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_37.asset	no reference; old/test/copy name	779
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-40.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	17676
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-03.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	61980
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-32.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	54510
+Likely unused	Assets/Sprites/MainChar/Hfinal/SuperJump/HarveyFDRsuperjump 1.png	orphan: nothing in the project references it, not in code/tools/settings; moved	1088
+Potentially obsolete	Assets/Sprites/Enemies/Tomb/MrOctopus/Unused/OldOctopus.controller	no reference; old/test/copy name	2038
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_11.asset	no reference; old/test/copy name	780
+Potentially obsolete	Assets/Sprites/Tileset/Japan/JapanWinter_4.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/JapanWinter.prefab	779
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_20.asset	no reference; old/test/copy name	780
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-50.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	289290
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-28.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	190824
+Uncertain	Assets/Sprites/Tileset/GridColliderTiles/JapanTileSetworldTwo_3_Grid.asset	folder in code/tools	793
+Uncertain	Assets/Sprites/Enemies/Egypt/LandsharkBoss/LandsharkBoss_Body_12Colour.png	folder in code/tools	76259
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-35.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	58938
+Uncertain	Assets/Sound/World/ChestOpen.wav	name in code/tools	441044
+Uncertain	Assets/Sound/Trap_04_02.wav	folder in code/tools	90180
+Potentially obsolete	Assets/Sprites/Tileset/TempleVines/PallettePieces/Templeruinsgrassfinalforunity 1_1.asset	no reference; old/test/copy name	799
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-37.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	84216
+Likely unused	Assets/Sprites/enviroment art/Japan/ToriGateAnimations/SpiritWorldGateAnim/FrontTorigate/SpiritWorldEnterAnim.anim	orphan: nothing in the project references it, not in code/tools/settings; moved	2766
+Likely unused	Assets/Sprites/Instructions/Materials/Power Up Instructions.mat	orphan: nothing in the project references it, not in code/tools/settings; moved	1097
+Potentially obsolete	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/EgyptTilesOne_1.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptZone/EgyptZonePalette/EgyptZone.prefab	781
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-05.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	535068
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-17.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	129978
+Uncertain	Assets/Sprites/Tileset/ZoneTwo/Zone2Edit/ZoneTwoPlaceHolder.prefab	folder in code/tools	9349
+Uncertain	Assets/Sound/Trap_02.wav	folder in code/tools	182368
+Likely unused	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/SandyPallete/EgyptTileTwo_1.asset	orphan: nothing in the project references it, not in code/tools/settings; moved	777
+Potentially obsolete	Assets/Sprites/enviroment art/Japan/BackgroundCover/BackgroundCoverCleanUp/V2/SunnyBackGroundCoverV2_2.asset	referenced only by an asset outside the build: Assets/Sprites/enviroment art/Japan/BackgroundCover/BackgroundCoverCleanUp/V2/BackGroundCoverSunnyJapanV2.prefab	790
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_6.asset	no reference; old/test/copy name	778
+Uncertain	Assets/Prefabs/Materials/Spikes.mat	name in code/tools	1082
+Uncertain	Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/JapanWorldTwo.prefab	a Tile Palette (an editor tool nothing references by design); left in place	9346
+Uncertain	Assets/Sprites/Enemies/Tomb/ShadowFox/Shadow Fox Charge Animation.png	path in code/tools	775988
+Uncertain	Assets/Sound/Trap_04_01.wav	folder in code/tools	90180
+Likely unused	Assets/Sprites/Obstacles/FloatingTile/FloatingTrapJapanWorld2.png	orphan: nothing in the project references it, not in code/tools/settings; moved	413
+Potentially obsolete	Assets/Sprites/enviroment art/Japan/BackgroundCover/BackgroundCoverCleanUp/V2/SunnyBackGroundCoverV2_3.asset	referenced only by an asset outside the build: Assets/Sprites/enviroment art/Japan/BackgroundCover/BackgroundCoverCleanUp/V2/BackGroundCoverSunnyJapanV2.prefab	788
+Uncertain	Assets/Sprites/Enemies/Egypt/BabyShark/GreenBabySharkMiniBoss.png	path in code/tools	1080999
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/FourEdges/FourEdges.prefab	no reference; old/test/copy name	12644
+Uncertain	Assets/Sprites/enviroment art/Japan/BackgroundCover/BackgroundCoverCleanUp/V2/BackGroundCoverSunnyJapanV2.prefab	a Tile Palette (an editor tool nothing references by design); left in place	9364
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_7.asset	no reference; old/test/copy name	779
+Uncertain	Assets/Sound/Trap_01.wav	folder in code/tools	106216
+Likely unused	Assets/Sprites/MainChar/Hfinal/RunAnim/HarveyFDRunAnim.png	orphan: nothing in the project references it, not in code/tools/settings; moved	3394
+Likely unused	Assets/Sound/Packs/Achievement & Bonus  Sound Pack/Item_Collect_#02.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	442628
+Potentially obsolete	Assets/Sprites/Enemies/Bosses/KingMoss/Anim/KingMoss_Leaf.anim	referenced only by an asset outside the build: Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss.controller	3421
+Uncertain	Assets/Sprites/Tileset/ZoneTwo/GreenZoneTest_3.asset	folder in code/tools	781
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-10.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	376218
+Uncertain	Assets/Sprites/MainChar/MainCharTwo/Animations/CharTwoAnimationsVerTwo/SpeedBoostPowerUp.png	name in code/tools	3995
+Potentially obsolete	Assets/Sprites/Tileset/Japan/JapanWinter_3.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/JapanWinter.prefab	778
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/FourEdges/FourEdges/FourCournersBottom/FrondBackGround/ForeGroundBackGround_2.asset	no reference; old/test/copy name	787
+Uncertain	Assets/Sprites/PowerUps/ChiStone.png	name in code/tools	286
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/HorizontalTiles/HorizontalTilespieces/HorizontalTiles_7.asset	no reference; old/test/copy name	783
+Uncertain	Assets/Sprites/Enemies/Grass/ForestSpiritFox/SpritFoxBossBeamAttackFrame.png	name in code/tools	7098
+Potentially obsolete	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/EgyptTilesOne_2.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptZone/EgyptZonePalette/EgyptZone.prefab	780
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-39.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	109152
+Uncertain	Assets/Sprites/Tileset/Japan/JapanWinter.prefab	a Tile Palette (an editor tool nothing references by design); left in place	9347
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-43.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	534192
+Likely unused	Assets/Sprites/MainChar/Hfinal/RunAnim/HarveyFDRidleAnim.png	orphan: nothing in the project references it, not in code/tools/settings; moved	1012
+Uncertain	Assets/Music/harveycombomusic.wav	folder in code/tools	3856906
+Uncertain	Assets/Sound/Japan/DragonSummon.wav	name in code/tools	529244
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-26.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	139380
+Potentially obsolete	Assets/Sprites/Enemies/Bosses/KingMoss/Anim/KingMoss_Collapse.anim	referenced only by an asset outside the build: Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss.controller	3021
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-49.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	602100
+Uncertain	Assets/Sound/Enemy/EnemyDefeat_Dash.wav	name in code/tools	123520
+Uncertain	Assets/Sound/RandomBox_CH_Add.wav	folder in code/tools	401984
+Uncertain	Assets/Sprites/Tileset/GridColliderTiles/JapanTileSetworldTwo_8_Grid.asset	folder in code/tools	792
+Potentially obsolete	Assets/Sprites/Enemies/Bosses/KingMoss/Anim/KingMoss_Slash.anim	referenced only by an asset outside the build: Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss.controller	3621
+Likely unused	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/SandyPallete/EgyptTileTwo_3.asset	orphan: nothing in the project references it, not in code/tools/settings; moved	780
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-15.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	72294
+Likely unused	Assets/Sprites/MainChar/Hfinal/JumpAnim/HarveyFDRjumpAnimup.png	orphan: nothing in the project references it, not in code/tools/settings; moved	733
+Potentially obsolete	Assets/Sprites/Enemies/Bosses/KingMoss/Anim/KingMoss_Fly.anim	referenced only by an asset outside the build: Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss.controller	2779
+Uncertain	Assets/Sprites/Tileset/GridColliderTiles/JapanTileSetworldTwo_0_Grid.asset	folder in code/tools	792
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-07.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	82362
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_34.asset	no reference; old/test/copy name	779
+Potentially obsolete	Assets/Sprites/Enemies/Bosses/KingMoss/Anim/KingMoss_BoulderThrow.anim	referenced only by an asset outside the build: Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss.controller	2784
+Uncertain	Assets/Sound/Player/Footstep_1.wav	name in code/tools	14156
+Likely unused	Assets/Sprites/TutorialGrahpics/Materials/TutorialSlideSuperJump.mat	orphan: nothing in the project references it, not in code/tools/settings; moved	1098
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/HorizontalTiles/FrondBackGround.prefab	no reference; old/test/copy name	8882
+Uncertain	Assets/Sprites/enviroment art/placeholder/PlaceHolder.prefab	name in code/tools	5585
+Uncertain	Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss_Body.png	path in code/tools	34298
+Uncertain	Assets/Sprites/Tileset/GridColliderTiles/JapanTileSetworldTwo_6_Grid.asset	folder in code/tools	793
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_22.asset	no reference; old/test/copy name	781
+Likely unused	Assets/Sprites/MainChar/Hfinal/RunAnim/HarveyFDRspeedboost.png	orphan: nothing in the project references it, not in code/tools/settings; moved	1128
+Likely unused	Assets/Sprites/MainChar/Animations/HcharIdleAnimSheet.png	orphan: nothing in the project references it, not in code/tools/settings; moved	626
+Potentially obsolete	Assets/Sprites/Instructions/Power Up Instructions.png	referenced only by an asset outside the build: Assets/Sprites/Instructions/Materials/Power Up Instructions.mat	6853
+Likely unused	Assets/Sprites/enviroment art/GreenZone/TreeOne.png	orphan: nothing in the project references it, not in code/tools/settings; moved	692
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/FourCornerTop/FourCornersTop.prefab	no reference; old/test/copy name	8875
+Uncertain	Assets/Sprites/enviroment art/Japan/BackgroundCover/BackgroundCoverCleanUp/palette/paletteTwo/BackgrounCoverSunnyJapan2.prefab	a Tile Palette (an editor tool nothing references by design); left in place	7007
+Potentially obsolete	Assets/Sprites/Enemies/Grass/CloudTroll/Unused/DeathAnimBounceEnemy.anim	no reference; old/test/copy name	2070
+Uncertain	Assets/Sprites/enviroment art/Japan/BackgroundCover/Backgroundcoverspirit/BackgroundSpiritWorldCover.prefab	a Tile Palette (an editor tool nothing references by design); left in place	9366
+Likely unused	Assets/Sprites/enviroment art/Japan/Village/Charecters/Japancharfmale.png	orphan: nothing in the project references it, not in code/tools/settings; moved	730
+Uncertain	Assets/Sprites/Tileset/ZoneTwo/GreenZoneTest_0.asset	folder in code/tools	780
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-02.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	140882
+Likely unused	Assets/Sprites/enviroment art/Japan/ToriGateAnimations/IdleForeGround/IdleBackGround.anim	orphan: nothing in the project references it, not in code/tools/settings; moved	1709
+Uncertain	Assets/Sprites/Enemies/Tomb/Ghoul/TempleGhoulOneVer2.png	name in code/tools	541
+Uncertain	Assets/Sprites/Tileset/ZoneTwo/GreenZoneTest_2.asset	folder in code/tools	781
+Likely unused	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/SandyPallete/EgyptTileTwo_0.asset	orphan: nothing in the project references it, not in code/tools/settings; moved	779
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_29.asset	no reference; old/test/copy name	781
+Potentially obsolete	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/EgyptTilesOne_0.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptZone/EgyptZonePalette/EgyptZone.prefab	780
+Potentially obsolete	Assets/Sprites/enviroment art/Egypt/PalmTree/Palmtreeanim_0 (1).controller	no reference; old/test/copy name	2029
+Likely unused	Assets/Sprites/enviroment art/Japan/JapanTileSet.png	orphan: nothing in the project references it, not in code/tools/settings; moved	1008
+Likely unused	Assets/Sprites/Obstacles/FloatingTile/FloatingTrapSandy.png	orphan: nothing in the project references it, not in code/tools/settings; moved	402
+Potentially obsolete	Assets/Sprites/Enemies/Tomb/ShadowFox/Unused/foxDeath.anim	no reference; old/test/copy name	2046
+Likely unused	Assets/Sprites/enviroment art/Japan/ToriGateAnimations/SpiritWorldGateAnim/FrontTorigate/offFrontSpirit.anim	orphan: nothing in the project references it, not in code/tools/settings; moved	1707
+Likely unused	Assets/Sound/Packs/Achievement & Bonus  Sound Pack/Item_Collect_#03.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	530828
+Uncertain	Assets/Sound/GameOver.wav	name in code/tools	163852
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_30.asset	no reference; old/test/copy name	779
+Potentially obsolete	Assets/Sprites/Tileset/EgyptZone/EgyptTilesOne.png	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/EgyptTilesOne_7.asset	543
+Uncertain	Assets/Sprites/ZoneMap/Cursor.png	name in code/tools	128
+Potentially obsolete	Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/tilset/JapanTileSetworldTwo_7.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/JapanWorldTwo.prefab	787
+Uncertain	Assets/Sprites/UI/MainMenu/Icon_Continue.png	name in code/tools	128
+Uncertain	Assets/Sound/CH_Landing.wav	folder in code/tools	109252
+Uncertain	Assets/Sound/ElevenLabs/World/HNL_MapGate.wav	folder in code/tools	176444
+Potentially obsolete	Assets/Sprites/Enemies/Bosses/KingMoss/Anim/KingMoss_BeamFire.anim	referenced only by an asset outside the build: Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss.controller	2786
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_13.asset	no reference; old/test/copy name	780
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-08.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	228366
+Uncertain	Assets/Sprites/Enemies/Tomb/Ghoul/TempleBigGhoulOne.png	folder in code/tools	602
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/FourEdges/FourEdges/TileFourEdges_3.asset	no reference; old/test/copy name	779
+Potentially obsolete	Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/tilset/JapanTileSetworldTwo_3.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/JapanWorldTwo.prefab	786
+Uncertain	Assets/Prefabs/Enemy/Grass/Grassenemynonboss.prefab	path in code/tools	9625
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-20.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	30642
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-48.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	534192
+Uncertain	Assets/Sprites/MainChar/MainCharArch.png	folder in code/tools	375
+Uncertain	Assets/Sprites/Tileset/GridColliderTiles/JapanTileSetworldTwo_2_Grid.asset	folder in code/tools	792
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-41.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	66594
+Likely unused	Assets/Sprites/MainChar/Hfinal/JumpAnim/HarveyFDRjumpAnimDown.png	orphan: nothing in the project references it, not in code/tools/settings; moved	840
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_5.asset	no reference; old/test/copy name	778
+Uncertain	Assets/Sound/Player/Footstep_3.wav	unreferenced but changed 2026-10-16 (recent work, may be pending use); left in place	14156
+Potentially obsolete	Assets/Sprites/Tileset/Japan/JapanWinter_7.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/JapanWinter.prefab	778
+Uncertain	Assets/Sprites/Enemies/Grass/ForestSpiritFox/SpritFoxBossAttackFramee.png	folder in code/tools	91217
+Potentially obsolete	Assets/Sprites/Enemies/Bosses/KingMoss/Anim/KingMoss_Cast.anim	referenced only by an asset outside the build: Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss.controller	2394
+Uncertain	Assets/Sprites/enviroment art/Japan/WorldThree/WorldThreeSummerJapan.prefab	a Tile Palette (an editor tool nothing references by design); left in place	9351
+Potentially obsolete	Assets/Sprites/Enemies/Bosses/KingMoss/Anim/KingMoss_Rise.anim	referenced only by an asset outside the build: Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss.controller	3017
+Potentially obsolete	Assets/Sprites/Enemies/Bosses/KingMoss/Anim/KingMoss_BoulderLift.anim	referenced only by an asset outside the build: Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss.controller	2399
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_3.asset	no reference; old/test/copy name	779
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-46.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	100428
+Potentially obsolete	Assets/Sprites/Enemies/Tomb/MrOctopus/Unused/DeathAnimOctoGhoul.anim	no reference; old/test/copy name	2059
+Uncertain	Assets/Sound/Enemy/EnemyDefeat_Stomp.wav	name in code/tools	132344
+Likely unused	Assets/Sprites/Tileset/EgyptZone/EgyptZonepaettetiles/SandyPallete/EgyptTileTwo_4.asset	orphan: nothing in the project references it, not in code/tools/settings; moved	778
+Uncertain	Assets/Sprites/Tileset/Japan/Japantwo/WorldTwoSummer/WorldTwoSummerJapan.prefab	a Tile Palette (an editor tool nothing references by design); left in place	9358
+Likely unused	Assets/Sound/Packs/Achievement & Bonus  Sound Pack/Game_Level_up_#05.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	707228
+Likely unused	Assets/Sprites/enviroment art/Japan/WorldTwo/JapanTileSetworldTwo.png	orphan: nothing in the project references it, not in code/tools/settings; moved	924
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-25.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	401520
+Potentially obsolete	Assets/Sprites/Tileset/TempleVines/PallettePieces/Templeruinsgrassfinalforunity 1_6.asset	no reference; old/test/copy name	799
+Likely unused	Assets/Sound/Packs/Achievement & Bonus  Sound Pack/Game_Level_up_#03.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	619028
+Likely unused	Assets/Sprites/enviroment art/Japan/ToriGateAnimations/SpiritWorldGateAnim/FrontTorigate/off.anim	orphan: nothing in the project references it, not in code/tools/settings; moved	1700
+Potentially obsolete	Assets/Sprites/Tileset/TempleVines/PallettePieces/Templeruinsgrassfinalforunity 1_3.asset	no reference; old/test/copy name	798
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_24.asset	no reference; old/test/copy name	779
+Potentially obsolete	Assets/Sprites/Tileset/TempleVines/PallettePieces/Templeruinsgrassfinalforunity 1_5.asset	no reference; old/test/copy name	799
+Potentially obsolete	Assets/Sprites/Tileset/EgyptTileSetThree/EgyptTilesThree.png	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTileSets/EgyptTilesThree_4.asset	551
+Uncertain	Assets/Sprites/Enemies/Grass/Grassenemynonboss/Grassenemynonboss.controller	name in code/tools	3637
+Potentially obsolete	Assets/Sprites/Tileset/TempleVines/PallettePieces/Templeruinsgrassfinalforunity 1_4.asset	no reference; old/test/copy name	798
+Uncertain	Assets/Sprites/Enemies/Tomb/VoidShrineBoss/Void Shrine Boss Sprite Sheet.png	path in code/tools	1941999
+Uncertain	Assets/Sprites/MainChar/Animations/Animations/New Animation.anim	name in code/tools	1301
+Uncertain	Assets/Sound/World/Checkpoint.wav	name in code/tools	317564
+Potentially obsolete	Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/tilset/JapanTileSetworldTwo_5.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/Japan/Japantwo/JapanWorldTwo/JapanWorldTwo.prefab	787
+Likely unused	Assets/Sprites/enviroment art/Japan/JapanCloudTwo.png	orphan: nothing in the project references it, not in code/tools/settings; moved	895
+Uncertain	Assets/Sprites/ZoneMap/Node_Open.png	name in code/tools	155
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_14.asset	no reference; old/test/copy name	779
+Potentially obsolete	Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTileSets/EgyptTilesThree_5.asset	referenced only by an asset outside the build: Assets/Sprites/Tileset/EgyptTileSetThree/SuperSandyTiles/SuperSandy.prefab	782
+Likely unused	Assets/Sprites/enviroment art/GreenZone/Materials/ParrallaxSky.mat	orphan: nothing in the project references it, not in code/tools/settings; moved	1088
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TestBack/backtilesedit_1.asset	no reference; old/test/copy name	779
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-31.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	76890
+Uncertain	Assets/Sprites/Tileset/Japan/Japantwo/JapanWinterTwo.prefab	a Tile Palette (an editor tool nothing references by design); left in place	9998
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-36.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	112848
+Uncertain	Assets/Sprites/MainChar/MainCharTwo/Animations/CharTwoAnimationsVerTwo/SpeedBoostPowerUp 1.png	folder in code/tools	2327
+Uncertain	Assets/Sound/Japan/ToriGate_ToLiving.wav	name in code/tools	635084
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TestBack/testBack.prefab	no reference; old/test/copy name	9336
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-21.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	37116
+Potentially obsolete	Assets/Sprites/Tileset/ProductionLevel/TempleTiles/BaclgroundTwoTiles/TilesetSides_38.asset	no reference; old/test/copy name	780
+Likely unused	Assets/Sound/Packs/CasualGameSounds/DM-CGS-09.wav	orphan: nothing in the project references it, not in code/tools/settings; moved	534192

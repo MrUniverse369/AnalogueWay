@@ -10,14 +10,16 @@ using UnityEngine;
 /// button sets it); the trail, the yarn, the foxes, chi and the combo run untouched. It starts from a new game's state
 /// (Inventory.ResetToNewGame: no skills, the starting loadout; saves must already be in memory), so the balance is
 /// the hardest case. Modes:
-///   win      dash the whole route (re-dashing on every landing), take what lies on the path, catch the yarn; then
-///            a second chase from the line, won again: one shard in all
+///   win      dash the whole route (re-dashing on every landing), take what lies on the path, catch the yarn: one
+///            shard; then (ONEATTEMPT) the trail is unusable at once, fades away, and the line starts no second chase
 ///   run      the same route without the dash: the clock must beat him; the yarn waits, never past leadStop
 ///   combo    dash through the first fox (a combo starts), then walk into the second without the dash: the combo
-///            breaks and the chase fails at once; then a new chase from the line where a fox hits him with no combo
-///            running: a life lost, the chase goes on
+///            breaks and the chase fails at once; Harvey is put back at the start, the trail fades, no second chase
+///   nocombo  a fox hits him with no combo running: a life lost, the chase goes on
 ///   dup      no dash; a chi stone and a stopwatch taken, then walked over again: nothing a second time
-///   respawn  a death mid-chase (the level's own respawn): the chase fails, nothing keeps running
+///   respawn  a death mid-chase (the level's own respawn): the chase fails, nothing keeps running; the respawn
+///            does not give the attempt back
+/// ONEATTEMPT (2026-10-29): one chase per level run, so every mode that starts one needs its own Play session.
 ///   entry    from the corridor under the shaft: the user's Jump Mushrooms (11) and (12) up onto lane 1's start
 ///   exit     after a win, off lane 3's east end: the drop onto the Outlook, alive
 ///   dash     the Spirit Dash on the Outlook, outside the trail: speed, length and chi as before
@@ -26,7 +28,9 @@ using UnityEngine;
 public class QATimeTrailDriver : MonoBehaviour
 {
     private const BindingFlags Any = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
-    private static readonly Vector2 StartSpot = new Vector2(150.5f, 57.2f);
+    private static Vector2 StartSpot = new Vector2(150.5f, 57.2f);
+    private static float LineX = 153.4f;
+    private static bool z4a9; // ENCOUNTERS (2026-10-29): Z4A9's trail (Z4A9TimeTrailBuilder): rock top east, one turn, lane 2 west
 
     private string mode, logPath;
     private readonly StringBuilder log = new StringBuilder();
@@ -69,6 +73,9 @@ public class QATimeTrailDriver : MonoBehaviour
         rb = pc.GetComponent<Rigidbody2D>();
         trail = FindFirstObjectByType<TimeTrail>();
         if (trail == null) { Line("no TimeTrail in the scene"); yield break; }
+        z4a9 = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Z4A9GrassGreen";
+        StartSpot = z4a9 ? new Vector2(5.5f, 30.2f) : new Vector2(150.5f, 57.2f);
+        LineX = z4a9 ? 8.4f : 153.4f;
         Application.targetFrameRate = 60;
         Inventory.ResetToNewGame();
         yield return null;
@@ -86,6 +93,7 @@ public class QATimeTrailDriver : MonoBehaviour
             case "win": yield return Win(); break;
             case "run": yield return Plain(); break;
             case "combo": yield return Combo(); break;
+            case "nocombo": yield return NoCombo(); break;
             case "dup": yield return Dup(); break;
             case "respawn": yield return Respawn(); break;
             case "entry": yield return Entry(); break;
@@ -103,8 +111,38 @@ public class QATimeTrailDriver : MonoBehaviour
     // runs, and a held key restarts it in the frame it ends; the Spirit Dash itself only starts on the ground)
     private void Update()
     {
+        WatchEnd();
+        TraceEnd();
         if (pc == null || dashSlot < 0 || !dashing) return;
         Press(dashSlot);
+    }
+
+    // ONEATTEMPT: the trail's state in the first frame after a chase ends, wherever the driver's own steps are then
+    // (a time-out can land in the middle of Route, long after the 1.4 s fade has finished)
+    private bool wasRunning, endSeen, endSpent, endFading, endZoneOn, endTakeable;
+    private float endAt = -1f, nextTrace;
+
+    // where Harvey is, held or not, for 3 s after a chase ends (reading a send-back that goes wrong)
+    private void TraceEnd()
+    {
+        if (!endSeen || pc == null || Time.time > endAt + 3f || Time.time < nextTrace) return;
+        nextTrace = Time.time + 0.25f;
+        Vector3 p = pc.transform.position;
+        Line($"  after the end +{Time.time - endAt:0.00}s: ({p.x:0.0},{p.y:0.0}) held {pc.NoControl} active {pc.gameObject.activeInHierarchy} returning {trail.Returning} lives {HurtPlayer.pLivesCount} botX {PlayerController.BotX}");
+    }
+
+    private void WatchEnd()
+    {
+        if (trail == null) return;
+        if (trail.Running) { wasRunning = true; return; }
+        if (!wasRunning || endSeen) return;
+        endSeen = true;
+        endAt = Time.time;
+        endSpent = trail.Spent;
+        endFading = trail.Fading;
+        foreach (TimeBoost b in FindObjectsByType<TimeBoost>(FindObjectsSortMode.None)) if (b.GetComponent<Collider2D>().enabled) endTakeable = true;
+        var zone = FieldOf(typeof(TimeTrail), "startZone")?.GetValue(trail) as BoxCollider2D;
+        endZoneOn = zone != null && zone.enabled;
     }
 
     private void OnEnable() => StompCombo.Broken += OnBroken;
@@ -159,6 +197,7 @@ public class QATimeTrailDriver : MonoBehaviour
         float end = Time.time + timeout;
         while ((dir > 0 ? pc.transform.position.x < x : pc.transform.position.x > x) && Time.time < end)
         {
+            if (inRoute && trail.Starts > starts0 && !trail.Running) { PlayerController.BotX = 0f; yield break; } // the chase ended mid-leg: stop steering (the send-back has him)
             PlayerController.BotX = dir;
             yield return null;
         }
@@ -177,7 +216,7 @@ public class QATimeTrailDriver : MonoBehaviour
         Jump();
         bool launched = false;
         end = Time.time + 3f;
-        while (!launched && Time.time < end)
+        while (!launched && Time.time < end && !Ended())
         {
             float dx = mx - pc.transform.position.x;
             PlayerController.BotX = Mathf.Abs(dx) < 0.12f ? 0f : Mathf.Sign(dx);
@@ -186,16 +225,37 @@ public class QATimeTrailDriver : MonoBehaviour
         }
         PlayerController.BotX = 0f;
         end = Time.time + 3f;
-        while (!early && pc.transform.position.y - 0.52f < laneTop + 0.9f && Time.time < end) yield return null; // early: steer from the launch
+        while (!early && pc.transform.position.y - 0.52f < laneTop + 0.9f && Time.time < end && !Ended()) yield return null; // early: steer from the launch
         end = Time.time + 3f;
-        do { PlayerController.BotX = dir; yield return null; } while (!(pc.GetIsGrounded && rb.linearVelocity.y <= 0.01f && pc.transform.position.y > laneTop) && Time.time < end);
+        do { PlayerController.BotX = Ended() ? 0f : dir; yield return null; } while (!(pc.GetIsGrounded && rb.linearVelocity.y <= 0.01f && pc.transform.position.y > laneTop) && Time.time < end && !Ended());
+        if (Ended()) PlayerController.BotX = 0f;
         dashing = was;
     }
 
     // the whole route, start line to nest; dash or not
+    private bool inRoute;
+    private bool Ended() => inRoute && trail.Starts > starts0 && !trail.Running; // the chase ended mid-route: stop steering
+
     private IEnumerator Route(bool dash)
     {
+        inRoute = true;
+        yield return RouteLegs(dash);
+        inRoute = false;
+    }
+
+    private IEnumerator RouteLegs(bool dash)
+    {
         dashing = dash;
+        if (z4a9)
+        {
+            yield return Go(1, 62.8f, 20f);
+            if (!trail.Running) yield break;
+            yield return Turn(66f, -1, 36f, 1);
+            if (!trail.Running) yield break;
+            dashing = dash;
+            yield return Go(-1, 22f, 20f);
+            yield break;
+        }
         yield return Go(1, 196.2f, 20f);
         if (!trail.Running) yield break;
         yield return Turn(199f, -1, 63f, 1);
@@ -216,7 +276,7 @@ public class QATimeTrailDriver : MonoBehaviour
     {
         Place(StartSpot);
         yield return Settle();
-        yield return Go(1, 153.4f, 3f);
+        yield return Go(1, LineX, 3f);
         float end = Time.time + 1f;
         while (!trail.Running && Time.time < end) yield return null;
     }
@@ -252,6 +312,8 @@ public class QATimeTrailDriver : MonoBehaviour
         PlayerController.BotX = 0f;
         dashing = false;
         yield return new WaitForSeconds(1f);
+        float until = Time.time + 4f; // ONEATTEMPT: the walk back and the fade finish first
+        while ((trail.Returning || trail.Fading) && Time.time < until) yield return null;
         Check(Mathf.Approximately(trail.TimeLeft, t0) && (trail.YarnPosition - y0).sqrMagnitude < 0.0001f, $"{what}: the clock ({t0:0.0}) and the yarn stay still afterwards");
         Check(!trail.Running, $"{what}: the chase is not running ({trail.Current})");
         bool boostsShown = false;
@@ -267,6 +329,37 @@ public class QATimeTrailDriver : MonoBehaviour
         return s != null ? Inventory.Count(s) : -1;
     }
 
+    // ---------------------------------------------------------------- ONEATTEMPT checks
+    // in the frame the chase ends: nothing of the trail can be used, while its art is still fading
+    private void EndedNow(string what)
+    {
+        bool takeable = false;
+        foreach (TimeBoost b in FindObjectsByType<TimeBoost>(FindObjectsSortMode.None)) if (b.GetComponent<Collider2D>().enabled) takeable = true;
+        var zone = FieldOf(typeof(TimeTrail), "startZone")?.GetValue(trail) as BoxCollider2D;
+        if (endSeen) { Check(endSpent && !endTakeable && !endZoneOn, $"{what}: in the frame it ended the trail was already unusable (spent {endSpent}, a stopwatch takeable {endTakeable}, start zone on {endZoneOn})"); Check(endFading, $"{what}: in the frame it ended its fade-out had begun (gameplay off before the art is gone)"); }
+        Check(trail.Spent && !takeable && (zone == null || !zone.enabled), $"{what}: the trail is unusable now (spent {trail.Spent}, a stopwatch takeable {takeable}, start zone on {zone != null && zone.enabled})");
+    }
+
+    // once it has settled: where Harvey is, the art gone, the lanes kept, and no second chase from the line
+    private IEnumerator OneAttempt(string what, bool sentBack)
+    {
+        float until = Time.time + 4f;
+        while ((trail.Returning || trail.Fading) && Time.time < until) yield return null;
+        Vector3 p = pc.transform.position;
+        if (sentBack) Check(Vector2.Distance(p, trail.ReturnPosition) < 0.75f && !pc.NoControl, $"{what}: Harvey is back at the trail's start, in control ({p.x:0.0},{p.y:0.0}; start {trail.ReturnPosition.x:0.0},{trail.ReturnPosition.y:0.0})");
+        bool artLeft = false;
+        foreach (YarnBall y in FindObjectsByType<YarnBall>(FindObjectsSortMode.None)) artLeft = true;
+        foreach (TimeBoost b in FindObjectsByType<TimeBoost>(FindObjectsSortMode.None)) artLeft = true;
+        var post = FieldOf(typeof(TimeTrail), "startLine")?.GetValue(trail) as Transform;
+        if (post != null && post.gameObject.activeInHierarchy) artLeft = true;
+        Check(!artLeft && !trail.Fading, $"{what}: the yarn, start post and stopwatches have dissolved and are switched off");
+        Transform geo = trail.transform.Find("Geometry");
+        Check(geo == null || geo.gameObject.activeInHierarchy, $"{what}: the lanes themselves stay (the level's route)");
+        yield return StartChase();
+        Check(!trail.Running && trail.Starts == starts0 + 1, $"{what}: back over the line, no second chase this level run (chases {trail.Starts - starts0}, {trail.Current})");
+        PlayerController.BotX = 0f;
+    }
+
     // ---------------------------------------------------------------- modes
     private IEnumerator Win()
     {
@@ -277,23 +370,14 @@ public class QATimeTrailDriver : MonoBehaviour
         Check(lead0 > 8f, $"the yarn starts ahead of Harvey ({lead0:0.0})");
         yield return Route(true);
         float end = Time.time + 6f;
-        while (trail.Running && Time.time < end) { PlayerController.BotX = 1f; yield return null; }
+        while (trail.Running && Time.time < end) { PlayerController.BotX = z4a9 ? -1f : 1f; yield return null; }
         Line("result: " + trail.LastResult);
         Check(trail.Current == TimeTrail.State.Won, "the yarn is caught (" + trail.Current + ")");
+        EndedNow("after the win");
         Check(trail.ShardsGiven - shards0 == 1 && ShardCount() == 1, $"one Historic Shard given (given {trail.ShardsGiven - shards0}, in the Bag {ShardCount()})");
         yield return Stopped("after the win");
 
-        // a second chase from the line, won again: no second shard
-        Place(new Vector2(158f, 57.2f));
-        yield return Settle();
-        Check(!trail.Running, "standing past the line after a chase does not start one");
-        yield return StartChase();
-        Check(trail.Running && trail.Starts == starts0 + 2, "back over the line: a new chase");
-        yield return Route(true);
-        end = Time.time + 6f;
-        while (trail.Running && Time.time < end) { PlayerController.BotX = 1f; yield return null; }
-        Line("second result: " + trail.LastResult);
-        Check(trail.Current == TimeTrail.State.Won, "won again");
+        yield return OneAttempt("after the win", false);
         Check(trail.ShardsGiven - shards0 == 1 && ShardCount() == 1, $"still one shard in all (given {trail.ShardsGiven - shards0}, in the Bag {ShardCount()})");
     }
 
@@ -306,13 +390,16 @@ public class QATimeTrailDriver : MonoBehaviour
         Line("the route's foxes switched off for this run");
         yield return Route(false);
         float end = Time.time + 20f;
-        while (trail.Running && Time.time < end) { PlayerController.BotX = 1f; yield return null; }
+        while (trail.Running && Time.time < end) { PlayerController.BotX = z4a9 ? -1f : 1f; yield return null; }
         Line("result: " + trail.LastResult + $"; the yarn's furthest lead {yarnPeakLead:0.0}");
         Check(trail.Current == TimeTrail.State.Failed && trail.LastResult.Contains("TIME"), "running without the dash: time runs out (" + trail.LastResult + ")");
         Check(trail.TimeLeft == 0f, $"the clock stops at 0 ({trail.TimeLeft})");
-        Check(holdFrames > 0 && holdBreaks == 0, $"past its waiting lead the yarn holds still ({holdFrames} frames past 12.7, moved in {holdBreaks}; furthest lead {yarnPeakLead:0.0})");
+        EndedNow("after time ran out");
+        if (holdFrames == 0) Line($"NOT RUN the yarn's wait: it never got past its waiting lead this run (furthest lead {yarnPeakLead:0.0}); the clock ran out first");
+        else Check(holdBreaks == 0, $"past its waiting lead the yarn holds still ({holdFrames} frames past 12.7, moved in {holdBreaks}; furthest lead {yarnPeakLead:0.0})");
         Check(ShardCount() == 0, "no shard after the failure");
         yield return Stopped("after time ran out");
+        yield return OneAttempt("after time ran out", true);
     }
 
     private IEnumerator Combo()
@@ -332,18 +419,22 @@ public class QATimeTrailDriver : MonoBehaviour
         Line("result: " + trail.LastResult + $"; lives {lives} -> {HurtPlayer.pLivesCount}");
         Check(trail.Current == TimeTrail.State.Failed && trail.LastResult.Contains("COMBO"), "a fox's hit on a live combo fails the chase at once (" + trail.LastResult + ")");
         Check(HurtPlayer.LastHitByEnemy != null, "the hit came from an enemy");
+        EndedNow("after the combo broke");
         Check(ShardCount() == 0, "no shard after the failure");
         yield return Stopped("after the combo broke");
 
-        // a new chase: a fox hits him with no combo running -> a life, the chase goes on
-        yield return new WaitForSeconds(1.5f); // the hurt flicker
-        PlayerController.playerInviInvincible = false;
+        yield return OneAttempt("after the combo broke", true);
+    }
+
+    // a fox hits him with no combo running: a life, the chase goes on (its own session: one chase per level run)
+    private IEnumerator NoCombo()
+    {
         HurtPlayer.pLivesCount = 3; // so the hit below can't be the last life (a death would end the chase another way)
         yield return StartChase();
-        Check(trail.Running && trail.Starts == starts0 + 2, "back over the line after the failure: a new chase");
+        Check(trail.Running && trail.Starts == starts0 + 1, "crossing the line starts the chase");
         Check(!StompCombo.IsActive, "no combo at the start of it");
-        lives = HurtPlayer.pLivesCount;
-        end = Time.time + 4f;
+        int lives = HurtPlayer.pLivesCount;
+        float end = Time.time + 4f;
         while (HurtPlayer.pLivesCount == lives && Time.time < end && trail.Running) { PlayerController.BotX = 1f; yield return null; }
         PlayerController.BotX = 0f;
         yield return new WaitForSeconds(0.3f);
@@ -383,7 +474,7 @@ public class QATimeTrailDriver : MonoBehaviour
     {
         yield return StartChase();
         dashing = true;
-        yield return Go(1, 175f, 5f);
+        yield return Go(1, z4a9 ? 25f : 175f, 5f);
         dashing = false;
         int deaths = HurtPlayer.oopsCount;
         HurtPlayer.pLivesCount = 0;
@@ -391,12 +482,14 @@ public class QATimeTrailDriver : MonoBehaviour
         yield return null;
         yield return null;
         Check(trail.Current == TimeTrail.State.Failed && trail.LastResult.Contains("FELL"), "a death mid-chase fails it at once (" + trail.LastResult + ")");
+        EndedNow("after the death");
         float end = Time.time + 5f;
         while (HurtPlayer.oopsCount == deaths && Time.time < end) yield return null;
         yield return new WaitForSeconds(1.5f);
         Vector3 p = pc.transform.position;
-        Check(Vector2.Distance(p, new Vector2(150f, 57.2f)) < 1.5f, $"he comes back at the trail's checkpoint ({p.x:0.0},{p.y:0.0})");
+        Check(Vector2.Distance(p, trail.ReturnPosition) < 1.5f, $"he comes back at the trail's checkpoint ({p.x:0.0},{p.y:0.0})");
         yield return Stopped("after the respawn");
+        yield return OneAttempt("after the respawn", false); // the respawn must not give the attempt back
     }
 
     private IEnumerator Entry()

@@ -1,0 +1,41 @@
+[QATT] mode win; dash slot 1; skills: combo cap 1, chi flow 0, dash damage 2; trail Idle
+[QATT] PASS the trail waits before the line (Idle)
+[QATT] t 0.0 pos (8.1,29.5) left 10.0 lead 10.0 yarn 10/110 chi 90 combo 0 lives 3
+[QATT] PASS crossing the line starts one chase
+[QATT] PASS the yarn starts ahead of Harvey (10.6)
+[QATT] t 1.0 pos (22.3,29.5) left 9.0 lead 8.4 yarn 23/110 chi 77 combo 2 lives 3
+[QATT] t 2.0 pos (38.3,29.5) left 8.0 lead 5.9 yarn 36/110 chi 83 combo 3 lives 3
+[QATT] t 3.0 pos (54.3,29.5) left 9.5 lead 3.6 yarn 50/110 chi 71 combo 5 lives 3
+[QATT] t 4.0 pos (66.0,30.4) left 8.5 lead 5.8 yarn 64/110 chi 64 combo 6 lives 3
+[QATT] t 5.0 pos (66.0,36.4) left 7.5 lead 10.9 yarn 75/110 chi 64 combo 6 lives 3
+[QATT] t 6.0 pos (62.3,39.6) left 6.5 lead 11.8 yarn 80/110 chi 64 combo 6 lives 3
+[QATT] t 7.0 pos (53.8,36.5) left 8.0 lead 10.2 yarn 88/110 chi 59 combo 6 lives 3
+[QATT] t 8.0 pos (37.8,36.5) left 7.0 lead 8.9 yarn 103/110 chi 47 combo 9 lives 3
+[QATT]   after the end +0.00s: (22.6,36.5) held False active True returning False lives 3 botX -1
+[QATT] result: won in 9.0s with 6.1s left
+[QATT] PASS the yarn is caught (Won)
+[QATT] PASS after the win: in the frame it ended the trail was already unusable (spent True, a stopwatch takeable False, start zone on False)
+[QATT] PASS after the win: in the frame it ended its fade-out had begun (gameplay off before the art is gone)
+[QATT] PASS after the win: the trail is unusable now (spent True, a stopwatch takeable False, start zone on False)
+[QATT] PASS one Historic Shard given (given 1, in the Bag 1)
+[QATT]   after the end +0.25s: (22.3,36.5) held False active True returning False lives 3 botX 0
+[QATT]   after the end +0.50s: (22.3,36.5) held False active True returning False lives 3 botX 0
+[QATT]   after the end +0.75s: (22.3,36.5) held False active True returning False lives 3 botX 0
+[QATT]   after the end +1.00s: (22.3,36.5) held False active True returning False lives 3 botX 0
+[QATT]   after the end +1.25s: (22.3,36.5) held False active True returning False lives 3 botX 0
+[QATT] PASS after the win: the clock (6.1) and the yarn stay still afterwards
+[QATT] PASS after the win: the chase is not running (Won)
+[QATT] PASS after the win: no stopwatch left showing
+[QATT] PASS after the win: Harvey has control
+[QATT] PASS after the win: the yarn, start post and stopwatches have dissolved and are switched off
+[QATT] PASS after the win: the lanes themselves stay (the level's route)
+[QATT]   after the end +1.50s: (5.5,30.2) held False active True returning False lives 3 botX 0
+[QATT]   after the end +1.75s: (5.5,29.6) held False active True returning False lives 3 botX 0
+[QATT]   after the end +2.00s: (6.2,29.5) held False active True returning False lives 3 botX 1
+[QATT]   after the end +2.25s: (7.3,29.5) held False active True returning False lives 3 botX 1
+[QATT]   after the end +2.50s: (8.5,29.5) held False active True returning False lives 3 botX 1
+[QATT]   after the end +2.75s: (9.6,29.5) held False active True returning False lives 3 botX 1
+[QATT]   after the end +3.00s: (10.7,29.5) held False active True returning False lives 3 botX 1
+[QATT] PASS after the win: back over the line, no second chase this level run (chases 1, Won)
+[QATT] PASS still one shard in all (given 1, in the Bag 1)
+[QATT] END win PASS 16 / FAIL 0

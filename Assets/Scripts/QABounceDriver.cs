@@ -308,6 +308,8 @@ public static class QABounceDriver
             };
             case "Z4A8GrassGreen": return new[]
             {
+                // ENCOUNTERS (2026-10-29): up into the Wave Sweep bowl (floor top 7, inside x 2..15); landing starts its arena, which stays in the bowl
+                R("JumpMushroom_Entry", -7.7f, -2f, 7f, 2.5f, 14.5f, Jump(1, -7.3f), AimAt(-6.5f), Until(0, 11f), Air(1, 6f), Land(0)),
                 R("JumpMushroom (2)", 72.3f, -2f, 12f, 76f, 90f, Jump(1, 72.9f), AimAt(75.37f), Until(0, 12.2f), Air(1, 77.6f), Land(1)),
                 R("JumpMushroom (3)", 87.4f, 12f, 12f, 97f, 105f, Jump(1, 88f), AimAt(90.31f), Air(1, 99f), Land(1)),
                 R("JumpMushroom (4)", 99.2f, 12f, 12f, 80f, 91f, Jump(-1, 98.7f), AimAt(96.65f), Air(-1, 88.5f), Land(-1)),
@@ -319,6 +321,9 @@ public static class QABounceDriver
             {
                 R("pillar from the left platform", 42.5f, -2f, -2f, 49f, 51f, Jump(1, 44.95f), Air(1, 49.6f), Land(0)),
                 R("JumpMushroom (2)", 49.35f, -2f, 15f, 52f, 56f, Jump(1, 49.3f), AimAt(50.01f), Until(0, 15.3f), Air(1, 53.6f), Land(1)),
+                // ENCOUNTERS (2026-10-29): the Time Trail's way up: the start floor onto the new ledge (top 14), then onto the rock top (29)
+                R("JumpMushroom_WayUp1", -6.6f, -2f, 14f, -2.8f, 2.8f, Jump(1, -6.1f), AimAt(-5f), Until(0, 15f), Air(1, -0.5f), Land(0)),
+                R("JumpMushroom_WayUp2", -2.6f, 14f, 29f, 3.6f, 9f, Jump(1, -2.2f), AimAt(-1.5f), Until(0, 30f), Air(1, 5.5f), Land(0)),
             };
             case "Z4A10GrassGreen": return new[]
             {

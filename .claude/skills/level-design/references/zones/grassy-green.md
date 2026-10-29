@@ -129,3 +129,25 @@ Grassy Green. Another zone gets them only if its own profile says so.
 - Grass boss reward is undecided (design doc).
 - The bounce corridors in Z4A9 (x 21–49) and Z4A10 (x 20–30) are still yellow placeholder boxes: a wide bounce floor
   with a push-down ceiling about 4 above it. Should they get art of their own (2026-10-28)?
+
+
+## Encounters by level (2026-10-29, ENCOUNTERS)
+
+Every playable level has at least one optional encounter, never the same kind two levels running except Z4A6 -> Z4A7
+(both pre-existing, kept). Village (hub), boss arena and the greybox level have none by design.
+
+| Level | Encounter | Where | Built by |
+| --- | --- | --- | --- |
+| Z4A6 | Chest game | cave, x -50.5, floor 52 | ChestShuffleSetup |
+| Z4A7 | Challenge Arena, chest game, Time Trail | side chamber 79.5,2; glade 236,26; lanes x 149..203 | GrassChallengeSetup, ChestShuffleSetup, Z4A7TimeTrailBuilder |
+| Z4A8 | Wave Sweep (ChallengeArena 2/3/4) | painted bowl x 0..16, floor top 7, over the start; Jump Mushroom (18) at x -6.5 up, one inside (14.5) out | GrassEncounterSetup (Tools/HNL/Encounters/Z4A8 Wave Sweep) |
+| Z4A9 | Time Trail (real art) | rock top (29) east, lane 2 (top 36, x 20..63) west; ledge x -3..2 top 14 and two Jump Mushrooms (20) up | Z4A9TimeTrailBuilder |
+| Z4A10 | Chest game | alcove over Jump Mushroom (3), chests x 5/9/13, floor 11 | GrassEncounterSetup (Z4A10 Chest Game) |
+
+- Painting new ground into a level's Ground tilemap: its CompositeCollider2D (Outlines) is saved with the scene; after
+  SetTile the TilemapCollider2D must be re-enabled (off/on) and the composite regenerated, or the new tiles have no
+  collision in play (GrassEncounterSetup.Paint does this).
+- Time Trails are one attempt per level run (ONEATTEMPT): a fail sends Harvey to the trail checkpoint (returnPoint),
+  success or failure dissolves the trail art; reloading the level makes it available again.
+- EncounterLandmark adds a pixel-dithered light shaft over each encounter at load (pink trail, gold chests, aqua
+  arena) that fades once the encounter is done.

@@ -47,6 +47,15 @@ public class TimeBoost : MonoBehaviour
         Show(true);
     }
 
+    /// <summary>ONEATTEMPT (2026-10-29): the chase is over: never takeable again (the trigger goes now); the art stays
+    /// for the trail's dissolve, which switches the object off.</summary>
+    public void Retire()
+    {
+        if (sr == null) Awake();
+        taken = true;
+        col.enabled = false;
+    }
+
     /// <summary>On or off as a whole (art, glow and trigger).</summary>
     public void Show(bool on)
     {

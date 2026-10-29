@@ -32102,6 +32102,10 @@ MonoBehaviour:
   - {fileID: 316117588}
   shard: {fileID: 11400000, guid: ab1479a8399354ec4951a5c74dce4d7e, type: 2}
   claimKey: TimeTrail_Z4A7
+  returnPoint: {fileID: 646435738}
+  fadeTime: 1.4
+  fadeAlso:
+  - {fileID: 428794125}
 --- !u!4 &1214895296
 Transform:
   m_ObjectHideFlags: 0
@@ -152937,7 +152941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501500, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: orthographic size
-      value: 5.625
+      value: 5.675
       objectReference: {fileID: 0}
     - target: {fileID: 1315481228748501501, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
       propertyPath: m_RootOrder
