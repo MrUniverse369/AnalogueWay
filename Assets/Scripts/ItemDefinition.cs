@@ -59,6 +59,7 @@ public class ItemDefinition : ScriptableObject
                 message = "CHI RESTORED";
                 return true;
             case ItemEffect.ExtraLife:
+                if (!GameSession.HealingAllowed) { message = "NO HEALING IN NINE LIVES"; return false; } // NINELIVES:
                 if (HurtPlayer.pLivesCount >= GameSession.StartingLives) { message = "LIVES ARE ALREADY FULL"; return false; }
                 HurtPlayer.pLivesCount = Mathf.Min(GameSession.StartingLives, HurtPlayer.pLivesCount + Mathf.Max(1, (int)amount));
                 message = amount >= GameSession.StartingLives ? "HEALTH FULLY RESTORED" : amount >= 2 ? "HEALTH RESTORED" : "A LIFE RESTORED"; // SHOPFOOD:

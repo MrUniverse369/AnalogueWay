@@ -22,6 +22,11 @@ public class HurtPlayer : MonoBehaviour
 
     }
 
+    /// <summary>YARNCHASE (2026-10-28): the enemy behind the latest hit taken through a HurtPlayer (null for a spike or
+    /// other hazard), and the frame it happened on.</summary>
+    public static EnemyController LastHitByEnemy { get; private set; }
+    public static int LastHitFrame { get; private set; } = -1;
+
     /// <summary>SHIELD (2026-10-21): while the Healing Stone runs nothing can hurt Harvey: enemies, spikes, traps or hazards.</summary>
     public static bool Shielded => PowerUpManager.Has(TalismanTrait.HealShield);
 
@@ -45,6 +50,8 @@ public class HurtPlayer : MonoBehaviour
 
             if (PlayerController.playerInviInvincible == false)
             {
+                LastHitByEnemy = ownEnemy; // YARNCHASE: read by the Time Trail when the hit breaks a combo
+                LastHitFrame = Time.frameCount;
                 pLivesCount -= 1;
                 LevelGrade.NoteHit(); // RANKS: a hit taken counts against the level's rank
                 PlayerFX.Hurt(transform.position); // FX: cream hit flash, sparks, then the dithered flicker

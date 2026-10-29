@@ -36,6 +36,7 @@ public class HealingTalisman : Talisman
 
     public override void OnActivated(PowerUpContext ctx)
     {
+        if (!GameSession.HealingAllowed) HarveyMenus.Toast(null, "SHIELD ONLY", "NO HEALING IN NINE LIVES", 2f); // NINELIVES:
         int missing = Mathf.Max(1, GameSession.StartingLives - HurtPlayer.pLivesCount);
         stepTime = Mathf.Min(healTime, Duration) / (missing + 1); // the last segment fills a beat before healTime
         stepTimer = stepTime;
@@ -46,6 +47,7 @@ public class HealingTalisman : Talisman
     {
         healLeft -= dt;
         if (HurtPlayer.pLivesCount <= 0) return;
+        if (!GameSession.HealingAllowed) return; // NINELIVES: in a Nine Lives run the stone shields but heals nothing
         if (healLeft <= 0f && stepTime > 0f) // SHIELD: the first fill is over; make sure the bar ended full
         {
             HurtPlayer.pLivesCount = Mathf.Max(HurtPlayer.pLivesCount, GameSession.StartingLives);

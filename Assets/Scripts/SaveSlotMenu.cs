@@ -449,7 +449,7 @@ public class SaveSlotMenu : MonoBehaviour
         { "Z1TombVillage", "THE OLD TOMB - VILLAGE" }, { "Z2SandyVillage", "SANDY DUNES - VILLAGE" }, { "Z4GrassVillage", "GRASSY MEADOW - VILLAGE" },
     };
 
-    private static string PlaceName(string sceneName)
+    public static string PlaceName(string sceneName) // NINELIVES: public for the Nine Lives game-over card
     {
         if (string.IsNullOrEmpty(sceneName)) return "UNKNOWN";
         return Places.TryGetValue(sceneName, out string place) ? place : sceneName.ToUpperInvariant();

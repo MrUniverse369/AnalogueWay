@@ -103,9 +103,9 @@ public class PauseMenuStyle : MonoBehaviour
         if (GameSession.IsTutorial) // TUTORIAL:
             MenuUI.Text("Hint", card, new Vector2(0, -top + 11), new Vector2(CardWidth - 16, 7), MenuUI.SmallSize, MenuUI.Muted, TextAlignmentOptions.Center,
                 "TUTORIAL: NOTHING HERE IS SAVED");
-        else if (GameSession.IsArcade) // ARCADE: nothing is saved, so say so where quitting happens
+        else if (GameSession.IsArcade) // ARCADE: nothing is saved, so say so where quitting happens // NINELIVES: by its new name
             MenuUI.Text("Hint", card, new Vector2(0, -top + 11), new Vector2(CardWidth - 16, 7), MenuUI.SmallSize, MenuUI.Yellow, TextAlignmentOptions.Center,
-                "ARCADE: PROGRESS IS NOT SAVED");
+                "NINE LIVES: NOT SAVED - THE MENU ENDS THE RUN");
         else
             MenuUI.Text("Hint", card, new Vector2(0, -top + 11), new Vector2(CardWidth - 16, 7), MenuUI.SmallSize, MenuUI.Muted, TextAlignmentOptions.Center,
                 "CROSS/ENTER: SELECT   OPTIONS/ESC: RESUME");

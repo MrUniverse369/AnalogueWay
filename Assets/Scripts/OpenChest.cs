@@ -364,7 +364,12 @@ public class OpenChest : MonoBehaviour
     private void CollectPeach(ItemDefinition peach)
     {
         int lives = Mathf.Max(1, (int)peach.Amount);
-        if (HarveyActive && HurtPlayer.pLivesCount > 0 && HurtPlayer.pLivesCount < GameSession.StartingLives)
+        if (!GameSession.HealingAllowed) // NINELIVES: no healing in a Nine Lives run: the peach goes to the Bag
+        {
+            Inventory.Add(peach);
+            HarveyMenus.Toast(peach.Icon, "FOUND " + peach.DisplayName.ToUpperInvariant(), "NO HEALING IN NINE LIVES: IT'S IN YOUR BAG");
+        }
+        else if (HarveyActive && HurtPlayer.pLivesCount > 0 && HurtPlayer.pLivesCount < GameSession.StartingLives)
         {
             HurtPlayer.pLivesCount = Mathf.Min(GameSession.StartingLives, HurtPlayer.pLivesCount + lives);
             HarveyGlow(new Color(1f, 0.42f, 0.6f, 0.9f), PeachSparkle);

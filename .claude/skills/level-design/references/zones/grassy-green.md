@@ -17,7 +17,7 @@ sky)"), the art-style memory. Tags as in `method.md`: [user] [ref] [built] [assu
 
 | | Z4A6 (authored) | Z4A7 (authored) | Greybox Level 3 (prototype) |
 | --- | --- | --- | --- |
-| Size | 178 × 111, tall | 292 × 66, wide (207 × 66 before the 2026-10-28 east expansion) | 122 × 69, tall |
+| Size | 178 × 111, tall | 292 × 83, wide (207 × 66 before the 2026-10-28 east expansion; the Time Trail lanes reach y 72) | 122 × 69, tall |
 | Shape | a vertical climb up mushroom chimneys | horizontal maze: 3-tall tunnels, shafts, a cloud section over a pit | five islands, four bridges, zig-zagging up |
 | Vertical travel | floating mushrooms (bounce 15) | Jump Mushrooms 12–20 (jump boxes until 2026-10-28), clouds 8–14 | clouds 10–14, floating mushroom 15, Jump Mushroom 18, steps |
 
@@ -64,6 +64,12 @@ sky)"), the art-style memory. Tags as in `method.md`: [user] [ref] [built] [assu
   floor; it needs about 12 tiles of floor, 3+ tiles of headroom over the chests (they hop 1.3) and no enemy nearby.
   Two correct picks of the two reward chests win gems and chi; the trap ends it. In Z4A6's cave and Z4A7's Spirit's
   Glade. Place the prefab root on the floor under the middle chest.
+- **Time Trail** [user 2026-10-28/29]: Z4A7's Spirit Dash yarn chase (TimeTrail, YarnBall, TimeBoost; built by
+  Tools/HNL/Build Z4A7 Time Trail (Greybox); record `levels/z4a7_time_trail.md`). Three stacked lanes joined by Jump
+  Mushroom turns (14.5), foxes in singles, pairs and trios, chi stones on the path and over fox pairs, stopwatch Time
+  Boosts (+2.5 s; greybox colour: their own cream-and-orange art, so they never read as coins or chi). The yarn runs
+  13-15.5 tiles/s (between Harvey's run 4.5 and dash 16) and waits past 12.5 ahead; an enemy hit on a live combo, the
+  clock or a death ends it; the reward is one Historic Shard, a plain collectible.
 
 ## Enemies
 

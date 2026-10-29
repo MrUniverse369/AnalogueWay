@@ -19,6 +19,14 @@ public static class GameSession
     /// </summary>
     public static bool IsArcade { get; private set; }
 
+    /// <summary>NINELIVES (2026-10-29): the main menu's challenge run (the Arcade run, renamed for the player): nine lives
+    /// for the whole game, no healing (see NineLives). The tutorial runs as an arcade run too but is not one.</summary>
+    public static bool IsNineLives => IsArcade && !IsTutorial;
+
+    /// <summary>NINELIVES: whether anything may raise Harvey's health within a life (the Healing Stone, health items,
+    /// a chest's peach). False in a Nine Lives run. A respawn's full bar is a new life, not a heal.</summary>
+    public static bool HealingAllowed => !IsNineLives;
+
     /// <summary>
     /// TUTORIAL (2026-10-20): the Basic Controls level from the main menu. It runs as an unsaved (arcade) run, and
     /// finishing it goes back to the main menu instead of on to the next level.
@@ -145,12 +153,13 @@ public static class GameSession
         return true;
     }
 
-    /// <summary>ARCADE: start an unsaved run from the first level with a new-game loadout.</summary>
+    /// <summary>ARCADE: start an unsaved run from the first level with a new-game loadout. NINELIVES: with nine lives.</summary>
     public static void StartArcade()
     {
         IsArcade = true;
         IsTutorial = false; // TUTORIAL:
         NewGame();
+        NineLives.Begin(); // NINELIVES:
         LevelLoader.Load(1); // LOADING:
     }
 

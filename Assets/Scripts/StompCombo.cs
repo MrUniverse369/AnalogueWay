@@ -195,13 +195,19 @@ public class StompCombo : MonoBehaviour
         instance.Advance(true, enemyPosition);
     }
 
+    /// <summary>YARNCHASE (2026-10-28): a live combo was ended by Break (being hurt), not by its window running out.
+    /// The Time Trail fails on it.</summary>
+    public static event System.Action Broken;
+
     /// <summary>Ends the combo now. PlayerFX.Hurt calls this, so being hurt ends the combo.</summary>
     public static void Break()
     {
         if (instance == null) return;
+        bool live = IsActive; // YARNCHASE:
         instance.stage = 0;
         instance.ClearAuras(); // DRAGONCOMBO: (was aura?.Clear, which Unity's fake null can slip past)
         instance.SetRainbow(false); // COINPULL:
+        if (live) Broken?.Invoke(); // YARNCHASE:
     }
 
     private void Advance(bool dash, Vector3 enemyPosition)

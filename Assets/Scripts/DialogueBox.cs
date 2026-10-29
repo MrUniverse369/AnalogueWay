@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 /// <summary>
-/// DIALOGUE: plays a DialogueScript in a text box at the bottom of the screen, in the HNL UI style (the HUD plate,
+/// DIALOGUE: plays a DialogueScript in a text box at the top of the screen (DIALOGUEBAR), in the HNL UI style (the HUD plate,
 /// a Yellow name, Cream text typed out, Muted hints, plain-text choices with the paw). It creates itself the first
 /// time a conversation starts. While it is open the game is paused like the shop.
 ///
@@ -15,6 +15,9 @@ using UnityEngine.UI;
 public class DialogueBox : MonoBehaviour
 {
     private const float CharsPerSecond = 45f;
+    // DIALOGUEBAR: the box at the top (UI units of the 320 x 180 canvas). HudClearance keeps it off the health bar
+    // (top left, 44 wide) and the level clock (top right, 54 wide) on screens narrower than 16:9.
+    private const float BoxWidth = 208f, MinBoxWidth = 176f, BoxHeight = 40f, TopMargin = 4f, HudClearance = 112f;
     private const int MaxJumps = 64; // a loop of -> with no lines in between ends the conversation instead of hanging
     private const int MaxChoices = 5;
 
@@ -80,9 +83,22 @@ public class DialogueBox : MonoBehaviour
         MenueControl.isGamePaused = true;
         PlayerController player = FindFirstObjectByType<PlayerController>();
         playerBody = player != null ? player.GetComponent<Rigidbody2D>() : null;
+        FitWidth();
         box.gameObject.SetActive(true);
         HarveyMenus.PlayUiSound(Inventory.Catalog != null ? Inventory.Catalog.selectSound : null);
         GoTo(node);
+    }
+
+    // DIALOGUEBAR: as wide as the space between the HUD's corners allows (208 at 16:9, 176 at 16:10), set once per
+    // conversation so the box never moves while it is open
+    private void FitWidth()
+    {
+        float canvasWidth = ((RectTransform)box.parent).rect.width;
+        float width = Mathf.Clamp(canvasWidth - HudClearance, MinBoxWidth, BoxWidth);
+        box.sizeDelta = new Vector2(width, BoxHeight);
+        foreach (TMP_Text t in new[] { nameText, bodyText, hintText })
+            t.rectTransform.sizeDelta = new Vector2(width - 12f, t.rectTransform.sizeDelta.y);
+        choicePanel.anchoredPosition = new Vector2(width / 2f, choicePanel.anchoredPosition.y);
     }
 
     private void GoTo(string node)
@@ -306,21 +322,24 @@ public class DialogueBox : MonoBehaviour
         Transform root = canvasGo.transform;
         Sprite frame = Inventory.Catalog != null ? Inventory.Catalog.frame : null;
 
-        // the text box along the bottom
-        me.box = MenuUI.Rect("Box", root, Vector2.zero, new Vector2(296, 50));
-        me.box.anchorMin = me.box.anchorMax = me.box.pivot = new Vector2(0.5f, 0f);
-        me.box.anchoredPosition = new Vector2(0, 6);
+        // DIALOGUEBAR (2026-10-29): the text box sits at the top, between the health bar and the level clock. Along
+        // the bottom (296 x 50) it covered Harvey and whoever he talked to: the follow camera keeps him about a
+        // quarter of the way up the screen. It is smaller too (BoxHeight; its width fits the screen, see FitWidth):
+        // no line in the game's dialogue needs more than two of its text lines, and it has room for three.
+        me.box = MenuUI.Rect("Box", root, Vector2.zero, new Vector2(BoxWidth, BoxHeight));
+        me.box.anchorMin = me.box.anchorMax = me.box.pivot = new Vector2(0.5f, 1f);
+        me.box.anchoredPosition = new Vector2(0, -TopMargin);
         MenuUI.Image(me.box, frame, true);
-        me.nameText = MenuUI.Text("Name", me.box, new Vector2(0, 17), new Vector2(280, 8), MenuUI.BodySize, MenuUI.Yellow, TextAlignmentOptions.Left, "");
-        me.bodyText = MenuUI.Text("Line", me.box, new Vector2(0, 0), new Vector2(280, 26), MenuUI.BodySize, MenuUI.Cream, TextAlignmentOptions.TopLeft, "", true);
+        me.nameText = MenuUI.Text("Name", me.box, new Vector2(0, 13), new Vector2(BoxWidth - 12, 8), MenuUI.BodySize, MenuUI.Yellow, TextAlignmentOptions.Left, "");
+        me.bodyText = MenuUI.Text("Line", me.box, new Vector2(0, -0.5f), new Vector2(BoxWidth - 12, 19), MenuUI.BodySize, MenuUI.Cream, TextAlignmentOptions.TopLeft, "", true);
         me.bodyText.lineSpacing = 0f;
-        me.bodyText.rectTransform.anchoredPosition = new Vector2(0, -1);
-        me.hintText = MenuUI.Text("Hint", me.box, new Vector2(0, -19), new Vector2(280, 7), MenuUI.SmallSize, MenuUI.Muted, TextAlignmentOptions.Right, "");
+        me.hintText = MenuUI.Text("Hint", me.box, new Vector2(0, -14.5f), new Vector2(BoxWidth - 12, 7), MenuUI.SmallSize, MenuUI.Muted, TextAlignmentOptions.Right, "");
 
-        // the choices, in a plate over the box's right end
+        // the choices, in a plate under the box's right end
         me.choicePanel = MenuUI.Rect("Choices", root, Vector2.zero, new Vector2(120, 40));
-        me.choicePanel.anchorMin = me.choicePanel.anchorMax = me.choicePanel.pivot = new Vector2(1f, 0f);
-        me.choicePanel.anchoredPosition = new Vector2(-12, 60);
+        me.choicePanel.anchorMin = me.choicePanel.anchorMax = new Vector2(0.5f, 1f);
+        me.choicePanel.pivot = new Vector2(1f, 1f);
+        me.choicePanel.anchoredPosition = new Vector2(BoxWidth / 2f, -(TopMargin + BoxHeight + 3f));
         MenuUI.Image(me.choicePanel, frame, true);
         for (int i = 0; i < MaxChoices; i++)
         {

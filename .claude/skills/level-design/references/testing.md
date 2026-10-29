@@ -79,3 +79,8 @@ Through the Unity MCP tools (`Unity_RunCommand`, `Unity_GetConsoleLogs`, `Unity_
   then save, and confirm with a raycast. Otherwise the old wall stays solid in Play (BUG-0007, 2026-10-28).
 - A brand-new `.cs` written while Unity is already compiling can be missed by the script list for good (it imports as
   a MonoScript but never enters the compile). Write it again under a new file name, then refresh.
+- Invincibility (`PlayerController.playerInviInvincible`) stops damage, not an enemy's knockback, and the game clears it
+  again after a hit: a scripted walk past foxes stalls. Switch the enemies off for runs that test something else
+  (QATimeTrailDriver's time-out and pickup runs do).
+- A scripted talisman held down means a press every frame (see the ledger, 2026-10-29). A chase or challenge left
+  running by one test carries into the next in the same Play session: check the state before starting the next.

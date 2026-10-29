@@ -749,19 +749,19 @@
       "visuals": ["crashed-biplane"]
     },
     {
-      "id": "arcade-mode", "name": "Arcade run", "category": "special", "rank": 54, "importance": 1, "frequency": "rare",
-      "frequencyWhy": "A separate way to start; not part of a saved playthrough.",
-      "summary": "An unsaved run from the first level with a new-game loadout.",
-      "how": ["Started from the main menu's arcade entry (MenueControl.StartArcade).", "Nothing is saved, and the opening cinematic is skipped."],
+      "id": "arcade-mode", "name": "Nine Lives mode", "category": "special", "rank": 54, "importance": 2, "frequency": "rare",
+      "frequencyWhy": "A separate challenge run from the main menu; not part of a saved playthrough.",
+      "summary": "Finish the whole game on nine lives, with no healing. (Called Arcade until 29 October 2026.)",
+      "how": ["Started from the main menu's NINE LIVES button (MenueControl.StartArcade); an unsaved run, level after level from the first, the opening cinematic skipped.", "Nine lives for the whole game: each death costs one, every life starts with a full health bar, nothing heals within a life (the Healing Stone only shields, health items can't be eaten, a chest's peach goes to the Bag) and nothing gives a life back.", "A counter of nine pips under the health bar; losing the ninth ends the run (a card, then the main menu); reaching the end shows the lives left and records the win."],
       "inputs": [],
-      "purpose": "Quick play without touching save files.",
+      "purpose": "A survival challenge for players who know the game.",
       "unlock": { "kind": "start", "text": "From the main menu." },
       "zones": [],
       "related": ["save-files", "plane-intro"],
-      "implementation": [{ "path": "Assets/Scripts/GameSession.cs", "note": "StartArcade" }, { "path": "Assets/Scripts/MenueControl.cs" }],
-      "presence": [], "presenceNote": "A menu flow.", "qa": ["SYS-MENUS", "SYS-SAVE"],
+      "implementation": [{ "path": "Assets/Scripts/NineLives.cs", "note": "rules, counter, end cards" }, { "path": "Assets/Scripts/GameSession.cs", "note": "StartArcade, IsNineLives, HealingAllowed" }, { "path": "Assets/Scripts/LevelManager.cs", "note": "a life per death; the safe-point guard" }, { "path": "Assets/Scripts/MenueControl.cs" }],
+      "presence": [], "presenceNote": "A menu flow.", "qa": ["SYS-NINELIVES", "SYS-SAVE"],
       "visuals": [],
-      "notes": "The code path exists; whether the current main menu shows an Arcade button wasn't checked in the scene for this catalogue."
+      "notes": "Internal names (StartArcade, IsArcade, the ArcadeButton object) are kept. Tested by QANineLivesDriver (TC-NINELIVES-*)."
     },
     {
       "id": "coin-magnet", "name": "Coin Magnet talisman", "category": "special", "rank": 55, "importance": 1, "frequency": "rare",

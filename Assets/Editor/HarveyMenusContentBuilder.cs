@@ -192,6 +192,9 @@ public static class HarveyMenusContentBuilder
             description = "Green hills and winding paths, and the way home at the very end." },
         new ItemSpec { file = "HerbalistsNotes", name = "Herbalist's Notes", category = ItemCategory.Collectible,
             description = "Which meadow herbs soothe, which ones sting, and which ones the moss king guards." },
+        // YARNCHASE (2026-10-28): the Time Trail's reward. Only a collectible for now: what shards are for is undecided.
+        new ItemSpec { file = "HistoricShard", name = "Historic Shard", category = ItemCategory.Collectible, unique = false,
+            description = "A shard of old carved stone, won by catching the runaway yarn in the Time Trail." },
         new ItemSpec { file = "OldCompass", name = "Old Compass", category = ItemCategory.Misc,
             description = "A brass compass that always points back toward the dig site. A keepsake." },
         new ItemSpec { file = "SpiritPeach", name = "Spirit Peach", category = ItemCategory.PowerUp, unique = false,

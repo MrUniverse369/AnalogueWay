@@ -75,13 +75,30 @@ public class LevelManager : MonoBehaviour
 
     private void TrackArcadeSafePoint()
     {
-        if (pScriptRef == null || !pScriptRef.gameObject.activeInHierarchy || !pScriptRef.GetIsGrounded || !OnSolidGround(pScriptRef.transform))
+        // NINELIVES (2026-10-29): never while he can't be hurt (the flicker after a hit or a respawn) or while he touches
+        // a hazard. A spike walked into during the flicker doesn't fire again once it ends, so he could stand in it
+        // unharmed and it became the safe point; every arcade respawn then put him back in it, and it killed him again
+        // straight away: a death loop (in a Nine Lives run it took six lives in a few seconds).
+        if (pScriptRef == null || !pScriptRef.gameObject.activeInHierarchy || !pScriptRef.GetIsGrounded || !OnSolidGround(pScriptRef.transform)
+            || PlayerController.playerInviInvincible || InHazard(pScriptRef.transform))
         {
             groundedFor = 0f;
             return;
         }
         groundedFor += Time.fixedDeltaTime;
         if (groundedFor >= SafeGroundTime) arcadeSafePoint = pScriptRef.transform.position;
+    }
+
+    // NINELIVES: anything that hurts on touch (spikes, kill planes, enemies: HurtPlayer) overlapping Harvey's body
+    private readonly Collider2D[] hazardHits = new Collider2D[8];
+    private static readonly ContactFilter2D HazardFilter = new ContactFilter2D { useTriggers = true };
+
+    private bool InHazard(Transform player)
+    {
+        int count = Physics2D.OverlapBox(player.position, new Vector2(0.5f, 1f), 0f, HazardFilter, hazardHits);
+        for (int i = 0; i < count; i++)
+            if (hazardHits[i] != null && hazardHits[i].GetComponentInParent<HurtPlayer>() != null) return true;
+        return false;
     }
 
     // ground that stays put: not a moving or falling tile, an enemy or a hazard, so respawning there is safe
@@ -125,6 +142,7 @@ public class LevelManager : MonoBehaviour
     public IEnumerator RespawnCo()
     {
         int run = ++respawnRun; // RESPAWNHOLD:
+        bool alive = pScriptRef != null && pScriptRef.gameObject.activeSelf; // NINELIVES: a second call while he's already down is the same death
         float deadline = Time.time + MaxRespawnHold;
         if (pScriptRef != null) pScriptRef.HoldForRespawn(true); // RESPAWNHOLD: no input from the moment he dies
         if (PowerUpManager.Instance != null) PowerUpManager.Instance.ResetAll(); // POWERUP: replaces speedBoostPowerUp = false below
@@ -132,6 +150,9 @@ public class LevelManager : MonoBehaviour
         ScreenGrade.GreyPulse(); // FX: a brief greyscale pulse on game over
         PixelFX.Burst(pScriptRef.transform.position, 12, 1.5f, 3.5f, new[] { PixelFX.Cream, PixelFX.Hex("98b2b1") }, 0.4f, 0.7f, 1, PixelShape.Square, PixelMotion.Float, true); // FX:
         pScriptRef.gameObject.SetActive(false);
+        // NINELIVES: a Nine Lives run takes one of its nine lives per death; with the last one gone there is no respawn
+        // (NineLives shows the game-over card and goes to the main menu)
+        if (alive && NineLives.LoseLife()) yield break;
         if (gameOverScreen != null) gameOverScreen.SetActive(true); // RESPAWN: a level missing its screen (Z1A3 was) still respawns
         yield return new WaitForSeconds(respawnDelay);
         // ARCADE: back where he fell (the last safe ground before it); saved play goes back to the checkpoint
