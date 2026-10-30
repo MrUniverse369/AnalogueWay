@@ -321,8 +321,8 @@ public class QANineLivesDriver : MonoBehaviour
         yield return Die();
         Check(NineLives.Left == 8, $"one death: {NineLives.Left} left");
         // the last level, finished as its treasure does it
-        LevelLoader.Load("Z3BossBattle");
-        yield return WaitForLevel("Z3BossBattle");
+        LevelLoader.Load("Z4Boss_Japan");
+        yield return WaitForLevel("Z4Boss_Japan");
         Check(GameSession.IsNineLives && NineLives.Left == 8, $"a level change keeps the run and the count ({NineLives.Left})");
         GameSession.FinishLevel();
         yield return WaitForLevel("Win");
@@ -344,8 +344,8 @@ public class QANineLivesDriver : MonoBehaviour
         GameSession.EndArcade();
         // a saved game: the level played from the save file (Continue / the map); here, a level loaded with no run on
         // (Z4A7: Z4A6 would play its opening cinematic first, with Harvey out of control)
-        LevelLoader.Load("Z4A7GrassGreen");
-        yield return WaitForLevel("Z4A7GrassGreen");
+        LevelLoader.Load("Z1A2_GrassGreen");
+        yield return WaitForLevel("Z1A2_GrassGreen");
         float wait = Time.realtimeSinceStartup + 10f;
         while (Harvey != null && Harvey.NoControl && Time.realtimeSinceStartup < wait) yield return null;
         Check(!GameSession.IsNineLives && FindFirstObjectByType<NineLivesHUD>() == null, $"normal play: no Nine Lives run, no counter (IsNineLives {GameSession.IsNineLives})");

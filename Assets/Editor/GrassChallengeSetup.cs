@@ -30,12 +30,12 @@ public static class GrassChallengeSetup
 {
     private const string Name = "ChallengeArena";
 
-    private const string Z4A6Path = "Assets/Scenes/Z4A6GrassGreen.unity";
+    private const string Z4A6Path = "Assets/Scenes/Z1A1_GrassGreen.unity";
     private static readonly Vector3Int[] Z4A6GateCells = { new Vector3Int(-44, 57, 0), new Vector3Int(-44, 58, 0), new Vector3Int(-44, 52, 0), new Vector3Int(-44, 53, 0) };
     private static readonly Vector3Int Z4A6GateTileFrom = new Vector3Int(-44, 59, 0);
     private static readonly Vector2[] Z4A6Spawns = { new Vector2(-56f, 52f), new Vector2(-53.5f, 52f), new Vector2(-51f, 52f), new Vector2(-49f, 52f), new Vector2(-47f, 52f) };
 
-    private const string Z4A7Path = "Assets/Scenes/Z4A7GrassGreen.unity";
+    private const string Z4A7Path = "Assets/Scenes/Z1A2_GrassGreen.unity";
     private const string Z4A7WayOut = "JumpMushroomHolder/JumpMushroom (3)"; // for the messages
     private static readonly Vector2[] Z4A7Spawns = { new Vector2(66.5f, 0f), new Vector2(69f, 0f), new Vector2(81f, 0f), new Vector2(84.5f, 0f), new Vector2(88.5f, 0f), new Vector2(92.5f, 0f) };
 

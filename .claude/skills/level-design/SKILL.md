@@ -20,13 +20,16 @@ designed from its own evidence.
 | `references/testing.md` | A: offline model and Unity bot recipes, gotchas | before testing |
 | `references/zones/<zone>.md` | B: the zone's identity, structure, mechanics, enemies, density, greybox notes, gaps | the requested zone only |
 | `references/zones/_new-zone.md` | B: template for a zone with no profile | a new zone |
+| `references/tile-placement.md` | B: how the user paints a zone's ground tiles (Grassy Green so far): rules, greybox-to-art conversion, checks | before painting, converting a greybox to art, or reviewing a painted level in that zone |
 | `references/levels/<level>.md` | level records: one level's decisions and open issues | when working on, or learning from, that level |
 | `references/ledger.md` | where each rule came from, its scope, what it replaced | when feedback arrives or rules conflict |
 | `references/brief-template.md` | the user's request template | to show the user, or to read a brief |
 | `references/project-tracking.md` | the HNL dashboard (main board) and Trello: reading tasks, recording work | before planning and after a build |
 
-Zone files: `grassy-green.md` (Z4, complete), `tomb.md` (Z1, usable), `sandy-dunes.md` (Z2, partial),
-`snow-temple-japan.md` (Z3, partial). The scene prefix is historical: play order is Grass → Tomb → Dunes → Japan.
+Zone files: `grassy-green.md` (Z1, complete), `tomb.md` (Z2, usable), `sandy-dunes.md` (Z3, partial),
+`snow-temple-japan.md` (Z4, partial). Since 2026-10-30 the scene prefix is the play order (Z1 Grassy Green → Z4
+Japan); each level's permanent id and its former names are in `Assets/Resources/Levels/LevelRegistry.json`, and
+`method.md` §1 has the old-to-new table. Notes written before then use the old codes (Z4A7 = Z1A2_GrassGreen).
 
 ## Tools (`scripts/`, run from the project root with `python3 -I`)
 
@@ -37,6 +40,8 @@ Zone files: `grassy-green.md` (Z4, complete), `tomb.md` (Z1, usable), `sandy-dun
   strips, edge drops and (with a route) plays it through; draws the layout.
 - `make_unity_bot.py <route.py> [--enemies] > bot.cs` — the same route as Unity MCP RunCommand code.
 - `gbsim.py` — the model behind them (base movement only).
+- In Unity (C#, menus under **Tools/HNL/Grass**): `GrassTilePainter` (the Grass tile rules as code: `Paint`,
+  `Check`), `GrassArtPass` (**Greybox To Tiles**, **Sky Backdrop**, **Check Tile Placement**). See `tile-placement.md`.
 - `gbsim_bouncers.py` — the model plus moving, single-use bounce enemies with synced patrols, for routes that
   stomp across them.
 
@@ -73,10 +78,18 @@ level: no edits to reference scenes, shared prefabs or global systems. If one is
 the project's working rules (CLAUDE.md, the unity-cleanup-rules memory: never edit PlayerControls.cs, never
 move or rename files yourself, keep serialized names).
 
+**Painting ground, or turning a greybox into art** (a painted level, a greybox the user wants finished, a review of
+painted ground): read `references/tile-placement.md` first and place tiles the way the user does. It records the
+rules learned from the user's own tiles, the conversion that applies them, and its validation checklist. In Grassy
+Green, use `GrassArtPass` and `GrassTilePainter` and do not hand-roll tile code. The user's hand-painted tiles are
+the reference: keep them, and report their faults instead of repainting them. A zone with no section in that file
+has to be studied first, from its own scenes.
+
 ### 6. Validate it
 `testing.md`, in order: the model (layout clean, the route completes, early jumps and early steering survive), then
 Unity (the route with enemies off, a pass with enemies on, pickups, checkpoints, the treasure, screenshots), with
-the saves protected. Fix layout faults by changing geometry or placement, never Harvey or shared prefabs.
+the saves protected. Fix layout faults by changing geometry or placement, never Harvey or shared prefabs. For
+painted ground, also run `tile-placement.md`'s checklist (the tile check, no greybox left, the sky sweep).
 
 **Acceptance criteria** (all must hold, or the report says which do not):
 - The main route completes with base movement and the level's own launchers, in the model and in Unity.

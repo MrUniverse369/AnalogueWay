@@ -1,9 +1,9 @@
 # Boss balance: the difficulty curve across the zones
 
 Written 2026-10-27 (BOSSBALANCE). The numbers below were read from the scenes and prefabs, not from memory or the setup
-tools: `Z4BossGrass` (the `MotherBoss.prefab` YokaiBoss, no stage overrides in the scene), `Z1BossTomb`
-(VoidShrineBoss), `Z2BossSandy` (the old Sandscale Scarab YokaiBoss at HEAD 46051a0, now switched off) and
-`Z3BossBattle` (SamuraiBoss). Every arena is the same size: floor at y -5, limits x -4.2 to 10.2 (14.4 units).
+tools: `Z1Boss_GrassGreen` (the `MotherBoss.prefab` YokaiBoss, no stage overrides in the scene), `Z2Boss_Tomb`
+(VoidShrineBoss), `Z3Boss_Egypt` (the old Sandscale Scarab YokaiBoss at HEAD 46051a0, now switched off) and
+`Z4Boss_Japan` (SamuraiBoss). Every arena is the same size: floor at y -5, limits x -4.2 to 10.2 (14.4 units).
 Play order comes from the Build Settings: Grassy Green, Old Tomb, Sandy Dunes (Egypt), Snow Temple (Japan).
 
 ## How a boss's difficulty is made here
@@ -86,7 +86,7 @@ Why these numbers:
 
 ## The Sandy Dunes mini-boss (SANDFIN, 2026-10-28)
 
-Sandfin (Z2MiniBossSandy, between Act 3 and Act 4) sits between a Dunes act and the Landshark on purpose:
+Sandfin (Z3MiniBoss_Egypt, between Act 3 and Act 4) sits between a Dunes act and the Landshark on purpose:
 
 | | Regular Sandshark | **Sandfin** (mini-boss) | Landshark |
 | --- | --- | --- | --- |

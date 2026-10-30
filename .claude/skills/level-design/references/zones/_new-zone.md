@@ -1,4 +1,4 @@
-# Zone profile — <Zone name> (<scene prefix>)
+# Zone profile — <Zone name> (<scene prefix, Z + its place in play order>)
 
 Copy this file to `zones/<zone>.md` when a brief names a zone with no profile. Fill it from evidence, tag every line
 ([user] [ref] [built] [assumed], see `method.md`), and mark the status honestly. Ask the user only for what the
@@ -7,7 +7,7 @@ project cannot tell you, and record their answers here with the date.
 **Status: draft | partial | usable | complete.** Play-order position. Sources: which scenes, notes, doc sections.
 
 ## Identity
-Setting, palette, atmosphere (ZoneAtmosphere decides it from the scene prefix), music, story role.
+Setting, palette, atmosphere (ZoneAtmosphere takes it from the level registry's `atmosphere`; add the zone's levels to LevelRegistry.json), music, story role.
 
 ## Structure and traversal
 A table of the authored levels: size, shape from `scene_profile.py --map`, how height is gained and lost. Then the

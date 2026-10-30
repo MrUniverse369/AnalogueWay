@@ -1,11 +1,11 @@
 # Level record — Z4A6 Challenge Arena
 
-**Level-specific.** The decisions behind one room of Z4A6GrassGreen. Lift anything that proves general into
+**Level-specific.** The decisions behind one room of Z1A1_GrassGreen. Lift anything that proves general into
 `method.md` or `zones/grassy-green.md`.
 
 | | |
 | --- | --- |
-| Scene | Assets/Scenes/Z4A6GrassGreen.unity, root object `ChallengeArena` |
+| Scene | Assets/Scenes/Z1A1_GrassGreen.unity, root object `ChallengeArena` |
 | Code | Assets/Scripts/ChallengeArena.cs (marker CHALLENGE); setup tool Tools/HNL/Set Up Grass Challenge Arena (Assets/Editor/GrassChallengeSetup.cs) |
 | Built | 2026-10-25; room shrunk by the user and spawns refitted 2026-10-26 |
 

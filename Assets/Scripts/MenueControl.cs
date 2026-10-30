@@ -86,6 +86,7 @@ public class MenueControl : MonoBehaviour
         if (PauseMenuStyle.BlocksPause) return; // MAP: the "back to the map?" question handles its own back/Esc
         if (DialogueBox.BlocksPause) return; // DIALOGUE: Circle/Esc leaves a conversation, not into the pause menu
         if (LevelLoader.Busy) return; // LOADING: no pausing while a level is loading or being revealed
+        if (NextLevel.Ending || TownExit.Exiting) return; // B14: Esc in the level-complete freeze used to unfreeze the game
         // PAUSE: only a real pause panel toggles. In the main menu pauseMenueUI is the menu itself, so pausing
         // there used to freeze time and then hide the whole menu (with this script on it), leaving no way back.
         if (pauseMenueUI != null && pauseMenueUI != gameObject && PausePressed())

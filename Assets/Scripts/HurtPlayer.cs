@@ -41,6 +41,7 @@ public class HurtPlayer : MonoBehaviour
             return;
         }
 
+        bool dies = false; // B3:
         // DEATH: an enemy that is already dying (playing its smoke animation) can no longer hurt the player
         if (other.CompareTag("PlayerDetectionArea") && !PowerUpManager.Has(TalismanTrait.EnemyImmunity) && (ownEnemy == null || !ownEnemy.IsDying)
             && !SamuraiSlash.ClashProtected // CLASH: not straight after a samurai clash (DASHCLASH: this test had slipped into the HEAL comment) // HEAL: (SHIELD: the Healing Stone's shield is handled above, for hazards too) // POWERUP: was ActiveCardManager.speedBoostPowerUp != true
@@ -59,19 +60,20 @@ public class HurtPlayer : MonoBehaviour
             // SFX: hurt sound only when a life was really lost and some remain; spikes/kill planes go straight to the game-over sound
             if (PlayerController.playerInviInvincible == false && pLivesCount > 0 && !gameObject.CompareTag("Fspike") && !gameObject.CompareTag("KillPlane") && audioManager != null)
                 audioManager.PlaySfxOneShot(audioManager.playerHurtSound);
-            if (pLivesCount <= 0) lmanagerScriptRef.Respawn();
+            dies = pLivesCount <= 0; // B3: decided once below, so a spike or kill plane on 1 life respawns once
         }
 
         if (other.CompareTag("PlayerDetectionArea") && gameObject.CompareTag("Fspike"))
         {
             if (PlayerController.playerInviInvincible == false) pLivesCount = 0;
-            if (pLivesCount <= 0) lmanagerScriptRef.Respawn();
+            dies |= pLivesCount <= 0;
         }
         if (other.CompareTag("PlayerDetectionArea") && gameObject.CompareTag("KillPlane"))
         {
 
             if (PlayerController.playerInviInvincible == false) pLivesCount = 0;
-            if (pLivesCount <= 0) lmanagerScriptRef.Respawn();
+            dies |= pLivesCount <= 0;
         }
+        if (dies) lmanagerScriptRef.Respawn(); // B3: was called from each block above, so one touch could respawn twice
     }
 }

@@ -6,6 +6,7 @@ public class ResetOnRespawn : MonoBehaviour
     [SerializeField] private Vector2 startPos;
     [SerializeField] private Quaternion startRot;
     [SerializeField] private Vector2 startScale;
+    private float startScaleZ = 1f; // B5: startScale is a Vector2 (serialized, so kept), which reset the z scale to 0
     [SerializeField] private Rigidbody2D startRb;
     [SerializeField] private MovingObstacles fallingObj;
     [SerializeField] private GameObject activeCardManScriptRef;
@@ -18,6 +19,7 @@ public class ResetOnRespawn : MonoBehaviour
         startPos = transform.position;
         startRot = transform.rotation;
         startScale = transform.localScale;
+        startScaleZ = transform.localScale.z; // B5:
 
         ownRb = GetComponent<Rigidbody2D>(); // PERF:
         ownFallingObj = GetComponent<MovingObstacles>(); // PERF:
@@ -37,7 +39,7 @@ public class ResetOnRespawn : MonoBehaviour
     {
         transform.position = startPos;
         transform.rotation = startRot;
-        transform.localScale = startScale;
+        transform.localScale = new Vector3(startScale.x, startScale.y, startScaleZ); // B5: was = startScale (z became 0)
         if (ownRb != null) ownRb.linearVelocity = Vector2.zero; // PERF: was two GetComponent calls per object per respawn
         if (ownFallingObj != null) ownFallingObj.GetPDetected = false; // PERF:
     }

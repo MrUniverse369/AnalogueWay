@@ -5,7 +5,7 @@ using UnityEngine;
 
 /// <summary>
 /// YARNCHASE (2026-10-28): scripted Time Trail tests for the Playtest agent, started from the Unity MCP in Play mode on
-/// Z4A7GrassGreen: QATimeTrailDriver.Run("&lt;mode&gt;", "&lt;log file&gt;"). Harvey plays through his own controller
+/// Z1A2_GrassGreen: QATimeTrailDriver.Run("&lt;mode&gt;", "&lt;log file&gt;"). Harvey plays through his own controller
 /// (PlayerController.BotX is the stick, QueueJumpPress a jump, a talisman press is the slot's pressQueued, as its
 /// button sets it); the trail, the yarn, the foxes, chi and the combo run untouched. It starts from a new game's state
 /// (Inventory.ResetToNewGame: no skills, the starting loadout; saves must already be in memory), so the balance is
@@ -73,7 +73,7 @@ public class QATimeTrailDriver : MonoBehaviour
         rb = pc.GetComponent<Rigidbody2D>();
         trail = FindFirstObjectByType<TimeTrail>();
         if (trail == null) { Line("no TimeTrail in the scene"); yield break; }
-        z4a9 = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Z4A9GrassGreen";
+        z4a9 = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Z1A4_GrassGreen";
         StartSpot = z4a9 ? new Vector2(5.5f, 30.2f) : new Vector2(150.5f, 57.2f);
         LineX = z4a9 ? 8.4f : 153.4f;
         Application.targetFrameRate = 60;

@@ -1,4 +1,4 @@
-# Zone profile — Snow Temple / Japan (Z3)
+# Zone profile — Snow Temple / Japan (Z4; Z3 before 2026-10-30)
 
 **Status: partial.** World 4 (last) in play order. Sources: the authored levels Z3A1 and Z3A2 (scene inventory and
 silhouettes, 2026-10-26), the samurai block, combo, enemy-spacing and music memories (2026-10-19 to 20), changeWorld,
@@ -8,7 +8,7 @@ asked for; the level structure is **[ref]** observation.
 ## Identity
 
 - Japanese temple and spirit world: palette 213447 314358 405874 6583a7 plus whites; sakura petals (automatic in
-  `Z3*` scenes). Z3A1–A2 are the sunlit act; later levels, the village and the boss arena are snowy. [ref]
+  every Japan level, from the registry's atmosphere). Z4A1–A2 (Z3A1–A2 before 2026-10-30) are the sunlit act; later levels, the village and the boss arena are snowy. [ref]
 - Levels start in "world one", the snowy spirit world (`changeWorld.lWorld == false`). [ref]
 - Setting and story [board, "Japan Level Lore and Time period planning"]: late 1700s to early 1800s; a sub-quest
   where Harvey helps a son reach his mother in the spirit world by travelling through the torii gates. Japan is
@@ -49,7 +49,7 @@ Wide, long levels with modest height. Springs exist (JumpBox, and JumpBoxWorldOn
   is what lets a player chain kills. [user 2026-10-20 work]
 - A ghost row is a stomp chain: bounce heights must carry Harvey from one ghost to the next. [user 2026-10-19 work]
 
-Boss: Sumaria (Z3BossBattle); reward undecided.
+Boss: Sumaria (Z4Boss_Japan); reward undecided.
 
 ## Hazards and rewards
 
@@ -58,7 +58,7 @@ Boss: Sumaria (Z3BossBattle); reward undecided.
 
 ## Greybox notes for this zone
 
-- Base scene: Z3A1Japan or Z3A2Japan.
+- Base scene: Z4A1_Japan or Z4A2_Japan.
 - **Capability gap**: the greybox pattern has no support for two worlds. A Japan greybox needs two geometry roots
   (one per world), per-world enemies and coins, torii gates, and a changeWorld wired to all of them, and
   check_layout.py models one world only. Plan this with the user before the first Japan greybox; a single-world

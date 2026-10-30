@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 /// foxes, coins over the fox ledges, chests, one checkpoint a third of the way) and Z4A7 (tunnels, springs and
 /// bounce clouds, flying bounce enemies used as stepping stones, spikes in dips, ceiling spikes in no-jump corridors,
 /// coin columns marking launches and coin blocks as big optional rewards, one checkpoint near the middle).
-/// It starts from a copy of Z4A7GrassGreen so it has the real Harvey, camera, HUD, pause menu, level manager,
+/// It starts from a copy of Z1A2_GrassGreen so it has the real Harvey, camera, HUD, pause menu, level manager,
 /// talisman manager, music, kill planes and the level-end treasure, and strips every piece of art and terrain.
 /// SKYISLANDS (2026-10-26): the level is a climb through floating sky islands, about 125 tiles wide and 60 high, that
 /// zig-zags up: right, left, right, left, right. Each island is its own place with a climb inside it; sky bridges cross
@@ -47,7 +47,7 @@ using UnityEngine.SceneManagement;
 public static class GreyboxLevelBuilder
 {
     public const string ScenePath = "Assets/Scenes/Greybox_GrassyGreen_Level3.unity";
-    private const string BaseScene = "Assets/Scenes/Z4A7GrassGreen.unity";
+    private const string BaseScene = "Assets/Scenes/Z1A2_GrassGreen.unity";
     private const string WhiteBoxPath = "Assets/Sprites/Tutorial/WhiteBox.png";
     private const string PostDir = "Assets/Sprites/Greybox/";
     private const string FoxPrefab = "Assets/Prefabs/Enemy/Grass/ForestSpiritFox.prefab";

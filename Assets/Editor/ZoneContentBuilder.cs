@@ -12,15 +12,15 @@ public static class ZoneContentBuilder
 {
     // Only the Tomb's backdrop is a full wall that has to be rebuilt around a new layout; the other zones show a
     // parallax sky behind patchy backdrop tilemaps.
-    private static bool RefillsBackdrop(string baseLevel) => baseLevel.StartsWith("Z1");
+    private static bool RefillsBackdrop(string baseLevel) => LevelRegistry.Find(baseLevel)?.zone == "TOMB"; // LEVELNAMES: Tomb bases
 
     // base level, new scene, seed, difficulty (1-5)
     private static readonly (string from, string to, int seed, int difficulty)[] Drafts =
     {
-        ("Z1A1Tomb", "Z1A4Tomb", 104, 3), ("Z1A1Tomb", "Z1A5Tomb", 105, 4),
-        ("Z2A2Sandy", "Z2A3Sandy", 203, 2), ("Z2A2Sandy", "Z2A4Sandy", 204, 3), ("Z2A2Sandy", "Z2A5Sandy", 205, 4),
-        ("Z3A1Japan", "Z3A3Japan", 303, 3), ("Z3A1Japan", "Z3A4Japan", 304, 4),
-        ("Z4A6GrassGreen", "Z4A8GrassGreen", 408, 2), ("Z4A6GrassGreen", "Z4A9GrassGreen", 409, 3), ("Z4A6GrassGreen", "Z4A10GrassGreen", 410, 4),
+        ("Z2A1_Tomb", "Z2A4_Tomb", 104, 3), ("Z2A1_Tomb", "Z2A5_Tomb", 105, 4),
+        ("Z3A2_Egypt", "Z3A3_Egypt", 203, 2), ("Z3A2_Egypt", "Z3A4_Egypt", 204, 3), ("Z3A2_Egypt", "Z3A5_Egypt", 205, 4),
+        ("Z4A1_Japan", "Z4A3_Japan", 303, 3), ("Z4A1_Japan", "Z4A4_Japan", 304, 4),
+        ("Z1A1_GrassGreen", "Z1A3_GrassGreen", 408, 2), ("Z1A1_GrassGreen", "Z1A4_GrassGreen", 409, 3), ("Z1A1_GrassGreen", "Z1A5_GrassGreen", 410, 4),
     };
 
     private const string BossArt = "Assets/Sprites/Enemies/Bosses/";
@@ -46,7 +46,7 @@ public static class ZoneContentBuilder
     {
         new BossDef
         {
-            baseLevel = "Z1A1Tomb", scene = "Z1BossTomb", name = "GraveWarden", body = "Boss_GraveWarden",
+            baseLevel = "Z2A1_Tomb", scene = "Z2Boss_Tomb", name = "GraveWarden", body = "Boss_GraveWarden",
             projectile = "Hazard_SpiritBolt", rock = "Hazard_StoneBlock", wave = "Hazard_SpiritWave", standingHeight = 2.7f, width = 2.3f,
             stages = new[]
             {
@@ -60,7 +60,7 @@ public static class ZoneContentBuilder
         },
         new BossDef
         {
-            baseLevel = "Z2A2Sandy", scene = "Z2BossSandy", name = "SandscaleScarab", body = "Boss_SandScarab",
+            baseLevel = "Z3A2_Egypt", scene = "Z3Boss_Egypt", name = "SandscaleScarab", body = "Boss_SandScarab",
             projectile = "Hazard_SandBall", rock = "Hazard_SandBlock", wave = "Hazard_SandWave", standingHeight = 2f, width = 2.7f,
             stages = new[]
             {
@@ -74,7 +74,7 @@ public static class ZoneContentBuilder
         },
         new BossDef
         {
-            baseLevel = "Z4A6GrassGreen", scene = "Z4BossGrass", name = "KingMossback", body = "Boss_KingMossback",
+            baseLevel = "Z1A1_GrassGreen", scene = "Z1Boss_GrassGreen", name = "KingMossback", body = "Boss_KingMossback",
             projectile = "Hazard_Seed", rock = "Hazard_MossyRock", wave = "Hazard_LeafWave", spike = "Hazard_Thorn", standingHeight = 2.3f, width = 2.5f,
             stages = new[]
             {

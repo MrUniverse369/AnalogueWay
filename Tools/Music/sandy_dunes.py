@@ -1,5 +1,5 @@
 """
-"Sandy Dunes" - loopable BGM for AnalogueWay's sandy levels (Z2A1Sandy, Z2A2Sandy).
+"Sandy Dunes" - loopable BGM for AnalogueWay's sandy levels (Z3A1_Egypt, Z3A2_Egypt).
 Modern pixel-platformer desert groove: E Hijaz / A harmonic minor, 118 BPM, light swing.
 Ney flute + oud plucks in the verses, FM brass chorus, darbuka (maqsum rhythm), riq, finger cymbals.
 

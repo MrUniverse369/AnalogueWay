@@ -1,5 +1,5 @@
 """SANDFIN (2026-10-28): turns the user's GreenBabySharkMiniBoss sheet (smooth-upscaled pixel art on transparency, as
-delivered) into a game-ready sheet for the Sandy Dunes mini-boss (Z2MiniBossSandy):
+delivered) into a game-ready sheet for the Sandy Dunes mini-boss (Z3MiniBoss_Egypt):
 
   in (kept untouched): Assets/Sprites/Enemies/Egypt/BabyShark/GreenBabySharkMiniBoss.png
        top row: 6 frames, the green shark swimming (tail and fins beat; its idle and its swim)

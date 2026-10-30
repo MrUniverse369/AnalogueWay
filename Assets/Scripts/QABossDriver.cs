@@ -456,7 +456,7 @@ public static class QABossDriver
         Add("two stages in order", stageSeq.Count == 2 && stageSeq[0] == 0 && stageSeq[1] == 1, "stages " + string.Join(" -> ", stageSeq) + "; attacks seen " + string.Join(", ", seen));
         Add("defeat, treasure and reward", boss.Defeated && treasure != null && treasure.activeInHierarchy && !talisman && chests >= 1 && chests <= 2,
             $"defeated {boss.Defeated} after {fightS:0.0} s ({fightHits} hits on the dodging bot); treasure shown {(treasure != null && treasure.activeInHierarchy)}; talisman on it {talisman}; {chests} chest(s)");
-        Add("sits between Act 3 and Act 4", before == "Z2A3Sandy" && next == "Z2A4Sandy",
+        Add("sits between Act 3 and Act 4", before == "Z3A3_Egypt" && next == "Z3A4_Egypt",
             $"build index {here}: after {before}, before {next}");
         LevelManager.Instance.Respawn();
         yield return new WaitForSeconds(4f);

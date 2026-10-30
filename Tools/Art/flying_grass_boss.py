@@ -1,5 +1,5 @@
 """KINGMOSS (2026-10-23): turns the King Mossback sheet (FlyingGrassBoss.png: upscaled pixel art on transparency,
-7 animation rows and a row of effects) into game-ready sheets for the Grass boss (Z4BossGrass):
+7 animation rows and a row of effects) into game-ready sheets for the Grass boss (Z1Boss_GrassGreen):
 
   in:  Assets/Sprites/Enemies/Grass/FlyingGrassBoss.png                    the sheet as delivered (kept untouched)
   out: Assets/Sprites/Enemies/Bosses/KingMoss/KingMoss_Body.png            one row per animation, equal cells:

@@ -25,7 +25,7 @@ public static class GrassPassSetup
     private const string WoodSprite = "Assets/Sprites/Obstacles/WoodenSpikes.png";
     private const string MushroomPrefab = "Assets/Prefabs/Enemy/Grass/FloatingMushroom.prefab";
     private const string FoxPrefab = "Assets/Prefabs/Enemy/Grass/ForestSpiritFox.prefab";
-    private const string BiplaneScene = "Assets/Scenes/Z4A6GrassGreen.unity";
+    private const string BiplaneScene = "Assets/Scenes/Z1A1_GrassGreen.unity";
     private const string FrontCloud = "BackgroundCloudOnePara", BackCloud = "BackGroundCloudsTwoParrallax";
     private const float FrontDepth = 0.12f, BackDepth = 0.2f;
     private const float SectionBelow = 9f, SectionAbove = 5f; // how far below/above the clouds Harvey can be
@@ -289,7 +289,7 @@ public static class GrassPassSetup
         foreach (EditorBuildSettingsScene s in EditorBuildSettings.scenes)
         {
             string name = System.IO.Path.GetFileNameWithoutExtension(s.path);
-            if (name.StartsWith("Z4") && System.IO.File.Exists(s.path)) WithScene(s.path, edit);
+            if (LevelRegistry.Find(name)?.zone == "GRASSY_GREEN" && System.IO.File.Exists(s.path)) WithScene(s.path, edit); // LEVELNAMES: Grassy Green levels
         }
     }
 

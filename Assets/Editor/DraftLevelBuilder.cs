@@ -80,7 +80,7 @@ public static class DraftLevelBuilder
 
     /// <summary>
     /// Copies baseScene to newScene and turns it into a boss arena: a walled 16-tile floor painted with the zone's
-    /// tiles, plus the boss rig (BossArena, YokaiBoss, BossTreasure) copied from Z3BossBattle. Returns the new boss.
+    /// tiles, plus the boss rig (BossArena, YokaiBoss, BossTreasure) copied from Z4Boss_Japan. Returns the new boss.
     /// </summary>
     public static YokaiBoss BuildBossArena(string baseScene, string newScene, bool refillBackdrop)
     {
@@ -90,7 +90,7 @@ public static class DraftLevelBuilder
         foreach (var e in Object.FindObjectsByType<YokaiBoss>(FindObjectsInactive.Include, FindObjectsSortMode.None))
             Object.DestroyImmediate(e.gameObject);
 
-        // Same arena geometry as Z3BossBattle: floor top at y -5, inner x -5..11, walls at -5.5 and 11.5.
+        // Same arena geometry as Z4Boss_Japan: floor top at y -5, inner x -5..11, walls at -5.5 and 11.5.
         const int floorTop = -5;
         for (int x = -24; x <= 30; x++)
             for (int y = floorTop - 10; y < floorTop; y++)
@@ -105,7 +105,7 @@ public static class DraftLevelBuilder
         ctx.FillBackdrops(-30, 36, floorTop - 16, floorTop + 20);
 
         // copy the boss rig from the Japan boss scene, keeping the references between its parts
-        Scene source = EditorSceneManager.OpenScene("Assets/Scenes/Z3BossBattle.unity", OpenSceneMode.Additive);
+        Scene source = EditorSceneManager.OpenScene("Assets/Scenes/Z4Boss_Japan.unity", OpenSceneMode.Additive);
         var holder = new GameObject("BossRigHolder");
         SceneManager.MoveGameObjectToScene(holder, source);
         foreach (var root in source.GetRootGameObjects())
@@ -115,8 +115,8 @@ public static class DraftLevelBuilder
         SceneManager.MoveGameObjectToScene(copy, scene);
         foreach (Transform child in copy.transform.Cast<Transform>().ToList()) child.SetParent(null, true);
         Object.DestroyImmediate(copy);
-        EditorSceneManager.CloseScene(source, true); // not saved: Z3BossBattle is untouched
-        // SAMURAIBOSS: Sumaria (SamuraiBoss) fights in Z3BossBattle now, so its YokaiBoss is kept switched off there as
+        EditorSceneManager.CloseScene(source, true); // not saved: Z4Boss_Japan is untouched
+        // SAMURAIBOSS: Sumaria (SamuraiBoss) fights in Z4Boss_Japan now, so its YokaiBoss is kept switched off there as
         // the template for these arenas; the copy is switched back on
         foreach (var root in scene.GetRootGameObjects().Where(g => g.name == "YokaiBoss")) root.SetActive(true);
 
@@ -140,7 +140,7 @@ public static class DraftLevelBuilder
         if (ctx.treasure != null) CopyNextLevelRefs(ctx.treasure.GetComponent<NextLevel>(), treasure.GetComponent<NextLevel>());
         ctx.DestroyTemplates();
 
-        // player, respawn and a fixed camera framing the arena (as in Z3BossBattle)
+        // player, respawn and a fixed camera framing the arena (as in Z4Boss_Japan)
         ctx.player.transform.position = new Vector3(-2.5f, floorTop + 1.2f, 0f);
         ctx.respawn.position = new Vector3(-2.5f, floorTop + 1.6f, 0f);
         var pso = new SerializedObject(ctx.player);

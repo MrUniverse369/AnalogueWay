@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// VOIDSHRINE (2026-10-22): the Void Shrine, the antlered fox-skull octopus guarding the Tomb (Z1BossTomb). Three
+/// VOIDSHRINE (2026-10-22): the Void Shrine, the antlered fox-skull octopus guarding the Tomb (Z2Boss_Tomb). Three
 /// lives, one stage each. Every animation is the user's sheet (Void Shrine Boss Sprite Sheet.png): idle, float, the
 /// three attacks, hurt and defeat. The frames face right (the skull's side); the swipe and the orb throw reach out
 /// on the tail side, so it turns its tail toward Harvey for those two (that turn is part of the tell).

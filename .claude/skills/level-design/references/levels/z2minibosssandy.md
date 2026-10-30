@@ -1,11 +1,11 @@
-# Level record — Z2MiniBossSandy (Sandfin, the Sandy Dunes mini-boss)
+# Level record — Z3MiniBoss_Egypt (Sandfin, the Sandy Dunes mini-boss)
 
 **Level-specific.** The decisions behind one boss-arena level. Lift anything that proves general into `method.md` or
 `zones/sandy-dunes.md`.
 
 | | |
 | --- | --- |
-| Scene | Assets/Scenes/Z2MiniBossSandy.unity, in Build Settings at index 20, between Z2A3Sandy and Z2A4Sandy |
+| Scene | Assets/Scenes/Z3MiniBoss_Egypt.unity, in Build Settings at index 20, between Z3A3_Egypt and Z3A4_Egypt |
 | Builder | Assets/Editor/SandfinMiniBossSetup.cs, Tools/HNL/Build Sandfin Mini-Boss Level (marker SANDFIN) |
 | Boss | Assets/Scripts/SandfinMiniBoss.cs; art Tools/Art/green_shark_miniboss.py from the user's GreenBabySharkMiniBoss.png |
 | Map | node `Z2Mini` in Tools/Art/zone_map.py and ZoneSelectSceneBuilder (the old A3-to-A4 bend); A4 and A5 moved up to y 40 |
@@ -20,7 +20,7 @@
 - **Sand, not water** [user brief: "Sandshark behaviours... moving through sand"]. The sheet is the green *water*
   shark species (Z2's BabyShark is the same green), legless and swimming, so it swims through the sand like water;
   the Ground layer hides what is below the floor line (the Landshark's trick).
-- **The arena is a copy of Z2BossSandy** [own decision]: a fixed camera, walls, respawn and treasure that already
+- **The arena is a copy of Z3Boss_Egypt** [own decision]: a fixed camera, walls, respawn and treasure that already
   work with a burrowing boss. Its floor is kept flat, so every tell (the mound, the surfaced lunge) is readable and
   nothing can trap a boss that lives in the floor. The treasure's TalismanUnlock is removed: the Summoning Talisman
   stays the Landshark's. **Open**: it shares the final arena's tiles and backdrop; a paint pass of its own would

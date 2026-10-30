@@ -31739,8 +31739,8 @@ Tilemap:
   - first: {x: 3, y: 12, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 6
-      m_TileSpriteIndex: 6
+      m_TileIndex: 7
+      m_TileSpriteIndex: 7
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -32699,8 +32699,8 @@ Tilemap:
   - first: {x: 3, y: 13, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 5
-      m_TileSpriteIndex: 5
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -45109,8 +45109,8 @@ Tilemap:
   - first: {x: 69, y: 28, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -45119,8 +45119,8 @@ Tilemap:
   - first: {x: 70, y: 28, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -46458,9 +46458,9 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 280
+  - m_RefCount: 278
     m_Data: {fileID: 11400000, guid: 1e0ab3857e5734b3b8cda481b7f6fca0, type: 2}
-  - m_RefCount: 3158
+  - m_RefCount: 3161
     m_Data: {fileID: 11400000, guid: 0f813c64973d549f28fdd23391dcb2f9, type: 2}
   - m_RefCount: 17
     m_Data: {fileID: 11400000, guid: 9dc123253250d4030bd66a2a8e170cba, type: 2}
@@ -46468,18 +46468,18 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 2f986da7d007f435fb583d436603e7ee, type: 2}
   - m_RefCount: 18
     m_Data: {fileID: 11400000, guid: e236ca8d002184da2bfd62111e5daeab, type: 2}
-  - m_RefCount: 138
+  - m_RefCount: 137
     m_Data: {fileID: 11400000, guid: 4f518dfcec26448d9be29158ca5e2cb8, type: 2}
-  - m_RefCount: 11
+  - m_RefCount: 10
     m_Data: {fileID: 11400000, guid: 36b23d00fb7db4e4480678de541db2e7, type: 2}
-  - m_RefCount: 293
+  - m_RefCount: 294
     m_Data: {fileID: 11400000, guid: 026d859c8072945bbbf3d95f86804cab, type: 2}
   - m_RefCount: 9
     m_Data: {fileID: 11400000, guid: f19c9e6f07bfa405496ee087f2e7c1ed, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 280
+  - m_RefCount: 278
     m_Data: {fileID: 99684798, guid: 96a77d990535c4ccc9976dd6fd186a56, type: 3}
-  - m_RefCount: 3158
+  - m_RefCount: 3161
     m_Data: {fileID: -182838419, guid: 96a77d990535c4ccc9976dd6fd186a56, type: 3}
   - m_RefCount: 17
     m_Data: {fileID: 1710431786, guid: 96a77d990535c4ccc9976dd6fd186a56, type: 3}
@@ -46487,11 +46487,11 @@ Tilemap:
     m_Data: {fileID: -390689033, guid: 96a77d990535c4ccc9976dd6fd186a56, type: 3}
   - m_RefCount: 18
     m_Data: {fileID: 1512998222, guid: 96a77d990535c4ccc9976dd6fd186a56, type: 3}
-  - m_RefCount: 138
+  - m_RefCount: 137
     m_Data: {fileID: -528302933, guid: 96a77d990535c4ccc9976dd6fd186a56, type: 3}
-  - m_RefCount: 11
+  - m_RefCount: 10
     m_Data: {fileID: 1283869840, guid: 96a77d990535c4ccc9976dd6fd186a56, type: 3}
-  - m_RefCount: 293
+  - m_RefCount: 294
     m_Data: {fileID: -588119087, guid: 96a77d990535c4ccc9976dd6fd186a56, type: 3}
   - m_RefCount: 9
     m_Data: {fileID: 971425965, guid: 96a77d990535c4ccc9976dd6fd186a56, type: 3}
@@ -74955,6 +74955,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1948382544926291788, guid: 9bc686a7eed4c4f469064ef4003fe1cd, type: 3}
   m_PrefabInstance: {fileID: 1120058271}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1123485820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1123485822}
+  - component: {fileID: 1123485821}
+  m_Layer: 0
+  m_Name: SkyBackdrop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1123485821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123485820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2c0706452b242bdad98d96ed2133ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkyBackdrop
+  cam: {fileID: 1448741560}
+  band: {fileID: 21300000, guid: 3a3a6082732a64e80bca7840e63030e6, type: 3}
+  bandBottom: 0.99125004
+  bandPhase: -10.76125
+  bandParallax: 0.008
+  above: {r: 0.043137256, g: 0.6901961, b: 0.99215686, a: 1}
+  below: {r: 0.32941177, g: 0.7882353, b: 1, a: 1}
+  material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  sortingLayer: Default
+  sortingOrder: -32000
+  margin: 2
+--- !u!4 &1123485822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123485820}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1126268847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81732,6 +81787,11 @@ PrefabInstance:
 --- !u!1 &1448741559 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1315481228748501502, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
+  m_PrefabInstance: {fileID: 1448741558}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1448741560 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1315481228748501500, guid: 1152e532987f74d8c9b3d0bdab1eb1b2, type: 3}
   m_PrefabInstance: {fileID: 1448741558}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1449185679
@@ -93924,6 +93984,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1123485822}
   - {fileID: 948761254}
   - {fileID: 606827778}
   - {fileID: 8427655564941566248}

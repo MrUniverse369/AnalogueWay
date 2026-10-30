@@ -5,14 +5,14 @@ using UnityEngine;
 
 /// <summary>
 /// DIALOGUE: editor tools for the dialogue system.
-///   Tools/HNL/Set Up Village Villagers   gives each villager in Z3JapanVillage a Villager component with a name,
+///   Tools/HNL/Set Up Village Villagers   gives each villager in Z4Village_Japan a Villager component with a name,
 ///                                         the village dialogue file and their start node (safe to run again; it
 ///                                         only sets these fields, so later inspector tweaks to range are kept)
 ///   Tools/HNL/Check Dialogue Files       parses every .txt in Assets/Dialogue and lists mistakes with line numbers
 /// </summary>
 public static class VillagerSetup
 {
-    private const string ScenePath = "Assets/Scenes/Z3JapanVillage.unity";
+    private const string ScenePath = "Assets/Scenes/Z4Village_Japan.unity";
     private const string DialogueDir = "Assets/Dialogue";
     private const string VillageFile = DialogueDir + "/JapanVillage.txt";
 

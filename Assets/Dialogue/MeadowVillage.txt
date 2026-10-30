@@ -1,4 +1,4 @@
-// Harvey's Nine Lives: the hill village in the Grassy Meadow (Z4GrassVillage).
+// Harvey's Nine Lives: the hill village in the Grassy Meadow (Z1Village_GrassGreen).
 // Format notes: see JapanVillage.txt and Assets/Scripts/DialogueScript.cs. Check with Tools/HNL/Check Dialogue Files.
 
 

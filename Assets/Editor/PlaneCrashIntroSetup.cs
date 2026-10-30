@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// INTRO (2026-10-26): puts the plane-crash opening (PlaneCrashIntro) into Z4A6GrassGreen, the first Grassy Green
+/// INTRO (2026-10-26): puts the plane-crash opening (PlaneCrashIntro) into Z1A1_GrassGreen, the first Grassy Green
 /// level: imports the flight frames drawn by Tools/Art/biplane_intro.py, adds a "PlaneCrashIntro" object to the scene
 /// (once; re-running only refreshes its references) wired to the level's own crashed biplane, the frames, the engine
 /// and backfire sounds from Tools/Audio/biplane_sfx.py and the existing boulder thud and break for the impact, and
@@ -15,7 +15,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public static class PlaneCrashIntroSetup
 {
-    private const string ScenePath = "Assets/Scenes/Z4A6GrassGreen.unity";
+    private const string ScenePath = "Assets/Scenes/Z1A1_GrassGreen.unity";
     private const string ArtDir = "Assets/Sprites/Enemies/Grass/Biplane/";
     private static readonly string[] Frames = { "BiplaneFlight_0.png", "BiplaneFlight_1.png", "BiplaneFlight_2.png" };
     private const string EngineClip = "Assets/Sound/World/BiplaneEngine.wav";

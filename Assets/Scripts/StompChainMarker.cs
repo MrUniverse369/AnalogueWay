@@ -63,7 +63,7 @@ public class StompChainMarker : MonoBehaviour
 
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (mode != LoadSceneMode.Single || !scene.name.StartsWith("Z") || scene.name == ZoneSelectMap.SceneName) return;
+        if (mode != LoadSceneMode.Single || !LevelRegistry.IsLevel(scene.name)) return; // LEVELNAMES: every registered level
         if (FindFirstObjectByType<PlayerController>() == null) return;
         HNLCatalog catalog = Inventory.Catalog;
         if (catalog == null || catalog.enemyMarkerStraight == null || catalog.enemyMarkerDiagonal == null) return;

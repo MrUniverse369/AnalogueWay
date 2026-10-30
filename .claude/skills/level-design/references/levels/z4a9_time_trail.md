@@ -1,11 +1,11 @@
 # Level record — Z4A9 Time Trail (rock top)
 
-**Level-specific.** The decisions behind Z4A9GrassGreen's Time Trail, the second yarn chase. The rules are Z4A7's
+**Level-specific.** The decisions behind Z1A4_GrassGreen's Time Trail, the second yarn chase. The rules are Z4A7's
 (`z4a7_time_trail.md`); this records what differs. Lift anything general into `zones/grassy-green.md`.
 
 | | |
 | --- | --- |
-| Scene | Assets/Scenes/Z4A9GrassGreen.unity, root object `Z4A9TimeTrail`, plus painted Ground cells (ledge, lane 2, east wall) |
+| Scene | Assets/Scenes/Z1A4_GrassGreen.unity, root object `Z4A9TimeTrail`, plus painted Ground cells (ledge, lane 2, east wall) |
 | Code | Assets/Editor/Z4A9TimeTrailBuilder.cs (marker ENCOUNTERS, menu Tools/HNL/Encounters/Z4A9 Time Trail); uses GrassEncounterSetup.Paint / JumpMushroom; TimeTrail, YarnBall, TimeBoost |
 | Tests | TC-TRAIL-Z4A9, TC-TRAIL-ONEATTEMPT; QATimeTrailDriver (z4a9 branch), QABounceDriver routes JumpMushroom_WayUp1/2 |
 | Built | 2026-10-29, from the brief "Grassy Green Interactive Encounters" (every level an encounter, no type twice running) |

@@ -295,7 +295,7 @@ public static class QABounceDriver
     {
         switch (scene)
         {
-            case "Z4A7GrassGreen": return new[]
+            case "Z1A2_GrassGreen": return new[]
             {
                 R("FloatingMushroom", 16.5f, -3f, 11f, 23f, 25.2f, Jump(1, 17.75f), AimAt(21.72f), Until(0, 11.25f), Air(1, 24f), Land(0)),
                 R("JumpMushroom (6)", 56.6f, 8f, 22f, 60f, 66f, Jump(1, 57.3f), AimAt(59.51f), Until(0, 22.3f), Air(1, 62.4f), Land(0)),
@@ -306,7 +306,7 @@ public static class QABounceDriver
                 R("JumpMushroom (5)", 103f, 8f, 14f, 101f, 111f, Jump(-1, 102.2f), AimAt(99.49f), Until(0, 14.25f), Air(1, 102.5f), Land(0)),
                 R("JumpMushroom (4)", 160.2f, 18f, 25f, 166f, 168f, Jump(1, 160.7f), AimAt(163.38f), Until(0, 24.05f), Air(1, 167f), Land(0)),
             };
-            case "Z4A8GrassGreen": return new[]
+            case "Z1A3_GrassGreen": return new[]
             {
                 // ENCOUNTERS (2026-10-29): up into the Wave Sweep bowl (floor top 7, inside x 2..15); landing starts its arena, which stays in the bowl
                 R("JumpMushroom_Entry", -7.7f, -2f, 7f, 2.5f, 14.5f, Jump(1, -7.3f), AimAt(-6.5f), Until(0, 11f), Air(1, 6f), Land(0)),
@@ -317,7 +317,7 @@ public static class QABounceDriver
                 R("JumpMushroom (6)", 157.4f, 6f, 13f, 148f, 155f, Jump(-1, 157.2f), AimAt(155.55f), Until(0, 13.2f), Air(-1, 151.5f), Land(-1)),
                 R("JumpMushroom (7)", 164.8f, 7f, 25f, 154f, 166f, Jump(1, 165.4f), AimAt(168.3f), Until(0, 25.2f), Air(-1, 162f), Land(-1)),
             };
-            case "Z4A9GrassGreen": return new[]
+            case "Z1A4_GrassGreen": return new[]
             {
                 R("pillar from the left platform", 42.5f, -2f, -2f, 49f, 51f, Jump(1, 44.95f), Air(1, 49.6f), Land(0)),
                 R("JumpMushroom (2)", 49.35f, -2f, 15f, 52f, 56f, Jump(1, 49.3f), AimAt(50.01f), Until(0, 15.3f), Air(1, 53.6f), Land(1)),
@@ -325,7 +325,7 @@ public static class QABounceDriver
                 R("JumpMushroom_WayUp1", -6.6f, -2f, 14f, -2.8f, 2.8f, Jump(1, -6.1f), AimAt(-5f), Until(0, 15f), Air(1, -0.5f), Land(0)),
                 R("JumpMushroom_WayUp2", -2.6f, 14f, 29f, 3.6f, 9f, Jump(1, -2.2f), AimAt(-1.5f), Until(0, 30f), Air(1, 5.5f), Land(0)),
             };
-            case "Z4A10GrassGreen": return new[]
+            case "Z1A5_GrassGreen": return new[]
             {
                 R("JumpMushroom (2)", 14f, -2f, 6f, 16f, 17.05f, Jump(1, 15f), AimAt(19.09f), Until(0, 6.25f), Air(-1, 16.55f), Land(0)),
                 R("JumpMushroom (3)", 16.6f, 6f, 11f, 2f, 14f, Jump(-1, 16.6f), AimAt(15.27f), Until(0, 11.25f), Air(-1, 9f), Land(-1)),

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// BOSS: the shared boss for every zone (first written for Z3BossBattle). Three lives, one stage per life,
+/// BOSS: the shared boss for every zone (first written for Z4Boss_Japan). Three lives, one stage per life,
 /// each stage faster and meaner. The boss can only be hurt (stomp or dash) while it is slumped during an
 /// opening. Attacking it at any other time hurts the player instead, so the player has to wait for the opening.
 /// Each zone's boss is this component with its own art, hazards and move patterns (set per stage).

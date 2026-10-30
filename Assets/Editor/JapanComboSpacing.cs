@@ -19,7 +19,7 @@ using UnityEngine;
 /// </summary>
 public static class JapanComboSpacing
 {
-    private static readonly string[] Scenes = { "Z3A1Japan", "Z3A2Japan", "Z3A3Japan", "Z3A4Japan" };
+    private static readonly string[] Scenes = { "Z4A1_Japan", "Z4A2_Japan", "Z4A3_Japan", "Z4A4_Japan" };
     private const float MinSpacing = 3.5f;   // closer than this and a landing stomp clips the next enemy's side
     private const float MaxSpacing = 6f;     // further than this and a bounce no longer reaches the next one
     private const float MaxPatrol = 4f;      // patrol length per enemy: predictable, but still moving

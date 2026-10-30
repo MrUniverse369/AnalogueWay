@@ -19,7 +19,7 @@ using UnityEngine;
 ///      DeathAnim bool with no exit time, like the Shadow Fox
 ///   4. Assets/Prefabs/Enemy/Grass/&lt;Enemy&gt;.prefab rebuilt from its base prefab (same patrol, stomp, hurt and respawn
 ///      set-up) with the new sprite, animator and collider and its own patrol speed
-/// FlyingGrassBoss is the zone boss's art and isn't used here; Z4BossGrass is left alone.
+/// FlyingGrassBoss is the zone boss's art and isn't used here; Z1Boss_GrassGreen is left alone.
 /// </summary>
 public static class GrassEnemiesSetup
 {
@@ -216,7 +216,7 @@ public static class GrassEnemiesSetup
     public static void Reskin()
     {
         foreach (Enemy e in Enemies) FitCollider(PrefabDir + e.prefab + ".prefab", Box(e.sheet));
-        var scenes = new[] { "Assets/Scenes/Z4A7GrassGreen.unity", "Assets/Scenes/Z4A8GrassGreen.unity" };
+        var scenes = new[] { "Assets/Scenes/Z1A2_GrassGreen.unity", "Assets/Scenes/Z1A3_GrassGreen.unity" };
         // read what each placed enemy looks like now, before the prefabs change under it
         var before = new System.Collections.Generic.Dictionary<string, (float width, float top)>();
         foreach (string path in scenes)

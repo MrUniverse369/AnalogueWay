@@ -224,13 +224,13 @@ public static class GameSession
         NoteReached(sceneName); // ZONEMAP:
         var data = new SaveData
         {
-            sceneName = sceneName,
+            sceneName = LevelRegistry.KeyOf(sceneName), // LEVELNAMES: a level's permanent id (a menu keeps its scene name)
             coins = CollectableCollisiondetector.coinCollected,
             lives = HurtPlayer.pLivesCount,
             chi = PlayerController.chi,
             deaths = HurtPlayer.oopsCount,
             inLivingWorld = changeWorld.lWorld,
-            furthestScene = furthestScene, // ZONEMAP:
+            furthestScene = LevelRegistry.KeyOf(furthestScene), // ZONEMAP: // LEVELNAMES: the permanent id
         };
         Inventory.Capture(data); // MENUS: talismans and the bag
         LevelGrade.Capture(data); // RANKS: the best rank per level
@@ -283,10 +283,12 @@ public static class GameSession
         LevelLoader.Load(sceneName); // LOADING: the level waits until it's ready
     }
 
-    /// <summary>Build index of a scene by name, or -1 if it isn't in Build Settings.</summary>
+    /// <summary>Build index of a scene by name, or -1 if it isn't in Build Settings. LEVELNAMES (2026-10-30): also takes a
+    /// level's permanent id or a former scene name (what saves and older data hold).</summary>
     public static int BuildIndexOf(string sceneName)
     {
         if (string.IsNullOrEmpty(sceneName)) return -1;
+        sceneName = LevelRegistry.SceneOf(sceneName);
         for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
             if (SceneNameAt(i) == sceneName) return i;
         return -1;
@@ -350,7 +352,8 @@ public static class GameSession
     {
         if (!SaveSystem.TryLoad(out SaveData data)) return false;
 
-        if (string.IsNullOrEmpty(data.sceneName) || !Application.CanStreamedLevelBeLoaded(data.sceneName))
+        string scene = LevelRegistry.SceneOf(data.sceneName); // LEVELNAMES: the save holds the level's permanent id
+        if (string.IsNullOrEmpty(scene) || !Application.CanStreamedLevelBeLoaded(scene))
         {
             Debug.LogWarning($"GameSession: saved scene '{data.sceneName}' is not in Build Settings.");
             return false;
@@ -360,7 +363,7 @@ public static class GameSession
         IsArcade = false; // SAVEFIX:
         IsTutorial = false;
         SessionActive = true;
-        LevelLoader.Load(data.sceneName); // LOADING:
+        LevelLoader.Load(scene); // LOADING:
         return true;
     }
 

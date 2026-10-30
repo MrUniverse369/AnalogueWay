@@ -12,7 +12,7 @@ reference levels · **[built]** a decision made while building Greybox_GrassyGre
 ## 1. Read the request, then the project
 
 - Pin down the zone before anything else. If the brief names no zone and the level name does not identify one
-  (`Z1`/Tomb, `Z2`/Sandy/Egypt, `Z3`/Japan, `Z4`/Grass), ask; a wrong zone wastes the whole build. [user 2026-10-26]
+  (`Z1`/Grass, `Z2`/Tomb, `Z3`/Egypt, `Z4`/Japan since 2026-10-30; older notes use the old codes, see the table below), ask; a wrong zone wastes the whole build. [user 2026-10-26]
 - Inspect before building; do not trust memory notes, this file or a profile's numbers without checking the files
   they name still say so. [user 2026-10-26]
 - Only the **authored** levels are evidence of how a zone is designed. `ZoneContentBuilder` generated the others as
@@ -20,10 +20,10 @@ reference levels · **[built]** a decision made while building Greybox_GrassyGre
 
   | Zone | Authored references | Generated drafts (not evidence) |
   | --- | --- | --- |
-  | Grassy Green (Z4) | Z4A6, Z4A7 | Z4A8, Z4A9, Z4A10 (user has since edited A8–A10 by hand) |
-  | Old Tomb (Z1) | Z1A1, Z1A2, Z1A3, Z1A6 | Z1A4, Z1A5 |
-  | Sandy Dunes (Z2) | Z2A1, Z2A2 | Z2A3, Z2A4, Z2A5 |
-  | Snow Temple, Japan (Z3) | Z3A1, Z3A2 | Z3A3, Z3A4 |
+  | Grassy Green (Z1) | Z1A1, Z1A2 | Z1A3, Z1A4, Z1A5 (user has since edited A3–A5 by hand) |
+  | Old Tomb (Z2) | Z2A1, Z2A2, Z2A3, Z2A6 | Z2A4, Z2A5 |
+  | Sandy Dunes / Egypt (Z3) | Z3A1, Z3A2 | Z3A3, Z3A4, Z3A5 |
+  | Snow Temple, Japan (Z4) | Z4A1, Z4A2 | Z4A3, Z4A4 |
 
   Villages and boss arenas are their own kinds of scene; do not mine them for platforming rules.
 - `scripts/scene_profile.py . '<pattern>' --map` gives each reference's size, silhouette, prefab counts and
@@ -31,6 +31,54 @@ reference levels · **[built]** a decision made while building Greybox_GrassyGre
   worldX/worldY is the bottom-left corner) when the silhouette is not enough.
 - Never modify a reference level, a shared prefab or a global system to make a new level work. Change the new
   level's geometry instead. If a shared change is truly needed, stop and ask. [user 2026-10-26]
+
+### Level names and ids (2026-10-30, LEVELNAMES)
+
+Scenes are named by play order: `Z<zone>A<act>_<Zone>` for acts, `Z<zone>Village_`, `Z<zone>Boss_`,
+`Z<zone>MiniBoss_` for the rest (zones 1 GrassGreen, 2 Tomb, 3 Egypt, 4 Japan). Each level also has a **permanent
+id**, `HNL_ZONE_<ZONE>_LEVEL_<NNN>` (acts 001.. in act order, then village, mini-boss, boss), which never changes
+and is what saves, ranks and one-time rewards use. The single source of truth is
+`Assets/Resources/Levels/LevelRegistry.json` (read by `LevelRegistry.cs`, the QA catalogue and the dashboard).
+
+- **A new level**: add its entry to the registry (new id, never reuse one) in the same change as its scene and its
+  Build Settings slot; the play order is still Build Settings order.
+- **Renaming or moving a level**: rename the scene in Unity (keeps its GUID), change `scene` in the registry and
+  add the old name to `legacyScenes`. The id stays.
+- **Never decide a level's zone from its scene name in code**: ask `LevelRegistry` (zone, atmosphere, kind).
+- Notes, records, test ids (`TC-Z4A7-…`), builder classes and menu items written before this date keep the old
+  codes; read them through this table.
+
+| Old scene (before 2026-10-30) | Scene now | Permanent id | Zone.position, kind |
+| --- | --- | --- | --- |
+| Z4A6GrassGreen | Z1A1_GrassGreen | HNL_ZONE_GRASSY_GREEN_LEVEL_001 | 1.1 act |
+| Z4GrassVillage | Z1Village_GrassGreen | HNL_ZONE_GRASSY_GREEN_LEVEL_006 | 1.2 village |
+| Z4A7GrassGreen | Z1A2_GrassGreen | HNL_ZONE_GRASSY_GREEN_LEVEL_002 | 1.3 act |
+| Z4A8GrassGreen | Z1A3_GrassGreen | HNL_ZONE_GRASSY_GREEN_LEVEL_003 | 1.4 act |
+| Z4A9GrassGreen | Z1A4_GrassGreen | HNL_ZONE_GRASSY_GREEN_LEVEL_004 | 1.5 act |
+| Z4A10GrassGreen | Z1A5_GrassGreen | HNL_ZONE_GRASSY_GREEN_LEVEL_005 | 1.6 act |
+| Z4BossGrass | Z1Boss_GrassGreen | HNL_ZONE_GRASSY_GREEN_LEVEL_007 | 1.7 boss |
+| Z1A1Tomb | Z2A1_Tomb | HNL_ZONE_TOMB_LEVEL_001 | 2.1 act |
+| Z1TombVillage | Z2Village_Tomb | HNL_ZONE_TOMB_LEVEL_007 | 2.2 village |
+| Z1A2Tomb | Z2A2_Tomb | HNL_ZONE_TOMB_LEVEL_002 | 2.3 act |
+| Z1A3Tomb | Z2A3_Tomb | HNL_ZONE_TOMB_LEVEL_003 | 2.4 act |
+| Z1A4Tomb | Z2A4_Tomb | HNL_ZONE_TOMB_LEVEL_004 | 2.5 act |
+| Z1A5Tomb | Z2A5_Tomb | HNL_ZONE_TOMB_LEVEL_005 | 2.6 act |
+| Z1A6Tomb | Z2A6_Tomb | HNL_ZONE_TOMB_LEVEL_006 | 2.7 act |
+| Z1BossTomb | Z2Boss_Tomb | HNL_ZONE_TOMB_LEVEL_008 | 2.8 boss |
+| Z2A1Sandy | Z3A1_Egypt | HNL_ZONE_EGYPT_LEVEL_001 | 3.1 act |
+| Z2SandyVillage | Z3Village_Egypt | HNL_ZONE_EGYPT_LEVEL_006 | 3.2 village |
+| Z2A2Sandy | Z3A2_Egypt | HNL_ZONE_EGYPT_LEVEL_002 | 3.3 act |
+| Z2A3Sandy | Z3A3_Egypt | HNL_ZONE_EGYPT_LEVEL_003 | 3.4 act |
+| Z2MiniBossSandy | Z3MiniBoss_Egypt | HNL_ZONE_EGYPT_LEVEL_007 | 3.5 miniboss |
+| Z2A4Sandy | Z3A4_Egypt | HNL_ZONE_EGYPT_LEVEL_004 | 3.6 act |
+| Z2A5Sandy | Z3A5_Egypt | HNL_ZONE_EGYPT_LEVEL_005 | 3.7 act |
+| Z2BossSandy | Z3Boss_Egypt | HNL_ZONE_EGYPT_LEVEL_008 | 3.8 boss |
+| Z3A1Japan | Z4A1_Japan | HNL_ZONE_JAPAN_LEVEL_001 | 4.1 act |
+| Z3JapanVillage | Z4Village_Japan | HNL_ZONE_JAPAN_LEVEL_005 | 4.2 village |
+| Z3A2Japan | Z4A2_Japan | HNL_ZONE_JAPAN_LEVEL_002 | 4.3 act |
+| Z3A3Japan | Z4A3_Japan | HNL_ZONE_JAPAN_LEVEL_003 | 4.4 act |
+| Z3A4Japan | Z4A4_Japan | HNL_ZONE_JAPAN_LEVEL_004 | 4.5 act |
+| Z3BossBattle | Z4Boss_Japan | HNL_ZONE_JAPAN_LEVEL_006 | 4.6 boss |
 
 ## 2. Know what Harvey can do at that point in the game
 
@@ -151,8 +199,9 @@ in code, can be diffed, and is rebuilt in one call. Use `Assets/Editor/GreyboxLe
   Level 3's. If a second builder needs the same piece code, propose extracting a shared kit to the user first.
 - Code comments follow the project's marker style: a CAPS marker and the date on the summary (`GREYBOX
   (2026-10-26):`), a summary that describes the level in plain words.
-- A polished (non-greybox) level follows the same plan and checks, but is painted with the zone's tiles. Ask
-  before replacing hand-painted work.
+- A polished (non-greybox) level follows the same plan and checks, but is painted with the zone's tiles, placed
+  the way the user places them: `tile-placement.md` (Grassy Green so far; another zone is studied from its own
+  scenes first). Ask before replacing hand-painted work. [user 2026-10-30]
 
 ## 7. Test it
 

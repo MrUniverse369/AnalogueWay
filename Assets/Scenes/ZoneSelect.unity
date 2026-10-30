@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 23679362}
   - component: {fileID: 23679363}
   m_Layer: 0
-  m_Name: Z2MiniBossSandy
+  m_Name: Z3MiniBoss_Egypt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z2MiniBossSandy
+  sceneName: Z3MiniBoss_Egypt
   zoneName: Sandy Dunes
   levelName: 'Mini-Boss: Sandfin'
   kind: 2
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 144578593}
   - component: {fileID: 144578594}
   m_Layer: 0
-  m_Name: Z1A6Tomb
+  m_Name: Z2A6_Tomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z1A6Tomb
+  sceneName: Z2A6_Tomb
   zoneName: The Old Tomb
   levelName: Act 6
   kind: 0
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 173734354}
   - component: {fileID: 173734355}
   m_Layer: 0
-  m_Name: Z2BossSandy
+  m_Name: Z3Boss_Egypt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z2BossSandy
+  sceneName: Z3Boss_Egypt
   zoneName: Sandy Dunes
   levelName: 'Boss: The Landshark'
   kind: 2
@@ -474,7 +474,7 @@ GameObject:
   - component: {fileID: 185736034}
   - component: {fileID: 185736035}
   m_Layer: 0
-  m_Name: Z4A7GrassGreen
+  m_Name: Z1A2_GrassGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z4A7GrassGreen
+  sceneName: Z1A2_GrassGreen
   zoneName: Grassy Meadow
   levelName: Act 2
   kind: 0
@@ -586,7 +586,7 @@ GameObject:
   - component: {fileID: 225572077}
   - component: {fileID: 225572078}
   m_Layer: 0
-  m_Name: Z3BossBattle
+  m_Name: Z4Boss_Japan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -678,7 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z3BossBattle
+  sceneName: Z4Boss_Japan
   zoneName: Snow Temple Pass
   levelName: 'Boss: The Yokai Warrior'
   kind: 2
@@ -835,7 +835,7 @@ GameObject:
   - component: {fileID: 310772510}
   - component: {fileID: 310772511}
   m_Layer: 0
-  m_Name: Z1A2Tomb
+  m_Name: Z2A2_Tomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -927,7 +927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z1A2Tomb
+  sceneName: Z2A2_Tomb
   zoneName: The Old Tomb
   levelName: Act 2
   kind: 0
@@ -1099,7 +1099,7 @@ GameObject:
   - component: {fileID: 520752400}
   - component: {fileID: 520752401}
   m_Layer: 0
-  m_Name: Z2A1Sandy
+  m_Name: Z3A1_Egypt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1191,7 +1191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z2A1Sandy
+  sceneName: Z3A1_Egypt
   zoneName: Sandy Dunes
   levelName: Act 1
   kind: 0
@@ -1347,7 +1347,7 @@ GameObject:
   - component: {fileID: 731446236}
   - component: {fileID: 731446237}
   m_Layer: 0
-  m_Name: Z2A4Sandy
+  m_Name: Z3A4_Egypt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1439,7 +1439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z2A4Sandy
+  sceneName: Z3A4_Egypt
   zoneName: Sandy Dunes
   levelName: Act 4
   kind: 0
@@ -1550,7 +1550,7 @@ GameObject:
   - component: {fileID: 850058273}
   - component: {fileID: 850058274}
   m_Layer: 0
-  m_Name: Z2A5Sandy
+  m_Name: Z3A5_Egypt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1642,7 +1642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z2A5Sandy
+  sceneName: Z3A5_Egypt
   zoneName: Sandy Dunes
   levelName: Act 5
   kind: 0
@@ -1767,7 +1767,7 @@ GameObject:
   - component: {fileID: 890170087}
   - component: {fileID: 890170088}
   m_Layer: 0
-  m_Name: Z1A1Tomb
+  m_Name: Z2A1_Tomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1859,7 +1859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z1A1Tomb
+  sceneName: Z2A1_Tomb
   zoneName: The Old Tomb
   levelName: Act 1
   kind: 0
@@ -1886,7 +1886,7 @@ GameObject:
   - component: {fileID: 893017848}
   - component: {fileID: 893017849}
   m_Layer: 0
-  m_Name: Z4A9GrassGreen
+  m_Name: Z1A4_GrassGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1978,7 +1978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z4A9GrassGreen
+  sceneName: Z1A4_GrassGreen
   zoneName: Grassy Meadow
   levelName: Act 4
   kind: 0
@@ -1998,7 +1998,7 @@ GameObject:
   - component: {fileID: 921275163}
   - component: {fileID: 921275164}
   m_Layer: 0
-  m_Name: Z4GrassVillage
+  m_Name: Z1Village_GrassGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2090,7 +2090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z4GrassVillage
+  sceneName: Z1Village_GrassGreen
   zoneName: Grassy Meadow
   levelName: Meadowbrook
   kind: 1
@@ -2110,7 +2110,7 @@ GameObject:
   - component: {fileID: 922541287}
   - component: {fileID: 922541288}
   m_Layer: 0
-  m_Name: Z1A4Tomb
+  m_Name: Z2A4_Tomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2202,7 +2202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z1A4Tomb
+  sceneName: Z2A4_Tomb
   zoneName: The Old Tomb
   levelName: Act 4
   kind: 0
@@ -2229,7 +2229,7 @@ GameObject:
   - component: {fileID: 940493245}
   - component: {fileID: 940493246}
   m_Layer: 0
-  m_Name: Z2A2Sandy
+  m_Name: Z3A2_Egypt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2321,7 +2321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z2A2Sandy
+  sceneName: Z3A2_Egypt
   zoneName: Sandy Dunes
   levelName: Act 2
   kind: 0
@@ -2439,7 +2439,7 @@ GameObject:
   - component: {fileID: 1010439870}
   - component: {fileID: 1010439871}
   m_Layer: 0
-  m_Name: Z3A3Japan
+  m_Name: Z4A3_Japan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2531,7 +2531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z3A3Japan
+  sceneName: Z4A3_Japan
   zoneName: Snow Temple Pass
   levelName: Act 3
   kind: 0
@@ -2818,7 +2818,7 @@ GameObject:
   - component: {fileID: 1175671417}
   - component: {fileID: 1175671418}
   m_Layer: 0
-  m_Name: Z1BossTomb
+  m_Name: Z2Boss_Tomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2910,7 +2910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z1BossTomb
+  sceneName: Z2Boss_Tomb
   zoneName: The Old Tomb
   levelName: 'Boss: The Grave Warden'
   kind: 2
@@ -3206,7 +3206,7 @@ GameObject:
   - component: {fileID: 1371782878}
   - component: {fileID: 1371782879}
   m_Layer: 0
-  m_Name: Z4A6GrassGreen
+  m_Name: Z1A1_GrassGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3298,7 +3298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z4A6GrassGreen
+  sceneName: Z1A1_GrassGreen
   zoneName: Grassy Meadow
   levelName: Act 1
   kind: 0
@@ -3430,7 +3430,7 @@ GameObject:
   - component: {fileID: 1416279463}
   - component: {fileID: 1416279464}
   m_Layer: 0
-  m_Name: Z3A4Japan
+  m_Name: Z4A4_Japan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3522,7 +3522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z3A4Japan
+  sceneName: Z4A4_Japan
   zoneName: Snow Temple Pass
   levelName: Act 4
   kind: 0
@@ -3549,7 +3549,7 @@ GameObject:
   - component: {fileID: 1420079949}
   - component: {fileID: 1420079950}
   m_Layer: 0
-  m_Name: Z2SandyVillage
+  m_Name: Z3Village_Egypt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3641,7 +3641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z2SandyVillage
+  sceneName: Z3Village_Egypt
   zoneName: Sandy Dunes
   levelName: Oasis Bazaar
   kind: 1
@@ -3842,7 +3842,7 @@ GameObject:
   - component: {fileID: 1522848109}
   - component: {fileID: 1522848110}
   m_Layer: 0
-  m_Name: Z4BossGrass
+  m_Name: Z1Boss_GrassGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3934,7 +3934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z4BossGrass
+  sceneName: Z1Boss_GrassGreen
   zoneName: Grassy Meadow
   levelName: 'Boss: King Mossback'
   kind: 2
@@ -4054,25 +4054,25 @@ MonoBehaviour:
   zoneMusic:
   - name: The Old Tomb
     scenePrefixes:
-    - Z1
+    - Z2
     clip: {fileID: 8300000, guid: b50dc9122f31140788b54dea4ff1c5cb, type: 3}
   - name: Sandy Dunes
     scenePrefixes:
-    - Z2
+    - Z3
     clip: {fileID: 0}
   - name: Japan (Shrine Road + Snow Temple Pass)
     scenePrefixes:
-    - Z3
+    - Z4
     clip: {fileID: 8300000, guid: c3f0c296fc49640f183fec21798da32e, type: 3}
   - name: Japan winter side (Snow Temple Pass) - PLACEHOLDER
     scenePrefixes:
-    - Z3A3
-    - Z3A4
-    - Z3Boss
+    - Z4A3
+    - Z4A4
+    - Z4Boss
     clip: {fileID: 8300000, guid: 0c7a73f8e35444b3a9783ff2eb9e95b1, type: 3}
   - name: Grassy Meadow + Journey's End
     scenePrefixes:
-    - Z4
+    - Z1
     - Win
     clip: {fileID: 0}
   musicFadeTime: 1.2
@@ -4108,7 +4108,7 @@ GameObject:
   - component: {fileID: 1545649158}
   - component: {fileID: 1545649159}
   m_Layer: 0
-  m_Name: Z2A3Sandy
+  m_Name: Z3A3_Egypt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4200,7 +4200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z2A3Sandy
+  sceneName: Z3A3_Egypt
   zoneName: Sandy Dunes
   levelName: Act 3
   kind: 0
@@ -4388,7 +4388,7 @@ GameObject:
   - component: {fileID: 1705749610}
   - component: {fileID: 1705749611}
   m_Layer: 0
-  m_Name: Z3A2Japan
+  m_Name: Z4A2_Japan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4480,7 +4480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z3A2Japan
+  sceneName: Z4A2_Japan
   zoneName: Sunlit Shrine Road
   levelName: Act 2
   kind: 0
@@ -4507,7 +4507,7 @@ GameObject:
   - component: {fileID: 1707411790}
   - component: {fileID: 1707411791}
   m_Layer: 0
-  m_Name: Z1TombVillage
+  m_Name: Z2Village_Tomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4599,7 +4599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z1TombVillage
+  sceneName: Z2Village_Tomb
   zoneName: The Old Tomb
   levelName: Lantern Camp
   kind: 1
@@ -4619,7 +4619,7 @@ GameObject:
   - component: {fileID: 1715051615}
   - component: {fileID: 1715051616}
   m_Layer: 0
-  m_Name: Z3A1Japan
+  m_Name: Z4A1_Japan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4711,7 +4711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z3A1Japan
+  sceneName: Z4A1_Japan
   zoneName: Sunlit Shrine Road
   levelName: Act 1
   kind: 0
@@ -4738,7 +4738,7 @@ GameObject:
   - component: {fileID: 1744820892}
   - component: {fileID: 1744820893}
   m_Layer: 0
-  m_Name: Z3JapanVillage
+  m_Name: Z4Village_Japan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4830,7 +4830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z3JapanVillage
+  sceneName: Z4Village_Japan
   zoneName: Sunlit Shrine Road
   levelName: Mountain Village
   kind: 1
@@ -4857,7 +4857,7 @@ GameObject:
   - component: {fileID: 1780527273}
   - component: {fileID: 1780527274}
   m_Layer: 0
-  m_Name: Z1A3Tomb
+  m_Name: Z2A3_Tomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4949,7 +4949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z1A3Tomb
+  sceneName: Z2A3_Tomb
   zoneName: The Old Tomb
   levelName: Act 3
   kind: 0
@@ -5353,7 +5353,7 @@ GameObject:
   - component: {fileID: 2007090040}
   - component: {fileID: 2007090041}
   m_Layer: 0
-  m_Name: Z4A8GrassGreen
+  m_Name: Z1A3_GrassGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5445,7 +5445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z4A8GrassGreen
+  sceneName: Z1A3_GrassGreen
   zoneName: Grassy Meadow
   levelName: Act 3
   kind: 0
@@ -5465,7 +5465,7 @@ GameObject:
   - component: {fileID: 2029565902}
   - component: {fileID: 2029565903}
   m_Layer: 0
-  m_Name: Z4A10GrassGreen
+  m_Name: Z1A5_GrassGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5557,7 +5557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z4A10GrassGreen
+  sceneName: Z1A5_GrassGreen
   zoneName: Grassy Meadow
   levelName: Act 5
   kind: 0
@@ -5584,7 +5584,7 @@ GameObject:
   - component: {fileID: 2043792558}
   - component: {fileID: 2043792559}
   m_Layer: 0
-  m_Name: Z1A5Tomb
+  m_Name: Z2A5_Tomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5676,7 +5676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac77ed804c5143a0892c6bb1256fa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneMapNode
-  sceneName: Z1A5Tomb
+  sceneName: Z2A5_Tomb
   zoneName: The Old Tomb
   levelName: Act 5
   kind: 0

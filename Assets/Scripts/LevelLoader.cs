@@ -69,6 +69,7 @@ public class LevelLoader : MonoBehaviour
 
     private void Begin(string sceneName, int buildIndex)
     {
+        if (sceneName != null) sceneName = LevelRegistry.SceneOf(sceneName); // LEVELNAMES: a permanent id or a former name loads today's scene
         if (Busy) return; // one load at a time (a double-pressed button must not load twice)
         StartCoroutine(LoadRoutine(sceneName, buildIndex));
     }

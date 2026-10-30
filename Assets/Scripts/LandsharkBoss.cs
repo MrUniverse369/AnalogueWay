@@ -4,7 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// LANDSHARK (2026-10-27): the Landshark, the grown-up apex form of the Dunes' baby Sandshark, guarding Egypt
-/// (Z2BossSandy). Four lives over three stages (BossStages: 4 lives Sand Hunter, 3 Apex Predator, 2-1 Desert Devourer).
+/// (Z3Boss_Egypt). Four lives over three stages (BossStages: 4 lives Sand Hunter, 3 Apex Predator, 2-1 Desert Devourer).
 /// It swims through the sand: the arena's ground draws over the boss, so whatever is below the floor line is hidden and
 /// only its fin, or the part that has burst out, shows.
 ///

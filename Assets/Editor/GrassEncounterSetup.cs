@@ -23,13 +23,12 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public static class GrassEncounterSetup
 {
-    private const string TileDir = "Assets/Sprites/Tileset/ZoneTwo/Zone2Edit/GreenZoneTest_";
     private const string FoxPrefab = "Assets/Prefabs/Enemy/Grass/ForestSpiritFox.prefab";
     private const string ChestGamePrefab = "Assets/Prefabs/LevelMechanics/GrassyGreen/MushroomSpiritChestGame.prefab";
 
-    public const string Z4A8Path = "Assets/Scenes/Z4A8GrassGreen.unity";
+    public const string Z4A8Path = "Assets/Scenes/Z1A3_GrassGreen.unity";
     public const string Z4A8Root = "WaveSweepBowl";
-    public const string Z4A10Path = "Assets/Scenes/Z4A10GrassGreen.unity";
+    public const string Z4A10Path = "Assets/Scenes/Z1A5_GrassGreen.unity";
 
     // ---------------------------------------------------------------- Z4A8
 
@@ -168,45 +167,10 @@ public static class GrassEncounterSetup
     public static Tilemap TilemapNamed(Scene scene, string name) =>
         scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<Tilemap>(true)).FirstOrDefault(t => t.name == name);
 
-    private static TileBase[] nine;
-
-    private static TileBase[] Nine()
-    {
-        if (nine != null && nine.All(t => t != null)) return nine;
-        nine = new TileBase[9];
-        for (int i = 0; i < 9; i++)
-        {
-            nine[i] = AssetDatabase.LoadAssetAtPath<TileBase>(TileDir + i + ".asset");
-            if (nine[i] == null) throw new System.Exception("missing tile " + TileDir + i);
-        }
-        return nine;
-    }
-
-    /// <summary>Paints cells with Grassy Green's plain 9-slice (0 top-left .. 8 bottom-right), each by its neighbours
-    /// within the painted shape and the tiles already there.</summary>
-    public static void Paint(Tilemap ground, List<Vector3Int> cells)
-    {
-        TileBase[] t = Nine();
-        bool Solid(Vector3Int c) => cells.Contains(c) || ground.HasTile(c);
-        foreach (Vector3Int c in cells) ground.SetTile(c, t[4]);
-        foreach (Vector3Int c in cells)
-        {
-            bool up = Solid(c + Vector3Int.up), down = Solid(c + Vector3Int.down), left = Solid(c + Vector3Int.left), right = Solid(c + Vector3Int.right);
-            int col = !left ? 0 : !right ? 2 : 1;
-            int row = !up ? 0 : !down ? 2 : 1;
-            ground.SetTile(c, t[row * 3 + col]);
-        }
-        ground.CompressBounds();
-        // the tilemap's collider must take the new tiles in before the composite (Outlines, saved with the scene) is
-        // rebuilt from it; rebuilding first bakes the old shape and the new ground has no collision in play
-        var tc = ground.GetComponent<TilemapCollider2D>();
-        if (tc != null) { tc.enabled = false; tc.enabled = true; tc.ProcessTilemapChanges(); } // a re-enable is what makes it re-read the tiles
-        var comp = ground.GetComponent<CompositeCollider2D>();
-        if (comp != null) comp.GenerateGeometry();
-        EditorUtility.SetDirty(ground);
-        if (tc != null) EditorUtility.SetDirty(tc);
-        if (comp != null) EditorUtility.SetDirty(comp);
-    }
+    /// <summary>Paints cells with Grassy Green's plain 9-slice by the user's placement rules. GRASSART (2026-10-30):
+    /// now GrassTilePainter.Paint, which also re-picks the existing tiles the new cells touch (before, a wall painted on
+    /// the rock left the rock's grass line buried under it, as in Z4A9) and rebuilds the collider.</summary>
+    public static void Paint(Tilemap ground, List<Vector3Int> cells) => GrassTilePainter.Paint(ground, cells);
 
     public static GameObject JumpMushroom(Scene scene, Transform parent, string name, Vector2 foot, float bounce)
     {

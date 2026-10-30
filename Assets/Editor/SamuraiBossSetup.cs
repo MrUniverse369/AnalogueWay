@@ -9,12 +9,12 @@ using UnityEngine;
 ///   1. imports the boss art at 16 PPU, point filtering, uncompressed: the sheet sliced into its six frames with the
 ///      feet pivot from Tools/Art/samurai_boss_layout.txt, plus the slash wave, the falling blade, its floor mark, the
 ///      danger line and the white tile its band is drawn with
-///   2. in Z3BossBattle: switches the old YokaiBoss off (it stays in the scene, because DraftLevelBuilder copies it into
+///   2. in Z4Boss_Japan: switches the old YokaiBoss off (it stays in the scene, because DraftLevelBuilder copies it into
 ///      the other zones' arenas) and builds Sumaria's rig in its place: the boss (hurtbox, body sprite, the old boss's
 ///      life pips), his projectile templates and the danger line, wired to the arena's limits and the boss treasure,
 ///      with the three stages' tuning
 /// BOSSBALANCE (2026-10-27): the stage tuning, his five lives and his meditation (BossRegen) are in ApplyBalance, which
-/// Tools/HNL/Apply Sumaria Balance also writes onto the Sumaria already in Z3BossBattle without rebuilding him.
+/// Tools/HNL/Apply Sumaria Balance also writes onto the Sumaria already in Z4Boss_Japan without rebuilding him.
 /// </summary>
 public static class SamuraiBossSetup
 {
@@ -26,7 +26,7 @@ public static class SamuraiBossSetup
     private const string Line = Dir + "SamuraiBoss_Line.png";
     private const string Fill = Dir + "SamuraiBoss_Fill.png";
     private const string Layout = "Tools/Art/samurai_boss_layout.txt";
-    private const string ScenePath = "Assets/Scenes/Z3BossBattle.unity";
+    private const string ScenePath = "Assets/Scenes/Z4Boss_Japan.unity";
     private const float BodyScale = 0.6f;   // he stands about 1.8 units tall, kneels about 1.1
     private const float WaveScale = 0.32f;  // a crescent about 0.9 x 1 units
     private const float BladeBand = 0.6f;   // keep in step with SamuraiBoss.bladeBandHeight
@@ -98,7 +98,7 @@ public static class SamuraiBossSetup
         return ti;
     }
 
-    // ---------------------------------------------------------------- 2. the rig in Z3BossBattle
+    // ---------------------------------------------------------------- 2. the rig in Z4Boss_Japan
 
     public static void BuildRig()
     {
@@ -109,7 +109,7 @@ public static class SamuraiBossSetup
         GameObject treasure = roots.FirstOrDefault(g => g.name == "BossTreasure");
         if (oldBoss == null || arena == null)
         {
-            Debug.LogWarning("SamuraiBossSetup: Z3BossBattle has no YokaiBoss/BossArena to build from.");
+            Debug.LogWarning("SamuraiBossSetup: Z4Boss_Japan has no YokaiBoss/BossArena to build from.");
             return;
         }
         foreach (GameObject g in roots.Where(g => g.name == "SamuraiBoss" || g.name == "SamuraiDanger"))
@@ -250,7 +250,7 @@ public static class SamuraiBossSetup
 
     private const int Lives = 5;
 
-    /// <summary>Writes Sumaria's balance onto the one in Z3BossBattle (lives, stages, meditation, chests, five pips).</summary>
+    /// <summary>Writes Sumaria's balance onto the one in Z4Boss_Japan (lives, stages, meditation, chests, five pips).</summary>
     [MenuItem("Tools/HNL/Apply Sumaria Balance")]
     public static void ApplyBalanceInScene()
     {
@@ -258,7 +258,7 @@ public static class SamuraiBossSetup
         SamuraiBoss sb = scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<SamuraiBoss>(true)).FirstOrDefault();
         if (sb == null)
         {
-            Debug.LogWarning("SamuraiBossSetup: no SamuraiBoss in Z3BossBattle; run Tools/HNL/Set Up Samurai Boss.");
+            Debug.LogWarning("SamuraiBossSetup: no SamuraiBoss in Z4Boss_Japan; run Tools/HNL/Set Up Samurai Boss.");
             return;
         }
         var so = new SerializedObject(sb);

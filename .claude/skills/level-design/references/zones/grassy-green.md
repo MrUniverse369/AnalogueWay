@@ -1,4 +1,4 @@
-# Zone profile — Grassy Green (Z4)
+# Zone profile — Grassy Green (Z1; Z4 before 2026-10-30)
 
 **Status: complete.** World 1 in play order. Sources: the authored levels Z4A6 and Z4A7 (inspected 2026-10-26),
 Greybox_GrassyGreen_Level3 and the two briefs behind it (2026-10-26), the design doc ("Grassy Green (forest in the
@@ -10,7 +10,7 @@ sky)"), the art-style memory. Tags as in `method.md`: [user] [ref] [built] [assu
 - **Floating sky islands are the zone's defining theme.** New Grass levels are journeys up through distinct
   islands in open sky, joined by sky bridges. [user 2026-10-26, restructure brief]
 - Palette: grass 37946e with a 6abe30/99e550 lip over dirt 663931/45283c/301c2a; tree greens 529271 52ab61 88ce6e;
-  sky 5fcde4; clouds d5ebff. Wooden spikes (WoodenSpikes.png), not stone. Atmosphere (automatic in `Z4*` scenes):
+  sky 5fcde4; clouds d5ebff. Wooden spikes (WoodenSpikes.png), not stone. Atmosphere (automatic in every Grassy Green level; the level registry's atmosphere `Green`):
   drifting leaves and pollen, wind sway on tree and bush tops, paired parallax clouds. [ref]
 
 ## Structure and traversal
@@ -86,7 +86,7 @@ Not used in Grassy Green since 2026-10-27 (the prefabs stay for other uses): the
 (Enemy/Grass/Grassenemynonboss, 2 stomps) and the fox-art walker (Enemy/Grass/CloudTrollHolder, a fox without the
 charge; Z4A8's 15 became real Spirit Foxes on the same spots and patrols).
 
-Boss: the Forest Spirit Fox (Z4BossGrass, MotherBoss.prefab). Placement patterns: foxes on ledges with room; pairs or
+Boss: the Forest Spirit Fox (Z1Boss_GrassGreen, MotherBoss.prefab). Placement patterns: foxes on ledges with room; pairs or
 a trio of overlapping patrols as a gauntlet late on; flying bounce mushrooms chained as a route up over a pit or to a
 reward. [ref]
 
@@ -108,13 +108,28 @@ reward. [ref]
 
 ## Greybox notes for this zone
 
-- Base scene: Z4A7GrassGreen (Player, camera, HUD, pause, LevelManager, music, Treasure). [built]
+- Base scene: Z1A2_GrassGreen (Player, camera, HUD, pause, LevelManager, music, Treasure). [built]
 - Islands white with stepped, tapering undersides (`l.Underside`); bridge pieces grey-blue `#98b2b1` with nothing
   under them; void strips under every bridge **and** the island edges next to it, never where a launcher below
   could reach. [built]
 - Spikes static (`popOutAndRetract = false`) and set a little clear of their surface so white reads on white. [built]
 - Floating mushroom caps 0.5 above the floor they are jumped onto from; a Jump Mushroom (`l.JumpMushroom(x, floorTop,
   force)`) stands on its floor with its cap 0.55 up; launchers 3.5–5.5 clear of the ledge they aim at. [built]
+
+## Painted ground and sky (2026-10-30, GRASSART)
+
+- **Ground tiles follow `tile-placement.md`** [user's own tiles, 2026-10-30]: the GreenZoneTest 9-slice picked by
+  the four sides only; concave corners plain dirt; nothing one tile thick; a lip on every exposed side, undersides
+  included; island undersides in whole-tile steps inset 2 a side. Convert a greybox with **Tools/HNL/Grass/Greybox
+  To Tiles** and check with **Check Tile Placement**.
+- **Every Grass scene has a `SkyBackdrop`** (Z4A6-A10, boss, village). It follows the camera and redraws the level's
+  own sky strip (BackGroundSky_One / ParrallaxSky, at its own height and parallax) with the strip's top colour
+  #0BB0FD above and bottom colour #54C9FF below, behind everything (Default layer, order -32000). The camera has no
+  limits, so this, not clamping, is what keeps the Skybox out of view. A new Grass scene: run **Tools/HNL/Grass/Sky
+  Backdrop** (it adds one to every Grass level, from each level's own strip). The hand-placed Sky boxes and strips
+  stay; they draw over it unchanged.
+- Z4A7's greybox (east expansion and Time Trail) is painted art since 2026-10-30. Nothing in the zone wears
+  `GreyboxSkin` now except the prototype `Greybox_GrassyGreen_Level3`.
 
 ## Do not carry this zone elsewhere
 
@@ -124,6 +139,10 @@ Grassy Green. Another zone gets them only if its own profile says so.
 ## Open questions
 
 - Should Z4A8–A10 (generated drafts, hand-edited since) be reworked into sky-island levels too, or stay as they are?
+- BUG-0011 (2026-10-30): the user's Outlook starts one tile clear of the cliff, so walking out of the corridor drops
+  Harvey into the x 190 crack, and the gap to Pillar 1 is 4 (the greybox had 3). Was the gap meant as a jump, or
+  should the island join the cliff?
+- Should `Greybox_GrassyGreen_Level3` (prototype, no Ground tilemap) be painted too? Left as greybox on 2026-10-30.
 - The rest of the 26 October restructure brief (after "Option 1 — Pillar jumps") never arrived. Were there bridge
   types or rules in it that this profile is missing?
 - Grass boss reward is undecided (design doc).

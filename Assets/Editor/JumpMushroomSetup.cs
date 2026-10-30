@@ -139,7 +139,8 @@ public static class JumpMushroomSetup
         foreach (EditorBuildSettingsScene s in EditorBuildSettings.scenes)
         {
             string name = System.IO.Path.GetFileNameWithoutExtension(s.path);
-            if (!name.StartsWith("Z4") || !System.IO.File.Exists(s.path)) continue;
+            if (LevelRegistry.Find(name)?.zone != "GRASSY_GREEN" || // LEVELNAMES: Grassy Green levels, from the registry
+                !System.IO.File.Exists(s.path)) continue;
             if (userDirty.Contains(s.path))
             {
                 log.Add($"{name}: skipped, it has unsaved changes; save it and run again");

@@ -12,7 +12,7 @@ survives editor restarts. The qa CLI copies each file into the QA store as evide
 
 ```csharp
 // Unity_RunCommand: one call can check ~15 scenes (0.1-1.7 s each)
-string[,] scenes = { {"Assets/Scenes/Z1A1Tomb.unity","act"}, {"Assets/Scenes/Z1BossTomb.unity","boss"} };
+string[,] scenes = { {"Assets/Scenes/Z2A1_Tomb.unity","act"}, {"Assets/Scenes/Z2Boss_Tomb.unity","boss"} };
 for (int i = 0; i < scenes.GetLength(0); i++)
     result.Log("{0} -> {1}", scenes[i, 0], QARunner.StructureReport(scenes[i, 0], scenes[i, 1]));
 ```
@@ -39,8 +39,8 @@ index in `HNLDashboard/qa/repo.mjs` (`buildIndex(repo).guidToPath`).
 
 ```csharp
 // Unity_RunCommand
-result.Log("{0}", QARunner.StartPlayCapture("Assets/Scenes/Z1A1Tomb.unity", "<session4>-Z1A1Tomb-idle-respawn",
-    "Z1A1Tomb idle at spawn (10 s after 2 s)", 2f, 10f, "respawn"));   // "" for no action
+result.Log("{0}", QARunner.StartPlayCapture("Assets/Scenes/Z2A1_Tomb.unity", "<session4>-Z1A1Tomb-idle-respawn",
+    "Z2A1_Tomb idle at spawn (10 s after 2 s)", 2f, 10f, "respawn"));   // "" for no action
 ```
 
 It returns the output path at once, or `error: ...` and does nothing. Play mode then reloads the domain, so don't

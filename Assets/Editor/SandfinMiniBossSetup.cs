@@ -7,16 +7,16 @@ using UnityEngine;
 
 /// <summary>
 /// SANDFIN (2026-10-28): Tools/HNL/Build Sandfin Mini-Boss Level. Builds the Sandy Dunes mini-boss level,
-/// Z2MiniBossSandy, and puts it in the middle of the zone. Safe to run again (after Tools/Art/green_shark_miniboss.py).
+/// Z3MiniBoss_Egypt, and puts it in the middle of the zone. Safe to run again (after Tools/Art/green_shark_miniboss.py).
 ///   1. imports the mini-boss sheet at 16 PPU, point filtering, uncompressed, sliced into its swim and attack rows with
 ///      the body-centre pivot from Tools/Art/green_shark_miniboss_layout.txt. The user's GreenBabySharkMiniBoss.png
 ///      is only read, never changed.
-///   2. the level: a copy of Z2BossSandy (the Dunes arena: its ground, backdrop, fixed camera, walls, respawn, HUD and
+///   2. the level: a copy of Z3Boss_Egypt (the Dunes arena: its ground, backdrop, fixed camera, walls, respawn, HUD and
 ///      treasure), made once. In it the Landshark, its pips and lane and the old Sandscale Scarab are removed, the
 ///      treasure loses its TalismanUnlock (the Summoning Talisman stays the final boss's reward; this treasure only ends
 ///      the level), and Sandfin's rig is built: the boss (hurtbox, body on the Player layer under the Ground), the
 ///      Landshark's sand mound as its tell, three pips in a row over the arena, its two stages and its chests.
-///   3. Build Settings: the level goes straight after Z2A3Sandy, so the zone plays Act 1, the Oasis Bazaar, Acts 2 and
+///   3. Build Settings: the level goes straight after Z3A3_Egypt, so the zone plays Act 1, the Oasis Bazaar, Acts 2 and
 ///      3, Sandfin, Acts 4 and 5, then the Landshark. Saves keep the furthest level by name, so nothing open is lost.
 /// The Zone Select map node is separate: Tools/Art/zone_map.py, then Tools/HNL/Rebuild Zone Select Scene.
 /// </summary>
@@ -26,9 +26,9 @@ public static class SandfinMiniBossSetup
     private const string Body = Dir + "GreenSharkMiniBoss_Body.png";
     private const string MoundSheet = "Assets/Sprites/Enemies/Egypt/LandsharkBoss/LandsharkBoss_Mound.png";
     private const string Layout = "Tools/Art/green_shark_miniboss_layout.txt";
-    private const string ArenaPath = "Assets/Scenes/Z2BossSandy.unity";
-    public const string ScenePath = "Assets/Scenes/Z2MiniBossSandy.unity";
-    private const string AfterScene = "Assets/Scenes/Z2A3Sandy.unity";
+    private const string ArenaPath = "Assets/Scenes/Z3Boss_Egypt.unity";
+    public const string ScenePath = "Assets/Scenes/Z3MiniBoss_Egypt.unity";
+    private const string AfterScene = "Assets/Scenes/Z3A3_Egypt.unity";
     private const float Ppu = 16f;
 
     [MenuItem("Tools/HNL/Build Sandfin Mini-Boss Level")]
@@ -97,7 +97,7 @@ public static class SandfinMiniBossSetup
         GameObject oldRig = roots.FirstOrDefault(g => g.name == "SandfinMiniBoss");
         if (arena == null || treasure == null || (scarab == null && oldRig == null))
         {
-            Debug.LogWarning("SandfinMiniBossSetup: Z2MiniBossSandy has no BossArena, BossTreasure or a boss to build from.");
+            Debug.LogWarning("SandfinMiniBossSetup: Z3MiniBoss_Egypt has no BossArena, BossTreasure or a boss to build from.");
             return;
         }
 

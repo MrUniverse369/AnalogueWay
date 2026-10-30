@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// INTRO (2026-10-26): the opening of Grassy Green, in Z4A6GrassGreen (the first level): Harvey flies his biplane in
+/// INTRO (2026-10-26): the opening of Grassy Green, in Z1A1_GrassGreen (the first level): Harvey flies his biplane in
 /// over the meadow, the engine coughs and smokes, the plane dives and ploughs into the ground under the cliff, right
 /// where the crashed biplane sits in the level, and Harvey hops out of the wreck onto the start of the level.
 ///   Arrival   the plane cruises in from the left through the level's own sky and clouds, the camera on it
@@ -24,7 +24,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class PlaneCrashIntro : MonoBehaviour
 {
-    public const string ClaimKey = "intro:Z4A6GrassGreen";
+    public const string ClaimKey = "intro:Z4A6GrassGreen"; // LEVELNAMES: a saved key, permanent: it keeps the level's former scene name on purpose (changing it would replay the intro for every save)
 
     [Header("Scene")]
     [Tooltip("The crashed biplane already in the level. Hidden until the crash, then switched on where it is.")]

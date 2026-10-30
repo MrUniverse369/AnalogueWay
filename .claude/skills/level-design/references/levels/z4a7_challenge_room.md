@@ -1,11 +1,11 @@
 # Level record — Z4A7 Challenge Room
 
-**Level-specific.** The decisions behind one room of Z4A7GrassGreen. Lift anything that proves general into
+**Level-specific.** The decisions behind one room of Z1A2_GrassGreen. Lift anything that proves general into
 `method.md` or `zones/grassy-green.md`.
 
 | | |
 | --- | --- |
-| Scene | Assets/Scenes/Z4A7GrassGreen.unity, root object `ChallengeArena` |
+| Scene | Assets/Scenes/Z1A2_GrassGreen.unity, root object `ChallengeArena` |
 | Code | Assets/Scripts/ChallengeArena.cs (markers CHALLENGE, WAVEMUSHROOM); setup tool Tools/HNL/Set Up Z4A7 Challenge Room (`GrassChallengeSetup.RunZ4A7`, Assets/Editor/GrassChallengeSetup.cs) |
 | Tests | TC-FLOW-ARENA-Z4A7 (scripted, `arena:all` through QAArenaDriver), TC-FLOW-ARENA-Z4A7-FIGHT (by hand) |
 | Built | 2026-10-28, from the user's brief and screenshot of the room |

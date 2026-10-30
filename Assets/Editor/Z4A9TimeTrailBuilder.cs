@@ -24,7 +24,7 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public static class Z4A9TimeTrailBuilder
 {
-    public const string ScenePath = "Assets/Scenes/Z4A9GrassGreen.unity";
+    public const string ScenePath = "Assets/Scenes/Z1A4_GrassGreen.unity";
     public const string RootName = "Z4A9TimeTrail";
     private const string ArtDir = "Assets/Sprites/LevelMechanics/TimeTrail/";
     private const string FoxPrefab = "Assets/Prefabs/Enemy/Grass/ForestSpiritFox.prefab";

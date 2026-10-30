@@ -37,7 +37,7 @@ public class EncounterLandmark : MonoBehaviour
 
     private static void OnLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (!scene.name.StartsWith("Z4")) return;
+        if (LevelRegistry.Find(scene.name)?.zone != "GRASSY_GREEN") return; // LEVELNAMES: Grassy Green levels
         foreach (TimeTrail t in FindObjectsByType<TimeTrail>(FindObjectsSortMode.None))
         {
             Transform post = t.transform.Find("Posts/StartPost");

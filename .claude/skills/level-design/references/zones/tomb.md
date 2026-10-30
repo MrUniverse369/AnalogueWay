@@ -1,6 +1,6 @@
-# Zone profile — Old Tomb (Z1)
+# Zone profile — Old Tomb (Z2; Z1 before 2026-10-30)
 
-**Status: usable, partly confirmed.** World 2 in play order (the scene prefix Z1 is historical; it is not the first
+**Status: usable, partly confirmed.** World 2 in play order (its scenes are Z2… since 2026-10-30; notes before then call them Z1…, which was not the first
 world). Sources: the authored levels Z1A1, Z1A2, Z1A3, Z1A6 (scene inventory and silhouettes, 2026-10-26), the
 "Tomb 1.0" cards on the Trello board (sweep of 21 Oct 2026), the tomb, boulder, spike-rhythm and shadow-fox memories
 (2026-10-20 to 22), ZoneAtmosphere/TombDarkness, the design doc. No new Tomb level has been designed with this skill
@@ -72,7 +72,7 @@ yet; the board gives the direction, and the structure rules are **[ref]** observ
 | Mr Octopus | Enemy/Tomb/Ghoul (6) (witch-hat octopus art) | patrols | 2 |
 | Shadow Fox | Enemy/Tomb/ShadowFox | patrols in a charging pose (no charge script, unlike the Grass fox); only in the generated Z1A4 so far | 2 |
 
-Boss: the Void Shrine (Z1BossTomb), reward Healing Stone. Authored density: 4–9 enemies per level, fewer than
+Boss: the Void Shrine (Z2Boss_Tomb), reward Healing Stone. Authored density: 4–9 enemies per level, fewer than
 Grass for the size. [ref]
 
 ## Rewards
@@ -83,7 +83,7 @@ fixed **Trap** chest (Z1A3) and a fixed Health chest, not only random ones. [ref
 
 ## Greybox notes for this zone
 
-- Base scene: Z1A1Tomb or the authored level nearest the brief (Z1A6Tomb carries a SpikeRhythm, kill planes and
+- Base scene: Z2A1_Tomb or the authored level nearest the brief (Z2A6_Tomb carries a SpikeRhythm, kill planes and
   RespawnPos).
 - **Set `toughness = 2` on every enemy instance.** Enemy health comes from the scene name, and a `Greybox_*` name
   gives every enemy 1 stomp; a ghoul chain or a two-stomp fight then plays wrong.

@@ -1,5 +1,5 @@
 """FOXBOSS (2026-10-25): turns the user's two Forest Spirit Fox boss sheets (upscaled pixel art on transparency, as
-delivered) into one game-ready sheet for the Grass boss (Z4BossGrass's MotherBoss):
+delivered) into one game-ready sheet for the Grass boss (Z1Boss_GrassGreen's MotherBoss):
 
   in (kept untouched, in Assets/Sprites/Enemies/Grass/ForestSpiritFox/):
        SpritFoxBossAttackFrame.png       top row: 6 frames, the fox crouched and braced, breathing (its idle)

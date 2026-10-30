@@ -146,13 +146,13 @@ public static class LevelGrade
     // ---------------------------------------------------------------- best ranks (saved)
     /// <summary>The best rank earned in a level (None if never cleared since ranks were added).</summary>
     public static Grade BestOf(string scene) =>
-        !string.IsNullOrEmpty(scene) && best.TryGetValue(scene, out Grade g) ? g : Grade.None;
+        !string.IsNullOrEmpty(scene) && best.TryGetValue(LevelRegistry.KeyOf(scene), out Grade g) ? g : Grade.None; // LEVELNAMES: by permanent id
 
     /// <summary>Keeps 'grade' for the level if it beats the best so far. Returns true if it did.</summary>
     public static bool Record(string scene, Grade grade)
     {
         if (string.IsNullOrEmpty(scene) || grade <= BestOf(scene)) return false;
-        best[scene] = grade;
+        best[LevelRegistry.KeyOf(scene)] = grade; // LEVELNAMES: by permanent id
         return true;
     }
 
@@ -179,7 +179,10 @@ public static class LevelGrade
         if (data == null || data.levelGrades == null) return grades;
         foreach (ItemStack s in data.levelGrades)
             if (s != null && !string.IsNullOrEmpty(s.id) && s.count >= (int)Grade.D && s.count <= (int)Grade.S)
-                grades[s.id] = (Grade)s.count;
+            {
+                string key = LevelRegistry.KeyOf(s.id); // LEVELNAMES: an older save's scene name reads as its level's id
+                if (!grades.TryGetValue(key, out Grade had) || (Grade)s.count > had) grades[key] = (Grade)s.count;
+            }
         return grades;
     }
 

@@ -7,7 +7,7 @@ using UnityEngine;
 
 /// <summary>
 /// FOXBOSS (2026-10-25): Tools/HNL/Set Up Forest Fox Boss. Puts the user's Forest Spirit Fox boss sheets on the Grass
-/// boss (MotherBoss.prefab, the YokaiBoss in Z4BossGrass, until now King Mossback) and gives it the fox's three
+/// boss (MotherBoss.prefab, the YokaiBoss in Z1Boss_GrassGreen, until now King Mossback) and gives it the fox's three
 /// attacks. Safe to run again (after re-running Tools/Art/forest_fox_boss.py).
 ///   1. imports ForestFoxBoss_Body.png (16 PPU, point, uncompressed) sliced into its three rows (idle, charge, beam),
 ///      pivot on the feet line at the middle of the torso. Sizes come from Tools/Art/forest_fox_boss_layout.txt.

@@ -78,9 +78,10 @@ public class LevelGradeSettings : ScriptableObject
     {
         if (parOverrides != null)
             foreach (ParOverride o in parOverrides)
-                if (o != null && o.sceneName == sceneName) return o.parSeconds;
+                if (o != null && LevelRegistry.KeyOf(o.sceneName) == LevelRegistry.KeyOf(sceneName)) return o.parSeconds; // LEVELNAMES: any name of the level
         float par = parBase + routeLength / parSpeed;
-        if (!string.IsNullOrEmpty(sceneName) && sceneName.Contains("Boss")) par += bossParBonus;
+        string kind = LevelRegistry.Find(sceneName)?.kind; // LEVELNAMES: bosses and the mini-boss, from the registry
+        if (kind == "boss" || kind == "miniboss") par += bossParBonus;
         return par;
     }
 }

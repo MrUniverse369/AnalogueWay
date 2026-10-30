@@ -9,10 +9,10 @@ using UnityEngine;
 /// <summary>
 /// TEST (2026-10-25): self-driving play-mode checks for the dash clash (DASHCLASH) and the Spirit Blast (SPIRITBLAST).
 /// Editor only, safe to delete. Added to a new object in Play mode (from an MCP RunCommand) with Mode set:
-///   "clash"  Z3A1Japan: drives Harvey into a patrolling samurai three times with a Spirit Dash timed to meet its dash
+///   "clash"  Z4A1_Japan: drives Harvey into a patrolling samurai three times with a Spirit Dash timed to meet its dash
 ///            (expects the battle card, no life lost, no knockback, no stun), then a dash into its wind-up (expects
 ///            the ordinary block: stun) and a slash taken standing still (expects a life lost)
-///   "beam"   Z4BossGrass: makes the fox fire its beam at Harvey from both sides and screenshots the charge, the shot
+///   "beam"   Z1Boss_GrassGreen: makes the fox fire its beam at Harvey from both sides and screenshots the charge, the shot
 ///            and the impact; checks the hazards and their dressing are gone afterwards
 /// Results go to the Console as "[CLASHTEST] ..." lines and to Log (a text file next to the screenshots).
 /// </summary>
@@ -308,7 +308,7 @@ public class HNLClashTest : MonoBehaviour
     private readonly bool[] dumped = new bool[2];
 
     // ---------------------------------------------------------------- the samurai boss (DASHCLASH)
-    // Z3BossBattle: Harvey stands mid-arena; each round waits for the boss's dash slash and dashes into it when he is
+    // Z4Boss_Japan: Harvey stands mid-arena; each round waits for the boss's dash slash and dashes into it when he is
     // within reach (expects the card, no life lost, no knockback, the boss attacking again afterwards); then two
     // controls: standing in the dash's path (a life), and dashing into him while he charges (the counter, a life).
     private IEnumerator Boss()

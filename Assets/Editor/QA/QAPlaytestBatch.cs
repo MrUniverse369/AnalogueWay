@@ -15,7 +15,7 @@ using UnityEngine.SceneManagement;
 /// stuck (slot 1), tries the dragon and the fox where the level allows them, and is moved on to each checkpoint in
 /// turn so the whole level is visited. At action moments it saves a clean 1920x1080 still (HUD hidden) through
 /// HNLTrailerTake. Everything goes to Logs/QA/&lt;prefix&gt;/&lt;scene&gt;[-n]/ (log.txt, 00000.png...).
-/// Usage: QAPlaytestBatch.Start("pt29", new[]{"Assets/Scenes/Z1A1Tomb.unity|respawn|30", ...}); Status(); Stop().
+/// Usage: QAPlaytestBatch.Start("pt29", new[]{"Assets/Scenes/Z2A1_Tomb.unity|respawn|30", ...}); Status(); Stop().
 /// Editor only.
 /// </summary>
 [InitializeOnLoad]

@@ -1,5 +1,5 @@
 """Turns the Void Shrine boss sheet (Void Shrine Boss Sprite Sheet.png: upscaled pixel art on black, labelled rows)
-into game-ready sheets for the Tomb boss (Z1BossTomb):
+into game-ready sheets for the Tomb boss (Z2Boss_Tomb):
 
   in:  Assets/Sprites/Enemies/Tomb/VoidShrineBoss/Void Shrine Boss Sprite Sheet.png   the sheet as delivered (kept)
   out: Assets/Sprites/Enemies/Tomb/VoidShrineBoss/VoidShrine_Body.png     one row per animation, equal cells:

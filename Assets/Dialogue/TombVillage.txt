@@ -1,4 +1,4 @@
-// Harvey's Nine Lives: the dig-site camp outside the Old Tomb (Z1TombVillage).
+// Harvey's Nine Lives: the dig-site camp outside the Old Tomb (Z2Village_Tomb).
 // Format notes: see JapanVillage.txt and Assets/Scripts/DialogueScript.cs. Check with Tools/HNL/Check Dialogue Files.
 
 

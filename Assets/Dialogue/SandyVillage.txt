@@ -1,4 +1,4 @@
-// Harvey's Nine Lives: the oasis bazaar in the Sandy Dunes (Z2SandyVillage).
+// Harvey's Nine Lives: the oasis bazaar in the Sandy Dunes (Z3Village_Egypt).
 // Format notes: see JapanVillage.txt and Assets/Scripts/DialogueScript.cs. Check with Tools/HNL/Check Dialogue Files.
 
 

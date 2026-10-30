@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// SAMURAIBOSS (2026-10-19): Sumaria, the samurai guarding the Japan zone (Z3BossBattle). Three lives, one stage each.
+/// SAMURAIBOSS (2026-10-19): Sumaria, the samurai guarding the Japan zone (Z4Boss_Japan). Three lives, one stage each.
 ///
 /// Stage 1  Charging dash slash. He takes the wall away from Harvey, crouches with his hand on the hilt and charges
 ///          (a red glow, sparks drawn in, and a dashed danger line across the arena at blade height), then dashes the

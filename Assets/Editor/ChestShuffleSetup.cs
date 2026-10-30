@@ -25,7 +25,7 @@ public static class ChestShuffleSetup
     private const string ChestPrefab = "Assets/Prefabs/Treasure_Chest_One.prefab";
     private const string IconPath = "Assets/Sprites/UI/Menus/Item_RubyGem.png";
     private const string DialoguePath = "Assets/Dialogue/MushroomSpirit.txt";
-    private const string Z4A6 = "Assets/Scenes/Z4A6GrassGreen.unity";
+    private const string Z4A6 = "Assets/Scenes/Z1A1_GrassGreen.unity";
     private static readonly Vector3 Z4A6Spot = new Vector3(-50.5f, 52f, 0f);
     private static readonly string[] FrameNames = { "MushroomSpirit_Idle0", "MushroomSpirit_Idle1", "MushroomSpirit_Shuffle", "MushroomSpirit_Cheer" };
     public const float ChestSpacing = 4f, SpiritHeight = 3f;

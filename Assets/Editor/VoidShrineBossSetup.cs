@@ -11,7 +11,7 @@ using UnityEngine;
 ///   1. imports the boss art at 16 PPU, point filtering, uncompressed: the body sheet sliced into its animation rows
 ///      (pivot on the antlers), the defeat and pillar sheets (pivot on the floor), the orb, the floor crack and the
 ///      white tile the swipe's band is drawn with. Cell sizes and pivots come from Tools/Art/void_shrine_boss_layout.txt.
-///   2. in Z1BossTomb (opened additively, so whatever scene is open stays open): switches the old GraveWarden
+///   2. in Z2Boss_Tomb (opened additively, so whatever scene is open stays open): switches the old GraveWarden
 ///      (YokaiBoss) off - it stays in the scene for ZoneContentBuilder - and builds the Void Shrine's rig in its
 ///      place: the boss (hurtbox, body sprite, the old boss's life pips), the orb and pillar templates, the crack
 ///      and the swipe band, wired to the arena's limits and the boss treasure, with the three stages' tuning
@@ -26,7 +26,7 @@ public static class VoidShrineBossSetup
     private const string Mark = Dir + "VoidShrine_Mark.png";
     private const string Fill = Dir + "VoidShrine_Fill.png";
     private const string Layout = "Tools/Art/void_shrine_boss_layout.txt";
-    private const string ScenePath = "Assets/Scenes/Z1BossTomb.unity";
+    private const string ScenePath = "Assets/Scenes/Z2Boss_Tomb.unity";
     private const float Ppu = 16f;
 
     [MenuItem("Tools/HNL/Set Up Void Shrine Boss")]
@@ -114,7 +114,7 @@ public static class VoidShrineBossSetup
             .Where(s => s.name.StartsWith("VoidShrine_" + anim + "_"))
             .OrderBy(s => int.Parse(s.name.Substring(s.name.LastIndexOf('_') + 1))).ToArray();
 
-    // ---------------------------------------------------------------- 2. the rig in Z1BossTomb
+    // ---------------------------------------------------------------- 2. the rig in Z2Boss_Tomb
 
     public static void BuildRig()
     {
@@ -125,7 +125,7 @@ public static class VoidShrineBossSetup
         GameObject treasure = roots.FirstOrDefault(g => g.name == "BossTreasure");
         if (oldBoss == null || arena == null)
         {
-            Debug.LogWarning("VoidShrineBossSetup: Z1BossTomb has no GraveWarden/BossArena to build from.");
+            Debug.LogWarning("VoidShrineBossSetup: Z2Boss_Tomb has no GraveWarden/BossArena to build from.");
             return;
         }
         foreach (GameObject g in roots.Where(g => g.name == "VoidShrineBoss" || g.name == "VoidShrineBand"))

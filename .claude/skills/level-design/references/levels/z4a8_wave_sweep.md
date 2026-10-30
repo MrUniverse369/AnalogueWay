@@ -1,11 +1,11 @@
 # Level record — Z4A8 Wave Sweep (sky bowl)
 
-**Level-specific.** Z4A8GrassGreen's Challenge Arena. The arena rules are Z4A6's/Z4A7's (`z4a6_challenge_arena.md`,
+**Level-specific.** Z1A3_GrassGreen's Challenge Arena. The arena rules are Z4A6's/Z4A7's (`z4a6_challenge_arena.md`,
 `z4a7_challenge_room.md`); this records the room and its ways in and out.
 
 | | |
 | --- | --- |
-| Scene | Assets/Scenes/Z4A8GrassGreen.unity, root object `WaveSweepBowl`, plus 68 painted Ground cells |
+| Scene | Assets/Scenes/Z1A3_GrassGreen.unity, root object `WaveSweepBowl`, plus 68 painted Ground cells |
 | Code | Assets/Editor/GrassEncounterSetup.cs (marker ENCOUNTERS, menu Tools/HNL/Encounters/Z4A8 Wave Sweep); ChallengeArena |
 | Tests | TC-ARENA-Z4A8; QAArenaDriver (Entry/Exit for Z4A8), QABounceDriver route JumpMushroom_Entry |
 | Built | 2026-10-29, from the brief "Grassy Green Interactive Encounters" |

@@ -80,7 +80,7 @@ public class Talisman : ScriptableObject
     public AudioClip ActivationSound => activationSound;
 
     public bool IsAllowedInScene(string sceneName) =>
-        blockedScenes == null || Array.IndexOf(blockedScenes, sceneName) < 0;
+        blockedScenes == null || Array.FindIndex(blockedScenes, s => LevelRegistry.KeyOf(s) == LevelRegistry.KeyOf(sceneName)) < 0; // LEVELNAMES: any name of the level
 
     /// <summary>HEAL: chi paid once when the talisman starts (on top of ChiPerSecond). 0 = none. Without enough chi
     /// it can't start.</summary>

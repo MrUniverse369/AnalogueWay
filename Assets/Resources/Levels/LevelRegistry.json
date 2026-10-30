@@ -1,0 +1,499 @@
+{
+  "_comment": "LEVELNAMES (2026-10-30): the single source of truth for level identity. 'id' is permanent: never change or reuse it, even if the level moves, is renamed or reordered. 'scene' is the current Unity scene name; every former name goes in 'legacyScenes' so old saves and data still resolve. zoneOrder/levelOrder/overallOrder are display and play order only. Read by LevelRegistry.cs, Tools/QA/catalogue.mjs and the HNL dashboard.",
+  "version": 1,
+  "levels": [
+    {
+      "id": "HNL_ZONE_GRASSY_GREEN_LEVEL_001",
+      "zone": "GRASSY_GREEN",
+      "zoneName": "Grassy Green",
+      "zoneOrder": 1,
+      "levelOrder": 1,
+      "overallOrder": 1,
+      "kind": "act",
+      "act": 1,
+      "scene": "Z1A1_GrassGreen",
+      "legacyScenes": [
+        "Z4A6GrassGreen"
+      ],
+      "displayName": "GRASSY MEADOW - ACT 1",
+      "atmosphere": "Green",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_GRASSY_GREEN_LEVEL_006",
+      "zone": "GRASSY_GREEN",
+      "zoneName": "Grassy Green",
+      "zoneOrder": 1,
+      "levelOrder": 2,
+      "overallOrder": 2,
+      "kind": "village",
+      "act": 0,
+      "scene": "Z1Village_GrassGreen",
+      "legacyScenes": [
+        "Z4GrassVillage"
+      ],
+      "displayName": "GRASSY MEADOW - VILLAGE",
+      "atmosphere": "Green",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_GRASSY_GREEN_LEVEL_002",
+      "zone": "GRASSY_GREEN",
+      "zoneName": "Grassy Green",
+      "zoneOrder": 1,
+      "levelOrder": 3,
+      "overallOrder": 3,
+      "kind": "act",
+      "act": 2,
+      "scene": "Z1A2_GrassGreen",
+      "legacyScenes": [
+        "Z4A7GrassGreen"
+      ],
+      "displayName": "GRASSY MEADOW - ACT 2",
+      "atmosphere": "Green",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_GRASSY_GREEN_LEVEL_003",
+      "zone": "GRASSY_GREEN",
+      "zoneName": "Grassy Green",
+      "zoneOrder": 1,
+      "levelOrder": 4,
+      "overallOrder": 4,
+      "kind": "act",
+      "act": 3,
+      "scene": "Z1A3_GrassGreen",
+      "legacyScenes": [
+        "Z4A8GrassGreen"
+      ],
+      "displayName": "GRASSY MEADOW - ACT 3",
+      "atmosphere": "Green",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_GRASSY_GREEN_LEVEL_004",
+      "zone": "GRASSY_GREEN",
+      "zoneName": "Grassy Green",
+      "zoneOrder": 1,
+      "levelOrder": 5,
+      "overallOrder": 5,
+      "kind": "act",
+      "act": 4,
+      "scene": "Z1A4_GrassGreen",
+      "legacyScenes": [
+        "Z4A9GrassGreen"
+      ],
+      "displayName": "GRASSY MEADOW - ACT 4",
+      "atmosphere": "Green",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_GRASSY_GREEN_LEVEL_005",
+      "zone": "GRASSY_GREEN",
+      "zoneName": "Grassy Green",
+      "zoneOrder": 1,
+      "levelOrder": 6,
+      "overallOrder": 6,
+      "kind": "act",
+      "act": 5,
+      "scene": "Z1A5_GrassGreen",
+      "legacyScenes": [
+        "Z4A10GrassGreen"
+      ],
+      "displayName": "GRASSY MEADOW - ACT 5",
+      "atmosphere": "Green",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_GRASSY_GREEN_LEVEL_007",
+      "zone": "GRASSY_GREEN",
+      "zoneName": "Grassy Green",
+      "zoneOrder": 1,
+      "levelOrder": 7,
+      "overallOrder": 7,
+      "kind": "boss",
+      "act": 0,
+      "scene": "Z1Boss_GrassGreen",
+      "legacyScenes": [
+        "Z4BossGrass"
+      ],
+      "displayName": "GRASSY MEADOW - BOSS",
+      "atmosphere": "Green",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_TOMB_LEVEL_001",
+      "zone": "TOMB",
+      "zoneName": "Tomb",
+      "zoneOrder": 2,
+      "levelOrder": 1,
+      "overallOrder": 8,
+      "kind": "act",
+      "act": 1,
+      "scene": "Z2A1_Tomb",
+      "legacyScenes": [
+        "Z1A1Tomb"
+      ],
+      "displayName": "THE OLD TOMB - ACT 1",
+      "atmosphere": "Tomb",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_TOMB_LEVEL_007",
+      "zone": "TOMB",
+      "zoneName": "Tomb",
+      "zoneOrder": 2,
+      "levelOrder": 2,
+      "overallOrder": 9,
+      "kind": "village",
+      "act": 0,
+      "scene": "Z2Village_Tomb",
+      "legacyScenes": [
+        "Z1TombVillage"
+      ],
+      "displayName": "THE OLD TOMB - VILLAGE",
+      "atmosphere": "Tomb",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_TOMB_LEVEL_002",
+      "zone": "TOMB",
+      "zoneName": "Tomb",
+      "zoneOrder": 2,
+      "levelOrder": 3,
+      "overallOrder": 10,
+      "kind": "act",
+      "act": 2,
+      "scene": "Z2A2_Tomb",
+      "legacyScenes": [
+        "Z1A2Tomb"
+      ],
+      "displayName": "THE OLD TOMB - ACT 2",
+      "atmosphere": "Tomb",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_TOMB_LEVEL_003",
+      "zone": "TOMB",
+      "zoneName": "Tomb",
+      "zoneOrder": 2,
+      "levelOrder": 4,
+      "overallOrder": 11,
+      "kind": "act",
+      "act": 3,
+      "scene": "Z2A3_Tomb",
+      "legacyScenes": [
+        "Z1A3Tomb"
+      ],
+      "displayName": "THE OLD TOMB - ACT 3",
+      "atmosphere": "Tomb",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_TOMB_LEVEL_004",
+      "zone": "TOMB",
+      "zoneName": "Tomb",
+      "zoneOrder": 2,
+      "levelOrder": 5,
+      "overallOrder": 12,
+      "kind": "act",
+      "act": 4,
+      "scene": "Z2A4_Tomb",
+      "legacyScenes": [
+        "Z1A4Tomb"
+      ],
+      "displayName": "THE OLD TOMB - ACT 4",
+      "atmosphere": "Tomb",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_TOMB_LEVEL_005",
+      "zone": "TOMB",
+      "zoneName": "Tomb",
+      "zoneOrder": 2,
+      "levelOrder": 6,
+      "overallOrder": 13,
+      "kind": "act",
+      "act": 5,
+      "scene": "Z2A5_Tomb",
+      "legacyScenes": [
+        "Z1A5Tomb"
+      ],
+      "displayName": "THE OLD TOMB - ACT 5",
+      "atmosphere": "Tomb",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_TOMB_LEVEL_006",
+      "zone": "TOMB",
+      "zoneName": "Tomb",
+      "zoneOrder": 2,
+      "levelOrder": 7,
+      "overallOrder": 14,
+      "kind": "act",
+      "act": 6,
+      "scene": "Z2A6_Tomb",
+      "legacyScenes": [
+        "Z1A6Tomb"
+      ],
+      "displayName": "THE OLD TOMB - ACT 6",
+      "atmosphere": "Tomb",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_TOMB_LEVEL_008",
+      "zone": "TOMB",
+      "zoneName": "Tomb",
+      "zoneOrder": 2,
+      "levelOrder": 8,
+      "overallOrder": 15,
+      "kind": "boss",
+      "act": 0,
+      "scene": "Z2Boss_Tomb",
+      "legacyScenes": [
+        "Z1BossTomb"
+      ],
+      "displayName": "THE OLD TOMB - BOSS",
+      "atmosphere": "Tomb",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_EGYPT_LEVEL_001",
+      "zone": "EGYPT",
+      "zoneName": "Egypt",
+      "zoneOrder": 3,
+      "levelOrder": 1,
+      "overallOrder": 16,
+      "kind": "act",
+      "act": 1,
+      "scene": "Z3A1_Egypt",
+      "legacyScenes": [
+        "Z2A1Sandy"
+      ],
+      "displayName": "SANDY DUNES - ACT 1",
+      "atmosphere": "Egypt",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_EGYPT_LEVEL_006",
+      "zone": "EGYPT",
+      "zoneName": "Egypt",
+      "zoneOrder": 3,
+      "levelOrder": 2,
+      "overallOrder": 17,
+      "kind": "village",
+      "act": 0,
+      "scene": "Z3Village_Egypt",
+      "legacyScenes": [
+        "Z2SandyVillage"
+      ],
+      "displayName": "SANDY DUNES - VILLAGE",
+      "atmosphere": "Egypt",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_EGYPT_LEVEL_002",
+      "zone": "EGYPT",
+      "zoneName": "Egypt",
+      "zoneOrder": 3,
+      "levelOrder": 3,
+      "overallOrder": 18,
+      "kind": "act",
+      "act": 2,
+      "scene": "Z3A2_Egypt",
+      "legacyScenes": [
+        "Z2A2Sandy"
+      ],
+      "displayName": "SANDY DUNES - ACT 2",
+      "atmosphere": "Egypt",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_EGYPT_LEVEL_003",
+      "zone": "EGYPT",
+      "zoneName": "Egypt",
+      "zoneOrder": 3,
+      "levelOrder": 4,
+      "overallOrder": 19,
+      "kind": "act",
+      "act": 3,
+      "scene": "Z3A3_Egypt",
+      "legacyScenes": [
+        "Z2A3Sandy"
+      ],
+      "displayName": "SANDY DUNES - ACT 3",
+      "atmosphere": "Egypt",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_EGYPT_LEVEL_007",
+      "zone": "EGYPT",
+      "zoneName": "Egypt",
+      "zoneOrder": 3,
+      "levelOrder": 5,
+      "overallOrder": 20,
+      "kind": "miniboss",
+      "act": 0,
+      "scene": "Z3MiniBoss_Egypt",
+      "legacyScenes": [
+        "Z2MiniBossSandy"
+      ],
+      "displayName": "SANDY DUNES - MINI-BOSS",
+      "atmosphere": "Egypt",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_EGYPT_LEVEL_004",
+      "zone": "EGYPT",
+      "zoneName": "Egypt",
+      "zoneOrder": 3,
+      "levelOrder": 6,
+      "overallOrder": 21,
+      "kind": "act",
+      "act": 4,
+      "scene": "Z3A4_Egypt",
+      "legacyScenes": [
+        "Z2A4Sandy"
+      ],
+      "displayName": "SANDY DUNES - ACT 4",
+      "atmosphere": "Egypt",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_EGYPT_LEVEL_005",
+      "zone": "EGYPT",
+      "zoneName": "Egypt",
+      "zoneOrder": 3,
+      "levelOrder": 7,
+      "overallOrder": 22,
+      "kind": "act",
+      "act": 5,
+      "scene": "Z3A5_Egypt",
+      "legacyScenes": [
+        "Z2A5Sandy"
+      ],
+      "displayName": "SANDY DUNES - ACT 5",
+      "atmosphere": "Egypt",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_EGYPT_LEVEL_008",
+      "zone": "EGYPT",
+      "zoneName": "Egypt",
+      "zoneOrder": 3,
+      "levelOrder": 8,
+      "overallOrder": 23,
+      "kind": "boss",
+      "act": 0,
+      "scene": "Z3Boss_Egypt",
+      "legacyScenes": [
+        "Z2BossSandy"
+      ],
+      "displayName": "SANDY DUNES - BOSS",
+      "atmosphere": "Egypt",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_JAPAN_LEVEL_001",
+      "zone": "JAPAN",
+      "zoneName": "Japan",
+      "zoneOrder": 4,
+      "levelOrder": 1,
+      "overallOrder": 24,
+      "kind": "act",
+      "act": 1,
+      "scene": "Z4A1_Japan",
+      "legacyScenes": [
+        "Z3A1Japan"
+      ],
+      "displayName": "SUNLIT SHRINE ROAD - ACT 1",
+      "atmosphere": "JapanSun",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_JAPAN_LEVEL_005",
+      "zone": "JAPAN",
+      "zoneName": "Japan",
+      "zoneOrder": 4,
+      "levelOrder": 2,
+      "overallOrder": 25,
+      "kind": "village",
+      "act": 0,
+      "scene": "Z4Village_Japan",
+      "legacyScenes": [
+        "Z3JapanVillage"
+      ],
+      "displayName": "SNOW TEMPLE PASS - VILLAGE",
+      "atmosphere": "JapanVillage",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_JAPAN_LEVEL_002",
+      "zone": "JAPAN",
+      "zoneName": "Japan",
+      "zoneOrder": 4,
+      "levelOrder": 3,
+      "overallOrder": 26,
+      "kind": "act",
+      "act": 2,
+      "scene": "Z4A2_Japan",
+      "legacyScenes": [
+        "Z3A2Japan"
+      ],
+      "displayName": "SUNLIT SHRINE ROAD - ACT 2",
+      "atmosphere": "JapanSun",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_JAPAN_LEVEL_003",
+      "zone": "JAPAN",
+      "zoneName": "Japan",
+      "zoneOrder": 4,
+      "levelOrder": 4,
+      "overallOrder": 27,
+      "kind": "act",
+      "act": 3,
+      "scene": "Z4A3_Japan",
+      "legacyScenes": [
+        "Z3A3Japan"
+      ],
+      "displayName": "SUNLIT SHRINE ROAD - ACT 3",
+      "atmosphere": "JapanSnow",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_JAPAN_LEVEL_004",
+      "zone": "JAPAN",
+      "zoneName": "Japan",
+      "zoneOrder": 4,
+      "levelOrder": 5,
+      "overallOrder": 28,
+      "kind": "act",
+      "act": 4,
+      "scene": "Z4A4_Japan",
+      "legacyScenes": [
+        "Z3A4Japan"
+      ],
+      "displayName": "SUNLIT SHRINE ROAD - ACT 4",
+      "atmosphere": "JapanSnow",
+      "status": "production"
+    },
+    {
+      "id": "HNL_ZONE_JAPAN_LEVEL_006",
+      "zone": "JAPAN",
+      "zoneName": "Japan",
+      "zoneOrder": 4,
+      "levelOrder": 6,
+      "overallOrder": 29,
+      "kind": "boss",
+      "act": 0,
+      "scene": "Z4Boss_Japan",
+      "legacyScenes": [
+        "Z3BossBattle"
+      ],
+      "displayName": "SNOW TEMPLE PASS - BOSS",
+      "atmosphere": "JapanSnow",
+      "status": "production"
+    }
+  ]
+}

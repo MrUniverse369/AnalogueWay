@@ -11,7 +11,7 @@ using UnityEngine;
 ///   1. imports the art at 16 PPU, point filtering, uncompressed: the body sheet sliced into its animation rows, every
 ///      frame pivoted on the floor point under its feet (from Tools/Art/landshark_boss_layout.txt), the three mound
 ///      sizes (pivot on the floor) and the white tile the charge lane is drawn with.
-///   2. in Z2BossSandy (opened additively, so whatever scene is open stays open): switches the old Sandscale Scarab
+///   2. in Z3Boss_Egypt (opened additively, so whatever scene is open stays open): switches the old Sandscale Scarab
 ///      (YokaiBoss) off - it stays in the scene for ZoneContentBuilder - and builds the Landshark in its place: the
 ///      boss (hurtbox, body sprite on the Player layer, which the arena's Ground draws over: that is how it hides in
 ///      the sand), the mound template, the charge lane, and the old boss's life pips made four and fixed above the
@@ -25,7 +25,7 @@ public static class LandsharkBossSetup
     private const string MoundSheet = Dir + "LandsharkBoss_Mound.png";
     private const string Fill = Dir + "LandsharkBoss_Fill.png";
     private const string Layout = "Tools/Art/landshark_boss_layout.txt";
-    private const string ScenePath = "Assets/Scenes/Z2BossSandy.unity";
+    private const string ScenePath = "Assets/Scenes/Z3Boss_Egypt.unity";
     private const float Ppu = 16f;
 
     [MenuItem("Tools/HNL/Set Up Landshark Boss")]
@@ -107,7 +107,7 @@ public static class LandsharkBossSetup
             .Where(s => s.name.StartsWith("Landshark_" + anim + "_"))
             .OrderBy(s => int.Parse(s.name.Substring(s.name.LastIndexOf('_') + 1))).ToArray();
 
-    // ---------------------------------------------------------------- 2. the rig in Z2BossSandy
+    // ---------------------------------------------------------------- 2. the rig in Z3Boss_Egypt
 
     public static void BuildRig()
     {
@@ -118,7 +118,7 @@ public static class LandsharkBossSetup
         GameObject treasure = roots.FirstOrDefault(g => g.name == "BossTreasure");
         if (oldBoss == null || arena == null)
         {
-            Debug.LogWarning("LandsharkBossSetup: Z2BossSandy has no SandscaleScarab/BossArena to build from.");
+            Debug.LogWarning("LandsharkBossSetup: Z3Boss_Egypt has no SandscaleScarab/BossArena to build from.");
             return;
         }
         foreach (GameObject g in roots.Where(g => g.name == "LandsharkBoss" || g.name == "LandsharkLane" || g.name == "LandsharkPips"))

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 /// <summary>
-/// Z4A7EAST (2026-10-28): greyboxes an eastern extension onto Z4A7GrassGreen, in the space the user marked with the
+/// Z4A7EAST (2026-10-28): greyboxes an eastern extension onto Z1A2_GrassGreen, in the space the user marked with the
 /// GreyBoxLevelDesignArea placeholder (x 190..275), and includes the Mushroom Spirit's chest game (ChestShuffleGame).
 /// Built with the level-design skill's method (Greybox_GrassyGreen_Level3's builder pattern, Grassy Green's sky-island
 /// profile): white island boxes on one merged static body, grey-blue bridge pieces, the zone's real prefabs drawn
@@ -30,7 +30,7 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public static class Z4A7EastExpansionBuilder
 {
-    public const string ScenePath = "Assets/Scenes/Z4A7GrassGreen.unity";
+    public const string ScenePath = "Assets/Scenes/Z1A2_GrassGreen.unity";
     public const string RootName = "Z4A7Expansion";
     private const string WhiteBoxPath = "Assets/Sprites/Tutorial/WhiteBox.png";
     private const string PostDir = "Assets/Sprites/Greybox/";

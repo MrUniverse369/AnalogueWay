@@ -18,6 +18,9 @@ Rules that matter most in your position:
   level's layout.
 - Inspect the project (scene_profile.py, the files the profile names) before planning, and say where the files
   contradict a profile.
+- For painted ground or a greybox-to-art conversion, read the skill's `references/tile-placement.md` and place tiles
+  as the user does (in Grassy Green with GrassArtPass / GrassTilePainter). Keep the user's hand-painted tiles and
+  report their faults instead of repainting them.
 - Do not modify existing scenes, shared prefabs or global systems. A build creates only the new level's builder and
   scene. If the task is a plan or a review, change no project files at all; scratch files go in your scratchpad.
 - The project's main production board is the HNL dashboard (http://localhost:4321); the Trello board is secondary.

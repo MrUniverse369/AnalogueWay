@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public static class SaveSystem
 {
-    public const int CurrentVersion = 2; // WORLDORDER: 2 = Build Settings in world order (Grass, Tomb, Egypt, Japan)
+    public const int CurrentVersion = 3; // WORLDORDER: 2 = Build Settings in world order (Grass, Tomb, Egypt, Japan); LEVELNAMES: 3 = levels saved by permanent id
     public const int SlotCount = 5; // SLOTS:
     private const string LegacySlot = "slot0"; // SLOTS: the single save from before save files; moved into file 1
     private const string ActiveSlotPref = "hnl_active_slot"; // SLOTS:
@@ -93,6 +93,7 @@ public static class SaveSystem
         slot ??= ActiveSlot; // SLOTS:
         try
         {
+            KeepOlderVersion(slot); // LEVELNAMES: the first save over an older-format file keeps a copy of it
             data.version = CurrentVersion;
             data.savedAtUtc = DateTime.UtcNow.ToString("o");
             Storage.Write(slot, JsonUtility.ToJson(data, true));
@@ -143,11 +144,70 @@ public static class SaveSystem
     private static void Migrate(SaveData data)
     {
         if (data.version < 2) MigrateWorldOrder(data);
+        if (data.version < 3) MigrateLevelIds(data);
         data.version = CurrentVersion;
     }
 
+    /// <summary>LEVELNAMES: the storage key of the copy kept of a file from before version 3.</summary>
+    public static string BackupKey(string slot) => slot + "_v2backup";
+
+    // LEVELNAMES (2026-10-30): before a file written by an older version is first overwritten, its text is copied to
+    // BackupKey once, so the player's original progress can always be restored by hand. Never throws.
+    private static void KeepOlderVersion(string slot)
+    {
+        try
+        {
+            if (!Storage.Exists(slot) || Storage.Exists(BackupKey(slot))) return;
+            string json = Storage.Read(slot);
+            if (string.IsNullOrEmpty(json)) return;
+            var probe = new SaveData { version = 0 };
+            JsonUtility.FromJsonOverwrite(json, probe);
+            if (probe.version < 3) Storage.Write(BackupKey(slot), json);
+        }
+        catch (Exception e) { Debug.LogWarning($"SaveSystem: could not back up slot '{slot}' before upgrading it: {e.Message}"); }
+    }
+
+    // LEVELNAMES (2026-10-30): version 2 and older saves name levels by scene (Z4A6GrassGreen); version 3 by permanent id
+    // (HNL_ZONE_GRASSY_GREEN_LEVEL_001), so renaming or reordering scenes never touches progress. Every place a level
+    // name was stored is converted through the level registry, which knows every former scene name. A name it does not
+    // know (a menu, a scene that no longer exists) is kept exactly as it was, never guessed. Running it again changes
+    // nothing (an id maps to itself).
+    public static void MigrateLevelIds(SaveData data)
+    {
+        data.sceneName = LevelRegistry.KeyOf(data.sceneName);
+        data.furthestScene = LevelRegistry.KeyOf(data.furthestScene);
+        if (data.levelGrades != null)
+        {
+            var merged = new System.Collections.Generic.List<ItemStack>();
+            foreach (ItemStack g in data.levelGrades)
+            {
+                if (g == null) continue;
+                string id = LevelRegistry.KeyOf(g.id);
+                ItemStack same = merged.Find(x => x.id == id);
+                if (same == null) merged.Add(new ItemStack { id = id, count = g.count });
+                else same.count = Mathf.Max(same.count, g.count); // the same level under two names: keep the better rank
+            }
+            data.levelGrades = merged.ToArray();
+        }
+        if (data.claimed != null)
+            for (int i = 0; i < data.claimed.Length; i++)
+                data.claimed[i] = MigrateClaim(data.claimed[i]);
+    }
+
+    // a one-time reward key built from a scene name: "pickup:<scene>/<object>" (ItemPickup). Other keys are fixed
+    // strings (intro:..., TimeTrail_...) and stay as they are.
+    private static string MigrateClaim(string key)
+    {
+        const string Pickup = "pickup:";
+        if (string.IsNullOrEmpty(key) || !key.StartsWith(Pickup)) return key;
+        int slash = key.IndexOf('/', Pickup.Length);
+        if (slash < 0) return key;
+        return Pickup + LevelRegistry.KeyOf(key.Substring(Pickup.Length, slash - Pickup.Length)) + key.Substring(slash);
+    }
+
     // WORLDORDER (2026-10-20): the level order before the worlds were put in order (Grass first) and the villages
-    // moved to straight after each zone's first act.
+    // moved to straight after each zone's first act. These are the scene names of that time and must stay so: the
+    // level registry resolves them (legacyScenes) to today's scenes.
     private static readonly string[] OldLevelOrder =
     {
         "MainMenue", "Z1A1Tomb", "Z1A2Tomb", "Z1A3Tomb", "Z1A4Tomb", "Z1A5Tomb", "Z1TombVillage", "Z1BossTomb",

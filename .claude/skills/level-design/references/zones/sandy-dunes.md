@@ -1,4 +1,4 @@
-# Zone profile — Sandy Dunes / Egypt (Z2)
+# Zone profile — Sandy Dunes / Egypt (Z3; Z2 before 2026-10-30)
 
 **Status: partial.** World 3 in play order. Sources: the authored levels Z2A1 and Z2A2 (scene inventory and
 silhouettes, 2026-10-26), the Z2A2 fish-shaft and water notes (2026-10-18), ZoneAtmosphere, the art-style memory,
@@ -8,7 +8,7 @@ authored Dunes levels were designed. Treat every structure line as **[ref]** obs
 ## Identity
 
 - Desert and sand: palette e1d089 e3ba66 ce812c; blowing sand wisps and heat haze on the far background layers
-  (automatic in `Z2*` scenes); a parallax sky behind patchy backdrop tilemaps; palms. [ref]
+  (automatic in every Egypt level; registry atmosphere `Egypt`); a parallax sky behind patchy backdrop tilemaps; palms. [ref]
 - The design doc calls the zone Sandy Dunes; scene files say Sandy, folders say Egypt. Same zone.
 - The one stated aim [board, "Create world Two", an old card]: an eye-catching look, "engaging sunny scapes".
 
@@ -44,14 +44,14 @@ authored Dunes levels were designed. Treat every structure line as **[ref]** obs
 | Sand Shark | Enemy/Egypt/BabySandShark | a fin moving through the ground | 2 |
 | Fish | Enemy/Egypt/EnemyHolder | water shafts; bounce stepping stones | 2 |
 
-Bosses [built 2026-10-27/28, updated from the scenes]: the **Landshark** ends the zone (Z2BossSandy, LandsharkBoss;
+Bosses [built 2026-10-27/28, updated from the scenes]: the **Landshark** ends the zone (Z3Boss_Egypt, LandsharkBoss;
 the old Sandscale Scarab is kept switched off there for ZoneContentBuilder), reward Summoning Talisman. **Sandfin**,
-a green-shark mini-boss, sits mid-zone in its own level, Z2MiniBossSandy, between Z2A3 and Z2A4 (record:
+a green-shark mini-boss, sits mid-zone in its own level, Z3MiniBoss_Egypt, between Z2A3 and Z2A4 (record:
 `levels/z2minibosssandy.md`); its treasure only ends the level. Both swim through the arena floor: the Ground layer
 draws over their Player-layer sprites below the floor line. Authored density: 17 enemies in Z2A1, 44 in Z2A2 (the
 fish shaft and shark-filled water account for many). [ref]
 
-Zone order [built 2026-10-28]: Z2A1, Z2SandyVillage, Z2A2, Z2A3, Z2MiniBossSandy, Z2A4, Z2A5, Z2BossSandy.
+Zone order [built 2026-10-28]: Z2A1, Z3Village_Egypt, Z2A2, Z2A3, Z3MiniBoss_Egypt, Z2A4, Z2A5, Z3Boss_Egypt.
 
 ## Rewards
 
@@ -59,7 +59,7 @@ The richest coin levels: 357 in Z2A1, 191 in Z2A2, in long trails through the tu
 
 ## Greybox notes for this zone
 
-- Base scene: Z2A1Sandy or Z2A2Sandy, whichever is nearer the brief.
+- Base scene: Z3A1_Egypt or Z3A2_Egypt, whichever is nearer the brief.
 - Water must stay a real, tagged water object (swimming, breath) under its greybox skin; the model does not simulate
   water, so any water route is tested in Unity only.
 - `GravitonController` components in these scenes are empty (no code); ignore them.

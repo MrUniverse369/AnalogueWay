@@ -12,6 +12,10 @@ public class NextLevel : MonoBehaviour
     private bool levelEnding; // PERF: B1 fix - the end-of-level sequence must only start once
     private AudioManager audioManager;
 
+    /// <summary>B14 (2026-10-29): true through the level-complete freeze. The pause menu stays shut meanwhile: Esc used
+    /// to open it and its Resume set the time scale back to 1, so the game ran on under the level-complete card.</summary>
+    public static bool Ending { get; private set; }
+
     // BOSSCHEST: in a boss arena Harvey takes the treasure with the action button, so he can open the chests the boss
     // dropped first; elsewhere touching it ends the level, as before. The bosses switch this on for their treasure.
     [Tooltip("Harvey must press Up / E at the treasure to finish (boss arenas). Off: touching it finishes the level.")]
@@ -52,6 +56,7 @@ public class NextLevel : MonoBehaviour
             if (!pressed) return;
         }
         levelEnding = true;
+        Ending = true; // B14:
         StartCoroutine(NextLevelPauseCo());
     }
 
@@ -91,7 +96,13 @@ public class NextLevel : MonoBehaviour
         Time.timeScale = 1;
 
         if (levelComplete != null) levelComplete.gameObject.SetActive(false);
+        Ending = false; // B14:
 
+    }
+
+    private void OnDestroy()
+    {
+        if (levelEnding) Ending = false; // B14: the scene changed under the freeze
     }
 
 

@@ -18,7 +18,7 @@ public class ItemPickup : MonoBehaviour
 
     public ItemDefinition Item => item;
 
-    private string ClaimKey => $"pickup:{gameObject.scene.name}/{name}";
+    private string ClaimKey => $"pickup:{LevelRegistry.KeyOf(gameObject.scene.name)}/{name}"; // LEVELNAMES: by the level's permanent id
 
     private void Start()
     {

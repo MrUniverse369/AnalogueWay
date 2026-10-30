@@ -431,27 +431,14 @@ public class SaveSlotMenu : MonoBehaviour
         return when.ToLocalTime().ToString("d MMM  HH:mm", CultureInfo.InvariantCulture).ToUpperInvariant();
     }
 
-    // the zone select's names for each level (ZoneSelect scene, ZoneMapNode zoneName + levelName)
-    private static readonly Dictionary<string, string> Places = new Dictionary<string, string>
-    {
-        { "Z1A1Tomb", "THE OLD TOMB - ACT 1" }, { "Z1A2Tomb", "THE OLD TOMB - ACT 2" }, { "Z1A3Tomb", "THE OLD TOMB - ACT 3" },
-        { "Z1A4Tomb", "THE OLD TOMB - ACT 4" }, { "Z1A5Tomb", "THE OLD TOMB - ACT 5" }, { "Z1BossTomb", "THE OLD TOMB - BOSS" },
-        { "Z2A1Sandy", "SANDY DUNES - ACT 1" }, { "Z2A2Sandy", "SANDY DUNES - ACT 2" }, { "Z2A3Sandy", "SANDY DUNES - ACT 3" },
-        { "Z2A4Sandy", "SANDY DUNES - ACT 4" }, { "Z2A5Sandy", "SANDY DUNES - ACT 5" }, { "Z2BossSandy", "SANDY DUNES - BOSS" },
-        { "Z3A1Japan", "SUNLIT SHRINE ROAD - ACT 1" }, { "Z3A2Japan", "SUNLIT SHRINE ROAD - ACT 2" },
-        { "Z3A3Japan", "SUNLIT SHRINE ROAD - ACT 3" }, { "Z3A4Japan", "SUNLIT SHRINE ROAD - ACT 4" },
-        { "Z3JapanVillage", "SNOW TEMPLE PASS - VILLAGE" }, { "Z3BossBattle", "SNOW TEMPLE PASS - BOSS" },
-        { "Z4A6GrassGreen", "GRASSY MEADOW - ACT 1" }, { "Z4A7GrassGreen", "GRASSY MEADOW - ACT 2" },
-        { "Z4A8GrassGreen", "GRASSY MEADOW - ACT 3" }, { "Z4A9GrassGreen", "GRASSY MEADOW - ACT 4" },
-        { "Z4A10GrassGreen", "GRASSY MEADOW - ACT 5" }, { "Z4BossGrass", "GRASSY MEADOW - BOSS" },
-        { "Win", "JOURNEY'S END" },
-        // VILLAGES (2026-10-20)
-        { "Z1TombVillage", "THE OLD TOMB - VILLAGE" }, { "Z2SandyVillage", "SANDY DUNES - VILLAGE" }, { "Z4GrassVillage", "GRASSY MEADOW - VILLAGE" },
-    };
+    // LEVELNAMES (2026-10-30): each level's label is its displayName in the level registry; only the end screen is here
+    private const string JourneysEnd = "JOURNEY'S END";
 
     public static string PlaceName(string sceneName) // NINELIVES: public for the Nine Lives game-over card
     {
         if (string.IsNullOrEmpty(sceneName)) return "UNKNOWN";
-        return Places.TryGetValue(sceneName, out string place) ? place : sceneName.ToUpperInvariant();
+        if (sceneName == "Win") return JourneysEnd;
+        LevelRegistry.Level level = LevelRegistry.Find(sceneName); // a save holds the level's id (older saves its scene name)
+        return level != null ? level.displayName : sceneName.ToUpperInvariant();
     }
 }

@@ -9,91 +9,91 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenue.unity
     guid: 56cb43adde0b94408a1a004added39e8
   - enabled: 1
-    path: Assets/Scenes/Z4A6GrassGreen.unity
+    path: Assets/Scenes/Z1A1_GrassGreen.unity
     guid: 65219a3255aa94e3699e9841f8008006
   - enabled: 1
-    path: Assets/Scenes/Z4GrassVillage.unity
+    path: Assets/Scenes/Z1Village_GrassGreen.unity
     guid: a5e3a0841a1354b2b8120e93d7935fcb
   - enabled: 1
-    path: Assets/Scenes/Z4A7GrassGreen.unity
+    path: Assets/Scenes/Z1A2_GrassGreen.unity
     guid: b4629643f36534b2fb3aadd4bd382cc2
   - enabled: 1
-    path: Assets/Scenes/Z4A8GrassGreen.unity
+    path: Assets/Scenes/Z1A3_GrassGreen.unity
     guid: 8516b0e03cc43448e85e8f746539d3c5
   - enabled: 1
-    path: Assets/Scenes/Z4A9GrassGreen.unity
+    path: Assets/Scenes/Z1A4_GrassGreen.unity
     guid: 422eb648926c04bbb9db40fd979d3fca
   - enabled: 1
-    path: Assets/Scenes/Z4A10GrassGreen.unity
+    path: Assets/Scenes/Z1A5_GrassGreen.unity
     guid: cfc22ceb08b984bffa08667a9e2ae55b
   - enabled: 1
-    path: Assets/Scenes/Z4BossGrass.unity
+    path: Assets/Scenes/Z1Boss_GrassGreen.unity
     guid: df29f23891b1c44b88a971cbbdfbb9d7
   - enabled: 1
-    path: Assets/Scenes/Z1A1Tomb.unity
+    path: Assets/Scenes/Z2A1_Tomb.unity
     guid: bb4b0d1567d8af84aad04a2d2a973c0c
   - enabled: 1
-    path: Assets/Scenes/Z1TombVillage.unity
+    path: Assets/Scenes/Z2Village_Tomb.unity
     guid: 3ecef3a2e6cef40878ea4475fcfbc6f2
   - enabled: 1
-    path: Assets/Scenes/Z1A2Tomb.unity
+    path: Assets/Scenes/Z2A2_Tomb.unity
     guid: 77e6fbf9305424962aa5dc200fce3c1c
   - enabled: 1
-    path: Assets/Scenes/Z1A3Tomb.unity
+    path: Assets/Scenes/Z2A3_Tomb.unity
     guid: 6f92664f6035446adace6ff806f23078
   - enabled: 1
-    path: Assets/Scenes/Z1A4Tomb.unity
+    path: Assets/Scenes/Z2A4_Tomb.unity
     guid: 5c38bff826f6c4c7daddfaf69067586f
   - enabled: 1
-    path: Assets/Scenes/Z1A5Tomb.unity
+    path: Assets/Scenes/Z2A5_Tomb.unity
     guid: 7a6676472f6d248d1990c7d87f4fceaf
   - enabled: 1
-    path: Assets/Scenes/Z1A6Tomb.unity
+    path: Assets/Scenes/Z2A6_Tomb.unity
     guid: 5858178e757584815a4953ef8f6ce776
   - enabled: 1
-    path: Assets/Scenes/Z1BossTomb.unity
+    path: Assets/Scenes/Z2Boss_Tomb.unity
     guid: 1a65351426aeb495c9e061a7c6e11240
   - enabled: 1
-    path: Assets/Scenes/Z2A1Sandy.unity
+    path: Assets/Scenes/Z3A1_Egypt.unity
     guid: 2f12dd93dfa0442faa76b54c26149112
   - enabled: 1
-    path: Assets/Scenes/Z2SandyVillage.unity
+    path: Assets/Scenes/Z3Village_Egypt.unity
     guid: 82aac1cd567104affb3b22015d45efdb
   - enabled: 1
-    path: Assets/Scenes/Z2A2Sandy.unity
+    path: Assets/Scenes/Z3A2_Egypt.unity
     guid: 7a43749a8e57c9247a035025d13ef335
   - enabled: 1
-    path: Assets/Scenes/Z2A3Sandy.unity
+    path: Assets/Scenes/Z3A3_Egypt.unity
     guid: 5b37f60e69efe43c5b58f23559055079
   - enabled: 1
-    path: Assets/Scenes/Z2MiniBossSandy.unity
+    path: Assets/Scenes/Z3MiniBoss_Egypt.unity
     guid: f873acdaa231241208b1c2609ede00f0
   - enabled: 1
-    path: Assets/Scenes/Z2A4Sandy.unity
+    path: Assets/Scenes/Z3A4_Egypt.unity
     guid: 92e0b40457e81434cbc0bf24793129fb
   - enabled: 1
-    path: Assets/Scenes/Z2A5Sandy.unity
+    path: Assets/Scenes/Z3A5_Egypt.unity
     guid: b64b47678b6fb4dd884262a57fbb01d4
   - enabled: 1
-    path: Assets/Scenes/Z2BossSandy.unity
+    path: Assets/Scenes/Z3Boss_Egypt.unity
     guid: 6e1a99518c35a42eb975e7cb8f59e87d
   - enabled: 1
-    path: Assets/Scenes/Z3A1Japan.unity
+    path: Assets/Scenes/Z4A1_Japan.unity
     guid: 125e022cb8d024bfdba6cf3b4e895b3e
   - enabled: 1
-    path: Assets/Scenes/Z3JapanVillage.unity
+    path: Assets/Scenes/Z4Village_Japan.unity
     guid: 754f78b8820004641bd650f1b6ea8a60
   - enabled: 1
-    path: Assets/Scenes/Z3A2Japan.unity
+    path: Assets/Scenes/Z4A2_Japan.unity
     guid: 2b08e72dd4565d14bbf82b87a35b248a
   - enabled: 1
-    path: Assets/Scenes/Z3A3Japan.unity
+    path: Assets/Scenes/Z4A3_Japan.unity
     guid: aaf9ad3d2635c4b47868a7ce37f3352e
   - enabled: 1
-    path: Assets/Scenes/Z3A4Japan.unity
+    path: Assets/Scenes/Z4A4_Japan.unity
     guid: 45bd00ae5d06f43188b54c3ebff531f0
   - enabled: 1
-    path: Assets/Scenes/Z3BossBattle.unity
+    path: Assets/Scenes/Z4Boss_Japan.unity
     guid: 30a8f4e02b1374d4ab6da2eee72cbdee
   - enabled: 1
     path: Assets/Scenes/Win.unity

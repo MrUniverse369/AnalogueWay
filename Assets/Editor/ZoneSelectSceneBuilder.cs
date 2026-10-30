@@ -28,35 +28,35 @@ public static class ZoneSelectSceneBuilder
     private static readonly Dictionary<string, (string scene, string zone, string level, ZoneNodeKind kind, Color colour, string gem)> Nodes =
         new Dictionary<string, (string, string, string, ZoneNodeKind, Color, string)>
         {
-            { "Z1A1", ("Z1A1Tomb", "The Old Tomb", "Act 1", ZoneNodeKind.Level, Tomb, "Blue") },
-            { "Z1A2", ("Z1A2Tomb", "The Old Tomb", "Act 2", ZoneNodeKind.Level, Tomb, "Blue") },
-            { "Z1A3", ("Z1A3Tomb", "The Old Tomb", "Act 3", ZoneNodeKind.Level, Tomb, "Blue") },
-            { "Z1A4", ("Z1A4Tomb", "The Old Tomb", "Act 4", ZoneNodeKind.Level, Tomb, "Blue") },
-            { "Z1A5", ("Z1A5Tomb", "The Old Tomb", "Act 5", ZoneNodeKind.Level, Tomb, "Blue") },
-            { "Z1A6", ("Z1A6Tomb", "The Old Tomb", "Act 6", ZoneNodeKind.Level, Tomb, "Blue") }, // WORLDMAP:
-            { "Z1Village", ("Z1TombVillage", "The Old Tomb", "Lantern Camp", ZoneNodeKind.Village, Tomb, null) }, // VILLAGES:
-            { "Z1Boss", ("Z1BossTomb", "The Old Tomb", "Boss: The Grave Warden", ZoneNodeKind.Boss, Tomb, null) },
-            { "Z2A1", ("Z2A1Sandy", "Sandy Dunes", "Act 1", ZoneNodeKind.Level, Sand, "Gold") },
-            { "Z2A2", ("Z2A2Sandy", "Sandy Dunes", "Act 2", ZoneNodeKind.Level, Sand, "Gold") },
-            { "Z2A3", ("Z2A3Sandy", "Sandy Dunes", "Act 3", ZoneNodeKind.Level, Sand, "Gold") },
-            { "Z2Mini", ("Z2MiniBossSandy", "Sandy Dunes", "Mini-Boss: Sandfin", ZoneNodeKind.Boss, Sand, null) }, // SANDFIN: between Acts 3 and 4
-            { "Z2A4", ("Z2A4Sandy", "Sandy Dunes", "Act 4", ZoneNodeKind.Level, Sand, "Gold") },
-            { "Z2A5", ("Z2A5Sandy", "Sandy Dunes", "Act 5", ZoneNodeKind.Level, Sand, "Gold") },
-            { "Z2Village", ("Z2SandyVillage", "Sandy Dunes", "Oasis Bazaar", ZoneNodeKind.Village, Sand, null) }, // VILLAGES:
-            { "Z2Boss", ("Z2BossSandy", "Sandy Dunes", "Boss: The Landshark", ZoneNodeKind.Boss, Sand, null) },
-            { "Z3A1", ("Z3A1Japan", "Sunlit Shrine Road", "Act 1", ZoneNodeKind.Level, Snow, "Red") },
-            { "Z3A2", ("Z3A2Japan", "Sunlit Shrine Road", "Act 2", ZoneNodeKind.Level, Snow, "Red") },
-            { "Z3A3", ("Z3A3Japan", "Snow Temple Pass", "Act 3", ZoneNodeKind.Level, Snow, "Red") }, // WORLDMAP: past the torii
-            { "Z3A4", ("Z3A4Japan", "Snow Temple Pass", "Act 4", ZoneNodeKind.Level, Snow, "Red") },
-            { "Village", ("Z3JapanVillage", "Sunlit Shrine Road", "Mountain Village", ZoneNodeKind.Village, Snow, null) }, // WORLDMAP: after act 1
-            { "Boss", ("Z3BossBattle", "Snow Temple Pass", "Boss: The Yokai Warrior", ZoneNodeKind.Boss, Snow, null) },
-            { "Z4A1", ("Z4A6GrassGreen", "Grassy Meadow", "Act 1", ZoneNodeKind.Level, Grass, "Green") },
-            { "Z4A2", ("Z4A7GrassGreen", "Grassy Meadow", "Act 2", ZoneNodeKind.Level, Grass, "Green") },
-            { "Z4A3", ("Z4A8GrassGreen", "Grassy Meadow", "Act 3", ZoneNodeKind.Level, Grass, "Green") },
-            { "Z4A4", ("Z4A9GrassGreen", "Grassy Meadow", "Act 4", ZoneNodeKind.Level, Grass, "Green") },
-            { "Z4A5", ("Z4A10GrassGreen", "Grassy Meadow", "Act 5", ZoneNodeKind.Level, Grass, "Green") },
-            { "Z4Village", ("Z4GrassVillage", "Grassy Meadow", "Meadowbrook", ZoneNodeKind.Village, Grass, null) }, // VILLAGES:
-            { "Z4Boss", ("Z4BossGrass", "Grassy Meadow", "Boss: King Mossback", ZoneNodeKind.Boss, Grass, null) },
+            { "Z1A1", ("Z2A1_Tomb", "The Old Tomb", "Act 1", ZoneNodeKind.Level, Tomb, "Blue") },
+            { "Z1A2", ("Z2A2_Tomb", "The Old Tomb", "Act 2", ZoneNodeKind.Level, Tomb, "Blue") },
+            { "Z1A3", ("Z2A3_Tomb", "The Old Tomb", "Act 3", ZoneNodeKind.Level, Tomb, "Blue") },
+            { "Z1A4", ("Z2A4_Tomb", "The Old Tomb", "Act 4", ZoneNodeKind.Level, Tomb, "Blue") },
+            { "Z1A5", ("Z2A5_Tomb", "The Old Tomb", "Act 5", ZoneNodeKind.Level, Tomb, "Blue") },
+            { "Z1A6", ("Z2A6_Tomb", "The Old Tomb", "Act 6", ZoneNodeKind.Level, Tomb, "Blue") }, // WORLDMAP:
+            { "Z1Village", ("Z2Village_Tomb", "The Old Tomb", "Lantern Camp", ZoneNodeKind.Village, Tomb, null) }, // VILLAGES:
+            { "Z1Boss", ("Z2Boss_Tomb", "The Old Tomb", "Boss: The Grave Warden", ZoneNodeKind.Boss, Tomb, null) },
+            { "Z2A1", ("Z3A1_Egypt", "Sandy Dunes", "Act 1", ZoneNodeKind.Level, Sand, "Gold") },
+            { "Z2A2", ("Z3A2_Egypt", "Sandy Dunes", "Act 2", ZoneNodeKind.Level, Sand, "Gold") },
+            { "Z2A3", ("Z3A3_Egypt", "Sandy Dunes", "Act 3", ZoneNodeKind.Level, Sand, "Gold") },
+            { "Z2Mini", ("Z3MiniBoss_Egypt", "Sandy Dunes", "Mini-Boss: Sandfin", ZoneNodeKind.Boss, Sand, null) }, // SANDFIN: between Acts 3 and 4
+            { "Z2A4", ("Z3A4_Egypt", "Sandy Dunes", "Act 4", ZoneNodeKind.Level, Sand, "Gold") },
+            { "Z2A5", ("Z3A5_Egypt", "Sandy Dunes", "Act 5", ZoneNodeKind.Level, Sand, "Gold") },
+            { "Z2Village", ("Z3Village_Egypt", "Sandy Dunes", "Oasis Bazaar", ZoneNodeKind.Village, Sand, null) }, // VILLAGES:
+            { "Z2Boss", ("Z3Boss_Egypt", "Sandy Dunes", "Boss: The Landshark", ZoneNodeKind.Boss, Sand, null) },
+            { "Z3A1", ("Z4A1_Japan", "Sunlit Shrine Road", "Act 1", ZoneNodeKind.Level, Snow, "Red") },
+            { "Z3A2", ("Z4A2_Japan", "Sunlit Shrine Road", "Act 2", ZoneNodeKind.Level, Snow, "Red") },
+            { "Z3A3", ("Z4A3_Japan", "Snow Temple Pass", "Act 3", ZoneNodeKind.Level, Snow, "Red") }, // WORLDMAP: past the torii
+            { "Z3A4", ("Z4A4_Japan", "Snow Temple Pass", "Act 4", ZoneNodeKind.Level, Snow, "Red") },
+            { "Village", ("Z4Village_Japan", "Sunlit Shrine Road", "Mountain Village", ZoneNodeKind.Village, Snow, null) }, // WORLDMAP: after act 1
+            { "Boss", ("Z4Boss_Japan", "Snow Temple Pass", "Boss: The Yokai Warrior", ZoneNodeKind.Boss, Snow, null) },
+            { "Z4A1", ("Z1A1_GrassGreen", "Grassy Meadow", "Act 1", ZoneNodeKind.Level, Grass, "Green") },
+            { "Z4A2", ("Z1A2_GrassGreen", "Grassy Meadow", "Act 2", ZoneNodeKind.Level, Grass, "Green") },
+            { "Z4A3", ("Z1A3_GrassGreen", "Grassy Meadow", "Act 3", ZoneNodeKind.Level, Grass, "Green") },
+            { "Z4A4", ("Z1A4_GrassGreen", "Grassy Meadow", "Act 4", ZoneNodeKind.Level, Grass, "Green") },
+            { "Z4A5", ("Z1A5_GrassGreen", "Grassy Meadow", "Act 5", ZoneNodeKind.Level, Grass, "Green") },
+            { "Z4Village", ("Z1Village_GrassGreen", "Grassy Meadow", "Meadowbrook", ZoneNodeKind.Village, Grass, null) }, // VILLAGES:
+            { "Z4Boss", ("Z1Boss_GrassGreen", "Grassy Meadow", "Boss: King Mossback", ZoneNodeKind.Boss, Grass, null) },
             { "Win", ("Win", "Journey's End", "Home at Last", ZoneNodeKind.Goal, Grass, null) },
         };
 

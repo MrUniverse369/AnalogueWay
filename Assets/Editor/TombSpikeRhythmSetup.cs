@@ -19,7 +19,7 @@ public static class TombSpikeRhythmSetup
 {
     private static readonly string[] Scenes =
     {
-        "Z1A1Tomb", "Z1A2Tomb", "Z1A3Tomb", "Z1A4Tomb", "Z1A5Tomb", "Z1A6Tomb", "Z1BossTomb", "Z1TombVillage"
+        "Z2A1_Tomb", "Z2A2_Tomb", "Z2A3_Tomb", "Z2A4_Tomb", "Z2A5_Tomb", "Z2A6_Tomb", "Z2Boss_Tomb", "Z2Village_Tomb"
     };
     private const string ExtendSound = "Assets/Sound/ElevenLabs/World/HNL_SpikeExtend.wav";
     private const string RetractSound = "Assets/Sound/ElevenLabs/World/HNL_SpikeRetract.wav";

@@ -121,6 +121,9 @@ public class LevelManager : MonoBehaviour
 
     public void Respawn()
     {
+        // B3 (2026-10-29): a spike and a kill plane (or two of anything) touched in the same death used to start two
+        // respawns: two game-over sounds, two oops, two resets. While he is down, a further call is the same death.
+        if (down) return;
         StartCoroutine("RespawnCo");
 
     }
@@ -137,6 +140,7 @@ public class LevelManager : MonoBehaviour
     private const float SettleSlack = 0.2f;      // kept for the settle check after the glide
     private const float MinGlide = 0.4f, MaxGlide = 1.2f;
     private int respawnRun;
+    private bool down; // B3: from the death until he reappears at the checkpoint
     private CameraController followCamera;
 
     public IEnumerator RespawnCo()
@@ -150,6 +154,7 @@ public class LevelManager : MonoBehaviour
         ScreenGrade.GreyPulse(); // FX: a brief greyscale pulse on game over
         PixelFX.Burst(pScriptRef.transform.position, 12, 1.5f, 3.5f, new[] { PixelFX.Cream, PixelFX.Hex("98b2b1") }, 0.4f, 0.7f, 1, PixelShape.Square, PixelMotion.Float, true); // FX:
         pScriptRef.gameObject.SetActive(false);
+        down = true; // B3:
         // NINELIVES: a Nine Lives run takes one of its nine lives per death; with the last one gone there is no respawn
         // (NineLives shows the game-over card and goes to the main menu)
         if (alive && NineLives.LoseLife()) yield break;
@@ -159,6 +164,7 @@ public class LevelManager : MonoBehaviour
         pScriptRef.transform.position = GameSession.IsArcade && arcadeSafePoint.HasValue ? arcadeSafePoint.Value : ReSpawnPos.transform.position;
         groundedFor = 0f;
         pScriptRef.gameObject.SetActive(true);
+        down = false; // B3: a death from here on (during the camera's return) is a new one
         // RESPAWNHOLD: the camera glides back in whatever is left of the wait
         float glide = Mathf.Clamp(deadline - Time.time - SettleSlack, MinGlide, MaxGlide);
         if (FollowCamera != null && FollowCamera.isActiveAndEnabled) FollowCamera.ReturnToPlayer(glide);

@@ -84,3 +84,24 @@ Through the Unity MCP tools (`Unity_RunCommand`, `Unity_GetConsoleLogs`, `Unity_
   (QATimeTrailDriver's time-out and pickup runs do).
 - A scripted talisman held down means a press every frame (see the ledger, 2026-10-29). A chase or challenge left
   running by one test carries into the next in the same Play session: check the state before starting the next.
+- A route bot that touches the Treasure ends the level and loads ZoneSelect, and any driver started after that in
+  the same Play session finds no Harvey (QATimeTrailDriver threw an NRE). Start a new Play session first.
+  (2026-10-30)
+- `Unity_Camera_Capture` with a camera's instance ID fails in Play mode ("No GameObject found with Instance ID"),
+  logs an error and trips **Error Pause**. From then on frames stop, so every later render shows stale state.
+  `ScreenCapture` writes nothing while Unity is unfocused. Render the camera into a RenderTexture yourself (§4).
+  (2026-10-30)
+- A RunCommand driver that waits on `EditorApplication.update` ticks can run faster than the game's frames. Wait on
+  `Time.frameCount` when it must see a `LateUpdate` result (the camera, SkyBackdrop, parallax). (2026-10-30)
+- A Play session started outside QARunner on a village or hub writes the save slot's sceneName on entry, even in a
+  few seconds. Swap `SaveSystem.Storage` to memory before anything else, or use QARunner; check the slots against the
+  backup afterwards. (2026-10-30)
+
+## 4. Sky coverage sweep (painted levels)
+
+In Play: set the main camera's clear colour to magenta (not saved), freeze Harvey (`Rigidbody2D.simulated = false`)
+and move him over a grid that runs past the level's bounds on every side (Z4A7: x -20..280 by y -15..75, 28 points).
+After each move call `CameraController.SnapToPlayer`, wait 3 game frames, render the camera into a 640×360
+RenderTexture (`RenderTexture.GetTemporary(..., ARGB32, sRGB)`) and count pixels with r>240, g<20, b>240. Pass = 0
+at every point. Run it again with `SkyBackdrop` switched off to show the gaps it closes (Z4A7 2026-10-30: 0 with it,
+18 of 28 points exposed without it). Save a few frames as evidence.

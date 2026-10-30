@@ -14,6 +14,11 @@ answer here. A one-off ambiguous remark is a level decision, not a rule change.
 
 | Date | Scope | Rule | Source | Replaces |
 | --- | --- | --- | --- | --- |
+| 2026-10-30 | Zone: Grassy Green (art) | Ground tiles: the 9-slice piece is chosen by the four sides only; concave corners are dirt; nothing one tile thick; a lip on every exposed side; island undersides step in 2 a side per tier; outer-boundary edges may stay dirt. Recorded in `tile-placement.md` and as code (GrassTilePainter) | The user's hand-tiled Outlook (Z4A7) and their Ground tiles in all seven Grass scenes, measured | — (first tile rules) |
+| 2026-10-30 | Zone: Grassy Green (art) | A greybox converts to tiles by keeping tops and centres, growing anything thinner than 2 under its floor, and leaving hand-painted areas alone (GrassArtPass) | Own decision, from the user's Outlook and the "preserve the layout" brief | — |
+| 2026-10-30 | Zone: Grassy Green | Every Grass scene has a camera-following SkyBackdrop drawn from its own sky strip; no camera clamping | User brief (sky always visible, never the clear colour); own decision on the method | Fixed Sky boxes only |
+| 2026-10-30 | Global (painting) | Paint a zone's ground the way the user does: read that zone's section of `tile-placement.md`, or study the zone's own scenes first | User brief | — |
+| 2026-10-30 | Global (testing) | Wait on game frames, not editor ticks, before rendering; never use Unity_Camera_Capture in Play (Error Pause); a bot that reaches the Treasure ends the Play session's level | Found in test | — |
 | 2026-10-28 | Global (testing) | After removing tiles by script, rebuild the Ground collider (toggle the TilemapCollider2D, ProcessTilemapChanges, CompositeCollider2D.GenerateGeometry) before saving, or the old outline stays solid | Found in test, BUG-0007 | — |
 | 2026-10-28 | Zone: Grassy Green | Z4A6's cave holds the Mushroom Spirit's chest shuffle game; the Challenge Arena is gone from Z4A6 (Z4A7's room keeps its own) | User brief | Z4A6 Challenge Arena |
 | 2026-10-28 | Level: Z4A7 (east expansion) | A fall from Fox Heights' west edge may land back on the Spirit's Glade (it costs one Jump Mushroom bounce); kept as an exception to "never fall onto an island already climbed" | Own decision | — (exception, rule unchanged) |

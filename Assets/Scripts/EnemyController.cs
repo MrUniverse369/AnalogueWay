@@ -21,25 +21,16 @@ public class EnemyController : MonoBehaviour
     /// <summary>TOUGHNESS: hits an unupgraded stomp needs in a scene (REBALANCE: by world in play order; other scenes 1).</summary>
     public static int ZoneToughness(string sceneName)
     {
-        if (GameSession.IsTutorial || string.IsNullOrEmpty(sceneName) || sceneName.Length < 2 || sceneName[0] != 'Z' || !char.IsDigit(sceneName[1])) return 1;
+        if (GameSession.IsTutorial) return 1;
         return WorldToughness[WorldOf(sceneName)];
     }
 
     // REBALANCE: index = world in play order (0 = not a zone)
     private static readonly int[] WorldToughness = { 1, 1, 2, 2, 3 };
 
-    /// <summary>REBALANCE: the world a Z scene belongs to in play order: Z4 Grass 1, Z1 Tomb 2, Z2 Dunes 3, Z3 Japan 4.</summary>
-    public static int WorldOf(string sceneName)
-    {
-        switch (sceneName[1])
-        {
-            case '4': return 1;
-            case '1': return 2;
-            case '2': return 3;
-            case '3': return 4;
-            default: return 0;
-        }
-    }
+    /// <summary>REBALANCE: the world a level belongs to in play order (Grass 1, Tomb 2, Dunes 3, Japan 4; 0 = not a
+    /// level). LEVELNAMES (2026-10-30): from the level registry, not the scene name.</summary>
+    public static int WorldOf(string sceneName) => Mathf.Clamp(LevelRegistry.ZoneOrderOf(sceneName), 0, 4);
 
     private void OnEnable() // a respawn brings enemies back at full health
     {

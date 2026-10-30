@@ -2,10 +2,10 @@
 Boss themes for AnalogueWay / Harvey's Nine Lives: one loopable track per boss, each built from its zone's
 instruments but faster, darker and more driving than the level music.
 
-  Boss_GraveWarden.wav      Z1BossTomb    D harmonic minor, 148 BPM: galloping bass, tolling bells, pulse lead, organ pad
-  Boss_SandscaleScarab.wav  Z2BossSandy   E Hijaz, 156 BPM: staccato brass riff, double-time darbuka + riq, ney climax
-  Boss_YokaiWarrior.wav     Z3BossBattle  D hirajoshi, 162 BPM: koto plucks, taiko toms, shakuhachi climax
-  Boss_KingMossback.wav     Z4BossGrass   E minor, 144 BPM, bouncy swing: pulse lead + e-piano stabs, brass anthem
+  Boss_GraveWarden.wav      Z2Boss_Tomb    D harmonic minor, 148 BPM: galloping bass, tolling bells, pulse lead, organ pad
+  Boss_SandscaleScarab.wav  Z3Boss_Egypt   E Hijaz, 156 BPM: staccato brass riff, double-time darbuka + riq, ney climax
+  Boss_YokaiWarrior.wav     Z4Boss_Japan  D hirajoshi, 162 BPM: koto plucks, taiko toms, shakuhachi climax
+  Boss_KingMossback.wav     Z1Boss_GrassGreen   E minor, 144 BPM, bouncy swing: pulse lead + e-piano stabs, brass anthem
 
 Form (32 bars, loops back to bar 0):  A riff, B climax, A2 riff with harmony, B2 climax with harmony + fill.
 

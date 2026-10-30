@@ -55,14 +55,23 @@ public static class PixelFX
 
     public static Color Pick(Color[] palette) => palette[Random.Range(0, palette.Length)];
 
-    /// <summary>The ground colours of the zone the active scene belongs to (by its Z1..Z4 name).</summary>
+    /// <summary>The ground colours of the zone the active scene belongs to (by the level registry).</summary>
     public static Color[] ZoneDust()
     {
-        string scene = SceneManager.GetActiveScene().name;
-        if (scene.StartsWith("Z1")) return StoneDust;
-        if (scene.StartsWith("Z2")) return SandDust;
-        if (scene.StartsWith("Z3")) return scene.Contains("A1") || scene.Contains("A2") ? SandDust : SnowDust;
-        if (scene.StartsWith("Z4")) return GrassDust;
+        return ZoneDust(SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>LEVELNAMES (2026-10-30): a scene's ground colours, from the level registry's atmosphere.</summary>
+    public static Color[] ZoneDust(string scene)
+    {
+        switch (LevelRegistry.Find(scene)?.atmosphere)
+        {
+            case "Tomb": return StoneDust;
+            case "Egypt": return SandDust;
+            case "JapanSun": return SandDust; // the sunlit shrine road
+            case "JapanSnow": case "JapanVillage": return SnowDust;
+            case "Green": return GrassDust;
+        }
         return SandDust; // menus: the dig site
     }
 

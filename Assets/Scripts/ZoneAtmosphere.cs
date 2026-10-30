@@ -15,7 +15,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class ZoneAtmosphere : MonoBehaviour
 {
-    private enum Zone { None, Tomb, Egypt, JapanSun, JapanSnow, Village, Green }
+    public enum Zone { None, Tomb, Egypt, JapanSun, JapanSnow, Village, Green }
 
     private Zone zone;
     private Camera cam;
@@ -32,20 +32,26 @@ public class ZoneAtmosphere : MonoBehaviour
 
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (mode != LoadSceneMode.Single || !scene.name.StartsWith("Z") || scene.name == ZoneSelectMap.SceneName) return;
+        if (mode != LoadSceneMode.Single || !LevelRegistry.IsLevel(scene.name)) return; // LEVELNAMES: every registered level, nothing else
         if (FindFirstObjectByType<PlayerController>() == null) return;
         var go = new GameObject("ZoneAtmosphere");
         SceneManager.MoveGameObjectToScene(go, scene);
         go.AddComponent<ZoneAtmosphere>().zone = ZoneOf(scene.name);
     }
 
-    private static Zone ZoneOf(string n)
+    /// <summary>LEVELNAMES (2026-10-30): the look comes from the level registry's atmosphere, not the scene name.</summary>
+    public static Zone ZoneOf(string n)
     {
-        if (n.StartsWith("Z1")) return Zone.Tomb;
-        if (n.StartsWith("Z2")) return Zone.Egypt;
-        if (n.StartsWith("Z3")) return n.Contains("Village") ? Zone.Village : n.Contains("A1") || n.Contains("A2") ? Zone.JapanSun : Zone.JapanSnow;
-        if (n.StartsWith("Z4")) return Zone.Green;
-        return Zone.None;
+        switch (LevelRegistry.Find(n)?.atmosphere)
+        {
+            case "Tomb": return Zone.Tomb;
+            case "Egypt": return Zone.Egypt;
+            case "JapanVillage": return Zone.Village;
+            case "JapanSun": return Zone.JapanSun;
+            case "JapanSnow": return Zone.JapanSnow;
+            case "Green": return Zone.Green;
+            default: return Zone.None;
+        }
     }
 
     // ---------------------------------------------------------------- materials
@@ -101,7 +107,7 @@ public class ZoneAtmosphere : MonoBehaviour
             if (zone == Zone.Tomb && (n.Contains("torch") || n.Contains("lamp") || n.Contains("lantern"))) embers.Add(r.transform);
         }
 
-        if (zone == Zone.Tomb && !SceneManager.GetActiveScene().name.Contains("Village")) gameObject.AddComponent<TombDarkness>(); // VILLAGES: the dig-site camp is out in the daylight
+        if (zone == Zone.Tomb && LevelRegistry.Find(SceneManager.GetActiveScene().name)?.kind != "village") gameObject.AddComponent<TombDarkness>(); // VILLAGES: the dig-site camp is out in the daylight
 
         // levels with a living/spirit world switch start with the colour of the world Harvey is in
         hasWorlds = FindFirstObjectByType<AnalogueWay.changeWorld>() != null;

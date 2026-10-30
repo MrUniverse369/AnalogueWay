@@ -1,11 +1,11 @@
 # Level record — Z4A7 Time Trail (greybox)
 
-**Level-specific.** The decisions behind Z4A7GrassGreen's Time Trail, the Spirit Dash yarn chase. Lift anything that
+**Level-specific.** The decisions behind Z1A2_GrassGreen's Time Trail, the Spirit Dash yarn chase. Lift anything that
 proves general into `method.md` or `zones/grassy-green.md`.
 
 | | |
 | --- | --- |
-| Scene | Assets/Scenes/Z4A7GrassGreen.unity, root object `Z4A7TimeTrail` (replaces the user's `SpeedDash` placeholder) |
+| Scene | Assets/Scenes/Z1A2_GrassGreen.unity, root object `Z4A7TimeTrail` (replaces the user's `SpeedDash` placeholder) |
 | Code | Assets/Editor/Z4A7TimeTrailBuilder.cs (marker YARNCHASE, menu Tools/HNL/Build Z4A7 Time Trail (Greybox)); TimeTrail, YarnBall, TimeBoost; art Tools/Art/time_trail.py |
 | Shared code touched | StompCombo.Broken (event: a live combo ended by Break), HurtPlayer.LastHitByEnemy / LastHitFrame; the Historic Shard item (HarveyMenusContentBuilder) |
 | Route | `z4a7_time_trail_route.py` (this folder): lanes and turns at base movement; the chase itself is QATimeTrailDriver |
@@ -73,3 +73,13 @@ easier), art.
 - Is Jump Mushroom (11)'s tight route up intended?
 - The level's own HUD clock shows next to the trail's banner clock during a chase.
 - The trail's sky: Z4A7's sky sprite ends at x 189.5 and y 69.5; lane 3 and the drop show the camera background.
+
+## Painted (2026-10-30, GRASSART)
+
+The lanes and walls are Ground tiles now (GrassArtPass); the stopwatches, yarn and posts kept their own art and the
+foxes and chi stones lost their GreyboxSkin. Lanes 2 and 3 and the drop shelf were 1 thick and became 2, grown under
+their floors (lane 2 y 61..62, lane 3 y 68..69, shelf y 29..30). Their tops are unchanged and lane headroom went from
+6 to 5. The west wall is x 136..137 and the drop wall x 206..207 (both were 1.5 wide; now 2, their inner faces moved
+0.5). Lane 1's underside merged into the old rock (x 162..189). QATimeTrailDriver on the tiles: win 16/16 (16.1 s,
+6.9 s left), entry 2/2, exit 5/5. The sky is covered by the SkyBackdrop, which closes the old open question about
+lane 3's exposed background.

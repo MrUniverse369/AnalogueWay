@@ -6,8 +6,8 @@ level-specific mechanics: SpikeRhythm, BoulderTrap, TombDarkness...).
 
     python3 -I scene_profile.py <project root> <scene name or glob> [...]
     python3 -I scene_profile.py . 'Z1*'          # every Tomb scene
-    python3 -I scene_profile.py . Z4A6GrassGreen --all   # also list prefabs and scripts seen once
-    python3 -I scene_profile.py . Z1A3Tomb --map         # and draw the solid tiles as a small ASCII silhouette
+    python3 -I scene_profile.py . Z1A1_GrassGreen --all   # also list prefabs and scripts seen once
+    python3 -I scene_profile.py . Z2A3_Tomb --map         # and draw the solid tiles as a small ASCII silhouette
 
 Reads files only. Counts are of the saved scene, so objects spawned at runtime are not in them.
 """

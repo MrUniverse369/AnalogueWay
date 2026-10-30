@@ -8,6 +8,8 @@ public class TownExit : MonoBehaviour
     [SerializeField] private GameObject fadeOut;
     [SerializeField] private bool exitVillage;
     private bool exiting; // PERF: B1 fix - the exit sequence must only start once
+    /// <summary>B14: true through the village-exit freeze, which the pause menu must not undo either.</summary>
+    public static bool Exiting { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class TownExit : MonoBehaviour
         if (exitVillage && !exiting)
         {
             exiting = true;
+            Exiting = true; // B14:
             StartCoroutine(VillageExitPauseCo());
         }
     }
@@ -34,7 +37,13 @@ public class TownExit : MonoBehaviour
         GameSession.FinishLevel(); // FLOW: back to the Zone Select with the next level unlocked (was straight into it)
         Time.timeScale = 1.0f;
         if (fadeOut != null) fadeOut.SetActive(false);
+        Exiting = false; // B14:
 
+    }
+
+    private void OnDestroy()
+    {
+        if (exiting) Exiting = false; // B14:
     }
     void OnTriggerEnter2D(Collider2D collision)
     {

@@ -13,7 +13,7 @@
     {
       "id": "z4a8-spirit-dash-combo-chain", "file": "z4a8-spirit-dash-combo-chain.png",
       "title": "Spirit Dash through a Spirit Fox line",
-      "zone": "grassy", "level": "Z4A8GrassGreen",
+      "zone": "grassy", "level": "Z1A3_GrassGreen",
       "mechanics": ["spirit-dash", "combo", "combo-mastery", "enemy-spirit-fox"],
       "moment": "Harvey's Spirit Dash knocking out a Spirit Fox mid-chain, with the combo's dust, sparks and pink afterimages.",
       "description": "The long fox line at the start of Z4A8, dashed through one fox after another. The chain reached a 9-hit combo in this take.",
@@ -26,7 +26,7 @@
     {
       "id": "z4a8-rainbow-coin-pull", "file": "z4a8-rainbow-coin-pull.png",
       "title": "Rainbow stage pulling in a coin line",
-      "zone": "grassy", "level": "Z4A8GrassGreen",
+      "zone": "grassy", "level": "Z1A3_GrassGreen",
       "mechanics": ["rainbow-stage", "combo", "coins"],
       "moment": "Straight after the fox chain: Harvey at the rainbow combo stage, outline cycling, a line of coins waiting to be pulled in.",
       "description": "The rainbow stage's outline cycles through every colour; in this frame it is green. The coin pull is happening, but a single still can't show the colour cycle, so this is better as a devlog frame than a store shot.",
@@ -39,7 +39,7 @@
     {
       "id": "z4a6-biplane-engine-failure", "file": "z4a6-biplane-engine-failure.png",
       "title": "Engine failure over Grassy Green",
-      "zone": "grassy", "level": "Z4A6GrassGreen",
+      "zone": "grassy", "level": "Z1A1_GrassGreen",
       "mechanics": ["plane-intro"],
       "moment": "The opening cinematic: Harvey's red biplane noses into its dive, trailing black smoke, toward the cliff.",
       "description": "The first thing a new save file shows. The cinematic drives its own camera; the HUD is hidden apart from the quick-item ring.",
@@ -53,7 +53,7 @@
     {
       "id": "z4a6-biplane-crash-landing", "file": "z4a6-biplane-crash-landing.png",
       "title": "Crash landing under the cliff",
-      "zone": "grassy", "level": "Z4A6GrassGreen",
+      "zone": "grassy", "level": "Z1A1_GrassGreen",
       "mechanics": ["plane-intro"],
       "moment": "The moment of impact: the biplane ploughs into the meadow under the cliff in a burst of debris.",
       "description": "The cinematic's impact beat, just before Harvey climbs out of the wreck and the level starts.",
@@ -66,7 +66,7 @@
     {
       "id": "z4a6-challenge-arena-round", "file": "z4a6-challenge-arena-round.png",
       "title": "Challenge room, round 2 of 5",
-      "zone": "grassy", "level": "Z4A6GrassGreen",
+      "zone": "grassy", "level": "Z1A1_GrassGreen",
       "mechanics": ["challenge-rooms", "enemy-spirit-fox", "stomp"],
       "moment": "Harvey leaping at a charging Spirit Fox inside Z4A6's locked cave, banner reading ROUND 2/5, ENEMIES LEFT 1.",
       "description": "Real challenge-room play. The rock wall fills the left of the frame because the room sits against it.",
@@ -79,7 +79,7 @@
     {
       "id": "z1a3-rolling-boulder-chase", "file": "z1a3-rolling-boulder-chase.png",
       "title": "Outrunning the boulder",
-      "zone": "tomb", "level": "Z1A3Tomb",
+      "zone": "tomb", "level": "Z2A3_Tomb",
       "mechanics": ["boulder-trap", "run", "tomb-darkness"],
       "moment": "The boulder has dropped from the ceiling shaft and rolls after Harvey through the dark corridor, lit only around him.",
       "description": "Z1A3's set-piece trap in the Old Tomb's darkness. Harvey keeps control throughout; there's no cutscene.",
@@ -92,7 +92,7 @@
     {
       "id": "z2boss-landshark-breach", "file": "z2boss-landshark-breach.png",
       "title": "The Landshark breaches",
-      "zone": "sandy", "level": "Z2BossSandy",
+      "zone": "sandy", "level": "Z3Boss_Egypt",
       "mechanics": ["boss-landshark", "boss-openings", "jump"],
       "moment": "The Landshark bursts out of the sand with its jaws wide while Harvey is in the air above the dunes; its life pips hang at the top.",
       "description": "A real fight in the Sandy Dunes arena, after Harvey's first stomp had taken a life (three pips left).",
@@ -105,7 +105,7 @@
     {
       "id": "z2boss-landshark-stomp-hit", "file": "z2boss-landshark-stomp-hit.png",
       "title": "Stomping the Landshark",
-      "zone": "sandy", "level": "Z2BossSandy",
+      "zone": "sandy", "level": "Z3Boss_Egypt",
       "mechanics": ["stomp", "boss-openings", "boss-landshark"],
       "moment": "The frame Harvey's stomp lands on the Landshark in its opening: the boss flashes white and drops from four pips to three.",
       "description": "The hit really happens (4 lives to 3), but the white hit-flash turns the boss into a silhouette, which reads oddly as a still.",
@@ -118,7 +118,7 @@
     {
       "id": "z4boss-forest-fox-stomp", "file": "z4boss-forest-fox-stomp.png",
       "title": "Landing on the Forest Spirit Fox",
-      "zone": "grassy", "level": "Z4BossGrass",
+      "zone": "grassy", "level": "Z1Boss_GrassGreen",
       "mechanics": ["stomp", "boss-openings", "boss-forest-fox"],
       "moment": "Harvey coming down on the giant fox's back during an opening; the stomp took it from three lives to two.",
       "description": "A real boss stomp at the end of Grassy Green. The boss sits in the left corner, leaving open sky to the right.",
@@ -131,7 +131,7 @@
     {
       "id": "z1boss-void-shrine-spirit-orbs", "file": "z1boss-void-shrine-spirit-orbs.png",
       "title": "The Void Shrine's spirit orbs",
-      "zone": "tomb", "level": "Z1BossTomb",
+      "zone": "tomb", "level": "Z2Boss_Tomb",
       "mechanics": ["boss-void-shrine", "boss-openings"],
       "moment": "The antlered fox-skull octopus rises and throws a volley of green spirit orbs down at Harvey.",
       "description": "The boss reads well, but Harvey is standing still in the corner and flickering from a hit.",
@@ -144,7 +144,7 @@
     {
       "id": "z3boss-sumaria-dash-slash", "file": "z3boss-sumaria-dash-slash.png",
       "title": "Sumaria's dash slash",
-      "zone": "japan", "level": "Z3BossBattle",
+      "zone": "japan", "level": "Z4Boss_Japan",
       "mechanics": ["boss-sumaria", "jump", "boss-openings"],
       "moment": "Sumaria tears across the arena behind a crimson slash and afterimages as Harvey jumps from its edge.",
       "description": "The Japan boss's signature attack, mid-dash, with five life pips above it.",
@@ -157,7 +157,7 @@
     {
       "id": "z2a2-dragon-flight", "file": "z2a2-dragon-flight.png",
       "title": "Dragon flight over the dunes",
-      "zone": "sandy", "level": "Z2A2Sandy",
+      "zone": "sandy", "level": "Z3A2_Egypt",
       "mechanics": ["dragon-flight", "summoning"],
       "moment": "Harvey on his dragon, gliding past a palm tree toward a line of coins above the pyramids.",
       "description": "The Summoning Talisman's dragon in free flight in the Sandy Dunes.",
@@ -170,7 +170,7 @@
     {
       "id": "z3a2-snow-temple-ghost-bounce", "file": "z3a2-snow-temple-ghost-bounce.png",
       "title": "Bouncing the Snow Temple ghost row",
-      "zone": "japan", "level": "Z3A2Japan",
+      "zone": "japan", "level": "Z4A2_Japan",
       "mechanics": ["stomp", "combo", "patrol-enemies", "enemy-pointer"],
       "moment": "Harvey mid-bounce over a row of hooded ghosts among snowy pagodas, a coin arc overhead and his combo outline on.",
       "description": "Z3A2's ghost-row stomp chain at night in the Snow Temple.",
@@ -183,7 +183,7 @@
     {
       "id": "z1a1-treasure-vault-gems", "file": "z1a1-treasure-vault-gems.png",
       "title": "Gems from a tomb chest",
-      "zone": "tomb", "level": "Z1A1Tomb",
+      "zone": "tomb", "level": "Z2A1_Tomb",
       "mechanics": ["treasure-chests", "crystals-gems", "coins", "poison-liquid", "enemy-ghoul"],
       "moment": "A Ruby and a Lapis gem spring out of the chest in a coin-lined vault while a ghoul drifts over the poison pool outside.",
       "description": "Z1A1's treasure alcove in the Old Tomb.",

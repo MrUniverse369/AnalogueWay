@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// YARNCHASE (2026-10-28): greyboxes the Time Trail into Z4A7GrassGreen, in the space the user marked with the
+/// YARNCHASE (2026-10-28): greyboxes the Time Trail into Z1A2_GrassGreen, in the space the user marked with the
 /// "SpeedDash" placeholder (x 134..202, y 55..65, over the shaft at x 152..161), and wires up TimeTrail: a Spirit Dash
 /// chase after a ball of yarn. Built with the level-design skill's method (white boxes on one merged static body,
 /// the zone's real prefabs drawn as coloured boxes by GreyboxSkin; the yarn, stopwatches and start post keep their
@@ -32,7 +32,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public static class Z4A7TimeTrailBuilder
 {
-    public const string ScenePath = "Assets/Scenes/Z4A7GrassGreen.unity";
+    public const string ScenePath = "Assets/Scenes/Z1A2_GrassGreen.unity";
     public const string RootName = "Z4A7TimeTrail";
     private const string WhiteBoxPath = "Assets/Sprites/Tutorial/WhiteBox.png";
     private const string PostDir = "Assets/Sprites/Greybox/";

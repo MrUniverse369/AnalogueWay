@@ -7,14 +7,14 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 
 /// <summary>
-/// KINGMOSS (2026-10-23): Tools/HNL/Set Up King Moss. Puts the FlyingGrassBoss sheet on King Mossback (Z4BossGrass's
+/// KINGMOSS (2026-10-23): Tools/HNL/Set Up King Moss. Puts the FlyingGrassBoss sheet on King Mossback (Z1Boss_GrassGreen's
 /// YokaiBoss) and gives him the attacks it draws. Safe to run again (after re-running Tools/Art/flying_grass_boss.py).
 ///   1. imports KingMoss_Body.png (16 PPU, point, uncompressed) sliced into its seven rows, pivot on the feet line
 ///      under the robe, and KingMoss_FX.png sliced into the leaf, crescent, orb, boulder and the beam's tail, body
 ///      (tiled) and head. Sizes come from Tools/Art/flying_grass_boss_layout.txt.
 ///   2. one clip per state and KingMoss.controller (states Idle, Fly, Cast, Leaf, Slash, BeamCharge, BeamFire,
 ///      BoulderLift, BoulderThrow, Collapse, Rise; YokaiBoss plays them by name, no transitions)
-///   3. in Z4BossGrass (opened additively): the Body gets the Animator and the first idle frame at BodyScale; the
+///   3. in Z1Boss_GrassGreen (opened additively): the Body gets the Animator and the first idle frame at BodyScale; the
 ///      Volley's seed becomes the sheet's leaf; crescent, beam and boulder templates are built from the projectile
 ///      template (same layer, rigidbody and trigger set-up); the hurtbox, hand and boulder anchors are set from the
 ///      art; and the three stages keep every move they had, with one new attack each (all three by the last stage).
@@ -28,7 +28,7 @@ public static class KingMossSetup
     private const string AnimDir = Dir + "Anim/";
     private const string ControllerPath = Dir + "KingMoss.controller";
     private const string Layout = "Tools/Art/flying_grass_boss_layout.txt";
-    private const string ScenePath = "Assets/Scenes/Z4BossGrass.unity";
+    private const string ScenePath = "Assets/Scenes/Z1Boss_GrassGreen.unity";
     private const float Ppu = 16f;
     private const float BodyScale = 1.25f;   // he stands about 2.7 units, as tall as the old King Mossback
     private const float Hover = 0.2f;
@@ -187,7 +187,7 @@ public static class KingMossSetup
         return ctrl;
     }
 
-    // ---------------------------------------------------------------- 3. the boss in Z4BossGrass
+    // ---------------------------------------------------------------- 3. the boss in Z1Boss_GrassGreen
 
     private static void BuildRig(string[] lines, Dictionary<string, Sprite[]> rows, Dictionary<string, Sprite> fx, AnimatorController ctrl)
     {

@@ -1,11 +1,11 @@
 # Level record — Z4A7 east expansion (greybox)
 
-**Level-specific.** The decisions behind the extension east of Z4A7GrassGreen's old end. Lift anything that proves
+**Level-specific.** The decisions behind the extension east of Z1A2_GrassGreen's old end. Lift anything that proves
 general into `method.md` or `zones/grassy-green.md`.
 
 | | |
 | --- | --- |
-| Scene | Assets/Scenes/Z4A7GrassGreen.unity, root object `Z4A7Expansion` (plus 39 Ground tiles cut at x 177..189, y 26..28) |
+| Scene | Assets/Scenes/Z1A2_GrassGreen.unity, root object `Z4A7Expansion` (plus 39 Ground tiles cut at x 177..189, y 26..28) |
 | Code | Assets/Editor/Z4A7EastExpansionBuilder.cs (marker Z4A7EAST, menu Tools/HNL/Build Z4A7 East Expansion (Greybox)); the chest game is ChestShuffleGame (marker SHUFFLE) via Tools/HNL/Chest Shuffle |
 | Route | `z4a7_east_route.py` (this folder) |
 | Tests | TC-Z4A7-EAST-ROUTE, TC-Z4A7-EAST-ENEMIES, TC-SHUFFLE-Z4A7; session S-20261028-212830-8qla |
@@ -65,3 +65,26 @@ Model: route complete in 20.7 s; all 14 early-jump variants (0.25 and 0.5 early)
 from below. Unity: route bot from (170, 26.6) to (272.57, 40.53) in 25.5 s with enemies off, treasure ends the level;
 fox inside x 251.6..264 patrolling and charging; checkpoint opens; a fall between pillars respawns at x 193. Not
 tested: the fox fight by hand; the level played from its start after the change; art.
+
+## Painted (2026-10-30, GRASSART)
+
+The greybox is now Ground tiles (GrassArtPass, Tools/HNL/Grass/Greybox To Tiles), following `tile-placement.md`.
+The `Geometry` holder is gone; the fox, coins, Jump Mushroom and checkpoint show their own art.
+
+| Piece | Greybox | Tiles (cells) |
+| --- | --- | --- |
+| Outlook | 190..206 × 22..26, tiers 192.5..203.5, 195..201 | **painted by the user** before this pass: 191..204 × 22..25, 193..202 × 20..21, 195..200 × 19 (kept; the leftover Under1 box removed) |
+| Pillars 1-4 | 209..211, 212.5..214, 217..218.5, 221.5..223 | 209..210, 212..213, 217..218, 221..222 (2 wide; tops 26/27/27/26 unchanged) |
+| Glade | 226..248 × 22..26 + 4 tiers | 226..247 × 22..25; 228..245 × 20..21; 230..243 × 19; 232..241 × 17..18; 234..239 × 16 |
+| Fox Heights | 250..268 × 36..39 + 3 tiers | 250..267 × 36..38; 252..265 × 34..35; 254..263 × 33; 256..261 × 31..32 |
+| Summit | 268..275 × 36..40 | 268..274 × 36..39 (joined to the Heights) |
+
+Gaps now: Outlook→P1 **4** (was 3, from the user's trim), P1→P2 1, P2→P3 3, P3→P4 2, P4→Glade 3. The route
+(`z4a7_east_route.py`, updated) completes in Unity in 20.7 s, but the first jump only clears from the very lip
+(landed at 209.00). Walking out of the corridor drops Harvey into the x 190 crack (BUG-0011, open). The x 189
+cliff face below the corridor is the old level boundary, so it is plain dirt with no lip. Like the rest of the
+user's tiles it was left as it is (BUG-0012).
+
+**The builder no longer reproduces the scene.** Rerunning Tools/HNL/Build Z4A7 East Expansion (Greybox) would put
+the greybox back over the tiles; follow it with Greybox To Tiles (hand-painted cells are skipped). check_layout.py
+reads the builder, so it is out of date for this level: test in Unity.

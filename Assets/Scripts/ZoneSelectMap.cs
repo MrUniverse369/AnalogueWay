@@ -131,7 +131,7 @@ public class ZoneSelectMap : MonoBehaviour
     private System.Collections.Generic.Dictionary<string, Grade> ranks; // RANKS:
 
     private Grade RankOf(ZoneMapNode node) =>
-        ranks != null && node != null && !string.IsNullOrEmpty(node.sceneName) && ranks.TryGetValue(node.sceneName, out Grade g) ? g : Grade.None;
+        ranks != null && node != null && !string.IsNullOrEmpty(node.sceneName) && ranks.TryGetValue(LevelRegistry.KeyOf(node.sceneName), out Grade g) ? g : Grade.None; // LEVELNAMES: ranks are by id
 
     private void StyleNode(ZoneMapNode node, bool isOpen, bool cleared)
     {
@@ -155,7 +155,7 @@ public class ZoneSelectMap : MonoBehaviour
         if (lastNode >= 0 && lastNode < nodes.Length && open[lastNode]) return lastNode;
         if (SaveSystem.TryLoad(out SaveData data))
             for (int i = 0; i < nodes.Length; i++)
-                if (open[i] && nodes[i].sceneName == data.sceneName) return i;
+                if (open[i] && LevelRegistry.KeyOf(nodes[i].sceneName) == LevelRegistry.KeyOf(data.sceneName)) return i; // LEVELNAMES:
         for (int i = nodes.Length - 1; i >= 0; i--)
             if (open[i]) return i;
         return 0;

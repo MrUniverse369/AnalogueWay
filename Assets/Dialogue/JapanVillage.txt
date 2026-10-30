@@ -1,4 +1,4 @@
-// Harvey's Nine Lives: the mountain village (Z3JapanVillage).
+// Harvey's Nine Lives: the mountain village (Z4Village_Japan).
 // How to write dialogue (full notes in Assets/Scripts/DialogueScript.cs):
 //   == node              starts a part of a conversation
 //   Name: text           a line spoken by Name ({name} = the villager you're talking to)

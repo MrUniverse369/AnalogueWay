@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// SANDFIN (2026-10-28): Sandfin, the green shark mini-boss in the middle of the Sandy Dunes (Z2MiniBossSandy, between
+/// SANDFIN (2026-10-28): Sandfin, the green shark mini-boss in the middle of the Sandy Dunes (Z3MiniBoss_Egypt, between
 /// Act 3 and Act 4). The user's GreenBabySharkMiniBoss sheet: a legless green shark that swims through the sand like
 /// water. Three lives over two stages (stageAt 3 / 1: Circling while it has three or two, Frenzy on its last). Smaller
 /// and simpler than the Landshark, the zone's final boss: no heal, two attacks, two stages.
