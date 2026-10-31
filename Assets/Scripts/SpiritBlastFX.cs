@@ -82,6 +82,7 @@ public class SpiritBlastFX : MonoBehaviour
     private SpriteRenderer tailR, bodyR, headR;
     private Sprite[] tails, bodies, heads;
     private float burstFps, flowFps, age;
+    private const float FadeIn = 0.04f; // BEAMSYNC: the fox's beam fades in as it leaves his mouth
 
     /// <summary>BLAST: animate the beam's parts: the tail's frames once through at framesPerSecond (holding the last),
     /// the body's and head's frames looped at flowPerSecond. A missing renderer or empty frames leaves that part still.</summary>
@@ -96,6 +97,13 @@ public class SpiritBlastFX : MonoBehaviour
         heads = headFrames;
         burstFps = framesPerSecond;
         flowFps = flowPerSecond;
+        if (parts != null) // BEAMSYNC: start invisible, so the first drawn frame is already part of the fade-in
+            foreach (SpriteRenderer sr in parts)
+            {
+                Color c = sr.color;
+                c.a = 0f;
+                sr.color = c;
+            }
     }
 
     private static void Show(SpriteRenderer r, Sprite[] frames, int index, bool loop)
@@ -137,12 +145,14 @@ public class SpiritBlastFX : MonoBehaviour
     {
         age += Time.deltaTime; // BLAST:
         Show(tailR, tails, Mathf.FloorToInt(age * burstFps), false);
-        int flow = Mathf.FloorToInt(age * flowFps);
-        Show(bodyR, bodies, flow, true);
-        Show(headR, heads, flow, true);
+        bool once = flowFps <= 0f; // BEAMSYNC: a flow rate of 0 plays the band and tip through once with the burst (the beam's life: full, then cooling)
+        int flow = once ? Mathf.FloorToInt(age * burstFps) : Mathf.FloorToInt(age * flowFps);
+        Show(bodyR, bodies, flow, !once);
+        Show(headR, heads, flow, !once);
 
         float fade = Mathf.Clamp01(hazard.LifeLeft / Mathf.Max(0.01f, hazard.Lifetime * FadeShare));
-        if (fade < 1f)
+        if (tails != null) fade = Mathf.Min(fade, Mathf.Clamp01(age / FadeIn)); // BEAMSYNC: fade in
+        if (fade < 1f || (tails != null && age < FadeIn + 0.1f))
             foreach (SpriteRenderer sr in parts)
             {
                 Color c = sr.color;

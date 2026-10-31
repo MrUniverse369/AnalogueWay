@@ -129,6 +129,7 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
     [Tooltip("The orb charges and sparks mark the beam's path for this long before it fires.")]
     [SerializeField] private float beamWarnTime = 0.7f;
     [SerializeField] private float beamLife = 0.45f;
+    [SerializeField] private int beamLeadFrames = 1; // BEAMSYNC: BeamFire frames before the beam leaves (1 = the fox's first full-length beam frame)
     [Tooltip("The landing spot is marked for this long (a share of the stage's telegraph time) before the throw.")]
     [SerializeField] private float boulderWarnShare = 0.8f;
     [SerializeField] private float boulderFlightTime = 0.85f;
@@ -548,9 +549,21 @@ public class YokaiBoss : MonoBehaviour, IBossAttacker // SAMURAIBOSS: BossHazard
                 PixelFX.Ring(tip, 12, 4f, sparks, 0.22f, 1, PixelShape.Square, true);
                 PixelFX.Burst(new Vector3(fromX, y, 0f), 10, 3f, 7f, sparks, 0.15f, 0.3f, 1, PixelShape.Star, PixelMotion.Float, true, PixelLayer.Front, facing > 0 ? 0f : 180f, 70f);
             }
+            // BEAMSYNC: with a BeamEnd state the fox's own release frames play first and the beam leaves on the last
+            // BeamFire frame (his firing pose), which the clip holds while the beam plays; then BeamEnd calms him down
+            bool synced = HasState("BeamEnd");
+            float lead = FrameTime("BeamFire") * beamLeadFrames; // BEAMSYNC: the beam picks up where the one drawn on him ends
+            if (synced) yield return new WaitForSeconds(lead);
             SpawnBeam(facing, fromX, toX, y);
             Play(audioManager != null ? (audioManager.dragonSummonSound != null ? audioManager.dragonSummonSound : audioManager.powerUpSound) : null);
-            yield return new WaitForSeconds(Mathf.Max(beamLife, AnimLength("BeamFire")));
+            if (synced)
+            {
+                // BEAMSYNC: he plays on to the firing frame and holds it for as long as the beam lives
+                yield return new WaitForSeconds(Mathf.Max(beamLife, AnimLength("BeamFire") - FrameTime("BeamFire") - lead));
+                Anim("BeamEnd");
+                yield return new WaitForSeconds(AnimLength("BeamEnd"));
+            }
+            else yield return new WaitForSeconds(Mathf.Max(beamLife, AnimLength("BeamFire")));
             Anim(IdleState);
             if (i + 1 < s.beams) yield return new WaitForSeconds(0.35f);
         }

@@ -96,8 +96,8 @@ export const SYSTEMS = [
   },
   {
     id: "SYS-RESPAWN", name: "Health, death, checkpoints and respawn",
-    description: "Three health segments, knockback, death, checkpoint respawn hold, objects that reset on respawn.",
-    files: ["LevelManager", "CheckPoint", "HealthUIManager", "ResetOnRespawn"],
+    description: "Three health segments, knockback, death, checkpoint respawn hold, objects that reset on respawn. FALLSAFETY: the global fall-detection safety net (no per-scene placement) that calls LevelManager.Respawn() after ~2s continuously below the last safe ground, for any level gap a KillPlane doesn't cover.",
+    files: ["LevelManager", "CheckPoint", "HealthUIManager", "ResetOnRespawn", "FallSafetyMonitor"],
     paths: [],
   },
   {
